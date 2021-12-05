@@ -1,0 +1,28 @@
+@import '/src/sass/flex'
+@import 'src/sass/font'
+
+:host
+  @include flex-column(center, flex-start)
+  width: 100vw
+  margin-top: 52px
+
+.container
+  @include flex-row(flex-start, center)
+  width: 100vw
+  position: fixed
+  top: 0
+  height: 50px
+  background-color: #151515
+  border-bottom: 2px solid #D0D0D0
+
+  .logo-container
+    height: 100%
+    cursor: pointer
+
+    .logo
+      height: calc(100% - 10px)
+      margin: 5px 20px
+
+  .header-items
+    @include flex-row(center, center)
+    height: 100%

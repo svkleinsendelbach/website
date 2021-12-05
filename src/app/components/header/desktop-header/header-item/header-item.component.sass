@@ -1,0 +1,69 @@
+@import '/src/sass/flex'
+@import 'src/sass/font'
+
+:host
+  @include flex-column(center, flex-start)
+
+.header-item
+  @include flex-column(center, flex-start)
+  margin: 0 10px
+  position: relative
+  width: 100%
+
+  .top-item
+    @include flex-row(center, center)
+    height: 50px
+    cursor: pointer
+    text-decoration: none
+    width: 100%
+    padding: 0 5px
+
+    .text
+      font-family: 'Roboto', sans-serif
+      color: #D0D0D0
+
+    .drop-down-arrow
+      margin-left: 5px
+      color: #D0D0D0
+
+  .sub-items
+    @include flex-column(center, flex-start)
+    position: absolute
+    top: 50px
+    z-index: 2
+    width: max-content
+    display: none
+    border-top: 2px solid #D0D0D0
+
+    .sub-item-container
+      @include flex-row(center, center)
+      width: 100%
+      padding: 7.5px 10px
+      background-color: #151515
+      border-right: 0.5px solid #D0D0D0
+      border-left: 0.5px solid #D0D0D0
+      cursor: pointer
+
+      .sub-item
+        font-family: 'Roboto', sans-serif
+        color: #D0D0D0
+        text-decoration: none
+
+      &:nth-child(1)
+        padding-top: 20px
+
+      &:nth-last-child(1)
+        padding-bottom: 20px
+        border-radius: 0 0 10px 10px
+        border-bottom: 0.5px solid #D0D0D0
+
+      &:hover
+        background-color: #06050A
+
+  &:hover
+    .top-item
+      background-color: #06050A
+
+    .sub-items
+      display: flex
+      z-index: 3
