@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HeaderItem } from '../../header.component';
 
 @Component({
@@ -6,10 +6,16 @@ import { HeaderItem } from '../../header.component';
   templateUrl: './header-item.component.html',
   styleUrls: ['./header-item.component.sass'],
 })
-export class HeaderItemComponent implements OnInit {
+export class HeaderItemComponent {
   @Input() headerItem!: HeaderItem;
 
-  constructor() {}
+  @Input() isIntransparent!: boolean;
 
-  ngOnInit(): void {}
+  @Input() expandedHeaderItemId!: string | null;
+
+  @Output() clickHeaderItemIdEmitter = new EventEmitter<string>();
+
+  handleClick() {
+    this.clickHeaderItemIdEmitter.emit(this.headerItem.id);
+  }
 }

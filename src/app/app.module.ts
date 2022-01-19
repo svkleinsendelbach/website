@@ -10,9 +10,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DesktopHeaderComponent } from './components/header/desktop-header/desktop-header.component';
 import { HeaderItemComponent as DesktopHeaderItemComponent } from './components/header/desktop-header/header-item/header-item.component';
+import { TopNewsComponent } from './pages/home/top-news/top-news.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, HeaderComponent, DesktopHeaderComponent, DesktopHeaderItemComponent],
+  declarations: [AppComponent, HomeComponent, HeaderComponent, DesktopHeaderComponent, DesktopHeaderItemComponent, TopNewsComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MaterialModule],
   providers: [],
   bootstrap: [AppComponent],

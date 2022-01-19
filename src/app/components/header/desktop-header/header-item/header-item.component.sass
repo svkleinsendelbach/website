@@ -12,58 +12,67 @@
 
   .top-item
     @include flex-row(center, center)
-    height: 50px
+    height: 75px
     cursor: pointer
     text-decoration: none
     width: 100%
     padding: 0 5px
 
     .text
-      font-family: 'Roboto', sans-serif
-      color: #D0D0D0
+      font-family: 'MetropolisExtraLight', Helvetica Neue, Helvetica, sans-serif
+      color: #ffffff
+      font-size: 18px
+      line-height: 75px
 
     .drop-down-arrow
-      margin-left: 5px
-      color: #D0D0D0
+      color: #ffffff
+
+    &:hover
+      .text, .drop-down-arrow
+        color: #fabfac
 
   .sub-items
     @include flex-column(center, flex-start)
     position: absolute
-    top: 50px
-    z-index: 2
+    top: 75px
+    z-index: 3
     width: max-content
     display: none
-    border-top: 2px solid #D0D0D0
 
     .sub-item-container
       @include flex-row(center, center)
       width: 100%
       padding: 7.5px 10px
-      background-color: #151515
-      border-right: 0.5px solid #D0D0D0
-      border-left: 0.5px solid #D0D0D0
+      background-color: #ffffff
       cursor: pointer
 
       .sub-item
-        font-family: 'Roboto', sans-serif
-        color: #D0D0D0
+        font-family: 'MetropolisExtraLight', Helvetica Neue, Helvetica, sans-serif
+        color: #000000
         text-decoration: none
-
-      &:nth-child(1)
-        padding-top: 20px
+        font-size: 18px
 
       &:nth-last-child(1)
-        padding-bottom: 20px
+        padding-bottom: 10px
         border-radius: 0 0 10px 10px
-        border-bottom: 0.5px solid #D0D0D0
 
       &:hover
-        background-color: #06050A
+        background-color: #f0f0f0
 
-  &:hover
+        .sub-item
+          color: #1f3a95
+
+  &.expanded .sub-items
+    display: flex
+    z-index: 4
+
+  &.intransparent
     .top-item
-      background-color: #06050A
+      .text, .drop-down-arrow
+        color: #000000
 
-    .sub-items
-      display: flex
-      z-index: 3
+      &:hover
+        background-color: #f0f0f0
+
+        .text, .drop-down-arrow
+          color: #1f3a95

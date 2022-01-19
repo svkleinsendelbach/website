@@ -1,11 +1,37 @@
-<span class="header-item">
-  <a href="{{ headerItem.topItem.link }}" class="top-item">
-    <div class="text">{{ headerItem.topItem.name }}</div>
-    <mat-icon *ngIf="headerItem.subItems != undefined" class="drop-down-arrow">arrow_drop_down</mat-icon>
+<span [ngClass]="{
+    intransparent: isIntransparent,
+    expanded: expandedHeaderItemId === headerItem.id
+  }"
+  class="header-item">
+  <a *ngIf="headerItem.subItems == undefined"
+    href="{{ headerItem.topItem.link }}"
+    class="top-item">
+    <div class="text">
+      {{ headerItem.topItem.name }}
+    </div>
+    <mat-icon *ngIf="headerItem.subItems != undefined"
+      class="drop-down-arrow">
+      arrow_drop_down
+    </mat-icon>
   </a>
+  <span *ngIf="headerItem.subItems != undefined"
+    (click)="handleClick();$event.stopPropagation()"
+    class="top-item">
+    <div class="text">
+      {{ headerItem.topItem.name }}
+    </div>
+    <mat-icon *ngIf="headerItem.subItems != undefined"
+      class="drop-down-arrow">
+      arrow_drop_down
+    </mat-icon>
+  </span>
   <span class="sub-items">
-    <span *ngFor="let subItem of headerItem.subItems"  class="sub-item-container">
-      <a href="{{ subItem.link }}" class="sub-item">{{ subItem.name }}</a>
+    <span *ngFor="let subItem of headerItem.subItems"
+      class="sub-item-container">
+      <a href="{{ subItem.link }}"
+        class="sub-item">
+        {{ subItem.name }}
+      </a>
     </span>
   </span>
 </span>
