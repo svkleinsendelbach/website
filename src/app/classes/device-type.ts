@@ -5,7 +5,8 @@ export class DeviceType {
     this.rawValue = DeviceType.currentRawValue;
   }
 
-  private static get ['currentRawValue'](): DeviceType.RawValue {
+  private static get currentRawValue(): DeviceType.RawValue {
+    return DeviceType.RawValue.tablet;
     const userAgent = navigator.userAgent;
     const tabletRegex = /(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i;
     const mobileRegex =
@@ -18,19 +19,19 @@ export class DeviceType {
     return DeviceType.RawValue.desktop;
   }
 
-  public get ['isMobile'](): boolean {
+  public get isMobile(): boolean {
     return this.rawValue === DeviceType.RawValue.mobile;
   }
 
-  public get ['isTablet'](): boolean {
+  public get isTablet(): boolean {
     return this.rawValue === DeviceType.RawValue.tablet;
   }
 
-  public get ['isDesktop'](): boolean {
+  public get isDesktop(): boolean {
     return this.rawValue === DeviceType.RawValue.desktop;
   }
 
-  public get ['stringValue'](): 'mobile' | 'tablet' | 'desktop' {
+  public get stringValue(): 'mobile' | 'tablet' | 'desktop' {
     switch (this.rawValue) {
       case DeviceType.RawValue.mobile:
         return 'mobile';

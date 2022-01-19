@@ -1,1 +1,2 @@
-<app-desktop-header *ngIf="deviceType.isDesktop" [headerItemsList]="headerItemsList" ></app-desktop-header>
+<app-desktop-header *ngIf="deviceType.isDesktop || deviceType.isTablet"
+  [headerItemsList]="headerItemsList"></app-desktop-header>

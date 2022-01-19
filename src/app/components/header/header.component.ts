@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
     };
   }
 
-  public get ['headerItemsList'](): HeaderItem[] {
+  public get headerItemsList(): HeaderItem[] {
     return headerItemsData[this.deviceType.stringValue].map(e => {
       return {
         id: e['top-item'],
