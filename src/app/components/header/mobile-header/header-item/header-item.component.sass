@@ -1,0 +1,89 @@
+@import '/src/sass/flex'
+@import 'src/sass/font'
+
+:host
+  @include flex-column(center, flex-start)
+
+  &:nth-last-child(1) .header-item .top-item
+    border-radius: 0 0 10px 10px
+
+  .expanded + &
+    .header-item .top-item
+      border-radius: 10px 10px 0 0
+
+    &:nth-last-child(1) .header-item .top-item
+      border-radius: 10px
+
+.header-item
+  @include flex-column(center, flex-start)
+  width: 90vw
+
+  .top-item
+    @include flex-row(center, center)
+    height: 75px
+    cursor: pointer
+    text-decoration: none
+    width: 100%
+    padding: 0 5px
+
+    .text
+      font-family: 'MetropolisExtraLight', Helvetica Neue, Helvetica, sans-serif
+      color: #ffffff
+      font-size: 18px
+      line-height: 75px
+
+    .drop-down-arrow
+      color: #ffffff
+
+    &:hover
+      .text, .drop-down-arrow
+        color: #7793f1
+
+  .sub-items
+    @include flex-column(center, flex-start)
+    width: 100%
+    display: none
+    margin-bottom: 10px
+
+    .sub-item-container
+      @include flex-row(center, center)
+      width: 90%
+      padding: 7.5px 0
+      background-color: #ffffff
+      cursor: pointer
+
+      .sub-item
+        font-family: 'MetropolisExtraLight', Helvetica Neue, Helvetica, sans-serif
+        color: #000000
+        text-decoration: none
+        font-size: 18px
+
+      &:nth-last-child(1)
+        padding-bottom: 10px
+        border-radius: 0 0 10px 10px
+
+      &:hover
+        background-color: #f0f0f0
+
+        .sub-item
+          color: #1f3a95
+
+  &.expanded
+    .top-item
+      border-radius: 0 0 10px 10px
+
+    .sub-items
+      display: flex
+
+  &.intransparent
+    .top-item
+      background-color: #ffffff
+
+      .text, .drop-down-arrow
+        color: #000000
+
+      &:hover
+        background-color: #f0f0f0
+
+        .text, .drop-down-arrow
+          color: #1f3a95
