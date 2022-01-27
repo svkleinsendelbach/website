@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import headerItemsData from 'src/app/assets/header-items-data.json';
-import { DeviceType } from 'src/app/classes/device-type';
+import { DeviceTypeService } from '../../services/device-type.service';
 
 type HeaderItemValue = {
   name: string;
@@ -18,12 +18,13 @@ export type HeaderItem = {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.sass'],
 })
-export class HeaderComponent implements OnInit {
-  public deviceType = new DeviceType();
+export class HeaderComponent {
+  constructor(public deviceType: DeviceTypeService) {}
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  @HostListener('window:resize')
+  onResize() {
+    this.deviceType.windowResized();
+  }
 
   private getHeaderItemValue(key: string): HeaderItemValue {
     if (!headerItemsData['header-items'].hasOwnProperty(key)) {
