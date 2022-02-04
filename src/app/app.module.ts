@@ -29,6 +29,7 @@ import { BirthdayViewComponent } from './pages/home/top-news/birthday-view/birth
 import { HttpClientModule } from '@angular/common/http';
 import { GameViewComponent } from './pages/home/top-news/game-view/game-view.component';
 import { NavigationComponent } from './pages/home/top-news/navigation/navigation.component';
+import { LinksComponent } from './pages/home/links/links.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { NavigationComponent } from './pages/home/top-news/navigation/navigation
     BirthdayViewComponent,
     GameViewComponent,
     NavigationComponent,
+    LinksComponent,
   ],
   imports: [
     BrowserModule,

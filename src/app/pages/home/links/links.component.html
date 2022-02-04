@@ -1,0 +1,17 @@
+<span class="links">
+  <span *ngFor="let linkItemRow of linkItemsList"
+    class="row">
+    <a *ngFor="let linkItem of linkItemRow"
+      href="{{ linkItem.linkUrl }}"
+      title="{{ linkItem.name }}"
+      class="item">
+      <mat-icon class="icon {{ linkItem.animation }}">
+        {{ linkItem.iconName }}
+      </mat-icon>
+      <div class="title">{{ linkItem.name }}</div>
+      <div class="description">
+        {{ linkItem.description }}
+      </div>
+    </a>
+  </span>
+</span>

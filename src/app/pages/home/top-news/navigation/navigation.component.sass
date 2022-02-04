@@ -5,47 +5,52 @@
   width: 100vw
   height: 100%
 
-.content
-  @include flex-column(center, flex-start)
-  width: 100vw
+.column
+  @include flex-column(center, space-between)
   height: 100%
-
-.buttons
-  @include flex-row(space-between, center)
-  position: absolute
   width: 100vw
-  z-index: 1
-  height: 400px
 
-  .left, .right
-    @include flex-row(center, center)
-    cursor: pointer
-    margin: 0 25px
-    background-color: #ffffff40
-    color: #ffffff
-    font-size: 30px
-    line-height: 30px
-    width: 35px
-    height: 90px
+  .row
+    @include flex-row(space-between, center)
+    width: 100vw
+    height: 400px - 34px
 
-  .nav-bar-container
-    @include flex-column(center, flex-end)
-    height: 100%
-
-    .nav-bar
+    .left, .right
       @include flex-row(center, center)
-      padding: 2px 0px 1px 0px
-      border-radius: 9.5px
+      cursor: pointer
       background-color: #ffffff40
-      margin-bottom: 20px
+      color: #ffffff
+      font-size: 30px
+      line-height: 30px
+      width: 35px
+      height: 90px
 
-      .cicle
-        @include flex-row(center, center)
-        font-size: 12.5px
-        line-height: 12.5px
-        height: 12.5px
-        color: #b0b0b0
-        cursor: pointer
+    .left
+      margin-left: 25px
 
-        &.filled
-          color: #ffffff
+    .right
+      margin-right: 25px
+
+    .content
+      @include flex-column(center, flex-start)
+      height: 100%
+      width: calc(100vw - 120px)
+
+  .nav-bar
+    @include flex-row(center, center)
+    border-radius: 7px
+    height: 14px
+    background-color: #ffffff40
+    margin-bottom: 20px
+
+    .cicle
+      @include flex-row(center, center)
+      font-size: 12px
+      line-height: 12px
+      height: 12px
+      color: #b0b0b0
+      cursor: pointer
+      padding: 1px 0px
+
+      &.filled
+        color: #ffffff

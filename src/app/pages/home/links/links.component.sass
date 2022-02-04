@@ -1,0 +1,62 @@
+@import '/src/sass/flex'
+
+:host
+  @include flex-column(center, flex-start)
+  width: 100vw
+
+.links
+  @include flex-column()
+  width: 80%
+  padding:
+    top: 32px
+    bottom: 64px
+
+  .row
+    @include flex-row(center, flex-start)
+    width: 100%
+    padding:
+      right: 32px
+      top: 32px
+      left: 32px
+
+    .item
+      @include flex-column()
+      flex: 1
+      padding: 0 16px
+      text-decoration: none
+      height: 100%
+
+      *
+        text-align: center
+
+      .icon
+        color: #24252A
+        font-size: 48px
+
+      .title
+        font-family: 'Montserrat', sans-serif
+        transition: .3s
+        color: #CF1D16
+        font:
+          size: 24px
+          weight: 500
+        padding:
+          top: 16px
+          bottom: 24px
+
+      .description
+        font-family: 'Montserrat', sans-serif
+        color: #868E90
+        font:
+          size: 16px
+          weight: 400
+
+      &:hover
+        .title
+          transform: scale(1.1)
+        .jump
+          animation: icon-jump 1s linear infinite
+        .shake
+          animation: icon-shake 1s linear infinite
+        .football
+          animation: football-rotation 3s linear infinite
