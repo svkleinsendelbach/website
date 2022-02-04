@@ -9,16 +9,14 @@
         class="logo">
       <div class="text">SV Kleinsendelbach</div>
     </a>
-    <mat-icon *ngIf="!isExpanded"
+    <fa-icon *ngIf="!isExpanded"
+      [icon]="faBars"
       (click)="handleHamburgerMenuClicked(true)"
-      class="hamburger-menu">
-      menu
-    </mat-icon>
-    <mat-icon *ngIf="isExpanded"
-      (click)="handleHamburgerMenuClicked(false)"
-      class="hamburger-menu">
-      menu_open
-    </mat-icon>
+      class="hamburger-menu"></fa-icon>
+    <fa-icon *ngIf="isExpanded"
+      [icon]="faTimes"
+      (click)="handleHamburgerMenuClicked(true)"
+      class="hamburger-menu"></fa-icon>
   </span>
   <span *ngIf="isExpanded"
     class="header-items">

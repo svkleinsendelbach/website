@@ -4,49 +4,70 @@
       "name": "Über uns",
       "linkUrl": "/über-uns",
       "description": "Informationen über unseren Vorstandes, Sportheim, etc.",
-      "iconName": "info",
+      "icon": {
+        "prefix": "fas",
+        "name": "info"
+      },
       "animation": "jump"
     },
     "football-adult": {
       "name": "Herrenfussball",
       "linkUrl": "/fussball/herren",
       "description": "Ergebnisse und Tabellen der Herrenmannschaften des SV Kleinsendelbach.",
-      "iconName": "sports_soccer",
+      "icon": {
+        "prefix": "far",
+        "name": "futbol"
+      },
       "animation": "football"
     },
     "football-youth": {
       "name": "Jugendfussball",
       "linkUrl": "/fussball/jugend",
       "description": "Ergebnisse und Tabellen der Jugendmannschaften",
-      "iconName": "sports_soccer",
+      "icon": {
+        "prefix": "far",
+        "name": "futbol"
+      },
       "animation": "football"
     },
     "gymnastics": {
       "name": "Gymnastik",
       "linkUrl": "/gymnastik",
       "description": "Gymnastikangebote beim SV Kleinsendelbach.",
-      "iconName": "people_alt",
+      "icon": {
+        "prefix": "fas",
+        "name": "user-friends"
+      },
       "animation": "jump"
     },
     "dancing": {
       "name": "Tanzen",
       "linkUrl": "/tanzen",
       "description": "Tanzgruppen der Kinder.",
-      "iconName": "emoji_people",
+      "icon": {
+        "prefix": "fas",
+        "name": "child"
+      },
       "animation": "jump"
     },
     "drive": {
       "name": "Anfahrt",
       "linkUrl": "/anfahrt",
       "description": "Anfahrt zum Sportheim Kleinsendelbach.",
-      "iconName": "famap",
+      "icon": {
+        "prefix": "far",
+        "name": "map"
+      },
       "animation": "shake"
     },
     "contact": {
       "name": "Kontakt",
       "linkUrl": "/kontakt",
       "description": "Nehm Kontakt zum SV Kleinsendelbach auf.",
-      "iconName": "contact_mail",
+      "icon": {
+        "prefix": "fas",
+        "name": "address-card"
+      },
       "animation": "shake"
     }
   },

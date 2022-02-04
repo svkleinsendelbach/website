@@ -17,10 +17,12 @@
     <div class="text">
       {{ headerItem.topItem.name }}
     </div>
-    <mat-icon *ngIf="headerItem.subItems != undefined"
-      class="drop-down-arrow">
-      arrow_drop_down
-    </mat-icon>
+    <fa-icon *ngIf="headerItem.subItems != undefined && expandedHeaderItemId !== headerItem.id"
+      [icon]="faCaretDown"
+      class="drop-down-arrow"></fa-icon>
+    <fa-icon *ngIf="headerItem.subItems != undefined && expandedHeaderItemId === headerItem.id"
+      [icon]="faCaretUp"
+      class="drop-down-arrow"></fa-icon>
   </span>
   <span class="sub-items">
     <span *ngFor="let subItem of headerItem.subItems"

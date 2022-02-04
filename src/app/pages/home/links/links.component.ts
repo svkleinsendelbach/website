@@ -1,12 +1,18 @@
 import { Component, HostListener } from '@angular/core';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import homeLinks from 'src/app/assets/home-links.json';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { faInfo, faUserFriends, faChild, faAddressCard, IconName, IconPrefix } from '@fortawesome/free-solid-svg-icons';
+import { faFutbol, faMap } from '@fortawesome/free-regular-svg-icons';
 
 export interface LinkItem {
   name: string;
   linkUrl: string;
   description: string;
-  iconName: string;
+  icon: {
+    prefix: IconPrefix;
+    name: IconName;
+  };
   animation: string;
 }
 
@@ -16,7 +22,9 @@ export interface LinkItem {
   styleUrls: ['./links.component.sass'],
 })
 export class LinksComponent {
-  constructor(public deviceType: DeviceTypeService) {}
+  constructor(public deviceType: DeviceTypeService, private library: FaIconLibrary) {
+    library.addIcons(faInfo, faFutbol, faUserFriends, faChild, faMap, faAddressCard);
+  }
 
   @HostListener('window:resize')
   onResize() {

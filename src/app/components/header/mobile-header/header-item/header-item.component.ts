@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HeaderItem } from '../../header.component';
+import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-mobile-header-item',
@@ -7,6 +8,9 @@ import { HeaderItem } from '../../header.component';
   styleUrls: ['./header-item.component.sass'],
 })
 export class HeaderItemComponent {
+  public faCaretDown = faCaretDown;
+  public faCaretUp = faCaretUp;
+
   @Input() headerItem!: HeaderItem;
 
   @Input() isIntransparent!: boolean;
