@@ -1,0 +1,33 @@
+<span class="content">
+  <app-birthday-view *ngIf="currentItem.type == 'birthday'"
+    [player]="currentItem.player"
+    [playerImage]="currentItem.playerImage">
+  </app-birthday-view>
+  <app-top-news-game-view *ngIf="currentItem.type == 'game'"
+    [gameProperties]="currentItem.gameProperties"
+    [nextLastGame]="currentItem.nextLastGame"
+    [team]="currentItem.team">
+  </app-top-news-game-view>
+</span>
+<span class="buttons">
+  <mat-icon (click)="handleButtonClick('left'); $event.stopPropagation()"
+    class="left">
+    chevron_left
+  </mat-icon>
+  <span class="nav-bar-container">
+    <span class="nav-bar">
+      <mat-icon *ngFor="let _ of itemList; index as index"
+        [ngClass]="{
+          filled: currentPage == index + 1
+        }"
+        (click)="currentPage = index + 1; $event.stopPropagation"
+        class="cicle">
+        circle
+      </mat-icon>
+    </span>
+  </span>
+  <mat-icon (click)="handleButtonClick('right'); $event.stopPropagation()"
+    class="right">
+    chevron_right
+  </mat-icon>
+</span>

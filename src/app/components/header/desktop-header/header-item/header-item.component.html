@@ -5,6 +5,7 @@
   class="header-item">
   <a *ngIf="headerItem.subItems == undefined"
     href="{{ headerItem.topItem.link }}"
+    title="{{ headerItem.topItem.name }}"
     class="top-item">
     <div class="text">
       {{ headerItem.topItem.name }}
@@ -25,6 +26,7 @@
     <span *ngFor="let subItem of headerItem.subItems"
       class="sub-item-container">
       <a href="{{ subItem.link }}"
+        title="{{ subItem.name }}"
         class="sub-item">
         {{ subItem.name }}
       </a>

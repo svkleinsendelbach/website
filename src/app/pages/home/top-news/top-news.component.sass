@@ -1,2 +1,21 @@
-img
+@import '/src/sass/flex'
+
+:host
+  @include flex-column(center, flex-start)
   width: 100vw
+
+.bgimage
+  position: absolute
+  top: 0
+  z-index: -1
+
+.content
+  @include flex-row(center, center)
+  width: 100vw
+  margin-top: 75px
+
+  .loading
+    font-family: 'MetropolisExtraLight', Helvetica Neue, Helvetica, sans-serif
+    color: #ffffff
+    font-size: 35px
+    display: none
