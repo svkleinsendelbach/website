@@ -1,0 +1,42 @@
+@import '/src/sass/flex'
+
+:host
+  @include flex-column(center, flex-start)
+  width: 100vw
+  height: 100%
+
+.content
+  @include flex-row(center, center)
+  width: 100vw
+  height: 100%
+
+  .logo-container
+    @include flex-row(center, center)
+    cursor: pointer
+    text-decoration: none
+    flex: 1
+
+    .logo
+      height: 100%
+
+  .text-container
+    @include flex-column(flex-start, flex-start)
+    flex: 2
+    // height: 150px
+
+    .text
+      font-family: 'MetropolisRegular', Helvetica Neue, Helvetica, sans-serif
+      color: #1d30e3
+      height: 25px
+      line-height: 25px
+      font-size: 25px
+      white-space: nowrap
+      margin-bottom: 10px
+
+    .opponent, .date, .result
+      font-family: 'MetropolisExtraLight', Helvetica Neue, Helvetica, sans-serif
+      color: #ffffff
+      height: 20px
+      line-height: 20px
+      font-size: 20px
+      margin-top: 5px

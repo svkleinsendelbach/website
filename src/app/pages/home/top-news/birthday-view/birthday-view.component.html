@@ -1,0 +1,27 @@
+<span class="content">
+  <span class="text-container">
+    <div class="age">
+      {{ Datum.age(player.dateOfBirth) }}
+    </div>
+    <span class="column-container">
+      <div class="text">
+        Alles Gute zum Geburtstag
+      </div>
+      <div class="name">{{ player.name }}</div>
+      <div class="date">
+        {{ Datum.shortDescription(player.dateOfBirth) }}
+      </div>
+    </span>
+  </span>
+  <a *ngIf="image != null"
+    href="http://www.anpfiff.info/sites/person/start.aspx?SK=2&Pers={{ player.id }}"
+    title="{{ player.name }} (anpfiff.info)"
+    target="_blank"
+    class="image-container">
+    <img [src]="image"
+      alt="{{ player.name }}"
+      class="image">
+  </a>
+  <div *ngIf="image == null"
+    class="image-container"></div>
+</span>

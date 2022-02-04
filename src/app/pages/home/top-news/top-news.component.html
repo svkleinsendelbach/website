@@ -1,1 +1,17 @@
-<img src="assets/banner.jpg" alt="">
+<img [ngStyle]="{
+    height: bannerHeight + 'px'
+  }"
+  src="assets/banner.jpg"
+  class="bgimage">
+<span [ngStyle]="{
+    height: contentHeight + 'px'
+  }"
+  class="content">
+  <span *ngIf="properties == null"
+    class="loading">
+    Loading
+  </span>
+  <app-top-news-navigation *ngIf="properties != null"
+    [itemList]="navigationItemist">
+  </app-top-news-navigation>
+</span>

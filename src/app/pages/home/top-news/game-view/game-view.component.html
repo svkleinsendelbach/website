@@ -1,0 +1,32 @@
+<span class="content">
+  <a *ngIf="logo != null && nextLastGame == 'last' && gameProperties.resultParameters != undefined"
+    class="logo-container"
+    href="{{ resultUrl(gameProperties.resultParameters) }}"
+    title="{{ 'Ergebnis ' + (gameProperties.opponent ?? '') + ' (anpfiff.info)' }}"
+    target="_blank">
+    <img [src]="logo"
+      alt="{{ gameProperties.opponent ?? '' }}"
+      class="logo">
+  </a>
+  <span *ngIf="logo != null && (nextLastGame == 'next' || gameProperties.resultParameters == undefined)"
+    class="logo-container">
+    <img [src]="logo"
+      alt="{{ gameProperties.opponent ?? '' }}"
+      class="logo">
+  </span>
+  <span class="text-container">
+    <div class="text">{{ firstLine }}</div>
+    <div *ngIf="gameProperties.opponent != null"
+      class="opponent">
+      {{ gameProperties.opponent }}
+    </div>
+    <div *ngIf="gameProperties.date != null"
+      class="date">
+      {{ FullDatum.description(gameProperties.date) }}
+    </div>
+    <div *ngIf="result != null"
+      class="result">
+      {{ result }}
+    </div>
+  </span>
+</span>
