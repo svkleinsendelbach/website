@@ -14,6 +14,7 @@ import { environment } from '../environments/environment.prod';
 import { AngularFireModule } from '@angular/fire/compat';
 import { REGION, AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -60,6 +61,7 @@ import { LinksComponent } from './pages/home/links/links.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireFunctionsModule,
     AngularFireStorageModule,
+    FontAwesomeModule,
   ],
   providers: [{ provide: REGION, useValue: 'europe-west1' }],
   bootstrap: [AppComponent],

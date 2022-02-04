@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DBPlayer, TeamSpieleSpiele } from 'src/app/services/fetch-home-top.service';
+import { faChevronLeft, faChevronRight, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 export type NavigationItem = NavigationItem.Birthday | NavigationItem.Game;
 
@@ -24,6 +25,10 @@ export namespace NavigationItem {
   styleUrls: ['./navigation.component.sass'],
 })
 export class NavigationComponent {
+  public faChevronLeft = faChevronLeft;
+  public faChevronRight = faChevronRight;
+  public faCircle = faCircle;
+
   @Input() itemList!: NavigationItem[];
 
   currentPage = 1;

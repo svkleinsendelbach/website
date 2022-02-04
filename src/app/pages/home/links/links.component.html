@@ -5,9 +5,8 @@
       href="{{ linkItem.linkUrl }}"
       title="{{ linkItem.name }}"
       class="item">
-      <mat-icon class="icon {{ linkItem.animation }}">
-        {{ linkItem.iconName }}
-      </mat-icon>
+      <fa-icon [icon]="[linkItem.icon.prefix, linkItem.icon.name]"
+        class="icon {{ linkItem.animation }}"></fa-icon>
       <div class="title">{{ linkItem.name }}</div>
       <div class="description">
         {{ linkItem.description }}

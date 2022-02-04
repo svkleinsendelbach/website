@@ -13,15 +13,15 @@
   .row
     @include flex-row(space-between, center)
     width: 100vw
-    height: 400px - 34px
+    height: 400px - 40px
 
     .left, .right
       @include flex-row(center, center)
       cursor: pointer
       background-color: #ffffff40
       color: #ffffff
-      font-size: 30px
-      line-height: 30px
+      font-size: 20px
+      line-height: 20px
       width: 35px
       height: 90px
 
@@ -38,8 +38,7 @@
 
   .nav-bar
     @include flex-row(center, center)
-    border-radius: 7px
-    height: 14px
+    border-radius: 8px
     background-color: #ffffff40
     margin-bottom: 20px
 
@@ -48,9 +47,9 @@
       font-size: 12px
       line-height: 12px
       height: 12px
+      padding: 4px
       color: #b0b0b0
       cursor: pointer
-      padding: 1px 0px
 
       &.filled
         color: #ffffff

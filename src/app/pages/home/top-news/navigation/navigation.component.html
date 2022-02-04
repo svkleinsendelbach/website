@@ -1,9 +1,8 @@
 <span class="column">
   <span class="row">
-    <mat-icon (click)="handleButtonClick('left'); $event.stopPropagation()"
-      class="left">
-      chevron_left
-    </mat-icon>
+    <fa-icon [icon]="faChevronLeft"
+      (click)="handleButtonClick('left'); $event.stopPropagation()"
+      class="left"></fa-icon>
     <span class="content">
       <app-birthday-view *ngIf="currentItem.type == 'birthday'"
         [player]="currentItem.player"
@@ -15,19 +14,17 @@
         [team]="currentItem.team">
       </app-top-news-game-view>
     </span>
-    <mat-icon (click)="handleButtonClick('right'); $event.stopPropagation()"
-      class="right">
-      chevron_right
-    </mat-icon>
+    <fa-icon [icon]="faChevronRight"
+      (click)="handleButtonClick('right'); $event.stopPropagation()"
+      class="right"></fa-icon>
   </span>
   <span class="nav-bar">
-    <mat-icon *ngFor="let _ of itemList; index as index"
+    <fa-icon *ngFor="let _ of itemList; index as index"
       [ngClass]="{
           filled: currentPage == index + 1
         }"
+      [icon]="faCircle"
       (click)="currentPage = index + 1; $event.stopPropagation"
-      class="cicle">
-      circle
-    </mat-icon>
+      class="cicle"></fa-icon>
   </span>
 </span>

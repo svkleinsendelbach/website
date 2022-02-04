@@ -43,6 +43,7 @@
         padding:
           top: 16px
           bottom: 24px
+        height: 26px
 
       .description
         font-family: 'Montserrat', sans-serif
@@ -53,10 +54,34 @@
 
       &:hover
         .title
-          transform: scale(1.1)
-        .jump
+          font-size: 26px
+        .icon.jump
           animation: icon-jump 1s linear infinite
-        .shake
+        .icon.shake
           animation: icon-shake 1s linear infinite
-        .football
+        .icon.football
           animation: football-rotation 3s linear infinite
+
+@keyframes football-rotation
+    0%
+        transform: rotate(0)
+    100%
+        transform: rotate(360deg)
+
+@keyframes icon-jump
+    0%
+        transform: translateY(0)
+    65%
+        transform: translateY(-10px)
+    100%
+        transform: translateY(0)
+
+@keyframes icon-shake
+    0%
+        transform: rotate(0)
+    25%
+        transform: rotate(10deg)
+    75%
+        transform: rotate(-10deg)
+    100%
+        transform: rotate(0)

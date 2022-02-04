@@ -1,5 +1,6 @@
 import { Component, HostListener, Input } from '@angular/core';
 import { HeaderItem } from '../header.component';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-mobile-header',
@@ -7,6 +8,9 @@ import { HeaderItem } from '../header.component';
   styleUrls: ['./mobile-header.component.sass'],
 })
 export class MobileHeaderComponent {
+  public faBars = faBars;
+  public faTimes = faTimes;
+
   @Input() headerItemsList!: HeaderItem[];
 
   isOnTop = true;
