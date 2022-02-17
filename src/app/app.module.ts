@@ -31,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GameViewComponent } from './pages/home/top-news/game-view/game-view.component';
 import { NavigationComponent } from './pages/home/top-news/navigation/navigation.component';
 import { LinksComponent } from './pages/home/links/links.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { LinksComponent } from './pages/home/links/links.component';
     GameViewComponent,
     NavigationComponent,
     LinksComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

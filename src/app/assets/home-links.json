@@ -3,7 +3,7 @@
     "about-us": {
       "name": "Über uns",
       "linkUrl": "/über-uns",
-      "description": "Informationen über unseren Vorstandes, Sportheim, etc.",
+      "description": "Informationen über unseren Vorstandes, Sportheim, etc",
       "icon": {
         "prefix": "fas",
         "name": "info"
@@ -13,7 +13,7 @@
     "football-adult": {
       "name": "Herrenfussball",
       "linkUrl": "/fussball/herren",
-      "description": "Ergebnisse und Tabellen der Herrenmannschaften des SV Kleinsendelbach.",
+      "description": "Ergebnisse und Tabellen der Herrenmannschaften des SV Kleinsendelbach",
       "icon": {
         "prefix": "far",
         "name": "futbol"
@@ -33,7 +33,7 @@
     "gymnastics": {
       "name": "Gymnastik",
       "linkUrl": "/gymnastik",
-      "description": "Gymnastikangebote beim SV Kleinsendelbach.",
+      "description": "Gymnastikangebote beim SV Kleinsendelbach",
       "icon": {
         "prefix": "fas",
         "name": "user-friends"
@@ -43,7 +43,7 @@
     "dancing": {
       "name": "Tanzen",
       "linkUrl": "/tanzen",
-      "description": "Tanzgruppen der Kinder.",
+      "description": "Tanzgruppen der Kinder",
       "icon": {
         "prefix": "fas",
         "name": "child"
@@ -53,7 +53,7 @@
     "drive": {
       "name": "Anfahrt",
       "linkUrl": "/anfahrt",
-      "description": "Anfahrt zum Sportheim Kleinsendelbach.",
+      "description": "Anfahrt zum Sportheim Kleinsendelbach",
       "icon": {
         "prefix": "far",
         "name": "map"
@@ -63,7 +63,7 @@
     "contact": {
       "name": "Kontakt",
       "linkUrl": "/kontakt",
-      "description": "Nehm Kontakt zum SV Kleinsendelbach auf.",
+      "description": "Kontakt zum SV Kleinsendelbach aufnehmen",
       "icon": {
         "prefix": "fas",
         "name": "address-card"
