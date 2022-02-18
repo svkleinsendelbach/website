@@ -7,6 +7,7 @@ import { ChronicleComponent } from './pages/about-us/chronicle/chronicle.compone
 import { StatuteComponent } from './pages/about-us/statute/statute.component';
 import { PrivacyComponent } from './pages/about-us/privacy/privacy.component';
 import { RequestComponent } from './pages/about-us/request/request.component';
+import { ImprintComponent } from './pages/imprint/imprint.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'satzung', component: StatuteComponent },
   { path: 'datenschutz', component: PrivacyComponent },
   { path: 'mitgliedsantrag', component: RequestComponent },
+  { path: 'impressum', component: ImprintComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 

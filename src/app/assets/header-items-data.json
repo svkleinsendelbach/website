@@ -105,8 +105,7 @@
       "link": "/kontakt"
     }
   },
-  "desktop": [
-    {
+  "desktop": [{
       "top-item": "home"
     },
     {
@@ -155,8 +154,7 @@
       "top-item": "contact"
     }
   ],
-  "tablet": [
-    {
+  "tablet": [{
       "top-item": "home",
       "sub-items": [
         "home",
@@ -205,8 +203,7 @@
       ]
     }
   ],
-  "mobile": [
-    {
+  "mobile": [{
       "top-item": "home",
       "sub-items": [
         "home",
