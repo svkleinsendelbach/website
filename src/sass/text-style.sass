@@ -104,47 +104,21 @@
     &.block
       text-align: justify
 
+    &.text-margin-right
+      margin-right: 5px
+
   a, a > *
     @include flex-row(center, center)
     text-decoration: none
     cursor: pointer
     color: #CF1D16
+    &.inline, &.inline.large, &.inline.medium
+      padding: 0
+      text-align: justify
+      display: inline
 
   a > *
     width: auto
-    margin: 0 2.5px
-
-  /*a, a > *
-    font-family: 'Montserrat', sans-serif
-      @include flex-row()
-      color: #CF1D16
-      text-decoration: none
-      font:
-          size: 1.1 * 16px
-          weight: 400
-      text-align: center
-      line-height: 20px
-      padding-bottom: 32px
-      &.large
-          font:
-              size: 24px
-              weight: 500
-          line-height: 32px
-          padding-bottom: 48px
-          i
-              margin-right: 4px
-      &.medium
-          font:
-              size: 20px
-              weight: 500
-          line-height: 28px
-          padding-bottom: 40px
-      &.inline, &.inline.large, &.inline.medium
-          padding: 0
-          text-align: justify
-          display: inline
-      i
-          margin-right: 2px
 
   /*.images
       @include flex-row(space-between)

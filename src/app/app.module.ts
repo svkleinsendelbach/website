@@ -34,6 +34,7 @@ import { LinksComponent } from './pages/home/links/links.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ManagersComponent } from './pages/about-us/managers/managers.component';
 import { SportsHomeComponent } from './pages/about-us/sports-home/sports-home.component';
+import { ChronicleComponent } from './pages/about-us/chronicle/chronicle.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { SportsHomeComponent } from './pages/about-us/sports-home/sports-home.co
     FooterComponent,
     ManagersComponent,
     SportsHomeComponent,
+    ChronicleComponent,
   ],
   imports: [
     BrowserModule,
