@@ -33,6 +33,7 @@ import { NavigationComponent } from './pages/home/top-news/navigation/navigation
 import { LinksComponent } from './pages/home/links/links.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ManagersComponent } from './pages/about-us/managers/managers.component';
+import { SportsHomeComponent } from './pages/about-us/sports-home/sports-home.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ManagersComponent } from './pages/about-us/managers/managers.component'
     LinksComponent,
     FooterComponent,
     ManagersComponent,
+    SportsHomeComponent,
   ],
   imports: [
     BrowserModule,

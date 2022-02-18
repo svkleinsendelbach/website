@@ -1,0 +1,46 @@
+<span class="text-section">
+  <h1>
+    Sportheim in Kleinsendelbach
+  </h1>
+  <p class="block">
+    Der SV Kleinsendelbach überträgt in seinem Sportheim die Spiele der Bundesliga auf Sky. Sie können live dabei sein, wenn Ihre Lieblingsmannschaft aufläuft. Frei nach dem Motto von Sky „Unsere Gäste haben das Beste verdient“, zeigen wir auch die Champions League Spiele mit deutscher Beteiligung, die nicht im freien Fernsehen ausgestrahlt werden.
+  </p>
+  <p>
+    Der Sportverein freut sich zusammen mit Ihnen auf spannende Spiele!
+  </p>
+</span>
+
+<span class="text-section">
+  <h1>
+    Unsere Öffnungszeiten
+  </h1>
+  <span class="opening-hours">
+    <span *ngFor="let openingHourItemRow of openingHoursList"
+      class="row">
+      <span *ngFor="let openingHourItem of openingHourItemRow"
+        class="item">
+        <div class="title">
+          {{ openingHourItem.title }}
+        </div>
+        <div class="time">
+          {{ openingHourItem.time }}
+        </div>
+      </span>
+    </span>
+  </span>
+</span>
+
+<span class="text-section">
+  <h1>
+    Sportheim des SV Kleinsendelbach e.V.
+  </h1>
+  <p class="medium center small-bottom-space">Hauptstraße 21</p>
+  <p class="medium center small-bottom-space">
+    91077 Kleinsendelbach
+  </p>
+  <a href="tel:091268403"
+    class="center">
+    <i class="medium fas fa-phone"></i>
+    <p class="medium">09126 / 8403</p>
+  </a>
+</span>

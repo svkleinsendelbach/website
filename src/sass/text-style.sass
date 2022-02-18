@@ -73,8 +73,9 @@
       padding-bottom: 16px
       margin-top: 80px
 
-  p
-    font-family: 'Montserrat', sans-serif
+  p, a, a > *
+    &:not(i)
+      font-family: 'Montserrat', sans-serif
     color: #868E90
     font:
       size: 18px
@@ -103,10 +104,15 @@
     &.block
       text-align: justify
 
+  a, a > *
+    @include flex-row(center, center)
+    text-decoration: none
+    cursor: pointer
+    color: #CF1D16
 
-  /*&.left-align
-    width: 100%
-    text-align: left
+  a > *
+    width: auto
+    margin: 0 2.5px
 
   /*a, a > *
     font-family: 'Montserrat', sans-serif

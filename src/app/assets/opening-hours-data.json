@@ -1,0 +1,48 @@
+﻿{
+  "opening-hours-items": {
+    "monday": {
+      "title": "Montag",
+      "time": "geschlossen"
+    },
+    "tuesday": {
+      "title": "Dienstag",
+      "time": "geschlossen"
+    },
+    "wednesday": {
+      "title": "Mittwoch",
+      "time": "geschlossen"
+    },
+    "thursday": {
+      "title": "Donnerstag",
+      "time": "geschlossen"
+    },
+    "friday": {
+      "title": "Freitag",
+      "time": "19 - 22 Uhr"
+    },
+    "saturday": {
+      "title": "Samstag",
+      "time": "18 - 21 Uhr"
+    },
+    "sunday": {
+      "title": "Sonntag",
+      "time": "9:30 – 12 Uhr und 17 – 20 Uhr, bei Heimspielen: 13:30 – 20 Uhr"
+    }
+  },
+  "desktop": [
+    ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+  ],
+  "tablet": [
+    ["monday", "tuesday", "wednesday", "thursday"],
+    ["friday", "saturday", "sunday"]
+  ],
+  "mobile": [
+    ["monday"],
+    ["tuesday"],
+    ["wednesday"],
+    ["thursday"],
+    ["friday"],
+    ["saturday"],
+    ["sunday"]
+  ]
+}
