@@ -1,6 +1,7 @@
 import { Component, HostListener, Input } from '@angular/core';
 import { HeaderItem } from '../header.component';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
 
 @Component({
   selector: 'app-mobile-header',
@@ -19,13 +20,20 @@ export class MobileHeaderComponent {
 
   expandedHeaderItemId: string | null = null;
 
+  constructor(private headerIntransparentService: HeaderIntransparentService) {}
+
   @HostListener('window:scroll')
   onScroll(): void {
     this.isOnTop = window.scrollY <= 0;
   }
 
   get isIntransparent(): boolean {
-    return !this.isOnTop || this.isExpanded || this.expandedHeaderItemId !== null;
+    return (
+      this.headerIntransparentService.isIntransparent ||
+      !this.isOnTop ||
+      this.isExpanded ||
+      this.expandedHeaderItemId !== null
+    );
   }
 
   handleHamburgerMenuClicked(toExpand: boolean) {

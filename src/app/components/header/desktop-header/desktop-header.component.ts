@@ -1,5 +1,6 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { HeaderItem } from '../header.component';
+import { HeaderIntransparentService } from '../../../services/header-intransparent.service';
 
 @Component({
   selector: 'app-desktop-header',
@@ -13,7 +14,7 @@ export class DesktopHeaderComponent implements OnInit {
 
   expandedHeaderItemId: string | null = null;
 
-  constructor() {}
+  constructor(private headerIntransparentService: HeaderIntransparentService) {}
 
   @HostListener('window:scroll')
   onScroll(): void {
@@ -23,7 +24,7 @@ export class DesktopHeaderComponent implements OnInit {
   ngOnInit(): void {}
 
   get isIntransparent(): boolean {
-    return !this.isOnTop || this.expandedHeaderItemId !== null;
+    return this.headerIntransparentService.isIntransparent || !this.isOnTop || this.expandedHeaderItemId !== null;
   }
 
   handleHeaderItemClick(id: string) {

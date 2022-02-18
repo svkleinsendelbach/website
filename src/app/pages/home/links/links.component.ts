@@ -23,7 +23,7 @@ export interface LinkItem {
 })
 export class LinksComponent {
   constructor(public deviceType: DeviceTypeService, private library: FaIconLibrary) {
-    library.addIcons(faInfo, faFutbol, faUserFriends, faChild, faMap, faAddressCard);
+    this.library.addIcons(faInfo, faFutbol, faUserFriends, faChild, faMap, faAddressCard);
   }
 
   @HostListener('window:resize')

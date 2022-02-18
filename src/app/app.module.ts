@@ -32,6 +32,7 @@ import { GameViewComponent } from './pages/home/top-news/game-view/game-view.com
 import { NavigationComponent } from './pages/home/top-news/navigation/navigation.component';
 import { LinksComponent } from './pages/home/links/links.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ManagersComponent } from './pages/about-us/managers/managers.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { FooterComponent } from './components/footer/footer.component';
     NavigationComponent,
     LinksComponent,
     FooterComponent,
+    ManagersComponent,
   ],
   imports: [
     BrowserModule,

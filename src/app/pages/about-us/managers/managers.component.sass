@@ -4,27 +4,21 @@
 :host
   @include flex-column(center, flex-start)
   width: 100%
+  margin-top: 75px
 
-.social-media .container
+.managers-container
   @include flex-row(space-around, flex-start)
   width: 100%
   margin-top: 25px
 
-  .link
+  .container
     @include flex-column(center, flex-end)
-    text-decoration: none
-    cursor: pointer
-    padding: 20px
-    border-radius: 10px
 
-    .icon
-      height: 75px
-      font-size: 75px
-      line-height: 75px
-      color: #24252A
+    .image
+      height: 200px
       margin-bottom: 25px
 
-    .text1, .text2
+    .name, .function
       color: #868E90
       white-space: nowrap
       font:
@@ -33,14 +27,9 @@
         family: 'Montserrat', sans-serif
       text-align: center
 
-    .text1
+    .name
       color: #CF1D16
       margin-bottom: 10px
-
-    &:hover
-      background-color: #e0e0e0
-      .text2
-        color: #1f3a95
 
   &.mobile
     @include flex-column(center, flex-start)

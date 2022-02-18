@@ -1,22 +1,23 @@
 import { Component, HostListener } from '@angular/core';
+import { HeaderIntransparentService } from '../../../services/header-intransparent.service';
 import { Title } from '@angular/platform-browser';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.sass'],
+  selector: 'app-managers',
+  templateUrl: './managers.component.html',
+  styleUrls: ['./managers.component.sass'],
 })
-export class HomeComponent {
+export class ManagersComponent {
   constructor(
     private headerIntransparentService: HeaderIntransparentService,
     private titleService: Title,
     public deviceType: DeviceTypeService,
   ) {
-    this.headerIntransparentService.makeTransparent();
-    this.titleService.setTitle('SV Kleinsendelbach');
+    this.headerIntransparentService.makeIntransparent();
+    this.titleService.setTitle('Vorstandschaft');
   }
+
   @HostListener('window:resize')
   onResize() {
     this.deviceType.windowResized();
