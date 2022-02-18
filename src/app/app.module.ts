@@ -35,6 +35,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ManagersComponent } from './pages/about-us/managers/managers.component';
 import { SportsHomeComponent } from './pages/about-us/sports-home/sports-home.component';
 import { ChronicleComponent } from './pages/about-us/chronicle/chronicle.component';
+import { StatuteComponent } from './pages/about-us/statute/statute.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ChronicleComponent } from './pages/about-us/chronicle/chronicle.compone
     ManagersComponent,
     SportsHomeComponent,
     ChronicleComponent,
+    StatuteComponent,
   ],
   imports: [
     BrowserModule,
