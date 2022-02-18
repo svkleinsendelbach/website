@@ -8,6 +8,7 @@ import { StatuteComponent } from './pages/about-us/statute/statute.component';
 import { PrivacyComponent } from './pages/about-us/privacy/privacy.component';
 import { RequestComponent } from './pages/about-us/request/request.component';
 import { ImprintComponent } from './pages/imprint/imprint.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'mitgliedsantrag', component: RequestComponent },
   { path: 'impressum', component: ImprintComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
