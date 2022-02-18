@@ -1,0 +1,49 @@
+@import '/src/sass/flex'
+@import '/src/sass/font'
+
+:host
+  @include flex-column(center, flex-start)
+  width: 100%
+  margin-top: 75px
+
+.team-image
+  width: 100%
+  border: #485460 solid 1px
+
+.all-event-group-container
+  @include flex-column(center, flex-start)
+  width: 100%
+
+  .group-container
+    @include flex-column(center, flex-start)
+    width: 100%
+
+    .event-container
+      @include flex-row(flex-start, flex-start)
+      width: 100%
+      margin-bottom: 15px
+      padding-bottom: 15px
+      border-bottom: #868E90 solid 0.5px
+
+      .date, .title, .subtitle
+        font-family: 'Montserrat', sans-serif
+        color: #868E90
+        font:
+          size: 18px
+          weight: 400
+        line-height: 20px
+        flex: 3
+
+      .date
+        flex: 4
+
+      .title
+        color: #24252A
+
+      .link
+        width: auto
+        flex: 3
+        padding-bottom: 0
+
+      &:nth-last-child(1)
+        border-bottom: none

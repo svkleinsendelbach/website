@@ -14,6 +14,7 @@ import { environment } from '../environments/environment.prod';
 import { AngularFireModule } from '@angular/fire/compat';
 import { REGION, AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -40,6 +41,7 @@ import { PrivacyComponent } from './pages/about-us/privacy/privacy.component';
 import { RequestComponent } from './pages/about-us/request/request.component';
 import { ImprintComponent } from './pages/imprint/imprint.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { GeneralComponent } from './pages/football-adults/general/general.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     RequestComponent,
     ImprintComponent,
     PageNotFoundComponent,
+    GeneralComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +82,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireFunctionsModule,
     AngularFireStorageModule,
+    AngularFireDatabaseModule,
     FontAwesomeModule,
   ],
   providers: [{ provide: REGION, useValue: 'europe-west1' }],

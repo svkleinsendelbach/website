@@ -3,7 +3,7 @@
     "about-us": {
       "name": "Über uns",
       "linkUrl": "/über-uns",
-      "description": "Informationen über unseren Vorstandes, Sportheim, etc",
+      "description": "Informationen über unseren Vorstandes, Sportheim, etc.",
       "icon": {
         "prefix": "fas",
         "name": "info"

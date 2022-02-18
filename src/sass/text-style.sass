@@ -73,7 +73,7 @@
       weight: 400
     text-align: left
     width: 100%
-    line-height: 18px
+    line-height: 20px
     padding-bottom: 32px
 
     &.center
@@ -81,16 +81,19 @@
 
     &.medium
       font-size: 20px
-      line-height: 20px
+      line-height: 22px
       padding-bottom: 40px
 
     &.large
       font-size: 24px
-      line-height: 24px
+      line-height: 26px
       padding-bottom: 48px
 
     &.small-bottom-space
       padding-bottom: 16px
+
+    &.big-top-space
+      padding-top: 25px
 
     &.block
       text-align: justify
@@ -103,10 +106,16 @@
     text-decoration: none
     cursor: pointer
     color: #CF1D16
+
     &.inline, &.inline.large, &.inline.medium
       padding: 0
       text-align: justify
       display: inline
+
+    &.left-align
+      width: 100%
+      text-align: left
+      justify-content: flex-start
 
   a > *
     width: auto

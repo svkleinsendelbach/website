@@ -9,6 +9,7 @@ import { PrivacyComponent } from './pages/about-us/privacy/privacy.component';
 import { RequestComponent } from './pages/about-us/request/request.component';
 import { ImprintComponent } from './pages/imprint/imprint.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { GeneralComponent } from './pages/football-adults/general/general.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'datenschutz', component: PrivacyComponent },
   { path: 'mitgliedsantrag', component: RequestComponent },
   { path: 'impressum', component: ImprintComponent },
+  { path: 'fussball/herren', component: GeneralComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
