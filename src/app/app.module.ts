@@ -46,6 +46,7 @@ import { PhoneNumberPipe } from './pipes/phone-number.pipe';
 import { ContactComponent } from './components/contact/contact.component';
 import { TrainingTimeComponent } from './components/training-time/training-time.component';
 import { ResultsComponent } from './components/results/results.component';
+import { SecondTeamComponent } from './pages/football-adults/second-team/second-team.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { ResultsComponent } from './components/results/results.component';
     ContactComponent,
     TrainingTimeComponent,
     ResultsComponent,
+    SecondTeamComponent,
   ],
   imports: [
     BrowserModule,

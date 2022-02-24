@@ -18,6 +18,25 @@
           "lng": 11.162849
         }]
       }
+    },
+    "football-adults/second-team": {
+      "text": "Das Training findet jeden Dienstag und Donnerstag von 19:00Uhr - 20:30Uhr abwechselnd in Kleinsendelbach und Hetzles, am B-Platz an der Sendelmühlstraße statt.",
+      "map": {
+        "zoom": 14,
+        "center": {
+          "lat": 49.589936,
+          "lng": 11.162849
+        },
+        "options": {
+          "scrollwheel": false,
+          "maxZoom": 18,
+          "minZoom": 5
+        },
+        "marker": [{
+          "lat": 49.589936,
+          "lng": 11.162849
+        }]
+      }
     }
   }
 }

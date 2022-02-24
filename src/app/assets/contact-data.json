@@ -7,6 +7,11 @@
     "josef_hoier": {
       "name": "Josef Hoier",
       "mobile": "017657857884"
+    },
+    "tim_kellermann": {
+      "name": "Tim Kellermann",
+      "mobile": "015112441784",
+      "email": "kellermann.tim@gmx.de"
     }
   },
   "pages": {
@@ -20,6 +25,15 @@
       },
       {
         "id": "simon_mueller",
+        "function": "Trainer"
+      }
+    ],
+    "football-adults/second-team": [{
+        "id": "josef_hoier",
+        "function": "Abteilungsleiter Fußball"
+      },
+      {
+        "id": "tim_kellermann",
         "function": "Trainer"
       }
     ]

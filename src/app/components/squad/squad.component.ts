@@ -64,7 +64,7 @@ export class SquadComponent implements OnInit {
       await lastValueFrom(
         callable({
           website: 'team/kader',
-          parameters: 'teamParameters/first-team',
+          parameters: this.parametersPath,
         }),
       )
     ).value;

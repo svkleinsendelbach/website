@@ -11,6 +11,7 @@ import { ImprintComponent } from './pages/imprint/imprint.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { GeneralComponent } from './pages/football-adults/general/general.component';
 import { FirstTeamComponent } from './pages/football-adults/first-team/first-team.component';
+import { SecondTeamComponent } from './pages/football-adults/second-team/second-team.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'impressum', component: ImprintComponent },
   { path: 'fussball/herren', component: GeneralComponent },
   { path: 'fussball/herren/erste-mannschaft', component: FirstTeamComponent },
+  { path: 'fussball/herren/zweite-mannschaft', component: SecondTeamComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
