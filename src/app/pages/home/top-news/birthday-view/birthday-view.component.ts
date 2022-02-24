@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { lastValueFrom } from 'rxjs';
 import { DBPlayer, Datum } from '../../../../services/fetch-home-top.service';
@@ -9,56 +8,26 @@ import { DBPlayer, Datum } from '../../../../services/fetch-home-top.service';
   templateUrl: './birthday-view.component.html',
   styleUrls: ['./birthday-view.component.sass'],
 })
-export class BirthdayViewComponent implements OnInit, OnChanges {
+export class BirthdayViewComponent {
   public Datum = Datum;
 
   @Input() player!: DBPlayer;
 
   @Input() playerImage?: string;
 
-  image: string | ArrayBuffer | null = null;
+  imageUrl?: string;
 
-  constructor(private storage: AngularFireStorage, private httpClient: HttpClient) {}
+  constructor(private storage: AngularFireStorage) {}
 
   ngOnInit(): void {
-    this.getImage();
+    this.getImageUrl();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    const previousImage: string | undefined = (changes as any).playerImage?.previousValue;
-    const currentImage: string | undefined = (changes as any).playerImage?.currentValue;
-    if (previousImage === undefined || currentImage === undefined) {
-      return;
-    }
-    if (previousImage !== currentImage) {
-      this.getImage();
-    }
-  }
-
-  async getImageUrl(): Promise<string | null> {
+  async getImageUrl() {
     if (this.playerImage === null) {
-      return null;
+      return;
     }
     const ref = this.storage.ref(`images/${this.playerImage}`);
-    return lastValueFrom(ref.getDownloadURL());
-  }
-
-  async getImage() {
-    const url = await this.getImageUrl();
-    if (url === null) {
-      return;
-    }
-    const blob = await lastValueFrom(this.httpClient.get(url, { responseType: 'blob' }));
-    const reader = new FileReader();
-    reader.addEventListener(
-      'load',
-      () => {
-        this.image = reader.result;
-      },
-      false,
-    );
-    if (blob) {
-      reader.readAsDataURL(blob);
-    }
+    this.imageUrl = await lastValueFrom(ref.getDownloadURL());
   }
 }

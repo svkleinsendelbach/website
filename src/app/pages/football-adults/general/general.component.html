@@ -13,33 +13,9 @@
   <p class="medium">Hier geht es zur <a href="http://sg-kh.de/team-sg-2/" title="Homepage der 2. Mannschaft"
       target="_blank" class="inline medium">Homepage</a> der 2. Mannschaft SG Kleinsendelbach / Hetzles.</p>
 </span>
-<span class="text-section">
-  <h1>Kommende Termine</h1>
-  <p *ngIf="nextEvents == undefined || nextEvents == []" class="center large red">Keine Termine</p>
-  <span class="all-event-group-container" *ngFor="let groupedEvents of nextEvents">
-    <h2 class="group left-align">{{ groupDescription(groupedEvents.groupId) }}</h2>
-    <span class="group-container">
-      <span class="event-container" *ngFor="let event of groupedEvents.events">
-        <div class="date">{{ dateDescription(event.date) }}</div>
-        <div class="title">{{ event.title }}</div>
-        <div *ngIf="event.subtitle != undefined" class="subtitle">{{ event.subtitle }}</div>
-        <div *ngIf="event.subtitle == undefined" class="subtitle"></div>
-        <a *ngIf="event.link != undefined" title="{{ event.title }}" href="{{ event.link }}" target="_blank"
-          class="link">Weiter Informationen</a>
-        <div *ngIf="event.link == undefined" class="link"></div>
-      </span>
-    </span>
-  </span>
-</span>
-<span class="text-section">
-  <h1>Kontakt</h1>
-  <h2 class="left-align">Abteilungsleiter Fußball</h2>
-  <p class="small-bottom-space">Josef Hoier</p>
-  <a href="tel:017657857884" class="left-align">
-    <i class="text-margin-right fas fa-phone"></i>
-    <p>0176 / 57857884</p>
-  </a>
-</span>
+<!-- TODO: links to first / second / ah team -->
+<app-component-events [eventGroupIds]="eventGroupIds"></app-component-events>
+<app-component-contact [pageId]="'football-adults/general'"></app-component-contact>
 <span class="text-section">
   <img class="team-image" title="1. und 2. Mannschaft" src="assets/mannschaft.png">
   <p class="big-top-space medium center small-bottom-space">Viel Spaß beim Sport wünscht</p>

@@ -17,9 +17,4 @@ export class ImprintComponent {
     this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Impressum und Datenschutz');
   }
-
-  @HostListener('window:resize')
-  onResize() {
-    this.deviceType.windowResized();
-  }
 }

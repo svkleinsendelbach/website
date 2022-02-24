@@ -17,9 +17,4 @@ export class ChronicleComponent {
     this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Chronik');
   }
-
-  @HostListener('window:resize')
-  onResize() {
-    this.deviceType.windowResized();
-  }
 }

@@ -17,8 +17,4 @@ export class HomeComponent {
     this.headerIntransparentService.makeTransparent();
     this.titleService.setTitle('SV Kleinsendelbach');
   }
-  @HostListener('window:resize')
-  onResize() {
-    this.deviceType.windowResized();
-  }
 }

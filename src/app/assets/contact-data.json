@@ -1,0 +1,27 @@
+{
+  "persons": {
+    "simon_mueller": {
+      "name": "Simon Müller",
+      "mobile": "015901094261"
+    },
+    "josef_hoier": {
+      "name": "Josef Hoier",
+      "mobile": "017657857884"
+    }
+  },
+  "pages": {
+    "football-adults/general": [{
+      "id": "josef_hoier",
+      "function": "Abteilungsleiter Fußball"
+    }],
+    "football-adults/first-team": [{
+        "id": "josef_hoier",
+        "function": "Abteilungsleiter Fußball"
+      },
+      {
+        "id": "simon_mueller",
+        "function": "Trainer"
+      }
+    ]
+  }
+}

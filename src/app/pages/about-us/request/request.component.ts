@@ -17,9 +17,4 @@ export class RequestComponent {
     this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Mitgliedsantrag');
   }
-
-  @HostListener('window:resize')
-  onResize() {
-    this.deviceType.windowResized();
-  }
 }

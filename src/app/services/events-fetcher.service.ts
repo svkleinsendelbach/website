@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/compat/functions';
 import { lastValueFrom } from 'rxjs';
 
-export type ValidEventGroupId =
+export type EventGroupId =
   | 'football-adults/general'
   | 'football-adults/first-team'
   | 'football-adults/second-team'
@@ -13,8 +13,8 @@ export type ValidEventGroupId =
   | 'football-youth/f-youth'
   | 'football-youth/g-youth';
 
-export namespace ValidEventGroupId {
-  export function description(id: ValidEventGroupId): string {
+export namespace EventGroupId {
+  export function description(id: EventGroupId): string {
     switch (id) {
       case 'football-adults/general':
         return 'Herrenfußball';
@@ -51,7 +51,7 @@ export interface Event {
 export class EventsFetcherService {
   constructor(private fns: AngularFireFunctions) {}
 
-  getEvents(groupIds: ValidEventGroupId[]): Promise<{ groupId: ValidEventGroupId; events: Event[] }[]> {
+  getEvents(groupIds: EventGroupId[]): Promise<{ groupId: EventGroupId; events: Event[] }[]> {
     const callable = this.fns.httpsCallable('getEvents');
     return lastValueFrom(callable({ groupIds }));
   }

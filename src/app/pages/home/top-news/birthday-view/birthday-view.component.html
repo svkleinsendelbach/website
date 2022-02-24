@@ -13,15 +13,9 @@
       </div>
     </span>
   </span>
-  <a *ngIf="image != null"
-    href="http://www.anpfiff.info/sites/person/start.aspx?SK=2&Pers={{ player.id }}"
-    title="{{ player.name }} (anpfiff.info)"
-    target="_blank"
-    class="image-container">
-    <img [src]="image"
-      alt="{{ player.name }}"
-      class="image">
+  <a *ngIf="imageUrl != undefined" href="http://www.anpfiff.info/sites/person/start.aspx?SK=2&Pers={{ player.id }}"
+    title="{{ player.name }} (anpfiff.info)" target="_blank" class="image-container">
+    <img src="{{ imageUrl }}" alt="{{ player.name }}" class="image">
   </a>
-  <div *ngIf="image == null"
-    class="image-container"></div>
+  <div *ngIf="imageUrl != undefined" class="image-container"></div>
 </span>

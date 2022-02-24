@@ -17,9 +17,4 @@ export class PrivacyComponent {
     this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Datenschutzerklärung');
   }
-
-  @HostListener('window:resize')
-  onResize() {
-    this.deviceType.windowResized();
-  }
 }

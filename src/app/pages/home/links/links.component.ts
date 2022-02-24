@@ -26,11 +26,6 @@ export class LinksComponent {
     this.library.addIcons(faInfo, faFutbol, faUserFriends, faChild, faMap, faAddressCard);
   }
 
-  @HostListener('window:resize')
-  onResize() {
-    this.deviceType.windowResized();
-  }
-
   private getLinkItemValue(key: string): LinkItem {
     if (!homeLinks['link-items'].hasOwnProperty(key)) {
       throw new Error(`Invalid link item key: ${key}`);

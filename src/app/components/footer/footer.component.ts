@@ -8,9 +8,4 @@ import { DeviceTypeService } from 'src/app/services/device-type.service';
 })
 export class FooterComponent {
   constructor(public deviceType: DeviceTypeService) {}
-
-  @HostListener('window:resize')
-  onResize() {
-    this.deviceType.windowResized();
-  }
 }

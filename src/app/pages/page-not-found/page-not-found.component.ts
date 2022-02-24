@@ -17,9 +17,4 @@ export class PageNotFoundComponent {
     this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Seite nicht gefunden');
   }
-
-  @HostListener('window:resize')
-  onResize() {
-    this.deviceType.windowResized();
-  }
 }

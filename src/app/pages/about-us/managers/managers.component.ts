@@ -17,9 +17,4 @@ export class ManagersComponent {
     this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Vorstandschaft');
   }
-
-  @HostListener('window:resize')
-  onResize() {
-    this.deviceType.windowResized();
-  }
 }

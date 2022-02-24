@@ -1,6 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { Component, Input } from '@angular/core';
 import { TeamSpieleSpiele } from 'src/app/services/fetch-home-top.service';
 import { FullDatum, ResultParameters } from '../../../../services/fetch-home-top.service';
 
@@ -9,7 +7,7 @@ import { FullDatum, ResultParameters } from '../../../../services/fetch-home-top
   templateUrl: './game-view.component.html',
   styleUrls: ['./game-view.component.sass'],
 })
-export class GameViewComponent implements OnInit, OnChanges {
+export class GameViewComponent {
   public FullDatum = FullDatum;
 
   @Input() nextLastGame!: 'next' | 'last';
@@ -18,46 +16,7 @@ export class GameViewComponent implements OnInit, OnChanges {
 
   @Input() gameProperties!: TeamSpieleSpiele;
 
-  logo: string | ArrayBuffer | null = null;
-
-  constructor(private httpClient: HttpClient) {}
-
-  ngOnInit(): void {
-    this.getLogo();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    const previousLogoId: number | undefined = (changes as any).gameProperties?.previousValue?.logoId;
-    const currentLogoId: number | undefined = (changes as any).gameProperties?.currentValue?.logoId;
-    if (previousLogoId === undefined || currentLogoId === undefined) {
-      return;
-    }
-    if (previousLogoId !== currentLogoId) {
-      this.getLogo();
-    }
-  }
-
-  async getLogo() {
-    if (this.gameProperties.logoId === undefined) {
-      return;
-    }
-    const url = `http://www.anpfiff.info/upload/images/Emblem4/${this.gameProperties.logoId}.png`;
-    if (url === null) {
-      return;
-    }
-    const blob = await lastValueFrom(this.httpClient.get(url, { responseType: 'blob' }));
-    const reader = new FileReader();
-    reader.addEventListener(
-      'load',
-      () => {
-        this.logo = reader.result;
-      },
-      false,
-    );
-    if (blob) {
-      reader.readAsDataURL(blob);
-    }
-  }
+  constructor() {}
 
   get firstLine(): string {
     const team = this.team === 'firstTeam' ? 'Erste Mannschaft' : 'Zweite Mannschaft';

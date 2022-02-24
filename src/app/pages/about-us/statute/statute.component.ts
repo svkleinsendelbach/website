@@ -17,9 +17,4 @@ export class StatuteComponent {
     this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Satzung');
   }
-
-  @HostListener('window:resize')
-  onResize() {
-    this.deviceType.windowResized();
-  }
 }

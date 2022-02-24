@@ -24,11 +24,6 @@ export class SportsHomeComponent {
     this.titleService.setTitle('Sportheim');
   }
 
-  @HostListener('window:resize')
-  onResize() {
-    this.deviceType.windowResized();
-  }
-
   private getOpeningHourItemValue(key: string): OpeningHour {
     if (!openingHours['opening-hours-items'].hasOwnProperty(key)) {
       throw new Error(`Invalid opening hours item key: ${key}`);

@@ -2,20 +2,16 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { MaterialModule } from 'src/app/modules/material/material.module';
-/*
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { environment } from '../environments/environment';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { provideDatabase, getDatabase } from '@angular/fire/database';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { provideFunctions, getFunctions } from '@angular/fire/functions';
-*/
+
+import 'src/app/utils';
+
 import { environment } from '../environments/environment.prod';
 import { AngularFireModule } from '@angular/fire/compat';
 import { REGION, AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,6 +38,14 @@ import { RequestComponent } from './pages/about-us/request/request.component';
 import { ImprintComponent } from './pages/imprint/imprint.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { GeneralComponent } from './pages/football-adults/general/general.component';
+import { FirstTeamComponent } from './pages/football-adults/first-team/first-team.component';
+import { EventsComponent } from './components/events/events.component';
+import { SquadComponent } from './components/squad/squad.component';
+import { PersonComponent } from './components/squad/person/person.component';
+import { PhoneNumberPipe } from './pipes/phone-number.pipe';
+import { ContactComponent } from './components/contact/contact.component';
+import { TrainingTimeComponent } from './components/training-time/training-time.component';
+import { ResultsComponent } from './components/results/results.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +71,14 @@ import { GeneralComponent } from './pages/football-adults/general/general.compon
     ImprintComponent,
     PageNotFoundComponent,
     GeneralComponent,
+    FirstTeamComponent,
+    EventsComponent,
+    SquadComponent,
+    PersonComponent,
+    PhoneNumberPipe,
+    ContactComponent,
+    TrainingTimeComponent,
+    ResultsComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,16 +86,12 @@ import { GeneralComponent } from './pages/football-adults/general/general.compon
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    /*provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
-    provideFirestore(() => getFirestore()),
-    provideFunctions(() => getFunctions()),*/
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireFunctionsModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     FontAwesomeModule,
+    GoogleMapsModule,
   ],
   providers: [{ provide: REGION, useValue: 'europe-west1' }],
   bootstrap: [AppComponent],
