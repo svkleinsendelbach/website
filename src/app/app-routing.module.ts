@@ -20,6 +20,7 @@ import { AhTeamComponent as FootballAdults_AhTeam_Component } from './pages/foot
 
 // Football youth pages
 import { GeneralComponent as FootballYouth_General_Component } from './pages/football-youth/general/general.component';
+import { CYouthComponent as FootballYouth_CYouth_Component } from './pages/football-youth/c-youth/c-youth.component';
 
 // Other pages
 import { ImprintComponent as Imprint_Component } from './pages/imprint/imprint.component';
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'fussball/herren/zweite-mannschaft', component: FootballAdults_SecondTeam_Component },
   { path: 'fussball/herren/alte-herren', component: FootballAdults_AhTeam_Component },
   { path: 'fussball/jugend', component: FootballYouth_General_Component },
+  { path: 'fussball/jugend/c-jugend', component: FootballYouth_CYouth_Component },
   { path: 'impressum', component: Imprint_Component },
   { path: '**', component: PageNotFound_Component },
 ];

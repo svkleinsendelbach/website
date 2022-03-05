@@ -1,4 +1,5 @@
 <span class="text-section">
   <h1>Ergebnisse und Tabellen</h1>
-  <div #bfvWidget class="bfv-widget"></div>
+  <div #bfvWidget *ngIf="pageId != undefined" class="bfv-widget"></div>
+  <div #bfvWidgetContainer *ngIf="results != undefined" class="bfv-widget-container"></div>
 </span>

@@ -29,6 +29,10 @@
     "football-adults/ah-team": {
       "text": "Das Training findet jeden Mittwoch um 19:00Uhr am B-Platz in Kleinsendelbach an der Sendelmühlstraße statt.",
       "map": "kleinsendelbach/b-platz"
+    },
+    "football-youth/c-youth": {
+      "text": "Das Training findet jeden Dienstag und Donnerstag von 17:00Uhr - 18:0Uhr am B-Platz in der Sendelmühlstraße statt.",
+      "map": "kleinsendelbach/b-platz"
     }
   }
 }

@@ -7,14 +7,41 @@ import gameResultsData from 'src/app/assets/game-results-data.json';
   styleUrls: ['./results.component.sass'],
 })
 export class ResultsComponent implements AfterViewInit {
-  @Input() pageId!: keyof typeof gameResultsData.pages;
+  @Input() pageId?: keyof typeof gameResultsData.pages;
+
+  @Input() results?: {
+    teamName: string;
+    id: keyof typeof gameResultsData.pages;
+  }[];
 
   @ViewChild('bfvWidget') bfvWidget?: ElementRef;
 
-  constructor() {}
+  @ViewChild('bfvWidgetContainer') bfvWidgetContainer?: ElementRef;
+
+  constructor() { }
 
   ngAfterViewInit(): void {
-    const teamId = gameResultsData.pages[this.pageId];
+    if (this.pageId !== undefined) {
+      const bfvWidgetIFrame = this.getBfvWidget(this.pageId)
+      this.bfvWidget?.nativeElement.appendChild(bfvWidgetIFrame);
+    } else if (this.results !== undefined) {
+      for (const result of this.results) {
+        const title = document.createElement('h2');
+        title.innerHTML = `Ergebisse der ${result.teamName}`;
+        const container = document.createElement('span');
+        container.classList.add('bfv-widget');
+        const bfvWidgetIFrame = this.getBfvWidget(result.id);
+        container.appendChild(bfvWidgetIFrame);
+        this.bfvWidgetContainer?.nativeElement.appendChild(title);
+        this.bfvWidgetContainer?.nativeElement.appendChild(container);
+      }
+    } else {
+      throw new Error('pageId and results are undefined.');
+    }
+  }
+
+  private getBfvWidget(id: keyof typeof gameResultsData.pages): HTMLIFrameElement {
+    const teamId = gameResultsData.pages[id];
     const options = {
       selectedTab: 'teammatches',
       colorResults: `#24252a;}</style><link rel='stylesheet' href='${window.location.protocol}//${window.location.hostname}/assets/other/bfvWidgetStyle.css'><style type='text/css'>xy{x:y`,
@@ -30,14 +57,14 @@ export class ResultsComponent implements AfterViewInit {
     iFrame.height = '100%';
     iFrame.style.border = 'none';
     const bfvHost = `${window.location.protocol}//widget-prod.bfv.de`;
-    const appPath = `widget/widgetresource/iframe${'https:' === document.location.protocol ? '/ssl' : ''}?url=${
-      window.location.hostname
-    }`;
+    const appPath = `widget/widgetresource/iframe${'https:' === document.location.protocol ? '/ssl' : ''}?url=${window.location.hostname
+      }`;
     iFrame.src = `${bfvHost}/${appPath}&widget=${encodeURIComponent(
       `widget/team/complete/team${teamId}/${options.selectedTab}?css=${encodeURIComponent(
         JSON.stringify(options),
       )}&referrer=${window.location.hostname}`,
     )}`;
-    this.bfvWidget?.nativeElement.appendChild(iFrame);
+    return iFrame;
   }
 }
+
