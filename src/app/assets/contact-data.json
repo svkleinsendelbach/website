@@ -40,6 +40,10 @@
     "fredi_woelfel": {
       "name": "Fredi Wölfel",
       "mobile": "01702911886"
+    },
+    "bernd_aumueller": {
+      "name": "Bernd Aumüller",
+      "mobile": "01729915405"
     }
   },
   "pages": {
@@ -94,6 +98,13 @@
       "function": "Trainer"
     }, {
       "id": "fredi_woelfel",
+      "function": "Trainer"
+    }],
+    "football-youth/f-youth": [{
+      "id": "bernd_aumueller",
+      "function": "Trainer"
+    }, {
+      "id": "stefan_seubert",
       "function": "Trainer"
     }]
   }
