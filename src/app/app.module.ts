@@ -71,6 +71,7 @@ import { AhTeamComponent as FootballAdults_AhTeam_Component } from './pages/foot
 // Football youth pages
 import { GeneralComponent as FootballYouth_General_Component } from './pages/football-youth/general/general.component';
 import { CYouthComponent as FootballYouth_CYouth_Component } from './pages/football-youth/c-youth/c-youth.component';
+import { EYouthComponent as FootballYouth_EYouth_Component } from './pages/football-youth/e-youth/e-youth.component';
 
 // Other pages
 import { ImprintComponent as Imprint_Component } from './pages/imprint/imprint.component';
@@ -112,6 +113,7 @@ import { PageNotFoundComponent as PageNotFound_Component } from './pages/page-no
     FootballAdults_AhTeam_Component,
     FootballYouth_General_Component,
     FootballYouth_CYouth_Component,
+    FootballYouth_EYouth_Component,
   ],
   imports: [
     BrowserModule,

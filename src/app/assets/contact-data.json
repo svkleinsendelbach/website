@@ -36,6 +36,10 @@
     "florian_veitengruber": {
       "name": "Florian Veitengruber",
       "mobile": "017670820050"
+    },
+    "fredi_woelfel": {
+      "name": "Fredi Wölfel",
+      "mobile": "01702911886"
     }
   },
   "pages": {
@@ -83,6 +87,13 @@
       "function": "Trainer"
     }, {
       "id": "florian_veitengruber",
+      "function": "Trainer"
+    }],
+    "football-youth/e-youth": [{
+      "id": "matthias_iberl",
+      "function": "Trainer"
+    }, {
+      "id": "fredi_woelfel",
       "function": "Trainer"
     }]
   }
