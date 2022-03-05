@@ -29,6 +29,7 @@ import { GYouthComponent as FootballYouth_GYouth_Component } from './pages/footb
 import { ImprintComponent as Imprint_Component } from './pages/imprint/imprint.component';
 import { PageNotFoundComponent as PageNotFound_Component } from './pages/page-not-found/page-not-found.component';
 import { GymnasticsComponent as Gymnastics_Component } from './pages/gymnastics/gymnastics.component';
+import { DancingComponent as Dancing_Component } from './pages/dancing/dancing.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: 'fussball/jugend/f-jugend', component: FootballYouth_FYouth_Component },
   { path: 'fussball/jugend/g-jugend', component: FootballYouth_GYouth_Component },
   { path: 'gymnastik', component: Gymnastics_Component },
+  { path: 'tanzen', component: Dancing_Component },
   { path: 'impressum', component: Imprint_Component },
   { path: '**', component: PageNotFound_Component },
 ];
