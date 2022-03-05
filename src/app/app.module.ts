@@ -80,6 +80,7 @@ import { ImprintComponent as Imprint_Component } from './pages/imprint/imprint.c
 import { PageNotFoundComponent as PageNotFound_Component } from './pages/page-not-found/page-not-found.component';
 import { GymnasticsComponent as Gymnastics_Component } from './pages/gymnastics/gymnastics.component';
 import { DancingComponent as Dancing_Component } from './pages/dancing/dancing.component';
+import { DriveComponent as Drive_Component } from './pages/drive/drive.component';
 
 @NgModule({
   declarations: [
@@ -122,6 +123,7 @@ import { DancingComponent as Dancing_Component } from './pages/dancing/dancing.c
     PhoneNumberPipe,
     Gymnastics_Component,
     Dancing_Component,
+    Drive_Component,
   ],
   imports: [
     BrowserModule,
