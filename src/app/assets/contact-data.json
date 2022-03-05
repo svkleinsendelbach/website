@@ -16,6 +16,14 @@
     "juergen_drummer": {
       "name": "Jürgen Drummer",
       "mobile": "01703396915"
+    },
+    "matthias_iberl": {
+      "name": "Matthias Iberl",
+      "mobile": "01606120508"
+    },
+    "stefan_seubert": {
+      "name": "Stefan Seubert",
+      "mobile": "01712447114"
     }
   },
   "pages": {
@@ -44,6 +52,16 @@
     "football-adults/ah-team": [{
       "id": "juergen_drummer",
       "function": "1. Anschrechpartner"
+    }],
+    "football-youth/general": [{
+      "id": "tim_kellermann",
+      "function": "Jugendleiter Großfeld"
+    }, {
+      "id": "matthias_iberl",
+      "function": "Jugendleiter Kleinfeld"
+    }, {
+      "id": "stefan_seubert",
+      "function": "Jugendleiter Kleinfeld"
     }]
   }
 }

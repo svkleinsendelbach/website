@@ -68,6 +68,9 @@ import { FirstTeamComponent as FootballAdults_FirstTeam_Component } from './page
 import { SecondTeamComponent as FootballAdults_SecondTeam_Component } from './pages/football-adults/second-team/second-team.component';
 import { AhTeamComponent as FootballAdults_AhTeam_Component } from './pages/football-adults/ah-team/ah-team.component';
 
+// Football youth pages
+import { GeneralComponent as FootballYouth_General_Component } from './pages/football-youth/general/general.component';
+
 // Other pages
 import { ImprintComponent as Imprint_Component } from './pages/imprint/imprint.component';
 import { PageNotFoundComponent as PageNotFound_Component } from './pages/page-not-found/page-not-found.component';
@@ -106,6 +109,7 @@ import { PageNotFoundComponent as PageNotFound_Component } from './pages/page-no
     PageNotFound_Component,
     PhoneNumberPipe,
     FootballAdults_AhTeam_Component,
+    FootballYouth_General_Component,
   ],
   imports: [
     BrowserModule,

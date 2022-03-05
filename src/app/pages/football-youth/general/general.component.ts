@@ -5,12 +5,18 @@ import { EventGroupId } from 'src/app/services/events-fetcher.service';
 import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
 
 @Component({
-  selector: 'app-ah-team',
-  templateUrl: './ah-team.component.html',
-  styleUrls: ['./ah-team.component.sass'],
+  selector: 'app-general',
+  templateUrl: './general.component.html',
+  styleUrls: ['./general.component.sass'],
 })
-export class AhTeamComponent {
-  eventGroupIds: EventGroupId[] = ['football-adults/ah-team'];
+export class GeneralComponent {
+  eventGroupIds: EventGroupId[] = [
+    'football-youth/general',
+    'football-youth/c-youth',
+    'football-youth/e-youth',
+    'football-youth/f-youth',
+    'football-youth/g-youth',
+  ];
 
   constructor(
     private headerIntransparentService: HeaderIntransparentService,
@@ -18,6 +24,6 @@ export class AhTeamComponent {
     public deviceType: DeviceTypeService,
   ) {
     this.headerIntransparentService.makeIntransparent();
-    this.titleService.setTitle('Alte Herren');
+    this.titleService.setTitle('Jugendfußball');
   }
 }
