@@ -73,6 +73,7 @@ import { GeneralComponent as FootballYouth_General_Component } from './pages/foo
 import { CYouthComponent as FootballYouth_CYouth_Component } from './pages/football-youth/c-youth/c-youth.component';
 import { EYouthComponent as FootballYouth_EYouth_Component } from './pages/football-youth/e-youth/e-youth.component';
 import { FYouthComponent as FootballYouth_FYouth_Component } from './pages/football-youth/f-youth/f-youth.component';
+import { GYouthComponent as FootballYouth_GYouth_Component } from './pages/football-youth/g-youth/g-youth.component';
 
 // Other pages
 import { ImprintComponent as Imprint_Component } from './pages/imprint/imprint.component';
@@ -108,14 +109,15 @@ import { PageNotFoundComponent as PageNotFound_Component } from './pages/page-no
     FootballAdults_General_Component,
     FootballAdults_FirstTeam_Component,
     FootballAdults_SecondTeam_Component,
-    Imprint_Component,
-    PageNotFound_Component,
-    PhoneNumberPipe,
     FootballAdults_AhTeam_Component,
     FootballYouth_General_Component,
     FootballYouth_CYouth_Component,
     FootballYouth_EYouth_Component,
     FootballYouth_FYouth_Component,
+    FootballYouth_GYouth_Component,
+    Imprint_Component,
+    PageNotFound_Component,
+    PhoneNumberPipe,
   ],
   imports: [
     BrowserModule,

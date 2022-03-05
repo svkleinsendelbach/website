@@ -57,6 +57,10 @@
     "football-youth/f-youth": {
       "text": "Das Training findet jeden Donnerstag von 17:30Uhr - 18:45Uhr am A-Platz in der Hauptstraße statt.",
       "map": "kleinsendelbach/a-platz"
+    },
+    "football-youth/g-youth": {
+      "text": "Das Training findet jeden Donnerstag von 17:30Uhr - 18:30Uhr am A-Platz in der Hauptstraße statt.",
+      "map": "kleinsendelbach/a-platz"
     }
   }
 }

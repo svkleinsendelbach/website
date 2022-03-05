@@ -44,6 +44,14 @@
     "bernd_aumueller": {
       "name": "Bernd Aumüller",
       "mobile": "01729915405"
+    },
+    "markus_schmitt": {
+      "name": "Markus Schmitt",
+      "mobile": "017632844763"
+    },
+    "dominic_schmitt": {
+      "name": "Dominic Schmitt",
+      "mobile": "01708087516"
     }
   },
   "pages": {
@@ -105,6 +113,13 @@
       "function": "Trainer"
     }, {
       "id": "stefan_seubert",
+      "function": "Trainer"
+    }],
+    "football-youth/g-youth": [{
+      "id": "markus_schmitt",
+      "function": "Trainer"
+    }, {
+      "id": "dominic_schmitt",
       "function": "Trainer"
     }]
   }

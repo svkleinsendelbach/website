@@ -23,6 +23,7 @@ import { GeneralComponent as FootballYouth_General_Component } from './pages/foo
 import { CYouthComponent as FootballYouth_CYouth_Component } from './pages/football-youth/c-youth/c-youth.component';
 import { EYouthComponent as FootballYouth_EYouth_Component } from './pages/football-youth/e-youth/e-youth.component';
 import { FYouthComponent as FootballYouth_FYouth_Component } from './pages/football-youth/f-youth/f-youth.component';
+import { GYouthComponent as FootballYouth_GYouth_Component } from './pages/football-youth/g-youth/g-youth.component';
 
 // Other pages
 import { ImprintComponent as Imprint_Component } from './pages/imprint/imprint.component';
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'fussball/jugend/c-jugend', component: FootballYouth_CYouth_Component },
   { path: 'fussball/jugend/e-jugend', component: FootballYouth_EYouth_Component },
   { path: 'fussball/jugend/f-jugend', component: FootballYouth_FYouth_Component },
+  { path: 'fussball/jugend/g-jugend', component: FootballYouth_GYouth_Component },
   { path: 'impressum', component: Imprint_Component },
   { path: '**', component: PageNotFound_Component },
 ];
