@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import trainingTimesData from 'src/app/assets/training-times-data.json';
+import { JsonDecodingError } from 'src/app/utils/jsonDecodingError';
 
 interface TrainingTime {
   text: string;
@@ -16,12 +17,25 @@ interface TrainingTime {
   templateUrl: './training-time.component.html',
   styleUrls: ['./training-time.component.sass'],
 })
-export class TrainingTimeComponent {
+export class TrainingTimeComponent implements OnInit {
+  public trainingTime!: TrainingTime;
+
   @Input() pageId!: keyof typeof trainingTimesData.pages;
 
-  constructor() {}
+  constructor() { }
 
-  public get trainingTime(): TrainingTime {
-    return trainingTimesData.pages[this.pageId];
+  ngOnInit(): void {
+    this.getTrainingTime();
+  }
+
+  private getTrainingTime(): void {
+    const pageData = trainingTimesData.pages[this.pageId];
+    if (!trainingTimesData.locations.hasOwnProperty(pageData.map)) {
+      throw new JsonDecodingError(`Couldn't get training time location for page: ${this.pageId}`);
+    }
+    this.trainingTime = {
+      text: pageData.text,
+      map: trainingTimesData.locations[pageData.map as keyof typeof trainingTimesData.locations],
+    };
   }
 }

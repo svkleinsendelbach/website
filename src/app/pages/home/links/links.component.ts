@@ -4,6 +4,7 @@ import homeLinks from 'src/app/assets/home-links.json';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { faInfo, faUserFriends, faChild, faAddressCard, IconName, IconPrefix } from '@fortawesome/free-solid-svg-icons';
 import { faFutbol, faMap } from '@fortawesome/free-regular-svg-icons';
+import { JsonDecodingError } from 'src/app/utils/jsonDecodingError';
 
 export interface LinkItem {
   name: string;
@@ -22,18 +23,21 @@ export interface LinkItem {
   styleUrls: ['./links.component.sass'],
 })
 export class LinksComponent {
+  public linkItemsList: (LinkItem & { id: string })[][];
+
   constructor(public deviceType: DeviceTypeService, private library: FaIconLibrary) {
     this.library.addIcons(faInfo, faFutbol, faUserFriends, faChild, faMap, faAddressCard);
+    this.linkItemsList = this.getLinkItemsList();
   }
 
   private getLinkItemValue(key: string): LinkItem {
     if (!homeLinks['link-items'].hasOwnProperty(key)) {
-      throw new Error(`Invalid link item key: ${key}`);
+      throw new JsonDecodingError(`Invalid link item key: ${key}`);
     }
-    return (homeLinks['link-items'] as any)[key];
+    return homeLinks['link-items'][key as keyof typeof homeLinks['link-items']] as LinkItem;
   }
 
-  public get linkItemsList(): (LinkItem & { id: string })[][] {
+  private getLinkItemsList(): (LinkItem & { id: string })[][] {
     return homeLinks[this.deviceType.stringValue].map(e => {
       return e.map(f => {
         return {

@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import headerItemsData from 'src/app/assets/header-items-data.json';
+import { JsonDecodingError } from 'src/app/utils/jsonDecodingError';
 import { DeviceTypeService } from '../../services/device-type.service';
 
 type HeaderItemValue = {
@@ -19,7 +20,11 @@ export type HeaderItem = {
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent {
-  constructor(public deviceType: DeviceTypeService) {}
+  public headerItemsList: HeaderItem[];
+
+  constructor(public deviceType: DeviceTypeService) {
+    this.headerItemsList = this.getHeaderItemsList();
+  }
 
   @HostListener('window:resize')
   onResize() {
@@ -28,15 +33,16 @@ export class HeaderComponent {
 
   private getHeaderItemValue(key: string): HeaderItemValue {
     if (!headerItemsData['header-items'].hasOwnProperty(key)) {
-      throw new Error(`Invalid header item key: ${key}`);
+      throw new JsonDecodingError(`Invalid header item key: ${key}`);
     }
+    const headerItem = headerItemsData['header-items'][key as keyof typeof headerItemsData['header-items']];
     return {
-      name: (headerItemsData['header-items'] as any)[key]['displayed-name'],
-      link: (headerItemsData['header-items'] as any)[key].link,
+      name: headerItem['displayed-name'],
+      link: headerItem.link,
     };
   }
 
-  public get headerItemsList(): HeaderItem[] {
+  private getHeaderItemsList(): HeaderItem[] {
     return headerItemsData[this.deviceType.stringValue].map(e => {
       return {
         id: e['top-item'],

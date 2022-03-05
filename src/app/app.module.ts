@@ -1,86 +1,111 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { MaterialModule } from 'src/app/modules/material/material.module';
-
 import 'src/app/utils';
-
+import { NgModule } from '@angular/core';
 import { environment } from '../environments/environment.prod';
+import { REGION } from '@angular/fire/compat/functions';
+
+// ##### Modules #####
+
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { MaterialModule } from 'src/app/modules/material/material.module';
 import { AngularFireModule } from '@angular/fire/compat';
-import { REGION, AngularFireFunctionsModule } from '@angular/fire/compat/functions';
+import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GoogleMapsModule } from '@angular/google-maps';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
-import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DesktopHeaderComponent } from './components/header/desktop-header/desktop-header.component';
-import { HeaderItemComponent as DesktopHeaderItemComponent } from './components/header/desktop-header/header-item/header-item.component';
-import { TopNewsComponent } from './pages/home/top-news/top-news.component';
-import { MobileHeaderComponent } from './components/header/mobile-header/mobile-header.component';
-import { HeaderItemComponent } from './components/header/mobile-header/header-item/header-item.component';
-import { BirthdayViewComponent } from './pages/home/top-news/birthday-view/birthday-view.component';
 import { HttpClientModule } from '@angular/common/http';
-import { GameViewComponent } from './pages/home/top-news/game-view/game-view.component';
-import { NavigationComponent } from './pages/home/top-news/navigation/navigation.component';
-import { LinksComponent } from './pages/home/links/links.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { ManagersComponent } from './pages/about-us/managers/managers.component';
-import { SportsHomeComponent } from './pages/about-us/sports-home/sports-home.component';
-import { ChronicleComponent } from './pages/about-us/chronicle/chronicle.component';
-import { StatuteComponent } from './pages/about-us/statute/statute.component';
-import { PrivacyComponent } from './pages/about-us/privacy/privacy.component';
-import { RequestComponent } from './pages/about-us/request/request.component';
-import { ImprintComponent } from './pages/imprint/imprint.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { GeneralComponent } from './pages/football-adults/general/general.component';
-import { FirstTeamComponent } from './pages/football-adults/first-team/first-team.component';
-import { EventsComponent } from './components/events/events.component';
-import { SquadComponent } from './components/squad/squad.component';
-import { PersonComponent } from './components/squad/person/person.component';
+
+// ##### Pipes #####
+
 import { PhoneNumberPipe } from './pipes/phone-number.pipe';
-import { ContactComponent } from './components/contact/contact.component';
-import { TrainingTimeComponent } from './components/training-time/training-time.component';
-import { ResultsComponent } from './components/results/results.component';
-import { SecondTeamComponent } from './pages/football-adults/second-team/second-team.component';
+
+// ##### Components #####
+
+// App component
+import { AppComponent } from './app.component';
+
+// Header components
+import { HeaderComponent as Header_Component } from './components/header/header.component';
+import { DesktopHeaderComponent as Header_Desktop_Component } from './components/header/desktop-header/desktop-header.component';
+import { HeaderItemComponent as Header_Desktop_Item_Component } from './components/header/desktop-header/header-item/header-item.component';
+import { MobileHeaderComponent as Header_Mobile_Component } from './components/header/mobile-header/mobile-header.component';
+import { HeaderItemComponent as Header_Mobile_Item_Component } from './components/header/mobile-header/header-item/header-item.component';
+
+// Footer component
+import { FooterComponent as Footer_Component } from './components/footer/footer.component';
+
+// Other components
+import { EventsComponent as Events_Component } from './components/events/events.component';
+import { ContactComponent as Contact_Component } from './components/contact/contact.component';
+import { SquadComponent as Team_Squad_Component } from './components/squad/squad.component';
+import { PersonComponent as Team_Squad_Person_Component } from './components/squad/person/person.component';
+import { TrainingTimeComponent as Team_TrainingTime_Component } from './components/training-time/training-time.component';
+import { ResultsComponent as Team_Results_Component } from './components/results/results.component';
+
+// ##### Pages #####
+
+// Home page
+import { HomeComponent as Home_Component } from './pages/home/home.component';
+import { TopNewsComponent as Home_TopNews_Component } from './pages/home/top-news/top-news.component';
+import { NavigationComponent as Home_TopNews_Navigation_Component } from './pages/home/top-news/navigation/navigation.component';
+import { BirthdayViewComponent as Home_TopNews_Birthday_Component } from './pages/home/top-news/birthday-view/birthday-view.component';
+import { GameViewComponent as Home_TopNews_Game_Component } from './pages/home/top-news/game-view/game-view.component';
+import { LinksComponent as Home_Links_Component } from './pages/home/links/links.component';
+
+// About us pages
+import { ManagersComponent as AboutUs_Managers_Component } from './pages/about-us/managers/managers.component';
+import { SportsHomeComponent as AboutUs_SportsHome_Component } from './pages/about-us/sports-home/sports-home.component';
+import { ChronicleComponent as AboutUs_Chronicle_Component } from './pages/about-us/chronicle/chronicle.component';
+import { StatuteComponent as AboutUs_Statute_Component } from './pages/about-us/statute/statute.component';
+import { PrivacyComponent as AboutUs_Privacy_Component } from './pages/about-us/privacy/privacy.component';
+import { RequestComponent as AboutUs_Request_Component } from './pages/about-us/request/request.component';
+
+// Football adults pages
+import { GeneralComponent as FootballAdults_General_Component } from './pages/football-adults/general/general.component';
+import { FirstTeamComponent as FootballAdults_FirstTeam_Component } from './pages/football-adults/first-team/first-team.component';
+import { SecondTeamComponent as FootballAdults_SecondTeam_Component } from './pages/football-adults/second-team/second-team.component';
+import { AhTeamComponent as FootballAdults_AhTeam_Component } from './pages/football-adults/ah-team/ah-team.component';
+
+// Other pages
+import { ImprintComponent as Imprint_Component } from './pages/imprint/imprint.component';
+import { PageNotFoundComponent as PageNotFound_Component } from './pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    HeaderComponent,
-    DesktopHeaderComponent,
-    DesktopHeaderItemComponent,
-    TopNewsComponent,
-    MobileHeaderComponent,
-    HeaderItemComponent,
-    BirthdayViewComponent,
-    GameViewComponent,
-    NavigationComponent,
-    LinksComponent,
-    FooterComponent,
-    ManagersComponent,
-    SportsHomeComponent,
-    ChronicleComponent,
-    StatuteComponent,
-    PrivacyComponent,
-    RequestComponent,
-    ImprintComponent,
-    PageNotFoundComponent,
-    GeneralComponent,
-    FirstTeamComponent,
-    EventsComponent,
-    SquadComponent,
-    PersonComponent,
+    Header_Component,
+    Header_Desktop_Component,
+    Header_Desktop_Item_Component,
+    Header_Mobile_Component,
+    Header_Mobile_Item_Component,
+    Footer_Component,
+    Events_Component,
+    Contact_Component,
+    Team_Squad_Component,
+    Team_Squad_Person_Component,
+    Team_TrainingTime_Component,
+    Team_Results_Component,
+    Home_Component,
+    Home_TopNews_Component,
+    Home_TopNews_Navigation_Component,
+    Home_TopNews_Birthday_Component,
+    Home_TopNews_Game_Component,
+    Home_Links_Component,
+    AboutUs_Managers_Component,
+    AboutUs_SportsHome_Component,
+    AboutUs_Chronicle_Component,
+    AboutUs_Statute_Component,
+    AboutUs_Privacy_Component,
+    AboutUs_Request_Component,
+    FootballAdults_General_Component,
+    FootballAdults_FirstTeam_Component,
+    FootballAdults_SecondTeam_Component,
+    Imprint_Component,
+    PageNotFound_Component,
     PhoneNumberPipe,
-    ContactComponent,
-    TrainingTimeComponent,
-    ResultsComponent,
-    SecondTeamComponent,
+    FootballAdults_AhTeam_Component,
   ],
   imports: [
     BrowserModule,

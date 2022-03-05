@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import contactData from 'src/app/assets/contact-data.json';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { JsonDecodingError } from 'src/app/utils/jsonDecodingError';
 
 interface ContactItem {
   name: string;
@@ -15,15 +16,21 @@ interface ContactItem {
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.sass'],
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
+  public contactList!: ContactItem[];
+
   @Input() pageId!: keyof typeof contactData.pages;
 
   constructor(public deviceType: DeviceTypeService) {}
 
-  public get contactList(): ContactItem[] {
-    return contactData.pages[this.pageId].compactMap(e => {
+  ngOnInit(): void {
+    this.getContactList();
+  }
+
+  private getContactList(): void {
+    this.contactList =  contactData.pages[this.pageId].map(e => {
       if (!contactData.persons.hasOwnProperty(e.id)) {
-        return null;
+        throw new JsonDecodingError(`Couldn't get contact person for id: ${e.id}`);
       }
       return {
         ...contactData.persons[e.id as keyof typeof contactData.persons],

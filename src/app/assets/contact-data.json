@@ -12,6 +12,10 @@
       "name": "Tim Kellermann",
       "mobile": "015112441784",
       "email": "kellermann.tim@gmx.de"
+    },
+    "juergen_drummer": {
+      "name": "Jürgen Drummer",
+      "mobile": "01703396915"
     }
   },
   "pages": {
@@ -36,6 +40,10 @@
         "id": "tim_kellermann",
         "function": "Trainer"
       }
-    ]
+    ],
+    "football-adults/ah-team": [{
+      "id": "juergen_drummer",
+      "function": "1. Anschrechpartner"
+    }]
   }
 }
