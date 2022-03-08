@@ -1,0 +1,40 @@
+<span class="text-section">
+  <h1>Kontakt zum SV Kleinsendelbach</h1>
+  <p class="medium center small-bottom-space">Bitte nehmen Sie Kontakt mit uns auf.</p>
+  <p class="medium center">Wir werden Ihnen gerne antworten.</p>
+</span>
+<span class="text-section">
+  <form [ngClass]="{'evaluated': formEvaluated }" class="form" [formGroup]="contactForm">
+    <span class="input name">
+      <p class="label">Ihr Name:</p>
+      <input placeholder="Ihr Name" formControlName="name">
+      <p *ngIf="evaluateError('name') == 'fieldEmpty'" class="error-msg">Ihr Name ist erforderlich.</p>
+    </span>
+    <span class="input email">
+      <p class="label">Ihre E-Mail Adresse:</p>
+      <input placeholder="Ihre E-Mail Adresse" formControlName="email">
+      <p *ngIf="evaluateError('email') == 'fieldEmpty'" class="error-msg">Ihre E-Mail Adresse ist erforderlich.</p>
+      <p *ngIf="evaluateError('email') == 'emailInvalid'" class="error-msg">Das ist keine gültige E-Mail Addresse.</p>
+    </span>
+    <span class="input receiver">
+      <p class="label">Anfrage an:</p>
+      <select formControlName="receiver">
+        <option *ngFor="let receiver of receivers">{{ receiver.name }}</option>
+      </select>
+      <p *ngIf="evaluateError('receiver') == 'fieldEmpty'" class="error-msg">Ein Empfänger ist erforderlich.</p>
+    </span>
+    <span class="input message">
+      <p class="label">Ihre Nachricht:</p>
+      <textarea placeholder="Ihre Nachricht" formControlName="message"></textarea>
+      <p *ngIf="evaluateError('message') == 'fieldEmpty'" class="error-msg">Eine Nachricht ist erforderlich.</p>
+    </span>
+    <button class="submit" [ngClass]="status" type="submit" (click)="onSubmit()">Abschicken</button>
+    <span [ngSwitch]="status" class="status-container">
+      <p *ngSwitchCase="Status.loading" class="status loading">Email wird versandt.</p>
+      <p *ngSwitchCase="Status.success" class="status success">Email wurde versendet.</p>
+      <p *ngSwitchCase="Status.failure" class="status failure">Es gab einen Fehler beim Senden.</p>
+      <p *ngSwitchCase="Status.inputError" class="status inputError">Nicht alle Eingaben sind gültig.</p>
+      <p *ngSwitchCase="Status.recaptchFailed" class="status recaptchFailed">reCAPTCHA ungültig.</p>
+    </span>
+  </form>
+</span>

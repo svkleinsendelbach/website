@@ -2,6 +2,7 @@ import 'src/app/utils';
 import { NgModule } from '@angular/core';
 import { environment } from '../environments/environment.prod';
 import { REGION } from '@angular/fire/compat/functions';
+import { RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha'
 
 // ##### Modules #####
 
@@ -16,6 +17,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RecaptchaV3Module, RecaptchaFormsModule } from 'ng-recaptcha'
 
 // ##### Pipes #####
 
@@ -38,7 +41,7 @@ import { FooterComponent as Footer_Component } from './components/footer/footer.
 
 // Other components
 import { EventsComponent as Events_Component } from './components/events/events.component';
-import { ContactComponent as Contact_Component } from './components/contact/contact.component';
+import { ContactComponent as _Contact_Component } from './components/contact/contact.component';
 import { SquadComponent as Team_Squad_Component } from './components/squad/squad.component';
 import { PersonComponent as Team_Squad_Person_Component } from './components/squad/person/person.component';
 import { TrainingTimeComponent as Team_TrainingTime_Component } from './components/training-time/training-time.component';
@@ -81,6 +84,7 @@ import { PageNotFoundComponent as PageNotFound_Component } from './pages/page-no
 import { GymnasticsComponent as Gymnastics_Component } from './pages/gymnastics/gymnastics.component';
 import { DancingComponent as Dancing_Component } from './pages/dancing/dancing.component';
 import { DriveComponent as Drive_Component } from './pages/drive/drive.component';
+import { ContactComponent as Contact_Component } from './pages/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +96,7 @@ import { DriveComponent as Drive_Component } from './pages/drive/drive.component
     Header_Mobile_Item_Component,
     Footer_Component,
     Events_Component,
-    Contact_Component,
+    _Contact_Component,
     Team_Squad_Component,
     Team_Squad_Person_Component,
     Team_TrainingTime_Component,
@@ -124,6 +128,7 @@ import { DriveComponent as Drive_Component } from './pages/drive/drive.component
     Gymnastics_Component,
     Dancing_Component,
     Drive_Component,
+    Contact_Component,
   ],
   imports: [
     BrowserModule,
@@ -137,8 +142,14 @@ import { DriveComponent as Drive_Component } from './pages/drive/drive.component
     AngularFireDatabaseModule,
     FontAwesomeModule,
     GoogleMapsModule,
+    ReactiveFormsModule,
+    RecaptchaV3Module,
+    RecaptchaFormsModule,
   ],
-  providers: [{ provide: REGION, useValue: 'europe-west1' }],
+  providers: [
+    { provide: REGION, useValue: 'europe-west1' },
+    { provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LdFFLgeAAAAAEzjFiR1X35IK7UHkL2Yx0EQ447i' },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
