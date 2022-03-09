@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import headerItemsData from 'src/app/assets/header-items-data.json';
 import { JsonDecodingError } from 'src/app/utils/jsonDecodingError';
 import { DeviceTypeService } from '../../services/device-type.service';
@@ -19,7 +19,7 @@ export type HeaderItem = {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.sass'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   public headerItemsList: HeaderItem[];
 
   constructor(public deviceType: DeviceTypeService) {
@@ -29,6 +29,16 @@ export class HeaderComponent {
   @HostListener('window:resize')
   onResize() {
     this.deviceType.windowResized();
+  }
+
+  ngOnInit(): void {
+    this.deviceType.addListener('header-items', _newValue => {
+      this.headerItemsList = this.getHeaderItemsList();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.deviceType.removeListener('header-items');
   }
 
   private getHeaderItemValue(key: string): HeaderItemValue {

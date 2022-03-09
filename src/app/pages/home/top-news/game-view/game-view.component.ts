@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TeamSpieleSpiele } from 'src/app/services/fetch-home-top.service';
 import { FullDatum, ResultParameters } from '../../../../services/fetch-home-top.service';
+import { DeviceTypeService } from '../../../../services/device-type.service';
 
 @Component({
   selector: 'app-top-news-game-view',
@@ -16,7 +17,7 @@ export class GameViewComponent {
 
   @Input() gameProperties!: TeamSpieleSpiele;
 
-  constructor() {}
+  constructor(public deviceType: DeviceTypeService) {}
 
   get firstLine(): string {
     const team = this.team === 'firstTeam' ? 'Erste Mannschaft' : 'Zweite Mannschaft';

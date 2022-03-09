@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { lastValueFrom } from 'rxjs';
 import { DBPlayer, Datum } from '../../../../services/fetch-home-top.service';
+import { DeviceTypeService } from '../../../../services/device-type.service';
 
 @Component({
   selector: 'app-birthday-view',
@@ -17,7 +18,7 @@ export class BirthdayViewComponent {
 
   imageUrl?: string;
 
-  constructor(private storage: AngularFireStorage) {}
+  constructor(private storage: AngularFireStorage, public deviceType: DeviceTypeService) {}
 
   ngOnInit(): void {
     this.getImageUrl();

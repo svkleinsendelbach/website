@@ -1,7 +1,7 @@
 <img [ngStyle]="{
     height: bannerHeight + 'px'
   }"
-  src="assets/banner.jpg"
+  src="assets/home-banner.jpeg"
   class="bgimage">
 <span [ngStyle]="{
     height: contentHeight + 'px'
@@ -9,7 +9,7 @@
   class="content">
   <span *ngIf="properties == null"
     class="loading">
-    Loading
+    Nachrichten werden geladen
   </span>
   <app-top-news-navigation *ngIf="properties != null"
     [itemList]="navigationItemist">

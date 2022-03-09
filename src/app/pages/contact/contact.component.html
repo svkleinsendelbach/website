@@ -4,7 +4,7 @@
   <p class="medium center">Wir werden Ihnen gerne antworten.</p>
 </span>
 <span class="text-section">
-  <form [ngClass]="{'evaluated': formEvaluated }" class="form" [formGroup]="contactForm">
+  <form [ngClass]="{'evaluated': formEvaluated, 'mobile': deviceType.isMobile}" class="form" [formGroup]="contactForm">
     <span class="input name">
       <p class="label">Ihr Name:</p>
       <input placeholder="Ihr Name" formControlName="name">

@@ -42,3 +42,10 @@
 
       &:nth-last-child(1)
         border-bottom: none
+
+  &.mobile .group-container .event-container
+    @include flex-column(center, flex-start)
+
+    .date, .title, .subtitle
+      width: 100%
+      margin-bottom: 5px

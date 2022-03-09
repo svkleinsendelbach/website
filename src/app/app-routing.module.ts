@@ -42,6 +42,7 @@ const routes: Routes = [
   { path: 'satzung', component: AboutUs_Statute_Component },
   { path: 'datenschutz', component: AboutUs_Privacy_Component },
   { path: 'mitgliedsantrag', component: AboutUs_Request_Component },
+  { path: 'fussball', redirectTo: '/fussball/herren', pathMatch: 'full' },
   { path: 'fussball/herren', component: FootballAdults_General_Component },
   { path: 'fussball/herren/erste-mannschaft', component: FootballAdults_FirstTeam_Component },
   { path: 'fussball/herren/zweite-mannschaft', component: FootballAdults_SecondTeam_Component },

@@ -27,6 +27,7 @@ export class ResultsComponent implements AfterViewInit {
     } else if (this.results !== undefined) {
       for (const result of this.results) {
         const title = document.createElement('h2');
+        title.style.paddingTop = '30px';
         title.innerHTML = `Ergebisse der ${result.teamName}`;
         const container = document.createElement('span');
         container.classList.add('bfv-widget');

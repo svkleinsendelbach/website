@@ -1,7 +1,7 @@
 <span class="text-section">
   <h1>Kommende Termine</h1>
   <p *ngIf="events == undefined || events.length == 0" class="center large red">Keine Termine</p>
-  <span class="all-event-group-container" *ngFor="let groupedEvents of events">
+  <span class="all-event-group-container" [ngClass]="deviceType.stringValue" *ngFor="let groupedEvents of events">
     <h2 class="group left-align">{{ groupDescription(groupedEvents.groupId) }}</h2>
     <span class="group-container">
       <span class="event-container" *ngFor="let event of groupedEvents.events">

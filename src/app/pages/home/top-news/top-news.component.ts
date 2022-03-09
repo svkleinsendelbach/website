@@ -14,25 +14,22 @@ export class TopNewsComponent {
 
   contentHeight: number;
 
-  private bannerImageResolution = [1000, 400];
+  private bannerImageResolution = [2400, 965];
 
   constructor(private fetcher: FetchHomeTopService) {
     this.bannerHeight = this.calculatedBannerHeight;
-    this.contentHeight = this.bannerHeight - 75;
+    this.contentHeight = this.bannerHeight;
     this.fetcher
       .fetch()
       .then(p => {
         this.properties = p;
-      })
-      .catch(e => {
-        // TODO handle error
       });
   }
 
   @HostListener('window:resize')
   onResize() {
     this.bannerHeight = this.calculatedBannerHeight;
-    this.contentHeight = this.bannerHeight - 75;
+    this.contentHeight = this.bannerHeight;
   }
 
   get calculatedBannerHeight(): number {

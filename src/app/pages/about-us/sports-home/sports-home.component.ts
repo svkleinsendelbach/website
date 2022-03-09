@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
@@ -15,7 +15,7 @@ export interface OpeningHour {
   templateUrl: './sports-home.component.html',
   styleUrls: ['./sports-home.component.sass'],
 })
-export class SportsHomeComponent {
+export class SportsHomeComponent implements OnInit, OnDestroy {
   public openingHoursList: (OpeningHour & { id: string })[][];
 
   constructor(
@@ -26,6 +26,16 @@ export class SportsHomeComponent {
     this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Sportheim');
     this.openingHoursList = this.getOpeningHoursList();
+  }
+
+  ngOnInit(): void {
+    this.deviceType.addListener('sports-home-opening-hours', _newValue => {
+      this.openingHoursList = this.getOpeningHoursList();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.deviceType.removeListener('sports-home-opening-hours');
   }
 
   private getOpeningHourItemValue(key: string): OpeningHour {

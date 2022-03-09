@@ -6,12 +6,30 @@ import { Injectable } from '@angular/core';
 export class DeviceTypeService {
   private rawValue: 'mobile' | 'tablet' | 'desktop';
 
+  private listeners: {
+    [key: string | number]: (newValue: 'mobile' | 'tablet' | 'desktop') => void;
+  } = {};
+
   public constructor() {
     this.rawValue = DeviceTypeService.currentRawValue;
   }
 
   public windowResized() {
-    this.rawValue = DeviceTypeService.currentRawValue;
+    const newValue = DeviceTypeService.currentRawValue;
+    if (this.rawValue !== newValue) {
+      this.rawValue = newValue;
+      for (const listener of Object.values(this.listeners)) {
+        listener(newValue);
+      }
+    }
+  }
+
+  public addListener(id: string | number, listener: (newValue: 'mobile' | 'tablet' | 'desktop') => void) {
+    this.listeners[id] = listener;
+  }
+
+  public removeListener(id: string | number) {
+    delete this.listeners[id];
   }
 
   private static get currentRawValue(): 'mobile' | 'tablet' | 'desktop' {
@@ -20,9 +38,8 @@ export class DeviceTypeService {
       return 'mobile';
     } else if (width <= 1366) {
       return 'tablet';
-    } else {
-      return 'desktop';
     }
+    return 'desktop';
   }
 
   public get isMobile(): boolean {

@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import homeLinks from 'src/app/assets/home-links.json';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
@@ -22,12 +22,22 @@ export interface LinkItem {
   templateUrl: './links.component.html',
   styleUrls: ['./links.component.sass'],
 })
-export class LinksComponent {
+export class LinksComponent implements OnInit, OnDestroy {
   public linkItemsList: (LinkItem & { id: string })[][];
 
   constructor(public deviceType: DeviceTypeService, private library: FaIconLibrary) {
     this.library.addIcons(faInfo, faFutbol, faUserFriends, faChild, faMap, faAddressCard);
     this.linkItemsList = this.getLinkItemsList();
+  }
+
+  ngOnInit(): void {
+    this.deviceType.addListener('home-links', _newValue => {
+      this.linkItemsList = this.getLinkItemsList();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.deviceType.removeListener('home-links');
   }
 
   private getLinkItemValue(key: string): LinkItem {

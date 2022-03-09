@@ -1,4 +1,4 @@
-<span class="content">
+<span class="content" [ngClass]="deviceType.stringValue">
   <a *ngIf="nextLastGame == 'last' && gameProperties.resultParameters != undefined" class="logo-container"
     href="{{ resultUrl(gameProperties.resultParameters) }}"
     title="{{ 'Ergebnis ' + (gameProperties.opponent ?? '') + ' (anpfiff.info)' }}" target="_blank">

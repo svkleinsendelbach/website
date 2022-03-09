@@ -3,6 +3,7 @@ import { AngularFireFunctions } from '@angular/fire/compat/functions';
 import { lastValueFrom } from 'rxjs';
 
 export type EventGroupId =
+  | 'general'
   | 'football-adults/general'
   | 'football-adults/first-team'
   | 'football-adults/second-team'
@@ -11,11 +12,15 @@ export type EventGroupId =
   | 'football-youth/c-youth'
   | 'football-youth/e-youth'
   | 'football-youth/f-youth'
-  | 'football-youth/g-youth';
+  | 'football-youth/g-youth'
+  | 'gymnastics'
+  | 'dancing';
 
 export namespace EventGroupId {
   export function description(id: EventGroupId): string {
     switch (id) {
+      case 'general':
+        return 'Allgemeines';
       case 'football-adults/general':
         return 'Herrenfußball';
       case 'football-adults/first-team':
@@ -34,6 +39,10 @@ export namespace EventGroupId {
         return 'F-Jugend';
       case 'football-youth/g-youth':
         return 'G-Jugend';
+      case 'gymnastics':
+        return 'Gymnastik';
+      case 'dancing':
+        return 'Tanzen';
     }
   }
 }

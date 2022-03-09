@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FullDatum } from 'src/app/services/fetch-home-top.service';
 import { EventsFetcherService, EventGroupId, Event } from '../../services/events-fetcher.service';
+import { DeviceTypeService } from '../../services/device-type.service';
 
 @Component({
   selector: 'app-component-events',
@@ -12,7 +13,10 @@ export class EventsComponent implements OnInit {
 
   @Input() eventGroupIds!: EventGroupId[];
 
-  constructor(private eventsFetcher: EventsFetcherService) {}
+  constructor(
+    public deviceType: DeviceTypeService,
+    private eventsFetcher: EventsFetcherService
+  ) { }
 
   ngOnInit(): void {
     this.fetchEvents().catch(console.error);

@@ -13,17 +13,21 @@
   .row
     @include flex-row(space-between, center)
     width: 100vw
-    height: 400px - 40px
+    height: calc(100% - 40px)
 
     .left, .right
       @include flex-row(center, center)
       cursor: pointer
-      background-color: #ffffff40
-      color: #ffffff
+      background-color: #a4a5aA80
+      box-shadow: 0px 0px 5px 2.5px #a4a5aA80
+      color: #24252A
       font-size: 20px
       line-height: 20px
       width: 35px
       height: 90px
+
+      &:hover
+        box-shadow: 0px 0px 0px #a4a5aA80
 
     .left
       margin-left: 25px
@@ -39,8 +43,13 @@
   .nav-bar
     @include flex-row(center, center)
     border-radius: 8px
-    background-color: #ffffff40
+    background-color: #a4a5aA80
+    box-shadow: 0px 0px 5px 2.5px #a4a5aA80
+    padding: 2.5px 7.5px
     margin-bottom: 20px
+
+    &:hover
+      box-shadow: 0px 0px 0px #a4a5aA80
 
     .cicle
       @include flex-row(center, center)
@@ -48,8 +57,8 @@
       line-height: 12px
       height: 12px
       padding: 4px
-      color: #b0b0b0
+      color: #84858A
       cursor: pointer
 
       &.filled
-        color: #ffffff
+        color: #24252A
