@@ -7,7 +7,7 @@
     <i class="large text-margin-right fas fa-phone"></i>
     <p class="large">09126 / 8304</p></a>
   <google-map [width]="null" [zoom]="map.zoom" [center]="map.center"
-    [options]="map.options">
+    [options]="mapOptions">
     <map-marker *ngFor="let marker of map.marker" [position]="marker"></map-marker>
   </google-map>
 </span>

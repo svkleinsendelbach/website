@@ -2,7 +2,7 @@
   <h1>Trainingszeiten</h1>
   <p class="center medium">{{ trainingTime.text }}</p>
   <google-map [width]="null" [zoom]="trainingTime.map.zoom" [center]="trainingTime.map.center"
-    [options]="trainingTime.map.options">
+    [options]="mapOptions">
     <map-marker *ngFor="let marker of trainingTime.map.marker" [position]="marker"></map-marker>
   </google-map>
 </span>

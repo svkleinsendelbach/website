@@ -46,3 +46,16 @@
   width: 100vw
   height: 100vw
   z-index: 1
+
+@media screen and (prefers-color-scheme: dark)
+  .container
+    .logo-container
+      .text
+        color: #ffffff
+
+    &.intransparent
+      background-color: #24252A
+      box-shadow: #1c1a17 0px 2px 10px
+
+      .logo-container .text
+        color: #C8D6E5

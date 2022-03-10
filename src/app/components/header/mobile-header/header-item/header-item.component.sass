@@ -88,3 +88,42 @@
 
         .text, .drop-down-arrow
           color: #1f3a95
+
+@media screen and (prefers-color-scheme: dark)
+  .header-item
+    .top-item
+      .text
+        color: #ffffff
+
+      .drop-down-arrow
+        color: #ffffff
+
+      &:hover
+        .text, .drop-down-arrow
+          color: #7793f1
+
+    .sub-items
+      .sub-item-container
+        background-color: #24252A
+
+        .sub-item
+          color: #868E90
+
+        &:hover
+          background-color: #44454A
+
+          .sub-item
+            color: #7793F1
+
+    &.intransparent
+      .top-item
+        background-color: #24252A
+
+        .text, .drop-down-arrow
+          color: #868E90
+
+        &:hover
+          background-color: #44454A
+
+          .text, .drop-down-arrow
+            color: #7793F1

@@ -44,3 +44,16 @@
 
   &.mobile
     @include flex-column(center, flex-start)
+
+@media screen and (prefers-color-scheme: dark)
+  .social-media .container
+    .link
+      .icon
+        color: #C8D6E5
+
+      .text2
+        color: #868E90
+      &:hover
+        background-color: #44454A
+        .text2
+          color: #7793F1

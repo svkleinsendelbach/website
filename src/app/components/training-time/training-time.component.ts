@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import trainingTimesData from 'src/app/assets/training-times-data.json';
 import { JsonDecodingError } from 'src/app/utils/jsonDecodingError';
+import { mapStyleDarkAppearence } from 'src/app/utils/mapStyleDarkAppearence';
+import { DarkModeService } from '../../services/dark-mode.service';
 
 interface TrainingTime {
   text: string;
@@ -17,15 +19,31 @@ interface TrainingTime {
   templateUrl: './training-time.component.html',
   styleUrls: ['./training-time.component.sass'],
 })
-export class TrainingTimeComponent implements OnInit {
+export class TrainingTimeComponent implements OnInit, OnDestroy {
   public trainingTime!: TrainingTime;
+
+  public mapOptions!: google.maps.MapOptions;
 
   @Input() pageId!: keyof typeof trainingTimesData.pages;
 
-  constructor() { }
+  constructor(private darkMode: DarkModeService) {}
 
   ngOnInit(): void {
     this.getTrainingTime();
+    this.mapOptions = {
+      ...this.trainingTime.map.options,
+      styles: this.darkMode.isDarkMode ? mapStyleDarkAppearence : null,
+    };
+    this.darkMode.addListener('training.time-map', isDarkMode => {
+      this.mapOptions = {
+        ...this.mapOptions,
+        styles: isDarkMode ? mapStyleDarkAppearence : null,
+      };
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.darkMode.removeListener('training.time-map');
   }
 
   private getTrainingTime(): void {

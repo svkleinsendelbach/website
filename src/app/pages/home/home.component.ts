@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
 import { EventGroupId } from '../../services/events-fetcher.service';
+import { DarkModeService } from '../../services/dark-mode.service';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +30,7 @@ export class HomeComponent {
     private headerIntransparentService: HeaderIntransparentService,
     private titleService: Title,
     public deviceType: DeviceTypeService,
+    public darkMode: DarkModeService
   ) {
     this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('SV Kleinsendelbach');
