@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { EventGroupId } from 'src/app/services/events-fetcher.service';

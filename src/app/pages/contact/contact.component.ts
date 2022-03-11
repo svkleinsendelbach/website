@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -104,7 +105,6 @@ export class ContactComponent {
 
   private resetForm(): void {
     this.contactForm.reset();
-    // tslint:disable-next-line:no-string-literal
     this.contactForm.controls['receiver'].setValue(this.receivers[0].name);
     this.formEvaluated = false;
   }

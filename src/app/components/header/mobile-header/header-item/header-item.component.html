@@ -3,7 +3,7 @@
     expanded: expandedHeaderItemId === headerItem.id
   }"
   class="header-item">
-  <a *ngIf="headerItem.subItems == undefined"
+  <a *ngIf="headerItem.subItems === undefined"
     href="{{ headerItem.topItem.link }}"
     target="{{ headerItem.topItem.extern ? '_blank' : '_self' }}"
     class="top-item"
@@ -12,16 +12,16 @@
       {{ headerItem.topItem.name }}
     </div>
   </a>
-  <span *ngIf="headerItem.subItems != undefined"
+  <span *ngIf="headerItem.subItems !== undefined"
     (click)="handleClick(); $event.stopPropagation()"
     class="top-item">
     <div class="text">
       {{ headerItem.topItem.name }}
     </div>
-    <fa-icon *ngIf="headerItem.subItems != undefined && expandedHeaderItemId !== headerItem.id"
+    <fa-icon *ngIf="headerItem.subItems !== undefined && expandedHeaderItemId !== headerItem.id"
       [icon]="faCaretDown"
       class="drop-down-arrow"></fa-icon>
-    <fa-icon *ngIf="headerItem.subItems != undefined && expandedHeaderItemId === headerItem.id"
+    <fa-icon *ngIf="headerItem.subItems !== undefined && expandedHeaderItemId === headerItem.id"
       [icon]="faCaretUp"
       class="drop-down-arrow"></fa-icon>
   </span>

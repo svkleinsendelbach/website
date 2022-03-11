@@ -1,6 +1,7 @@
 export {};
 
 declare global {
+  // eslint-disable-next-line no-unused-vars
   interface Array<T> {
     compactMap<U, This = undefined>(
       callback: (value: T, index: number, array: T[]) => U | undefined | null,

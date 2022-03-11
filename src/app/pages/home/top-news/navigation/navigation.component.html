@@ -4,11 +4,11 @@
       (click)="handleButtonClick('left'); $event.stopPropagation()"
       class="left"></fa-icon>
     <span class="content">
-      <app-birthday-view *ngIf="currentItem.type == 'birthday'"
+      <app-birthday-view *ngIf="currentItem.type === 'birthday'"
         [player]="currentItem.player"
         [playerImage]="currentItem.playerImage">
       </app-birthday-view>
-      <app-top-news-game-view *ngIf="currentItem.type == 'game'"
+      <app-top-news-game-view *ngIf="currentItem.type === 'game'"
         [gameProperties]="currentItem.gameProperties"
         [nextLastGame]="currentItem.nextLastGame"
         [team]="currentItem.team">
@@ -21,7 +21,7 @@
   <span class="nav-bar">
     <fa-icon *ngFor="let _ of itemList; index as index"
       [ngClass]="{
-          filled: currentPage == index + 1
+          filled: currentPage === index + 1
         }"
       [icon]="faCircle"
       (click)="currentPage = index + 1; $event.stopPropagation"

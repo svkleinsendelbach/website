@@ -28,6 +28,6 @@
       (clickHeaderItemIdEmitter)="handleHeaderItemClick($event)"></app-mobile-header-item>
   </span>
 </span>
-<span *ngIf="isExpanded || expandedHeaderItemId != undefined"
+<span *ngIf="isExpanded || expandedHeaderItemId !== undefined"
   (click)="isExpanded = false; expandedHeaderItemId = null; $event.stopPropagation()"
   class="background"></span>

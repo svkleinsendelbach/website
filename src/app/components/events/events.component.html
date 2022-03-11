@@ -1,17 +1,17 @@
 <span class="text-section">
   <h1>Kommende Termine</h1>
-  <p *ngIf="events == undefined || events.length == 0" class="center large red">Keine Termine</p>
+  <p *ngIf="events === undefined || events.length === 0" class="center large red">Keine Termine</p>
   <span class="all-event-group-container" [ngClass]="deviceType.stringValue" *ngFor="let groupedEvents of events">
     <h2 class="group left-align">{{ groupDescription(groupedEvents.groupId) }}</h2>
     <span class="group-container">
       <span class="event-container" *ngFor="let event of groupedEvents.events">
         <div class="date">{{ dateDescription(event.date) }}</div>
         <div class="title">{{ event.title }}</div>
-        <div *ngIf="event.subtitle != undefined" class="subtitle">{{ event.subtitle }}</div>
-        <div *ngIf="event.subtitle == undefined" class="subtitle"></div>
-        <a *ngIf="event.link != undefined" title="{{ event.title }}" href="{{ event.link }}" target="_blank"
+        <div *ngIf="event.subtitle !== undefined" class="subtitle">{{ event.subtitle }}</div>
+        <div *ngIf="event.subtitle === undefined" class="subtitle"></div>
+        <a *ngIf="event.link !== undefined" title="{{ event.title }}" href="{{ event.link }}" target="_blank"
           class="link">Weitere Informationen</a>
-        <div *ngIf="event.link == undefined" class="link"></div>
+        <div *ngIf="event.link === undefined" class="link"></div>
       </span>
     </span>
   </span>

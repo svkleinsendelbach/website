@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { HeaderItem } from '../header.component';
 import { HeaderIntransparentService } from '../../../services/header-intransparent.service';
 
@@ -7,7 +7,7 @@ import { HeaderIntransparentService } from '../../../services/header-intranspare
   templateUrl: './desktop-header.component.html',
   styleUrls: ['./desktop-header.component.sass'],
 })
-export class DesktopHeaderComponent implements OnInit {
+export class DesktopHeaderComponent {
   @Input() headerItemsList!: HeaderItem[];
 
   isOnTop = true;
@@ -20,8 +20,6 @@ export class DesktopHeaderComponent implements OnInit {
   onScroll(): void {
     this.isOnTop = window.scrollY <= 0;
   }
-
-  ngOnInit(): void {}
 
   get isIntransparent(): boolean {
     return this.headerIntransparentService.isIntransparent || !this.isOnTop || this.expandedHeaderItemId !== null;

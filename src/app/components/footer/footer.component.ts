@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 
 @Component({

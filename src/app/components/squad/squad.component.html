@@ -1,61 +1,61 @@
 <span class="text-section">
   <h1>Kader</h1>
-  <p *ngIf="squad == undefined" class="center large red">Kader lädt</p>
+  <p *ngIf="squad === undefined" class="center large red">Kader lädt</p>
 
   <!-- Coach -->
-  <h2 *ngIf="squad != undefined && squad.coach != undefined" class="left-align">Trainer</h2>
-  <span *ngIf="squad != undefined && squad.coach != undefined" class="coach-container">
+  <h2 *ngIf="squad !== undefined && squad.coach !== undefined" class="left-align">Trainer</h2>
+  <span *ngIf="squad !== undefined && squad.coach !== undefined" class="coach-container">
     <app-squad-person [ngClass]="deviceType.stringValue" [person]="coachPerson"></app-squad-person>
   </span>
 
   <!-- Goal keeper -->
-  <h2 *ngIf="squad != undefined && squad.kader != undefined && squad.kader.torwart != undefined &&
-    squad.kader.torwart.length != 0" class="left-align"> Torwart</h2>
-  <span *ngIf="squad != undefined && squad.kader != undefined && squad.kader.torwart != undefined &&
-    squad.kader.torwart.length != 0" class="squad-container">
+  <h2 *ngIf="squad !== undefined && squad.kader !== undefined && squad.kader.torwart !== undefined &&
+    squad.kader.torwart.length !== 0" class="left-align"> Torwart</h2>
+  <span *ngIf="squad !== undefined && squad.kader !== undefined && squad.kader.torwart !== undefined &&
+    squad.kader.torwart.length !== 0" class="squad-container">
     <app-squad-person *ngFor="let person of squad.kader.torwart" [ngClass]="deviceType.stringValue"
       [person]="squadPerson(person)"></app-squad-person>
   </span>
 
   <!-- Defence -->
-  <h2 *ngIf="squad != undefined && squad.kader != undefined && squad.kader.abwehr != undefined &&
-    squad.kader.abwehr.length != 0" class="left-align">Abwehr</h2>
-  <span *ngIf="squad != undefined && squad.kader != undefined && squad.kader.abwehr != undefined &&
-    squad.kader.abwehr.length != 0" class="squad-container">
+  <h2 *ngIf="squad !== undefined && squad.kader !== undefined && squad.kader.abwehr !== undefined &&
+    squad.kader.abwehr.length !== 0" class="left-align">Abwehr</h2>
+  <span *ngIf="squad !== undefined && squad.kader !== undefined && squad.kader.abwehr !== undefined &&
+    squad.kader.abwehr.length !== 0" class="squad-container">
     <app-squad-person *ngFor="let person of squad.kader.abwehr" [ngClass]="deviceType.stringValue"
       [person]="squadPerson(person)"></app-squad-person>
   </span>
 
   <!-- Midfield -->
-  <h2 *ngIf="squad != undefined && squad.kader != undefined && squad.kader.mittelfeld != undefined &&
-    squad.kader.mittelfeld.length != 0" class="left-align">Mittelfeld</h2>
-  <span *ngIf="squad != undefined && squad.kader != undefined && squad.kader.mittelfeld != undefined &&
-    squad.kader.mittelfeld.length != 0" class="squad-container">
+  <h2 *ngIf="squad !== undefined && squad.kader !== undefined && squad.kader.mittelfeld !== undefined &&
+    squad.kader.mittelfeld.length !== 0" class="left-align">Mittelfeld</h2>
+  <span *ngIf="squad !== undefined && squad.kader !== undefined && squad.kader.mittelfeld !== undefined &&
+    squad.kader.mittelfeld.length !== 0" class="squad-container">
     <app-squad-person *ngFor="let person of squad.kader.mittelfeld" [ngClass]="deviceType.stringValue"
       [person]="squadPerson(person)"></app-squad-person>
   </span>
 
   <!-- Offence -->
-  <h2 *ngIf="squad != undefined && squad.kader != undefined && squad.kader.sturm != undefined &&
-    squad.kader.sturm.length != 0" class="left-align">Sturm</h2>
-  <span *ngIf="squad != undefined && squad.kader != undefined && squad.kader.sturm != undefined &&
-    squad.kader.sturm.length != 0" class="squad-container">
+  <h2 *ngIf="squad !== undefined && squad.kader !== undefined && squad.kader.sturm !== undefined &&
+    squad.kader.sturm.length !== 0" class="left-align">Sturm</h2>
+  <span *ngIf="squad !== undefined && squad.kader !== undefined && squad.kader.sturm !== undefined &&
+    squad.kader.sturm.length !== 0" class="squad-container">
     <app-squad-person *ngFor="let person of squad.kader.sturm" [ngClass]="deviceType.stringValue"
       [person]="squadPerson(person)"></app-squad-person>
   </span>
 
   <!-- Without disclosures -->
-  <h2 *ngIf="squad != undefined && squad.kader != undefined && squad.kader.ohneAngabe != undefined &&
-    squad.kader.ohneAngabe.length != 0" class="left-align">Ohne Angaben</h2>
-  <span *ngIf="squad != undefined && squad.kader != undefined && squad.kader.ohneAngabe != undefined &&
-    squad.kader.ohneAngabe.length != 0" class="squad-container">
+  <h2 *ngIf="squad !== undefined && squad.kader !== undefined && squad.kader.ohneAngabe !== undefined &&
+    squad.kader.ohneAngabe.length !== 0" class="left-align">Ohne Angaben</h2>
+  <span *ngIf="squad !== undefined && squad.kader !== undefined && squad.kader.ohneAngabe !== undefined &&
+    squad.kader.ohneAngabe.length !== 0" class="squad-container">
     <app-squad-person *ngFor="let person of squad.kader.ohneAngabe" [ngClass]="deviceType.stringValue"
       [person]="squadPerson(person)"></app-squad-person>
   </span>
 
   <!-- Staff -->
-  <h2 *ngIf="squad != undefined && squad.stab != undefined && squad.stab.length != 0" class="left-align">Stab</h2>
-  <span *ngIf="squad != undefined && squad.stab != undefined && squad.stab.length != 0" class="squad-container">
+  <h2 *ngIf="squad !== undefined && squad.stab !== undefined && squad.stab.length !== 0" class="left-align">Stab</h2>
+  <span *ngIf="squad !== undefined && squad.stab !== undefined && squad.stab.length !== 0" class="squad-container">
     <app-squad-person *ngFor="let person of squad.stab" [ngClass]="deviceType.stringValue"
       [person]="staffPerson(person)"></app-squad-person>
   </span>

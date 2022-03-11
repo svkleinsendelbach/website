@@ -4,11 +4,11 @@
     <span *ngFor="let contact of contactList" class="container">
       <p class="function">{{ contact.function }}</p>
       <p class="name">{{ contact.name }}</p>
-      <a *ngIf="contact.telephone != undefined" href="tel:{{ contact.telephone }}" title="{{ contact.name }} anrufen"
+      <a *ngIf="contact.telephone !== undefined" href="tel:{{ contact.telephone }}" title="{{ contact.name }} anrufen"
         class="telephone"><i class="fas fa-phone"></i>{{ contact.telephone | phoneNumber }}</a>
-      <a *ngIf="contact.mobile != undefined" href="tel:{{ contact.mobile }}" title="{{ contact.name }} anrufen"
+      <a *ngIf="contact.mobile !== undefined" href="tel:{{ contact.mobile }}" title="{{ contact.name }} anrufen"
         class="mobile"><i class="fas fa-mobile"></i>{{ contact.mobile | phoneNumber }}</a>
-      <a *ngIf="contact.email != undefined" href="mailto:{{ contact.email }}" title="E-Mail an {{ contact.name }}"
+      <a *ngIf="contact.email !== undefined" href="mailto:{{ contact.email }}" title="E-Mail an {{ contact.name }}"
         class="email"><i class="fas fa-envelope"></i>{{ contact.email }}</a>
     </span>
   </span>

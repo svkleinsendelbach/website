@@ -7,11 +7,11 @@
     height: contentHeight + 'px'
   }"
   class="content">
-  <span *ngIf="properties == null"
+  <span *ngIf="properties === null"
     class="loading">
     Nachrichten werden geladen
   </span>
-  <app-top-news-navigation *ngIf="properties != null"
+  <app-top-news-navigation *ngIf="properties !== null"
     [itemList]="navigationItemist">
   </app-top-news-navigation>
 </span>

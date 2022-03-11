@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { lastValueFrom } from 'rxjs';
 import { DBPlayer, Datum } from '../../../../services/fetch-home-top.service';
@@ -9,7 +9,7 @@ import { DeviceTypeService } from '../../../../services/device-type.service';
   templateUrl: './birthday-view.component.html',
   styleUrls: ['./birthday-view.component.sass'],
 })
-export class BirthdayViewComponent {
+export class BirthdayViewComponent implements OnInit {
   public Datum = Datum;
 
   @Input() player!: DBPlayer;

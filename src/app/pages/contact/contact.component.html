@@ -8,25 +8,25 @@
     <span class="input name">
       <p class="label">Ihr Name:</p>
       <input placeholder="Ihr Name" formControlName="name">
-      <p *ngIf="evaluateError('name') == 'fieldEmpty'" class="error-msg">Ihr Name ist erforderlich.</p>
+      <p *ngIf="evaluateError('name') === 'fieldEmpty'" class="error-msg">Ihr Name ist erforderlich.</p>
     </span>
     <span class="input email">
       <p class="label">Ihre E-Mail Adresse:</p>
       <input placeholder="Ihre E-Mail Adresse" formControlName="email">
-      <p *ngIf="evaluateError('email') == 'fieldEmpty'" class="error-msg">Ihre E-Mail Adresse ist erforderlich.</p>
-      <p *ngIf="evaluateError('email') == 'emailInvalid'" class="error-msg">Das ist keine gültige E-Mail Addresse.</p>
+      <p *ngIf="evaluateError('email') === 'fieldEmpty'" class="error-msg">Ihre E-Mail Adresse ist erforderlich.</p>
+      <p *ngIf="evaluateError('email') === 'emailInvalid'" class="error-msg">Das ist keine gültige E-Mail Addresse.</p>
     </span>
     <span class="input receiver">
       <p class="label">Anfrage an:</p>
       <select formControlName="receiver">
         <option *ngFor="let receiver of receivers">{{ receiver.name }}</option>
       </select>
-      <p *ngIf="evaluateError('receiver') == 'fieldEmpty'" class="error-msg">Ein Empfänger ist erforderlich.</p>
+      <p *ngIf="evaluateError('receiver') === 'fieldEmpty'" class="error-msg">Ein Empfänger ist erforderlich.</p>
     </span>
     <span class="input message">
       <p class="label">Ihre Nachricht:</p>
       <textarea placeholder="Ihre Nachricht" formControlName="message"></textarea>
-      <p *ngIf="evaluateError('message') == 'fieldEmpty'" class="error-msg">Eine Nachricht ist erforderlich.</p>
+      <p *ngIf="evaluateError('message') === 'fieldEmpty'" class="error-msg">Eine Nachricht ist erforderlich.</p>
     </span>
     <button class="submit" [ngClass]="status" type="submit" (click)="onSubmit()">Abschicken</button>
     <span [ngSwitch]="status" class="status-container">
