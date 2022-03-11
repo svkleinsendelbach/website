@@ -1,6 +1,6 @@
 <img *ngIf="person.imageId != undefined" class="image"
   src="http://www.anpfiff.info/upload/images/Portrait4/{{ person.imageId }}.jpg" title="{{ person.name }}">
-<img *ngIf="person.imageId == undefined" class="image" src="assets/profile.png" title="{{ person.name }}">
+<img *ngIf="person.imageId == undefined" class="image" src="assets/images/profile.png" title="{{ person.name }}">
 
 <a *ngIf="person.personParameters != undefined"
   href="http://www.anpfiff.info/sites/person/start.aspx?SK={{ person.personParameters.spielkreis }}&Pers={{ person.personParameters.personId }}"
