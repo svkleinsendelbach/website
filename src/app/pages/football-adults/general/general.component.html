@@ -13,7 +13,20 @@
   <p class="medium">Hier geht es zur <a href="http://sg-kh.de/team-sg-2/" title="Homepage der 2. Mannschaft"
       target="_blank" class="inline medium">Homepage</a> der 2. Mannschaft SG Kleinsendelbach / Hetzles.</p>
 </span>
-<!-- TODO: links to first / second / ah team -->
+<span class="text-section-like links" [ngClass]="deviceType.stringValue">
+  <a href="/fussball/herren/erste-mannschaft" title="1. Mannschaft" class="container">
+    <p class="title">1. Mannschaft</p>
+    <p class="text">1. Mannschaft der SG Kleinsendelbach / Hetzles</p>
+  </a>
+  <a href="/fussball/herren/zweite-mannschaft" title="2. Mannschaft" class="container">
+    <p class="title">2. Mannschaft</p>
+    <p class="text">2. Mannschaft der SG Kleinsendelbach / Hetzles</p>
+  </a>
+  <a href="/fussball/herren/alte-herren" title="Alte Herren" class="container">
+    <p class="title">Alte Herren</p>
+    <p class="text">Alte Herren des SV Kleinsendelbach</p>
+  </a>
+</span>
 <app-component-events [eventGroupIds]="eventGroupIds"></app-component-events>
 <app-component-contact [pageId]="'football-adults/general'"></app-component-contact>
 <span class="text-section">

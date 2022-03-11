@@ -62,11 +62,13 @@
     },
     "football-youth-a": {
       "displayed-name": "A-Jugend (SV Hetzles)",
-      "link": "http://sv-hetzles.de/index.php/a-junioren"
+      "link": "http://sv-hetzles.de/index.php/a-junioren",
+      "extern": true
     },
     "football-youth-b": {
       "displayed-name": "B-Jugend (SV Hetzles)",
-      "link": "http://sv-hetzles.de/index.php/b-junioren-u17"
+      "link": "http://sv-hetzles.de/index.php/b-junioren-u17",
+      "extern": true
     },
     "football-youth-c": {
       "displayed-name": "C-Jugend",
@@ -74,7 +76,8 @@
     },
     "football-youth-d": {
       "displayed-name": "D-Jugend (TSV Neunk. a. B.)",
-      "link": "http://www.tsv-neunkirchen-am-brand.de/fu/junioren"
+      "link": "http://www.tsv-neunkirchen-am-brand.de/fu/junioren",
+      "extern": true
     },
     "football-youth-e": {
       "displayed-name": "E-Jugend",

@@ -9,6 +9,52 @@
   width: 100%
   border: #485460 solid 1px
 
+.links
+  @include flex-row(center, flex-start)
+  flex-wrap: wrap
+
+  .container
+    @include flex-column(center, flex-start)
+    padding: 20px 15px
+    margin: 0 5px
+    border-radius: 10px
+    text-decoration: none
+
+    .title
+      font:
+        family: 'Montserrat', sans-serif
+        weight: 400
+        size: 24px
+      color: #CF1D16
+      margin-bottom: 10px
+
+    .text
+      font:
+        family: 'Montserrat', sans-serif
+        weight: 400
+        size: 20px
+      color: #868E90
+      text-align: center
+
+    &:hover
+      background-color: #e0e0e0
+      .text2
+        color: #1f3a95
+
+  &.desktop .container
+    width: calc(20% - 40px)
+
+  &.tablet .container
+    width: calc(25% - 40px)
+
+  &.mobile .container
+    width: calc(100% - 40px)
+
 @media screen and (prefers-color-scheme: dark)
   .team-image
     border: #24252A solid 1px
+
+  .links .container:hover
+    background-color: #44454A
+    .text2
+      color: #7793F1

@@ -6,6 +6,7 @@ import { DeviceTypeService } from '../../services/device-type.service';
 type HeaderItemValue = {
   name: string;
   link: string;
+  extern: boolean;
 };
 
 export type HeaderItem = {
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(public deviceType: DeviceTypeService) {
     this.headerItemsList = this.getHeaderItemsList();
+    console.log(this.headerItemsList);
   }
 
   @HostListener('window:resize')
@@ -49,6 +51,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return {
       name: headerItem['displayed-name'],
       link: headerItem.link,
+      extern: (headerItem as any).extern ?? false
     };
   }
 
