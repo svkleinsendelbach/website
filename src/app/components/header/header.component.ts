@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(public deviceType: DeviceTypeService) {
     this.headerItemsList = this.getHeaderItemsList();
-    console.log(this.headerItemsList);
   }
 
   @HostListener('window:resize')
