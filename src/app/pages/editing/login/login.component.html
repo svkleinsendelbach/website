@@ -1,0 +1,6 @@
+<span class="text-section" [ngClass]="deviceType.stringValue">
+  <h1>Anmeldung um Website zu bearbeiten</h1>
+  <p  *ngIf="pageState === 'startupLoading'" class="large center red top-space">Anmeldedaten werden überprüft.</p>
+  <app-login-fields *ngIf="pageState === 'loginFields'" (userUnregisteredEmitter)="handleUserUnregistered()"></app-login-fields>
+  <app-login-user-unregistered *ngIf="pageState === 'userUnregistered'" (cancelEmitter)="handleUnregisteredCanceled()"></app-login-user-unregistered>
+</span>

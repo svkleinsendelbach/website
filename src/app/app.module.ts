@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { environment } from '../environments/environment.prod';
 import { REGION } from '@angular/fire/compat/functions';
 import { RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha'
+import { USE_DEVICE_LANGUAGE, PERSISTENCE } from '@angular/fire/compat/auth';
 
 // ##### Modules #####
 
@@ -19,6 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaV3Module, RecaptchaFormsModule } from 'ng-recaptcha'
+import { AngularFireAuthModule } from '@angular/fire/compat/auth'
+import { AngularFireAuthGuardModule } from '@angular/fire/compat/auth-guard';
 
 // ##### Pipes #####
 
@@ -85,6 +88,11 @@ import { GymnasticsComponent as Gymnastics_Component } from './pages/gymnastics/
 import { DancingComponent as Dancing_Component } from './pages/dancing/dancing.component';
 import { DriveComponent as Drive_Component } from './pages/drive/drive.component';
 import { ContactComponent as Contact_Component } from './pages/contact/contact.component';
+import { LoginComponent as Editing_Login_Component } from './pages/editing/login/login.component';
+import { MainComponent as Editing_Main_Component } from './pages/editing/main/main.component';
+import { InputFormComponent } from './components/input-form/input-form.component';
+import { LoginFieldsComponent } from './pages/editing/login/login-fields/login-fields.component';
+import { LoginUserUnregisteredComponent } from './pages/editing/login/login-user-unregistered/login-user-unregistered.component';
 
 @NgModule({
   declarations: [
@@ -129,6 +137,11 @@ import { ContactComponent as Contact_Component } from './pages/contact/contact.c
     Dancing_Component,
     Drive_Component,
     Contact_Component,
+    Editing_Login_Component,
+    Editing_Main_Component,
+    InputFormComponent,
+    LoginFieldsComponent,
+    LoginUserUnregisteredComponent,
   ],
   imports: [
     BrowserModule,
@@ -140,6 +153,8 @@ import { ContactComponent as Contact_Component } from './pages/contact/contact.c
     AngularFireFunctionsModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireAuthGuardModule,
     FontAwesomeModule,
     GoogleMapsModule,
     ReactiveFormsModule,
@@ -149,6 +164,8 @@ import { ContactComponent as Contact_Component } from './pages/contact/contact.c
   providers: [
     { provide: REGION, useValue: 'europe-west1' },
     { provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LdFFLgeAAAAAEzjFiR1X35IK7UHkL2Yx0EQ447i' },
+    { provide: USE_DEVICE_LANGUAGE, useValue: true },
+    { provide: PERSISTENCE, useValue: 'session' },
   ],
   bootstrap: [AppComponent],
 })

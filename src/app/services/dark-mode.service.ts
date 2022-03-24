@@ -30,4 +30,8 @@ export class DarkModeService {
   public removeListener(id: string | number) {
     delete this.listeners[id];
   }
+
+  public get current(): 'light' | 'dark' {
+    return this.isDarkMode ? 'dark' : 'light';
+  }
 }

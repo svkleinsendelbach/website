@@ -1,0 +1,42 @@
+
+<!-- Email / password fields -->
+<app-input-form [inputFields]="emailPasswordFields" class="form">
+  <p class="label ignore-text-style">E-Mail Addresse:</p>
+  <input type="email" placeholder="E-Mail" formId="email" [ngClass]="{ touched: emailPasswordFields.field('email').touchedInvalid}">
+  <p *ngIf="emailPasswordFields.field('email').errorFirstIfTouchedOf('required') === 'invalid'" class="error-msg ignore-text-style">Die E-Mail Addresse ist erforderlich.</p>
+  <p *ngIf="emailPasswordFields.field('email').errorFirstIfTouchedOf('email') === 'invalid'" class="error-msg ignore-text-style">Das ist keine gültige E-Mail Addresse.</p>
+  <p class="label ignore-text-style">Passwort:</p>
+  <input type="password" placeholder="Passwort" formId="password" [ngClass]="{ touched: emailPasswordFields.field('password').touchedInvalid}">
+  <p *ngIf="emailPasswordFields.field('password').errorFirstIfTouchedOf('required') === 'invalid'" class="error-msg ignore-text-style">Das Passwort ist erforderlich.</p>
+  <p *ngIf="emailPasswordFields.field('password').errorFirstIfTouchedOf('minLength') === 'invalid'" class="error-msg ignore-text-style">Das Passwort muss mindestens 8 Zeichen lang sein.</p>
+  <p *ngIf="emailPasswordFields.field('password').errorFirstIfTouchedOf('containsAnInteger') === 'invalid'" class="error-msg ignore-text-style">Das Passwort muss eine Zahl enthalten.</p>
+  <p *ngIf="emailPasswordFields.field('password').errorFirstIfTouchedOf('containsALowercasedCharacter') === 'invalid'" class="error-msg ignore-text-style">Das Passwort muss einen Kleinbuchstaben enthalten.</p>
+  <p *ngIf="emailPasswordFields.field('password').errorFirstIfTouchedOf('containsAnUppercasedCharacter') === 'invalid'" class="error-msg ignore-text-style">Das Passwort muss einen Großbuchstaben enthalten.</p>
+  <div (click)="handleSignInWithEmail(); $event.stopPropagation()" class="submit-btn" [ngClass]="{ evaluatedInvalid: emailPasswordFields.status !== 'valid' }">Anmelden</div>
+  <p *ngIf="emailPasswordFields.status === 'invalidInput'" class="error-msg ignore-text-style">Nicht alle Eingaben sind gültig.</p>
+  <p *ngIf="emailPasswordFields.status === 'loading'" class="loading-msg ignore-text-style">Anmeldung wird gepüft.</p>
+  <p *ngIf="isLoginErrorCode(emailPasswordFields.status)" class="error-msg ignore-text-style">{{ loginErrorMessage(emailPasswordFields.status) }}</p>
+</app-input-form>
+
+<p class="or-text ignore-text-style">oder</p>
+
+<!-- Sign in with apple button -->
+<span class="sign-in-container">
+  <span [ngClass]="darkMode.current" (click)="handleSignInWithApple(); $event.stopPropagation(); $event.stopPropagation()" class="sign-in-with-apple">
+    <img *ngIf="darkMode.isDarkMode" src="assets/images/apple_logo_black.png" class="logo">
+    <img *ngIf="!darkMode.isDarkMode" src="assets/images/apple_logo_white.png" class="logo">
+    <p class="text ignore-text-style">Mit Apple Anmelden</p>
+  </span>
+  <p *ngIf="signInWithAppleStatus === 'loading'" class="loading-msg ignore-text-style">Bitte melden Sie sich im seperaten Anmeldefenster an.</p>
+  <p *ngIf="isLoginErrorCode(signInWithAppleStatus)" class="error-msg ignore-text-style">{{ loginErrorMessage(signInWithAppleStatus) }}</p>
+</span>
+
+<!-- Sign in with google button -->
+<span class="sign-in-container">
+  <span [ngClass]="darkMode.current" (click)="handleSignInWithGoogle(); $event.stopPropagation(); $event.stopPropagation()" class="sign-in-with-google">
+    <img src="assets/images/google_logo.png" class="logo">
+    <p class="text ignore-text-style">Mit Google Anmelden</p>
+  </span>
+  <p *ngIf="signInWithGoogleStatus === 'loading'" class="loading-msg ignore-text-style">Bitte melden Sie sich im seperaten Anmeldefenster an.</p>
+  <p *ngIf="isLoginErrorCode(signInWithGoogleStatus)" class="error-msg ignore-text-style">{{ loginErrorMessage(signInWithGoogleStatus) }}</p>
+</span>

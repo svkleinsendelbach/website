@@ -32,6 +32,8 @@ import { GymnasticsComponent as Gymnastics_Component } from './pages/gymnastics/
 import { DancingComponent as Dancing_Component } from './pages/dancing/dancing.component';
 import { DriveComponent as Drive_Component } from './pages/drive/drive.component';
 import { ContactComponent as Contact_Component } from './pages/contact/contact.component';
+import { LoginComponent as Editing_Login_Component } from './pages/editing/login/login.component';
+import { MainComponent as Editing_Main_Component } from './pages/editing/main/main.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -57,6 +59,8 @@ const routes: Routes = [
   { path: 'anfahrt', component: Drive_Component },
   { path: 'kontakt', component: Contact_Component },
   { path: 'impressum', component: Imprint_Component },
+  { path: 'bearbeiten', component: Editing_Main_Component },
+  { path: 'bearbeiten/anmelden', component: Editing_Login_Component },
   { path: '**', component: PageNotFound_Component },
 ];
 

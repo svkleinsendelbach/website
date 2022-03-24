@@ -5,7 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { VerifyRecaptchaService } from '../../services/verify-recaptcha.service';
 import { SendContactMailService, MailRequest } from '../../services/send-contact-mail.service';
 

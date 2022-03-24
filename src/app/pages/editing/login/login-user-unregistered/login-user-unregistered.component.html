@@ -1,0 +1,18 @@
+<p class="center medium">Du bist nicht registriert um die Webseite zu bearbeiten. Um die Rechte dafür zu beantragen, gebe deinen Namen an und klicke auf 'Beantragen'. Dies kann einige Tage dauern. Ansonsten klicke auf 'Abbrechen'.</p>
+
+<!-- Name fields -->
+<app-input-form [inputFields]="nameFields" class="form" [ngClass]="deviceType.stringValue">
+  <p class="label ignore-text-style">Vorname:</p>
+  <input type="text" placeholder="Vorname" formId="firstName" [ngClass]="{ touched: nameFields.field('firstName').touchedInvalid }">
+  <p *ngIf="nameFields.field('firstName').errorFirstIfTouchedOf('required') === 'invalid'" class="error-msg ignore-text-style">Der Vorname ist erforderlich.</p>
+  <p class="label ignore-text-style">Nachname:</p>
+  <input type="text" placeholder="Nachname" formId="lastName" [ngClass]="{ touched: nameFields.field('lastName').touchedInvalid }">
+  <p *ngIf="nameFields.field('lastName').errorFirstIfTouchedOf('required') === 'invalid'" class="error-msg ignore-text-style">Der Nachname ist erforderlich.</p>
+  <span class="button-container">
+    <div (click)="handleCancel(); $event.stopPropagation()" class="cancel-btn">Abbrechen</div>
+    <div (click)="handleApply(); $event.stopPropagation()" class="submit-btn" [ngClass]="{ evaluatedInvalid: nameFields.status !== 'valid' }">Beantragen</div>
+  </span>
+  <p *ngIf="nameFields.status === 'invalidInput'" class="error-msg ignore-text-style">Nicht alle Eingaben sind gültig.</p>
+  <p *ngIf="isLoginErrorCode(nameFields.status)" class="error-msg ignore-text-style">{{ loginErrorMessage(nameFields.status) }}</p>
+  <p *ngIf="nameFields.status === 'loading'" class="loading-msg ignore-text-style">Antrag wird übermittelt.</p>
+</app-input-form>
