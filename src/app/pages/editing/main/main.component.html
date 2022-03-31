@@ -1,1 +1,22 @@
-<p (click)="logOut(); $event.stopPropagation()">Log out</p>
+<span class="log-out-container">
+    <p (click)="logOut(); $event.stopPropagation()" class="log-out-btn">Abmelden</p>
+</span>
+<span class="text-section" *ngIf="!isStartupLoading && waitingUsers !== undefined && waitingUsers.length !== 0">
+  <h1>Wartende Website Editors</h1>
+  <p class="medium center">Folgende Personen haben beantragt, die Website zu bearbeiten. Bestätige oder lehne die Anfrage ab.</p>
+  <span class="waiting-users-container" [ngClass]="deviceType.stringValue">
+    <span class="waiting-user" *ngFor="let user of waitingUsers">
+      <p class="name">{{ user.name.first }} {{ user.name.last }}</p>
+      <p class="accept" (click)="acceptDeclineUserWaiting('accept', user.id)">Bestätigen</p>
+      <p class="decline" (click)="acceptDeclineUserWaiting('decline', user.id)">Ablehnen</p>
+    </span>
+  </span>
+</span>
+<span class="text-section">
+  <h1>Webseite bearbeiten</h1>
+  <p *ngIf="isStartupLoading" class="large center red top-space">Anmeldedaten werden überprüft.</p>
+  <span *ngIf="!isStartupLoading" class="edit-container" [ngClass]="deviceType.stringValue">
+    <a href="/bearbeiten/events" title="Events bearbeiten" class="button">Bearbeiten</a>
+    <p class="text">Kommende Termine bearbeiten</p>
+  </span>
+</span>

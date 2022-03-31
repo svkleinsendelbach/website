@@ -1,0 +1,138 @@
+@import '/src/sass/flex'
+@import '/src/sass/font'
+
+:host
+  @include flex-column(center, flex-start)
+  width: 100%
+
+.log-out-container
+  @include flex-row(flex-end, center)
+  width: 100%
+
+  .log-out-btn
+    font:
+      family: 'Montserrat', sans-serif
+      size: 20px
+      weight: 300
+    cursor: pointer
+    text-align: center
+    padding: 5px 15px
+    margin: 20px
+    border: 1px solid #24252A
+    border-radius: 5px
+    color: #24252A
+    background-color: #F8F9FA
+
+    &:hover
+      background-color: #f0f0f0
+      color: #1f3a95
+      border: 1px solid #1f3a95
+
+.waiting-users-container
+  @include flex-column(center, flex-start)
+  width: 100%
+
+  .waiting-user
+    @include flex-row(flex-end, center)
+    width: 95%
+    border-bottom: 1px solid #24252a80
+    background-color: #F8F9FA
+    box-shadow: 0 0 5px #aaaaaa
+
+    &:nth-child(1)
+      border-radius: 5px 5px 0 0
+
+      .name, .accept, .decline
+        padding-top: 5
+
+    &:nth-last-child(1)
+      border-radius: 0 0 5px 5px
+      border-bottom: none
+
+      .name, .accept, .decline
+        padding-bottom: 5
+
+    &:nth-child(1):nth-last-child(1)
+      border-radius: 5px
+
+      .name, .accept, .decline
+        padding-top: 5
+        padding-bottom: 5
+
+    .name
+      flex: 2
+      text-align: center
+      color: #24252A
+      padding: 10px 0
+
+    .accept, .decline
+      flex: 1
+      padding: 10px 0
+      text-align: center
+      cursor: pointer
+      color: #CF1D16
+
+      &:hover
+        background-color: #e0e0e0
+        border-radius: 5px
+
+  &.mobile .waiting-user
+    @include flex-column(center, flex-start)
+
+.edit-container
+  @include flex-row(flex-start, center)
+  width: 100%
+
+  .button
+    background-color: #F8F9FA
+    box-shadow: 0 0 5px #aaaaaa
+    flex: 1
+    text-align: center
+    padding: 5px 0
+    border-radius: 7.5px
+
+    &:hover
+      background-color: #e0e0e0
+  .text
+    flex: 3
+    text-align: left
+    margin-left: 20px
+    padding-bottom: 0
+
+  &.mobile
+    @include flex-column(flex-start, center)
+    border-bottom: 1px solid #24252a80
+    padding-bottom: 10px
+
+    .text
+      margin-top: 10px
+
+@media screen and (prefers-color-scheme: dark)
+  .log-out-container .log-out-btn
+    border: 1px solid #868E90
+    color: #868E90
+    background-color: #24252a
+
+    &:hover
+      background-color: #44454A
+      color: #7793F1
+      border: 1px solid #7793F1
+
+  .waiting-users-container .waiting-user
+    border-bottom: 1px solid #868E90
+    background-color: #24252a
+    box-shadow: 0 0 5px #333333
+
+    .name
+      color: #868E90
+
+    .accept, .decline
+      &:hover
+        background-color: #44454A
+
+  .edit-container .button
+    background-color: #24252a
+    box-shadow: 0 0 5px #333333
+
+    &:hover
+      background-color: #44454A

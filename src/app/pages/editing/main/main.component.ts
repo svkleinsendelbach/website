@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import * as shajs from 'sha.js';
 import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
 import { WebsiteEditorAuthService } from 'src/app/services/website-editor-auth.service';
+import { WebsiteEditingService } from '../../../services/website-editing.service';
+import { DeviceTypeService } from '../../../services/device-type.service';
 
 @Component({
   selector: 'app-main',
@@ -12,27 +12,43 @@ import { WebsiteEditorAuthService } from 'src/app/services/website-editor-auth.s
   styleUrls: ['./main.component.sass'],
 })
 export class MainComponent {
+  public isStartupLoading: boolean = true;
+
+  public waitingUsers: WebsiteEditingService.WebsiteEditor[] | undefined = undefined;
+
   constructor(
     private titleService: Title,
     private headerIntransparentService: HeaderIntransparentService,
-    private auth: AngularFireAuth,
     private authService: WebsiteEditorAuthService,
-    private router: Router
+    private router: Router,
+    private websiteEditingService: WebsiteEditingService,
+    public deviceType: DeviceTypeService,
   ) {
     this.titleService.setTitle('Bearbeiten');
     this.headerIntransparentService.makeIntransparent();
-    this.auth.currentUser.then(user => {
-      console.log(user?.uid);
-      console.log(shajs('sha256').update(user?.uid ?? '').digest('hex'));
+    this.authService.isLoggedIn.then(isLoggedIn => {
+      if (!isLoggedIn) {
+        this.router.navigateByUrl('/bearbeiten/anmelden');
+      }
+      this.isStartupLoading = false;
     });
-    this.authService.isLoggedIn.then(loggedIn => {
-      console.log(loggedIn ? 'Logged in' : 'Logged out');
-    })
+    this.websiteEditingService.getUsersWaitingForEditing().then(users => {
+      if (users.length !== 0)
+        this.waitingUsers = users;
+    });
   }
 
-  logOut() {
+  public logOut() {
     this.authService.logOut().then(() => {
       this.router.navigateByUrl('/bearbeiten/anmelden');
     });
+  }
+
+  public acceptDeclineUserWaiting(acceptDecline: 'accept' | 'decline', userId: string) {
+    console.log(acceptDecline, userId);
+    this.websiteEditingService.acceptDeclineUserWaitingForEditing(acceptDecline, userId);
+    this.waitingUsers = this.waitingUsers?.filter(user => user.id !== userId);
+    if (this.waitingUsers?.length === 0)
+      this.waitingUsers = undefined;
   }
 }

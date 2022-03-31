@@ -9,7 +9,6 @@ import { USE_DEVICE_LANGUAGE, PERSISTENCE } from '@angular/fire/compat/auth';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { MaterialModule } from 'src/app/modules/material/material.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
@@ -147,7 +146,6 @@ import { LoginUserUnregisteredComponent } from './pages/editing/login/login-user
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireFunctionsModule,
