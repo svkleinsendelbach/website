@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { TeamSpieleSpiele } from 'src/app/services/fetch-home-top.service';
-import { FullDatum, ResultParameters } from '../../../../services/fetch-home-top.service';
+import { TeamSpieleSpiele } from 'src/app/services/api/fetch-home-top.service';
+import { FullDatum, ResultParameters } from '../../../../services/api/fetch-home-top.service';
 import { DeviceTypeService } from '../../../../services/device-type.service';
 
 @Component({

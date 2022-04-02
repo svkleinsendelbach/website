@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
 import { Router } from '@angular/router';
-import { WebsiteEditorAuthService } from '../../../services/website-editor-auth.service';
+import { WebsiteEditorAuthService } from '../../../services/api/website-editor-auth.service';
 import { DarkModeService } from 'src/app/services/dark-mode.service';
 import { DeviceTypeService } from '../../../services/device-type.service';
 
@@ -26,9 +26,12 @@ export class LoginComponent {
     this.headerIntransparentService.makeIntransparent();
     this.authService.isLoggedIn.then(isLoggedIn => {
       if (isLoggedIn) {
-        this.router.navigateByUrl('/bearbeiten');
+        this.router.navigateByUrl('/bearbeiten').then(success => {
+          if (!success) throw new Error("Couldn't navigate to url.");
+        });
+      } else {
+        this.pageState = 'loginFields';
       }
-      this.pageState = 'loginFields';
     });
   }
 

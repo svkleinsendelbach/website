@@ -6,8 +6,8 @@ import { Title } from '@angular/platform-browser';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
 import { lastValueFrom, Observable } from 'rxjs';
-import { VerifyRecaptchaService } from '../../services/verify-recaptcha.service';
-import { SendContactMailService, MailRequest } from '../../services/send-contact-mail.service';
+import { VerifyRecaptchaService } from '../../services/api/verify-recaptcha.service';
+import { SendContactMailService, MailRequest } from '../../services/api/send-contact-mail.service';
 
 enum Status {
   input = '',

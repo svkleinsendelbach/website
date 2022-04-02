@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { FetchHomeTopService, HomeTopProperties } from '../../../services/fetch-home-top.service';
+import { FetchHomeTopService, HomeTopProperties } from '../../../services/api/fetch-home-top.service';
 import { NavigationItem } from './navigation/navigation.component';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { lastValueFrom } from 'rxjs';
-import { DBPlayer, Datum } from '../../../../services/fetch-home-top.service';
+import { DBPlayer, Datum } from '../../../../services/api/fetch-home-top.service';
 import { DeviceTypeService } from '../../../../services/device-type.service';
 
 @Component({

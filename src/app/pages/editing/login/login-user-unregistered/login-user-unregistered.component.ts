@@ -1,9 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { InputFields, InputField, Validator } from 'src/app/components/input-form/input-form.component';
-import { WebsiteEditorAuthService } from 'src/app/services/website-editor-auth.service';
+import { WebsiteEditorAuthService } from 'src/app/services/api/website-editor-auth.service';
 import { DeviceTypeService } from '../../../../services/device-type.service';
-import { LoginErrorCode } from '../../../../services/website-editor-auth.service';
+import { LoginErrorCode } from '../../../../services/api/website-editor-auth.service';
 
 @Component({
   selector: 'app-login-user-unregistered',

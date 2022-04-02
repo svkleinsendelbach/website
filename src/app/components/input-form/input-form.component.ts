@@ -37,6 +37,13 @@ export namespace Validator {
     return 'invalid';
   };
 
+  export const url: Validator = (textValue: string) => {
+    const regex =
+      /^(?:https?:\/\/)?(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}[-a-zA-Z0-9()@:%_\+.~#?&\/=]*$/;
+    if (regex.test(textValue)) return 'valid';
+    return 'invalid';
+  };
+
   export function minLength(length: number): Validator {
     return (textValue: string) => {
       if (textValue.length < length) return 'invalid';

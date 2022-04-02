@@ -92,6 +92,8 @@ import { MainComponent as Editing_Main_Component } from './pages/editing/main/ma
 import { InputFormComponent } from './components/input-form/input-form.component';
 import { LoginFieldsComponent } from './pages/editing/login/login-fields/login-fields.component';
 import { LoginUserUnregisteredComponent } from './pages/editing/login/login-user-unregistered/login-user-unregistered.component';
+import { EventsComponent as Editing_Events_Component } from './pages/editing/events/events.component';
+import { EditEventComponent as Editing_Events_EditEvent_Component } from './pages/editing/events/edit-event/edit-event.component';
 
 @NgModule({
   declarations: [
@@ -141,6 +143,8 @@ import { LoginUserUnregisteredComponent } from './pages/editing/login/login-user
     InputFormComponent,
     LoginFieldsComponent,
     LoginUserUnregisteredComponent,
+    Editing_Events_Component,
+    Editing_Events_EditEvent_Component,
   ],
   imports: [
     BrowserModule,

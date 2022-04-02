@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FullDatum } from 'src/app/services/fetch-home-top.service';
-import { EventsFetcherService, EventGroupId, Event } from '../../services/events-fetcher.service';
+import { FullDatum } from 'src/app/services/api/fetch-home-top.service';
+import { EventsFetcherService, EventGroupId, Event } from '../../services/api/events-fetcher.service';
 import { DeviceTypeService } from '../../services/device-type.service';
 
 @Component({

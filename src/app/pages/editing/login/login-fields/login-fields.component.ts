@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { InputField, InputFields, Validator } from 'src/app/components/input-form/input-form.component';
 import { DarkModeService } from 'src/app/services/dark-mode.service';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { LoginErrorCode, WebsiteEditorAuthService } from 'src/app/services/website-editor-auth.service';
+import { LoginErrorCode, WebsiteEditorAuthService } from 'src/app/services/api/website-editor-auth.service';
 
 @Component({
   selector: 'app-login-fields',

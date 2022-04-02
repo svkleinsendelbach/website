@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
-import { WebsiteEditorAuthService } from 'src/app/services/website-editor-auth.service';
-import { WebsiteEditingService } from '../../../services/website-editing.service';
+import { WebsiteEditorAuthService } from 'src/app/services/api/website-editor-auth.service';
+import { WebsiteEditingService } from '../../../services/api/website-editing.service';
 import { DeviceTypeService } from '../../../services/device-type.service';
 
 @Component({
@@ -28,9 +28,12 @@ export class MainComponent {
     this.headerIntransparentService.makeIntransparent();
     this.authService.isLoggedIn.then(isLoggedIn => {
       if (!isLoggedIn) {
-        this.router.navigateByUrl('/bearbeiten/anmelden');
+        this.router.navigateByUrl('/bearbeiten/anmelden').then(success => {
+          if (!success) throw new Error("Couldn't navigate to url.");
+        });
+      } else {
+          this.isStartupLoading = false;
       }
-      this.isStartupLoading = false;
     });
     this.websiteEditingService.getUsersWaitingForEditing().then(users => {
       if (users.length !== 0)

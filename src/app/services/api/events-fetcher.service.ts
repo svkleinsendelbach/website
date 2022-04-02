@@ -48,6 +48,7 @@ export namespace EventGroupId {
 }
 
 export interface Event {
+  id: string;
   date: string;
   title: string;
   subtitle?: string;

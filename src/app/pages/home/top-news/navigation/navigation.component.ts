@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DBPlayer, TeamSpieleSpiele } from 'src/app/services/fetch-home-top.service';
+import { DBPlayer, TeamSpieleSpiele } from 'src/app/services/api/fetch-home-top.service';
 import { faChevronLeft, faChevronRight, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 export type NavigationItem = NavigationItem.Birthday | NavigationItem.Game;
