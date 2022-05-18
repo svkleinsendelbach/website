@@ -1,8 +1,8 @@
 <span class="text-section">
   <h1>Termine bearbeiten</h1>
   <p *ngIf="isStartupLoading" class="large center red top-space">Anmeldedaten werden überprüft.</p>
-  <p class="add-event ignore-text-style" (click)="addNewEvent(); $event.stopPropagation()">Neuen Termin hinzufügen</p>
-  <span class="event-group-container" *ngFor="let eventGroup of allEvents ?? []" [ngClass]="deviceType.stringValue">
+  <p *ngIf="!isStartupLoading" class="add-event ignore-text-style" (click)="addNewEvent(); $event.stopPropagation()">Neuen Termin hinzufügen</p>
+  <span class="event-group-container" *ngFor="let eventGroup of isStartupLoading ? [] : (allEvents ?? [])" [ngClass]="deviceType.stringValue">
     <p class="group-name ignore-text-style">{{ groupDescription(eventGroup.groupId) }}</p>
     <span class="event-container" *ngFor="let event of getEventsOf(eventGroup.groupId)">
       <span class="title-container">

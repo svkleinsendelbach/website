@@ -23,21 +23,6 @@ export class EventsComponent {
       }[]
     | undefined = undefined;
 
-  private readonly allEventGroupIds: EventGroupId[] = [
-    'general',
-    'football-adults/general',
-    'football-adults/first-team',
-    'football-adults/second-team',
-    'football-adults/ah-team',
-    'football-youth/general',
-    'football-youth/c-youth',
-    'football-youth/e-youth',
-    'football-youth/f-youth',
-    'football-youth/g-youth',
-    'gymnastics',
-    'dancing',
-  ];
-
   constructor(
     private titleService: Title,
     private headerIntransparentService: HeaderIntransparentService,
@@ -59,7 +44,7 @@ export class EventsComponent {
         this.isStartupLoading = false;
       }
     });
-    this.eventsFetcher.getEvents(this.allEventGroupIds).then(events => {
+    this.eventsFetcher.getEvents(EventGroupId.all).then(events => {
       this.allEvents = events;
     });
   }

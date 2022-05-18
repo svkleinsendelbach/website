@@ -10,6 +10,11 @@ export namespace Validator {
     return 'valid';
   };
 
+  export const empty: Validator = (textValue: string) => {
+      if (textValue === '') return 'valid';
+      return 'invalid'
+  }
+
   export function min(n: number): Validator<'NaN' | 'invalid'> {
     return (textValue: string) => {
       textValue = textValue.replace(/,/g, '.');
@@ -30,19 +35,32 @@ export namespace Validator {
     };
   }
 
-  export const email: Validator = (textValue: string) => {
-    const regex =
-      /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
-    if (regex.test(textValue)) return 'valid';
-    return 'invalid';
-  };
+  export function pattern(regex: RegExp): Validator {
+    return (textValue: string) => {
+      if (regex.test(textValue)) return 'valid';
+      return 'invalid';
+    };
+  }
 
-  export const url: Validator = (textValue: string) => {
-    const regex =
-      /^(?:https?:\/\/)?(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}[-a-zA-Z0-9()@:%_\+.~#?&\/=]*$/;
-    if (regex.test(textValue)) return 'valid';
-    return 'invalid';
-  };
+  export const email: Validator = Validator.pattern(
+      /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/
+  );
+
+  export const url: Validator = Validator.pattern(
+    /^(?:https?:\/\/)?(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}[-a-zA-Z0-9()@:%_\+.~#?&\/=]*$/
+  );
+
+  export const isoDate: Validator = Validator.pattern(
+    /^(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))$/
+  );
+
+  export const date: Validator = Validator.pattern(
+    /^\d{4}-\d{2}-\d{2}$/
+  );
+
+  export const time: Validator = Validator.pattern(
+    /^\d{2}:\d{2}$/
+  );
 
   export function minLength(length: number): Validator {
     return (textValue: string) => {
@@ -58,7 +76,7 @@ export namespace Validator {
     };
   }
 
-  function containsASubstringFromStringSet(stringSet: Set<string>): Validator {
+  export function containsASubstringFromStringSet(stringSet: Set<string>): Validator {
     return (textValue: string) => {
       for (const v of stringSet) {
         if (textValue.includes(v)) return 'valid';
@@ -67,31 +85,48 @@ export namespace Validator {
     };
   }
 
-  export const containsAnInteger: Validator = containsASubstringFromStringSet(
-    new Set(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']),
+  export const containsAnInteger: Validator = Validator.containsASubstringFromStringSet(
+    new Set([...'0123456789'])
   );
 
-  export const containsAnUppercasedCharacter: Validator = containsASubstringFromStringSet(
-    new Set(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'])
+  export const containsAnUppercasedCharacter: Validator = Validator.containsASubstringFromStringSet(
+    new Set([...'ABCDEFGHIJKLMNOPQRSTUVWXYZ']),
   );
 
-  export const containsALowercasedCharacter: Validator = containsASubstringFromStringSet(
-    new Set(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'])
+  export const containsALowercasedCharacter: Validator = Validator.containsASubstringFromStringSet(
+    new Set([...'abcdefghijklmnopqrstuvwxyz']),
   );
 
-  export function pattern(regex: RegExp): Validator {
+  export function isOneOf(validInputs: string[]): Validator {
     return (textValue: string) => {
-      if (regex.test(textValue)) return 'valid';
-      return 'invalid';
+      return validInputs.includes(textValue) ? 'valid' : 'invalid';
     }
   }
 
-  export function compose<InvalidErrorCodes1, InvalidErrorCodes2>(validator1: Validator<InvalidErrorCodes1>, validator2: Validator<InvalidErrorCodes2>): Validator<InvalidErrorCodes1 | InvalidErrorCodes2> {
+  export function compose<InvalidErrorCodes>(...validators: [Validator<InvalidErrorCodes>, ...Validator<InvalidErrorCodes>[]]): Validator<InvalidErrorCodes> {
     return (textValue: string) => {
-      const validation1 = validator1(textValue);
-      if (validation1 !== 'valid') return validation1;
-      return validator2(textValue);
+      for (const validator of validators) {
+        const validation = validator(textValue);
+        if (validation !== 'valid') return validation;
+      }
+      return 'valid';
     }
+  }
+
+  export function eitherOne<InvalidErrorCodes>(...validators: [Validator<InvalidErrorCodes>, ...Validator<InvalidErrorCodes>[]]): Validator<InvalidErrorCodes> {
+    return (textValue: string) => {
+      let lastInvalidErrorCode!: InvalidErrorCodes;
+      for (const validator of validators) {
+        const validation = validator(textValue);
+        if (validation === 'valid') return 'valid';
+        lastInvalidErrorCode = validation;
+      }
+      return lastInvalidErrorCode;
+    }
+  }
+
+  export function custom<InvalidErrorCodes = 'invalid'>(evaluater: (textValue: string) => 'valid' | InvalidErrorCodes): Validator<InvalidErrorCodes> {
+    return evaluater;
   }
 }
 
@@ -124,6 +159,21 @@ export class InputField<Validators extends { [key: string]: Validator<any> }> {
         return (this.element as HTMLSelectElement).value;
       default:
         return '';
+    }
+  }
+
+  public set textValue(value: string) {
+    if (this.element === undefined) return;
+    switch (this.element.tagName) {
+      case 'INPUT':
+        (this.element as HTMLInputElement).value = value;
+        break;
+      case 'TEXTAREA':
+        (this.element as HTMLTextAreaElement).value = value;
+        break;
+      case 'SELECT':
+        (this.element as HTMLSelectElement).value = value;
+        break;
     }
   }
 
