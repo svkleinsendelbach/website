@@ -35,6 +35,11 @@ export namespace Validator {
     };
   }
 
+  export const checked: Validator = (textValue: string) => {
+    if (textValue === 'checked') return 'valid';
+    return 'invalid';
+  };
+
   export function pattern(regex: RegExp): Validator {
     return (textValue: string) => {
       if (regex.test(textValue)) return 'valid';
@@ -152,6 +157,8 @@ export class InputField<Validators extends { [key: string]: Validator<any> }> {
     if (this.element === undefined) return '';
     switch (this.element.tagName) {
       case 'INPUT':
+        if ((this.element as HTMLInputElement).type === 'checkbox')
+          return (this.element as HTMLInputElement).checked ? 'checked' : 'unchecked';
         return (this.element as HTMLInputElement).value;
       case 'TEXTAREA':
         return (this.element as HTMLTextAreaElement).value;
@@ -166,6 +173,8 @@ export class InputField<Validators extends { [key: string]: Validator<any> }> {
     if (this.element === undefined) return;
     switch (this.element.tagName) {
       case 'INPUT':
+        if ((this.element as HTMLInputElement).type === 'checkbox')
+          (this.element as HTMLInputElement).checked = value == 'checked';
         (this.element as HTMLInputElement).value = value;
         break;
       case 'TEXTAREA':

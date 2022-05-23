@@ -31,11 +31,15 @@ import { PageNotFoundComponent as PageNotFound_Component } from './pages/page-no
 import { GymnasticsComponent as Gymnastics_Component } from './pages/gymnastics/gymnastics.component';
 import { DancingComponent as Dancing_Component } from './pages/dancing/dancing.component';
 import { DriveComponent as Drive_Component } from './pages/drive/drive.component';
+
+// Editing pages
 import { ContactComponent as Contact_Component } from './pages/contact/contact.component';
 import { LoginComponent as Editing_Login_Component } from './pages/editing/login/login.component';
 import { MainComponent as Editing_Main_Component } from './pages/editing/main/main.component';
 import { EventsComponent as Editing_Events_Component } from './pages/editing/events/events.component';
 import { EditEventComponent as Editing_Events_EditEvent_Component } from './pages/editing/events/edit-event/edit-event.component';
+import { NewsComponent as Editing_News_Component } from './pages/editing/news/news.component';
+import { EditNewsComponent as Editing_News_EditNews_Component } from './pages/editing/news/edit-news/edit-news.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -64,7 +68,9 @@ const routes: Routes = [
   { path: 'bearbeiten', component: Editing_Main_Component },
   { path: 'bearbeiten/anmelden', component: Editing_Login_Component },
   { path: 'bearbeiten/termine', component: Editing_Events_Component },
-  { path: 'bearbeiten/termine/termin-bearbeiten', component: Editing_Events_EditEvent_Component },
+  { path: 'bearbeiten/termine/bearbeiten', component: Editing_Events_EditEvent_Component },
+  { path: 'bearbeiten/nachrichten', component: Editing_News_Component },
+  { path: 'bearbeiten/nachrichten/bearbeiten', component: Editing_News_EditNews_Component },
   { path: '**', component: PageNotFound_Component },
 ];
 

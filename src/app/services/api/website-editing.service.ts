@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/compat/functions';
 import { lastValueFrom } from 'rxjs';
 import { EventGroupId } from './events-fetcher.service';
+import { StorageFilesManagerService } from './storage-files-manager.service';
 
 export type WebsiteEditingErrorCode = 'unknown' | 'permission-denied';
 
@@ -30,7 +31,7 @@ export class WebsiteEditingError implements Error {
   providedIn: 'root',
 })
 export class WebsiteEditingService {
-  constructor(private fns: AngularFireFunctions) {}
+  constructor(private fns: AngularFireFunctions, private storageFilesManager: StorageFilesManagerService) {}
 
   public async getUsersWaitingForEditing(): Promise<WebsiteEditingService.WebsiteEditor[]> {
     return await this.executeFirebaseFunction<{ jsonWebToken: string }, WebsiteEditingService.WebsiteEditor[]>(
@@ -62,6 +63,19 @@ export class WebsiteEditingService {
     );
   }
 
+  public async editNews(params: Omit<WebsiteEditingService.EditNewsParams, 'newsUrl'>, messageParams: { fileName: string, message: string }) {
+    await this.storageFilesManager.uploadString(messageParams.message, `news/${messageParams.fileName}`);
+    const newsUrl = await this.storageFilesManager.getDownloadUrl(`news/${messageParams.fileName}`);
+    return await this.executeFirebaseFunction<WebsiteEditingService.EditNewsParams & { jsonWebToken: string }>(
+      'editNews',
+      {
+        ...params,
+        newsUrl: newsUrl,
+        jsonWebToken: this.jsonWebToken,
+      },
+    )
+  }
+
   private get jsonWebToken(): string {
     const expiration = localStorage.getItem('website_editing_user_expires_at');
     if (expiration === null || new Date(Number(expiration)) < new Date())
@@ -76,6 +90,7 @@ export class WebsiteEditingService {
     return await lastValueFrom(callable(params)).catch(error => {
       if (error.code === 'functions/permission-denied')
         throw new WebsiteEditingError('permission-denied');
+      console.error(error);
       throw new WebsiteEditingError('unknown');
     });
   }
@@ -107,4 +122,16 @@ export namespace WebsiteEditingService {
     groupId: EventGroupId;
     eventId: string;
   }
+
+  export interface EditNewsParams {
+    editType: 'add' | 'update';
+    newsId: string;
+    title: string;
+    subtitle?: string;
+    date: string;
+    shortDescription?: string;
+    newsUrl: string;
+    disabled: boolean;
+  }
+
 }

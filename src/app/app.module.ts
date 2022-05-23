@@ -16,11 +16,13 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaV3Module, RecaptchaFormsModule } from 'ng-recaptcha'
 import { AngularFireAuthModule } from '@angular/fire/compat/auth'
 import { AngularFireAuthGuardModule } from '@angular/fire/compat/auth-guard';
+import { AngularMarkdownEditorModule } from 'angular-markdown-editor';
+import { MarkdownModule } from 'ngx-markdown';
 
 // ##### Pipes #####
 
@@ -87,6 +89,8 @@ import { GymnasticsComponent as Gymnastics_Component } from './pages/gymnastics/
 import { DancingComponent as Dancing_Component } from './pages/dancing/dancing.component';
 import { DriveComponent as Drive_Component } from './pages/drive/drive.component';
 import { ContactComponent as Contact_Component } from './pages/contact/contact.component';
+
+// Editing pages
 import { LoginComponent as Editing_Login_Component } from './pages/editing/login/login.component';
 import { MainComponent as Editing_Main_Component } from './pages/editing/main/main.component';
 import { InputFormComponent } from './components/input-form/input-form.component';
@@ -94,6 +98,10 @@ import { LoginFieldsComponent } from './pages/editing/login/login-fields/login-f
 import { LoginUserUnregisteredComponent } from './pages/editing/login/login-user-unregistered/login-user-unregistered.component';
 import { EventsComponent as Editing_Events_Component } from './pages/editing/events/events.component';
 import { EditEventComponent as Editing_Events_EditEvent_Component } from './pages/editing/events/edit-event/edit-event.component';
+import { NewsComponent as Editing_News_Component } from './pages/editing/news/news.component';
+import { EditNewsComponent as Editing_News_EditNews_Component } from './pages/editing/news/edit-news/edit-news.component';
+import { MarkdownEditorComponent } from './components/markdown-editor/markdown-editor.component';
+import { ToggleSwitchComponent } from './components/toggle-switch/toggle-switch.component';
 
 @NgModule({
   declarations: [
@@ -145,6 +153,10 @@ import { EditEventComponent as Editing_Events_EditEvent_Component } from './page
     LoginUserUnregisteredComponent,
     Editing_Events_Component,
     Editing_Events_EditEvent_Component,
+    Editing_News_Component,
+    Editing_News_EditNews_Component,
+    MarkdownEditorComponent,
+    ToggleSwitchComponent,
   ],
   imports: [
     BrowserModule,
@@ -159,9 +171,14 @@ import { EditEventComponent as Editing_Events_EditEvent_Component } from './page
     AngularFireAuthGuardModule,
     FontAwesomeModule,
     GoogleMapsModule,
+    FormsModule,
     ReactiveFormsModule,
     RecaptchaV3Module,
     RecaptchaFormsModule,
+    AngularMarkdownEditorModule.forRoot(),
+    MarkdownModule.forRoot({
+      loader: HttpClient
+    }),
   ],
   providers: [
     { provide: REGION, useValue: 'europe-west1' },

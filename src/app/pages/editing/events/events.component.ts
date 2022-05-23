@@ -6,7 +6,7 @@ import { WebsiteEditorAuthService } from 'src/app/services/api/website-editor-au
 import { EventsFetcherService, EventGroupId, Event } from '../../../services/api/events-fetcher.service';
 import { DeviceTypeService } from '../../../services/device-type.service';
 import { WebsiteEditingService } from '../../../services/api/website-editing.service';
-import { ShareEventEditService } from '../../../services/shared-data/share-event-edit.service';
+import { SharedEventEditService } from '../../../services/shared-data/shared-event-edit.service';
 
 @Component({
   selector: 'app-events',
@@ -31,7 +31,7 @@ export class EventsComponent {
     private eventsFetcher: EventsFetcherService,
     public deviceType: DeviceTypeService,
     private websiteEditing: WebsiteEditingService,
-    private shareEventEdit: ShareEventEditService,
+    private sharedEventEdit: SharedEventEditService,
   ) {
     this.titleService.setTitle('Termine Bearbeiten');
     this.headerIntransparentService.makeIntransparent();
@@ -75,12 +75,12 @@ export class EventsComponent {
   }
 
   public editEvent(groupId: EventGroupId, event: Event) {
-    this.shareEventEdit.event = { groupId, event };
-    this.router.navigateByUrl('/bearbeiten/termine/termin-bearbeiten');
+    this.sharedEventEdit.event = { groupId, event };
+    this.router.navigateByUrl('/bearbeiten/termine/bearbeiten');
   }
 
   public addNewEvent() {
-    this.shareEventEdit.event = undefined;
-    this.router.navigateByUrl('/bearbeiten/termine/termin-bearbeiten');
+    this.sharedEventEdit.event = undefined;
+    this.router.navigateByUrl('/bearbeiten/termine/bearbeiten');
   }
 }

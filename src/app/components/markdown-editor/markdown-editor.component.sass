@@ -1,0 +1,31 @@
+@import '/src/sass/flex'
+@import '/src/sass/font'
+
+:host
+  @include flex-column(center, flex-start)
+  width: 100%
+
+.file-input
+  display: none
+
+.editor
+  width: 100%
+
+.error, .file-upload
+  font:
+    family: 'Montserrat', sans-serif
+    size: 24px
+    weight: 400
+  line-height: 26px
+  padding:
+    left: 8px
+    top: 8px
+    bottom: 16px
+  width: 100%
+  text-align: left
+
+.error
+  color: #CF1D16
+
+.file-upload
+  color: #868E90

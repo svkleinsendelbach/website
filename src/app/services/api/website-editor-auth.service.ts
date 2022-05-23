@@ -5,6 +5,7 @@ import { lastValueFrom } from 'rxjs';
 import * as sha512 from 'js-sha512';
 import { OAuthProvider } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
+import { Router } from '@angular/router';
 
 export type LoginErrorCode = 'unknown' | 'invalid-email' | 'user-disabled' | 'wrong-password' | 'popup-blocked' | 'popup-closed';
 
@@ -41,9 +42,16 @@ export class LoginError implements Error {
   providedIn: 'root',
 })
 export class WebsiteEditorAuthService {
-  constructor(private fns: AngularFireFunctions, private auth: AngularFireAuth) {}
+  private _loggedIn: boolean = false;
+
+  constructor(private fns: AngularFireFunctions, private auth: AngularFireAuth, private router: Router) {}
+
+  public get loggedIn(): boolean {
+    return this._loggedIn;
+  }
 
   public async login(email: string, passwort: string): Promise<'registered' | 'unregistered'> {
+    this._loggedIn = false;
     const credential = await this.auth.signInWithEmailAndPassword(email, passwort).catch(async error => {
       switch (error.code) {
         case 'auth/invalid-email':
@@ -63,12 +71,14 @@ export class WebsiteEditorAuthService {
   }
 
   public async loginWithApple(): Promise<'registered' | 'unregistered'> {
+    this._loggedIn = false;
     const provider = new OAuthProvider('apple.com');
     const credential = await this.auth.signInWithPopup(provider).catch(this.handlePopupError);
     return this.handleLoginCredential(credential);
   }
 
   public async loginWithGoogle(): Promise<'registered' | 'unregistered'> {
+    this._loggedIn = false;
     const provider = new firebase.auth.GoogleAuthProvider();
     const credential = await this.auth.signInWithPopup(provider).catch(this.handlePopupError);
     return this.handleLoginCredential(credential);
@@ -99,21 +109,20 @@ export class WebsiteEditorAuthService {
   private async handleLoginCredential(
     credential: firebase.auth.UserCredential,
   ): Promise<'registered' | 'unregistered'> {
-    if (credential.user === null)
-      throw new LoginError('unknown');
+    if (credential.user === null) throw new LoginError('unknown');
     const authorized = (await this.checkAuthorationAndStoreLocal(credential.user)) === 'authorized';
+    if (authorized) this._loggedIn = true;
     return authorized ? 'registered' : 'unregistered';
   }
 
   private async checkAuthorationAndStoreLocal(
     user: firebase.User | null = null,
   ): Promise<'authorized' | 'unauthorized'> {
+    this._loggedIn = false;
     localStorage.removeItem('website_editing_user_id_token');
     localStorage.removeItem('website_editing_user_expires_at');
-    if (user === null)
-      user = await this.auth.currentUser;
-    if (user === null)
-      return 'unauthorized';
+    if (user === null) user = await this.auth.currentUser;
+    if (user === null) return 'unauthorized';
 
     const callable = this.fns.httpsCallable<{ userId: string }, { token: string; expiresAt: number }>(
       'checkUserForEditing',
@@ -129,17 +138,17 @@ export class WebsiteEditorAuthService {
         throw new LoginError('unknown');
       }
     });
-    if (jwtPayload === 'unauthorized')
-      return 'unauthorized';
+    if (jwtPayload === 'unauthorized') return 'unauthorized';
 
-    if (new Date(jwtPayload.expiresAt) < new Date())
-      return 'unauthorized';
+    if (new Date(jwtPayload.expiresAt) < new Date()) return 'unauthorized';
     localStorage.setItem('website_editing_user_id_token', jwtPayload.token);
     localStorage.setItem('website_editing_user_expires_at', jwtPayload.expiresAt.toString());
+    this._loggedIn = true;
     return 'authorized';
   }
 
   public async logOut() {
+    this._loggedIn = false;
     localStorage.removeItem('website_editing_user_id_token');
     localStorage.removeItem('website_editing_user_expires_at');
     await this.auth.signOut();
@@ -149,6 +158,7 @@ export class WebsiteEditorAuthService {
     return new Promise(async resolve => {
       const expiration = localStorage.getItem('website_editing_user_expires_at');
       if (expiration !== null && new Date(Number(expiration)) >= new Date()) {
+        this._loggedIn = true;
         return resolve(true);
       }
       const authorized = await this.checkAuthorationAndStoreLocal();
@@ -162,17 +172,31 @@ export class WebsiteEditorAuthService {
     });
   }
 
+  public checkLogInOrNavigateToLogInPage() {
+    this.isLoggedIn.then(isLoggedIn => {
+      if (!isLoggedIn) {
+        this.router.navigateByUrl('/bearbeiten/anmelden').then(success => {
+          if (!success) throw new Error("Couldn't navigate to url.");
+        });
+      }
+    });
+  }
+
   public async addUserToWaitingForRegistration(firstName: string, lastName: string) {
     const currentUser = await this.auth.currentUser;
     if (currentUser === null) {
       throw new LoginError('unknown');
     }
-    const callable = this.fns.httpsCallable<{ userId: string; firstName: string; lastName: string }, void>('addUserToWaitingForRegistrationForEditing');
-    await lastValueFrom(callable({
-      userId: sha512.sha512(currentUser.uid),
-      firstName,
-      lastName
-    }));
+    const callable = this.fns.httpsCallable<{ userId: string; firstName: string; lastName: string }, void>(
+      'addUserToWaitingForRegistrationForEditing',
+    );
+    await lastValueFrom(
+      callable({
+        userId: sha512.sha512(currentUser.uid),
+        firstName,
+        lastName,
+      }),
+    );
   }
 
   public async removeRegisteredUser() {

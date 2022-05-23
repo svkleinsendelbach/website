@@ -4,7 +4,7 @@ import { EventGroupId, Event } from '../api/events-fetcher.service';
 @Injectable({
   providedIn: 'root',
 })
-export class ShareEventEditService {
+export class SharedEventEditService {
   private _eventForEdit: { groupId: EventGroupId; event: Event } | undefined = undefined;
 
   constructor() {}

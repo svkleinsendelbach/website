@@ -6,7 +6,7 @@ import { EventGroupId, GroupedEventGroupId, Event } from 'src/app/services/api/e
 import { WebsiteEditingErrorCode, WebsiteEditingService } from 'src/app/services/api/website-editing.service';
 import { WebsiteEditorAuthService } from 'src/app/services/api/website-editor-auth.service';
 import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
-import { ShareEventEditService } from 'src/app/services/shared-data/share-event-edit.service';
+import { SharedEventEditService } from 'src/app/services/shared-data/shared-event-edit.service';
 import { DeviceTypeService } from '../../../../services/device-type.service';
 import * as uuid from 'uuid';
 
@@ -72,12 +72,12 @@ export class EditEventComponent implements AfterViewInit {
     private headerIntransparentService: HeaderIntransparentService,
     private authService: WebsiteEditorAuthService,
     private router: Router,
-    private shareEventEdit: ShareEventEditService,
+    private sharedEventEdit: SharedEventEditService,
     public deviceType: DeviceTypeService,
     private websiteEditing: WebsiteEditingService,
   ) {
     this.headerIntransparentService.makeIntransparent();
-    this.event = this.shareEventEdit.event;
+    this.event = this.sharedEventEdit.event;
     this.editType = this.event === undefined ? 'add' : 'update';
     if (this.editType === 'update') {
       this.titleService.setTitle('Termin Bearbeiten');
@@ -127,26 +127,30 @@ export class EditEventComponent implements AfterViewInit {
   }
 
   public handleAddEditEvent() {
+    if (this.inputFields.status !== 'valid') return
     const validation = this.inputFields.validationOfAllFields;
     if (validation !== 'valid') return;
     this.inputFields.setStatus('loading');
+    const eventId = this.editType === 'update' && this.event !== undefined ? this.event.event.id : uuid.v4();
     this.websiteEditing
       .editEvent({
         editType: this.editType,
         groupId: this.inputFields.field('groupId').textValue as EventGroupId,
-        eventId: uuid.v4(),
+        eventId: eventId,
         eventDate: `${this.inputFields.field('date').textValue}T${this.inputFields.field('time').textValue}:00.000Z`,
         eventTitle: this.inputFields.field('title').textValue,
         eventSubtitle: this.inputFields.field('subtitle').textValue || undefined,
         eventLink: this.inputFields.field('link').textValue || undefined,
       })
       .then(() => {
-        this.router.navigateByUrl('bearbeiten/termine');
+        this.inputFields.setStatus('valid');
+        this.router.navigateByUrl('/bearbeiten/termine');
       })
       .catch(error => {
         if ('name' in error && error.name === 'WebsiteEditingServiceError' && 'code' in error)
           this.inputFields.setStatus(error.code);
         else this.inputFields.setStatus('unknown');
+        console.error(error);
       });
   }
 }

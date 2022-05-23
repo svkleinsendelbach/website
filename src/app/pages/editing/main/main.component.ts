@@ -48,7 +48,6 @@ export class MainComponent {
   }
 
   public acceptDeclineUserWaiting(acceptDecline: 'accept' | 'decline', userId: string) {
-    console.log(acceptDecline, userId);
     this.websiteEditingService.acceptDeclineUserWaitingForEditing(acceptDecline, userId);
     this.waitingUsers = this.waitingUsers?.filter(user => user.id !== userId);
     if (this.waitingUsers?.length === 0)

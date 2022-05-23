@@ -1,0 +1,125 @@
+@import '/src/sass/flex'
+@import '/src/sass/font'
+
+:host
+  @include flex-column(center, flex-start)
+  width: 100%
+
+.form
+  @include flex-column(flex-start, center)
+  width: 50%
+
+  .disabled-container
+    @include flex-row(flex-start, flex-start)
+    width: 100%
+
+    .label
+      width: auto
+
+    .switch
+      margin:
+        top: 20px
+        left: 10px
+
+  .markdown-editor
+    width: 100%
+
+  input, select, textarea
+    @include flex-row(center, center)
+    font:
+      family: 'Montserrat', sans-serif
+      size: 24px
+      weight: 400
+    text-align: center
+    width: 100%
+    height: 40px
+    line-height: 40px
+    border: 1px solid #24252A
+    border-radius: 5px
+    color: #24252A
+    background-color: #F8F9FA
+
+    &.touched
+      border: 2px solid #CF1D16
+
+  textarea
+    height: 160px
+    max-width: 100%
+
+  .label
+    font:
+      family: 'Montserrat', sans-serif
+      size: 24px
+      weight: 400
+    padding:
+      left: 8px
+      bottom: 8px
+    color: #24252A
+    margin-top: 20px
+    width: 100%
+    text-align: left
+
+  .submit-btn
+    font:
+      family: 'Montserrat', sans-serif
+      size: 24px
+      weight: 400
+    cursor: pointer
+    text-align: center
+    width: 100%
+    height: 40px
+    line-height: 40px
+    border: 1px solid #24252A
+    border-radius: 5px
+    color: #24252A
+    background-color: #F8F9FA
+    margin-top: 35px
+
+    &.evaluatedInvalid
+      border: 2px solid #CF1D16
+
+    &:hover:not(.evaluatedInvalid)
+      background-color: #f0f0f0
+      color: #1f3a95
+      border: 1px solid #1f3a95
+
+  &.mobile
+    width: 100%
+
+.error-msg, .loading-msg
+  font:
+    family: 'Montserrat', sans-serif
+    size: 24px
+    weight: 400
+  line-height: 26px
+  padding:
+    left: 8px
+    top: 8px
+    bottom: 16px
+  color: #CF1D16
+  width: 100%
+  text-align: left
+
+.loading-msg
+  color: #868E90
+
+@media screen and (prefers-color-scheme: dark)
+  .form
+    .label
+      color: #C8D6E5
+
+    input, select, textarea
+      border: 1px solid #868E90
+      color: #868E90
+      background-color: #24252A
+
+    .submit-btn
+      border: 1px solid #868E90
+      color: #868E90
+      background-color: #24252a
+
+      &:hover:not(.evaluatedInvalid)
+        background-color: #44454A
+        color: #7793F1
+        border: 1px solid #7793F1
+
