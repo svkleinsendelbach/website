@@ -34,8 +34,7 @@ export class StorageFilesManagerService {
     return await lastValueFrom(ref.getDownloadURL());
   }
 
-  public async download<T>(fileName: string): Promise<T> {
-    const url = await this.getDownloadUrl(fileName);
-    return await lastValueFrom(this.http.get<T>(url));
+  public async download(url: string): Promise<string> {
+    return await (await fetch(url)).text()
   }
 }

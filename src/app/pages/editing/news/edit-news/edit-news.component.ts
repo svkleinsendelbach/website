@@ -64,8 +64,7 @@ export class EditNewsComponent implements AfterViewInit {
       this.inputFields.field('subtitle').textValue = this.news.subtitle ?? '';
       this.inputFields.field('shortDescription').textValue = this.news.shortDescription ?? '';
       this.disabledChecked = this.news.disabled;
-      this.storageFilesManager.download<string>(this.news.newsUrl).then(message => {
-        console.log(message);
+      this.storageFilesManager.download(this.news.newsUrl).then(message => {
         this.markdownText = message;
       });
     }

@@ -1,0 +1,124 @@
+@import '/src/sass/flex'
+@import '/src/sass/font'
+
+:host
+  @include flex-column(center, flex-start)
+  width: 100%
+
+.add-news
+  font:
+    family: 'Montserrat', sans-serif
+    size: 20px
+      weight: 400
+  flex: 1
+  color: #CF1D16
+  cursor: pointer
+  text-align: center
+  padding: 10px 25px
+  margin-bottom: 50px
+  background-color: #F8F9FA
+  box-shadow: 0 0 5px #aaaaaa
+  border-radius: 5px
+
+  &:hover
+    background-color: #e0e0e0
+
+.news-container
+  @include flex-row(center, center)
+  width: 95%
+  border-bottom: 1px solid #24252a80
+  background-color: #F8F9FA
+  box-shadow: 0 0 5px #aaaaaa
+  padding: 5px
+
+  &:nth-child(3)
+    border-radius: 5px 5px 0 0
+
+  &:nth-last-child(1)
+    border-radius: 0 0 5px 5px
+    border-bottom: none
+
+  &:nth-child(3):nth-last-child(1)
+    border-radius: 5px
+
+  .title-container
+    @include flex-column(center, flex-start)
+    flex: 3
+    margin-left: 5px
+
+    .title
+      font:
+        family: 'Montserrat', sans-serif
+        size: 20px
+        weight: 400
+      text-align: left
+      width: 100%
+      color: #24252a
+      white-space: nowrap
+      margin: 0
+
+    .subtitle
+      font:
+        family: 'Montserrat', sans-serif
+        size: 18px
+        weight: 300
+      text-align: left
+      width: 100%
+      color: #868E90
+      white-space: nowrap
+      margin: 0
+      margin-top: 2.5px
+
+  .edit-btn
+    font:
+      family: 'Montserrat', sans-serif
+      size: 20px
+        weight: 400
+    flex: 1
+    color: #CF1D16
+    cursor: pointer
+    text-align: center
+    padding: 10px 0
+    margin: 0
+
+    &:hover
+      background-color: #e0e0e0
+      border-radius: 5px
+
+  &.mobile
+    @include flex-column(center, flex-start)
+
+    .title-container
+      width: 100%
+      margin: 5px 0
+
+      .title, .subtitle
+        white-space: pre-wrap
+        text-align: center
+
+    .edit-btn, .delete-btn
+      width: calc(100% - 20px)
+
+@media screen and (prefers-color-scheme: dark)
+  .add-news
+    background-color: #24252a
+    box-shadow: 0 0 5px #111111
+
+    &:hover
+      background-color: #44454A
+
+  .news-container
+    border-bottom: 1px solid #868E90
+    background-color: #24252a
+    box-shadow: 0 0 5px #111111
+
+    .title-container
+      .title
+        color: #C8D6E5
+
+      .subtitle
+        color: #868E90
+
+    .edit-btn, .delete-btn
+      &:hover
+        background-color: #44454A
