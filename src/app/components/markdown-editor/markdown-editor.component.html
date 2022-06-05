@@ -1,4 +1,0 @@
-<input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
-<angular-markdown-editor class="editor" textareaId="editor1" [options]="editorOptions" [rows]="20" [(ngModel)]="markdownText" [locale]="locale"></angular-markdown-editor>
-<div class="error" *ngIf="insertImageState.state === 'error'">{{ insertImageState.message }}</div>
-<div class="file-upload" *ngIf="insertImageState.state === 'fileUpload'">Bild wird hochgeladen: {{ insertImageState.percentage }}%</div>

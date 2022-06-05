@@ -9,8 +9,10 @@ import { News } from '../shared-data/shared-news-edit.service';
 export class NewsFetcherService {
   constructor(private fns: AngularFireFunctions) {}
 
-  getNews(numberNews?: number): Promise<News[]> {
-    const callable = this.fns.httpsCallable<{ numberNews: number | undefined }, News[]>('getNews');
+  getNews(numberNews?: number): Promise<{ news: News[]; hasMore: boolean }> {
+    const callable = this.fns.httpsCallable<{ numberNews: number | undefined }, { news: News[]; hasMore: boolean }>(
+      'getNews',
+    );
     return lastValueFrom(callable({ numberNews }));
   }
 }

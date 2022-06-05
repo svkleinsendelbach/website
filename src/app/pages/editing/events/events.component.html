@@ -2,6 +2,7 @@
   <h1>Termine bearbeiten</h1>
   <p *ngIf="isStartupLoading" class="large center red top-space">Anmeldedaten werden überprüft.</p>
   <p *ngIf="!isStartupLoading" class="add-event ignore-text-style" (click)="addNewEvent(); $event.stopPropagation()">Neuen Termin hinzufügen</p>
+  <p *ngIf="!isStartupLoading && allEvents === undefined" class="large center top-space">Termine werden geladen</p>
   <span class="event-group-container" *ngFor="let eventGroup of isStartupLoading ? [] : (allEvents ?? [])" [ngClass]="deviceType.stringValue">
     <p class="group-name ignore-text-style">{{ groupDescription(eventGroup.groupId) }}</p>
     <span class="event-container" *ngFor="let event of getEventsOf(eventGroup.groupId)">

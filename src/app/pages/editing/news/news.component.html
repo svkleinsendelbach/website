@@ -2,6 +2,7 @@
   <h1>Nachrichten bearbeiten</h1>
   <p *ngIf="!authService.loggedIn" class="large center red top-space">Anmeldedaten werden überprüft.</p>
   <p *ngIf="authService.loggedIn" class="add-news ignore-text-style" (click)="addNewNews(); $event.stopPropagation()">Neue Nachricht hinzufügen</p>
+  <p *ngIf="authService.loggedIn && news === undefined" class="large center top-space">Nachrichten werden geladen</p>
   <span class="news-container" *ngFor="let news of !authService.loggedIn ? [] : (news ?? [])" [ngClass]="deviceType.stringValue">
     <span class="title-container">
       <p class="title ignore-text-style">{{ news.title }}</p>

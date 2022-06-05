@@ -16,7 +16,7 @@
     <app-toggle-switch class="switch" [(checked)]="disabledChecked"></app-toggle-switch>
   </span>
   <p class="label ignore-text-style">Nachricht:</p>
-  <app-markdown-editor class="markdown-editor" [(markdownText)]="markdownText"></app-markdown-editor>
+  <app-text-editor class="message-editor" [(htmlContent)]="messageText"></app-text-editor>
   <p *ngIf="inputFields.status === 'messageRequired'" class="error-msg ignore-text-style">Die Nachricht ist erforderlich.</p>
   <div (click)="handleAddEditNews(); $event.stopPropagation()" class="submit-btn" [ngClass]="{ evaluatedInvalid: inputFields.status !== 'valid' }">{{ editType === 'update' ? 'Speichern' : 'Hinzufügen' }}</div>
   <p *ngIf="inputFields.status === 'invalidInput' || inputFields.status === 'messageRequired'" class="error-msg ignore-text-style">Nicht alle Eingaben sind gültig.</p>

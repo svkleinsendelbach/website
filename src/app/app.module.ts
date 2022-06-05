@@ -16,13 +16,20 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaV3Module, RecaptchaFormsModule } from 'ng-recaptcha'
 import { AngularFireAuthModule } from '@angular/fire/compat/auth'
 import { AngularFireAuthGuardModule } from '@angular/fire/compat/auth-guard';
-import { AngularMarkdownEditorModule } from 'angular-markdown-editor';
-import { MarkdownModule } from 'ngx-markdown';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+
+import 'froala-editor/js/plugins.pkgd.min.js';
+import 'froala-editor/js/plugins/align.min.js';
+import 'froala-editor/js/languages/de.js';
+import 'froala-editor/js/third_party/font_awesome.min';
+import 'froala-editor/js/third_party/image_tui.min';
+import 'froala-editor/js/third_party/spell_checker.min';
+import 'froala-editor/js/third_party/embedly.min';
 
 // ##### Pipes #####
 
@@ -100,8 +107,8 @@ import { EventsComponent as Editing_Events_Component } from './pages/editing/eve
 import { EditEventComponent as Editing_Events_EditEvent_Component } from './pages/editing/events/edit-event/edit-event.component';
 import { NewsComponent as Editing_News_Component } from './pages/editing/news/news.component';
 import { EditNewsComponent as Editing_News_EditNews_Component } from './pages/editing/news/edit-news/edit-news.component';
-import { MarkdownEditorComponent } from './components/markdown-editor/markdown-editor.component';
 import { ToggleSwitchComponent } from './components/toggle-switch/toggle-switch.component';
+import { TextEditorComponent } from './components/text-editor/text-editor.component';
 
 @NgModule({
   declarations: [
@@ -155,8 +162,8 @@ import { ToggleSwitchComponent } from './components/toggle-switch/toggle-switch.
     Editing_Events_EditEvent_Component,
     Editing_News_Component,
     Editing_News_EditNews_Component,
-    MarkdownEditorComponent,
     ToggleSwitchComponent,
+    TextEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -175,10 +182,8 @@ import { ToggleSwitchComponent } from './components/toggle-switch/toggle-switch.
     ReactiveFormsModule,
     RecaptchaV3Module,
     RecaptchaFormsModule,
-    AngularMarkdownEditorModule.forRoot(),
-    MarkdownModule.forRoot({
-      loader: HttpClient
-    }),
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
   ],
   providers: [
     { provide: REGION, useValue: 'europe-west1' },

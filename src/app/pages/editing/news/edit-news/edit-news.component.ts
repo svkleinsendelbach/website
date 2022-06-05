@@ -20,7 +20,7 @@ export class EditNewsComponent implements AfterViewInit {
 
   public editType: 'add' | 'update' = 'add';
 
-  public markdownText: string = '';
+  public messageText: string = '';
 
   public disabledChecked: boolean = false;
 
@@ -65,14 +65,14 @@ export class EditNewsComponent implements AfterViewInit {
       this.inputFields.field('shortDescription').textValue = this.news.shortDescription ?? '';
       this.disabledChecked = this.news.disabled;
       this.storageFilesManager.download(this.news.newsUrl).then(message => {
-        this.markdownText = message;
+        this.messageText = message;
       });
     }
   }
 
   public handleAddEditNews() {
     const validation = this.inputFields.validationOfAllFields;
-    if (this.markdownText === '') this.inputFields.setStatus('messageRequired');
+    if (this.messageText === '') this.inputFields.setStatus('messageRequired');
     if (this.inputFields.status !== 'valid') return;
     if (validation !== 'valid') return;
     this.inputFields.setStatus('loading');
@@ -80,21 +80,26 @@ export class EditNewsComponent implements AfterViewInit {
     const newsId = this.editType === 'update' && this.news !== undefined ? this.news.id : uuid.v4();
     const date = this.editType === 'update' && this.news !== undefined ? this.news.date : new Date().toISOString();
     this.websiteEditing
-      .editNews({
-        editType: this.editType,
-        newsId: newsId,
-        title: this.inputFields.field('title').textValue,
-        subtitle: this.inputFields.field('subtitle').textValue || undefined,
-        shortDescription: this.inputFields.field('shortDescription').textValue || undefined,
-        date: date,
-        disabled: this.disabledChecked,
-      }, {
-        fileName: newsId,
-        message: this.markdownText,
-      }).then(() => {
+      .editNews(
+        {
+          editType: this.editType,
+          newsId: newsId,
+          title: this.inputFields.field('title').textValue,
+          subtitle: this.inputFields.field('subtitle').textValue || undefined,
+          shortDescription: this.inputFields.field('shortDescription').textValue || undefined,
+          date: date,
+          disabled: this.disabledChecked,
+        },
+        {
+          fileName: newsId,
+          message: this.messageText,
+        },
+      )
+      .then(() => {
         this.inputFields.setStatus('valid');
         this.router.navigateByUrl('/bearbeiten/nachrichten');
-      }).catch(error => {
+      })
+      .catch(error => {
         if ('name' in error && error.name === 'WebsiteEditingServiceError' && 'code' in error)
           this.inputFields.setStatus(error.code);
         else this.inputFields.setStatus('unknown');

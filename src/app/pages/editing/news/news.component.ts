@@ -28,7 +28,7 @@ export class NewsComponent {
     this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Nachrichten Bearbeiten');
     this.authService.checkLogInOrNavigateToLogInPage();
-    this.newsFetcher.getNews().then(n => (this.news = n));
+    this.newsFetcher.getNews().then(e => (this.news = e.news));
   }
 
   public editNews(news: News) {
