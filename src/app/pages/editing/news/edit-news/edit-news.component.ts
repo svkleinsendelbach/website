@@ -22,6 +22,8 @@ export class EditNewsComponent implements AfterViewInit {
 
   public messageText: string = '';
 
+  public thumbnailUrl?: string;
+
   public disabledChecked: boolean = false;
 
   private news: News | undefined;
@@ -34,7 +36,7 @@ export class EditNewsComponent implements AfterViewInit {
       subtitle: new InputField(),
       shortDescription: new InputField(),
     },
-    undefined as 'messageRequired' | WebsiteEditingErrorCode | 'loading' | undefined,
+    undefined as 'messageRequired' | WebsiteEditingErrorCode | 'noImageSelected' | 'loading' | undefined,
   );
 
   constructor(
@@ -45,7 +47,7 @@ export class EditNewsComponent implements AfterViewInit {
     public deviceType: DeviceTypeService,
     private storageFilesManager: StorageFilesManagerService,
     private websiteEditing: WebsiteEditingService,
-    private router: Router
+    private router: Router,
   ) {
     this.headerIntransparentService.makeIntransparent();
     this.news = this.sharedNewsEdit.news;
@@ -67,17 +69,19 @@ export class EditNewsComponent implements AfterViewInit {
       this.storageFilesManager.download(this.news.newsUrl).then(message => {
         this.messageText = message;
       });
+      this.thumbnailUrl = this.news.thumbnailUrl;
     }
   }
 
   public handleAddEditNews() {
     const validation = this.inputFields.validationOfAllFields;
     if (this.messageText === '') this.inputFields.setStatus('messageRequired');
+    if (this.thumbnailUrl === undefined) this.inputFields.setStatus('noImageSelected');
     if (this.inputFields.status !== 'valid') return;
     if (validation !== 'valid') return;
     this.inputFields.setStatus('loading');
 
-    const newsId = this.editType === 'update' && this.news !== undefined ? this.news.id : uuid.v4();
+    const newsId = this.editType === 'update' && this.news !== undefined ? this.news.id : undefined;
     const date = this.editType === 'update' && this.news !== undefined ? this.news.date : new Date().toISOString();
     this.websiteEditing
       .editNews(
@@ -89,9 +93,10 @@ export class EditNewsComponent implements AfterViewInit {
           shortDescription: this.inputFields.field('shortDescription').textValue || undefined,
           date: date,
           disabled: this.disabledChecked,
+          thumbnailUrl: this.thumbnailUrl ?? '',
         },
         {
-          fileName: newsId,
+          fileName: newsId ?? uuid.v4(),
           message: this.messageText,
         },
       )
@@ -105,5 +110,16 @@ export class EditNewsComponent implements AfterViewInit {
         else this.inputFields.setStatus('unknown');
         console.error(error);
       });
+  }
+
+  uploadThumbnail(event: Event) {
+    const file: File | undefined = (event as any)?.srcElement?.files?.[0];
+    if (file === undefined) return;
+    const fileExtension = /.[^/.]+$/.exec(file.name)?.[0];
+    const filePath = `uploads/${uuid.v4()}${fileExtension}`;
+    this.storageFilesManager
+      .upload(file, filePath)
+      .then(url => this.thumbnailUrl = url)
+      .catch(console.error);
   }
 }

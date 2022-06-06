@@ -109,6 +109,7 @@ import { NewsComponent as Editing_News_Component } from './pages/editing/news/ne
 import { EditNewsComponent as Editing_News_EditNews_Component } from './pages/editing/news/edit-news/edit-news.component';
 import { ToggleSwitchComponent } from './components/toggle-switch/toggle-switch.component';
 import { TextEditorComponent } from './components/text-editor/text-editor.component';
+import { NewsListComponent } from './components/news-list/news-list.component';
 
 @NgModule({
   declarations: [
@@ -164,6 +165,7 @@ import { TextEditorComponent } from './components/text-editor/text-editor.compon
     Editing_News_EditNews_Component,
     ToggleSwitchComponent,
     TextEditorComponent,
+    NewsListComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,41 @@
   @include flex-column(flex-start, center)
   width: 50%
 
+  .thumbnail
+    border: 1px solid #24252A
+    border-radius: 5px
+    margin-bottom: 20px
+    width: 25vw
+    height: 25vw
+    object-fit: cover
+
+  .image-selector
+    display: none
+
+  .custom-image-selector
+    @include flex-row(center, center)
+    font:
+      family: 'Montserrat', sans-serif
+      size: 24px
+      weight: 400
+    text-align: center
+    width: 100%
+    height: 40px
+    line-height: 40px
+    border: 1px solid #24252A
+    border-radius: 5px
+    color: #24252A
+    background-color: #F8F9FA
+    cursor: pointer
+
+    &:hover:not(.evaluatedInvalid)
+      background-color: #f0f0f0
+      color: #1f3a95
+      border: 1px solid #1f3a95
+
+    &.evaluatedInvalid
+      border: 2px solid #CF1D16
+
   .disabled-container
     @include flex-row(flex-start, flex-start)
     width: 100%
@@ -86,6 +121,10 @@
   &.mobile
     width: 95%
 
+    .thumbnail
+      width: 75vw
+      height: 75vw
+
 .error-msg, .loading-msg
   font:
     family: 'Montserrat', sans-serif
@@ -108,12 +147,15 @@
     .label
       color: #C8D6E5
 
+    .thumbnail
+      border: 1px solid #868E90
+
     input, select, textarea
       border: 1px solid #868E90
       color: #868E90
       background-color: #24252A
 
-    .submit-btn
+    .submit-btn, .custom-image-selector
       border: 1px solid #868E90
       color: #868E90
       background-color: #24252a
@@ -122,4 +164,3 @@
         background-color: #44454A
         color: #7793F1
         border: 1px solid #7793F1
-

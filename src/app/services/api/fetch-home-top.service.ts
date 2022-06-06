@@ -96,7 +96,7 @@ export namespace Datum {
       'November',
       'Dezember',
     ];
-    return `${datum.day}. ${monthNames[datum.month - 1]}`;
+    return `${datum.day}. ${monthNames[datum.month]}`;
   }
 
   export function description(datum: Datum): string {

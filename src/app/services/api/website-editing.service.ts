@@ -125,13 +125,14 @@ export namespace WebsiteEditingService {
 
   export interface EditNewsParams {
     editType: 'add' | 'update';
-    newsId: string;
+    newsId?: string;
     title: string;
     subtitle?: string;
     date: string;
     shortDescription?: string;
     newsUrl: string;
     disabled: boolean;
+    thumbnailUrl: string;
   }
 
 }

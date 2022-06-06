@@ -8,6 +8,7 @@ export interface News {
   shortDescription?: string;
   newsUrl: string;
   disabled: boolean;
+  thumbnailUrl: string;
 }
 
 @Injectable({
