@@ -43,7 +43,7 @@ export class TopNewsComponent {
       return [];
     }
     const itemList: NavigationItem[] = [];
-    if (this.properties[1].next !== undefined) {
+    if (this.properties[1].next !== null) {
       itemList.push({
         type: 'game',
         gameProperties: this.properties[1].next,
@@ -51,13 +51,13 @@ export class TopNewsComponent {
         team: 'firstTeam',
       });
     }
-    if (this.properties[2].next !== undefined) {
-      itemList.push({
-        type: 'game',
-        gameProperties: this.properties[2].next,
-        nextLastGame: 'next',
-        team: 'secondTeam',
-      });
+    if (this.properties[2].next !== null) {
+        itemList.push({
+            type: 'game',
+            gameProperties: this.properties[2].next,
+            nextLastGame: 'next',
+            team: 'secondTeam',
+        });
     }
     for (const a of this.properties[0]) {
       itemList.push({
@@ -66,21 +66,21 @@ export class TopNewsComponent {
         playerImage: a.image,
       });
     }
-    if (this.properties[1].last !== undefined) {
-      itemList.push({
-        type: 'game',
-        gameProperties: this.properties[1].last,
-        nextLastGame: 'last',
-        team: 'firstTeam',
-      });
+    if (this.properties[1].last !== null) {
+        itemList.push({
+            type: 'game',
+            gameProperties: this.properties[1].last,
+            nextLastGame: 'last',
+            team: 'firstTeam',
+        });
     }
-    if (this.properties[2].last !== undefined) {
-      itemList.push({
-        type: 'game',
-        gameProperties: this.properties[2].last,
-        nextLastGame: 'last',
-        team: 'secondTeam',
-      });
+    if (this.properties[2].last !== null) {
+        itemList.push({
+            type: 'game',
+            gameProperties: this.properties[2].last,
+            nextLastGame: 'last',
+            team: 'secondTeam',
+        });
     }
     return itemList;
   }

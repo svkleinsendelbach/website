@@ -28,7 +28,7 @@ export class GameViewComponent {
 
   get result(): string | null {
     if (this.gameProperties.result === undefined) {
-      return null;
+        return null;
     }
     const result =
       this.gameProperties.result.homeTeam === this.gameProperties.result.awayTeam

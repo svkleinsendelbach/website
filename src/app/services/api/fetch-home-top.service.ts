@@ -16,18 +16,18 @@ export class FetchHomeTopService {
 }
 
 export type HomeTopProperties = [
-  {
-    player: DBPlayer;
-    image?: string;
-  }[],
-  {
-    last?: TeamSpieleSpiele;
-    next?: TeamSpieleSpiele;
-  },
-  {
-    last?: TeamSpieleSpiele;
-    next?: TeamSpieleSpiele;
-  },
+    {
+        player: DBPlayer;
+        image?: string;
+    }[],
+    {
+        last: TeamSpieleSpiele | null;
+        next: TeamSpieleSpiele | null;
+    },
+    {
+        last: TeamSpieleSpiele | null;
+        next: TeamSpieleSpiele | null;
+    },
 ];
 
 export interface DBPlayer {
