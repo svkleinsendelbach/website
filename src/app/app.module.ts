@@ -57,6 +57,9 @@ import { SquadComponent as Team_Squad_Component } from './components/squad/squad
 import { PersonComponent as Team_Squad_Person_Component } from './components/squad/person/person.component';
 import { TrainingTimeComponent as Team_TrainingTime_Component } from './components/training-time/training-time.component';
 import { ResultsComponent as Team_Results_Component } from './components/results/results.component';
+import { ToggleSwitchComponent as ToggleSwitch_Component } from './components/toggle-switch/toggle-switch.component';
+import { TextEditorComponent as TextEditor_Component } from './components/text-editor/text-editor.component';
+import { NewsListComponent as NewsList_Component } from './components/news-list/news-list.component';
 
 // ##### Pages #####
 
@@ -96,6 +99,8 @@ import { GymnasticsComponent as Gymnastics_Component } from './pages/gymnastics/
 import { DancingComponent as Dancing_Component } from './pages/dancing/dancing.component';
 import { DriveComponent as Drive_Component } from './pages/drive/drive.component';
 import { ContactComponent as Contact_Component } from './pages/contact/contact.component';
+import { AllNewsComponent as AllNews_Component } from './pages/all-news/all-news.component';
+import { NewsDetailComponent as NewsDetail_Component } from './pages/news-detail/news-detail.component';
 
 // Editing pages
 import { LoginComponent as Editing_Login_Component } from './pages/editing/login/login.component';
@@ -107,9 +112,6 @@ import { EventsComponent as Editing_Events_Component } from './pages/editing/eve
 import { EditEventComponent as Editing_Events_EditEvent_Component } from './pages/editing/events/edit-event/edit-event.component';
 import { NewsComponent as Editing_News_Component } from './pages/editing/news/news.component';
 import { EditNewsComponent as Editing_News_EditNews_Component } from './pages/editing/news/edit-news/edit-news.component';
-import { ToggleSwitchComponent } from './components/toggle-switch/toggle-switch.component';
-import { TextEditorComponent } from './components/text-editor/text-editor.component';
-import { NewsListComponent } from './components/news-list/news-list.component';
 
 @NgModule({
   declarations: [
@@ -163,9 +165,11 @@ import { NewsListComponent } from './components/news-list/news-list.component';
     Editing_Events_EditEvent_Component,
     Editing_News_Component,
     Editing_News_EditNews_Component,
-    ToggleSwitchComponent,
-    TextEditorComponent,
-    NewsListComponent,
+    ToggleSwitch_Component,
+    TextEditor_Component,
+    NewsList_Component,
+    AllNews_Component,
+    NewsDetail_Component,
   ],
   imports: [
     BrowserModule,

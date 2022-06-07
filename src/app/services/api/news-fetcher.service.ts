@@ -15,4 +15,9 @@ export class NewsFetcherService {
     );
     return lastValueFrom(callable({ numberNews }));
   }
+
+  getSingleNews(id: string): Promise<News | null> {
+    const callable = this.fns.httpsCallable<{ newsId: string }, News | null>('getSingleNewsById');
+    return lastValueFrom(callable({ newsId: id }));
+  }
 }

@@ -7,12 +7,12 @@
   </span>
   <span *ngIf="FetchState.isSuccess(fetchState)" class="news-list" [ngClass]="deviceType.stringValue">
     <span *ngFor="let news of notDisabledNews(fetchState)" class="news">
-      <a href="/nachricht/{{ newsUrl(news.id) }}" title="{{ news.title }}" class="thumbnail-link">
+      <a href="/nachricht/{{ news.id }}" title="{{ news.title }}" class="thumbnail-link">
         <img src="{{ news.thumbnailUrl }}" class="thumbnail ignore-text-style">
       </a>
       <span class="container">
         <p class="date no-bottom-space dark">{{ date(news.date) }}</p>
-        <a href="/nachricht/{{ newsUrl(news.id) }}" title="{{ news.title }}" class="title no-bottom-space red inline">{{ news.title }}</a>
+        <a href="/nachricht/{{ news.id }}" title="{{ news.title }}" class="title no-bottom-space red inline">{{ news.title }}</a>
         <p *ngIf="news.subtitle !== undefined" class="subtitle no-bottom-space dark">{{ news.subtitle }}</p>
         <p *ngIf="news.shortDescription !== undefined" class="shortDescription no-bottom-space">{{ news.shortDescription }}</p>
       </span>

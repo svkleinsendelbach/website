@@ -31,6 +31,8 @@ import { PageNotFoundComponent as PageNotFound_Component } from './pages/page-no
 import { GymnasticsComponent as Gymnastics_Component } from './pages/gymnastics/gymnastics.component';
 import { DancingComponent as Dancing_Component } from './pages/dancing/dancing.component';
 import { DriveComponent as Drive_Component } from './pages/drive/drive.component';
+import { AllNewsComponent as AllNews_Component } from './pages/all-news/all-news.component';
+import { NewsDetailComponent as NewsDetail_Component } from './pages/news-detail/news-detail.component';
 
 // Editing pages
 import { ContactComponent as Contact_Component } from './pages/contact/contact.component';
@@ -65,6 +67,8 @@ const routes: Routes = [
   { path: 'anfahrt', component: Drive_Component },
   { path: 'kontakt', component: Contact_Component },
   { path: 'impressum', component: Imprint_Component },
+  { path: 'nachrichten', component: AllNews_Component },
+  { path: 'nachricht/:id', component: NewsDetail_Component },
   { path: 'bearbeiten', component: Editing_Main_Component },
   { path: 'bearbeiten/anmelden', component: Editing_Login_Component },
   { path: 'bearbeiten/termine', component: Editing_Events_Component },

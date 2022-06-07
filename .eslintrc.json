@@ -38,7 +38,8 @@
         "no-unused-vars": [
           "warn",
           { "args": "none" }
-        ]
+        ],
+        "indent": ["off", 4]
       }
     },
     {
