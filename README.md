@@ -20,11 +20,11 @@ Dieses Projekt wird genutzt, um die Webseite des `SV Kleinsendelbach e.V.` mit m
 ## Webseite bearbeiten
 
 <span style="display: flex; justify-content: center">
-  <img src="docs/assets/editWebsite_instructions_1.png" width="50%"/>
-  <img src="docs/assets/editWebsite_instructions_2.png" width="50%"/>
+  <img src="docs/assets/editWebsite_instructions_1.png" width="49%"/>
+  <img src="docs/assets/editWebsite_instructions_2.png" width="49%"/>
 </span>
 <span style="display: flex; justify-content: center">
-  <img src="docs/assets/editWebsite_instructions_3.png" width="50%"/>
+  <img src="docs/assets/editWebsite_instructions_3.png" width="49%"/>
 </span>
 
 1. Auf der Hauptseite ganz links unten auf `Bearbeiten` klicken.
@@ -32,7 +32,7 @@ Dieses Projekt wird genutzt, um die Webseite des `SV Kleinsendelbach e.V.` mit m
 3. Wenn du noch nicht berechtigt bist die Webseite zu bearbeiten, wirst du zu einer Seite weitergeleitet, auf der du den Zugriff beantragen kannst. Gebe hierfür deinen Name ein und klicke auf `Beantragen`. Es kann dann einige Tage dauern, bis du die Webseite bearbeiten kannst.
 
 <span style="display: flex; justify-content: center">
-  <img src="docs/assets/editWebsite_instructions_4.png" width="50%"/>
+  <img src="docs/assets/editWebsite_instructions_4.png" width="49%"/>
 </span>
 
 4. Du kannst einen neuen Termin hinzufügen oder einen alten bearbeiten:
@@ -41,7 +41,7 @@ Dieses Projekt wird genutzt, um die Webseite des `SV Kleinsendelbach e.V.` mit m
     - Wähle einen Datum und eine Zeit aus und klicke auf `Hinzufügen` bzw. `Speichern`.
 
 <span style="display: flex; justify-content: center;">
-  <img src="docs/assets/editWebsite_instructions_5.png" width="50%"/>
+  <img src="docs/assets/editWebsite_instructions_5.png" width="49%"/>
 </span>
 
 5. Du kannst einen neuen Artikel hinzufügen oder einen alten bearbeiten:
@@ -55,8 +55,8 @@ Dieses Projekt wird genutzt, um die Webseite des `SV Kleinsendelbach e.V.` mit m
 Die Webseite unterstützt Designs für den Desktop, das Tablet und das Smartphone und für alles auch ein dunkles Design.
 
 <span style="display: flex; justify-content: center">
-  <img src="docs/assets/home_desktop_light.png" width="50%"/>
-  <img src="docs/assets/home_desktop_dark.png" width="50%"/>
+  <img src="docs/assets/home_desktop_light.png" width="49%"/>
+  <img src="docs/assets/home_desktop_dark.png" width="49%"/>
 </span>
 <span style="display: flex; justify-content: center">
   <img src="docs/assets/home_tablet_light.png" width="45%"/>
