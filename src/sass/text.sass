@@ -1,0 +1,15 @@
+@use 'sass:map'
+
+@mixin font-roboto
+    font-family: Roboto, sans-serif
+
+$font-weight-map: ('thin': 100, 'extra-light': 200, 'light': 300, 'normal': 400, 'medium': 500, 'semi-bold': 550, 'bold': 700, 'extra-bold': 800, 'heavy': 900, 'black': 900)
+
+@mixin font-weight($weight)
+    font-weight: map.get($font-weight-map, $weight)
+
+$font-size-map: ('x-small': 0.9em, 'small': 1em, 'normal': 1.1em, 'medium': 1.25em, 'large': 1.5em, 'x-large': 1.75em, 'header': 2em, 'xl-header': 3em)
+
+@mixin font-size($size)
+    font-size: map.get($font-size-map, $size)
+

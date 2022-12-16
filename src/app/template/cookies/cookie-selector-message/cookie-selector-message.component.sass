@@ -1,0 +1,112 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  display: block
+
+#message-box
+  @include flex-column(flex-start, center)
+  width: 25vw
+  padding: 2em
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25)
+  position: absolute
+  bottom: 0
+  right: 2em
+
+  #header
+    @include font-roboto
+    @include font-weight('medium')
+    @include font-size('medium')
+    padding-bottom: 0.75em
+
+  .text
+    @include font-roboto
+    @include font-weight('light')
+    @include font-size('small')
+    padding-bottom: 0.75em
+    text-align: justify
+    line-height: 1.2
+
+  #privacy
+    @include font-roboto
+    @include font-weight('light')
+    @include font-size('small')
+    padding-bottom: 2em
+    text-decoration: underline
+    cursor: pointer
+
+  #extra-text
+    @include font-roboto
+    @include font-weight('medium')
+    @include font-size('small')
+    padding-bottom: 0.75em
+
+  #selection-buttons
+    @include flex-row(space-between, center)
+    width: 100%
+    padding-bottom: 1em
+
+    .button
+      @include font-roboto
+      @include font-weight('light')
+      @include font-size('small')
+      padding: 0.4em 0em
+      border: 0.1em solid
+      width: 30%
+      text-align: center
+      cursor: pointer
+
+      &.unchangable
+        cursor: not-allowed
+
+  #details-button
+    @include font-roboto
+    @include font-weight('light')
+    @include font-size('small')
+    padding-bottom: 0.75em
+    text-decoration: underline
+    cursor: pointer
+
+  .details-topic
+    @include font-roboto
+    @include font-weight('medium')
+    @include font-size('normal')
+    padding-bottom: 0.25em
+
+  .details-description
+    @include font-roboto
+    @include font-weight('light')
+    @include font-size('small')
+    padding-bottom: 0.75em
+    text-align: justify
+    line-height: 1.2
+
+  #confirm-buttons
+    @include flex-row(space-between, center)
+    width: 100%
+    padding-top: 0.75em
+
+    #confirm-selected, #confirm-all
+      @include font-roboto
+      @include font-weight('light')
+      @include font-size('small')
+      padding: 0.4em 0em
+      border: 0.1em solid
+      width: 45%
+      text-align: center
+      cursor: pointer
+
+  &.mobile
+    width: calc(100vw - 4em)
+    right: 0
+
+    #selection-buttons
+      @include flex-column(flex-start, center)
+
+      .button
+        width: 100%
+        margin-bottom: 0.75em
+
+@media screen and (prefers-color-scheme: dark)
+  #message-box
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.25)

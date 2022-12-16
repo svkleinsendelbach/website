@@ -1,0 +1,142 @@
+<div
+    id="message-box"
+    *ngIf="isShown"
+    [ngClass]="deviceType.className"
+    [ngStyle]="{
+        backgroundColor: styleConfig.backgroundColor.css(appearance.current)
+    }"
+>
+    <p
+        id="header"
+        [ngStyle]="{
+            color: styleConfig.primaryColor.css(appearance.current)
+        }"
+    >Cookie-Einstellungen</p>
+    <p
+        class="text"
+        [ngStyle]="{
+            color: styleConfig.textColor.css(appearance.current)
+        }"
+    >Wir verwenden Cookies, um Ihnen ein optimales Webseiten-Erlebnis zu bieten.</p>
+    <p
+        class="text"
+        [ngStyle]="{
+            color: styleConfig.textColor.css(appearance.current)
+         }"
+    >Mit der Nutzung unserer Webseite stimmen Sie der Verwendung von Cookies zu. Weitere Informationen über die Verwendung von Cookies und wie Sie Ihre Einwilligung für die Zukunft widerrufen können, finden Sie in unseren Datenschutzhinweisen.</p>
+    <a
+        id="privacy"
+        href="TODO"
+        title="Datenschutzerklärung"
+        [ngStyle]="{
+            color: styleConfig.primaryColor.css(appearance.current)
+        }"
+    >Datenschutzerklärung</a>
+    <p
+        id="extra-text"
+        [ngStyle]="{
+            color: styleConfig.primaryColor.css(appearance.current)
+        }"
+    >Welchen Cookies stimmen Sie zu?</p>
+    <div
+        id="selection-buttons"
+    >
+        <p
+            class="button unchangable"
+            [ngStyle]="{
+                color: (cookiesSelection.necessary === 'selected' ? styleConfig.backgroundColor : styleConfig.textColor).css(appearance.current),
+                'background-color': (cookiesSelection.necessary === 'selected' ? styleConfig.primaryColor : styleConfig.backgroundColor).css(appearance.current),
+                'border-color': (cookiesSelection.necessary === 'selected' ? styleConfig.primaryColor : styleConfig.textColor).css(appearance.current)
+            }"
+        >Notwendig</p>
+        <p
+            class="button"
+            [ngStyle]="{
+                color: (cookiesSelection.functionality === 'selected' ? styleConfig.backgroundColor : styleConfig.textColor).css(appearance.current),
+                'background-color': (cookiesSelection.functionality === 'selected' ? styleConfig.primaryColor : styleConfig.backgroundColor).css(appearance.current),
+                'border-color': (cookiesSelection.functionality === 'selected' ? styleConfig.primaryColor : styleConfig.textColor).css(appearance.current)
+            }"
+            (click)="handleCookieSelection(CookieType.Functionality)"
+        >Funktionalität</p>
+        <p
+            class="button"
+            [ngStyle]="{
+                color: (cookiesSelection.statistics === 'selected' ? styleConfig.backgroundColor : styleConfig.textColor).css(appearance.current),
+                'background-color': (cookiesSelection.statistics === 'selected' ? styleConfig.primaryColor : styleConfig.backgroundColor).css(appearance.current),
+                'border-color': (cookiesSelection.statistics === 'selected' ? styleConfig.primaryColor : styleConfig.textColor).css(appearance.current)
+            }"
+            (click)="handleCookieSelection(CookieType.Statistics)"
+        >Statistik</p>
+    </div>
+    <p
+        id="details-button"
+        [ngStyle]="{
+            color: styleConfig.primaryColor.css(appearance.current)
+        }"
+        (click)="handleShowDetails()"
+    >{{ detailsShown ? "Details ausblenden" : "Details zeigen" }}</p>
+    <p
+        class="details-topic"
+        *ngIf="detailsShown"
+        [ngStyle]="{
+            color: styleConfig.primaryColor.css(appearance.current)
+        }"
+    >Notwendig</p>
+    <p
+        class="details-description"
+        *ngIf="detailsShown"
+        [ngStyle]="{
+            color: styleConfig.textColor.css(appearance.current)
+        }"
+    >Diese Cookies sind für den Betrieb unserer Seite unbedingt notwendig. Sie ermöglichen beispielsweise sicherheitsrelevante Funktionalitäten, die Sprachumschaltung oder die Speicherung der von Ihnen festgelegten Cookie-Einstellungen.</p>
+    <p
+        class="details-topic"
+        *ngIf="detailsShown"
+        [ngStyle]="{
+            color: styleConfig.primaryColor.css(appearance.current)
+        }"
+    >Funktionalität</p>
+    <p
+        class="details-description"
+        *ngIf="detailsShown"
+        [ngStyle]="{
+            color: styleConfig.textColor.css(appearance.current)
+        }"
+    >Funktionale Cookies ermöglichen es, Inhalte von Dritten, wie BFV oder Google Maps, anzuzeigen.</p>
+    <p
+        class="details-topic"
+        *ngIf="detailsShown"
+        [ngStyle]="{
+            color: styleConfig.primaryColor.css(appearance.current)
+        }"
+    >Statistik</p>
+    <p
+        class="details-description"
+        *ngIf="detailsShown"
+        [ngStyle]="{
+            color: styleConfig.textColor.css(appearance.current)
+        }"
+    >Um unsere Webseite weiter zu verbessern, erfassen wir anonymisiert Daten für Statistiken und Analysen. Mit Hilfe dieser Cookies können wir beispielsweise die Anzahl der Website-Besucher und Zugriffe auf bestimmte Seiten ermitteln, um auf dieser Grundlage unsere Inhalte zu verbessern.</p>
+    <div
+        id="confirm-buttons"
+    >
+        <p
+            id="confirm-selected"
+            [ngStyle]="{
+                color: styleConfig.textColor.css(appearance.current),
+                'background-color': styleConfig.backgroundColor.css(appearance.current),
+                'border-color': styleConfig.textColor.css(appearance.current)
+            }"
+            (click)="handleConfirmSelected()"
+        >Auswahl bestätigen</p>
+        <p
+            id="confirm-all"
+            [ngStyle]="{
+                color: styleConfig.backgroundColor.css(appearance.current),
+                'background-color': styleConfig.primaryColor.css(appearance.current),
+                'border-color': styleConfig.primaryColor.css(appearance.current)
+            }"
+            (click)="handleConfirmAll()"
+        >Alle bestätigen</p>
+    </div>
+</div>
