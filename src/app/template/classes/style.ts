@@ -91,8 +91,6 @@ export namespace Style {
             }
             throw new DecodingError(`Invalid hex color: ${value}`)
         }
-
-        export const _default = Color.hex('#000000FF');
     }
 
     export class AppearanceColor {
@@ -101,19 +99,27 @@ export namespace Style {
             private readonly darkColor?: Color
         ) {}
 
+        public get light(): Color {
+          return this.lightColor
+        }
+
+        public get dark(): Color {
+          return this.darkColor ?? this.lightColor
+        }
+
+        public color(appearance: AppearanceService.Appearance): Color {
+          switch (appearance) {
+              case AppearanceService.Appearance.Light: return this.light
+              case AppearanceService.Appearance.Dark: return this.dark
+          }
+        }
+
         public css(appearance: AppearanceService.Appearance): string {
-            switch (appearance) {
-                case AppearanceService.Appearance.Light: return this.lightColor.css
-                case AppearanceService.Appearance.Dark: return (this.darkColor ?? this.lightColor).css
-            }
+            return this.color(appearance).css
         }
 
         public withAlpha(alpha: number): AppearanceColor {
             return new AppearanceColor(this.lightColor.withAlpha(alpha), this.darkColor?.withAlpha(alpha))
         }
-    }
-
-    export namespace AppearanceColor {
-        export const _default = new AppearanceColor(Color._default, Color._default);
     }
 }

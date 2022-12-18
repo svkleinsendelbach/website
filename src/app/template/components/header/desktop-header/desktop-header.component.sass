@@ -1,0 +1,43 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100vw
+
+#container
+  @include flex-row(center, space-around)
+  box-shadow: #80808080 0em 0.25em 1em
+  width: 100vw
+  position: fixed
+  top: 0
+  height: 5em
+  z-index: 1001
+
+  #logo-container
+    @include flex-row(center, center)
+    text-decoration: none
+    height: 100%
+    cursor: pointer
+
+    #logo
+      height: 3em
+      width: 3em
+
+    #logo-text
+      @include font-metrophobic
+      @include font-size('normal')
+      @include font-weight('medium')
+      margin-left: 1em
+
+  #header-items
+    @include flex-row(center, center)
+    height: 100%
+
+#background
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  z-index: 1000

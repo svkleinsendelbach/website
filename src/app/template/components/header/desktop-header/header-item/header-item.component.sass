@@ -1,0 +1,58 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  height: 100%
+
+#header-item
+  @include flex-column(flex-start, center)
+  margin: 0 1em
+  position: relative
+  width: 100%
+
+  #top-item
+    @include flex-row(center, center)
+    height: 5em
+    cursor: pointer
+    text-decoration: none
+    width: 100%
+    padding: 0 0.5em
+
+    #top-item-text
+      @include font-metrophobic
+      @include font-size('normal')
+      @include font-weight('medium')
+      line-height: 5em
+
+    .drop-down-arrow
+      margin-left: 0.5em
+
+  #sub-items
+    @include flex-column(flex-start, center)
+    position: absolute
+    top: 5em
+    z-index: 1002
+    width: max-content
+    display: none
+
+
+    .sub-item
+      @include flex-row(center, center)
+      width: 100%
+      padding: 0.5em 1em
+      cursor: pointer
+
+      .sub-item-text
+        @include font-metrophobic
+        @include font-size('normal')
+        @include font-weight('medium')
+        text-decoration: none
+
+      &:nth-last-child(1)
+        padding-bottom: 1em
+        border-radius: 0 0 0.5em 0.5em
+
+  &.expanded #sub-items
+    display: flex
+    z-index: 1003

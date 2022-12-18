@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Style } from '../../classes/style';
-import { AppearanceService } from '../../services/appearance.service';
-import { CookieService } from '../../services/cookie.service';
-import { DeviceTypeService } from '../../services/device-type.service';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Style } from '../../../classes/style';
+import { AppearanceService } from '../../../services/appearance.service';
+import { CookieService } from '../../../services/cookie.service';
+import { DeviceTypeService } from '../../../services/device-type.service';
 
 /**
  * Message box for cookie selection.
@@ -12,7 +12,7 @@ import { DeviceTypeService } from '../../services/device-type.service';
   templateUrl: './cookie-selector-message.component.html',
   styleUrls: ['./cookie-selector-message.component.sass']
 })
-export class CookieSelectorMessageComponent implements OnInit {
+export class CookieSelectorMessageComponent implements OnInit, OnDestroy {
 
   /**
    * Defines a cookie type that can be selected.
@@ -27,7 +27,7 @@ export class CookieSelectorMessageComponent implements OnInit {
   /**
    * Style configuration of this component.
    */
-  @Input() public styleConfig: CookieSelectorMessageComponent.StyleConfig = CookieSelectorMessageComponent.StyleConfig._default
+  @Input() public styleConfig!: CookieSelectorMessageComponent.StyleConfig
 
   /**
    * Contains the selected cookies.
@@ -57,6 +57,10 @@ export class CookieSelectorMessageComponent implements OnInit {
     if (cookieSelection == null) {
       this.isShown = true
     }
+  }
+
+  public ngOnDestroy() {
+    this.deviceType.listeners.remove('cookieSelectorMessage')
   }
 
   /**
@@ -114,13 +118,5 @@ export namespace CookieSelectorMessageComponent {
     backgroundColor: Style.AppearanceColor,
     primaryColor: Style.AppearanceColor,
     textColor: Style.AppearanceColor
-  }
-
-  export namespace StyleConfig {
-    export const _default: StyleConfig = {
-      backgroundColor: Style.AppearanceColor._default,
-      primaryColor: Style.AppearanceColor._default,
-      textColor: Style.AppearanceColor._default
-    }
   }
 }

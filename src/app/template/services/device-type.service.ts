@@ -45,10 +45,10 @@ export class DeviceTypeService {
   }
 
   public get isDesktop(): boolean {
-    return this.deviceType === DeviceTypeService.DeviceType.Mobile
+    return this.deviceType === DeviceTypeService.DeviceType.Desktop
   }
 
-  public get className(): string {
+  public get className(): 'mobile' | 'tablet' | 'desktop'{
     switch (this.deviceType) {
       case DeviceTypeService.DeviceType.Mobile: return "mobile"
       case DeviceTypeService.DeviceType.Tablet: return "tablet"

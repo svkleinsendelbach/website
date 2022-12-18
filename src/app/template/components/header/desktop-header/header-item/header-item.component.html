@@ -1,0 +1,89 @@
+<div
+  id="header-item"
+  [ngClass]="{
+    expanded: expandedHeaderItemId === headerItem.id
+  }"
+>
+
+  <!-- Top item without sub items -->
+  <a
+    id="top-item"
+    *ngIf="headerItem.subItems === undefined"
+    href="{{ headerItem.topItem.link.link }}"
+    target="{{ headerItem.topItem.link.target }}"
+    title="{{ headerItem.topItem.name }}"
+    (mouseenter)="handleHoverStart(headerItem.topItem)"
+    (mouseleave)="handleHoverStop(headerItem.topItem)"
+    [ngStyle]="{
+      backgroundColor: backgroundColor(headerItem.topItem).css
+    }"
+  >
+    <div
+      id="top-item-text"
+      [ngStyle]="{
+        color: textColor(headerItem.topItem).css
+      }"
+    >{{ headerItem.topItem.name }}</div>
+  </a>
+
+  <!-- Top item with sub items -->
+  <div
+    id="top-item"
+    *ngIf="headerItem.subItems !== undefined"
+    (click)="handleHeaderItemClick(); $event.stopPropagation()"
+    (mouseenter)="handleHoverStart(headerItem.topItem)"
+    (mouseleave)="handleHoverStop(headerItem.topItem)"
+    [ngStyle]="{
+      backgroundColor: backgroundColor(headerItem.topItem).css
+    }"
+  >
+    <div
+      id="top-item-text"
+      [ngStyle]="{
+        color: textColor(headerItem.topItem).css
+      }"
+    >{{ headerItem.topItem.name }}</div>
+    <fa-icon
+      *ngIf="headerItem.subItems !== undefined && expandedHeaderItemId !== headerItem.id"
+      [icon]="faCaretDown"
+      class="drop-down-arrow"
+      [ngStyle]="{
+        color: textColor(headerItem.topItem).css
+      }"
+    ></fa-icon>
+    <fa-icon
+      *ngIf="headerItem.subItems !== undefined && expandedHeaderItemId === headerItem.id"
+      [icon]="faCaretUp"
+      class="drop-down-arrow"
+      [ngStyle]="{
+        color: textColor(headerItem.topItem).css
+      }"
+    ></fa-icon>
+  </div>
+
+  <!-- Sub items -->
+  <div
+    id="sub-items"
+  >
+    <div
+      class="sub-item"
+      *ngFor="let subItem of headerItem.subItems"
+      (mouseenter)="handleHoverStart(subItem)"
+      (mouseleave)="handleHoverStop(subItem)"
+      [ngStyle]="{
+        backgroundColor: backgroundColor(subItem).css
+      }"
+    >
+      <a
+        class="sub-item-text"
+        href="{{ subItem.link.link }}"
+        target="{{ subItem.link.target }}"
+        title="{{ subItem.name }}"
+        [ngStyle]="{
+          color: textColor(subItem).css
+        }"
+      >{{ subItem.name }}</a>
+    </div>
+  </div>
+
+</div>
