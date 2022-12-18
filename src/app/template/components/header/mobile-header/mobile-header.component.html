@@ -1,0 +1,67 @@
+<div
+  id="container"
+  [ngStyle]="{
+    backgroundColor: styleConfig.backgroundColor.css(appearance.current)
+  }"
+>
+  <div
+    id="top-row"
+  >
+    <a
+      href="{{ homeLinkData.homeLink.link }}"
+      target="{{ homeLinkData.homeLink.target }}"
+      title="Startseite"
+      id="logo-container"
+    >
+      <img
+        src="{{ homeLinkData.logoSrc }}"
+        alt="{{ homeLinkData.title }}"
+        id="logo"
+      >
+      <p
+        id="logo-text"
+        [ngStyle]="{
+          color:  styleConfig.textColor.css(appearance.current)
+        }"
+      >{{ homeLinkData.title }}</p>
+    </a>
+    <fa-icon
+      class="hamburger-menu"
+      *ngIf="!isExpanded"
+      [icon]="faBars"
+      (click)="handleHamburgerMenuClick(true)"
+      [ngStyle]="{
+        color:  styleConfig.textColor.css(appearance.current)
+      }"
+    ></fa-icon>
+    <fa-icon
+      class="hamburger-menu"
+      *ngIf="isExpanded"
+      [icon]="faTimes"
+      (click)="handleHamburgerMenuClick(false)"
+      [ngStyle]="{
+        color:  styleConfig.textColor.css(appearance.current)
+      }"
+    ></fa-icon>
+  </div>
+  <div
+    id="header-items"
+    *ngIf="isExpanded"
+  >
+    <app-mobile-header-item
+      *ngFor="let headerItem of headerData"
+      [ngClass]="{
+        expanded: expandedHeaderItemId === headerItem.id
+      }"
+      [headerItem]="headerItem"
+      [expandedHeaderItemId]="expandedHeaderItemId"
+      [styleConfig]="styleConfig"
+      (clickHeaderItemIdEmitter)="handleHeaderItemClick($event)"
+    ></app-mobile-header-item>
+  </div>
+</div>
+<div
+  id="background"
+  *ngIf="isExpanded || expandedHeaderItemId !== null"
+  (click)="isExpanded = false; expandedHeaderItemId = null; $event.stopPropagation()"
+></div>

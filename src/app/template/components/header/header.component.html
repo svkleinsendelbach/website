@@ -4,8 +4,9 @@
   [homeLinkData]="homeLinkData"
   [styleConfig]="styleConfig"
 ></app-desktop-header>
-<!--app-desktop-mobile
+<app-mobile-header
   *ngIf="deviceType.isMobile"
   [headerData]="headerDataForDeviceType[deviceType.className]"
+  [homeLinkData]="homeLinkData"
   [styleConfig]="styleConfig"
-></app-desktop-mobile-->
+></app-mobile-header>

@@ -1,0 +1,56 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100vw
+
+#container
+  @include flex-column(flex-start, center)
+  width: 100vw
+  position: fixed
+  top: 0
+  height: 3em
+  z-index: 1001
+  box-shadow: #80808080 0em 0.25em 1em
+
+  #top-row
+    @include flex-row(center, center)
+    width: 100vw
+    height: 3em
+
+    #logo-container
+      @include flex-row(center, center)
+      height: 100%
+      text-decoration: none
+      cursor: pointer
+      width: calc(100% - 2em)
+
+      #logo
+        height: 2em
+        width: 2em
+
+      #logo-text
+        @include font-metrophobic
+        @include font-size('normal')
+        @include font-weight('medium')
+        margin-left: 1em
+
+    .hamburger-menu
+      cursor: pointer
+      font-size: 1.5em
+      width: 1.5em
+      margin-right: 1em
+
+  #header-items
+    @include flex-column(flex-start, center)
+    width: 100vw
+    height: 100%
+
+#background
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  z-index: 1000

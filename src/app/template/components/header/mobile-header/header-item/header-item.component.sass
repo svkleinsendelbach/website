@@ -1,0 +1,65 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+
+  &:nth-last-child(1) #header-item #top-item
+    border-radius: 0 0 0.5em 0.5em
+
+  .expanded + &
+    #header-item #top-item
+      border-radius: 0.5em 0.5em 0 0
+
+    &:nth-last-child(1) #header-item #top-item
+      border-radius: 0.5em
+
+#header-item
+  @include flex-column(flex-start, center)
+  width: 90vw
+
+  #top-item
+    @include flex-row(center, center)
+    height: 3em
+    cursor: pointer
+    text-decoration: none
+    width: 100%
+    padding: 0 0.25em
+
+    #top-item-text
+      @include font-metrophobic
+      @include font-size('normal')
+      @include font-weight('medium')
+      line-height: 3em
+
+    .drop-down-arrow
+      margin-left: 0.5em
+
+  #sub-items
+    @include flex-column(flex-start, center)
+    width: 100%
+    display: none
+    margin-bottom: 1em
+
+    .sub-item
+      @include flex-row(center, center)
+      width: 90%
+      padding: 0.5em 0
+      cursor: pointer
+
+      .sub-item-text
+        @include font-metrophobic
+        @include font-size('small')
+        @include font-weight('medium')
+        text-decoration: none
+
+      &:nth-last-child(1)
+        padding-bottom: 1em
+        border-radius: 0 0 0.5em 0.5em
+
+  &.expanded
+    #top-item
+      border-radius: 0 0 0.5em 0.5em
+
+    #sub-items
+      display: flex

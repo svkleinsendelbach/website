@@ -26,12 +26,14 @@
     >Mit der Nutzung unserer Webseite stimmen Sie der Verwendung von Cookies zu. Weitere Informationen über die Verwendung von Cookies und wie Sie Ihre Einwilligung für die Zukunft widerrufen können, finden Sie in unseren Datenschutzhinweisen.</p>
     <a
         id="privacy"
-        href="TODO"
-        title="Datenschutzerklärung"
+        *ngIf="privacyLink !== undefined"
+        href="{{ privacyLink.link }}"
+        target="{{ privacyLink.target }}"
+        title="{{ privacyLink.title }}"
         [ngStyle]="{
             color: styleConfig.primaryColor.css(appearance.current)
         }"
-    >Datenschutzerklärung</a>
+    >{{ privacyLink.title }}</a>
     <p
         id="extra-text"
         [ngStyle]="{

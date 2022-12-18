@@ -12,16 +12,14 @@
     href="{{ headerItem.topItem.link.link }}"
     target="{{ headerItem.topItem.link.target }}"
     title="{{ headerItem.topItem.link.title }}"
-    (mouseenter)="handleHoverStart(headerItem.topItem)"
-    (mouseleave)="handleHoverStop(headerItem.topItem)"
     [ngStyle]="{
-      backgroundColor: backgroundColor(headerItem.topItem).css
+      backgroundColor: styleConfig.backgroundColor.css(this.appearance.current)
     }"
   >
     <div
       id="top-item-text"
       [ngStyle]="{
-        color: textColor(headerItem.topItem).css
+        color: styleConfig.textColor.css(this.appearance.current)
       }"
     >{{ headerItem.topItem.link.title }}</div>
   </a>
@@ -31,16 +29,14 @@
     id="top-item"
     *ngIf="headerItem.subItems !== undefined"
     (click)="handleHeaderItemClick(); $event.stopPropagation()"
-    (mouseenter)="handleHoverStart(headerItem.topItem)"
-    (mouseleave)="handleHoverStop(headerItem.topItem)"
     [ngStyle]="{
-      backgroundColor: backgroundColor(headerItem.topItem).css
+      backgroundColor: styleConfig.backgroundColor.css(this.appearance.current)
     }"
   >
     <div
       id="top-item-text"
       [ngStyle]="{
-        color: textColor(headerItem.topItem).css
+        color: styleConfig.textColor.css(this.appearance.current)
       }"
     >{{ headerItem.topItem.link.title }}</div>
     <fa-icon
@@ -48,7 +44,7 @@
       [icon]="faCaretDown"
       class="drop-down-arrow"
       [ngStyle]="{
-        color: textColor(headerItem.topItem).css
+        color: styleConfig.textColor.css(this.appearance.current)
       }"
     ></fa-icon>
     <fa-icon
@@ -56,7 +52,7 @@
       [icon]="faCaretUp"
       class="drop-down-arrow"
       [ngStyle]="{
-        color: textColor(headerItem.topItem).css
+        color: styleConfig.textColor.css(this.appearance.current)
       }"
     ></fa-icon>
   </div>
@@ -68,10 +64,8 @@
     <div
       class="sub-item"
       *ngFor="let subItem of headerItem.subItems"
-      (mouseenter)="handleHoverStart(subItem)"
-      (mouseleave)="handleHoverStop(subItem)"
       [ngStyle]="{
-        backgroundColor: backgroundColor(subItem).css
+        backgroundColor: styleConfig.backgroundColor.css(this.appearance.current)
       }"
     >
       <a
@@ -80,7 +74,7 @@
         target="{{ subItem.link.target }}"
         title="{{ subItem.link.title }}"
         [ngStyle]="{
-          color: textColor(subItem).css
+          color: styleConfig.textColor.css(this.appearance.current)
         }"
       >{{ subItem.link.title }}</a>
     </div>

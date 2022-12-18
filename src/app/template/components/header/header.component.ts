@@ -23,7 +23,6 @@ export class HeaderComponent<InternalPath extends string> {
 export namespace HeaderComponent {
   export interface HeaderItemLink<InternalPath extends string> {
     id: string,
-    name: string,
     link: Link<InternalPath>
   }
 

@@ -1,4 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Link } from 'src/app/template/classes/link';
 import { Style } from '../../../classes/style';
 import { AppearanceService } from '../../../services/appearance.service';
 import { CookieService } from '../../../services/cookie.service';
@@ -12,7 +13,7 @@ import { DeviceTypeService } from '../../../services/device-type.service';
   templateUrl: './cookie-selector-message.component.html',
   styleUrls: ['./cookie-selector-message.component.sass']
 })
-export class CookieSelectorMessageComponent implements OnInit, OnDestroy {
+export class CookieSelectorMessageComponent<InternalPath extends string> implements OnInit, OnDestroy {
 
   /**
    * Defines a cookie type that can be selected.
@@ -23,6 +24,11 @@ export class CookieSelectorMessageComponent implements OnInit, OnDestroy {
    * Specifies if the cookie message is shown
    */
   @Input() public isShown = false;
+
+  /**
+   * Link to privacy page
+   */
+  @Input() public privacyLink?: Link<InternalPath>;
 
   /**
    * Style configuration of this component.
