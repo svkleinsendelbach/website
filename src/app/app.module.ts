@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MobileHeaderComponent } from './template/components/header/mobile-header/mobile-header.component';
 import { MobileHeaderItemComponent } from './template/components/header/mobile-header/header-item/header-item.component';
 import { FooterComponent } from './template/components/footer/footer.component';
+import { InputFormComponent } from './template/components/input-form/input-form.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FooterComponent } from './template/components/footer/footer.component';
     DesktopHeaderItemComponent,
     MobileHeaderComponent,
     MobileHeaderItemComponent,
-    FooterComponent
+    FooterComponent,
+    InputFormComponent
   ],
   imports: [
     BrowserModule,
