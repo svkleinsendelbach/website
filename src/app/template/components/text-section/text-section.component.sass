@@ -1,0 +1,20 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(center, center)
+  width: 100vw
+
+#text-section
+  @include flex-column(center, center)
+  width: 85%
+  margin: 3em 0
+  padding-top: 3em
+  border-top: solid 0.075em
+
+  #title
+    @include font-montserrat
+    @include font-size('header')
+    @include font-weight('medium')
+    text-align: center
+    margin-bottom: 1em

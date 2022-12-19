@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { Link } from './template/classes/link';
 import { Style } from './template/classes/style';
+import { ContactInfoComponent } from './template/components/contact-info/contact-info.component';
 import { CookieSelectorMessageComponent } from './template/components/cookies/cookie-selector-message/cookie-selector-message.component';
 import { FooterComponent } from './template/components/footer/footer.component';
 import { HeaderComponent } from './template/components/header/header.component';
@@ -258,6 +259,45 @@ export class AppComponent {
     textColor: new Style.AppearanceColor(Style.Color.hex('#333333'), Style.Color.hex('#CCCCCC'))
   }
 
+  public contactData: ContactInfoComponent.ContactItem[] = [
+    {
+      function: 'Trainer',
+      name: 'öok maa',
+      mobile: {
+        number: '',
+        text: 'po8e7 / r9087632'
+      },
+      telephone: {
+        number: '',
+        text: 'i786283 / r9087632'
+      },
+      email: 'aöldifömli'
+    },
+    {
+      function: 'alöskdfmoöi jasdlf',
+      name: 'oik mba',
+      telephone: {
+        number: '',
+        text: 'i786283 / r9087632'
+      },
+      email: 'löuiasdjfhb'
+    },
+    {
+      function: 'kionakm9',
+      name: 'oipuo z nb',
+      mobile: {
+        number: '',
+        text: 'po8e7 / r9087632'
+      }
+    }
+  ]
+
+  public contactInfoStyleConfig: ContactInfoComponent.StyleConfig = {
+    primaryColor: styleConfig.primaryColor,
+    textColor: styleConfig.textColor,
+    secondaryTextColor: styleConfig.secondaryTextColor,
+  }
+
   public constructor(
     private readonly deviceType: DeviceTypeService
   ) {}
@@ -269,6 +309,14 @@ export class AppComponent {
 
 export type InternalPath = 'home' | 'über-uns' | 'sportheim' | 'chroniken' | 'satzung' | 'datenschutz' | 'mitgliedsantrag' | 'fussball/herren' | 'fussball/herren/erste-mannschaft' | 'fussball/herren/zweite-mannschaft' | 'fussball/herren/alte-herren' |
   'fussball/jugend' | 'fussball/jugend/c-jugend' | 'fussball/jugend/e-jugend' | 'fussball/jugend/f-jugend' | 'fussball/jugend/g-jugend' | 'gymnastik' | 'tanzen' | 'anfahrt' | 'kontakt' | 'impressum' | 'bearbeiten'
+
+export const styleConfig = {
+  primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
+  backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
+  secondaryBackgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#3C4A57')),
+  textColor: new Style.AppearanceColor(Style.Color.hex('#24252A'), Style.Color.hex('#C8D6E5')),
+  secondaryTextColor: new Style.AppearanceColor(Style.Color.hex('#868E90'), Style.Color.hex('#868E90'))
+}
 
 export const allHeaderItemLinks = {
  home: {

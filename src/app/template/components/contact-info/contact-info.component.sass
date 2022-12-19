@@ -1,0 +1,52 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100%
+
+#contacts
+  @include flex-row(flex-start, center)
+  width: 100%
+  flex-wrap: wrap
+
+  .contact
+    @include flex-column(flex-start, center)
+    margin-bottom: 2em
+
+    .function
+      @include font-montserrat
+      @include font-size('large')
+      @include font-weight('normal')
+      text-align: center
+      margin-bottom: 0.5em
+
+    .name
+      @include font-montserrat
+      @include font-size('medium')
+      @include font-weight('normal')
+      text-align: center
+      margin-bottom: 0.5em
+
+    .telephone, .mobile, .email
+      @include flex-row(center, center)
+      @include font-montserrat
+      @include font-size('normal')
+      @include font-weight('small')
+      margin-bottom: 0.25em
+      text-decoration: none
+
+      .icon
+        margin-right: 0.5em
+
+    &:nth-last-child(1)
+      margin-bottom: 0
+
+  &.desktop .contact
+    width: 20%
+
+  &.tablet .contact
+    width: 33%
+
+  &.mobile .contact
+    width: 100%

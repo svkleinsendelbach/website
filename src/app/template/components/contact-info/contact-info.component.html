@@ -1,0 +1,72 @@
+<app-text-section
+  [title]="'Kontakt'"
+  [styleConfig]="styleConfig"
+>
+  <div
+    id="contacts"
+    [ngClass]="deviceType.className"
+  >
+    <div
+      class="contact"
+      *ngFor="let contact of contactData"
+    >
+      <p
+        class="function"
+        [ngStyle]="{
+          color: styleConfig.textColor.css(appearance.current)
+        }"
+      >{{ contact.function }}</p>
+      <p
+        class="name"
+        [ngStyle]="{
+          color: styleConfig.secondaryTextColor.css(appearance.current)
+        }"
+      >{{ contact.name }}</p>
+      <a
+        class="telephone"
+        *ngIf="contact.telephone !== undefined"
+        href="tel:{{ contact.telephone.number }}"
+        title="{{ contact.telephone.text }}"
+        [ngStyle]="{
+          color: styleConfig.primaryColor.css(appearance.current)
+        }"
+      >
+        <fa-icon
+          class="icon"
+          [icon]="faPhone"
+        ></fa-icon>
+        {{ contact.telephone.text }}
+      </a>
+      <a
+        class="mobile"
+        *ngIf="contact.mobile !== undefined"
+        href="tel:{{ contact.mobile.number }}"
+        title="{{ contact.mobile.text }}"
+        [ngStyle]="{
+          color: styleConfig.primaryColor.css(appearance.current)
+        }"
+      >
+        <fa-icon
+          class="icon"
+          [icon]="faMobile"
+        ></fa-icon>
+        {{ contact.mobile.text }}
+      </a>
+      <a
+        class="email"
+        *ngIf="contact.email !== undefined"
+        href="mailto:{{ contact.email }}"
+        title="{{ contact.email }}"
+        [ngStyle]="{
+          color: styleConfig.primaryColor.css(appearance.current)
+        }"
+      >
+        <fa-icon
+          class="icon"
+          [icon]="faEnvelope"
+        ></fa-icon>
+        {{ contact.email }}
+      </a>
+    </div>
+  </div>
+</app-text-section>

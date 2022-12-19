@@ -13,6 +13,8 @@ import { MobileHeaderItemComponent } from './template/components/header/mobile-h
 import { FooterComponent } from './template/components/footer/footer.component';
 import { InputFormComponent } from './template/components/input-form/input-form.component';
 import { ToggleSwitchComponent } from './template/components/toggle-switch/toggle-switch.component';
+import { ContactInfoComponent } from './template/components/contact-info/contact-info.component';
+import { TextSectionComponent } from './template/components/text-section/text-section.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { ToggleSwitchComponent } from './template/components/toggle-switch/toggl
     MobileHeaderItemComponent,
     FooterComponent,
     InputFormComponent,
-    ToggleSwitchComponent
+    ToggleSwitchComponent,
+    ContactInfoComponent,
+    TextSectionComponent
   ],
   imports: [
     BrowserModule,
