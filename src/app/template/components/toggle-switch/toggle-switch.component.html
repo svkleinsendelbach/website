@@ -1,0 +1,21 @@
+<div
+  id="container"
+>
+  <div
+    id="slider"
+    (click)="handleClick()"
+    [ngClass]="{
+      checked: checked
+    }"
+    [ngStyle]="{
+      backgroundColor: styleConfig.backgroundColor.css(appearance.current)
+    }"
+  >
+    <div
+      id="inside"
+      [ngStyle]="{
+        backgroundColor: checked ? styleConfig.primaryColor.css(appearance.current) : styleConfig.uncheckedColor.css(appearance.current)
+      }"
+    ></div>
+  </div>
+</div>

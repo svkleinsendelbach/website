@@ -4,6 +4,7 @@ import { Style } from './template/classes/style';
 import { CookieSelectorMessageComponent } from './template/components/cookies/cookie-selector-message/cookie-selector-message.component';
 import { FooterComponent } from './template/components/footer/footer.component';
 import { HeaderComponent } from './template/components/header/header.component';
+import { ToggleSwitchComponent } from './template/components/toggle-switch/toggle-switch.component';
 import { DeviceTypeService } from './template/services/device-type.service';
 
 @Component({
@@ -241,6 +242,12 @@ export class AppComponent {
     textColor: new Style.AppearanceColor(Style.Color.hex('#000000'), Style.Color.hex('#868E90')),
     contactTextColor: new Style.AppearanceColor(Style.Color.hex('#000000'), Style.Color.hex('#C8D6E5')),
     contactShadow: new Style.AppearanceColor(Style.Color.hex('#80808080'), Style.Color.hex('#1C1A17'))
+  }
+
+  public toogleStyleConfig: ToggleSwitchComponent.StyleConfig = {
+    backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
+    uncheckedColor: new Style.AppearanceColor(Style.Color.hex('#F0F0F0'), Style.Color.hex('#44454A')),
+    primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F'))
   }
 
   public privacyLink = allHeaderItemLinks.privacy.link

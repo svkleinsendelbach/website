@@ -12,6 +12,7 @@ import { MobileHeaderComponent } from './template/components/header/mobile-heade
 import { MobileHeaderItemComponent } from './template/components/header/mobile-header/header-item/header-item.component';
 import { FooterComponent } from './template/components/footer/footer.component';
 import { InputFormComponent } from './template/components/input-form/input-form.component';
+import { ToggleSwitchComponent } from './template/components/toggle-switch/toggle-switch.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { InputFormComponent } from './template/components/input-form/input-form.
     MobileHeaderComponent,
     MobileHeaderItemComponent,
     FooterComponent,
-    InputFormComponent
+    InputFormComponent,
+    ToggleSwitchComponent
   ],
   imports: [
     BrowserModule,
