@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { Link } from './template/classes/link';
 import { Style } from './template/classes/style';
 import { CookieSelectorMessageComponent } from './template/components/cookies/cookie-selector-message/cookie-selector-message.component';
+import { FooterComponent } from './template/components/footer/footer.component';
 import { HeaderComponent } from './template/components/header/header.component';
 import { DeviceTypeService } from './template/services/device-type.service';
 
@@ -197,11 +198,56 @@ export class AppComponent {
     textColor: new Style.AppearanceColor(Style.Color.hex('#000000'), Style.Color.hex('#868E90'))
   }
 
+  public footerData: FooterComponent.FooterData<InternalPath> = {
+    links: [
+      allHeaderItemLinks.drive,
+      allHeaderItemLinks.contact,
+      {
+        id: 'impressum',
+        link: Link.internal<InternalPath>('Impressum und Datenschutz', 'impressum')
+      }
+    ],
+    copyrightText: "2022 SV Kleinsendelbach e.V.",
+    editLink: Link.internal<InternalPath>('Website bearbeite', 'bearbeiten'),
+    contact: [
+      {
+        function: 'Sportheim',
+        name: 'Sportverein Kleinsendelbach',
+        street: 'Hauptstraße 21',
+        city: '91077 Kleinsendelbach',
+        telephone: {
+          number: '091268304',
+          text: '09126 / 8304'
+        }
+      },
+      {
+        function: 'Vertretungsberechtigter Vorstand',
+        name: 'Sebastian Schuldes',
+        street: 'Mühlenstraße 2',
+        city: '91077 Kleinsendelbach',
+        telephone: {
+          number: '015150405030',
+          text: '01515 / 0405030'
+        }
+      }
+    ]
+  }
+
+  public footerStyleConfig: FooterComponent.StyleConfig = {
+    backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
+    backgroundColorHover: new Style.AppearanceColor(Style.Color.hex('#F0F0F0'), Style.Color.hex('#44454A')),
+    contactBackgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#3C4A57')),
+    primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
+    textColor: new Style.AppearanceColor(Style.Color.hex('#000000'), Style.Color.hex('#868E90')),
+    contactTextColor: new Style.AppearanceColor(Style.Color.hex('#000000'), Style.Color.hex('#C8D6E5')),
+    contactShadow: new Style.AppearanceColor(Style.Color.hex('#80808080'), Style.Color.hex('#1C1A17'))
+  }
+
   public privacyLink = allHeaderItemLinks.privacy.link
 
   public cookieSelectorMessageStyleConfig: CookieSelectorMessageComponent.StyleConfig = {
-    backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#000000')),
-    primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024')),
+    backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
+    primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
     textColor: new Style.AppearanceColor(Style.Color.hex('#333333'), Style.Color.hex('#CCCCCC'))
   }
 
@@ -215,7 +261,7 @@ export class AppComponent {
 }
 
 export type InternalPath = 'home' | 'über-uns' | 'sportheim' | 'chroniken' | 'satzung' | 'datenschutz' | 'mitgliedsantrag' | 'fussball/herren' | 'fussball/herren/erste-mannschaft' | 'fussball/herren/zweite-mannschaft' | 'fussball/herren/alte-herren' |
-  'fussball/jugend' | 'fussball/jugend/c-jugend' | 'fussball/jugend/e-jugend' | 'fussball/jugend/f-jugend' | 'fussball/jugend/g-jugend' | 'gymnastik' | 'tanzen' | 'anfahrt' | 'kontakt'
+  'fussball/jugend' | 'fussball/jugend/c-jugend' | 'fussball/jugend/e-jugend' | 'fussball/jugend/f-jugend' | 'fussball/jugend/g-jugend' | 'gymnastik' | 'tanzen' | 'anfahrt' | 'kontakt' | 'impressum' | 'bearbeiten'
 
 export const allHeaderItemLinks = {
  home: {
@@ -321,5 +367,9 @@ export const allHeaderItemLinks = {
  contact: {
     id: 'contact',
     link: Link.internal<InternalPath>('Kontakt','kontakt')
+  },
+  impressum: {
+    id: 'impressum',
+    link: Link.internal<InternalPath>('Impressum', 'impressum')
   }
 }

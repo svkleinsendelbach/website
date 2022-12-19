@@ -1,0 +1,111 @@
+<div
+  id="footer"
+  [ngClass]="deviceType.className"
+  [ngStyle]="{
+    backgroundColor: styleConfig.backgroundColor.css(appearance.current)
+  }"
+>
+
+  <div
+    id="links-copyright"
+  >
+    <div
+      id="links"
+    >
+      <a
+        *ngFor="let link of footerData.links"
+        class="link"
+        href="{{ link.link.link }}"
+        title="{{ link.link.title }}"
+        (mouseenter)="handleLinkHoverStart(link)"
+        (mouseleave)="handleLinkHoverStop(link)"
+        [ngStyle]="{
+          color: hoveredLinkId === link.id ? styleConfig.primaryColor.css(appearance.current) : styleConfig.textColor.css(appearance.current),
+          backgroundColor: hoveredLinkId === link.id ? styleConfig.backgroundColorHover.css(appearance.current) : undefined
+        }"
+      >{{ link.link.title }}</a>
+    </div>
+    <p
+      id="copyright"
+      [ngStyle]="{
+        color: styleConfig.textColor.css(appearance.current)
+      }"
+    >© Copyright {{ footerData.copyrightText }}</p>
+    <a
+      *ngIf="footerData.editLink"
+      id="edit-link"
+      href="{{ footerData.editLink.link }}"
+      title="{{ footerData.editLink.title }}"
+      (mouseenter)="editButtonHovered = true"
+      (mouseleave)="editButtonHovered = false"
+      [ngStyle]="{
+        color: editButtonHovered ? styleConfig.primaryColor.css(appearance.current) : styleConfig.textColor.css(appearance.current),
+        borderColor: editButtonHovered ? styleConfig.primaryColor.css(appearance.current) : styleConfig.textColor.css(appearance.current),
+        backgroundColor: editButtonHovered ? styleConfig.backgroundColorHover.css(appearance.current) : undefined
+      }"
+    >Bearbeiten</a>
+  </div>
+
+  <div
+    class="address-card"
+    *ngFor="let contact of footerData.contact"
+  >
+    <div
+      class="top"
+      [ngStyle]="{
+        backgroundColor: styleConfig.contactBackgroundColor.css(appearance.current),
+        boxShadow: styleConfig.contactShadow.css(appearance.current) + ' 0 0 1em'
+      }"
+    >
+      <p
+        class="function"
+        [ngStyle]="{
+          color: styleConfig.contactTextColor.css(appearance.current)
+        }"
+      >{{ contact.function }}</p>
+      <p
+        class="name"
+        [ngStyle]="{
+          color: styleConfig.contactTextColor.css(appearance.current)
+        }"
+      >{{ contact.name }}</p>
+    </div>
+    <div
+      class="bottom"
+      [ngStyle]="{
+        backgroundColor: styleConfig.contactBackgroundColor.css(appearance.current),
+        boxShadow: styleConfig.contactShadow.css(appearance.current) + ' 0 0 1em'
+      }"
+    >
+      <p
+        class="street"
+        [ngStyle]="{
+          color: styleConfig.contactTextColor.css(appearance.current)
+        }"
+      >{{ contact.street }}</p>
+      <p
+        class="city"
+        [ngStyle]="{
+          color: styleConfig.contactTextColor.css(appearance.current)
+        }"
+      >{{ contact.city }}</p>
+      <a
+        class="telephone"
+        href="tel:{{ contact.telephone.number }}"
+        title="{{ contact.name }}"
+        [ngStyle]="{
+          color: styleConfig.primaryColor.css(appearance.current)
+        }"
+      >
+        <fa-icon
+          class="icon"
+          [icon]="faPhone"
+        ></fa-icon>
+        <p
+          class="number"
+        >{{ contact.telephone.text }}</p>
+      </a>
+    </div>
+  </div>
+
+</div>

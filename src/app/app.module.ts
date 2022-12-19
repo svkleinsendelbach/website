@@ -10,6 +10,7 @@ import { DesktopHeaderItemComponent } from './template/components/header/desktop
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MobileHeaderComponent } from './template/components/header/mobile-header/mobile-header.component';
 import { MobileHeaderItemComponent } from './template/components/header/mobile-header/header-item/header-item.component';
+import { FooterComponent } from './template/components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MobileHeaderItemComponent } from './template/components/header/mobile-h
     DesktopHeaderComponent,
     DesktopHeaderItemComponent,
     MobileHeaderComponent,
-    MobileHeaderItemComponent
+    MobileHeaderItemComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
