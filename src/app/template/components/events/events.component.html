@@ -1,0 +1,64 @@
+<app-text-section
+  [title]="'Kommende Termine'"
+  [styleConfig]="styleConfig"
+>
+  <p
+    *ngIf="eventGroups === undefined || eventGroups.length === 0"
+    class="text center large"
+    [ngStyle]="{
+      color: styleConfig.primaryColor.css(appearance.current)
+    }"
+  >Keine Termine</p>
+  <div
+    id="event-groups"
+    *ngFor="let eventGroup of eventGroups"
+    [ngClass]="deviceType.className"
+  >
+    <p
+      class="event-group"
+      [ngStyle]="{
+        color: styleConfig.textColor.css(appearance.current)
+      }"
+    >{{ eventGroupDescription[eventGroup.groupId] }}</p>
+    <div
+      class="event"
+      *ngFor="let event of eventGroup.events"
+      [ngStyle]="{
+        borderColor: styleConfig.textColor.css(appearance.current)
+      }"
+    >
+      <p
+        class="date"
+        [ngStyle]="{
+          color: styleConfig.secondaryTextColor.css(appearance.current)
+        }"
+      >{{ getDateDescription(event.date) }}</p>
+      <p
+        class="title"
+        [ngStyle]="{
+          color: styleConfig.textColor.css(appearance.current)
+        }"
+      >{{ event.title }}</p>
+      <p
+        class="subtitle"
+        [ngStyle]="{
+          color: styleConfig.secondaryTextColor.css(appearance.current)
+        }"
+      >{{ event.subtitle ?? '' }}</p>
+      <a
+        class="link"
+        *ngIf="event.link !== undefined"
+        href="{{ event.link }}"
+        target="_blank"
+        title="{{ event.title }}"
+        [ngStyle]="{
+          color: styleConfig.primaryColor.css(appearance.current)
+        }"
+      >Weitere Informationen</a>
+      <p
+        class="link"
+        *ngIf="event.link === undefined"
+      ></p>
+    </div>
+  </div>
+</app-text-section>

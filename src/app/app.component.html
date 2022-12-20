@@ -2,5 +2,6 @@
 <router-outlet></router-outlet>
 <div id="space"></div>
 <app-contact-info [contactData]="contactData" [styleConfig]="contactInfoStyleConfig"></app-contact-info>
+<app-events [groupIds]="['football-adults/first-team', 'football-adults/second-team']" [eventGroupDescription]="eventGroupDescription" [styleConfig]="contactInfoStyleConfig"></app-events>
 <app-footer [footerData]="footerData" [styleConfig]="footerStyleConfig"></app-footer>
 <app-cookie-selector-message [privacyLink]="privacyLink" [styleConfig]="cookieSelectorMessageStyleConfig"></app-cookie-selector-message>

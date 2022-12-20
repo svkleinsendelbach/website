@@ -298,6 +298,23 @@ export class AppComponent {
     secondaryTextColor: styleConfig.secondaryTextColor,
   }
 
+  public eventGroupDescription: {
+    [key in EventGroupId]: string
+  } = {
+    'general': 'Allgemeines',
+    'football-adults/general': 'Herrenfußball',
+    'football-adults/first-team': '1. Mannschaft',
+    'football-adults/second-team': '2. Mannschaft',
+    'football-adults/ah-team': 'Alte Herren',
+    'football-youth/general': 'Jugendfußball',
+    'football-youth/c-youth': 'C-Jugend',
+    'football-youth/e-youth': 'E-Jugend',
+    'football-youth/f-youth': 'F-Jugend',
+    'football-youth/g-youth': 'G-Jugend',
+    'gymnastics': 'Gymnastik',
+    'dancing': 'Tanzen'
+  }
+
   public constructor(
     private readonly deviceType: DeviceTypeService
   ) {}
@@ -309,6 +326,9 @@ export class AppComponent {
 
 export type InternalPath = 'home' | 'über-uns' | 'sportheim' | 'chroniken' | 'satzung' | 'datenschutz' | 'mitgliedsantrag' | 'fussball/herren' | 'fussball/herren/erste-mannschaft' | 'fussball/herren/zweite-mannschaft' | 'fussball/herren/alte-herren' |
   'fussball/jugend' | 'fussball/jugend/c-jugend' | 'fussball/jugend/e-jugend' | 'fussball/jugend/f-jugend' | 'fussball/jugend/g-jugend' | 'gymnastik' | 'tanzen' | 'anfahrt' | 'kontakt' | 'impressum' | 'bearbeiten'
+
+export type EventGroupId = | 'general' | 'football-adults/general' | 'football-adults/first-team' | 'football-adults/second-team' | 'football-adults/ah-team' | 'football-youth/general' | 'football-youth/c-youth' | 'football-youth/e-youth' |
+  'football-youth/f-youth' | 'football-youth/g-youth' | 'gymnastics' | 'dancing';
 
 export const styleConfig = {
   primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),

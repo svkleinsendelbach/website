@@ -1,0 +1,50 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100%
+
+#event-groups
+  @include flex-column(flex-start, center)
+  width: 100%
+
+  .event-group
+    @include font-montserrat
+    @include font-size('x-large')
+    @include font-weight('medium')
+    margin: 1em 0
+    width: 100%
+    text-align: left
+
+  .event
+    @include flex-row(flex-start, flex-start)
+    width: 100%
+    margin-bottom: 1em
+    padding-bottom: 1em
+    border-bottom: solid 0.05em
+
+    .date, .title, .subtitle, .link
+      @include font-montserrat
+      @include font-size('medium')
+      @include font-weight('small')
+      flex: 3
+
+    .date
+      flex: 4
+
+    .link
+      width: auto
+      padding-bottom: 0
+      text-decoration: none
+      cursor: pointer
+
+    &:nth-last-child(1)
+      border-bottom: none
+
+  &.mobile .event
+    @include flex-column(flex-start, center)
+
+    .date, .title, .subtitle, .link
+      width: 100%
+      margin-bottom: 0.25em

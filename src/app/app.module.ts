@@ -15,6 +15,17 @@ import { InputFormComponent } from './template/components/input-form/input-form.
 import { ToggleSwitchComponent } from './template/components/toggle-switch/toggle-switch.component';
 import { ContactInfoComponent } from './template/components/contact-info/contact-info.component';
 import { TextSectionComponent } from './template/components/text-section/text-section.component';
+import { environment } from '../environments/environment';
+import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
+import { EventsComponent } from './template/components/events/events.component';
+
+import { AngularFireModule } from '@angular/fire/compat'
+import { AngularFireFunctionsModule, REGION } from '@angular/fire/compat/functions'
+import { AngularFireAuthModule } from '@angular/fire/compat/auth'
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database'
+// import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
+import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics'
+import { AngularFirePerformanceModule } from '@angular/fire/compat/performance'
 
 @NgModule({
   declarations: [
@@ -29,14 +40,26 @@ import { TextSectionComponent } from './template/components/text-section/text-se
     InputFormComponent,
     ToggleSwitchComponent,
     ContactInfoComponent,
-    TextSectionComponent
+    TextSectionComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireFunctionsModule,
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+ //    AngularFirestoreModule,
+    AngularFireAnalyticsModule,
+    AngularFirePerformanceModule
   ],
-  providers: [],
+  providers: [
+    ScreenTrackingService,
+    UserTrackingService,
+    { provide: REGION, useValue: 'europe-west1' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
