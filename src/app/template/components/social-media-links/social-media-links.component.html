@@ -1,0 +1,58 @@
+<app-text-section
+  [title]="'Schauen Sie auch mal bei unseren Social-Media Kanälen vorbei!'"
+>
+  <div
+    id="link-rows"
+  >
+    <div
+      class="link-row"
+      *ngFor="let linkRow of socialMediaData"
+    >
+      <a
+        class="social-media-link"
+        *ngFor="let socialMediaLink of linkRow"
+        href="{{ socialMediaLink.link.link }}"
+        target="{{ socialMediaLink.link.target }}"
+        title="{{ socialMediaLink.link.title }}"
+        (mouseenter)="handleHoverStart(socialMediaLink)"
+        (mouseleave)="handleHoverStop(socialMediaLink)"
+        [ngStyle]="{
+          backgroundColor: hoveredItemId === socialMediaLink.id ? styleConfig.css('hoveredBackgroundColor') : undefined
+        }"
+      >
+        <fa-icon
+          *ngIf="isIcon(socialMediaLink.image)"
+          class="icon"
+          [icon]="socialMediaLink.image"
+          [ngStyle]="{
+            color: styleConfig.css('textColor')
+          }"
+        ></fa-icon>
+        <img
+          *ngIf="!isIcon(socialMediaLink.image) && appearance.current === Appearance.Light"
+          class="icon"
+          src="{{ socialMediaLink.image.lightModeSource }}"
+          title="{{ socialMediaLink.title }}"
+        >
+        <img
+        *ngIf="!isIcon(socialMediaLink.image) && appearance.current === Appearance.Dark"
+          class="icon"
+          src="{{ socialMediaLink.image.darkModeSource }}"
+          title="{{ socialMediaLink.title }}"
+        >
+        <p
+          class="title"
+          [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+          }"
+        >{{ socialMediaLink.title }}</p>
+        <p
+          class="name"
+          [ngStyle]="{
+            color: styleConfig.css('secondaryTextColor')
+          }"
+        >{{ socialMediaLink.name }}</p>
+    </a>
+    </div>
+  </div>
+</app-text-section>

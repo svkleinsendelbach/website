@@ -44,6 +44,7 @@ export namespace StyleConfigService {
     primaryColor: Style.AppearanceColor,
     backgroundColor: Style.AppearanceColor,
     secondaryBackgroundColor: Style.AppearanceColor,
+    hoveredBackgroundColor: Style.AppearanceColor,
     textColor: Style.AppearanceColor,
     secondaryTextColor: Style.AppearanceColor
   }

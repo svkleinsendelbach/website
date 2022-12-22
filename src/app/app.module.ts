@@ -28,6 +28,7 @@ import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics'
 import { AngularFirePerformanceModule, PerformanceMonitoringService } from '@angular/fire/compat/performance';
 import { NewsListComponent } from './template/components/news-list/news-list.component';
 import { HomeLinksComponent } from './template/components/home-links/home-links.component';
+import { SocialMediaLinksComponent } from './template/components/social-media-links/social-media-links.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { HomeLinksComponent } from './template/components/home-links/home-links.
     TextSectionComponent,
     EventsComponent,
     NewsListComponent,
-    HomeLinksComponent
+    HomeLinksComponent,
+    SocialMediaLinksComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faAddressBook, faFileLines, faFutbol, faMap, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faAddressCard, faBook, faChild, faHouse, faHouseFlag, faInfo, faShieldHalved, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { Link } from './template/classes/link';
@@ -7,6 +8,7 @@ import { ContactInfoComponent } from './template/components/contact-info/contact
 import { FooterComponent } from './template/components/footer/footer.component';
 import { HeaderComponent } from './template/components/header/header.component';
 import { HomeLinksComponent } from './template/components/home-links/home-links.component';
+import { SocialMediaLinksComponent } from './template/components/social-media-links/social-media-links.component';
 import { ToggleSwitchComponent } from './template/components/toggle-switch/toggle-switch.component';
 import { DeviceTypeService } from './template/services/device-type.service';
 import { StyleConfigService } from './template/services/style-config.service';
@@ -37,6 +39,20 @@ export class AppComponent {
       [allHomeLinks.tanzen],
       [allHomeLinks.anfahrt],
       [allHomeLinks.kontakt]
+    ]
+  }
+
+  public socialMediaDataForDeviceType: SocialMediaLinksComponent.SocialMediaDataForDeviceType<InternalPath> = {
+    desktop: [
+      [allSocialMediaLinks.facebook, allSocialMediaLinks.instagram, allSocialMediaLinks.sgWebiste]
+    ],
+    tablet: [
+      [allSocialMediaLinks.facebook, allSocialMediaLinks.instagram, allSocialMediaLinks.sgWebiste]
+    ],
+    mobile: [
+      [allSocialMediaLinks.facebook],
+      [allSocialMediaLinks.instagram],
+      [allSocialMediaLinks.sgWebiste]
     ]
   }
 
@@ -335,6 +351,7 @@ export class AppComponent {
       primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
       backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
       secondaryBackgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#3C4A57')),
+      hoveredBackgroundColor: new Style.AppearanceColor(Style.Color.hex('#E0E0E0'), Style.Color.hex('#44454A')),
       textColor: new Style.AppearanceColor(Style.Color.hex('#24252A'), Style.Color.hex('#C8D6E5')),
       secondaryTextColor: new Style.AppearanceColor(Style.Color.hex('#868E90'), Style.Color.hex('#868E90'))
     })
@@ -647,5 +664,36 @@ export const allHomeLinks: {
     description: 'TODO',
     icon: faPenToSquare,
     animation: 'shake'
+  }
+}
+
+export const allSocialMediaLinks: {
+  facebook: SocialMediaLinksComponent.SocialMediaItem<InternalPath>,
+  instagram: SocialMediaLinksComponent.SocialMediaItem<InternalPath>,
+  sgWebiste: SocialMediaLinksComponent.SocialMediaItem<InternalPath>
+} = {
+  facebook: {
+    id: 'facebook',
+    name: 'Facebook',
+    title: 'SV Kleinsendelbach',
+    link: Link.external('Facebook', 'https://www.facebook.com/svkleinsendelbach/', true),
+    image: faFacebookF
+  },
+  instagram: {
+    id: 'instagram',
+    name: 'Instagram',
+    title: 'SG Kleinsendelbach / Hetzles',
+    link: Link.external('Instagram', 'https://www.instagram.com/sgkleinsendelbachhetzles/', true),
+    image: faInstagram
+  },
+  sgWebiste: {
+    id: 'sgWebiste',
+    name: 'Website',
+    title: 'SG Kleinsendelbach / Hetzles',
+    link: Link.external('SG Kleinsendelbach / Hetzles', 'http://sg-kh.de', true),
+    image: {
+      lightModeSource: 'assets/images/sg-logo.png',
+      darkModeSource: 'assets/images/sg-logo-dark-appearence.png'
+    }
   }
 }
