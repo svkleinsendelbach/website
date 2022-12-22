@@ -1,6 +1,7 @@
 <app-header [headerDataForDeviceType]="headerData" [homeLinkData]="homeLinkData" [styleConfig]="headerStyleConfig"></app-header>
 <router-outlet></router-outlet>
 <div id="space"></div>
+<app-news-list [styleConfig]="contactInfoStyleConfig"></app-news-list>
 <app-contact-info [contactData]="contactData" [styleConfig]="contactInfoStyleConfig"></app-contact-info>
 <app-events [groupIds]="['football-adults/first-team', 'football-adults/second-team']" [eventGroupDescription]="eventGroupDescription" [styleConfig]="contactInfoStyleConfig"></app-events>
 <app-footer [footerData]="footerData" [styleConfig]="footerStyleConfig"></app-footer>

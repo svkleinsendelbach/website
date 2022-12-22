@@ -3,7 +3,21 @@
   [styleConfig]="styleConfig"
 >
   <p
-    *ngIf="eventGroups === undefined || eventGroups.length === 0"
+    *ngIf="FetchState.isLoading(fetchedEventGroups)"
+    class="text center large"
+    [ngStyle]="{
+      color: styleConfig.primaryColor.css(appearance.current)
+    }"
+  >Termine werden geladen</p>
+  <p
+    *ngIf="FetchState.isFailure(fetchedEventGroups)"
+    class="text center large"
+    [ngStyle]="{
+      color: styleConfig.primaryColor.css(appearance.current)
+    }"
+  >Termine konnten nicht geladen werden</p>
+  <p
+    *ngIf="FetchState.isSuccess(fetchedEventGroups) && FetchState.getContent(fetchedEventGroups).length === 0"
     class="text center large"
     [ngStyle]="{
       color: styleConfig.primaryColor.css(appearance.current)
@@ -11,7 +25,7 @@
   >Keine Termine</p>
   <div
     id="event-groups"
-    *ngFor="let eventGroup of eventGroups"
+    *ngFor="let eventGroup of FetchState.getContent(fetchedEventGroups)"
     [ngClass]="deviceType.className"
   >
     <p

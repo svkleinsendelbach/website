@@ -25,7 +25,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth'
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database'
 // import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics'
-import { AngularFirePerformanceModule } from '@angular/fire/compat/performance'
+import { AngularFirePerformanceModule } from '@angular/fire/compat/performance';
+import { NewsListComponent } from './template/components/news-list/news-list.component'
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AngularFirePerformanceModule } from '@angular/fire/compat/performance'
     ToggleSwitchComponent,
     ContactInfoComponent,
     TextSectionComponent,
-    EventsComponent
+    EventsComponent,
+    NewsListComponent
   ],
   imports: [
     BrowserModule,

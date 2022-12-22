@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FetchState } from '../../classes/fetch-state';
 import { FullDatum } from '../../classes/full-datum';
 import { Style } from '../../classes/style';
 import { AppearanceService } from '../../services/appearance.service';
@@ -11,6 +12,8 @@ import { EventFetcherService } from '../../services/event-fetcher.service';
   styleUrls: ['./events.component.sass']
 })
 export class EventsComponent<GroupId extends string> implements OnInit {
+  public FetchState = FetchState
+
   @Input() public groupIds!: GroupId[]
 
   @Input() public eventGroupDescription!: {
@@ -19,7 +22,7 @@ export class EventsComponent<GroupId extends string> implements OnInit {
 
   @Input() public styleConfig!: EventsComponent.StyleConfig
 
-  public eventGroups?: EventFetcherService.EventGroup<GroupId>[]
+  public fetchedEventGroups: FetchState<EventFetcherService.EventGroup<GroupId>[]> = FetchState.loading
 
   public constructor(
     private readonly eventFetcher: EventFetcherService<GroupId>,
@@ -30,9 +33,11 @@ export class EventsComponent<GroupId extends string> implements OnInit {
   public ngOnInit() {
     this.eventFetcher.fetchEvents(this.groupIds)
       .then(eventGroups => {
-        this.eventGroups = eventGroups
+        this.fetchedEventGroups = FetchState.success(eventGroups)
       })
-      .catch(console.error)
+      .catch(reason => {
+        this.fetchedEventGroups = FetchState.failure(reason)
+      })
   }
 
   public getDateDescription(date: string): string {

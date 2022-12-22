@@ -1,0 +1,72 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100%
+
+#all-news
+  @include flex-column(flex-start, center)
+  width: 100%
+
+  .news
+    @include flex-row(flex-start, center)
+    width: 100%
+    border-bottom: solid 0.05em
+    padding: 2em 0
+
+    .thumbnail-link
+      @include flex-row(flex-start, center)
+      width: fit-content
+      height: fit-content
+      text-decoration: none
+      cursor: pointer
+
+      .thumbnail
+        border: solid 0.05em
+        border-radius: 0.25em
+        height: 12em
+        width: 12em
+        object-fit: cover
+
+    .container
+      @include flex-column(flex-start, center)
+      width: calc(100% - 12em - 2em)
+      margin-left: 2em
+
+      .date, .title, .subtitle, .shortDescription
+        @include font-montserrat
+        @include font-weight('small')
+        text-align: left
+        width: 100%
+
+      .date
+        @include font-size('normal')
+        margin-bottom: 0.5em
+
+      .title
+        text-decoration: none
+        cursor: pointer
+        @include font-size('x-large')
+        margin-bottom: 0.75em
+
+      .subtitle
+        @include font-size('large')
+        margin-bottom: 0.5em
+
+      .shortDescription
+        @include font-size('medium')
+        text-align: justify
+
+    &:last-child
+      border-bottom: none
+
+  &.mobile .news
+    @include flex-column(flex-start, center)
+
+    .thumbnail-link
+      margin-bottom: 0.75em
+
+    .container
+      width: 100%
+      margin-left: 0
