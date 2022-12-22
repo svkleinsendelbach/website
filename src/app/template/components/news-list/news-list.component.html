@@ -1,26 +1,25 @@
 <app-text-section
   [title]="'Aktuelle Nachrichten'"
-  [styleConfig]="styleConfig"
 >
   <p
     *ngIf="FetchState.isLoading(fetchedNews)"
     class="text center large"
     [ngStyle]="{
-      color: styleConfig.primaryColor.css(appearance.current)
+      color: styleConfig.css('primaryColor')
     }"
   >Nachrichten werden geladen</p>
   <p
     *ngIf="FetchState.isFailure(fetchedNews)"
     class="text center large"
     [ngStyle]="{
-      color: styleConfig.primaryColor.css(appearance.current)
+      color: styleConfig.css('primaryColor')
     }"
   >Nachrichten konnten nicht geladen werden</p>
   <p
     *ngIf="FetchState.isSuccess(fetchedNews) && FetchState.getContent(fetchedNews).news.length === 0"
     class="text center large"
     [ngStyle]="{
-      color: styleConfig.primaryColor.css(appearance.current)
+      color: styleConfig.css('primaryColor')
     }"
   >Keine Nachrichten</p>
   <div
@@ -32,7 +31,7 @@
       class="news"
       *ngFor="let news of notDisabledNews"
       [ngStyle]="{
-        borderColor: styleConfig.textColor.css(appearance.current)
+        borderColor: styleConfig.css('textColor')
       }"
     >
       <a
@@ -44,7 +43,7 @@
           class="thumbnail"
           src="{{ news.thumbnailUrl }}"
           [ngStyle]="{
-            borderColor: styleConfig.textColor.css(appearance.current)
+            borderColor: styleConfig.css('textColor')
           }"
         >
       </a>
@@ -54,7 +53,7 @@
         <p
           class="date"
           [ngStyle]="{
-            color: styleConfig.textColor.css(appearance.current)
+            color: styleConfig.css('textColor')
           }"
         >{{ getDateDescription(news.date) }}</p>
         <a
@@ -62,21 +61,21 @@
           href="/nachricht/{{ news.id }}"
           title="{{ news.title }}"
           [ngStyle]="{
-            color: styleConfig.primaryColor.css(appearance.current)
+            color: styleConfig.css('primaryColor')
           }"
         >{{ news.title }}</a>
         <p
           class="subtitle"
           *ngIf="news.subtitle !== undefined"
           [ngStyle]="{
-            color: styleConfig.textColor.css(appearance.current)
+            color: styleConfig.css('textColor')
           }"
         >{{ news.subtitle }}</p>
         <p
           class="shortDescription"
           *ngIf="news.shortDescription !== undefined"
           [ngStyle]="{
-            color: styleConfig.secondaryTextColor.css(appearance.current)
+            color: styleConfig.css('secondaryTextColor')
           }"
         >{{ news.shortDescription }}</p>
       </div>
@@ -87,5 +86,8 @@
     href="/nachrichten"
     title="Alle Nachrichten"
     *ngIf="FetchState.isSuccess(fetchedNews) && FetchState.getContent(fetchedNews).hasMore || true"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
   >Alle Nachrichten</a>
 </app-text-section>

@@ -42,6 +42,16 @@ export namespace CookieService {
     Statistics
   }
 
+  export namespace CookieType {
+    export function selectionString(type: CookieType): 'necessary' | 'functionality' | 'statistics'{
+      switch (type) {
+        case CookieType.Necessary: return 'necessary'
+        case CookieType.Functionality: return 'functionality'
+        case CookieType.Statistics: return 'statistics'
+      }
+    }
+  }
+
   /**
    * Contains the selected cookies.
    */

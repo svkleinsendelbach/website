@@ -9,9 +9,10 @@
   width: 25vw
   padding: 2em
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25)
-  position: absolute
+  position: fixed
   bottom: 0
   right: 2em
+  z-index: 1100
 
   #header
     @include font-roboto
@@ -42,7 +43,7 @@
     padding-bottom: 0.75em
 
   #selection-buttons
-    @include flex-row(space-between, center)
+    @include flex-row(center, space-between)
     width: 100%
     padding-bottom: 1em
 
@@ -82,7 +83,7 @@
     line-height: 1.2
 
   #confirm-buttons
-    @include flex-row(space-between, center)
+    @include flex-row(center, space-between)
     width: 100%
     padding-top: 0.75em
 

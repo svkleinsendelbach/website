@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CookieSelectorMessageComponent } from './template/components/cookies/cookie-selector-message/cookie-selector-message.component';
+import { CookieSelectorMessageComponent } from './template/components/cookie-selector-message/cookie-selector-message.component';
 import { HeaderComponent } from './template/components/header/header.component';
 import { DesktopHeaderComponent } from './template/components/header/desktop-header/desktop-header.component';
 import { DesktopHeaderItemComponent } from './template/components/header/desktop-header/header-item/header-item.component';
@@ -25,8 +25,9 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth'
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database'
 // import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics'
-import { AngularFirePerformanceModule } from '@angular/fire/compat/performance';
-import { NewsListComponent } from './template/components/news-list/news-list.component'
+import { AngularFirePerformanceModule, PerformanceMonitoringService } from '@angular/fire/compat/performance';
+import { NewsListComponent } from './template/components/news-list/news-list.component';
+import { HomeLinksComponent } from './template/components/home-links/home-links.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { NewsListComponent } from './template/components/news-list/news-list.com
     ContactInfoComponent,
     TextSectionComponent,
     EventsComponent,
-    NewsListComponent
+    NewsListComponent,
+    HomeLinksComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,7 @@ import { NewsListComponent } from './template/components/news-list/news-list.com
   providers: [
     ScreenTrackingService,
     UserTrackingService,
+    PerformanceMonitoringService,
     { provide: REGION, useValue: 'europe-west1' }
   ],
   bootstrap: [AppComponent]

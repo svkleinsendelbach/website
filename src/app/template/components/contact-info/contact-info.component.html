@@ -1,6 +1,5 @@
 <app-text-section
   [title]="'Kontakt'"
-  [styleConfig]="styleConfig"
 >
   <div
     id="contacts"
@@ -13,13 +12,13 @@
       <p
         class="function"
         [ngStyle]="{
-          color: styleConfig.textColor.css(appearance.current)
+          color: styleConfig.css('textColor')
         }"
       >{{ contact.function }}</p>
       <p
         class="name"
         [ngStyle]="{
-          color: styleConfig.secondaryTextColor.css(appearance.current)
+          color: styleConfig.css('secondaryTextColor')
         }"
       >{{ contact.name }}</p>
       <a
@@ -28,7 +27,7 @@
         href="tel:{{ contact.telephone.number }}"
         title="{{ contact.telephone.text }}"
         [ngStyle]="{
-          color: styleConfig.primaryColor.css(appearance.current)
+          color: styleConfig.css('primaryColor')
         }"
       >
         <fa-icon
@@ -43,7 +42,7 @@
         href="tel:{{ contact.mobile.number }}"
         title="{{ contact.mobile.text }}"
         [ngStyle]="{
-          color: styleConfig.primaryColor.css(appearance.current)
+          color: styleConfig.css('primaryColor')
         }"
       >
         <fa-icon
@@ -58,7 +57,7 @@
         href="mailto:{{ contact.email }}"
         title="{{ contact.email }}"
         [ngStyle]="{
-          color: styleConfig.primaryColor.css(appearance.current)
+          color: styleConfig.css('primaryColor')
         }"
       >
         <fa-icon

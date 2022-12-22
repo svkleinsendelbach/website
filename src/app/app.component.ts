@@ -1,12 +1,15 @@
 import { Component, HostListener } from '@angular/core';
+import { faAddressBook, faFileLines, faFutbol, faMap, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
+import { faAddressCard, faBook, faChild, faHouse, faHouseFlag, faInfo, faShieldHalved, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { Link } from './template/classes/link';
 import { Style } from './template/classes/style';
 import { ContactInfoComponent } from './template/components/contact-info/contact-info.component';
-import { CookieSelectorMessageComponent } from './template/components/cookies/cookie-selector-message/cookie-selector-message.component';
 import { FooterComponent } from './template/components/footer/footer.component';
 import { HeaderComponent } from './template/components/header/header.component';
+import { HomeLinksComponent } from './template/components/home-links/home-links.component';
 import { ToggleSwitchComponent } from './template/components/toggle-switch/toggle-switch.component';
 import { DeviceTypeService } from './template/services/device-type.service';
+import { StyleConfigService } from './template/services/style-config.service';
 
 @Component({
   selector: 'app-root',
@@ -16,172 +19,193 @@ import { DeviceTypeService } from './template/services/device-type.service';
 export class AppComponent {
   public title = 'svkleinsendelbach-website';
 
+  public linkDataForDeviceType: HomeLinksComponent.LinkDataForDeviceType<InternalPath> = {
+    desktop: [
+      [allHomeLinks['über-uns'], allHomeLinks['fussball/herren'], allHomeLinks['fussball/jugend'], allHomeLinks.gymnastik],
+      [allHomeLinks.tanzen, allHomeLinks.anfahrt, allHomeLinks.kontakt]
+    ],
+    tablet: [
+      [allHomeLinks['über-uns'], allHomeLinks['fussball/herren']],
+      [allHomeLinks['fussball/jugend'], allHomeLinks.gymnastik, allHomeLinks.tanzen],
+      [allHomeLinks.anfahrt, allHomeLinks.kontakt]
+    ],
+    mobile: [
+      [allHomeLinks['über-uns']],
+      [allHomeLinks['fussball/herren']],
+      [allHomeLinks['fussball/jugend']],
+      [allHomeLinks.gymnastik],
+      [allHomeLinks.tanzen],
+      [allHomeLinks.anfahrt],
+      [allHomeLinks.kontakt]
+    ]
+  }
+
   public headerData: HeaderComponent.HeaderDataForDeviceType<InternalPath> = {
     desktop: [
       {
         id: 'home',
-        topItem: allHeaderItemLinks.home
+        topItem: allHeaderItemLinks['home']
       },
       {
         id: 'aboutUs',
-        topItem: allHeaderItemLinks.aboutUs,
+        topItem: allHeaderItemLinks['aboutUs'],
         subItems: [
-          allHeaderItemLinks.managers,
-          allHeaderItemLinks.sportshome,
-          allHeaderItemLinks.chronicle,
-          allHeaderItemLinks.statute,
-          allHeaderItemLinks.privacy,
-          allHeaderItemLinks.request
+          allHeaderItemLinks['managers'],
+          allHeaderItemLinks['sportshome'],
+          allHeaderItemLinks['chronicle'],
+          allHeaderItemLinks['statute'],
+          allHeaderItemLinks['privacy'],
+          allHeaderItemLinks['request']
         ]
       },
       {
         id: 'footballAdult',
-        topItem: allHeaderItemLinks.footballAdult,
+        topItem: allHeaderItemLinks['footballAdult'],
         subItems: [
-          allHeaderItemLinks.footballAdultGeneral,
-          allHeaderItemLinks.footballAdult1,
-          allHeaderItemLinks.footballAdult2,
-          allHeaderItemLinks.footballAdultAH
+          allHeaderItemLinks['footballAdultGeneral'],
+          allHeaderItemLinks['footballAdult1'],
+          allHeaderItemLinks['footballAdult2'],
+          allHeaderItemLinks['footballAdultAH']
         ]
       },
       {
         id: 'footballYouth',
-        topItem: allHeaderItemLinks.footballYouth,
+        topItem: allHeaderItemLinks['footballYouth'],
         subItems: [
-          allHeaderItemLinks.footballYouthGeneral,
-          allHeaderItemLinks.footballYouthA,
-          allHeaderItemLinks.footballYouthB,
-          allHeaderItemLinks.footballYouthC,
-          allHeaderItemLinks.footballYouthD,
-          allHeaderItemLinks.footballYouthE,
-          allHeaderItemLinks.footballYouthF,
-          allHeaderItemLinks.footballYouthG,
+          allHeaderItemLinks['footballYouthGeneral'],
+          allHeaderItemLinks['footballYouthA'],
+          allHeaderItemLinks['footballYouthB'],
+          allHeaderItemLinks['footballYouthC'],
+          allHeaderItemLinks['footballYouthD'],
+          allHeaderItemLinks['footballYouthE'],
+          allHeaderItemLinks['footballYouthF'],
+          allHeaderItemLinks['footballYouthG'],
         ]
       },
       {
         id: 'gymnastics',
-        topItem: allHeaderItemLinks.gymnastics
+        topItem: allHeaderItemLinks['gymnastics']
       },
       {
         id: 'dancing',
-        topItem: allHeaderItemLinks.dancing
+        topItem: allHeaderItemLinks['dancing']
       },
       {
         id: 'drive',
-        topItem: allHeaderItemLinks.drive
+        topItem: allHeaderItemLinks['drive']
       },
       {
         id: 'contact',
-        topItem: allHeaderItemLinks.contact
+        topItem: allHeaderItemLinks['contact']
       }
     ],
     tablet: [
       {
         id: 'home',
-        topItem: allHeaderItemLinks.home,
+        topItem: allHeaderItemLinks['home'],
         subItems: [
-          allHeaderItemLinks.home,
-          allHeaderItemLinks.drive,
-          allHeaderItemLinks.contact
+          allHeaderItemLinks['home'],
+          allHeaderItemLinks['drive'],
+          allHeaderItemLinks['contact']
         ]
       },
       {
         id: 'aboutUs',
-        topItem: allHeaderItemLinks.aboutUs,
+        topItem: allHeaderItemLinks['aboutUs'],
         subItems: [
-          allHeaderItemLinks.managers,
-          allHeaderItemLinks.sportshome,
-          allHeaderItemLinks.chronicle,
-          allHeaderItemLinks.statute,
-          allHeaderItemLinks.privacy,
-          allHeaderItemLinks.request
+          allHeaderItemLinks['managers'],
+          allHeaderItemLinks['sportshome'],
+          allHeaderItemLinks['chronicle'],
+          allHeaderItemLinks['statute'],
+          allHeaderItemLinks['privacy'],
+          allHeaderItemLinks['request']
         ]
       },
       {
         id: 'footballAdult',
-        topItem: allHeaderItemLinks.footballAdult,
+        topItem: allHeaderItemLinks['footballAdult'],
         subItems: [
-          allHeaderItemLinks.footballAdultGeneral,
-          allHeaderItemLinks.footballAdult1,
-          allHeaderItemLinks.footballAdult2,
-          allHeaderItemLinks.footballAdultAH
+          allHeaderItemLinks['footballAdultGeneral'],
+          allHeaderItemLinks['footballAdult1'],
+          allHeaderItemLinks['footballAdult2'],
+          allHeaderItemLinks['footballAdultAH']
         ]
       },
       {
         id: 'footballYouth',
-        topItem: allHeaderItemLinks.footballYouth,
+        topItem: allHeaderItemLinks['footballYouth'],
         subItems: [
-          allHeaderItemLinks.footballYouthGeneral,
-          allHeaderItemLinks.footballYouthA,
-          allHeaderItemLinks.footballYouthB,
-          allHeaderItemLinks.footballYouthC,
-          allHeaderItemLinks.footballYouthD,
-          allHeaderItemLinks.footballYouthE,
-          allHeaderItemLinks.footballYouthF,
-          allHeaderItemLinks.footballYouthG,
+          allHeaderItemLinks['footballYouthGeneral'],
+          allHeaderItemLinks['footballYouthA'],
+          allHeaderItemLinks['footballYouthB'],
+          allHeaderItemLinks['footballYouthC'],
+          allHeaderItemLinks['footballYouthD'],
+          allHeaderItemLinks['footballYouthE'],
+          allHeaderItemLinks['footballYouthF'],
+          allHeaderItemLinks['footballYouthG'],
         ]
       },
       {
         id: 'gymnastics',
-        topItem: allHeaderItemLinks.gymnastics,
+        topItem: allHeaderItemLinks['gymnastics'],
         subItems: [
-          allHeaderItemLinks.gymnastics,
-          allHeaderItemLinks.dancing
+          allHeaderItemLinks['gymnastics'],
+          allHeaderItemLinks['dancing']
         ]
       }
     ],
     mobile: [
       {
         id: 'home',
-        topItem: allHeaderItemLinks.home,
+        topItem: allHeaderItemLinks['home'],
         subItems: [
-          allHeaderItemLinks.home,
-          allHeaderItemLinks.drive,
-          allHeaderItemLinks.contact
+          allHeaderItemLinks['home'],
+          allHeaderItemLinks['drive'],
+          allHeaderItemLinks['contact']
         ]
       },
       {
         id: 'aboutUs',
-        topItem: allHeaderItemLinks.aboutUs,
+        topItem: allHeaderItemLinks['aboutUs'],
         subItems: [
-          allHeaderItemLinks.managers,
-          allHeaderItemLinks.sportshome,
-          allHeaderItemLinks.chronicle,
-          allHeaderItemLinks.statute,
-          allHeaderItemLinks.privacy,
-          allHeaderItemLinks.request
+          allHeaderItemLinks['managers'],
+          allHeaderItemLinks['sportshome'],
+          allHeaderItemLinks['chronicle'],
+          allHeaderItemLinks['statute'],
+          allHeaderItemLinks['privacy'],
+          allHeaderItemLinks['request']
         ]
       },
       {
         id: 'footballAdult',
-        topItem: allHeaderItemLinks.footballAdult,
+        topItem: allHeaderItemLinks['footballAdult'],
         subItems: [
-          allHeaderItemLinks.footballAdultGeneral,
-          allHeaderItemLinks.footballAdult1,
-          allHeaderItemLinks.footballAdult2,
-          allHeaderItemLinks.footballAdultAH
+          allHeaderItemLinks['footballAdultGeneral'],
+          allHeaderItemLinks['footballAdult1'],
+          allHeaderItemLinks['footballAdult2'],
+          allHeaderItemLinks['footballAdultAH']
         ]
       },
       {
         id: 'footballYouth',
-        topItem: allHeaderItemLinks.footballYouth,
+        topItem: allHeaderItemLinks['footballYouth'],
         subItems: [
-          allHeaderItemLinks.footballYouthGeneral,
-          allHeaderItemLinks.footballYouthA,
-          allHeaderItemLinks.footballYouthB,
-          allHeaderItemLinks.footballYouthC,
-          allHeaderItemLinks.footballYouthD,
-          allHeaderItemLinks.footballYouthE,
-          allHeaderItemLinks.footballYouthF,
-          allHeaderItemLinks.footballYouthG,
+          allHeaderItemLinks['footballYouthGeneral'],
+          allHeaderItemLinks['footballYouthA'],
+          allHeaderItemLinks['footballYouthB'],
+          allHeaderItemLinks['footballYouthC'],
+          allHeaderItemLinks['footballYouthD'],
+          allHeaderItemLinks['footballYouthE'],
+          allHeaderItemLinks['footballYouthF'],
+          allHeaderItemLinks['footballYouthG'],
         ]
       },
       {
         id: 'gymnastics',
-        topItem: allHeaderItemLinks.gymnastics,
+        topItem: allHeaderItemLinks['gymnastics'],
         subItems: [
-          allHeaderItemLinks.gymnastics,
-          allHeaderItemLinks.dancing
+          allHeaderItemLinks['gymnastics'],
+          allHeaderItemLinks['dancing']
         ]
       }
     ]
@@ -202,8 +226,8 @@ export class AppComponent {
 
   public footerData: FooterComponent.FooterData<InternalPath> = {
     links: [
-      allHeaderItemLinks.drive,
-      allHeaderItemLinks.contact,
+      allHeaderItemLinks['drive'],
+      allHeaderItemLinks['contact'],
       {
         id: 'impressum',
         link: Link.internal<InternalPath>('Impressum und Datenschutz', 'impressum')
@@ -251,13 +275,7 @@ export class AppComponent {
     primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F'))
   }
 
-  public privacyLink = allHeaderItemLinks.privacy.link
-
-  public cookieSelectorMessageStyleConfig: CookieSelectorMessageComponent.StyleConfig = {
-    backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
-    primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
-    textColor: new Style.AppearanceColor(Style.Color.hex('#333333'), Style.Color.hex('#CCCCCC'))
-  }
+  public privacyLink = allHeaderItemLinks['privacy'].link
 
   public contactData: ContactInfoComponent.ContactItem[] = [
     {
@@ -292,12 +310,6 @@ export class AppComponent {
     }
   ]
 
-  public contactInfoStyleConfig: ContactInfoComponent.StyleConfig = {
-    primaryColor: styleConfig.primaryColor,
-    textColor: styleConfig.textColor,
-    secondaryTextColor: styleConfig.secondaryTextColor,
-  }
-
   public eventGroupDescription: {
     [key in EventGroupId]: string
   } = {
@@ -316,29 +328,59 @@ export class AppComponent {
   }
 
   public constructor(
-    private readonly deviceType: DeviceTypeService
-  ) {}
+    private readonly deviceType: DeviceTypeService,
+    private readonly styleConfig: StyleConfigService
+  ) {
+    this.styleConfig.setConfig({
+      primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
+      backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
+      secondaryBackgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#3C4A57')),
+      textColor: new Style.AppearanceColor(Style.Color.hex('#24252A'), Style.Color.hex('#C8D6E5')),
+      secondaryTextColor: new Style.AppearanceColor(Style.Color.hex('#868E90'), Style.Color.hex('#868E90'))
+    })
+  }
 
   @HostListener('window:resize') onResize() {
     this.deviceType.windowResized()
   }
 }
 
+export type EventGroupId = 'general' | 'football-adults/general' | 'football-adults/first-team' | 'football-adults/second-team' | 'football-adults/ah-team' | 'football-youth/general' | 'football-youth/c-youth' | 'football-youth/e-youth' |
+  'football-youth/f-youth' | 'football-youth/g-youth' | 'gymnastics' | 'dancing';
+
 export type InternalPath = 'home' | 'über-uns' | 'sportheim' | 'chroniken' | 'satzung' | 'datenschutz' | 'mitgliedsantrag' | 'fussball/herren' | 'fussball/herren/erste-mannschaft' | 'fussball/herren/zweite-mannschaft' | 'fussball/herren/alte-herren' |
   'fussball/jugend' | 'fussball/jugend/c-jugend' | 'fussball/jugend/e-jugend' | 'fussball/jugend/f-jugend' | 'fussball/jugend/g-jugend' | 'gymnastik' | 'tanzen' | 'anfahrt' | 'kontakt' | 'impressum' | 'bearbeiten'
 
-export type EventGroupId = | 'general' | 'football-adults/general' | 'football-adults/first-team' | 'football-adults/second-team' | 'football-adults/ah-team' | 'football-youth/general' | 'football-youth/c-youth' | 'football-youth/e-youth' |
-  'football-youth/f-youth' | 'football-youth/g-youth' | 'gymnastics' | 'dancing';
+export const allInternalLinks: {
+ [key in InternalPath]: Link<InternalPath>
+} = {
+  home: Link.internal<InternalPath>('Home', 'home'),
+  'über-uns': Link.internal<InternalPath>('Über uns', 'über-uns'),
+  sportheim: Link.internal<InternalPath>('Sportheim', 'sportheim'),
+  chroniken: Link.internal<InternalPath>('Chronik', 'chroniken'),
+  satzung: Link.internal<InternalPath>('Satzung', 'satzung'),
+  datenschutz: Link.internal<InternalPath>('Datenschutz', 'datenschutz'),
+  mitgliedsantrag: Link.internal<InternalPath>('Mitgliedsantrag', 'mitgliedsantrag'),
+  'fussball/herren': Link.internal<InternalPath>('Herrenfussball', 'fussball/herren'),
+  'fussball/herren/erste-mannschaft': Link.internal<InternalPath>('1. Mannschaft', 'fussball/herren/erste-mannschaft'),
+  'fussball/herren/zweite-mannschaft': Link.internal<InternalPath>('2. Mannschaft', 'fussball/herren/zweite-mannschaft'),
+  'fussball/herren/alte-herren': Link.internal<InternalPath>('Alte Herren','fussball/herren/alte-herren'),
+  'fussball/jugend': Link.internal<InternalPath>('Jugendfussball', 'fussball/jugend'),
+  'fussball/jugend/c-jugend': Link.internal<InternalPath>('C-Jugend', 'fussball/jugend/c-jugend'),
+  'fussball/jugend/e-jugend': Link.internal<InternalPath>('E-Jugend', 'fussball/jugend/e-jugend'),
+  'fussball/jugend/f-jugend': Link.internal<InternalPath>('F-Jugend', 'fussball/jugend/f-jugend'),
+  'fussball/jugend/g-jugend': Link.internal<InternalPath>('G-Jugend', 'fussball/jugend/g-jugend'),
+  gymnastik: Link.internal<InternalPath>('Gymnastik', 'gymnastik'),
+  tanzen: Link.internal<InternalPath>('Tanzen', 'tanzen'),
+  anfahrt: Link.internal<InternalPath>('Anfahrt', 'anfahrt'),
+  kontakt: Link.internal<InternalPath>('Kontakt','kontakt'),
+  impressum: Link.internal<InternalPath>('Impressum', 'impressum'),
+  bearbeiten: Link.internal<InternalPath>('Website bearbeiten', 'bearbeiten')
+ }
 
-export const styleConfig = {
-  primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
-  backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
-  secondaryBackgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#3C4A57')),
-  textColor: new Style.AppearanceColor(Style.Color.hex('#24252A'), Style.Color.hex('#C8D6E5')),
-  secondaryTextColor: new Style.AppearanceColor(Style.Color.hex('#868E90'), Style.Color.hex('#868E90'))
-}
-
-export const allHeaderItemLinks = {
+export const allHeaderItemLinks: {
+  [key: string]: HeaderComponent.HeaderItemLink<InternalPath>
+}  = {
  home: {
     id: 'home',
     link: Link.internal<InternalPath>('Home', 'home')
@@ -446,5 +488,164 @@ export const allHeaderItemLinks = {
   impressum: {
     id: 'impressum',
     link: Link.internal<InternalPath>('Impressum', 'impressum')
+  }
+}
+
+export const allHomeLinks: {
+  [key in InternalPath]: HomeLinksComponent.LinkItem<InternalPath>
+} = {
+  home: {
+    name: 'Home',
+    link: allInternalLinks.home,
+    description: 'TODO',
+    icon: faHouse,
+    animation: 'shake'
+  },
+  'über-uns': {
+    name: 'Über uns',
+    link: allInternalLinks['über-uns'],
+    description: 'Informationen über unseren Vorstand, Sportheim, etc.',
+    icon: faInfo,
+    animation: 'jump'
+  },
+  sportheim: {
+    name: 'Sportheim',
+    link: allInternalLinks.sportheim,
+    description: 'TODO',
+    icon: faHouseFlag,
+    animation: 'shake'
+  },
+  chroniken: {
+    name: 'Chronik',
+    link: allInternalLinks.chroniken,
+    description: 'TODO',
+    icon: faBook,
+    animation: 'shake'
+  },
+  satzung: {
+    name: 'Satzung',
+    link: allInternalLinks.satzung,
+    description: 'TODO',
+    icon: faFileLines,
+    animation: 'shake'
+  },
+  datenschutz: {
+    name: 'Datenschutz',
+    link: allInternalLinks.datenschutz,
+    description: 'TODO',
+    icon: faShieldHalved,
+    animation: 'shake'
+  },
+  mitgliedsantrag: {
+    name: 'Mitgliedsantrag',
+    link: allInternalLinks.mitgliedsantrag,
+    description: 'TODO',
+    icon: faFileLines,
+    animation: 'shake'
+  },
+  'fussball/herren': {
+    name: 'Herrenfussball',
+    link: allInternalLinks['fussball/herren'],
+    description: 'Ergebnisse und Tabellen der Herrenmannschaften des SV Kleinsendelbach',
+    icon: faFutbol,
+    animation: 'rotation'
+  },
+  'fussball/herren/erste-mannschaft': {
+    name: '1. Mannschaft',
+    link: allInternalLinks['fussball/herren/erste-mannschaft'],
+    description: 'TODO',
+    icon: faFutbol,
+    animation: 'rotation'
+  },
+  'fussball/herren/zweite-mannschaft': {
+    name: '2. Mannschaft',
+    link: allInternalLinks['fussball/herren/zweite-mannschaft'],
+    description: 'TODO',
+    icon: faFutbol,
+    animation: 'rotation'
+  },
+  'fussball/herren/alte-herren': {
+    name: 'Alte Herren',
+    link: allInternalLinks['fussball/herren/alte-herren'],
+    description: 'TODO',
+    icon: faFutbol,
+    animation: 'rotation'
+  },
+  'fussball/jugend': {
+    name: 'Jugendfussball',
+    link: allInternalLinks['fussball/jugend'],
+    description: 'Ergebnisse und Tabellen der Jugendmannschaften',
+    icon: faFutbol,
+    animation: 'rotation'
+  },
+  'fussball/jugend/c-jugend': {
+    name: 'C-Jugend',
+    link: allInternalLinks['fussball/jugend/c-jugend'],
+    description: 'TODO',
+    icon: faFutbol,
+    animation: 'rotation'
+  },
+  'fussball/jugend/e-jugend': {
+    name: 'E-Jugend',
+    link: allInternalLinks['fussball/jugend/e-jugend'],
+    description: 'TODO',
+    icon: faFutbol,
+    animation: 'rotation'
+  },
+  'fussball/jugend/f-jugend': {
+    name: 'F-Jugend',
+    link: allInternalLinks['fussball/jugend/f-jugend'],
+    description: 'TODO',
+    icon: faFutbol,
+    animation: 'rotation'
+  },
+  'fussball/jugend/g-jugend': {
+    name: 'G-Jugend',
+    link: allInternalLinks['fussball/jugend/g-jugend'],
+    description: 'TODO',
+    icon: faFutbol,
+    animation: 'rotation'
+  },
+  gymnastik: {
+    name: 'Gymnastik',
+    link: allInternalLinks.gymnastik,
+    description: 'Gymnastikangebote beim SV Kleinsendelbach',
+    icon: faUserFriends,
+    animation: 'jump'
+  },
+  tanzen: {
+    name: 'Tanzen',
+    link: allInternalLinks.tanzen,
+    description: 'Tanzgruppen der Kinder',
+    icon: faChild,
+    animation: 'jump'
+  },
+  anfahrt: {
+    name: 'Anfahrt',
+    link: allInternalLinks.anfahrt,
+    description: 'Anfahrt zum Sportheim Kleinsendelbach',
+    icon: faMap,
+    animation: 'shake'
+  },
+  kontakt: {
+    name: 'Kontakt',
+    link: allInternalLinks.kontakt,
+    description: 'Kontakt zum SV Kleinsendelbach aufnehmen',
+    icon: faAddressCard,
+    animation: 'shake'
+  },
+  impressum: {
+    name: 'Impressum',
+    link: allInternalLinks.impressum,
+    description: 'TODO',
+    icon: faAddressBook,
+    animation: 'shake'
+  },
+  bearbeiten: {
+    name: 'Website bearbeiten',
+    link: allInternalLinks.bearbeiten,
+    description: 'TODO',
+    icon: faPenToSquare,
+    animation: 'shake'
   }
 }

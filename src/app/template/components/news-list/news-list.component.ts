@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FetchState } from '../../classes/fetch-state';
 import { FullDatum } from '../../classes/full-datum';
-import { Style } from '../../classes/style';
-import { AppearanceService } from '../../services/appearance.service';
 import { DeviceTypeService } from '../../services/device-type.service';
 import { NewsFetcherService } from '../../services/news-fetcher.service';
+import { StyleConfigService } from '../../services/style-config.service';
 
 @Component({
   selector: 'app-news-list',
@@ -16,13 +15,11 @@ export class NewsListComponent implements OnInit {
 
   @Input() public maxListCount?: number
 
-  @Input() public styleConfig!: NewsListComponent.StyleConfig
-
   public fetchedNews: FetchState<{ news: NewsFetcherService.News[], hasMore: boolean }> = FetchState.loading
 
   public constructor(
     private readonly newsFetcher: NewsFetcherService,
-    public readonly appearance: AppearanceService,
+    public readonly styleConfig: StyleConfigService,
     public readonly deviceType: DeviceTypeService
   ) {}
 
@@ -45,13 +42,5 @@ export class NewsListComponent implements OnInit {
 
   public getDateDescription(date: string): string {
     return FullDatum.description(FullDatum.fromDate(new Date(date)))
-  }
-}
-
-export namespace NewsListComponent {
-  export interface StyleConfig {
-    primaryColor: Style.AppearanceColor,
-    textColor: Style.AppearanceColor,
-    secondaryTextColor: Style.AppearanceColor
   }
 }

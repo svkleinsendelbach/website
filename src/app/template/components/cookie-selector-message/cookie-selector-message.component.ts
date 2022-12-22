@@ -1,9 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Link } from 'src/app/template/classes/link';
-import { Style } from '../../../classes/style';
-import { AppearanceService } from '../../../services/appearance.service';
-import { CookieService } from '../../../services/cookie.service';
-import { DeviceTypeService } from '../../../services/device-type.service';
+import { CookieService } from '../../services/cookie.service';
+import { DeviceTypeService } from '../../services/device-type.service';
+import { StyleConfigService } from '../../services/style-config.service';
 
 /**
  * Message box for cookie selection.
@@ -31,11 +30,6 @@ export class CookieSelectorMessageComponent<InternalPath extends string> impleme
   @Input() public privacyLink?: Link<InternalPath>;
 
   /**
-   * Style configuration of this component.
-   */
-  @Input() public styleConfig!: CookieSelectorMessageComponent.StyleConfig
-
-  /**
    * Contains the selected cookies.
    */
   public cookiesSelection: CookieService.CookiesSelection = {
@@ -51,7 +45,7 @@ export class CookieSelectorMessageComponent<InternalPath extends string> impleme
 
   public constructor(
     public readonly cookieService: CookieService,
-    public readonly appearance: AppearanceService,
+    public readonly styleConfig: StyleConfigService,
     public readonly deviceType: DeviceTypeService
   ) {}
 
@@ -113,16 +107,15 @@ export class CookieSelectorMessageComponent<InternalPath extends string> impleme
     }
     this.handleConfirmSelected();
   }
-}
 
-export namespace CookieSelectorMessageComponent {
-
-  /**
-   * Style configuration of this component.
-   */
-  export interface StyleConfig {
-    backgroundColor: Style.AppearanceColor,
-    primaryColor: Style.AppearanceColor,
-    textColor: Style.AppearanceColor
+  public selectionButtonStyle(type: CookieService.CookieType): {
+    [key: string]: string | undefined
+  } {
+    const isSelected = this.cookiesSelection[CookieService.CookieType.selectionString(type)] === 'selected'
+    return {
+      color: this.styleConfig.css(isSelected ? 'backgroundColor' : 'textColor'),
+      'background-color': this.styleConfig.css(isSelected ? 'primaryColor' : 'backgroundColor'),
+      'border-color': this.styleConfig.css(isSelected ? 'primaryColor' : 'textColor')
+    }
   }
 }

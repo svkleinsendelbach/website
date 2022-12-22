@@ -1,26 +1,25 @@
 <app-text-section
   [title]="'Kommende Termine'"
-  [styleConfig]="styleConfig"
 >
   <p
     *ngIf="FetchState.isLoading(fetchedEventGroups)"
     class="text center large"
     [ngStyle]="{
-      color: styleConfig.primaryColor.css(appearance.current)
+      color: styleConfig.css('primaryColor')
     }"
   >Termine werden geladen</p>
   <p
     *ngIf="FetchState.isFailure(fetchedEventGroups)"
     class="text center large"
     [ngStyle]="{
-      color: styleConfig.primaryColor.css(appearance.current)
+      color: styleConfig.css('primaryColor')
     }"
   >Termine konnten nicht geladen werden</p>
   <p
     *ngIf="FetchState.isSuccess(fetchedEventGroups) && FetchState.getContent(fetchedEventGroups).length === 0"
     class="text center large"
     [ngStyle]="{
-      color: styleConfig.primaryColor.css(appearance.current)
+      color: styleConfig.css('primaryColor')
     }"
   >Keine Termine</p>
   <div
@@ -31,32 +30,32 @@
     <p
       class="event-group"
       [ngStyle]="{
-        color: styleConfig.textColor.css(appearance.current)
+        color: styleConfig.css('textColor')
       }"
     >{{ eventGroupDescription[eventGroup.groupId] }}</p>
     <div
       class="event"
       *ngFor="let event of eventGroup.events"
       [ngStyle]="{
-        borderColor: styleConfig.textColor.css(appearance.current)
+        borderColor: styleConfig.css('textColor')
       }"
     >
       <p
         class="date"
         [ngStyle]="{
-          color: styleConfig.secondaryTextColor.css(appearance.current)
+          color: styleConfig.css('secondaryTextColor')
         }"
       >{{ getDateDescription(event.date) }}</p>
       <p
         class="title"
         [ngStyle]="{
-          color: styleConfig.textColor.css(appearance.current)
+          color: styleConfig.css('textColor')
         }"
       >{{ event.title }}</p>
       <p
         class="subtitle"
         [ngStyle]="{
-          color: styleConfig.secondaryTextColor.css(appearance.current)
+          color: styleConfig.css('secondaryTextColor')
         }"
       >{{ event.subtitle ?? '' }}</p>
       <a
@@ -66,7 +65,7 @@
         target="_blank"
         title="{{ event.title }}"
         [ngStyle]="{
-          color: styleConfig.primaryColor.css(appearance.current)
+          color: styleConfig.css('primaryColor')
         }"
       >Weitere Informationen</a>
       <p

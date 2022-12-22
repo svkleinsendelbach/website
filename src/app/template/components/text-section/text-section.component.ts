@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Style } from '../../classes/style';
-import { AppearanceService } from '../../services/appearance.service';
+import { StyleConfigService } from '../../services/style-config.service';
 
 @Component({
   selector: 'app-text-section',
@@ -10,15 +9,7 @@ import { AppearanceService } from '../../services/appearance.service';
 export class TextSectionComponent {
   @Input() title?: string
 
-  @Input() public styleConfig!: TextSectionComponent.StyleConfig
-
   public constructor(
-    public readonly appearance: AppearanceService
+    public readonly styleConfig: StyleConfigService
   ) {}
-}
-
-export namespace TextSectionComponent {
-  export interface StyleConfig {
-    textColor: Style.AppearanceColor
-  }
 }

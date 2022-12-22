@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Style } from '../../classes/style';
-import { AppearanceService } from '../../services/appearance.service';
 import { DeviceTypeService } from '../../services/device-type.service';
 import { faPhone, faMobile, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { StyleConfigService } from '../../services/style-config.service';
 
 @Component({
   selector: 'app-contact-info',
@@ -16,10 +15,8 @@ export class ContactInfoComponent {
 
   @Input() public contactData!: ContactInfoComponent.ContactItem[]
 
-  @Input() public styleConfig!: ContactInfoComponent.StyleConfig
-
   public constructor(
-    public readonly appearance: AppearanceService,
+    public readonly styleConfig: StyleConfigService,
     public readonly deviceType: DeviceTypeService
   ) {}
 }
@@ -37,11 +34,5 @@ export namespace ContactInfoComponent {
       text: string
     },
     email?: string
-  }
-
-  export interface StyleConfig {
-    primaryColor: Style.AppearanceColor,
-    textColor: Style.AppearanceColor,
-    secondaryTextColor: Style.AppearanceColor
   }
 }
