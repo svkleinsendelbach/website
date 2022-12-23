@@ -23,7 +23,7 @@ export class Link<InternalPath extends string>{
   }
 
   public get target(): '_self' | '_blank' {
-    return ('openInNewTab' in this.value ? this.value.openInNewTab : false) ? '_self' : '_blank'
+    return ('openInNewTab' in this.value ? this.value.openInNewTab : false) ? '_blank' : '_self'
   }
 }
 

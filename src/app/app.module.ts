@@ -32,6 +32,7 @@ import { SocialMediaLinksComponent } from './template/components/social-media-li
 import { HomeBannerComponent } from './template/components/home-banner/home-banner.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { ImprintComponent } from './pages/imprint/imprint.component';
+import { PrivacyComponent } from './pages/about-us/privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ImprintComponent } from './pages/imprint/imprint.component';
     SocialMediaLinksComponent,
     HomeBannerComponent,
     PageNotFoundComponent,
-    ImprintComponent
+    ImprintComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,
