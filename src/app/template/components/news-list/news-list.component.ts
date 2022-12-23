@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FetchState } from '../../classes/fetch-state';
-import { FullDatum } from '../../classes/full-datum';
+import { Datum } from '../../classes/full-datum';
 import { DeviceTypeService } from '../../services/device-type.service';
 import { NewsFetcherService } from '../../services/news-fetcher.service';
 import { StyleConfigService } from '../../services/style-config.service';
@@ -41,6 +41,6 @@ export class NewsListComponent implements OnInit {
   }
 
   public getDateDescription(date: string): string {
-    return FullDatum.description(FullDatum.fromDate(new Date(date)))
+    return Datum.description(Datum.fromDate(new Date(date)))
   }
 }

@@ -85,7 +85,7 @@
     id="view-all-news"
     href="/nachrichten"
     title="Alle Nachrichten"
-    *ngIf="FetchState.isSuccess(fetchedNews) && FetchState.getContent(fetchedNews).hasMore || true"
+    *ngIf="FetchState.isSuccess(fetchedNews) && FetchState.getContent(fetchedNews).hasMore"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
     }"

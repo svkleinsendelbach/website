@@ -7,6 +7,7 @@ import { Style } from './template/classes/style';
 import { ContactInfoComponent } from './template/components/contact-info/contact-info.component';
 import { FooterComponent } from './template/components/footer/footer.component';
 import { HeaderComponent } from './template/components/header/header.component';
+import { HomeBannerComponent } from './template/components/home-banner/home-banner.component';
 import { HomeLinksComponent } from './template/components/home-links/home-links.component';
 import { SocialMediaLinksComponent } from './template/components/social-media-links/social-media-links.component';
 import { ToggleSwitchComponent } from './template/components/toggle-switch/toggle-switch.component';
@@ -323,6 +324,21 @@ export class AppComponent {
         number: '',
         text: 'po8e7 / r9087632'
       }
+    }
+  ]
+
+  public bannerData: HomeBannerComponent.BannerItem[] = [
+    {
+      imageSource: 'https://charts.comdirect.de/charts/rebrush/design_small.ewf.chart?DENSITY=2&ID_NOTATION=14477108&TIME_SPAN=1D&TYPE=MOUNTAIN&WITH_EARNINGS=1&HEIGHT=191&WIDTH=348',
+      title: 'asdf'
+    },
+    {
+      imageSource: 'https://kleinsendelbach.feuerwehren.bayern/media/filer_public_thumbnails/filer_public/e8/05/e805a6f1-2239-41f4-8201-323e71194811/fahrzeug_startseite.jpg__1300x400_q85_crop_subject_location_subsampling-2_upscale.jpg',
+      title: 'ioujkenr'
+    },
+    {
+      imageSource: 'https://cyprusview.com/image/estate-large/y/d/ydxcx.jpg',
+      title: 'lioqw45u'
     }
   ]
 
