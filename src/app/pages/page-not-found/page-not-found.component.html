@@ -1,0 +1,41 @@
+<app-text-section
+  [title]="'Diese Seite ist leider nicht verfügbar'"
+>
+  <p
+    class="text center"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Entweder funktioniert der von Ihnen angeklickte Link nicht oder die Seite wurde entfernt.</p>
+  <p
+    class="text center margin-top-normal"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Ist dies der Fall, schreiben Sie uns dies bitte an folgende E-Mail Adresse: <a
+    class="text small"
+    href="mailto:vorstand@sv-kleinsendelbach.de"
+    title="vorstand@sv-kleinsendelbach.de"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >vorstand@sv-kleinsendelbach.de</a></p>
+  <div
+    id="image-link"
+  >
+    <img
+      id="image"
+      src="assets/images/svk-logo.png"
+      title="SV Kleinsendelbach"
+    >
+    <a
+      id="link"
+      href="/home"
+      title="Startseite"
+      [ngStyle]="{
+        color: styleConfig.css('primaryColor')
+      }"
+    >Zur Startseite</a>
+  </div>
+</app-text-section>
+7=-

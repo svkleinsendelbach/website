@@ -22,11 +22,27 @@
   ::ng-deep .text
     @include font-montserrat
     @include font-size('medium')
-    @include font-weight('medium')
+    @include font-weight('normal')
 
     &.center
       text-align: center
 
+    &.small
+      @include font-size('small')
+
     &.large
       @include font-size('large')
       padding-bottom: 2em
+
+    &.margin-top-small
+      margin-top: 0.5em
+
+    &.margin-top-normal
+      margin-top: 1em
+
+    &.margin-top-large
+      margin-top: 2em
+
+    &:is(a)
+      text-decoration: none
+      cursor: pointer

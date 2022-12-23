@@ -20,6 +20,8 @@ import { StyleConfigService } from './template/services/style-config.service';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
+  public DeviceType = DeviceTypeService.DeviceType
+
   public title = 'svkleinsendelbach-website';
 
   public linkDataForDeviceType: HomeLinksComponent.LinkDataForDeviceType<InternalPath> = {
@@ -230,7 +232,7 @@ export class AppComponent {
 
   public homeLinkData: HeaderComponent.HomeLinkData<InternalPath> = {
     title: 'SV Kleinsendelbach',
-    logoSrc: 'assets/images/svk-logo.png"',
+    logoSrc: 'assets/images/svk-logo.png',
     homeLink: Link.internal('Home', 'home')
   }
 
@@ -360,7 +362,7 @@ export class AppComponent {
   }
 
   public constructor(
-    private readonly deviceType: DeviceTypeService,
+    public readonly deviceType: DeviceTypeService,
     private readonly styleConfig: StyleConfigService
   ) {
     this.styleConfig.setConfig({

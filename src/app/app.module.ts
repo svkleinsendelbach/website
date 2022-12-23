@@ -30,6 +30,7 @@ import { NewsListComponent } from './template/components/news-list/news-list.com
 import { HomeLinksComponent } from './template/components/home-links/home-links.component';
 import { SocialMediaLinksComponent } from './template/components/social-media-links/social-media-links.component';
 import { HomeBannerComponent } from './template/components/home-banner/home-banner.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { HomeBannerComponent } from './template/components/home-banner/home-bann
     NewsListComponent,
     HomeLinksComponent,
     SocialMediaLinksComponent,
-    HomeBannerComponent
+    HomeBannerComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

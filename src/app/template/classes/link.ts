@@ -19,7 +19,7 @@ export class Link<InternalPath extends string>{
   }
 
   public get link(): string {
-    return 'path' in this.value ? this.value.path : this.value.link
+    return 'path' in this.value ? `/${this.value.path}` : this.value.link
   }
 
   public get target(): '_self' | '_blank' {
