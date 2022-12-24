@@ -33,6 +33,7 @@ import { HomeBannerComponent } from './template/components/home-banner/home-bann
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { ImprintComponent } from './pages/imprint/imprint.component';
 import { PrivacyComponent } from './pages/about-us/privacy/privacy.component';
+import { RequestComponent } from './pages/about-us/request/request.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { PrivacyComponent } from './pages/about-us/privacy/privacy.component';
     HomeBannerComponent,
     PageNotFoundComponent,
     ImprintComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    RequestComponent
   ],
   imports: [
     BrowserModule,
