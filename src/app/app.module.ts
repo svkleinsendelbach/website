@@ -36,6 +36,7 @@ import { PrivacyComponent } from './pages/about-us/privacy/privacy.component';
 import { RequestComponent } from './pages/about-us/request/request.component';
 import { StatuteComponent } from './pages/about-us/statute/statute.component';
 import { ChronicleComponent } from './pages/about-us/chronicle/chronicle.component';
+import { SportshomeComponent } from './pages/about-us/sportshome/sportshome.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ChronicleComponent } from './pages/about-us/chronicle/chronicle.compone
     PrivacyComponent,
     RequestComponent,
     StatuteComponent,
-    ChronicleComponent
+    ChronicleComponent,
+    SportshomeComponent
   ],
   imports: [
     BrowserModule,

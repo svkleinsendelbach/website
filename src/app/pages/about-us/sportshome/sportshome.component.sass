@@ -1,0 +1,27 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+#opening-hours
+  @include flex-column(flex-start, center)
+  width: 100%
+
+  .row
+    @include flex-row(flex-start, center)
+    width: 100%
+    margin-bottom: 2em
+
+    .opening-hour
+      @include flex-column(flex-start, center)
+      flex: 1
+
+      .title, .time
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('small')
+        text-align: center
+
+      .title
+        margin-bottom: 0.75em
+
+    &:last-child
+      margin-bottom: 0
