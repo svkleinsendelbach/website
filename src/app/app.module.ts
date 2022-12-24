@@ -34,6 +34,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { ImprintComponent } from './pages/imprint/imprint.component';
 import { PrivacyComponent } from './pages/about-us/privacy/privacy.component';
 import { RequestComponent } from './pages/about-us/request/request.component';
+import { StatuteComponent } from './pages/about-us/statute/statute.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { RequestComponent } from './pages/about-us/request/request.component';
     PageNotFoundComponent,
     ImprintComponent,
     PrivacyComponent,
-    RequestComponent
+    RequestComponent,
+    StatuteComponent
   ],
   imports: [
     BrowserModule,
