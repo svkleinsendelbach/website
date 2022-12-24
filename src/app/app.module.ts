@@ -35,6 +35,7 @@ import { ImprintComponent } from './pages/imprint/imprint.component';
 import { PrivacyComponent } from './pages/about-us/privacy/privacy.component';
 import { RequestComponent } from './pages/about-us/request/request.component';
 import { StatuteComponent } from './pages/about-us/statute/statute.component';
+import { ChronicleComponent } from './pages/about-us/chronicle/chronicle.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { StatuteComponent } from './pages/about-us/statute/statute.component';
     ImprintComponent,
     PrivacyComponent,
     RequestComponent,
-    StatuteComponent
+    StatuteComponent,
+    ChronicleComponent
   ],
   imports: [
     BrowserModule,
