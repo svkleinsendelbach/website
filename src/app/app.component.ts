@@ -715,3 +715,19 @@ export const allSocialMediaLinks: {
     }
   }
 }
+export const eventGroupDescription: {
+  [key in EventGroupId]: string
+} = {
+  'general': 'Allgemeines',
+  'football-adults/general': 'Herrenfußball',
+  'football-adults/first-team': '1. Mannschaft',
+  'football-adults/second-team': '2. Mannschaft',
+  'football-adults/ah-team': 'Alte Herren',
+  'football-youth/general': 'Jugendfußball',
+  'football-youth/c-youth': 'C-Jugend',
+  'football-youth/e-youth': 'E-Jugend',
+  'football-youth/f-youth': 'F-Jugend',
+  'football-youth/g-youth': 'G-Jugend',
+  'gymnastics': 'Gymnastik',
+  'dancing': 'Tanzen'
+}

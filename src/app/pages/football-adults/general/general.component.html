@@ -1,0 +1,199 @@
+<app-text-section
+  [title]="'Abteilung Herrenfußball'"
+>
+
+  <p
+    class="text left-align"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Die <a
+    class="text small"
+    href="/fussball//herren/erste-mannschaft"
+    title="1. Mannschaft"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >1. Mannschaft</a> spielt als Spielgemeinschaft SG Kleinsendelbach / Hetzles in der Kreisklasse Kreis Erlangen / Pegnitzgrund Gruppe 3.</p>
+  <p
+    class="text left-align"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Hier geht es zur <a
+    class="text small"
+    href="http://sg-kh.de/sgkh-1-herren/"
+    target="_blank"
+    title="1. Mannschaft"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Homepage</a> der 1. Mannschaft SG Kleinsendelbach / Hetzles.</p>
+
+  <p
+    class="text left-align margin-top-large"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Die <a
+    class="text small"
+    href="/fussball//herren/erste-mannschaft"
+    title="1. Mannschaft"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >2. Mannschaft</a> spielt als Spielgemeinschaft SG Kleinsendelbach / Hetzles 2 in der B-Klasse Kreis Erlangen / Pegnitzgrund Gruppe 3.</p>
+  <p
+    class="text left-align"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Hier geht es zur <a
+    class="text small"
+    href="http://sg-kh.de/sgkh-2-herren/"
+    target="_blank"
+    title="1. Mannschaft"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Homepage</a> der 2. Mannschaft SG Kleinsendelbach / Hetzles.</p>
+
+</app-text-section>
+
+<app-text-section>
+  <div
+    id="links"
+    [ngClass]="deviceType.className"
+  >
+    <a
+      href="/fussball/herren/erste-mannschaft"
+      title="1. Mannschaft"
+      class="container"
+      (mouseenter)="hoverLinkStart('first-team')"
+      (mouseleave)="hoverLinkStop('first-team')"
+      [ngStyle]="{
+        backgroundColor: hoveredLink === 'first-team' ? styleConfig.css('hoveredBackgroundColor') : undefined
+      }"
+    >
+      <p
+        class="title"
+        [ngStyle]="{
+          color: styleConfig.css('primaryColor')
+        }"
+      >1. Mannschaft</p>
+      <p
+        class="subtitle"
+        [ngStyle]="{
+          color: styleConfig.css('secondaryTextColor')
+        }"
+      >1. Mannschaft der SG Kleinsendelbach / Hetzles</p>
+    </a>
+    <a
+      href="/fussball/herren/zweite-mannschaft"
+      title="2. Mannschaft"
+      class="container"
+      (mouseenter)="hoverLinkStart('second-team')"
+      (mouseleave)="hoverLinkStop('second-team')"
+      [ngStyle]="{
+        backgroundColor: hoveredLink === 'second-team' ? styleConfig.css('hoveredBackgroundColor') : undefined
+      }"
+    >
+      <p
+        class="title"
+        [ngStyle]="{
+          color: styleConfig.css('primaryColor')
+        }"
+      >2. Mannschaft</p>
+      <p
+        class="subtitle"
+        [ngStyle]="{
+          color: styleConfig.css('secondaryTextColor')
+        }"
+      >2. Mannschaft der SG Kleinsendelbach / Hetzles</p>
+    </a>
+    <a
+      href="/fussball/herren/alte-herren"
+      title="Alte Herren"
+      class="container"
+      (mouseenter)="hoverLinkStart('ah-team')"
+      (mouseleave)="hoverLinkStop('ah-team')"
+      [ngStyle]="{
+        backgroundColor: hoveredLink === 'ah-team' ? styleConfig.css('hoveredBackgroundColor') : undefined
+      }"
+    >
+      <p
+        class="title"
+        [ngStyle]="{
+          color: styleConfig.css('primaryColor')
+        }"
+      >Alte Herren</p>
+      <p
+        class="subtitle"
+        [ngStyle]="{
+          color: styleConfig.css('secondaryTextColor')
+        }"
+      >Alte Herren des SV Kleinsendelbach</p>
+    </a>
+  </div>
+</app-text-section>
+
+<app-events
+  [groupIds]="eventGroupIds"
+  [eventGroupDescription]="eventGroupDescription"
+></app-events>
+
+<app-text-section
+  [title]="'Kontakt'"
+>
+
+  <p
+    class="text"
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+    >Abteilungsleiter Fußball</p>
+  <p
+    class="text"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+    >Josef Hoier</p>
+  <a
+    class="text"
+    href="tel:017657857884"
+    title="Josef Hoier"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >
+    <fa-icon
+      [icon]="faMobile"
+    ></fa-icon> 0176 / 57857884
+  </a>
+
+</app-text-section>
+
+<app-text-section>
+
+  <img
+    class="text-image"
+    src="assets/images/mannschaft.png"
+    title="Herrenabteilung"
+    [ngStyle]="{
+      borderColor: styleConfig.css('textColor')
+    }"
+  >
+  <p
+    class="text margin-top-large"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Viel Spaß beim Sport wünscht</p>
+  <p
+    class="text"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >die Herrenabteilung</p>
+
+</app-text-section>
