@@ -21,13 +21,16 @@ export class CookieService {
     this.listeners.emitValue(selection)
   }
 
+  public changeCookieSelection(type: CookieService.CookieType, value: 'selected' | 'unselected') {
+    if (type === CookieService.CookieType.Necessary) { return }
+    const selection = this.getCookiesSelection() ?? CookieService.CookiesSelection.defaultSelection
+    selection[CookieService.CookieType.selectionString(type) as 'functionality' | 'statistics'] = value
+    this.saveCookieSelection(selection)
+  }
+
   public removeCookieSelection() {
     localStorage.removeItem('cookies')
-    this.listeners.emitValue({
-      necessary: 'selected',
-      functionality: 'unselected',
-      statistics: 'unselected'
-    })
+    this.listeners.emitValue(CookieService.CookiesSelection.defaultSelection)
   }
 }
 
@@ -43,7 +46,7 @@ export namespace CookieService {
   }
 
   export namespace CookieType {
-    export function selectionString(type: CookieType): 'necessary' | 'functionality' | 'statistics'{
+    export function selectionString(type: CookieType): 'necessary' | 'functionality' | 'statistics' {
       switch (type) {
         case CookieType.Necessary: return 'necessary'
         case CookieType.Functionality: return 'functionality'
@@ -59,5 +62,13 @@ export namespace CookieService {
     necessary: 'selected'
     functionality: 'selected' | 'unselected'
     statistics: 'selected' | 'unselected'
+  }
+
+  export namespace CookiesSelection {
+    export const defaultSelection: CookieService.CookiesSelection = {
+      necessary: 'selected',
+      functionality: 'unselected',
+      statistics: 'unselected'
+    }
   }
 }

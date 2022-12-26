@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CookieSelectorMessageComponent } from './template/components/cookie-selector-message/cookie-selector-message.component';
@@ -18,7 +19,6 @@ import { TextSectionComponent } from './template/components/text-section/text-se
 import { environment } from '../environments/environment';
 import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { EventsComponent } from './template/components/events/events.component';
-
 import { AngularFireModule } from '@angular/fire/compat'
 import { AngularFireFunctionsModule, REGION } from '@angular/fire/compat/functions'
 import { AngularFireAuthModule } from '@angular/fire/compat/auth'
@@ -39,6 +39,8 @@ import { ChronicleComponent } from './pages/about-us/chronicle/chronicle.compone
 import { SportshomeComponent } from './pages/about-us/sportshome/sportshome.component';
 import { ManagersComponent } from './pages/about-us/managers/managers.component';
 import { GeneralComponent } from './pages/football-adults/general/general.component';
+import { MapsComponent } from './template/components/maps/maps.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,8 @@ import { GeneralComponent } from './pages/football-adults/general/general.compon
     ChronicleComponent,
     SportshomeComponent,
     ManagersComponent,
-    GeneralComponent
+    GeneralComponent,
+    MapsComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +82,10 @@ import { GeneralComponent } from './pages/football-adults/general/general.compon
     AngularFireDatabaseModule,
  //    AngularFirestoreModule,
     AngularFireAnalyticsModule,
-    AngularFirePerformanceModule
+    AngularFirePerformanceModule,
+    GoogleMapsModule,
+    HttpClientModule,
+    HttpClientJsonpModule
   ],
   providers: [
     ScreenTrackingService,
