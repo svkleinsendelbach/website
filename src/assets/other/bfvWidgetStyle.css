@@ -1,0 +1,104 @@
+tbody tr:nth-child(1) td.text-left:nth-child(1)::before {
+  content: url("http://svkleinsendelbach.de/assets/images/logo-transparent-small.png");
+}
+
+#bfv-team-widget-header tr td.text-left img {
+  display: none;
+}
+
+#bfv-team-widget-header>.row>.container-fluid {
+  background: rgb(248, 249, 250) !important;
+}
+
+#bfv-club-team-matches-container .list-group-item,
+#bfv-competition-matches-container .list-group-item,
+#bfv-wettbewerb-spieltag-row .spieltage,
+#bfv-wettbewerb-spieltag-fixed-table .spieltage,
+.table-condensed tbody tr:nth-of-type(odd),
+.table-condensed thead,
+#bfv-widget-team-competition-tables-subnav .spieltage,
+#bfv-team-kader-container .spiele-group .list-group-item,
+#bfv-widget-team-player-subnav div .spieltage,
+#bfv-widget-footer,
+.player-image-galery tbody tr,
+body {
+  background: rgb(248, 249, 250);
+}
+
+#bfv-club-team-matches-container .list-group-item.header,
+#bfv-competition-matches-container .list-group-item.header,
+#bfv-wettbewerb-spieltag-row .spieltage.active a,
+#bfv-widget-team-competition-tables-subnav .spieltage.active a,
+#bfv-team-kader-container .spiele-group .list-group-item.header,
+#bfv-widget-team-player-subnav div .spieltage.active a,
+.table-condensed tbody tr:nth-of-type(even),
+#bfv-loading-inner {
+  background: #eee;
+}
+
+@media (prefers-color-scheme: dark) {
+  #bfv-team-widget-header>.row>.container-fluid {
+    background: #2C3A47 !important;
+  }
+
+  #bfv-team-widget-header tbody tr td.text-left h3 small,
+  #bfv-team-widget-header tbody tr td.text-left div,
+  #bfv-widget-footer h6,
+  #bfv-club-team-matches-container .bfv-base-widget-color-club-name,
+  #bfv-competition-table-scroll-wrapper .bfv-base-widget-color-club-name {
+    color: #868e90;
+  }
+
+  #bfv-team-widget-header tbody tr td.text-left:nth-child(2) {
+    display: flex;
+  }
+
+  #bfv-team-widget-header tbody tr td.text-left h3.bfv-base-widget-color-club-name-head {
+    background: #24252a;
+    margin-right: 20px;
+    padding: 5px 15px;
+    border-radius: 5px;
+  }
+
+  #bfv-team-widget-header .btn-primary {
+    border: none;
+  }
+
+  #bfv-widget-footer {
+    background: #2C3A47;
+  }
+
+  #bfv-club-team-matches-container .list-group-item,
+  #bfv-competition-matches-container .list-group-item,
+  #bfv-wettbewerb-spieltag-row .spieltage,
+  #bfv-wettbewerb-spieltag-fixed-table .spieltage,
+  .table-condensed tbody tr:nth-of-type(odd),
+  .table-condensed thead,
+  #bfv-widget-team-competition-tables-subnav .spieltage,
+  #bfv-team-kader-container .spiele-group .list-group-item,
+  #bfv-widget-team-player-subnav div .spieltage,
+  #bfv-widget-footer,
+  .player-image-galery tbody tr,
+  body,
+  #bfv-team-squad-container-scroll-wrapper .list-group-item {
+    background: #2C3A47;
+  }
+
+  #bfv-club-team-matches-container .list-group-item.header,
+  #bfv-competition-matches-container .list-group-item.header,
+  #bfv-wettbewerb-spieltag-row .spieltage.active a,
+  #bfv-widget-team-competition-tables-subnav .spieltage.active a,
+  #bfv-team-kader-container .spiele-group .list-group-item.header,
+  #bfv-widget-team-player-subnav div .spieltage.active a,
+  .table-condensed tbody tr:nth-of-type(even),
+  #bfv-loading-inner,
+  #bfv-team-squad-container-scroll-wrapper .list-group-item.header {
+    background: #24252a;
+  }
+
+  #bfv-club-team-matches-container .list-group-item,
+  .table-condensed tbody tr td,
+  #bfv-team-kader-container .spiele-group .list-group-item {
+    border: none;
+  }
+}
