@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { EventGroupId } from 'src/app/app.component';
+import { EventGroupId, InternalPath } from 'src/app/app.component';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
 import { eventGroupDescription } from 'src/app/app.component'
-import { faMobile } from '@fortawesome/free-solid-svg-icons';
+import { ContactInfoComponent } from 'src/app/template/components/contact-info/contact-info.component';
+import { LinksComponent } from 'src/app/template/components/links/links.component';
+import { Link } from 'src/app/template/classes/link';
 
 @Component({
   selector: 'app-general',
@@ -13,7 +15,26 @@ import { faMobile } from '@fortawesome/free-solid-svg-icons';
 })
 export class GeneralComponent {
   public eventGroupDescription = eventGroupDescription
-  public faMobile = faMobile
+
+  public readonly links: LinksComponent.LinkData<InternalPath>[] = [
+    {
+      id: 'first-team',
+      link: Link.internal('1. Mannschaft', 'fussball/herren/erste-mannschaft'),
+      title: '1. Mannschaft',
+      subtitle: '1. Mannschaft der SG Kleinsendelbach / Hetzles'
+    }, {
+      id: 'second-team',
+      link: Link.internal('2. Mannschaft', 'fussball/herren/zweite-mannschaft'),
+      title: '2. Mannschaft',
+      subtitle: '2. Mannschaft der SG Kleinsendelbach / Hetzles'
+    },
+    {
+      id: 'ah-team',
+      link: Link.internal('Alte Herren', 'fussball/herren/alte-herren'),
+      title: 'Alte Herren',
+      subtitle: 'Alte Herren des SV Kleinsendelbach'
+    }
+  ]
 
   public readonly eventGroupIds: EventGroupId[] = [
     'football-adults/general',
@@ -22,7 +43,16 @@ export class GeneralComponent {
     'football-adults/ah-team',
   ]
 
-  public hoveredLink: string | null = null
+  public readonly contactData: ContactInfoComponent.ContactItem[] = [
+    {
+      function: 'Abteilungsleiter Fußball',
+      name: 'Josef Hoier',
+      mobile: {
+        number: '017657857884',
+        text: '0176 / 57857884'
+      }
+    }
+  ]
 
   public constructor(
     public readonly titleService: Title,
@@ -30,15 +60,5 @@ export class GeneralComponent {
     public readonly styleConfig: StyleConfigService
   ) {
     this.titleService.setTitle('Herrenfußball')
-  }
-
-  public hoverLinkStart(link: string) {
-    this.hoveredLink = link
-  }
-
-  public hoverLinkStop(link: string) {
-    if (this.hoveredLink === link) {
-      this.hoveredLink = null
-    }
   }
 }

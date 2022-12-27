@@ -44,6 +44,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { BfvWidgetComponent } from './template/components/bfv-widget/bfv-widget.component';
 import { SquadComponent } from './template/components/squad/squad.component';
 import { SquadPersonComponent } from './template/components/squad/squad-person/squad-person.component';
+import { LinksComponent } from './template/components/links/links.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { SquadPersonComponent } from './template/components/squad/squad-person/s
     MapsComponent,
     BfvWidgetComponent,
     SquadComponent,
-    SquadPersonComponent
+    SquadPersonComponent,
+    LinksComponent
   ],
   imports: [
     BrowserModule,
