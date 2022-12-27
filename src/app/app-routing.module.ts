@@ -17,6 +17,7 @@ import { GeneralComponent as FootballYouthGeneralComponent } from './pages/footb
 import { CYouthComponent } from './pages/football-youth/c-youth/c-youth.component'
 import { EYouthComponent } from './pages/football-youth/e-youth/e-youth.component'
 import { FYouthComponent } from './pages/football-youth/f-youth/f-youth.component'
+import { GYouthComponent } from './pages/football-youth/g-youth/g-youth.component'
 
 const routes: Routes = [
   { path: 'über-uns', component: ManagersComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'fussball/jugend/c-jugend', component: CYouthComponent },
   { path: 'fussball/jugend/e-jugend', component: EYouthComponent },
   { path: 'fussball/jugend/f-jugend', component: FYouthComponent },
+  { path: 'fussball/jugend/g-jugend', component: GYouthComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
