@@ -42,6 +42,8 @@ import { GeneralComponent } from './pages/football-adults/general/general.compon
 import { MapsComponent } from './template/components/maps/maps.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { BfvWidgetComponent } from './template/components/bfv-widget/bfv-widget.component';
+import { SquadComponent } from './template/components/squad/squad.component';
+import { SquadPersonComponent } from './template/components/squad/squad-person/squad-person.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,9 @@ import { BfvWidgetComponent } from './template/components/bfv-widget/bfv-widget.
     ManagersComponent,
     GeneralComponent,
     MapsComponent,
-    BfvWidgetComponent
+    BfvWidgetComponent,
+    SquadComponent,
+    SquadPersonComponent
   ],
   imports: [
     BrowserModule,

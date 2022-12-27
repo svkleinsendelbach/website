@@ -1,0 +1,36 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  margin: 1em
+
+  &.desktop
+    width: calc(14% - 2em)
+
+  &.tablet
+    width: calc(20% - 2em)
+
+  &.mobile
+    width: calc(100% - 2em)
+
+#image
+  height: 11em
+  padding-bottom: 1em
+
+#name
+  @include font-montserrat
+  @include font-weight('small')
+  @include font-size('normal')
+  text-align: center
+
+a#name
+  text-decoration: none
+  cursor: pointer
+
+#additionalText
+  @include font-montserrat
+  @include font-weight('small')
+  @include font-size('normal')
+  text-align: center
+  padding-top: 1em
