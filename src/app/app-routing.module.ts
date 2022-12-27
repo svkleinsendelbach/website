@@ -15,6 +15,7 @@ import { SecondTeamComponent } from './pages/football-adults/second-team/second-
 import { AhTeamComponent } from './pages/football-adults/ah-team/ah-team.component';
 import { GeneralComponent as FootballYouthGeneralComponent } from './pages/football-youth/general/general.component'
 import { CYouthComponent } from './pages/football-youth/c-youth/c-youth.component'
+import { EYouthComponent } from './pages/football-youth/e-youth/e-youth.component'
 
 const routes: Routes = [
   { path: 'über-uns', component: ManagersComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'fussball/herren/alte-herren', component: AhTeamComponent },
   { path: 'fussball/jugend', component: FootballYouthGeneralComponent },
   { path: 'fussball/jugend/c-jugend', component: CYouthComponent },
+  { path: 'fussball/jugend/e-jugend', component: EYouthComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

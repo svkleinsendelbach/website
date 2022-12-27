@@ -49,7 +49,8 @@ import { FirstTeamComponent } from './pages/football-adults/first-team/first-tea
 import { SecondTeamComponent } from './pages/football-adults/second-team/second-team.component';
 import { AhTeamComponent } from './pages/football-adults/ah-team/ah-team.component';
 import { GeneralComponent as FootballYouthGeneralComponent } from './pages/football-youth/general/general.component';
-import { CYouthComponent } from './pages/football-youth/c-youth/c-youth.component'
+import { CYouthComponent } from './pages/football-youth/c-youth/c-youth.component';
+import { EYouthComponent } from './pages/football-youth/e-youth/e-youth.component'
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { CYouthComponent } from './pages/football-youth/c-youth/c-youth.componen
     SecondTeamComponent,
     AhTeamComponent,
     FootballYouthGeneralComponent,
-    CYouthComponent
+    CYouthComponent,
+    EYouthComponent
   ],
   imports: [
     BrowserModule,
