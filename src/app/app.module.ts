@@ -45,6 +45,7 @@ import { BfvWidgetComponent } from './template/components/bfv-widget/bfv-widget.
 import { SquadComponent } from './template/components/squad/squad.component';
 import { SquadPersonComponent } from './template/components/squad/squad-person/squad-person.component';
 import { LinksComponent } from './template/components/links/links.component';
+import { FirstTeamComponent } from './pages/football-adults/first-team/first-team.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { LinksComponent } from './template/components/links/links.component';
     BfvWidgetComponent,
     SquadComponent,
     SquadPersonComponent,
-    LinksComponent
+    LinksComponent,
+    FirstTeamComponent
   ],
   imports: [
     BrowserModule,

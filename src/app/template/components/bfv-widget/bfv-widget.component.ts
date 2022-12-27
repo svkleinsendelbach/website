@@ -12,7 +12,7 @@ import { StyleConfigService } from '../../services/style-config.service';
 export class BfvWidgetComponent implements AfterViewInit {
   @Input() public teamId!: string
 
-  @ViewChild('bfvWidget') public bfvWidget!: ElementRef<HTMLElement>
+  @ViewChild('bfvWidget') public bfvWidget?: ElementRef<HTMLElement>
 
   public functionalityCookiesSelected: boolean
 
@@ -36,7 +36,9 @@ export class BfvWidgetComponent implements AfterViewInit {
   }
 
   private appendBfvWidgetChild() {
-    this.bfvWidget.nativeElement.innerHTML = ''
+    if (this.bfvWidget !== undefined) {
+      this.bfvWidget.nativeElement.innerHTML = ''
+    }
     const options = {
       selectedTab: 'teammatches',
       colorResults: `#24252a;}</style><link rel='stylesheet' href='${window.location.protocol}//${window.location.hostname}/assets/other/bfvWidgetStyle.css'><style type='text/css'>xy{x:y`,
@@ -54,7 +56,7 @@ export class BfvWidgetComponent implements AfterViewInit {
     const bfvHost = `${window.location.protocol}//widget-prod.bfv.de`
     const appPath = `widget/widgetresource/iframe${'https:' === document.location.protocol ? '/ssl' : ''}?url=${window.location.hostname}`
     iFrame.src = `${bfvHost}/${appPath}&widget=${encodeURIComponent(`widget/team/complete/team${this.teamId}/${options.selectedTab}?css=${encodeURIComponent(JSON.stringify(options))}&referrer=${window.location.hostname}`)}`
-    this.bfvWidget.nativeElement.appendChild(iFrame)
+    this.bfvWidget?.nativeElement.appendChild(iFrame)
   }
 
   public acceptFunctionalityCookies() {

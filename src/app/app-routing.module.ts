@@ -10,6 +10,7 @@ import { ChronicleComponent } from './pages/about-us/chronicle/chronicle.compone
 import { SportshomeComponent } from './pages/about-us/sportshome/sportshome.component';
 import { ManagersComponent } from './pages/about-us/managers/managers.component';
 import { GeneralComponent } from './pages/football-adults/general/general.component';
+import { FirstTeamComponent } from './pages/football-adults/first-team/first-team.component';
 
 const routes: Routes = [
   { path: 'über-uns', component: ManagersComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'mitgliedsantrag', component: RequestComponent },
   { path: 'impressum', component: ImprintComponent },
   { path: 'fussball/herren', component: GeneralComponent },
+  { path: 'fussball/herren/erste-mannschaft', component: FirstTeamComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
