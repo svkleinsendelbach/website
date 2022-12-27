@@ -47,6 +47,7 @@ import { SquadPersonComponent } from './template/components/squad/squad-person/s
 import { LinksComponent } from './template/components/links/links.component';
 import { FirstTeamComponent } from './pages/football-adults/first-team/first-team.component';
 import { SecondTeamComponent } from './pages/football-adults/second-team/second-team.component';
+import { AhTeamComponent } from './pages/football-adults/ah-team/ah-team.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { SecondTeamComponent } from './pages/football-adults/second-team/second-
     SquadPersonComponent,
     LinksComponent,
     FirstTeamComponent,
-    SecondTeamComponent
+    SecondTeamComponent,
+    AhTeamComponent
   ],
   imports: [
     BrowserModule,

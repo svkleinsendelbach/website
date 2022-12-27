@@ -12,6 +12,7 @@ import { ManagersComponent } from './pages/about-us/managers/managers.component'
 import { GeneralComponent } from './pages/football-adults/general/general.component';
 import { FirstTeamComponent } from './pages/football-adults/first-team/first-team.component';
 import { SecondTeamComponent } from './pages/football-adults/second-team/second-team.component';
+import { AhTeamComponent } from './pages/football-adults/ah-team/ah-team.component';
 
 const routes: Routes = [
   { path: 'über-uns', component: ManagersComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'fussball/herren', component: GeneralComponent },
   { path: 'fussball/herren/erste-mannschaft', component: FirstTeamComponent },
   { path: 'fussball/herren/zweite-mannschaft', component: SecondTeamComponent },
+  { path: 'fussball/herren/alte-herren', component: AhTeamComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
