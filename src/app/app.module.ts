@@ -52,7 +52,8 @@ import { GeneralComponent as FootballYouthGeneralComponent } from './pages/footb
 import { CYouthComponent } from './pages/football-youth/c-youth/c-youth.component';
 import { EYouthComponent } from './pages/football-youth/e-youth/e-youth.component';
 import { FYouthComponent } from './pages/football-youth/f-youth/f-youth.component';
-import { GYouthComponent } from './pages/football-youth/g-youth/g-youth.component'
+import { GYouthComponent } from './pages/football-youth/g-youth/g-youth.component';
+import { GymnasticsComponent } from './pages/gymnastics/gymnastics.component'
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { GYouthComponent } from './pages/football-youth/g-youth/g-youth.componen
     CYouthComponent,
     EYouthComponent,
     FYouthComponent,
-    GYouthComponent
+    GYouthComponent,
+    GymnasticsComponent
   ],
   imports: [
     BrowserModule,
