@@ -9,10 +9,11 @@ import { StatuteComponent } from './pages/about-us/statute/statute.component';
 import { ChronicleComponent } from './pages/about-us/chronicle/chronicle.component';
 import { SportshomeComponent } from './pages/about-us/sportshome/sportshome.component';
 import { ManagersComponent } from './pages/about-us/managers/managers.component';
-import { GeneralComponent } from './pages/football-adults/general/general.component';
+import { GeneralComponent as FootballAdultsGeneralComponent } from './pages/football-adults/general/general.component';
 import { FirstTeamComponent } from './pages/football-adults/first-team/first-team.component';
 import { SecondTeamComponent } from './pages/football-adults/second-team/second-team.component';
 import { AhTeamComponent } from './pages/football-adults/ah-team/ah-team.component';
+import { GeneralComponent as FootballYouthGeneralComponent } from './pages/football-youth/general/general.component'
 
 const routes: Routes = [
   { path: 'über-uns', component: ManagersComponent },
@@ -22,10 +23,11 @@ const routes: Routes = [
   { path: 'datenschutz', component: PrivacyComponent },
   { path: 'mitgliedsantrag', component: RequestComponent },
   { path: 'impressum', component: ImprintComponent },
-  { path: 'fussball/herren', component: GeneralComponent },
+  { path: 'fussball/herren', component: FootballAdultsGeneralComponent },
   { path: 'fussball/herren/erste-mannschaft', component: FirstTeamComponent },
   { path: 'fussball/herren/zweite-mannschaft', component: SecondTeamComponent },
   { path: 'fussball/herren/alte-herren', component: AhTeamComponent },
+  { path: 'fussball/jugend', component: FootballYouthGeneralComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

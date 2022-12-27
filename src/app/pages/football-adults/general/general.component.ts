@@ -22,7 +22,8 @@ export class GeneralComponent {
       link: Link.internal('1. Mannschaft', 'fussball/herren/erste-mannschaft'),
       title: '1. Mannschaft',
       subtitle: '1. Mannschaft der SG Kleinsendelbach / Hetzles'
-    }, {
+    },
+    {
       id: 'second-team',
       link: Link.internal('2. Mannschaft', 'fussball/herren/zweite-mannschaft'),
       title: '2. Mannschaft',

@@ -38,7 +38,7 @@ import { StatuteComponent } from './pages/about-us/statute/statute.component';
 import { ChronicleComponent } from './pages/about-us/chronicle/chronicle.component';
 import { SportshomeComponent } from './pages/about-us/sportshome/sportshome.component';
 import { ManagersComponent } from './pages/about-us/managers/managers.component';
-import { GeneralComponent } from './pages/football-adults/general/general.component';
+import { GeneralComponent as FootballAdultsGeneralComponent } from './pages/football-adults/general/general.component';
 import { MapsComponent } from './template/components/maps/maps.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { BfvWidgetComponent } from './template/components/bfv-widget/bfv-widget.component';
@@ -48,6 +48,7 @@ import { LinksComponent } from './template/components/links/links.component';
 import { FirstTeamComponent } from './pages/football-adults/first-team/first-team.component';
 import { SecondTeamComponent } from './pages/football-adults/second-team/second-team.component';
 import { AhTeamComponent } from './pages/football-adults/ah-team/ah-team.component';
+import { GeneralComponent as FootballYouthGeneralComponent } from './pages/football-youth/general/general.component'
 
 @NgModule({
   declarations: [
@@ -76,7 +77,7 @@ import { AhTeamComponent } from './pages/football-adults/ah-team/ah-team.compone
     ChronicleComponent,
     SportshomeComponent,
     ManagersComponent,
-    GeneralComponent,
+    FootballAdultsGeneralComponent,
     MapsComponent,
     BfvWidgetComponent,
     SquadComponent,
@@ -84,7 +85,8 @@ import { AhTeamComponent } from './pages/football-adults/ah-team/ah-team.compone
     LinksComponent,
     FirstTeamComponent,
     SecondTeamComponent,
-    AhTeamComponent
+    AhTeamComponent,
+    FootballYouthGeneralComponent
   ],
   imports: [
     BrowserModule,

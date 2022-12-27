@@ -70,3 +70,20 @@
   ::ng-deep .text-image
     width: 100%
     border: solid 0.1em
+
+  ::ng-deep .text-images-2
+    @include flex-row(center, space-between)
+    width: 100%
+
+    .text-image
+      width: 47.4%
+
+    &.mobile
+      @include flex-column(center, center)
+
+      .text-image
+        width: 100%
+        margin-bottom: 1em
+
+        &:last-child
+          margin-bottom: 0
