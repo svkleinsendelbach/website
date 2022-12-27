@@ -54,7 +54,8 @@ import { EYouthComponent } from './pages/football-youth/e-youth/e-youth.componen
 import { FYouthComponent } from './pages/football-youth/f-youth/f-youth.component';
 import { GYouthComponent } from './pages/football-youth/g-youth/g-youth.component';
 import { GymnasticsComponent } from './pages/gymnastics/gymnastics.component';
-import { DancingComponent } from './pages/dancing/dancing.component'
+import { DancingComponent } from './pages/dancing/dancing.component';
+import { DriveComponent } from './pages/drive/drive.component'
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import { DancingComponent } from './pages/dancing/dancing.component'
     FYouthComponent,
     GYouthComponent,
     GymnasticsComponent,
-    DancingComponent
+    DancingComponent,
+    DriveComponent
   ],
   imports: [
     BrowserModule,

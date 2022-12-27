@@ -261,8 +261,8 @@ export class AppComponent {
         street: 'Hauptstraße 21',
         city: '91077 Kleinsendelbach',
         telephone: {
-          number: '091268403',
-          text: '09126 / 8403'
+          number: '091268304',
+          text: '09126 / 8304'
         }
       },
       {

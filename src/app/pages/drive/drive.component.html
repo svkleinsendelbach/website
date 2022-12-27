@@ -1,0 +1,38 @@
+<app-text-section
+  [title]="'Anfahrt zum Sportheim Kleinsendelbach'"
+>
+  <p
+    class="text large no-bottom-padding"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Sportverein Kleinsendelbach e.V.</p>
+  <p
+    class="text large no-bottom-padding margin-top-normal"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Hauptstraße 21</p>
+  <p
+    class="text large no-bottom-padding margin-top-normal"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >91077 Kleinsendelbach</p>
+  <a
+    class="text large margin-bottom-normal margin-top-normal"
+    href="tel:091268304"
+    title="Sportverein Kleinsendelbach e.V."
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >
+    <fa-icon
+      [icon]="faPhone"
+    ></fa-icon> 09126 / 8304
+  </a>
+  <app-maps
+    [options]="mapOptions"
+    [markers]="mapMarkers"
+  ></app-maps>
+</app-text-section>
