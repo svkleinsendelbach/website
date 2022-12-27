@@ -11,6 +11,7 @@ import { SportshomeComponent } from './pages/about-us/sportshome/sportshome.comp
 import { ManagersComponent } from './pages/about-us/managers/managers.component';
 import { GeneralComponent } from './pages/football-adults/general/general.component';
 import { FirstTeamComponent } from './pages/football-adults/first-team/first-team.component';
+import { SecondTeamComponent } from './pages/football-adults/second-team/second-team.component';
 
 const routes: Routes = [
   { path: 'über-uns', component: ManagersComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'impressum', component: ImprintComponent },
   { path: 'fussball/herren', component: GeneralComponent },
   { path: 'fussball/herren/erste-mannschaft', component: FirstTeamComponent },
+  { path: 'fussball/herren/zweite-mannschaft', component: SecondTeamComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

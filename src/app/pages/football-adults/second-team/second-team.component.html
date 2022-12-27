@@ -1,0 +1,46 @@
+<app-text-section
+  [title]="'1. Mannschaft der SG Kleinsendelbach / Hetzles'"
+>
+  <p
+    class="text"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+</app-text-section>
+
+<app-events
+  [groupIds]="eventGroupIds"
+  [eventGroupDescription]="eventGroupDescription"
+></app-events>
+
+<app-text-section
+  [title]="'Ergebnisse und Tabellen'"
+>
+  <app-bfv-widget
+    [teamId]="teamId"
+  ></app-bfv-widget>
+</app-text-section>
+
+<app-contact-info
+  [contactData]="contactData"
+></app-contact-info>
+
+<app-text-section
+  [title]="'Trainingszeiten'"
+>
+  <p
+    class="text margin-bottom-normal"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Das Training findet jeden Dienstag und Donnerstag von 19:00Uhr - 20:30Uhr abwechselnd in Kleinsendelbach und Hetzles, am B-Platz an der Sendelmühlstraße statt.</p>
+  <app-maps
+    [options]="mapOptions"
+    [markers]="mapMarkers"
+  ></app-maps>
+</app-text-section>
+
+<app-squad
+  [parametersPath]="squadParametersPath"
+></app-squad>
