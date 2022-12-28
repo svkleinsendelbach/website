@@ -58,7 +58,8 @@ import { DancingComponent } from './pages/dancing/dancing.component';
 import { DriveComponent } from './pages/drive/drive.component';
 import { ContactComponent } from './pages/contact/contact.component'
 import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
-import { InputFieldComponent } from './template/components/input-form/input-field/input-field.component'
+import { InputFieldComponent } from './template/components/input-form/input-field/input-field.component';
+import { HomeComponent } from './pages/home/home.component'
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { InputFieldComponent } from './template/components/input-form/input-fiel
     DancingComponent,
     DriveComponent,
     ContactComponent,
-    InputFieldComponent
+    InputFieldComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

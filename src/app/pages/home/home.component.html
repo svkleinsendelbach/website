@@ -1,0 +1,49 @@
+<app-home-banner
+  [bannerData]="bannerData"
+></app-home-banner>
+
+<app-home-links
+  [linkDataForDeviceType]="linkData"
+></app-home-links>
+
+<app-text-section
+  [title]="'Schön, dass Sie unsere Website besuchen!'"
+>
+  <p
+    class="text"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Haben Sie Lust auf Fußball, Gymnastik oder Kindertanz? Dann informieren Sie sich unter der entsprechenden Abteilung auf unserer Homepage oder senden Sie uns eine Nachricht.</p>
+  <p
+    class="text margin-top-normal"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Wir freuen uns auf Sie! </p>
+  <p
+    class="text"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Ihre Vorstandschaft des SV Kleinsendelbach</p>
+  <p
+    class="text margin-top-normal"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Der SVK bedankt sich herzlich bei allen Sponsoren und Gönnern.</p>
+</app-text-section>
+
+<app-news-list
+  [maxListCount]="5"
+></app-news-list>
+
+<app-social-media-links
+  [socialMediaDataForDeviceType]="socialMediaData"
+></app-social-media-links>
+
+<app-events
+  [groupIds]="eventGroupIds"
+  [eventGroupDescription]="eventGroupDescription"
+></app-events>

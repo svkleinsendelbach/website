@@ -22,8 +22,11 @@ import { GymnasticsComponent } from './pages/gymnastics/gymnastics.component'
 import { DancingComponent } from './pages/dancing/dancing.component'
 import { DriveComponent } from './pages/drive/drive.component'
 import { ContactComponent } from './pages/contact/contact.component'
+import { HomeComponent } from './pages/home/home.component'
 
 const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: 'home', component: HomeComponent },
   { path: 'über-uns', component: ManagersComponent },
   { path: 'sportheim', component: SportshomeComponent },
   { path: 'chroniken', component: ChronicleComponent },
