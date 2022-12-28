@@ -1,0 +1,58 @@
+<div
+  class="input"
+>
+  <p
+    class="label"
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >{{ label }}</p>
+
+  <!-- Input text -->
+  <input
+    *ngIf="type.type === 'inputText'"
+    type="text"
+    placeholder="{{ type.placeholder }}"
+    [attr.formId]="id"
+    [ngStyle]="{
+      color: styleConfig.css('textColor'),
+      backgroundColor: styleConfig.css('backgroundColor'),
+      borderColor: styleConfig.css(field.errorMessage === undefined ? 'textColor' : 'formErrorStatusColor')
+    }"
+  >
+
+  <!-- textarea -->
+  <textarea
+    *ngIf="type.type === 'textarea'"
+    placeholder="{{ type.placeholder }}"
+    [attr.formId]="id"
+    [ngStyle]="{
+      color: styleConfig.css('textColor'),
+      backgroundColor: styleConfig.css('backgroundColor'),
+      borderColor: styleConfig.css(field.errorMessage === undefined ? 'textColor' : 'formErrorStatusColor')
+    }"
+  ></textarea>
+
+  <!-- select -->
+  <select
+    *ngIf="type.type === 'select'"
+    [attr.formId]="id"
+    [ngStyle]="{
+      color: styleConfig.css('textColor'),
+      backgroundColor: styleConfig.css('backgroundColor'),
+      borderColor: styleConfig.css(field.errorMessage === undefined ? 'textColor' : 'formErrorStatusColor')
+    }"
+  >
+    <option
+      *ngFor="let option of type.options"
+    >{{ option }}</option>
+  </select>
+
+  <p
+    *ngIf="field.errorMessage !== undefined"
+    class="error-msg"
+    [ngStyle]="{
+      color: styleConfig.css('formErrorStatusColor')
+    }"
+  >{{ field.errorMessage }}</p>
+</div>

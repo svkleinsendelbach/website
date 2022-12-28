@@ -1,14 +1,20 @@
-import { InvalidErrorCodes, Validator } from "./validator";
+import { Validator } from "./validator";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export class InputField<Validators extends { [key: string]: Validator<any> }> {
+export class InputField<Validators extends {
+  [key: string]: {
+    validator: Validator<any>, // eslint-disable-line @typescript-eslint/no-explicit-any
+    errorMessage: string
+  }
+}> {
   private isTouched = false;
 
   private isEvalutated = false;
 
   private element?: Element;
 
-  public constructor(private readonly validators?: Validators) {}
+  public constructor(
+    private readonly validators?: Validators
+  ) {}
 
   public setElement(element: Element) {
     this.element = element;
@@ -52,63 +58,50 @@ export class InputField<Validators extends { [key: string]: Validator<any> }> {
     }
   }
 
-  public get firstErrorKey(): keyof Validators | undefined {
-    this.isEvalutated = true;
-    if (this.validators === undefined) return undefined;
-    const value = this.textValue;
-    for (const entry of Object.entries(this.validators)) {
-      if (entry[1](value) !== 'valid') return entry[0];
+  public get errorMessage(): string | undefined {
+    if (this.validators === undefined) return undefined
+    if (!this.isTouched && !this.isEvalutated) return undefined
+    for (const value of Object.values(this.validators)) {
+      if (value.validator(this.textValue) !== 'valid') {
+        return value.errorMessage
+      }
     }
-    return undefined;
-  }
-
-  public get hasError(): boolean {
-    return this.firstErrorKey !== undefined;
-  }
-
-  public errorOf<Key extends keyof Validators>(key: Key): 'valid' | InvalidErrorCodes<Validators[Key]> {
-    this.isEvalutated = true;
-    if (this.validators === undefined) return 'valid';
-    return this.validators[key](this.textValue);
-  }
-
-  public errorFirstOf<Key extends keyof Validators>(
-    key: Key,
-  ): undefined | 'valid' | InvalidErrorCodes<Validators[Key]> {
-    if (this.firstErrorKey !== key) return undefined;
-    return this.errorOf<Key>(key);
-  }
-
-  public errorFirstIfTouchedOf<Key extends keyof Validators>(
-    key: Key,
-  ): undefined | 'valid' | InvalidErrorCodes<Validators[Key]> {
-    if (!this.touched) return undefined;
-    return this.errorFirstOf<Key>(key);
+    return undefined
   }
 
   public reset() {
     this.isTouched = false;
     this.isEvalutated = false;
+    this.textValue = '';
   }
 
-  public get touched(): boolean {
-    return this.isTouched || this.isEvalutated;
-  }
-
-  public get touchedInvalid(): boolean {
-    return this.touched && this.hasError;
+  public evaluate(): 'valid' | 'invalid' {
+    this.isEvalutated = true
+    if (this.validators === undefined) return 'valid'
+    for (const value of Object.values(this.validators)) {
+      if (value.validator(this.textValue) !== 'valid') {
+        return 'invalid'
+      }
+    }
+    return 'valid'
   }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export class InputFields<Fields extends { [key: string]: InputField<any> }, ExtraStatus = never> {
-  private _status: 'valid' | 'invalidInput' | ExtraStatus;
+export class InputFields<Fields extends { [key: string]: InputField<any> }, ExtraStatus extends string = never> {
+  private _status: 'valid' | 'invalidInput' | ExtraStatus = 'valid';
 
-  private resetTimeout: number | undefined = undefined;
+  private resetTimeout: NodeJS.Timeout | undefined = undefined;
 
-  public constructor(private readonly inputFields: Fields, status?: 'valid' | 'invalidInput' | ExtraStatus) {
-    this._status = status ?? 'valid';
-  }
+  public constructor(
+    private readonly inputFields: Fields,
+    private readonly statusMessages: {
+      [key in 'invalidInput' | ExtraStatus]: {
+        message: string,
+        level: InputFields.StatusLevel
+      }
+    }
+  ) {}
 
   public setElements(rootElement: HTMLElement) {
     for (const entry of Object.entries(this.inputFields)) {
@@ -125,7 +118,9 @@ export class InputFields<Fields extends { [key: string]: InputField<any> }, Extr
   public get validationOfAllFields(): 'valid' | 'invalid' {
     let validation: 'valid' | 'invalid' = 'valid';
     for (const field of Object.values(this.inputFields)) {
-      if (field.hasError) validation = 'invalid';
+      if (field.evaluate() === 'invalid') {
+        validation = 'invalid';
+      }
     }
     if (validation === 'invalid') this.setStatus('invalidInput');
     return validation;
@@ -138,7 +133,7 @@ export class InputFields<Fields extends { [key: string]: InputField<any> }, Extr
 
   private resetStatusAfterTimeout() {
     if (this.resetTimeout !== undefined) clearTimeout(this.resetTimeout);
-    this.resetTimeout = window.setTimeout(() => {
+    this.resetTimeout = setTimeout(() => {
       this._status = 'valid';
     }, 5000);
   }
@@ -153,5 +148,21 @@ export class InputFields<Fields extends { [key: string]: InputField<any> }, Extr
 
   public get status(): 'valid' | 'invalidInput' | ExtraStatus {
     return this._status;
+  }
+
+  public get statusMessage(): {
+    message: string,
+    level: InputFields.StatusLevel
+  } | undefined {
+    if (this._status === 'valid') return undefined
+    return this.statusMessages[this._status]
+  }
+}
+
+export namespace InputFields {
+  export enum StatusLevel {
+    Error,
+    Info,
+    Success
   }
 }

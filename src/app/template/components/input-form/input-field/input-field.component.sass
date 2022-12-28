@@ -5,23 +5,38 @@
   @include flex-column(flex-start, center)
   width: 100%
 
-.form
+.input
   @include flex-column(flex-start, center)
-  width: 65%
+  width: 100%
+  margin-bottom: 2em
 
-  button.submit
+  .label
+    @include font-montserrat
+    @include font-size('large')
+    @include font-weight('normal')
+    margin-bottom: 0.5em
+    text-align: left
+    width: 100%
+
+  input, textarea, select
     @include font-montserrat
     @include font-size('large')
     @include font-weight('normal')
     cursor: pointer
     text-align: center
     width: 100%
-    height: 2em
     vertical-align: middle
     border: solid 0.1em
     border-radius: 0.5em
 
-  .status
+  input, select
+    height: 2em
+
+  textarea
+    height: 10em
+    resize: none
+
+  .error-msg
     @include font-montserrat
     @include font-size('large')
     @include font-weight('normal')

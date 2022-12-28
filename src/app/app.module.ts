@@ -55,7 +55,10 @@ import { FYouthComponent } from './pages/football-youth/f-youth/f-youth.componen
 import { GYouthComponent } from './pages/football-youth/g-youth/g-youth.component';
 import { GymnasticsComponent } from './pages/gymnastics/gymnastics.component';
 import { DancingComponent } from './pages/dancing/dancing.component';
-import { DriveComponent } from './pages/drive/drive.component'
+import { DriveComponent } from './pages/drive/drive.component';
+import { ContactComponent } from './pages/contact/contact.component'
+import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
+import { InputFieldComponent } from './template/components/input-form/input-field/input-field.component'
 
 @NgModule({
   declarations: [
@@ -100,7 +103,9 @@ import { DriveComponent } from './pages/drive/drive.component'
     GYouthComponent,
     GymnasticsComponent,
     DancingComponent,
-    DriveComponent
+    DriveComponent,
+    ContactComponent,
+    InputFieldComponent
   ],
   imports: [
     BrowserModule,
@@ -115,13 +120,16 @@ import { DriveComponent } from './pages/drive/drive.component'
     AngularFirePerformanceModule,
     GoogleMapsModule,
     HttpClientModule,
-    HttpClientJsonpModule
+    HttpClientJsonpModule,
+    RecaptchaV3Module
+
   ],
   providers: [
     ScreenTrackingService,
     UserTrackingService,
     PerformanceMonitoringService,
-    { provide: REGION, useValue: 'europe-west1' }
+    { provide: REGION, useValue: 'europe-west1' },
+    { provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LdFFLgeAAAAAEzjFiR1X35IK7UHkL2Yx0EQ447i' }
   ],
   bootstrap: [AppComponent]
 })

@@ -46,6 +46,9 @@ export namespace StyleConfigService {
     secondaryBackgroundColor: Style.AppearanceColor,
     hoveredBackgroundColor: Style.AppearanceColor,
     textColor: Style.AppearanceColor,
-    secondaryTextColor: Style.AppearanceColor
+    secondaryTextColor: Style.AppearanceColor,
+    formSuccessStatusColor: Style.AppearanceColor,
+    formErrorStatusColor: Style.AppearanceColor,
+    formInfoStatusColor: Style.AppearanceColor
   }
 }

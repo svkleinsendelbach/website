@@ -1,3 +1,29 @@
-<form #form>
+<div
+  #form
+  class="form"
+  [ngClass]="deviceType.className"
+>
   <ng-content></ng-content>
-</form>
+
+  <!-- Submit button -->
+  <button
+    class="submit"
+    type="submit"
+    (click)="submitButtonClicked.emit(); $event.stopPropagation()"
+    [ngStyle]="{
+      color: styleConfig.css('textColor'),
+      backgroundColor: styleConfig.css('backgroundColor'),
+      borderColor: styleConfig.css(inputFields.status === 'loading' ? 'formInfoStatusColor' : (inputFields.status === 'valid' ? 'textColor' : (inputFields.status === 'sendSucceded' ? 'formSuccessStatusColor' : 'formErrorStatusColor')))
+    }"
+  >{{ submitButtonText }}</button>
+
+  <!-- Error message -->
+  <p
+    *ngIf="inputFields.statusMessage !== undefined"
+    class="status"
+    [ngStyle]="{
+      color: formStatusColor(inputFields.statusMessage.level)
+    }"
+  >{{ inputFields.statusMessage.message }}</p>
+
+</div>

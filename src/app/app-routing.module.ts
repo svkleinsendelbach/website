@@ -21,6 +21,7 @@ import { GYouthComponent } from './pages/football-youth/g-youth/g-youth.componen
 import { GymnasticsComponent } from './pages/gymnastics/gymnastics.component'
 import { DancingComponent } from './pages/dancing/dancing.component'
 import { DriveComponent } from './pages/drive/drive.component'
+import { ContactComponent } from './pages/contact/contact.component'
 
 const routes: Routes = [
   { path: 'über-uns', component: ManagersComponent },
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'gymnastik', component: GymnasticsComponent },
   { path: 'tanzen', component: DancingComponent },
   { path: 'anfahrt', component: DriveComponent },
+  { path: 'kontakt', component: ContactComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
