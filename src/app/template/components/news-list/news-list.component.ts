@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FetchState } from '../../classes/fetch-state';
 import { Datum } from '../../classes/full-datum';
+import { News } from '../../classes/news';
+import { ApiService } from '../../services/api.service';
 import { DeviceTypeService } from '../../services/device-type.service';
-import { NewsFetcherService } from '../../services/news-fetcher.service';
 import { StyleConfigService } from '../../services/style-config.service';
 
 @Component({
@@ -15,32 +16,38 @@ export class NewsListComponent implements OnInit {
 
   @Input() public maxListCount?: number
 
-  public fetchedNews: FetchState<{ news: NewsFetcherService.News[], hasMore: boolean }> = FetchState.loading
+  public fetchedNews: FetchState<{ news: News[], hasMore: boolean }> = FetchState.loading
 
   public constructor(
-    private readonly newsFetcher: NewsFetcherService,
+    private readonly apiService: ApiService,
     public readonly styleConfig: StyleConfigService,
     public readonly deviceType: DeviceTypeService
   ) {}
 
   public ngOnInit() {
-    this.newsFetcher.fetchNews(this.maxListCount)
+    this.apiService
+      .getNews({
+        numberNews: this.maxListCount
+      })
       .then(news => {
-        this.fetchedNews = FetchState.success(news)
+        this.fetchedNews = FetchState.success({
+          news: news.news.map(News.ReturnType.toNews),
+          hasMore: news.hasMore
+        })
       })
       .catch(reason => {
         this.fetchedNews = FetchState.failure(reason)
       })
   }
 
-  public get notDisabledNews(): NewsFetcherService.News[] | undefined {
+  public get notDisabledNews(): News[] | undefined {
     if (!FetchState.isSuccess(this.fetchedNews)) {
       return undefined
     }
     return FetchState.getContent(this.fetchedNews).news.filter(news => !news.disabled)
   }
 
-  public getDateDescription(date: string): string {
-    return Datum.description(Datum.fromDate(new Date(date)))
+  public getDateDescription(date: Date): string {
+    return Datum.description(Datum.fromDate(date))
   }
 }

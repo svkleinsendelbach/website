@@ -17,7 +17,7 @@ export class HomeBannerComponent implements OnInit {
 
   public currentPage = 1
 
-  private nextPageTimeout: NodeJS.Timeout | null = null
+  private nextPageTimeout: number | null = null
 
   public constructor(
     public readonly deviceType: DeviceTypeService,
@@ -33,7 +33,7 @@ export class HomeBannerComponent implements OnInit {
       clearTimeout(this.nextPageTimeout)
     }
     this.currentPage = page
-    this.nextPageTimeout = setTimeout(() => {
+    this.nextPageTimeout = window.setTimeout(() => {
       if (this.currentPage < this.bannerData.length) {
         this.setPage(this.currentPage + 1)
       } else {

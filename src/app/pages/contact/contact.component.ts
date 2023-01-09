@@ -2,11 +2,11 @@ import { AfterViewInit, Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { lastValueFrom } from 'rxjs';
-import { SendContactMailService } from 'src/app/services/send-contact-mail.service';
-import { VerifyRecaptchaService } from 'src/app/services/verify-recaptcha.service';
 import { InputField, InputFields } from 'src/app/template/classes/input-fields';
 import { Validator } from 'src/app/template/classes/validator';
 import { InputFieldComponent } from 'src/app/template/components/input-form/input-field/input-field.component';
+import { SendContactMailFunction } from 'src/app/template/services/api-functions-types';
+import { ApiService } from 'src/app/template/services/api.service';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
 
@@ -104,8 +104,7 @@ export class ContactComponent implements AfterViewInit {
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService,
-    private readonly sendContactMailService: SendContactMailService,
-    private readonly verifyRecaptchaService: VerifyRecaptchaService,
+    private readonly apiService: ApiService,
     private recaptchaService: ReCaptchaV3Service
   ) {
     this.titleService.setTitle('Kontakt')
@@ -134,26 +133,25 @@ export class ContactComponent implements AfterViewInit {
     }
     this.inputFields.setStatus('loading')
     const token = await lastValueFrom(this.recaptchaService.execute('contactFormAction'));
-    const verifyResponse = await this.verifyRecaptchaService.fetch('contactForm', token);
+    const verifyResponse = await this.apiService.verifyRecaptcha({
+      actionType: 'contactForm',
+      token: token
+    })
     if (!verifyResponse.success) {
       this.inputFields.setStatus('recaptchaFailed')
       return
     }
-    const request: SendContactMailService.MailRequest = {
-      sender: {
-        name: this.inputFields.field('name').textValue,
-        address: this.inputFields.field('email').textValue,
-      },
-      receiver: {
-        name: this.inputFields.field('receiver').textValue,
-        address: address,
-      },
+    const request: SendContactMailFunction.Parameters = {
+      senderName: this.inputFields.field('name').textValue,
+      senderAddress: this.inputFields.field('email').textValue,
+      receiverName: this.inputFields.field('receiver').textValue,
+      receiverAddress: address,
       message: this.inputFields.field('message').textValue,
     };
-    const response = await this.sendContactMailService.sendMail(request);
-    const status: 'sendSucceded' | 'sendFailed' = response === 'success' ? 'sendSucceded' : 'sendFailed'
+    const response = await this.apiService.sendContactMail(request);
+    const status: 'sendSucceded' | 'sendFailed' = response.success ? 'sendSucceded' : 'sendFailed'
     this.inputFields.setStatus(status);
-    if (response === 'success') {
+    if (response.success) {
       this.resetForm();
     }
   }

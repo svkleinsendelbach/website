@@ -91,7 +91,7 @@ export class InputField<Validators extends {
 export class InputFields<Fields extends { [key: string]: InputField<any> }, ExtraStatus extends string = never> {
   private _status: 'valid' | 'invalidInput' | ExtraStatus = 'valid';
 
-  private resetTimeout: NodeJS.Timeout | undefined = undefined;
+  private resetTimeout: number | undefined = undefined;
 
   public constructor(
     private readonly inputFields: Fields,
@@ -133,7 +133,7 @@ export class InputFields<Fields extends { [key: string]: InputField<any> }, Extr
 
   private resetStatusAfterTimeout() {
     if (this.resetTimeout !== undefined) clearTimeout(this.resetTimeout);
-    this.resetTimeout = setTimeout(() => {
+    this.resetTimeout = window.setTimeout(() => {
       this._status = 'valid';
     }, 5000);
   }

@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { EventGroup } from '../../classes/event';
 import { FetchState } from '../../classes/fetch-state';
 import { FullDatum } from '../../classes/full-datum';
+import { ApiService } from '../../services/api.service';
 import { DeviceTypeService } from '../../services/device-type.service';
-import { EventFetcherService } from '../../services/event-fetcher.service';
+
 import { StyleConfigService } from '../../services/style-config.service';
 
 @Component({
@@ -19,16 +21,19 @@ export class EventsComponent<GroupId extends string> implements OnInit {
     [key in GroupId]: string
   }
 
-  public fetchedEventGroups: FetchState<EventFetcherService.EventGroup<GroupId>[]> = FetchState.loading
+  public fetchedEventGroups: FetchState<EventGroup<GroupId>[]> = FetchState.loading
 
   public constructor(
-    private readonly eventFetcher: EventFetcherService<GroupId>,
+    private readonly apiService: ApiService,
     public readonly styleConfig: StyleConfigService,
     public readonly deviceType: DeviceTypeService
   ) {}
 
   public ngOnInit() {
-    this.eventFetcher.fetchEvents(this.groupIds)
+    this.apiService
+      .getEvents({
+        groupIds: this.groupIds
+      })
       .then(eventGroups => {
         this.fetchedEventGroups = FetchState.success(eventGroups)
       })
