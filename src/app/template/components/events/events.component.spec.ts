@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EventGroupId } from 'src/app/app.component';
 
 import { EventsComponent } from './events.component';
 
 describe('EventsComponent', () => {
-  let component: EventsComponent;
-  let fixture: ComponentFixture<EventsComponent>;
+  let component: EventsComponent<EventGroupId>;
+  let fixture: ComponentFixture<EventsComponent<EventGroupId>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -12,7 +13,7 @@ describe('EventsComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EventsComponent);
+    fixture = TestBed.createComponent(EventsComponent<EventGroupId>);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

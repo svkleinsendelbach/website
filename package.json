@@ -44,6 +44,7 @@
     "@angular-eslint/template-parser": "15.1.0",
     "@angular/cli": "~15.0.4",
     "@angular/compiler-cli": "^15.0.4",
+    "@types/googlemaps": "^3.43.3",
     "@types/jasmine": "~4.3.1",
     "@types/node": "^18.11.18",
     "@types/utf8": "^3.0.1",

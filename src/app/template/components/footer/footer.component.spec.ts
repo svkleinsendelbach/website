@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { InternalPath } from 'src/app/app.component';
 
 import { FooterComponent } from './footer.component';
 
 describe('FooterComponent', () => {
-  let component: FooterComponent;
-  let fixture: ComponentFixture<FooterComponent>;
+  let component: FooterComponent<InternalPath>;
+  let fixture: ComponentFixture<FooterComponent<InternalPath>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -12,7 +13,7 @@ describe('FooterComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FooterComponent);
+    fixture = TestBed.createComponent(FooterComponent<InternalPath>);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

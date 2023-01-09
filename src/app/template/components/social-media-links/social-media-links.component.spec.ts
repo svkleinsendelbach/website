@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { InternalPath } from 'src/app/app.component';
 
 import { SocialMediaLinksComponent } from './social-media-links.component';
 
 describe('SocialMediaLinksComponent', () => {
-  let component: SocialMediaLinksComponent;
-  let fixture: ComponentFixture<SocialMediaLinksComponent>;
+  let component: SocialMediaLinksComponent<InternalPath>;
+  let fixture: ComponentFixture<SocialMediaLinksComponent<InternalPath>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -12,7 +13,7 @@ describe('SocialMediaLinksComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SocialMediaLinksComponent);
+    fixture = TestBed.createComponent(SocialMediaLinksComponent<InternalPath>);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

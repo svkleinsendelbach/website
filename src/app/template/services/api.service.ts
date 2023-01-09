@@ -83,12 +83,12 @@ export class ApiService {
     if (fiatShamirParametersResult.state === 'failure')
       throw fiatShamirParametersResult.error;
     const callableFunction = this.firebaseFunctions.httpsCallable<{
-    verbose: 'none' | 'verbose' | 'colored' | 'coloredVerbose',
+    verbose: ApiService.VerboseType,
     databaseType: DatabaseType.Value,
     parameters: string
     }, string>(functionName);
     const data = await lastValueFrom(callableFunction({
-      verbose: environment.verbose ? 'verbose' : 'none',
+      verbose: environment.verbose,
       databaseType: environment.databaseType.value,
       parameters: crypter.encodeEncrypt({
         ...parameters,
@@ -124,12 +124,12 @@ export class ApiService {
     const crypter = new Crypter(environment.cryptionKeys);
     const asAndBs = this.generateAsAndBs();
     const callableFunction = this.firebaseFunctions.httpsCallable<{
-      verbose: 'none' | 'verbose' | 'colored' | 'coloredVerbose',
+      verbose: ApiService.VerboseType,
       databaseType: DatabaseType.Value,
       parameters: string
     }, string>('v2_fiatShamirChallengeGenerator');
     const data = await lastValueFrom(callableFunction({
-      verbose: environment.verbose ? 'verbose' : 'none',
+      verbose: environment.verbose,
       databaseType: environment.databaseType.value,
       parameters: crypter.encodeEncrypt({
         databaseType: environment.databaseType.value,
@@ -183,4 +183,8 @@ export class ApiService {
     }
     return result;
   }
+}
+
+export namespace ApiService {
+  export type VerboseType = 'none' | 'verbose' | 'colored' | 'coloredVerbose';
 }

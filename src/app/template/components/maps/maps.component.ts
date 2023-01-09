@@ -48,12 +48,12 @@ export class MapsComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.mapOptions = {
       ...this.options,
-      styles: this.appearance.current === AppearanceService.Appearance.Light ? null : mapStyleDarkAppearence
+      styles: this.appearance.current === AppearanceService.Appearance.Light ? undefined : mapStyleDarkAppearence
     }
     this.appearance.listeners.add('maps-component', appearance => {
       this.mapOptions = {
         ...this.options,
-        styles: appearance === AppearanceService.Appearance.Light ? null : mapStyleDarkAppearence
+        styles: appearance === AppearanceService.Appearance.Light ? undefined : mapStyleDarkAppearence
       }
     })
   }
