@@ -9,6 +9,10 @@ export interface IEnvironment {
     apiKey: string
   },
   databaseType: DatabaseType,
+  testUser?: {
+    email: string,
+    password: string
+  }
   verbose: ApiService.VerboseType,
   cryptionKeys: Crypter.Keys,
   fiatShamirKeys: {

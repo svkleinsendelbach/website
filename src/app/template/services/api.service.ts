@@ -7,7 +7,7 @@ import { DatabaseType } from '../classes/database-type';
 import { lastValueFrom } from 'rxjs';
 import { FirebaseFunction } from '../classes/firebase-function';
 import { Result } from '../classes/result';
-import { VerifyRecaptchaFunction, SendContactMailFunction, AddUserForWaitingFunction, AcceptDeclineWaitingUserFunction, CheckUserAuthenticationFunction, EditEventFunction, EditNewsFunction, GetEventsFunction, GetNewsFunction, GetSingleNewsFunction, GetUnauthenticatedUsersFunction, GetTeamSquadFunction } from './api-functions-types';
+import { VerifyRecaptchaFunction, SendContactMailFunction, AddUserForWaitingFunction, AcceptDeclineWaitingUserFunction, CheckUserAuthenticationFunction, EditEventFunction, EditNewsFunction, GetEventsFunction, GetNewsFunction, GetSingleNewsFunction, GetUnauthenticatedUsersFunction, GetTeamSquadFunction, DeleteAllDataFunction } from './api-functions-types';
 
 @Injectable({
   providedIn: 'root'
@@ -62,8 +62,10 @@ export class ApiService {
     return result.get();
   }
 
-  public async getSingleNews(parameters: GetSingleNewsFunction.Parameters): Promise<GetSingleNewsFunction.ReturnType> {
+  public async getSingleNews(parameters: GetSingleNewsFunction.Parameters): Promise<GetSingleNewsFunction.ReturnType | null> {
     const result = await this.callFunction<GetSingleNewsFunction.Parameters, GetSingleNewsFunction.ReturnType>('v2_getSingleNews', parameters);
+    if (result.state === 'failure' && result.error.code === 'unavailable') return null;
+    if (result.state === 'failure' && result.error.code === 'not-found') return null;
     return result.get();
   }
 
@@ -74,6 +76,10 @@ export class ApiService {
 
   public async getTeamSquad(parameters: GetTeamSquadFunction.Parameters): Promise<GetTeamSquadFunction.ReturnType> {
     const result = await this.callFunction<GetTeamSquadFunction.Parameters, GetTeamSquadFunction.ReturnType>('v2_getTeamSquad', parameters);
+    return result.get();
+  }
+  public async deleteAllData(parameters: DeleteAllDataFunction.Parameters): Promise<DeleteAllDataFunction.ReturnType> {
+    const result = await this.callFunction<DeleteAllDataFunction.Parameters, DeleteAllDataFunction.ReturnType>('v2_deleteAllData', parameters);
     return result.get();
   }
 

@@ -134,3 +134,9 @@ export namespace VerifyRecaptchaFunction {
     errorCodes?: string[];
   }
 }
+
+export namespace DeleteAllDataFunction {
+  export type Parameters = Record<string, never>;
+
+  export type ReturnType = void;
+}
