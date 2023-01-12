@@ -37,9 +37,11 @@ export class ApiService {
     return result.get();
   }
 
-  public async checkUserAuthentication(parameters: CheckUserAuthenticationFunction.Parameters): Promise<CheckUserAuthenticationFunction.ReturnType> {
+  public async checkUserAuthentication(parameters: CheckUserAuthenticationFunction.Parameters): Promise<'authorized' | 'unauthorized'> {
     const result = await this.callFunction<CheckUserAuthenticationFunction.Parameters, CheckUserAuthenticationFunction.ReturnType>('v2_checkUserAuthentication', parameters);
-    return result.get();
+    if (result.state === 'failure' && result.error.code === 'permission-denied') return 'unauthorized';
+    result.get();
+    return 'authorized'
   }
 
   public async editEvent<GroupId>(parameters: EditEventFunction.Parameters<GroupId>): Promise<EditEventFunction.ReturnType> {

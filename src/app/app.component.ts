@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faAddressBook, faFileLines, faFutbol, faMap, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
-import { faAddressCard, faBook, faChild, faHouse, faHouseFlag, faInfo, faShieldHalved, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { faAddressCard, faBook, faChild, faHouse, faHouseFlag, faInfo, faRightToBracket, faShieldHalved, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { Link } from './template/classes/link';
 import { Style } from './template/classes/style';
 import { ContactInfoComponent } from './template/components/contact-info/contact-info.component';
@@ -387,7 +387,7 @@ export type EventGroupId = 'general' | 'football-adults/general' | 'football-adu
   'football-youth/f-youth' | 'football-youth/g-youth' | 'gymnastics' | 'dancing';
 
 export type InternalPath = 'home' | 'über-uns' | 'sportheim' | 'chroniken' | 'satzung' | 'datenschutz' | 'mitgliedsantrag' | 'fussball/herren' | 'fussball/herren/erste-mannschaft' | 'fussball/herren/zweite-mannschaft' | 'fussball/herren/alte-herren' |
-  'fussball/jugend' | 'fussball/jugend/c-jugend' | 'fussball/jugend/e-jugend' | 'fussball/jugend/f-jugend' | 'fussball/jugend/g-jugend' | 'gymnastik' | 'tanzen' | 'anfahrt' | 'kontakt' | 'impressum' | 'bearbeiten'
+  'fussball/jugend' | 'fussball/jugend/c-jugend' | 'fussball/jugend/e-jugend' | 'fussball/jugend/f-jugend' | 'fussball/jugend/g-jugend' | 'gymnastik' | 'tanzen' | 'anfahrt' | 'kontakt' | 'impressum' | 'bearbeiten' | 'bearbeiten/anmelden'
 
 export const allInternalLinks: {
  [key in InternalPath]: Link<InternalPath>
@@ -413,7 +413,8 @@ export const allInternalLinks: {
   anfahrt: Link.internal<InternalPath>('Anfahrt', 'anfahrt'),
   kontakt: Link.internal<InternalPath>('Kontakt','kontakt'),
   impressum: Link.internal<InternalPath>('Impressum', 'impressum'),
-  bearbeiten: Link.internal<InternalPath>('Website bearbeiten', 'bearbeiten')
+  bearbeiten: Link.internal<InternalPath>('Website bearbeiten', 'bearbeiten'),
+  'bearbeiten/anmelden': Link.internal<InternalPath>('Anmelden', 'bearbeiten/anmelden')
  }
 
 export const allHeaderItemLinks: {
@@ -684,6 +685,13 @@ export const allHomeLinks: {
     link: allInternalLinks.bearbeiten,
     description: 'TODO',
     icon: faPenToSquare,
+    animation: 'shake'
+  },
+  'bearbeiten/anmelden': {
+    name: 'Anmelden',
+    link: allInternalLinks['bearbeiten/anmelden'],
+    description: 'TODO',
+    icon: faRightToBracket,
     animation: 'shake'
   }
 }

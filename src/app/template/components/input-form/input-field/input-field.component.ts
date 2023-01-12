@@ -29,7 +29,8 @@ export namespace InputFieldComponent {
   export namespace FieldType {
     export interface InputText {
       type: 'inputText',
-      placeholder: string
+      placeholder: string,
+      secure: boolean
     }
 
     export interface Textarea {
@@ -45,7 +46,16 @@ export namespace InputFieldComponent {
     export function inputText(placeholder: string): FieldType.InputText {
       return {
         type: 'inputText',
-        placeholder: placeholder
+        placeholder: placeholder,
+        secure: false
+      }
+    }
+
+    export function secureText(placeholder: string): FieldType.InputText {
+      return {
+        type: 'inputText',
+        placeholder: placeholder,
+        secure: true
       }
     }
 

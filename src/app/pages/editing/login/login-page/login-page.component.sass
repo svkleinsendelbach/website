@@ -1,0 +1,51 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+.sign-in-container
+  @include flex-column(flex-start, center)
+  width: 65%
+  margin-bottom: 2em
+
+  .sign-in-button
+    @include flex-row(center, center)
+    width: 100%
+    cursor: pointer
+    height: 3.2em
+    border-radius: 0.5em
+    vertical-align: middle
+
+    .logo
+      height: 1.5em
+      width: 1.5em
+      border-radius: 0.5em
+      padding: 1em
+
+    .button-text
+      @include font-size('large')
+      @include font-weight('normal')
+      text-align: center
+      flex: 5
+      margin-right: 3.5em
+
+    &.apple .button-text
+      font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif
+
+    &.google .button-text
+      @include font-roboto
+
+  .status
+    @include font-montserrat
+    @include font-size('large')
+    @include font-weight('normal')
+    margin-top: 0.5em
+    text-align: left
+    width: 100%
+
+  &.tablet
+    width: 85%
+
+  &.mobile
+    width: 100%
+
+    .sign-in-button .button-text
+      @include font-size('medium')

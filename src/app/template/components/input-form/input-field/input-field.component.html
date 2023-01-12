@@ -11,7 +11,7 @@
   <!-- Input text -->
   <input
     *ngIf="type.type === 'inputText'"
-    type="text"
+    type="{{type.secure ? 'password' : 'text' }}"
     placeholder="{{ type.placeholder }}"
     [attr.formId]="id"
     [ngStyle]="{

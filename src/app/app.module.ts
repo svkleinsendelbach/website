@@ -59,7 +59,11 @@ import { DriveComponent } from './pages/drive/drive.component';
 import { ContactComponent } from './pages/contact/contact.component'
 import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 import { InputFieldComponent } from './template/components/input-form/input-field/input-field.component';
-import { HomeComponent } from './pages/home/home.component'
+import { HomeComponent } from './pages/home/home.component';
+import { MainComponent } from './pages/editing/main/main.component';
+import { AuthenticationCheckComponent } from './template/components/authentication-check/authentication-check.component';
+import { LoginComponent } from './pages/editing/login/login.component';
+import { LoginPageComponent } from './pages/editing/login/login-page/login-page.component'
 
 @NgModule({
   declarations: [
@@ -107,7 +111,11 @@ import { HomeComponent } from './pages/home/home.component'
     DriveComponent,
     ContactComponent,
     InputFieldComponent,
-    HomeComponent
+    HomeComponent,
+    MainComponent,
+    AuthenticationCheckComponent,
+    LoginComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,

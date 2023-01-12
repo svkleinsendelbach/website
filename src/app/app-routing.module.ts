@@ -23,6 +23,8 @@ import { DancingComponent } from './pages/dancing/dancing.component'
 import { DriveComponent } from './pages/drive/drive.component'
 import { ContactComponent } from './pages/contact/contact.component'
 import { HomeComponent } from './pages/home/home.component'
+import { MainComponent } from './pages/editing/main/main.component';
+import { LoginComponent } from './pages/editing/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -47,6 +49,8 @@ const routes: Routes = [
   { path: 'tanzen', component: DancingComponent },
   { path: 'anfahrt', component: DriveComponent },
   { path: 'kontakt', component: ContactComponent },
+  { path: 'bearbeiten', component: MainComponent },
+  { path: 'bearbeiten/anmelden', component: LoginComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

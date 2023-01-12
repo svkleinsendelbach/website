@@ -52,7 +52,7 @@ export class ContactComponent implements AfterViewInit {
       email: new InputField({
         required: {
           validator: Validator.required,
-          errorMessage: 'Ihre E-Mail Adresse ist erforderlich.'
+          errorMessage: 'Ihre E-Mail Addresse ist erforderlich.'
         },
         email: {
           validator: Validator.email,
@@ -132,12 +132,11 @@ export class ContactComponent implements AfterViewInit {
       return
     }
     this.inputFields.setStatus('loading')
-    const token = await lastValueFrom(this.recaptchaService.execute('contactFormAction'));
+    const token = await lastValueFrom(this.recaptchaService.execute('contactForm'));
     const verifyResponse = await this.apiService.verifyRecaptcha({
-      actionType: 'contactForm',
       token: token
     })
-    if (!verifyResponse.success) {
+    if (verifyResponse.action !== 'contactForm' || !verifyResponse.success) {
       this.inputFields.setStatus('recaptchaFailed')
       return
     }

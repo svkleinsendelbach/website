@@ -1,0 +1,39 @@
+<app-text-section
+  [title]="'Authentifizierung wird überprüft'"
+  *ngIf="state === 'loading'"
+>
+  <p
+    class="text large margin-top-large"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Es wird überprüft, ob Sie berechtigt sind diese Seite zu besuchen.</p>
+</app-text-section>
+<app-text-section
+  [title]="'Authentifizierung bestätigt'"
+  *ngIf="state === 'alreadyLoggedIn'"
+>
+  <p
+    class="text large margin-top-large"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Sie konnten nicht automatisch weitergeleitet werden. Bitte nutzen Sie den Link:</p>
+  <a
+    class="text large"
+    href="{{ editPageLink.link }}"
+    target="{{ editPageLink.target }}"
+    title="{{ editPageLink.title }}"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Website bearbeiten</a>
+</app-text-section>
+<div
+  class="container"
+  *ngIf="state === 'loginPage'"
+>
+  <app-login-page
+    (userUnregisteredEmitter)="handleUserUnregistered()"
+  ></app-login-page>
+</div>

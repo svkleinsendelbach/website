@@ -123,12 +123,13 @@ export namespace SendContactMailFunction {
 
 export namespace VerifyRecaptchaFunction {
   export type Parameters = {
-    actionType: 'contactForm',
     token: string
   }
 
   export type ReturnType = {
     success: boolean;
+    score: number;
+    action: string;
     challenge_ts: string;
     hostname: string;
     errorCodes?: string[];
