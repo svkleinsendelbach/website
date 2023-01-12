@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.checkAuthentication();
+    this.state = 'addToWaitingUserPage';
+    // this.checkAuthentication();
   }
 
   private async checkAuthentication() {

@@ -37,3 +37,11 @@
     (userUnregisteredEmitter)="handleUserUnregistered()"
   ></app-login-page>
 </div>
+<div
+  class="container"
+  *ngIf="state === 'addToWaitingUserPage'"
+>
+  <app-login-add-user-waiting
+    (addToWaitingUserCanceled)="handleAddToWaitingUserCanceled()"
+  ></app-login-add-user-waiting>
+</div>

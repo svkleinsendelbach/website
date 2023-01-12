@@ -9,17 +9,22 @@
   @include flex-column(flex-start, center)
   width: 65%
 
-  button.submit
-    @include font-montserrat
-    @include font-size('large')
-    @include font-weight('normal')
-    cursor: pointer
-    text-align: center
+  #cancel-submit-container
+    @include flex-row(flex-start, center)
     width: 100%
-    height: 48px
-    vertical-align: middle
-    border: solid 1px
-    border-radius: 8px
+    gap: 32px
+
+    button.submit, button.cancel
+      @include font-montserrat
+      @include font-size('large')
+      @include font-weight('normal')
+      cursor: pointer
+      text-align: center
+      flex: 1
+      height: 48px
+      vertical-align: middle
+      border: solid 1px
+      border-radius: 8px
 
   .status
     @include font-montserrat
@@ -34,3 +39,10 @@
 
   &.mobile
     width: 100%
+
+    #cancel-submit-container
+      @include flex-column(flex-start, center)
+      gap: 16px
+
+      button.submit, button.cancel
+        width: 100%

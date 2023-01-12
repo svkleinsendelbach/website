@@ -13,7 +13,11 @@ export class InputFormComponent<ExtraStatus extends string> implements AfterView
 
   @Input() public submitButtonText!: string;
 
-  @Output() public submitButtonClicked = new EventEmitter<void>()
+  @Input() public cancelButtonText?: string;
+
+  @Output() public submitButtonClicked = new EventEmitter<void>();
+
+  @Output() public cancelButtonClicked = new EventEmitter<void>();
 
   @ViewChild('form') public formElement!: ElementRef<HTMLFormElement>
 

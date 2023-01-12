@@ -63,7 +63,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { MainComponent } from './pages/editing/main/main.component';
 import { AuthenticationCheckComponent } from './template/components/authentication-check/authentication-check.component';
 import { LoginComponent } from './pages/editing/login/login.component';
-import { LoginPageComponent } from './pages/editing/login/login-page/login-page.component'
+import { LoginPageComponent } from './pages/editing/login/login-page/login-page.component';
+import { LoginAddUserWaitingComponent } from './pages/editing/login/login-add-user-waiting/login-add-user-waiting.component'
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import { LoginPageComponent } from './pages/editing/login/login-page/login-page.
     MainComponent,
     AuthenticationCheckComponent,
     LoginComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    LoginAddUserWaitingComponent
   ],
   imports: [
     BrowserModule,

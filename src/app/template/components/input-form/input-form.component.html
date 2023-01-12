@@ -5,17 +5,32 @@
 >
   <ng-content></ng-content>
 
-  <!-- Submit button -->
-  <button
-    class="submit"
-    type="submit"
-    (click)="submitButtonClicked.emit(); $event.stopPropagation()"
-    [ngStyle]="{
-      color: styleConfig.css('textColor'),
-      backgroundColor: styleConfig.css('backgroundColor'),
-      borderColor: styleConfig.css(inputFields.status === 'loading' ? 'formInfoStatusColor' : (inputFields.status === 'valid' ? 'textColor' : (inputFields.status === 'sendSucceded' ? 'formSuccessStatusColor' : 'formErrorStatusColor')))
-    }"
-  >{{ submitButtonText }}</button>
+  <!-- Cancel and submit button -->
+  <div
+    id="cancel-submit-container"
+  >
+    <button
+      *ngIf="cancelButtonText !== undefined && cancelButtonClicked !== undefined"
+      class="cancel"
+      type="button"
+      (click)="cancelButtonClicked.emit(); $event.stopPropagation()"
+      [ngStyle]="{
+        color: styleConfig.css('textColor'),
+        backgroundColor: styleConfig.css('backgroundColor'),
+        borderColor: styleConfig.css('textColor')
+      }"
+    >{{ cancelButtonText }}</button>
+    <button
+      class="submit"
+      type="button"
+      (click)="submitButtonClicked.emit(); $event.stopPropagation()"
+      [ngStyle]="{
+        color: styleConfig.css('textColor'),
+        backgroundColor: styleConfig.css('backgroundColor'),
+        borderColor: styleConfig.css(inputFields.status === 'loading' ? 'formInfoStatusColor' : (inputFields.status === 'valid' ? 'textColor' : (inputFields.status === 'sendSucceded' ? 'formSuccessStatusColor' : 'formErrorStatusColor')))
+      }"
+    >{{ submitButtonText }}</button>
+  </div>
 
   <!-- Error message -->
   <p
