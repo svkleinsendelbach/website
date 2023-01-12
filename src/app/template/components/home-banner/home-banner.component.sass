@@ -1,6 +1,6 @@
 @import '/src/sass/flex'
 
-$height: 30em
+$height: 480px
 
 :host
   @include flex-column(flex-start, center)
@@ -34,36 +34,36 @@ $height: 30em
   #nav-button-container
     @include flex-row(center, space-between)
     width: 100%
-    height: calc($height - 3em)
+    height: calc($height - 48px)
 
     #left-button, #right-button
       @include flex-row(center, center)
       cursor: pointer
-      font-size: 4em
+      font-size: 64px
       opacity: 0.5
 
       &:hover
         opacity: 1
 
     #left-button
-      margin-left: 1em
+      margin-left: 16px
 
     #right-button
-      margin-right: 1em
+      margin-right: 16px
 
   #nav-bar
     @include flex-row(flex-start, center)
-    border-radius: 0.5em
-    padding: 0.25em 0.5em
-    margin-bottom: 1em
+    border-radius: 8px
+    padding: 4px 8px
+    margin-bottom: 16px
 
     .circle
       @include flex-row(center, center)
-      height: 1em
-      width: 1em
-      padding: 0.25em
+      height: 16px
+      width: 16px
+      padding: 4px
       cursor: pointer
-      font-size: 1em
+      font-size: 16px
       opacity: 0.5
 
       &.filled

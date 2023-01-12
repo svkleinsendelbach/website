@@ -8,19 +8,19 @@
 #link-rows
   @include flex-column(center, center)
   width: 85%
-  padding-bottom: 4em
+  padding-bottom: 64px
 
   .link-row
     @include flex-row(flex-start, center)
     width: 100%
-    padding-top: 4em
+    padding-top: 64px
 
     .link-item
       @include flex-column(center, center)
       cursor: pointer
       text-decoration: none
       flex: 1
-      padding: 0 1em
+      padding: 0 16px
       height: 100%
 
       .title, .description
@@ -28,13 +28,13 @@
         text-align: center
 
       .icon
-        font-size: 3em
-        margin-bottom: 0.5em
+        font-size: 48px
+        margin-bottom: 20px
 
       .title
         @include font-size('large')
         @include font-weight('medium')
-        margin-bottom: 0.5em
+        margin-bottom: 8px
 
       .description
         @include font-size('normal')

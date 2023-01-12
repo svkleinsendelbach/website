@@ -7,24 +7,24 @@
 #message-box
   @include flex-column(flex-start, center)
   width: 25vw
-  padding: 2em
+  padding: 32px
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25)
   position: fixed
   bottom: 0
-  right: 2em
+  right: 32px
   z-index: 1100
 
   #header
     @include font-roboto
     @include font-weight('medium')
     @include font-size('medium')
-    padding-bottom: 0.75em
+    padding-bottom: 12px
 
   .text
     @include font-roboto
     @include font-weight('light')
     @include font-size('small')
-    padding-bottom: 0.75em
+    padding-bottom: 12px
     text-align: justify
     line-height: 1.2
 
@@ -32,7 +32,7 @@
     @include font-roboto
     @include font-weight('light')
     @include font-size('small')
-    padding-bottom: 2em
+    padding-bottom: 32px
     text-decoration: underline
     cursor: pointer
 
@@ -40,19 +40,19 @@
     @include font-roboto
     @include font-weight('medium')
     @include font-size('small')
-    padding-bottom: 0.75em
+    padding-bottom: 12px
 
   #selection-buttons
     @include flex-row(center, space-between)
     width: 100%
-    padding-bottom: 1em
+    padding-bottom: 16px
 
     .button
       @include font-roboto
       @include font-weight('light')
       @include font-size('small')
-      padding: 0.4em 0em
-      border: 0.1em solid
+      padding: 6px 0
+      border: 1px solid
       width: 30%
       text-align: center
       cursor: pointer
@@ -64,7 +64,7 @@
     @include font-roboto
     @include font-weight('light')
     @include font-size('small')
-    padding-bottom: 0.75em
+    padding-bottom: 12px
     text-decoration: underline
     cursor: pointer
 
@@ -72,33 +72,33 @@
     @include font-roboto
     @include font-weight('medium')
     @include font-size('normal')
-    padding-bottom: 0.25em
+    padding-bottom: 4px
 
   .details-description
     @include font-roboto
     @include font-weight('light')
     @include font-size('small')
-    padding-bottom: 0.75em
+    padding-bottom: 12px
     text-align: justify
     line-height: 1.2
 
   #confirm-buttons
     @include flex-row(center, space-between)
     width: 100%
-    padding-top: 0.75em
+    padding-top: 12px
 
     #confirm-selected, #confirm-all
       @include font-roboto
       @include font-weight('light')
       @include font-size('small')
-      padding: 0.4em 0em
-      border: 0.1em solid
+      padding: 6px 0
+      border: 1px solid
       width: 45%
       text-align: center
       cursor: pointer
 
   &.mobile
-    width: calc(100vw - 4em)
+    width: calc(100vw - 64px)
     right: 0
 
     #selection-buttons
@@ -106,7 +106,7 @@
 
       .button
         width: 100%
-        margin-bottom: 0.75em
+        margin-bottom: 12px
 
 @media screen and (prefers-color-scheme: dark)
   #message-box

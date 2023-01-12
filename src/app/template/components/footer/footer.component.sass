@@ -4,18 +4,18 @@
 :host
   @include flex-column(flex-start, center)
   width: 100vw
-  margin-top: 3em
+  margin-top: 48px
 
 #footer
   @include flex-row(center, center)
   width: 100%
-  box-shadow: #80808080 0em -0.25em 1em
-  padding: 2em 0
+  box-shadow: #80808080 0 -4px 16px
+  padding: 32px 0
 
   #links-copyright
     @include flex-column(center, center)
     flex: 1
-    margin: 0 1em
+    margin: 0 16px
 
     #links
       @include flex-column(center, center)
@@ -27,17 +27,17 @@
         @include font-weight('normal')
         text-decoration: none
         white-space: nowrap
-        padding: 0.5em
-        margin: 0.1em 0
+        padding: 8px
+        margin: 1px 0
         width: 100%
-        border-radius: 0.25em
+        border-radius: 4px
         text-align: center
 
     #copyright
       @include font-montserrat
       @include font-size('xx-small')
       @include font-weight('light')
-      margin-top: 0.5em
+      margin-top: 8px
 
     #edit-link
       @include font-montserrat
@@ -45,18 +45,18 @@
       @include font-weight('small')
       cursor: pointer
       text-align: center
-      padding: 0.2em 0.5em
-      margin-top: 0.5em
-      border: 0.075em solid
-      border-radius: 0.25em
+      padding: 3px 8px
+      margin-top: 8px
+      border: 1px solid
+      border-radius: 4px
       text-decoration: none
 
   .address-card
-    $cover-height: 6em
-    $under-sheet-height: 5em
+    $cover-height: 96px
+    $under-sheet-height: 80px
     @include flex-column(center, center)
     flex: 1
-    margin: 0 1em
+    margin: 0 16px
 
     .top
       @include flex-column(center, center)
@@ -65,7 +65,7 @@
       transition: .5s
       transform: translateY(0.25 * ($cover-height + $under-sheet-height))
       z-index: 902
-      border-radius: 0.5em
+      border-radius: 8px
       cursor: pointer
 
       .function, .name
@@ -73,7 +73,7 @@
         @include font-size('normal')
         @include font-weight('small')
         white-space: nowrap
-        margin: 0.1em
+        margin: 1px
 
     .bottom
       @include flex-column(center, center)
@@ -82,7 +82,7 @@
       transition: .5s
       transform: translateY(-0.25 * ($cover-height + $under-sheet-height))
       z-index: 901
-      border-radius: 0.5em
+      border-radius: 8px
       opacity: 0
 
       .street, .city
@@ -90,7 +90,7 @@
         @include font-size('normal')
         @include font-weight('small')
         white-space: nowrap
-        margin: 0.1em
+        margin: 1px
 
       .telephone
         @include flex-row(center, center)
@@ -101,35 +101,35 @@
           @include font-size('normal')
           @include font-weight('small')
           white-space: nowrap
-          line-height: 1em
+          line-height: 16px
 
         .number
           @include font-montserrat
-          margin-left: 0.25em
+          margin-left: 4px
 
     &:hover
       .top
         transform: translateY(0)
-        border-radius: 0.5em 0.5em 0 0
+        border-radius: 8px 8px 0 0
 
       .bottom
         transform: translateY(0)
-        border-radius: 0 0 0.5em 0.5em
+        border-radius: 0 0 8px 8px
         opacity: 1
 
   &.desktop
     #links-copyright, .address-card
-      margin: 0 2em
+      margin: 0 32px
 
   &.tablet, &.mobile
     .address-card
       .top
         transform: translateY(0)
-        border-radius: 0.5em 0.5em 0 0
+        border-radius: 8px 8px 0 0
 
       .bottom
         transform: translateY(0)
-        border-radius: 0 0 0.5em 0.5em
+        border-radius: 0 0 8px 8px
         opacity: 1
 
     &.mobile
@@ -137,5 +137,5 @@
 
       #links-copyright, .address-card
         width: 90%
-        margin-bottom: 1em
+        margin-bottom: 16px
 

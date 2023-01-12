@@ -7,9 +7,9 @@
 
   .container
     @include flex-column(flex-start, center)
-    padding: 1em
-    margin: 0 0.5em
-    border-radius: 0.5em
+    padding: 16px
+    margin: 0 8px
+    border-radius: 8px
     text-decoration: none
 
     .title, .subtitle
@@ -19,17 +19,17 @@
     .title
       @include font-size('large')
       @include font-weight('normal')
-      margin-bottom: 0.5em
+      margin-bottom: 8px
 
     .subtitle
       @include font-size('medium')
       @include font-weight('small')
 
   &.desktop .container
-    width: calc(20% - 3em)
+    width: calc(20% - 48px)
 
   &.tablet .container
-    width: calc(25% - 3em)
+    width: calc(25% - 48px)
 
   &.mobile .container
-    width: calc(100% - 3em)
+    width: calc(100% - 48px)

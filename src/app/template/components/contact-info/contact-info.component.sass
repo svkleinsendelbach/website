@@ -12,32 +12,32 @@
 
   .contact
     @include flex-column(flex-start, center)
-    margin-bottom: 2em
+    margin-bottom: 32px
 
     .function
       @include font-montserrat
       @include font-size('large')
       @include font-weight('normal')
       text-align: center
-      margin-bottom: 0.5em
+      margin-bottom: 8px
 
     .name
       @include font-montserrat
       @include font-size('medium')
       @include font-weight('normal')
       text-align: center
-      margin-bottom: 0.5em
+      margin-bottom: 8px
 
     .telephone, .mobile, .email
       @include flex-row(center, center)
       @include font-montserrat
       @include font-size('normal')
       @include font-weight('small')
-      margin-bottom: 0.25em
+      margin-bottom: 4px
       text-decoration: none
 
       .icon
-        margin-right: 0.5em
+        margin-right: 8px
 
     &:nth-last-child(1)
       margin-bottom: 0

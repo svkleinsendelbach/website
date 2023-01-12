@@ -7,31 +7,30 @@
 
 #header-item
   @include flex-column(flex-start, center)
-  margin: 0 1em
   position: relative
   width: 100%
 
   #top-item
     @include flex-row(center, center)
-    height: 5em
+    height: 80px
     cursor: pointer
     text-decoration: none
-    width: 100%
-    padding: 0 0.5em
+    width: max-content
+    padding: 0 24px
 
     #top-item-text
       @include font-metrophobic
       @include font-size('normal')
       @include font-weight('medium')
-      line-height: 5em
+      line-height: 80px
 
     .drop-down-arrow
-      margin-left: 0.5em
+      margin-left: 8px
 
   #sub-items
     @include flex-column(flex-start, center)
     position: absolute
-    top: 5em
+    top: 80px
     z-index: 1002
     width: max-content
     display: none
@@ -40,7 +39,7 @@
     .sub-item
       @include flex-row(center, center)
       width: 100%
-      padding: 0.5em 1em
+      padding: 8px 16px
       cursor: pointer
 
       .sub-item-text
@@ -50,8 +49,8 @@
         text-decoration: none
 
       &:nth-last-child(1)
-        padding-bottom: 1em
-        border-radius: 0 0 0.5em 0.5em
+        padding-bottom: 16px
+        border-radius: 0 0 8px 8px
 
   &.expanded #sub-items
     display: flex
