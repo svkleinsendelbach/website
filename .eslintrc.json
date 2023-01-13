@@ -36,7 +36,8 @@
           {
             "allowDeclarations": true
           }
-        ]
+        ],
+        "no-async-promise-executor": "off"
       }
     },
     {

@@ -65,6 +65,7 @@ import { AuthenticationCheckComponent } from './template/components/authenticati
 import { LoginComponent } from './pages/editing/login/login.component';
 import { LoginPageComponent } from './pages/editing/login/login-page/login-page.component';
 import { LoginAddUserWaitingComponent } from './pages/editing/login/login-add-user-waiting/login-add-user-waiting.component'
+import { USE_DEVICE_LANGUAGE, PERSISTENCE } from '@angular/fire/compat/auth';
 
 @NgModule({
   declarations: [
@@ -141,7 +142,9 @@ import { LoginAddUserWaitingComponent } from './pages/editing/login/login-add-us
     UserTrackingService,
     PerformanceMonitoringService,
     { provide: REGION, useValue: 'europe-west1' },
-    { provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LdFFLgeAAAAAEzjFiR1X35IK7UHkL2Yx0EQ447i' }
+    { provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LdFFLgeAAAAAEzjFiR1X35IK7UHkL2Yx0EQ447i' },
+    { provide: USE_DEVICE_LANGUAGE, useValue: true },
+    { provide: PERSISTENCE, useValue: 'session' }
   ],
   bootstrap: [AppComponent]
 })

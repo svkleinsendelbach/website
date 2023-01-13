@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faAddressBook, faFileLines, faFutbol, faMap, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
-import { faAddressCard, faBook, faChild, faHouse, faHouseFlag, faInfo, faRightToBracket, faShieldHalved, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { faAddressCard, faBook, faCalendarDays, faChild, faHouse, faHouseFlag, faInfo, faNewspaper, faRightToBracket, faShieldHalved, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { Link } from './template/classes/link';
 import { Style } from './template/classes/style';
 import { ContactInfoComponent } from './template/components/contact-info/contact-info.component';
@@ -387,7 +387,8 @@ export type EventGroupId = 'general' | 'football-adults/general' | 'football-adu
   'football-youth/f-youth' | 'football-youth/g-youth' | 'gymnastics' | 'dancing';
 
 export type InternalPath = 'home' | 'über-uns' | 'sportheim' | 'chroniken' | 'satzung' | 'datenschutz' | 'mitgliedsantrag' | 'fussball/herren' | 'fussball/herren/erste-mannschaft' | 'fussball/herren/zweite-mannschaft' | 'fussball/herren/alte-herren' |
-  'fussball/jugend' | 'fussball/jugend/c-jugend' | 'fussball/jugend/e-jugend' | 'fussball/jugend/f-jugend' | 'fussball/jugend/g-jugend' | 'gymnastik' | 'tanzen' | 'anfahrt' | 'kontakt' | 'impressum' | 'bearbeiten' | 'bearbeiten/anmelden'
+  'fussball/jugend' | 'fussball/jugend/c-jugend' | 'fussball/jugend/e-jugend' | 'fussball/jugend/f-jugend' | 'fussball/jugend/g-jugend' | 'gymnastik' | 'tanzen' | 'anfahrt' | 'kontakt' | 'impressum' | 'bearbeiten' | 'bearbeiten/anmelden' | 'bearbeiten/termine' |
+  'bearbeiten/nachrichten'
 
 export const allInternalLinks: {
  [key in InternalPath]: Link<InternalPath>
@@ -414,7 +415,9 @@ export const allInternalLinks: {
   kontakt: Link.internal<InternalPath>('Kontakt','kontakt'),
   impressum: Link.internal<InternalPath>('Impressum', 'impressum'),
   bearbeiten: Link.internal<InternalPath>('Website bearbeiten', 'bearbeiten'),
-  'bearbeiten/anmelden': Link.internal<InternalPath>('Anmelden', 'bearbeiten/anmelden')
+  'bearbeiten/anmelden': Link.internal<InternalPath>('Anmelden', 'bearbeiten/anmelden'),
+  'bearbeiten/termine': Link.internal<InternalPath>('Termine bearbeiten', 'bearbeiten/termine'),
+  'bearbeiten/nachrichten': Link.internal<InternalPath>('Nachrichten bearbeiten', 'bearbeiten/nachrichten')
  }
 
 export const allHeaderItemLinks: {
@@ -692,6 +695,20 @@ export const allHomeLinks: {
     link: allInternalLinks['bearbeiten/anmelden'],
     description: 'TODO',
     icon: faRightToBracket,
+    animation: 'shake'
+  },
+  'bearbeiten/termine': {
+    name: 'Termine bearbeiten',
+    link: allInternalLinks['bearbeiten/termine'],
+    description: 'TODO',
+    icon: faCalendarDays,
+    animation: 'shake'
+  },
+  'bearbeiten/nachrichten': {
+    name: 'Nachrichten bearbeiten',
+    link: allInternalLinks['bearbeiten/nachrichten'],
+    description: 'TODO',
+    icon: faNewspaper,
     animation: 'shake'
   }
 }

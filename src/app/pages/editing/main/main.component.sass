@@ -1,0 +1,90 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100%
+
+#log-out-container
+  @include flex-row(center, flex-end)
+  width: 100%
+
+  #log-out-button
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    cursor: pointer
+    text-align: center
+    border: 1px solid
+    border-radius: 5px
+    padding: 5px 15px
+    margin-top: 20px
+    margin-right: 20px
+
+#unauthenticated-user-container
+  @include flex-column(flex-start, center)
+  width: 100%
+  margin-top: 25px
+
+  .unauthenticated-user
+    @include flex-row(center, center)
+    width: 95%
+    border:  1px solid
+    border-bottom: none
+
+    &:first-child
+      border-radius: 5px 5px 0 0
+
+    &:last-child
+      border-bottom: 1px solid
+      border-radius: 0 0 5px 5px
+
+    &:first-child:last-child
+      border-radius: 5px
+
+    .name, .button
+      @include font-montserrat
+      @include font-size('normal')
+      @include font-weight('small')
+      text-align: center
+      padding: 5px 10px
+
+    .name
+      flex: 5
+
+    .button
+      flex: 2
+      cursor: pointer
+
+  &.mobile .unauthenticated-user
+    @include flex-column(center, center)
+
+.edit-container
+  @include flex-row(center, flex-start)
+  width: 100%
+  margin-bottom: 15px
+
+  .button
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    cursor: pointer
+    text-align: center
+    border: 1px solid
+    border-radius: 5px
+    padding: 5px 35px
+    text-decoration: none
+
+  .title
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    margin-left: 25px
+
+  &.mobile
+    @include flex-column(center, center)
+    margin-bottom: 25px
+
+    .title
+      margin-left: 0
+      margin-top: 10px

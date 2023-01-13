@@ -3,7 +3,6 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireFunctions, REGION } from '@angular/fire/compat/functions';
-import { sha512 } from 'sha512-crypt-ts';
 import { environment } from 'src/environments/environment';
 import { guid } from '../classes/guid';
 import { News } from '../classes/news';
@@ -41,7 +40,7 @@ describe('ApiService', () => {
     const credential = await firebaseAuth.signInWithEmailAndPassword(environment.testUser!.email, environment.testUser!.password);
     expect(credential.user).not.toBeNull();
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const hashedUserId = sha512.base64(credential.user!.uid);
+    const hashedUserId = Crypter.sha512(credential.user!.uid);
     const crypter = new Crypter(environment.cryptionKeys);
     await databaseManager.setValue(`users/authentication/websiteEditing/${hashedUserId}`, crypter.encodeEncrypt({
         state: 'authenticated',
@@ -104,7 +103,7 @@ describe('ApiService', () => {
     const user = await firebaseAuth.currentUser;
     expect(user).not.toBeNull();
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const hashedUserId = sha512.base64(user!.uid);
+    const hashedUserId = Crypter.sha512(user!.uid);
     await databaseManager.removeValue(`users/authentication/websiteEditing/${hashedUserId}`);
     await service.addUserForWaiting({
         type: 'websiteEditing',
