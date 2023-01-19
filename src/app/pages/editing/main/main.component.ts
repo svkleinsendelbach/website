@@ -43,11 +43,11 @@ export class MainComponent {
   }
 
   public async acceptDeclineUser(action: 'accept' | 'decline', hashedUserId: string) {
+    this.unauthenticatedUsers = this.unauthenticatedUsers?.filter(user => user.hashedUserId !== hashedUserId);
     await this.apiService.acceptDeclineWaitingUser({
       type: 'websiteEditing',
       action: action,
       hashedUserId: hashedUserId
     });
-    this.unauthenticatedUsers = this.unauthenticatedUsers?.filter(user => user.hashedUserId !== hashedUserId);
   }
 }

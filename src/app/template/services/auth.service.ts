@@ -4,7 +4,7 @@ import { ApiService } from './api.service';
 import firebase from 'firebase/compat/app';
 import { OAuthProvider } from '@angular/fire/auth';
 import { UserAuthenticationType } from './api-functions-types';
-import { InputFields } from '../classes/input-fields';
+import { InputForm } from '../classes/input-form';
 
 @Injectable({
   providedIn: 'root'
@@ -102,9 +102,8 @@ export class AuthService {
 
   private async checkAuthenticationAndStoreLocal(authenticationType: UserAuthenticationType, user: firebase.User | null = null): Promise<'authorized' | 'unauthorized'> {
     if (user === null) {
-      user = await new Promise<firebase.User | null>(async resolve => {
-        const unsubscribe = await this.firebaseAuth.onAuthStateChanged(user => {
-          unsubscribe();
+      user = await new Promise<firebase.User | null>(resolve => {
+        this.firebaseAuth.onAuthStateChanged(user => {
           resolve(user);
         });
       })
@@ -176,32 +175,32 @@ export namespace AuthService {
       export const statusMessages: {
         [key in LoginError.Code]: {
           message: string,
-          level: InputFields.StatusLevel
+          level: InputForm.StatusLevel
         }
       } = {
         'unknown': {
           message: 'Es ist ein unbekannter Fehler aufgetreten.',
-          level: InputFields.StatusLevel.Error
+          level: InputForm.StatusLevel.Error
         },
         'invalid-email': {
           message: 'Die angegebene E-Mail Addresse ust ungültig.',
-          level: InputFields.StatusLevel.Error
+          level: InputForm.StatusLevel.Error
         },
         'user-disabled': {
           message: 'Der Benutzer wurde gesperrt.',
-          level: InputFields.StatusLevel.Error
+          level: InputForm.StatusLevel.Error
         },
         'wrong-password': {
           message: 'Das angebene Passwort ist falsch.',
-          level: InputFields.StatusLevel.Error
+          level: InputForm.StatusLevel.Error
         },
         'popup-blocked': {
           message: 'Anmeldefenster wurde von Ihrem Browser blockiert.',
-          level: InputFields.StatusLevel.Error
+          level: InputForm.StatusLevel.Error
         },
         'popup-closed': {
           message: 'Anmeldefenster wurde vom Benutzer geschlossen.',
-          level: InputFields.StatusLevel.Error
+          level: InputForm.StatusLevel.Error
         }
       }
     }

@@ -386,9 +386,39 @@ export class AppComponent {
 export type EventGroupId = 'general' | 'football-adults/general' | 'football-adults/first-team' | 'football-adults/second-team' | 'football-adults/ah-team' | 'football-youth/general' | 'football-youth/c-youth' | 'football-youth/e-youth' |
   'football-youth/f-youth' | 'football-youth/g-youth' | 'gymnastics' | 'dancing';
 
+export const allEventGroupIds: EventGroupId[] = [
+  'general', 'football-adults/general', 'football-adults/first-team', 'football-adults/second-team',
+  'football-adults/ah-team', 'football-youth/general', 'football-youth/c-youth', 'football-youth/e-youth',
+  'football-youth/f-youth', 'football-youth/g-youth', 'gymnastics', 'dancing'
+]
+
+export const groupedEventGroupIds: {
+  groupDescription: string,
+  eventIds: EventGroupId[],
+}[] = [
+  {
+    groupDescription: 'Allgemeines',
+    eventIds: [
+      'general', 'gymnastics', 'dancing'
+    ]
+  },
+  {
+    groupDescription: 'Herrenfußball',
+    eventIds: [
+      'football-adults/general', 'football-adults/first-team', 'football-adults/second-team', 'football-adults/ah-team'
+    ]
+  },
+  {
+    groupDescription: 'Jugendfußball',
+    eventIds: [
+      'football-youth/general', 'football-youth/c-youth', 'football-youth/e-youth', 'football-youth/f-youth', 'football-youth/g-youth'
+    ]
+  }
+]
+
 export type InternalPath = 'home' | 'über-uns' | 'sportheim' | 'chroniken' | 'satzung' | 'datenschutz' | 'mitgliedsantrag' | 'fussball/herren' | 'fussball/herren/erste-mannschaft' | 'fussball/herren/zweite-mannschaft' | 'fussball/herren/alte-herren' |
   'fussball/jugend' | 'fussball/jugend/c-jugend' | 'fussball/jugend/e-jugend' | 'fussball/jugend/f-jugend' | 'fussball/jugend/g-jugend' | 'gymnastik' | 'tanzen' | 'anfahrt' | 'kontakt' | 'impressum' | 'bearbeiten' | 'bearbeiten/anmelden' | 'bearbeiten/termine' |
-  'bearbeiten/nachrichten'
+  'bearbeiten/nachrichten' | 'bearbeiten/termine/bearbeiten' | 'bearbeiten/nachrichten/bearbeiten'
 
 export const allInternalLinks: {
  [key in InternalPath]: Link<InternalPath>
@@ -417,7 +447,9 @@ export const allInternalLinks: {
   bearbeiten: Link.internal<InternalPath>('Website bearbeiten', 'bearbeiten'),
   'bearbeiten/anmelden': Link.internal<InternalPath>('Anmelden', 'bearbeiten/anmelden'),
   'bearbeiten/termine': Link.internal<InternalPath>('Termine bearbeiten', 'bearbeiten/termine'),
-  'bearbeiten/nachrichten': Link.internal<InternalPath>('Nachrichten bearbeiten', 'bearbeiten/nachrichten')
+  'bearbeiten/nachrichten': Link.internal<InternalPath>('Nachrichten bearbeiten', 'bearbeiten/nachrichten'),
+  'bearbeiten/termine/bearbeiten': Link.internal<InternalPath>('Termin bearbeiten', 'bearbeiten/termine/bearbeiten'),
+  'bearbeiten/nachrichten/bearbeiten': Link.internal<InternalPath>('Nachricht bearbeiten', 'bearbeiten/nachrichten/bearbeiten')
  }
 
 export const allHeaderItemLinks: {
@@ -707,6 +739,20 @@ export const allHomeLinks: {
   'bearbeiten/nachrichten': {
     name: 'Nachrichten bearbeiten',
     link: allInternalLinks['bearbeiten/nachrichten'],
+    description: 'TODO',
+    icon: faNewspaper,
+    animation: 'shake'
+  },
+  'bearbeiten/termine/bearbeiten': {
+    name: 'Termin bearbeiten',
+    link: allInternalLinks['bearbeiten/termine/bearbeiten'],
+    description: 'TODO',
+    icon: faCalendarDays,
+    animation: 'shake'
+  },
+  'bearbeiten/nachrichten/bearbeiten': {
+    name: 'Nachricht bearbeiten',
+    link: allInternalLinks['bearbeiten/nachrichten/bearbeiten'],
     description: 'TODO',
     icon: faNewspaper,
     animation: 'shake'

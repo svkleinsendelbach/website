@@ -1,0 +1,77 @@
+<app-authentication-check
+  [authenticationType]="'websiteEditing'"
+  [logInPageLink]="logInPageLink"
+>
+  <app-text-section
+    [title]="'Termine bearbeiten'"
+  >
+    <p
+      id="add-event"
+      (click)="$event.preventDefault(); $event.stopPropagation(); addNewEvent()"
+      [ngStyle]="{
+        color: styleConfig.css('primaryColor'),
+        backgroundColor: styleConfig.css('backgroundColor'),
+        borderColor: styleConfig.css('textColor')
+      }"
+    >Neuen Termin hinzufügen</p>
+    <p
+      *ngIf="eventGroups === undefined"
+      class="text margin-top-large"
+      [ngStyle]="{
+        color: styleConfig.css('secondaryTextColor')
+      }"
+    >Termine werden geladen</p>
+    <div
+      *ngFor="let eventGroup of eventGroups"
+      class="event-group"
+      [ngClass]="deviceType.className"
+    >
+      <p
+        class="group-name"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ eventGroupDescription[eventGroup.groupId] }}</p>
+      <div
+        *ngFor="let event of eventGroup.events"
+        class="event"
+        [ngStyle]="{
+          backgroundColor: styleConfig.css('backgroundColor'),
+          borderColor: styleConfig.css('textColor')
+        }"
+      >
+        <div
+          class="title-container"
+        >
+          <p
+            class="title"
+            [ngStyle]="{
+              color: styleConfig.css('textColor')
+            }"
+          >{{ event.title }}</p>
+          <p
+            *ngIf="event.subtitle !== undefined"
+            class="subtitle"
+            [ngStyle]="{
+              color: styleConfig.css('secondaryTextColor')
+            }"
+          >{{ event.subtitle }}</p>
+        </div>
+        <p
+          class="edit-button"
+          (click)="$event.preventDefault(); $event.stopPropagation(); editEvent(eventGroup.groupId, event)"
+          [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+          }"
+        >Bearbeiten</p>
+        <p
+          class="delete-button"
+          (click)="$event.preventDefault(); $event.stopPropagation(); deleteEvent(eventGroup.groupId, event.id)"
+          [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+          }"
+        >Löschen</p>
+      </div>
+    </div>
+  </app-text-section>
+</app-authentication-check>

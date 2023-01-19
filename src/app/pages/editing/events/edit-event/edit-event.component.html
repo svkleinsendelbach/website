@@ -1,0 +1,14 @@
+<app-authentication-check
+  [authenticationType]="'websiteEditing'"
+  [logInPageLink]="logInPageLink"
+>
+  <app-text-section
+    [title]="previousEvent === undefined ? 'Termin hinzufügen' : 'Termin bearbeiten'"
+  >
+    <app-input-form
+      [inputForm]="inputForm"
+      [submitButtonText]="previousEvent === undefined ? 'Hinzufügen' : 'Speichern'"
+      (submitButtonClicked)="saveEvent()"
+    ></app-input-form>
+  </app-text-section>
+</app-authentication-check>

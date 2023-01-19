@@ -66,6 +66,8 @@ import { LoginComponent } from './pages/editing/login/login.component';
 import { LoginPageComponent } from './pages/editing/login/login-page/login-page.component';
 import { LoginAddUserWaitingComponent } from './pages/editing/login/login-add-user-waiting/login-add-user-waiting.component'
 import { USE_DEVICE_LANGUAGE, PERSISTENCE } from '@angular/fire/compat/auth';
+import { EventsComponent as EventsComponent_1 } from './pages/editing/events/events.component';
+import { EditEventComponent } from './pages/editing/events/edit-event/edit-event.component';
 
 @NgModule({
   declarations: [
@@ -118,7 +120,9 @@ import { USE_DEVICE_LANGUAGE, PERSISTENCE } from '@angular/fire/compat/auth';
     AuthenticationCheckComponent,
     LoginComponent,
     LoginPageComponent,
-    LoginAddUserWaitingComponent
+    LoginAddUserWaitingComponent,
+    EventsComponent_1,
+    EditEventComponent
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@
   >
     <p
       id="log-out-button"
-      (click)="logOut(); $event.stopPropagation()"
+      (click)="$event.preventDefault(); $event.stopPropagation(); logOut()"
       [ngStyle]="{
         color: styleConfig.css('textColor'),
         backgroundColor: styleConfig.css('backgroundColor')

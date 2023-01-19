@@ -17,33 +17,8 @@
 
 <app-text-section>
   <app-input-form
-    [inputFields]="inputFields"
+    [inputForm]="inputForm"
     [submitButtonText]="'Abschicken'"
     (submitButtonClicked)="onSubmit()"
-  >
-    <app-input-field
-      [field]="inputFields.field('name')"
-      [id]="'name'"
-      [label]="'Ihr Name:'"
-      [type]="FieldType.inputText('Ihr Name')"
-    ></app-input-field>
-    <app-input-field
-      [field]="inputFields.field('email')"
-      [id]="'email'"
-      [label]="'Ihre E-Mail Adresse:'"
-      [type]="FieldType.inputText('Ihre E-Mail Adresse')"
-    ></app-input-field>
-    <app-input-field
-      [field]="inputFields.field('receiver')"
-      [id]="'receiver'"
-      [label]="'Anfrage an:'"
-      [type]="FieldType.select(reveiverNames)"
-    ></app-input-field>
-    <app-input-field
-      [field]="inputFields.field('message')"
-      [id]="'message'"
-      [label]="'Ihre Nachricht:'"
-      [type]="FieldType.textarea('Ihre Nachricht')"
-    ></app-input-field>
-  </app-input-form>
+  ></app-input-form>
 </app-text-section>

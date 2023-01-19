@@ -6,14 +6,16 @@
     [ngStyle]="{
       color: styleConfig.css('textColor')
     }"
-  >{{ label }}</p>
+  >{{ field.label }}</p>
 
   <!-- Input text -->
   <input
-    *ngIf="type.type === 'inputText'"
-    type="{{type.secure ? 'password' : 'text' }}"
-    placeholder="{{ type.placeholder }}"
+    *ngIf="field.type.type === 'inputText'"
+    type="{{ field.type.option === undefined ? 'text' : field.type.option.type }}"
+    placeholder="{{ field.type.placeholder }}"
     [attr.formId]="id"
+    [attr.min]="field.type.option !== undefined && field.type.option.type === 'date' ? field.type.option.min : undefined"
+    [attr.max]="field.type.option !== undefined && field.type.option.type === 'date' ? field.type.option.max : undefined"
     [ngStyle]="{
       color: styleConfig.css('textColor'),
       backgroundColor: styleConfig.css('backgroundColor'),
@@ -23,8 +25,8 @@
 
   <!-- textarea -->
   <textarea
-    *ngIf="type.type === 'textarea'"
-    placeholder="{{ type.placeholder }}"
+    *ngIf="field.type.type === 'textarea'"
+    placeholder="{{ field.type.placeholder }}"
     [attr.formId]="id"
     [ngStyle]="{
       color: styleConfig.css('textColor'),
@@ -35,7 +37,7 @@
 
   <!-- select -->
   <select
-    *ngIf="type.type === 'select'"
+    *ngIf="field.type.type === 'select'"
     [attr.formId]="id"
     [ngStyle]="{
       color: styleConfig.css('textColor'),
@@ -43,9 +45,19 @@
       borderColor: styleConfig.css(field.errorMessage === undefined ? 'textColor' : 'formErrorStatusColor')
     }"
   >
+    <optgroup
+      *ngFor="let group of field.type.options.type === 'grouped' ? field.type.options.groups : []"
+      label="{{ group.groupText }}"
+    >
+      <option
+        *ngFor="let option of group.options"
+        value="{{ option.id }}"
+      >{{ option.text }}</option>
+    </optgroup>
     <option
-      *ngFor="let option of type.options"
-    >{{ option }}</option>
+      *ngFor="let option of field.type.options.type === 'ungrouped' ? field.type.options.options : []"
+      value="{{ option.id }}"
+    >{{ option.text }}</option>
   </select>
 
   <p

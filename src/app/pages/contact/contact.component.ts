@@ -2,9 +2,9 @@ import { AfterViewInit, Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { lastValueFrom } from 'rxjs';
-import { InputField, InputFields } from 'src/app/template/classes/input-fields';
-import { Validator } from 'src/app/template/classes/validator';
-import { InputFieldComponent } from 'src/app/template/components/input-form/input-field/input-field.component';
+import { InputField } from 'src/app/template/classes/input-field';
+import { InputForm } from 'src/app/template/classes/input-form';
+import { Validator } from 'src/app/template/classes/validators';
 import { SendContactMailFunction } from 'src/app/template/services/api-functions-types';
 import { ApiService } from 'src/app/template/services/api.service';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
@@ -16,8 +16,6 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
   styleUrls: ['./contact.component.sass']
 })
 export class ContactComponent implements AfterViewInit {
-  public FieldType = InputFieldComponent.FieldType
-
   public receivers = [
     {
       name: 'Vorstandschaft',
@@ -41,61 +39,82 @@ export class ContactComponent implements AfterViewInit {
     },
   ]
 
-  public inputFields = new InputFields(
+  public inputForm = new InputForm(
     {
-      name: new InputField({
-        required: {
-          validator: Validator.required,
-          errorMessage: 'Ihr Name ist erforderlich.'
+      name: new InputField(
+        'Ihr Name:',
+        InputField.Type.inputText('Ihr Name'),
+        {
+          required: {
+            validator: Validator.required,
+            errorMessage: 'Ihr Name ist erforderlich.'
+          }
         }
-      }),
-      email: new InputField({
-        required: {
-          validator: Validator.required,
-          errorMessage: 'Ihre E-Mail Addresse ist erforderlich.'
-        },
-        email: {
-          validator: Validator.email,
-          errorMessage: 'Das ist keine gültige E-Mail Addresse.'
+      ),
+      email: new InputField(
+        'Ihre E-Mail Adresse:',
+        InputField.Type.inputText('Ihre E-Mail Adresse'),
+        {
+          required: {
+            validator: Validator.required,
+            errorMessage: 'Ihre E-Mail Addresse ist erforderlich.'
+          },
+          email: {
+            validator: Validator.email,
+            errorMessage: 'Das ist keine gültige E-Mail Addresse.'
+          }
         }
-      }),
-      receiver: new InputField({
-        required: {
-          validator: Validator.required,
-          errorMessage: 'Ein Empfänger ist erforderlich.'
-        },
-        isOneOf: {
-          validator: Validator.isOneOf(this.reveiverNames),
-          errorMessage: 'Der Empfänger ist ungültig'
+      ),
+      receiver: new InputField(
+        'Anfrage an:',
+        InputField.Type.select(this.receivers.map(receiver => {
+          return {
+            id: receiver.name,
+            text: receiver.name
+          }
+        })),
+        {
+          required: {
+            validator: Validator.required,
+            errorMessage: 'Ein Empfänger ist erforderlich.'
+          },
+          isOneOf: {
+            validator: Validator.isOneOf(this.reveiverNames),
+            errorMessage: 'Der Empfänger ist ungültig'
+          }
         }
-      }),
-      message: new InputField({
-        required: {
-          validator: Validator.required,
-          errorMessage: 'Eine Nachricht ist erforderlich.'
+      ),
+        message: new InputField(
+          'Ihre Nachricht:',
+          InputField.Type.textarea('Ihre Nachricht'),
+          {
+          required: {
+            validator: Validator.required,
+            errorMessage: 'Eine Nachricht ist erforderlich.'
+          }
         }
-      })
+      )
     },
     {
       invalidInput: {
         message: 'Nicht alle Eingaben sind gültig.',
-        level: InputFields.StatusLevel.Error
+        level: InputForm.StatusLevel.Error
       },
       loading: {
         message: 'Email wird versandt.',
-        level: InputFields.StatusLevel.Info
+        level: InputForm.StatusLevel.Info
       },
       recaptchaFailed: {
         message: 'reCAPTCHA ungültig.',
-        level: InputFields.StatusLevel.Error
+        level: InputForm.StatusLevel.Error
       },
       sendFailed: {
         message: 'Es gab einen Fehler beim Senden.',
-        level: InputFields.StatusLevel.Error
+        level: InputForm.StatusLevel.Error
       },
       sendSucceded: {
         message: 'Email wurde versendet.',
-        level: InputFields.StatusLevel.Success
+        level: InputForm.StatusLevel.Success
       }
     }
   )
@@ -111,7 +130,7 @@ export class ContactComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit() {
-    this.inputFields.field('receiver').textValue = this.receivers[0].name
+    this.inputForm.field('receiver').textValue = this.receivers[0].name
   }
 
   public get reveiverNames(): string[] {
@@ -119,44 +138,44 @@ export class ContactComponent implements AfterViewInit {
   }
 
   public onSubmit() {
-    if (this.inputFields.status !== 'valid') { return }
-    const validation = this.inputFields.validationOfAllFields
+    if (this.inputForm.status !== 'valid') { return }
+    const validation = this.inputForm.validationOfAllFields
     if (validation !== 'valid') { return }
     this.sendContactMail();
   }
 
   private async sendContactMail() {
-    const address = this.receivers.find(receiver => receiver.name === this.inputFields.field('receiver').textValue )?.address;
+    const address = this.receivers.find(receiver => receiver.name === this.inputForm.field('receiver').textValue )?.address;
     if (address === undefined) {
-      this.inputFields.setStatus('invalidInput')
+      this.inputForm.setStatus('invalidInput')
       return
     }
-    this.inputFields.setStatus('loading')
+    this.inputForm.setStatus('loading')
     const token = await lastValueFrom(this.recaptchaService.execute('contactForm'));
     const verifyResponse = await this.apiService.verifyRecaptcha({
       token: token
     })
     if (verifyResponse.action !== 'contactForm' || !verifyResponse.success) {
-      this.inputFields.setStatus('recaptchaFailed')
+      this.inputForm.setStatus('recaptchaFailed')
       return
     }
     const request: SendContactMailFunction.Parameters = {
-      senderName: this.inputFields.field('name').textValue,
-      senderAddress: this.inputFields.field('email').textValue,
-      receiverName: this.inputFields.field('receiver').textValue,
+      senderName: this.inputForm.field('name').textValue,
+      senderAddress: this.inputForm.field('email').textValue,
+      receiverName: this.inputForm.field('receiver').textValue,
       receiverAddress: address,
-      message: this.inputFields.field('message').textValue,
+      message: this.inputForm.field('message').textValue,
     };
     const response = await this.apiService.sendContactMail(request);
     const status: 'sendSucceded' | 'sendFailed' = response.success ? 'sendSucceded' : 'sendFailed'
-    this.inputFields.setStatus(status);
+    this.inputForm.setStatus(status);
     if (response.success) {
       this.resetForm();
     }
   }
 
   private resetForm() {
-    this.inputFields.resetAll()
-    this.inputFields.field('receiver').textValue = this.receivers[0].name
+    this.inputForm.resetAll()
+    this.inputForm.field('receiver').textValue = this.receivers[0].name
   }
 }

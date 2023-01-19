@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { allInternalLinks } from 'src/app/app.component';
-import { InputField, InputFields } from 'src/app/template/classes/input-fields';
-import { Validator } from 'src/app/template/classes/validator';
-import { InputFieldComponent } from 'src/app/template/components/input-form/input-field/input-field.component';
+import { InputField } from 'src/app/template/classes/input-field';
+import { InputForm } from 'src/app/template/classes/input-form';
+import { Validator } from 'src/app/template/classes/validators';
 import { AuthService } from 'src/app/template/services/auth.service';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
@@ -14,32 +14,39 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
   styleUrls: ['./login-add-user-waiting.component.sass']
 })
 export class LoginAddUserWaitingComponent {
-  public FieldType = InputFieldComponent.FieldType
 
   @Output() private addToWaitingUserCanceled = new EventEmitter<void>();
 
-  public inputFields = new InputFields({
-    firstName: new InputField({
-      required: {
-        validator: Validator.required,
-        errorMessage: 'Der Vorname ist erforderlich.'
+  public inputForm = new InputForm({
+    firstName: new InputField(
+      'Vorname:',
+      InputField.Type.inputText('Vorname'),
+      {
+        required: {
+          validator: Validator.required,
+          errorMessage: 'Der Vorname ist erforderlich.'
+        }
       }
-    }),
-    lastName: new InputField({
-      required: {
-        validator: Validator.required,
-        errorMessage: 'Der Nachname ist erforderlich.'
+    ),
+    lastName: new InputField(
+      'Nachname:',
+      InputField.Type.inputText('Nachname'),
+      {
+        required: {
+          validator: Validator.required,
+          errorMessage: 'Der Nachname ist erforderlich.'
+        }
       }
-    })
+    )
   },
   {
     invalidInput: {
       message: 'Nicht alle Eingaben sind gültig.',
-      level: InputFields.StatusLevel.Error
+      level: InputForm.StatusLevel.Error
     },
     loading: {
       message: 'Antrag wird übermittelt.',
-      level: InputFields.StatusLevel.Info
+      level: InputForm.StatusLevel.Info
     },
     ...AuthService.LoginError.Code.statusMessages
   });
@@ -52,38 +59,38 @@ export class LoginAddUserWaitingComponent {
   ) {}
 
   public async handleCancel() {
-    this.inputFields.resetAll();
+    this.inputForm.resetAll();
     await this.authService.removeRegistration();
     this.addToWaitingUserCanceled.emit();
   }
 
   public async handleApply() {
-    if (this.inputFields.status !== 'valid') return;
-    const validation = this.inputFields.validationOfAllFields
+    if (this.inputForm.status !== 'valid') return;
+    const validation = this.inputForm.validationOfAllFields
     if (validation !== 'valid') return;
     const result = await this.authService
-      .addUserForWaiting('websiteEditing', this.inputFields.field('firstName').textValue, this.inputFields.field('lastName').textValue)
+      .addUserForWaiting('websiteEditing', this.inputForm.field('firstName').textValue, this.inputForm.field('lastName').textValue)
       .catch(reason => this.handleLoginError(reason));
     if (result === 'error') return;
-    this.inputFields.setStatus('valid');
-    this.inputFields.resetAll();
+    this.inputForm.setStatus('valid');
+    this.inputForm.resetAll();
     this.router.navigateByUrl(allInternalLinks.home.link);
   }
 
   private handleLoginError(reason: unknown): 'error' {
     if (typeof reason !== 'object' || reason === null) {
-      this.inputFields.setStatus('unknown');
+      this.inputForm.setStatus('unknown');
       return 'error';
     }
     if (!('name' in reason) || (reason as Record<'name', unknown>).name !== 'WebsiteEditorAuthServiceLoginError') {
-      this.inputFields.setStatus('unknown');
+      this.inputForm.setStatus('unknown');
       return 'error';
     }
     if (!('code' in reason) || typeof (reason as Record<'code', unknown>).code !== 'string' || !AuthService.LoginError.Code.isLoginErrorCode((reason as Record<'code', string>).code)) {
-      this.inputFields.setStatus('unknown');
+      this.inputForm.setStatus('unknown');
       return 'error';
     }
-    this.inputFields.setStatus((reason as Record<'code', AuthService.LoginError.Code>).code);
+    this.inputForm.setStatus((reason as Record<'code', AuthService.LoginError.Code>).code);
     return 'error';
   }
 }

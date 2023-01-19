@@ -25,6 +25,8 @@ import { ContactComponent } from './pages/contact/contact.component'
 import { HomeComponent } from './pages/home/home.component'
 import { MainComponent } from './pages/editing/main/main.component';
 import { LoginComponent } from './pages/editing/login/login.component';
+import { EventsComponent } from './pages/editing/events/events.component';
+import { EditEventComponent } from './pages/editing/events/edit-event/edit-event.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -51,6 +53,8 @@ const routes: Routes = [
   { path: 'kontakt', component: ContactComponent },
   { path: 'bearbeiten', component: MainComponent },
   { path: 'bearbeiten/anmelden', component: LoginComponent },
+  { path: 'bearbeiten/termine', component: EventsComponent },
+  { path: 'bearbeiten/termine/bearbeiten', component: EditEventComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

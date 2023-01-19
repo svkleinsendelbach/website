@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { InputFields } from '../../classes/input-fields';
+import { InputField } from '../../classes/input-field';
+import { InputForm } from '../../classes/input-form';
 import { DeviceTypeService } from '../../services/device-type.service';
 import { StyleConfigService } from '../../services/style-config.service';
 
@@ -9,7 +10,7 @@ import { StyleConfigService } from '../../services/style-config.service';
   styleUrls: ['./input-form.component.sass']
 })
 export class InputFormComponent<ExtraStatus extends string> implements AfterViewInit {
-  @Input() public inputFields!: InputFields<any, ExtraStatus> // eslint-disable-line @typescript-eslint/no-explicit-any
+  @Input() public inputForm!: InputForm<Record<string, InputField>, ExtraStatus>
 
   @Input() public submitButtonText!: string;
 
@@ -19,7 +20,7 @@ export class InputFormComponent<ExtraStatus extends string> implements AfterView
 
   @Output() public cancelButtonClicked = new EventEmitter<void>();
 
-  @ViewChild('form') public formElement!: ElementRef<HTMLFormElement>
+  @ViewChild('form') public formElement!: ElementRef<HTMLElement>
 
   public constructor(
     public readonly deviceType: DeviceTypeService,
@@ -27,14 +28,18 @@ export class InputFormComponent<ExtraStatus extends string> implements AfterView
   ) {}
 
   public ngAfterViewInit() {
-    this.inputFields.setElements(this.formElement.nativeElement)
+    this.inputForm.setElements(this.formElement.nativeElement)
   }
 
-  public formStatusColor(level: InputFields.StatusLevel): string {
+  public formStatusColor(level: InputForm.StatusLevel): string {
     switch (level) {
-      case InputFields.StatusLevel.Success: return this.styleConfig.css('formSuccessStatusColor')
-      case InputFields.StatusLevel.Info: return this.styleConfig.css('formInfoStatusColor')
-      case InputFields.StatusLevel.Error: return this.styleConfig.css('formErrorStatusColor')
+      case InputForm.StatusLevel.Success: return this.styleConfig.css('formSuccessStatusColor')
+      case InputForm.StatusLevel.Info: return this.styleConfig.css('formInfoStatusColor')
+      case InputForm.StatusLevel.Error: return this.styleConfig.css('formErrorStatusColor')
     }
+  }
+
+  public asdf(v: string) {
+    console.log(v)
   }
 }

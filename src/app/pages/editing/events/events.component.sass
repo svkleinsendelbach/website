@@ -1,0 +1,38 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100%
+
+#add-event
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    cursor: pointer
+    text-align: center
+    border: 1px solid
+    border-radius: 5px
+    padding: 5px 15px
+    margin-bottom: 25px
+
+.event-group
+  @include flex-column(flex-start, center)
+  width: 100%
+
+  .group-name
+    @include font-montserrat
+    @include font-size('large')
+    @include font-weight('small')
+    width: 100%
+    text-align: left
+
+
+  .event
+    @include flex-column(flex-start, center)
+    width: 100%
+
+  .title-container
+    .title
+    .subtitle
+  .edit-button, .delete-button

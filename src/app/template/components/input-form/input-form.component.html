@@ -3,7 +3,13 @@
   class="form"
   [ngClass]="deviceType.className"
 >
-  <ng-content></ng-content>
+
+  <!-- Control fields -->
+  <app-input-field
+    *ngFor="let fieldEntry of inputForm.fields"
+    [id]="fieldEntry.id"
+    [field]="fieldEntry.field"
+  ></app-input-field>
 
   <!-- Cancel and submit button -->
   <div
@@ -13,7 +19,7 @@
       *ngIf="cancelButtonText !== undefined && cancelButtonClicked !== undefined"
       class="cancel"
       type="button"
-      (click)="cancelButtonClicked.emit(); $event.stopPropagation()"
+      (click)="$event.preventDefault(); $event.stopPropagation(); cancelButtonClicked.emit()"
       [ngStyle]="{
         color: styleConfig.css('textColor'),
         backgroundColor: styleConfig.css('backgroundColor'),
@@ -23,22 +29,22 @@
     <button
       class="submit"
       type="button"
-      (click)="submitButtonClicked.emit(); $event.stopPropagation()"
+      (click)="$event.preventDefault(); $event.stopPropagation(); submitButtonClicked.emit()"
       [ngStyle]="{
         color: styleConfig.css('textColor'),
         backgroundColor: styleConfig.css('backgroundColor'),
-        borderColor: styleConfig.css(inputFields.status === 'loading' ? 'formInfoStatusColor' : (inputFields.status === 'valid' ? 'textColor' : (inputFields.status === 'sendSucceded' ? 'formSuccessStatusColor' : 'formErrorStatusColor')))
+        borderColor: styleConfig.css(inputForm.status === 'loading' ? 'formInfoStatusColor' : (inputForm.status === 'valid' ? 'textColor' : (inputForm.status === 'sendSucceded' ? 'formSuccessStatusColor' : 'formErrorStatusColor')))
       }"
     >{{ submitButtonText }}</button>
   </div>
 
   <!-- Error message -->
   <p
-    *ngIf="inputFields.statusMessage !== undefined"
+    *ngIf="inputForm.statusMessage !== undefined"
     class="status"
     [ngStyle]="{
-      color: formStatusColor(inputFields.statusMessage.level)
+      color: formStatusColor(inputForm.statusMessage.level)
     }"
-  >{{ inputFields.statusMessage.message }}</p>
+  >{{ inputForm.statusMessage.message }}</p>
 
 </div>
