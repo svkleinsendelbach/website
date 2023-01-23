@@ -19,6 +19,7 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
 })
 export class EditEventComponent implements AfterViewInit {
   public logInPageLink = allInternalLinks['bearbeiten/anmelden'];
+  public editEventsLink = allInternalLinks['bearbeiten/termine']
 
   public previousEvent: {
     groupId: EventGroupId,

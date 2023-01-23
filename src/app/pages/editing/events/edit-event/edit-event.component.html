@@ -2,6 +2,19 @@
   [authenticationType]="'websiteEditing'"
   [logInPageLink]="logInPageLink"
 >
+  <div
+    id="back-btn-container"
+  >
+    <a
+      id="back-button"
+      title="Zurück"
+      href="{{ editEventsLink.link }}"
+      [ngStyle]="{
+        color: styleConfig.css('textColor'),
+        backgroundColor: styleConfig.css('backgroundColor')
+      }"
+    >Zurück</a>
+  </div>
   <app-text-section
     [title]="previousEvent === undefined ? 'Termin hinzufügen' : 'Termin bearbeiten'"
   >

@@ -38,8 +38,4 @@ export class InputFormComponent<ExtraStatus extends string> implements AfterView
       case InputForm.StatusLevel.Error: return this.styleConfig.css('formErrorStatusColor')
     }
   }
-
-  public asdf(v: string) {
-    console.log(v)
-  }
 }

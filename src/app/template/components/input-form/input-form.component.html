@@ -1,6 +1,7 @@
 <div
   #form
   class="form"
+  (keyup.enter)="$event.preventDefault(); $event.stopPropagation(); submitButtonClicked.emit()"
   [ngClass]="deviceType.className"
 >
 

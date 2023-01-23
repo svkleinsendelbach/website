@@ -17,7 +17,9 @@ export class InputField {
     this.element = element;
     if (!['INPUT', 'TEXTAREA', 'SELECT'].includes(element.tagName))
       throw new Error(`Element isn't a valid type: ${element.tagName}`);
-    // element.addEventListener('blur', console.log);
+    element.addEventListener('blur', () => {
+      this.isTouched = true;
+    });
   }
 
   public get textValue(): string {

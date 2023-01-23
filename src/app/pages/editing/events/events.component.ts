@@ -17,6 +17,7 @@ import { SharedDataService } from 'src/app/template/services/shared-data.service
 })
 export class EventsComponent {
   public logInPageLink = allInternalLinks['bearbeiten/anmelden'];
+  public mainEditingPageLink = allInternalLinks['bearbeiten']
   public allEventGroupIds = allEventGroupIds;
   public eventGroupDescription = eventGroupDescription
 
