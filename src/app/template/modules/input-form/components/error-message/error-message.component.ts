@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
-import { Error } from '../../classes/error';
+import { InputError } from '../../classes/input-error';
 import { ErrorLevel } from '../../classes/error-level';
 
 @Component({
@@ -9,7 +9,7 @@ import { ErrorLevel } from '../../classes/error-level';
   styleUrls: ['./error-message.component.sass']
 })
 export class ErrorMessageComponent {
-  @Input() public error!: Error | undefined;
+  @Input() public error!: InputError | undefined;
 
   public constructor(
     public styleConfig: StyleConfigService

@@ -1,0 +1,66 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100%
+
+#back-btn-container
+  @include flex-row(center, flex-start)
+  width: 100%
+
+  #back-button
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    cursor: pointer
+    text-align: center
+    border: 1px solid
+    border-radius: 5px
+    padding: 5px 15px
+    margin-top: 20px
+    margin-left: 20px
+    text-decoration: none
+
+#input-field-label
+  @include font-montserrat
+  @include font-size('large')
+  @include font-weight('normal')
+  margin-bottom: 8px
+  text-align: left
+  width: 100%
+
+#thumbnail
+    border: 1px solid
+    border-radius: 5px
+    margin-bottom: 20px
+    width: 25vw
+    height: 25vw
+    object-fit: cover
+
+#image-selector
+  display: none
+
+#custom-image-selector
+  @include flex-row(center, center)
+  @include font-montserrat
+  @include font-size('large')
+  @include font-weight('normal')
+  cursor: pointer
+  text-align: center
+  width: 100%
+  vertical-align: middle
+  border: solid 1px
+  border-radius: 8px
+  height: 48px
+
+#error-message
+  @include font-montserrat
+  @include font-size('large')
+  @include font-weight('normal')
+  margin-top: 8px
+  text-align: left
+  width: 100%
+
+#spacer
+  height: 20px

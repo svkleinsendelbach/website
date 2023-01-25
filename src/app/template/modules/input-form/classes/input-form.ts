@@ -1,5 +1,5 @@
 import { InputField } from "./input-field";
-import { Error } from "./error";
+import { InputError } from "./input-error";
 import { ValidationResult } from "./validation-result";
 
 export class InputForm<
@@ -10,7 +10,7 @@ export class InputForm<
 
   public constructor(
     private readonly inputFields: InputFields,
-    private readonly statusMessages: Record<'invalidInput' | ExtraStatus, Error>
+    private readonly statusMessages: Record<'invalidInput' | ExtraStatus, InputError>
   ) {}
 
   public field<Key extends keyof InputFields>(key: Key): InputFields[Key] {
@@ -36,7 +36,7 @@ export class InputForm<
     }
   }
 
-  public get error(): Error | undefined {
+  public get error(): InputError | undefined {
     if (this.status === 'valid')
       return undefined;
     return this.statusMessages[this.status];

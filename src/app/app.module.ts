@@ -12,19 +12,17 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MobileHeaderComponent } from './template/components/header/mobile-header/mobile-header.component';
 import { MobileHeaderItemComponent } from './template/components/header/mobile-header/header-item/header-item.component';
 import { FooterComponent } from './template/components/footer/footer.component';
-import { InputFormComponent } from './template/components/input-form/input-form.component';
-import { ToggleSwitchComponent } from './template/components/toggle-switch/toggle-switch.component';
 import { ContactInfoComponent } from './template/components/contact-info/contact-info.component';
 import { TextSectionComponent } from './template/components/text-section/text-section.component';
 import { environment } from '../environments/environment';
 import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { EventsComponent } from './template/components/events/events.component';
-import { AngularFireModule } from '@angular/fire/compat'
-import { AngularFireFunctionsModule, REGION } from '@angular/fire/compat/functions'
-import { AngularFireAuthModule } from '@angular/fire/compat/auth'
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database'
-import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage'
-import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics'
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireFunctionsModule, REGION } from '@angular/fire/compat/functions';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
+import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 import { AngularFirePerformanceModule, PerformanceMonitoringService } from '@angular/fire/compat/performance';
 import { NewsListComponent } from './template/components/news-list/news-list.component';
 import { HomeLinksComponent } from './template/components/home-links/home-links.component';
@@ -56,23 +54,19 @@ import { GYouthComponent } from './pages/football-youth/g-youth/g-youth.componen
 import { GymnasticsComponent } from './pages/gymnastics/gymnastics.component';
 import { DancingComponent } from './pages/dancing/dancing.component';
 import { DriveComponent } from './pages/drive/drive.component';
-import { ContactComponent } from './pages/contact/contact.component'
+import { ContactComponent } from './pages/contact/contact.component';
 import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
-import { InputFieldComponent } from './template/components/input-form/input-field/input-field.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MainComponent } from './pages/editing/main/main.component';
 import { AuthenticationCheckComponent } from './template/components/authentication-check/authentication-check.component';
 import { LoginComponent } from './pages/editing/login/login.component';
 import { LoginPageComponent } from './pages/editing/login/login-page/login-page.component';
-import { LoginAddUserWaitingComponent } from './pages/editing/login/login-add-user-waiting/login-add-user-waiting.component'
+import { LoginAddUserWaitingComponent } from './pages/editing/login/login-add-user-waiting/login-add-user-waiting.component';
 import { USE_DEVICE_LANGUAGE, PERSISTENCE } from '@angular/fire/compat/auth';
 import { EventsComponent as EventsComponent_1 } from './pages/editing/events/events.component';
 import { EditEventComponent } from './pages/editing/events/edit-event/edit-event.component';
 import { NewsComponent } from './pages/editing/news/news.component';
 import { EditNewsComponent } from './pages/editing/news/edit-news/edit-news.component';
-import { AngularEditorModule } from '@kolkov/angular-editor'
-import { FormsModule } from '@angular/forms';
-import { TextEditorComponent } from './template/components/text-editor/text-editor.component';
 import { InputFormModule } from './template/modules/input-form/input-form.module';
 
 @NgModule({
@@ -85,8 +79,6 @@ import { InputFormModule } from './template/modules/input-form/input-form.module
     MobileHeaderComponent,
     MobileHeaderItemComponent,
     FooterComponent,
-    InputFormComponent,
-    ToggleSwitchComponent,
     ContactInfoComponent,
     TextSectionComponent,
     EventsComponent,
@@ -120,7 +112,6 @@ import { InputFormModule } from './template/modules/input-form/input-form.module
     DancingComponent,
     DriveComponent,
     ContactComponent,
-    InputFieldComponent,
     HomeComponent,
     MainComponent,
     AuthenticationCheckComponent,
@@ -130,8 +121,7 @@ import { InputFormModule } from './template/modules/input-form/input-form.module
     EventsComponent_1,
     EditEventComponent,
     NewsComponent,
-    EditNewsComponent,
-    TextEditorComponent
+    EditNewsComponent
   ],
   imports: [
     BrowserModule,
@@ -148,8 +138,6 @@ import { InputFormModule } from './template/modules/input-form/input-form.module
     HttpClientModule,
     HttpClientJsonpModule,
     RecaptchaV3Module,
-    AngularEditorModule,
-    FormsModule,
     InputFormModule
   ],
   providers: [

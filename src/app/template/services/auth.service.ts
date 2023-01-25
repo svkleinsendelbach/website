@@ -4,7 +4,7 @@ import { ApiService } from './api.service';
 import firebase from 'firebase/compat/app';
 import { OAuthProvider } from '@angular/fire/auth';
 import { UserAuthenticationType } from './api-functions-types';
-import { InputForm } from '../classes/input-form';
+import { InputError } from '../modules/input-form/classes/input-error';
 
 @Injectable({
   providedIn: 'root'
@@ -96,7 +96,7 @@ export class AuthService {
       throw new AuthService.LoginError('unknown');
     const authorized = await this.checkAuthenticationAndStoreLocal(authenticationType, credential.user);
     if (authorized === 'authorized')
-      this.authenticationExpirationTime[authenticationType] = new Date(new Date().getTime() + 300000) // 5 minutes
+      this.authenticationExpirationTime[authenticationType] = new Date(new Date().getTime() + 300000); // 5 minutes
     return authorized === 'authorized' ? 'registered' : 'unregistered';
   }
 
@@ -106,13 +106,13 @@ export class AuthService {
         this.firebaseAuth.onAuthStateChanged(user => {
           resolve(user);
         });
-      })
+      });
     }
     if (user === null)
       return 'unauthorized';
     const expirationTime = this.authenticationExpirationTime[authenticationType];
     if (expirationTime !== undefined && expirationTime >= new Date())
-      return 'authorized'
+      return 'authorized';
     this.authenticationExpirationTime[authenticationType] = undefined;
     return await this.apiService.checkUserAuthentication({
       type: authenticationType
@@ -172,37 +172,14 @@ export namespace AuthService {
         ].includes(value);
       }
 
-      export const statusMessages: {
-        [key in LoginError.Code]: {
-          message: string,
-          level: InputForm.StatusLevel
-        }
-      } = {
-        'unknown': {
-          message: 'Es ist ein unbekannter Fehler aufgetreten.',
-          level: InputForm.StatusLevel.Error
-        },
-        'invalid-email': {
-          message: 'Die angegebene E-Mail Addresse ust ungültig.',
-          level: InputForm.StatusLevel.Error
-        },
-        'user-disabled': {
-          message: 'Der Benutzer wurde gesperrt.',
-          level: InputForm.StatusLevel.Error
-        },
-        'wrong-password': {
-          message: 'Das angebene Passwort ist falsch.',
-          level: InputForm.StatusLevel.Error
-        },
-        'popup-blocked': {
-          message: 'Anmeldefenster wurde von Ihrem Browser blockiert.',
-          level: InputForm.StatusLevel.Error
-        },
-        'popup-closed': {
-          message: 'Anmeldefenster wurde vom Benutzer geschlossen.',
-          level: InputForm.StatusLevel.Error
-        }
-      }
+      export const statusMessages: Record<LoginError.Code, InputError> = {
+        'unknown': new InputError('Es ist ein unbekannter Fehler aufgetreten.'),
+        'invalid-email': new InputError('Die angegebene E-Mail Addresse ust ungültig.'),
+        'user-disabled': new InputError('Der Benutzer wurde gesperrt.'),
+        'wrong-password': new InputError('Das angebene Passwort ist falsch.'),
+        'popup-blocked': new InputError('Anmeldefenster wurde von Ihrem Browser blockiert.'),
+        'popup-closed': new InputError('Anmeldefenster wurde vom Benutzer geschlossen.')
+      };
     }
   }
 }

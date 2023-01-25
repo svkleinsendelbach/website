@@ -1,11 +1,21 @@
 <app-text-section
   [title]="'Anmeldung um die Website zu bearbeiten'"
 >
-  <app-input-form
+  <input-form
     [inputForm]="inputForm"
     [submitButtonText]="'Anmelden'"
     (submitButtonClicked)="onSubmit()"
-  ></app-input-form>
+  >
+    <input-field-text
+      [label]="'E-Mail Adresse'"
+      [inputField]="inputForm.field('email')"
+    ></input-field-text>
+    <input-field-text
+      [label]="'Passwort'"
+      [secure]="true"
+      [inputField]="inputForm.field('password')"
+    ></input-field-text>
+  </input-form>
 
   <p
     class="text margin-top-large large"

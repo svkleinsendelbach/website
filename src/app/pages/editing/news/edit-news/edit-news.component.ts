@@ -3,10 +3,13 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { allInternalLinks } from 'src/app/app.component';
 import { guid } from 'src/app/template/classes/guid';
-import { InputField } from 'src/app/template/classes/input-field';
-import { InputForm } from 'src/app/template/classes/input-form';
 import { News } from 'src/app/template/classes/news';
-import { Validator } from 'src/app/template/classes/validators';
+import { ErrorLevel } from 'src/app/template/modules/input-form/classes/error-level';
+import { InputError } from 'src/app/template/modules/input-form/classes/input-error';
+import { InputField } from 'src/app/template/modules/input-form/classes/input-field';
+import { InputForm } from 'src/app/template/modules/input-form/classes/input-form';
+import { ValidationResult } from 'src/app/template/modules/input-form/classes/validation-result';
+import { Validator } from 'src/app/template/modules/input-form/classes/validator';
 import { ApiService } from 'src/app/template/services/api.service';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { FileStorageService } from 'src/app/template/services/file-storage.service';
@@ -21,44 +24,26 @@ import { environment } from 'src/environments/environment';
 })
 export class EditNewsComponent implements AfterViewInit {
   public logInPageLink = allInternalLinks['bearbeiten/anmelden'];
-  public editNewsLink = allInternalLinks['bearbeiten/nachrichten']
+  public editNewsLink = allInternalLinks['bearbeiten/nachrichten'];
 
   public previousNews: News.ReturnType | undefined;
 
   public inputForm = new InputForm({
-    title: new InputField(
-      'Titel:',
-      InputField.Type.inputText('Titel'),
-      {
-        required: {
-          validator: Validator.required,
-          errorMessage: 'Der Titel is erfordelich.'
-        }
-      }
-    ),
-    subtitle: new InputField(
-      'Untertitel:',
-      InputField.Type.inputText('Untertitel (Optional)')
-    ),
-    shortDescription: new InputField(
-      'Kurzbeschreibung:',
-      InputField.Type.inputText('Kurzbeschreibung (Optional)')
-    ),
+    title: new InputField<string>('', [
+      Validator.required('Der Titel is erfordelich.')
+    ]),
+    subtitle: new InputField<string>(''),
+    shortDescription: new InputField<string>(''),
+    message: new InputField<string>('', [
+      Validator.required('Die Nachricht ist erfordelich.')
+    ])
   },
   {
-    invalidInput: {
-      message: 'Nicht alle Eingaben sind gültig.',
-      level: InputForm.StatusLevel.Error
-    },
-    loading: {
-      message: 'Nachricht wird gespeichert.',
-      level: InputForm.StatusLevel.Info
-    }
+    invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
+    loading: new InputError('Nachricht wird gespeichert.', ErrorLevel.Info)
   });
 
-  public thumbnailUrl?: string
-
-  public messageText = ''
+  public thumbnailUrl?: string;
 
   public constructor(
     public readonly titleService: Title,
@@ -77,22 +62,35 @@ export class EditNewsComponent implements AfterViewInit {
 
   public ngAfterViewInit(): void {
     if (this.previousNews !== undefined) {
-      this.inputForm.field('title').textValue = this.previousNews.title;
-      this.inputForm.field('subtitle').textValue = this.previousNews.subtitle ?? '';
-      this.inputForm.field('shortDescription').textValue = this.previousNews.shortDescription ?? '';
+      this.inputForm.field('title').initialValue = this.previousNews.title;
+      this.inputForm.field('subtitle').initialValue = this.previousNews.subtitle ?? '';
+      this.inputForm.field('shortDescription').initialValue = this.previousNews.shortDescription ?? '';
       this.thumbnailUrl = this.previousNews.thumbnailUrl;
       this.fileStorage.download(this.previousNews.newsUrl).then(message => {
-        this.messageText = message;
+        this.inputForm.field('message').initialValue = message;
       });
     }
   }
 
-  public async saveNews() {}
+  public uploadFile = (file: File): Promise<string> => {
+    const fileExtension = /.[^/.]+$/.exec(file.name)?.[0];
+    const filename = `${environment.databaseType.value}/uploads/editor/${guid.newGuid().guidString}${fileExtension}`;
+    return this.fileStorage.upload(file, filename);
+  };
+
+  public async saveNews() {
+    if (this.inputForm.status !== 'valid')
+      return;
+    const validation = this.inputForm.evaluate();
+    if (validation === ValidationResult.Invalid)
+      return;
+    this.inputForm.status ='loading';
+  }
 
   public async uploadThumbnail(event: Event) {
-    const file = (event.target as HTMLInputElement).files?.[0]
+    const file = (event.target as HTMLInputElement).files?.[0];
     if (file === undefined) return;
-    const fileExtension = /.[^/.]+$/.exec(file.name)?.[0]
+    const fileExtension = /.[^/.]+$/.exec(file.name)?.[0];
     if (fileExtension === undefined) return;
     const filePath = `${environment.databaseType.value}/uploads/thumbnail/${guid.newGuid().guidString}${fileExtension}`;
     this.thumbnailUrl = await this.fileStorage.upload(file, filePath);

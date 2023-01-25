@@ -18,10 +18,34 @@
   <app-text-section
     [title]="previousEvent === undefined ? 'Termin hinzufügen' : 'Termin bearbeiten'"
   >
-    <app-input-form
+    <input-form
       [inputForm]="inputForm"
       [submitButtonText]="previousEvent === undefined ? 'Hinzufügen' : 'Speichern'"
       (submitButtonClicked)="saveEvent()"
-    ></app-input-form>
+    >
+      <input-field-select
+        [label]="'Zugehöriges Thema'"
+        [selectOptions]="groupIdSelectOptions"
+        [inputField]="inputForm.field('groupId')"
+      ></input-field-select>
+      <input-field-text
+        [label]="'Titel'"
+        [inputField]="inputForm.field('title')"
+      ></input-field-text>
+      <input-field-text
+        [label]="'Untertitel'"
+        [placeholder]="'Untertitel (optional)'"
+        [inputField]="inputForm.field('subtitle')"
+      ></input-field-text>
+      <input-field-text
+        [label]="'Link'"
+        [placeholder]="'Link (optional)'"
+        [inputField]="inputForm.field('link')"
+      ></input-field-text>
+      <input-field-date-time
+        [label]="'Datum / Uhrzeit'"
+        [inputField]="inputForm.field('date')"
+      ></input-field-date-time>
+    </input-form>
   </app-text-section>
 </app-authentication-check>

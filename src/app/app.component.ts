@@ -2,8 +2,6 @@ import { Component, HostListener } from '@angular/core';
 import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faAddressBook, faFileLines, faFutbol, faMap, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faAddressCard, faBook, faCalendarDays, faChild, faHouse, faHouseFlag, faInfo, faNewspaper, faRightToBracket, faShieldHalved, faUserFriends } from '@fortawesome/free-solid-svg-icons';
-import { environment } from 'src/environments/environment';
-import { guid } from './template/classes/guid';
 import { Link } from './template/classes/link';
 import { Style } from './template/classes/style';
 import { ContactInfoComponent } from './template/components/contact-info/contact-info.component';
@@ -12,12 +10,6 @@ import { HeaderComponent } from './template/components/header/header.component';
 import { HomeBannerComponent } from './template/components/home-banner/home-banner.component';
 import { HomeLinksComponent } from './template/components/home-links/home-links.component';
 import { SocialMediaLinksComponent } from './template/components/social-media-links/social-media-links.component';
-import { ToggleSwitchComponent } from './template/components/toggle-switch/toggle-switch.component';
-import { ErrorLevel } from './template/modules/input-form/classes/error-level';
-import { InputField } from './template/modules/input-form/classes/input-field';
-import { InputForm } from './template/modules/input-form/classes/input-form';
-import { Validator } from './template/modules/input-form/classes/validator';
-import { SelectOptions } from './template/modules/input-form/components/input-field/select/select.component';
 import { DeviceTypeService } from './template/services/device-type.service';
 import { FileStorageService } from './template/services/file-storage.service';
 import { StyleConfigService } from './template/services/style-config.service';
@@ -28,117 +20,9 @@ import { StyleConfigService } from './template/services/style-config.service';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  public DeviceType = DeviceTypeService.DeviceType
+  public DeviceType = DeviceTypeService.DeviceType;
 
   public title = 'svkleinsendelbach-website';
-
-  public inputForm = new InputForm(
-    {
-      checkbox: new InputField<boolean>(
-        true,
-        {
-          checked: {
-            isValid: Validator.checked,
-            errorMessage: 'joikjnk'
-          }
-        }
-      ),
-      dateTime: new InputField<Date>(
-        new Date(),
-        {
-          futureDate: {
-            isValid: Validator.futureDate,
-            errorMessage: 'asdfoij'
-          }
-        }
-      ),
-      select: new InputField<'v1' | 'v2' | 'v3'>(
-        'v2',
-        {
-          notV2: {
-            isValid: Validator.custom(value => value !== 'v2'),
-            errorMessage: 'oiunuzg'
-          }
-        }
-      ),
-      textEditor: new InputField<string>(
-        '',
-        {
-          required: {
-            isValid: Validator.required,
-            errorMessage: 'Dsfalkn'
-          }
-        }
-      ),
-      text: new InputField<string>(
-        '',
-        {
-          required: {
-            isValid: Validator.required,
-            errorMessage: 'Dsfalkn'
-          }
-        }
-      ),
-      textarea: new InputField<string>(
-        'adf',
-        {
-          required: {
-            isValid: Validator.required,
-            errorMessage: 'oipujklmnkjh'
-          }
-        }
-      )
-    },
-    {
-      invalidInput: {
-        message: 'poik',
-        level: ErrorLevel.Error
-      },
-      loading: {
-        message: 'Loading',
-        level: ErrorLevel.Info
-      }
-    }
-  );
-
-  public selectOptions = SelectOptions.grouped<'v1' | 'v2' | 'v3'>([
-    {
-      title: 'Group 1',
-      options: [
-        {
-          id: 'v1',
-          text: 'V1'
-        },
-        {
-          id: 'v2',
-          text: 'V2'
-        }
-      ]
-    },
-    {
-      title: 'Group 2',
-      options: [
-        {
-          id: 'v3',
-          text: 'V3'
-        }
-      ]
-    }
-  ]);
-
-  public uploadFile = (file: File): Promise<string> => {
-    const fileExtension = /.[^/.]+$/.exec(file.name)?.[0];
-    const filename = `${environment.databaseType.value}/uploads/editor/${guid.newGuid().guidString}${fileExtension}`;
-    return this.fileStorage.upload(file, filename);
-  };
-
-  public onSubmit() {
-    this.inputForm.evaluate();
-  }
-
-  public onCancel() {
-    this.inputForm.status = 'loading';
-  }
 
   public linkDataForDeviceType: HomeLinksComponent.LinkDataForDeviceType<InternalPath> = {
     desktop: [
@@ -159,7 +43,7 @@ export class AppComponent {
       [allHomeLinks.anfahrt],
       [allHomeLinks.kontakt]
     ]
-  }
+  };
 
   public socialMediaDataForDeviceType: SocialMediaLinksComponent.SocialMediaDataForDeviceType<InternalPath> = {
     desktop: [
@@ -173,7 +57,7 @@ export class AppComponent {
       [allSocialMediaLinks.instagram],
       [allSocialMediaLinks.sgWebiste]
     ]
-  }
+  };
 
   public headerData: HeaderComponent.HeaderDataForDeviceType<InternalPath> = {
     desktop: [
@@ -344,20 +228,20 @@ export class AppComponent {
         ]
       }
     ]
-  }
+  };
 
   public homeLinkData: HeaderComponent.HomeLinkData<InternalPath> = {
     title: 'SV Kleinsendelbach',
     logoSrc: 'assets/images/svk-logo.png',
     homeLink: Link.internal('Home', 'home')
-  }
+  };
 
   public headerStyleConfig: HeaderComponent.StyleConfig = {
     backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
     backgroundColorHover: new Style.AppearanceColor(Style.Color.hex('#F0F0F0'), Style.Color.hex('#44454A')),
     primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
     textColor: new Style.AppearanceColor(Style.Color.hex('#000000'), Style.Color.hex('#868E90'))
-  }
+  };
 
   public footerData: FooterComponent.FooterData<InternalPath> = {
     links: [
@@ -392,7 +276,7 @@ export class AppComponent {
         }
       }
     ]
-  }
+  };
 
   public footerStyleConfig: FooterComponent.StyleConfig = {
     backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
@@ -402,15 +286,9 @@ export class AppComponent {
     textColor: new Style.AppearanceColor(Style.Color.hex('#000000'), Style.Color.hex('#868E90')),
     contactTextColor: new Style.AppearanceColor(Style.Color.hex('#000000'), Style.Color.hex('#C8D6E5')),
     contactShadow: new Style.AppearanceColor(Style.Color.hex('#80808080'), Style.Color.hex('#1C1A17'))
-  }
+  };
 
-  public toogleStyleConfig: ToggleSwitchComponent.StyleConfig = {
-    backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
-    uncheckedColor: new Style.AppearanceColor(Style.Color.hex('#F0F0F0'), Style.Color.hex('#44454A')),
-    primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F'))
-  }
-
-  public privacyLink = allHeaderItemLinks['privacy'].link
+  public privacyLink = allHeaderItemLinks['privacy'].link;
 
   public contactData: ContactInfoComponent.ContactItem[] = [
     {
@@ -443,7 +321,7 @@ export class AppComponent {
         text: 'po8e7 / r9087632'
       }
     }
-  ]
+  ];
 
   public bannerData: HomeBannerComponent.BannerItem[] = [
     {
@@ -458,7 +336,7 @@ export class AppComponent {
       imageSource: 'https://cyprusview.com/image/estate-large/y/d/ydxcx.jpg',
       title: 'lioqw45u'
     }
-  ]
+  ];
 
   public eventGroupDescription: {
     [key in EventGroupId]: string
@@ -475,7 +353,7 @@ export class AppComponent {
     'football-youth/g-youth': 'G-Jugend',
     'gymnastics': 'Gymnastik',
     'dancing': 'Tanzen'
-  }
+  };
 
   public constructor(
     public readonly deviceType: DeviceTypeService,
@@ -492,11 +370,11 @@ export class AppComponent {
       formSuccessStatusColor: new Style.AppearanceColor(Style.Color.hex('#54B435'), Style.Color.hex('#B6E2A1')),
       formErrorStatusColor: new Style.AppearanceColor(Style.Color.hex('#CE3A0F'), Style.Color.hex('#EB4511')),
       formInfoStatusColor: new Style.AppearanceColor(Style.Color.hex('#FFBF00'), Style.Color.hex('#FFE15D'))
-    })
+    });
   }
 
   @HostListener('window:resize') onResize() {
-    this.deviceType.windowResized()
+    this.deviceType.windowResized();
   }
 }
 
@@ -507,7 +385,7 @@ export const allEventGroupIds: EventGroupId[] = [
   'general', 'football-adults/general', 'football-adults/first-team', 'football-adults/second-team',
   'football-adults/ah-team', 'football-youth/general', 'football-youth/c-youth', 'football-youth/e-youth',
   'football-youth/f-youth', 'football-youth/g-youth', 'gymnastics', 'dancing'
-]
+];
 
 export const groupedEventGroupIds: {
   groupDescription: string,
@@ -531,7 +409,7 @@ export const groupedEventGroupIds: {
       'football-youth/general', 'football-youth/c-youth', 'football-youth/e-youth', 'football-youth/f-youth', 'football-youth/g-youth'
     ]
   }
-]
+];
 
 export type InternalPath = 'home' | 'über-uns' | 'sportheim' | 'chroniken' | 'satzung' | 'datenschutz' | 'mitgliedsantrag' | 'fussball/herren' | 'fussball/herren/erste-mannschaft' | 'fussball/herren/zweite-mannschaft' | 'fussball/herren/alte-herren' |
   'fussball/jugend' | 'fussball/jugend/c-jugend' | 'fussball/jugend/e-jugend' | 'fussball/jugend/f-jugend' | 'fussball/jugend/g-jugend' | 'gymnastik' | 'tanzen' | 'anfahrt' | 'kontakt' | 'impressum' | 'bearbeiten' | 'bearbeiten/anmelden' | 'bearbeiten/termine' |
@@ -567,7 +445,7 @@ export const allInternalLinks: {
   'bearbeiten/nachrichten': Link.internal<InternalPath>('Nachrichten bearbeiten', 'bearbeiten/nachrichten'),
   'bearbeiten/termine/bearbeiten': Link.internal<InternalPath>('Termin bearbeiten', 'bearbeiten/termine/bearbeiten'),
   'bearbeiten/nachrichten/bearbeiten': Link.internal<InternalPath>('Nachricht bearbeiten', 'bearbeiten/nachrichten/bearbeiten')
- }
+ };
 
 export const allHeaderItemLinks: {
   [key: string]: HeaderComponent.HeaderItemLink<InternalPath>
@@ -680,7 +558,7 @@ export const allHeaderItemLinks: {
     id: 'impressum',
     link: Link.internal<InternalPath>('Impressum', 'impressum')
   }
-}
+};
 
 export const allHomeLinks: {
   [key in InternalPath]: HomeLinksComponent.LinkItem<InternalPath>
@@ -874,7 +752,7 @@ export const allHomeLinks: {
     icon: faNewspaper,
     animation: 'shake'
   }
-}
+};
 
 export const allSocialMediaLinks: {
   facebook: SocialMediaLinksComponent.SocialMediaItem<InternalPath>,
@@ -905,7 +783,7 @@ export const allSocialMediaLinks: {
       darkModeSource: 'assets/images/sg-logo-dark-appearence.png'
     }
   }
-}
+};
 export const eventGroupDescription: {
   [key in EventGroupId]: string
 } = {
@@ -921,4 +799,4 @@ export const eventGroupDescription: {
   'football-youth/g-youth': 'G-Jugend',
   'gymnastics': 'Gymnastik',
   'dancing': 'Tanzen'
-}
+};

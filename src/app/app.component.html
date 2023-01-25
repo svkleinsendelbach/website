@@ -1,4 +1,4 @@
-<!--app-header
+<app-header
   [headerDataForDeviceType]="headerData"
   [homeLinkData]="homeLinkData"
   [styleConfig]="headerStyleConfig"
@@ -12,40 +12,4 @@
 ></app-footer>
 <app-cookie-selector-message
   [privacyLink]="privacyLink"
-></app-cookie-selector-message-->
-<app-text-section>
-  <input-form
-    [inputForm]="inputForm"
-    [submitButtonText]="'Submit'"
-    (submitButtonClicked)="onSubmit()"
-    [cancelButtonText]="'Cancel'"
-    (cancelButtonClicked)="onCancel()"
-  >
-    <input-field-checkbox
-      [label]="'Checkbox'"
-      [inputField]="inputForm.field('checkbox')"
-    ></input-field-checkbox>
-    <input-field-date-time
-      [label]="'Date Time'"
-      [inputField]="inputForm.field('dateTime')"
-    ></input-field-date-time>
-    <input-field-select
-      [label]="'Select'"
-      [selectOptions]="selectOptions"
-      [inputField]="inputForm.field('select')"
-    ></input-field-select>
-    <input-field-text-editor
-      [label]="'Text Editor'"
-      [inputField]="inputForm.field('textEditor')"
-      [uploadFile]="uploadFile"
-    ></input-field-text-editor>
-    <input-field-text
-      [label]="'Text Input'"
-      [inputField]="inputForm.field('text')"
-    ></input-field-text>
-    <input-field-textarea
-      [label]="'Textarea'"
-      [inputField]="inputForm.field('textarea')"
-    ></input-field-textarea>
-  </input-form>
-</app-text-section>
+></app-cookie-selector-message>

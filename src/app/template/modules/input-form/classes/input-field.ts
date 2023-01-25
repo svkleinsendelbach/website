@@ -1,7 +1,7 @@
-import { Error } from "./error";
+import { InputError } from "./input-error";
 import { ErrorLevel } from "./error-level";
 import { ValidationResult } from "./validation-result";
-import { Validators } from "./validators";
+import { Validator } from "./validator";
 
 export class InputField<T> {
   private fieldValue: T;
@@ -11,10 +11,15 @@ export class InputField<T> {
   private isEvalutated = false;
 
   public constructor(
-    private readonly initialValue: T,
-    private readonly validators?: Validators<T>
+    private _initialValue: T,
+    private readonly validators?: Validator<T>[]
   ) {
-    this.fieldValue = initialValue;
+    this.fieldValue = _initialValue;
+  }
+
+  public set initialValue(value: T) {
+    this._initialValue = value;
+    this.fieldValue = value;
   }
 
   public set inputValue(value: T) {
@@ -26,12 +31,12 @@ export class InputField<T> {
     return this.fieldValue;
   }
 
-  public get error(): Error | undefined {
+  public get error(): InputError | undefined {
     if (this.validators === undefined)
       return undefined;
     if (!this.isTouched && !this.isEvalutated)
       return undefined;
-    for (const validator of Object.values(this.validators)) {
+    for (const validator of this.validators) {
       if (validator.isValid(this.fieldValue) === ValidationResult.Invalid)
         return {
           message: validator.errorMessage,
@@ -45,7 +50,7 @@ export class InputField<T> {
     this.isEvalutated = true;
     if (this.validators === undefined)
       return ValidationResult.Valid;
-    for (const validator of Object.values(this.validators)) {
+    for (const validator of this.validators) {
       if (validator.isValid(this.fieldValue) === ValidationResult.Invalid)
         return ValidationResult.Invalid;
     }
@@ -53,7 +58,7 @@ export class InputField<T> {
   }
 
   public reset() {
-    this.fieldValue = this.initialValue;
+    this.fieldValue = this._initialValue;
     this.isTouched = false;
     this.isEvalutated = false;
   }
