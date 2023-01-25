@@ -286,7 +286,7 @@ describe('ApiService', () => {
     }));
     const result = await service.getEvents({
       groupIds: ['general', 'football-adults/first-team']
-    })
+    });
     expect(result).toEqual([
       {
         groupId: 'general',

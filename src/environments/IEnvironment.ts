@@ -1,7 +1,7 @@
-import { FirebaseOptions } from "@angular/fire/app";
-import { DatabaseType } from "src/app/template/classes/database-type";
-import { Crypter } from "src/app/template/crypter/Crypter";
-import { ApiService } from "src/app/template/services/api.service";
+import { FirebaseOptions } from '@angular/fire/app';
+import { DatabaseType } from 'src/app/template/classes/database-type';
+import { Crypter } from 'src/app/template/crypter/Crypter';
+import { ApiService } from 'src/app/template/services/api.service';
 
 export interface IEnvironment {
   firebase: FirebaseOptions,

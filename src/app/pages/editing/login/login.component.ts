@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { allInternalLinks } from 'src/app/app.component';
+import { InternalLink } from 'src/app/classes/InternalPath';
 import { AuthService } from 'src/app/template/services/auth.service';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
@@ -12,7 +12,7 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  public editPageLink = allInternalLinks.bearbeiten;
+  public editPageLink = InternalLink.all.bearbeiten;
 
   public state: 'loading' | 'alreadyLoggedIn' | 'loginPage' | 'addToWaitingUserPage' = 'loading';
 
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly router: Router,
   ) {
-    this.titleService.setTitle('Anmelden')
+    this.titleService.setTitle('Anmelden');
   }
 
   public ngOnInit() {

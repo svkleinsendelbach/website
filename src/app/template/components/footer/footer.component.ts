@@ -11,15 +11,15 @@ import { faPhone } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./footer.component.sass']
 })
 export class FooterComponent<InternalPath extends string> {
-  public faPhone = faPhone
+  public faPhone = faPhone;
 
-  @Input() public footerData!: FooterComponent.FooterData<InternalPath>
+  @Input() public footerData!: FooterComponent.FooterData<InternalPath>;
 
-  @Input() public styleConfig!: FooterComponent.StyleConfig
+  @Input() public styleConfig!: FooterComponent.StyleConfig;
 
-  public hoveredLinkId: string | null = null
+  public hoveredLinkId: string | null = null;
 
-  public editButtonHovered = false
+  public editButtonHovered = false;
 
   public constructor(
     public readonly appearance: AppearanceService,
@@ -27,12 +27,12 @@ export class FooterComponent<InternalPath extends string> {
   ) {}
 
   public handleLinkHoverStart(link: { id: string }) {
-    this.hoveredLinkId = link.id
+    this.hoveredLinkId = link.id;
   }
 
   public handleLinkHoverStop(link: { id: string }) {
     if (this.hoveredLinkId === link.id) {
-      this.hoveredLinkId = null
+      this.hoveredLinkId = null;
     }
   }
 }

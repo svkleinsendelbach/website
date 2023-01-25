@@ -1,12 +1,12 @@
 <app-desktop-header
   *ngIf="deviceType.isDesktop || deviceType.isTable"
-  [headerData]="headerDataForDeviceType[deviceType.className]"
+  [headerData]="headerData[deviceType.className]"
   [homeLinkData]="homeLinkData"
   [styleConfig]="styleConfig"
 ></app-desktop-header>
 <app-mobile-header
   *ngIf="deviceType.isMobile"
-  [headerData]="headerDataForDeviceType[deviceType.className]"
+  [headerData]="headerData[deviceType.className]"
   [homeLinkData]="homeLinkData"
   [styleConfig]="styleConfig"
 ></app-mobile-header>

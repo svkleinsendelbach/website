@@ -14,6 +14,6 @@ export class RequestComponent {
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('Mitgliedsantrag')
+    this.titleService.setTitle('Mitgliedsantrag');
   }
 }

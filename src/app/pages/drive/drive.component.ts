@@ -10,7 +10,7 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
   styleUrls: ['./drive.component.sass']
 })
 export class DriveComponent {
-  public faPhone = faPhone
+  public faPhone = faPhone;
 
   public readonly mapOptions: google.maps.MapOptions = {
     zoom: 14,
@@ -21,20 +21,20 @@ export class DriveComponent {
     scrollwheel: false,
     maxZoom: 18,
     minZoom: 5
-  }
+  };
 
   public readonly mapMarkers: google.maps.LatLngLiteral[] = [
     {
       lat: 49.59223121455868,
       lng: 11.15793746762878,
     }
-  ]
+  ];
 
   public constructor(
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('Anfahrt')
+    this.titleService.setTitle('Anfahrt');
   }
 }

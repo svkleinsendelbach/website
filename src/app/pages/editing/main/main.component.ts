@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { allInternalLinks } from 'src/app/app.component';
 import { ApiService } from 'src/app/template/services/api.service';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
 import { GetUnauthenticatedUsersFunction } from 'src/app/template/services/api-functions-types';
 import { AuthService } from 'src/app/template/services/auth.service';
 import { Router } from '@angular/router';
+import { InternalLink } from 'src/app/classes/InternalPath';
 
 @Component({
   selector: 'app-main',
@@ -14,8 +14,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./main.component.sass']
 })
 export class MainComponent {
-  public logInPageLink = allInternalLinks['bearbeiten/anmelden'];
-  public allInternalLinks = allInternalLinks
+  public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
+  public allInternalLinks = InternalLink.all;
 
   public unauthenticatedUsers: GetUnauthenticatedUsersFunction.ReturnType | undefined = undefined;
 
@@ -27,7 +27,7 @@ export class MainComponent {
     private readonly authService: AuthService,
     private router: Router
   ) {
-    this.titleService.setTitle('Bearbeiten')
+    this.titleService.setTitle('Bearbeiten');
     this.getUnauthenticatedUsers();
   }
 
@@ -39,7 +39,7 @@ export class MainComponent {
 
   public async logOut() {
     await this.authService.logOut();
-    await this.router.navigateByUrl(allInternalLinks['bearbeiten/anmelden'].link);
+    await this.router.navigateByUrl(InternalLink.all['bearbeiten/anmelden'].link);
   }
 
   public async acceptDeclineUser(action: 'accept' | 'decline', hashedUserId: string) {

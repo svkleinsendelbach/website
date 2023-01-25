@@ -9,15 +9,15 @@ import { StyleConfigService } from '../../services/style-config.service';
   styleUrls: ['./home-banner.component.sass']
 })
 export class HomeBannerComponent implements OnInit {
-  public faChevronLeft = faChevronLeft
-  public faChevronRight = faChevronRight
-  public faCircle = faCircle
+  public faChevronLeft = faChevronLeft;
+  public faChevronRight = faChevronRight;
+  public faCircle = faCircle;
 
-  @Input() public bannerData!: HomeBannerComponent.BannerItem[]
+  @Input() public bannerData!: HomeBannerComponent.BannerItem[];
 
-  public currentPage = 1
+  public currentPage = 1;
 
-  private nextPageTimeout: number | null = null
+  private nextPageTimeout: number | null = null;
 
   public constructor(
     public readonly deviceType: DeviceTypeService,
@@ -25,43 +25,43 @@ export class HomeBannerComponent implements OnInit {
   ) {}
 
   public ngOnInit() {
-    this.setPage(1)
+    this.setPage(1);
   }
 
   private setPage(page: number) {
     if (this.nextPageTimeout !== null) {
-      clearTimeout(this.nextPageTimeout)
+      clearTimeout(this.nextPageTimeout);
     }
-    this.currentPage = page
+    this.currentPage = page;
     this.nextPageTimeout = window.setTimeout(() => {
       if (this.currentPage < this.bannerData.length) {
-        this.setPage(this.currentPage + 1)
+        this.setPage(this.currentPage + 1);
       } else {
-        this.setPage(1)
+        this.setPage(1);
       }
-    }, 5000)
+    }, 5000);
   }
 
   public handleNavBarClick(page: number) {
-    this.setPage(page)
+    this.setPage(page);
   }
 
   public handleButtonClick(direction: 'left' | 'right') {
     switch (direction) {
       case 'left':
         if (this.currentPage > 1) {
-          this.setPage(this.currentPage - 1)
+          this.setPage(this.currentPage - 1);
         } else {
-          this.setPage(this.bannerData.length)
+          this.setPage(this.bannerData.length);
         }
-        break
+        break;
       case 'right':
         if (this.currentPage < this.bannerData.length) {
-          this.setPage(this.currentPage + 1)
+          this.setPage(this.currentPage + 1);
         } else {
-          this.setPage(1)
+          this.setPage(1);
         }
-        break
+        break;
     }
   }
 }

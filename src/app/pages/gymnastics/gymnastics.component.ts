@@ -14,6 +14,6 @@ export class GymnasticsComponent {
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('Gymnastik')
+    this.titleService.setTitle('Gymnastik');
   }
 }

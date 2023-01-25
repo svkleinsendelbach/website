@@ -1,4 +1,4 @@
-import { ErrorLevel } from "./error-level";
+import { ErrorLevel } from './error-level';
 
 export class InputError {
   public constructor(

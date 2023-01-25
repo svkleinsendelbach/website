@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { allEventGroupIds, allInternalLinks, eventGroupDescription, EventGroupId } from 'src/app/app.component';
 import { EventGroup } from 'src/app/template/classes/event';
 import { GetEventsFunction } from 'src/app/template/services/api-functions-types';
 import { ApiService } from 'src/app/template/services/api.service';
@@ -9,6 +8,8 @@ import { DeviceTypeService } from 'src/app/template/services/device-type.service
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
 import { Event } from 'src/app/template/classes/event';
 import { SharedDataService } from 'src/app/template/services/shared-data.service';
+import { InternalLink } from 'src/app/classes/InternalPath';
+import { EventGroupId } from 'src/app/classes/EventGroupId';
 
 @Component({
   selector: 'app-editing-events',
@@ -16,10 +17,10 @@ import { SharedDataService } from 'src/app/template/services/shared-data.service
   styleUrls: ['./events.component.sass']
 })
 export class EventsComponent {
-  public logInPageLink = allInternalLinks['bearbeiten/anmelden'];
-  public mainEditingPageLink = allInternalLinks['bearbeiten']
-  public allEventGroupIds = allEventGroupIds;
-  public eventGroupDescription = eventGroupDescription
+  public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
+  public mainEditingPageLink = InternalLink.all['bearbeiten'];
+  public allEventGroupIds = EventGroupId.all;
+  public eventGroupTitle = EventGroupId.title;
 
   public eventGroups: GetEventsFunction.ReturnType<EventGroupId> | undefined = undefined;
 
@@ -36,14 +37,14 @@ export class EventsComponent {
     }>,
     private router: Router
   ) {
-    this.titleService.setTitle('Termine bearbeiten')
+    this.titleService.setTitle('Termine bearbeiten');
     this.getEvents();
   }
 
   private async getEvents() {
     this.eventGroups = await this.apiService.getEvents<EventGroupId>({
-      groupIds: allEventGroupIds
-    })
+      groupIds: EventGroupId.all
+    });
   }
 
   public getEventGroupOf(groupId: EventGroupId): EventGroup<EventGroupId> | undefined {
@@ -60,7 +61,7 @@ export class EventsComponent {
       return {
         groupId: eventGroup.groupId,
         events: events
-      }
+      };
     });
     await this.apiService.editEvent({
       editType: 'remove',
@@ -75,11 +76,11 @@ export class EventsComponent {
       groupId: groupId,
       event: event
     });
-    await this.router.navigateByUrl(allInternalLinks['bearbeiten/termine/bearbeiten'].link);
+    await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine/bearbeiten'].link);
   }
 
   public async addNewEvent() {
     this.sharedData.removeValue('editEvent');
-    await this.router.navigateByUrl(allInternalLinks['bearbeiten/termine/bearbeiten'].link);
+    await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine/bearbeiten'].link);
   }
 }

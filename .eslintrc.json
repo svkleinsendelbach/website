@@ -38,7 +38,8 @@
         "no-async-promise-executor": "off",
         "semi": ["warn", "always"],
         "@typescript-eslint/no-inferrable-types": "off",
-        "no-inner-declarations": "off"
+        "no-inner-declarations": "off",
+        "quotes": ["warn", "single"]
       }
     },
     {

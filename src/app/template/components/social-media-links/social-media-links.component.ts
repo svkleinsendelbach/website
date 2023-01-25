@@ -11,11 +11,11 @@ import { StyleConfigService } from '../../services/style-config.service';
   styleUrls: ['./social-media-links.component.sass']
 })
 export class SocialMediaLinksComponent<InternalPath extends string> {
-  public Appearance = AppearanceService.Appearance
+  public Appearance = AppearanceService.Appearance;
 
-  @Input() public socialMediaDataForDeviceType!: SocialMediaLinksComponent.SocialMediaDataForDeviceType<InternalPath>
+  @Input() public socialMediaDataForDeviceType!: SocialMediaLinksComponent.SocialMediaDataForDeviceType<InternalPath>;
 
-  public hoveredItemId: string | null = null
+  public hoveredItemId: string | null = null;
 
   public constructor(
     public readonly deviceType: DeviceTypeService,
@@ -24,23 +24,23 @@ export class SocialMediaLinksComponent<InternalPath extends string> {
   ) {}
 
   public get socialMediaData(): SocialMediaLinksComponent.SocialMediaItem<InternalPath>[][] {
-    return this.socialMediaDataForDeviceType[this.deviceType.className]
+    return this.socialMediaDataForDeviceType[this.deviceType.className];
   }
 
   public isIcon(image: IconDefinition | {
     lightModeSource: string,
     darkModeSource: string
   }): image is IconDefinition {
-    return !('lightModeSource' in image)
+    return !('lightModeSource' in image);
   }
 
   public handleHoverStart(socialMediaLink: SocialMediaLinksComponent.SocialMediaItem<InternalPath>) {
-    this.hoveredItemId = socialMediaLink.id
+    this.hoveredItemId = socialMediaLink.id;
   }
 
   public handleHoverStop(socialMediaLink: SocialMediaLinksComponent.SocialMediaItem<InternalPath>) {
     if (this.hoveredItemId === socialMediaLink.id) {
-      this.hoveredItemId = null
+      this.hoveredItemId = null;
     }
   }
 }

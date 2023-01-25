@@ -632,4 +632,4 @@ export const teamSquadData: TeamSquad = {
           }
       }
   ]
-}
+};

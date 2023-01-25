@@ -14,6 +14,6 @@ export class PageNotFoundComponent {
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('Seite nicht gefunden')
+    this.titleService.setTitle('Seite nicht gefunden');
   }
 }

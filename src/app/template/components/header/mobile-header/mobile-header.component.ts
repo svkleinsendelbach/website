@@ -9,32 +9,33 @@ import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./mobile-header.component.sass']
 })
 export class MobileHeaderComponent<InternalPath extends string> {
-  public faBars = faBars
-  public faTimes = faTimes
+  public Object = Object;
+  public faBars = faBars;
+  public faTimes = faTimes;
 
-  @Input() public headerData!: HeaderComponent.HeaderData<InternalPath>
+  @Input() public headerData!: HeaderComponent.HeaderData<InternalPath>;
 
-  @Input() public homeLinkData!: HeaderComponent.HomeLinkData<InternalPath>
+  @Input() public homeLinkData!: HeaderComponent.HomeLinkData<InternalPath>;
 
-  @Input() public styleConfig!: HeaderComponent.StyleConfig
+  @Input() public styleConfig!: HeaderComponent.StyleConfig;
 
-  public isExpanded = false
+  public isExpanded = false;
 
-  public expandedHeaderItemId: string | null = null
+  public expandedHeaderItemId: string | null = null;
 
   public constructor(
     public readonly appearance: AppearanceService
   ) {}
 
   public handleHamburgerMenuClick(toExpanded: boolean) {
-    this.isExpanded = toExpanded
+    this.isExpanded = toExpanded;
   }
 
   public handleHeaderItemClick(headerItemId: string) {
     if (this.expandedHeaderItemId === headerItemId) {
-      this.expandedHeaderItemId = null
+      this.expandedHeaderItemId = null;
     } else {
-      this.expandedHeaderItemId = headerItemId
+      this.expandedHeaderItemId = headerItemId;
     }
   }
 }

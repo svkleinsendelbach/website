@@ -6,53 +6,53 @@ import { EventListener } from '../classes/event-listener';
 })
 export class DeviceTypeService {
   private static computeDeviceType(): DeviceTypeService.DeviceType {
-    const width = window.innerWidth
+    const width = window.innerWidth;
     if (width <= 480) {
-      return DeviceTypeService.DeviceType.Mobile
+      return DeviceTypeService.DeviceType.Mobile;
     } else if (width <= 1366) {
-      return DeviceTypeService.DeviceType.Tablet
+      return DeviceTypeService.DeviceType.Tablet;
     } else {
-      return DeviceTypeService.DeviceType.Desktop
+      return DeviceTypeService.DeviceType.Desktop;
     }
   }
 
-  private deviceType: DeviceTypeService.DeviceType
+  private deviceType: DeviceTypeService.DeviceType;
 
-  public listeners = new EventListener<DeviceTypeService.DeviceType>()
+  public listeners = new EventListener<DeviceTypeService.DeviceType>();
 
   constructor() {
-    this.deviceType = DeviceTypeService.computeDeviceType()
+    this.deviceType = DeviceTypeService.computeDeviceType();
   }
 
   public windowResized() {
-    const newDeviceType = DeviceTypeService.computeDeviceType()
+    const newDeviceType = DeviceTypeService.computeDeviceType();
     if (this.deviceType !== newDeviceType) {
-      this.deviceType = newDeviceType
-      this.listeners.emitValue(newDeviceType)
+      this.deviceType = newDeviceType;
+      this.listeners.emitValue(newDeviceType);
     }
   }
 
   public get current(): DeviceTypeService.DeviceType {
-    return this.deviceType
+    return this.deviceType;
   }
 
   public get isMobile(): boolean {
-    return this.deviceType === DeviceTypeService.DeviceType.Mobile
+    return this.deviceType === DeviceTypeService.DeviceType.Mobile;
   }
 
   public get isTable(): boolean {
-    return this.deviceType === DeviceTypeService.DeviceType.Tablet
+    return this.deviceType === DeviceTypeService.DeviceType.Tablet;
   }
 
   public get isDesktop(): boolean {
-    return this.deviceType === DeviceTypeService.DeviceType.Desktop
+    return this.deviceType === DeviceTypeService.DeviceType.Desktop;
   }
 
   public get className(): 'mobile' | 'tablet' | 'desktop'{
     switch (this.deviceType) {
-      case DeviceTypeService.DeviceType.Mobile: return "mobile"
-      case DeviceTypeService.DeviceType.Tablet: return "tablet"
-      case DeviceTypeService.DeviceType.Desktop: return "desktop"
+      case DeviceTypeService.DeviceType.Mobile: return 'mobile';
+      case DeviceTypeService.DeviceType.Tablet: return 'tablet';
+      case DeviceTypeService.DeviceType.Desktop: return 'desktop';
     }
   }
 }

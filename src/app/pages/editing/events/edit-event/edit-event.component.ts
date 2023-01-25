@@ -1,7 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { allEventGroupIds, allInternalLinks, eventGroupDescription, EventGroupId, groupedEventGroupIds } from 'src/app/app.component';
+import { EventGroupId } from 'src/app/classes/EventGroupId';
+import { InternalLink } from 'src/app/classes/InternalPath';
 import { Event } from 'src/app/template/classes/event';
 import { guid } from 'src/app/template/classes/guid';
 import { ErrorLevel } from 'src/app/template/modules/input-form/classes/error-level';
@@ -22,8 +23,8 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
   styleUrls: ['./edit-event.component.sass']
 })
 export class EditEventComponent implements AfterViewInit {
-  public logInPageLink = allInternalLinks['bearbeiten/anmelden'];
-  public editEventsLink = allInternalLinks['bearbeiten/termine'];
+  public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
+  public editEventsLink = InternalLink.all['bearbeiten/termine'];
 
   public previousEvent: {
     groupId: EventGroupId,
@@ -33,7 +34,7 @@ export class EditEventComponent implements AfterViewInit {
   public inputForm = new InputForm({
     groupId: new InputField<EventGroupId>('general', [
       Validator.required('Ein zugehöiges Thema ist erforderlich.'),
-      Validator.isOneOf(allEventGroupIds, 'Das zugehörige Thema ist ungültig.')
+      Validator.isOneOf(EventGroupId.all, 'Das zugehörige Thema ist ungültig.')
     ]),
     title: new InputField<string>('', [
       Validator.required('Der Titel is erfordelich.')
@@ -69,13 +70,13 @@ export class EditEventComponent implements AfterViewInit {
 
   public get groupIdSelectOptions(): SelectOptions<EventGroupId> {
     return SelectOptions.grouped<EventGroupId>(
-      groupedEventGroupIds.map(group => {
+      EventGroupId.grouped.map(group => {
         return {
-          title: group.groupDescription,
-          options: group.eventIds.map(groupId => {
+          title: group.title,
+          options: group.groupIds.map(groupId => {
             return {
               id: groupId,
-              text: eventGroupDescription[groupId]
+              text: EventGroupId.title[groupId]
             };
           })
         };
@@ -113,7 +114,7 @@ export class EditEventComponent implements AfterViewInit {
           link: this.inputForm.field('link').value || undefined
         }
       });
-      await this.router.navigateByUrl(allInternalLinks['bearbeiten/termine'].link);
+      await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine'].link);
       this.inputForm.status = 'valid';
   }
 }

@@ -1,4 +1,4 @@
-import { FunctionsErrorCodeCore } from '@angular/fire/functions'
+import { FunctionsErrorCodeCore } from '@angular/fire/functions';
 import { Result } from './result';
 
 export namespace FirebaseFunction {

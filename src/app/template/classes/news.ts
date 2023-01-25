@@ -42,7 +42,7 @@ export namespace News {
           newsUrl: news.newsUrl,
           disabled: news.disabled,
           thumbnailUrl: news.thumbnailUrl
-        }
+        };
       }
     }
 }

@@ -1,4 +1,4 @@
-import { guid } from "../classes/guid";
+import { guid } from '../classes/guid';
 
 export namespace Json {
 

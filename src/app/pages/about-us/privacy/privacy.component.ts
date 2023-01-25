@@ -14,6 +14,6 @@ export class PrivacyComponent {
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('Datenschutzerklärung')
+    this.titleService.setTitle('Datenschutzerklärung');
   }
 }

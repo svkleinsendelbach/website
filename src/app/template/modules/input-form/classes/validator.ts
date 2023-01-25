@@ -1,4 +1,4 @@
-import { ValidationResult } from "./validation-result";
+import { ValidationResult } from './validation-result';
 
 export interface Validator<T> {
   isValid(value: T): ValidationResult,

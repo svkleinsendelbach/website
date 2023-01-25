@@ -8,13 +8,15 @@ import { HeaderComponent } from '../header.component';
   styleUrls: ['./desktop-header.component.sass']
 })
 export class DesktopHeaderComponent<InternalPath extends string> {
-  @Input() public headerData!: HeaderComponent.HeaderData<InternalPath>
+  public Object = Object;
 
-  @Input() public homeLinkData!: HeaderComponent.HomeLinkData<InternalPath>
+  @Input() public headerData!: HeaderComponent.HeaderData<InternalPath>;
 
-  @Input() public styleConfig!: HeaderComponent.StyleConfig
+  @Input() public homeLinkData!: HeaderComponent.HomeLinkData<InternalPath>;
 
-  public expandedHeaderItemId: string | null = null
+  @Input() public styleConfig!: HeaderComponent.StyleConfig;
+
+  public expandedHeaderItemId: string | null = null;
 
   public constructor(
     public readonly appearance: AppearanceService
@@ -22,9 +24,9 @@ export class DesktopHeaderComponent<InternalPath extends string> {
 
   public handleHeaderItemClick(headerItemId: string) {
     if (this.expandedHeaderItemId === headerItemId) {
-      this.expandedHeaderItemId = null
+      this.expandedHeaderItemId = null;
     } else {
-      this.expandedHeaderItemId = headerItemId
+      this.expandedHeaderItemId = headerItemId;
     }
   }
 }

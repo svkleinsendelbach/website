@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { allInternalLinks } from 'src/app/app.component';
+import { InternalLink } from 'src/app/classes/InternalPath';
 import { ErrorLevel } from 'src/app/template/modules/input-form/classes/error-level';
 import { InputError } from 'src/app/template/modules/input-form/classes/input-error';
 import { InputField } from 'src/app/template/modules/input-form/classes/input-field';
@@ -59,7 +59,7 @@ export class LoginAddUserWaitingComponent {
     if (result === 'error') return;
     this.inputForm.status = 'valid';
     this.inputForm.reset();
-    this.router.navigateByUrl(allInternalLinks.home.link);
+    this.router.navigateByUrl(InternalLink.all.home.link);
   }
 
   private handleLoginError(reason: unknown): 'error' {

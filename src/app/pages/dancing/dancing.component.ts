@@ -14,6 +14,6 @@ export class DancingComponent {
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('Tanzen')
+    this.titleService.setTitle('Tanzen');
   }
 }

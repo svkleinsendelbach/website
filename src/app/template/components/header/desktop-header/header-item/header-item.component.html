@@ -1,62 +1,62 @@
 <div
   id="header-item"
   [ngClass]="{
-    expanded: expandedHeaderItemId === headerItem.id
+    expanded: expandedHeaderItemId === headerItem[0]
   }"
 >
 
   <!-- Top item without sub items -->
   <a
     id="top-item"
-    *ngIf="headerItem.subItems === undefined"
-    href="{{ headerItem.topItem.link.link }}"
-    target="{{ headerItem.topItem.link.target }}"
-    title="{{ headerItem.topItem.link.title }}"
-    (mouseenter)="handleHoverStart(headerItem.topItem)"
-    (mouseleave)="handleHoverStop(headerItem.topItem)"
+    *ngIf="headerItem[1].subItems === undefined"
+    href="{{ headerItem[1].topItem.link }}"
+    target="{{ headerItem[1].topItem.target }}"
+    title="{{ headerItem[1].topItem.title }}"
+    (mouseenter)="handleHoverStart(headerItem[0])"
+    (mouseleave)="handleHoverStop(headerItem[0])"
     [ngStyle]="{
-      backgroundColor: backgroundColor(headerItem.topItem).css
+      backgroundColor: backgroundColor(headerItem[0]).css
     }"
   >
     <div
       id="top-item-text"
       [ngStyle]="{
-        color: textColor(headerItem.topItem).css
+        color: textColor(headerItem[0]).css
       }"
-    >{{ headerItem.topItem.link.title }}</div>
+    >{{ headerItem[1].topItem.title }}</div>
   </a>
 
   <!-- Top item with sub items -->
   <div
     id="top-item"
-    *ngIf="headerItem.subItems !== undefined"
+    *ngIf="headerItem[1].subItems !== undefined"
     (click)="$event.preventDefault(); $event.stopPropagation(); handleHeaderItemClick()"
-    (mouseenter)="handleHoverStart(headerItem.topItem)"
-    (mouseleave)="handleHoverStop(headerItem.topItem)"
+    (mouseenter)="handleHoverStart(headerItem[0])"
+    (mouseleave)="handleHoverStop(headerItem[0])"
     [ngStyle]="{
-      backgroundColor: backgroundColor(headerItem.topItem).css
+      backgroundColor: backgroundColor(headerItem[0]).css
     }"
   >
     <div
       id="top-item-text"
       [ngStyle]="{
-        color: textColor(headerItem.topItem).css
+        color: textColor(headerItem[0]).css
       }"
-    >{{ headerItem.topItem.link.title }}</div>
+    >{{ headerItem[1].topItem.title }}</div>
     <fa-icon
-      *ngIf="expandedHeaderItemId !== headerItem.id"
+      *ngIf="expandedHeaderItemId !== headerItem[0]"
       [icon]="faCaretDown"
       class="drop-down-arrow"
       [ngStyle]="{
-        color: textColor(headerItem.topItem).css
+        color: textColor(headerItem[0]).css
       }"
     ></fa-icon>
     <fa-icon
-      *ngIf="expandedHeaderItemId === headerItem.id"
+      *ngIf="expandedHeaderItemId === headerItem[0]"
       [icon]="faCaretUp"
       class="drop-down-arrow"
       [ngStyle]="{
-        color: textColor(headerItem.topItem).css
+        color: textColor(headerItem[0]).css
       }"
     ></fa-icon>
   </div>
@@ -67,22 +67,22 @@
   >
     <div
       class="sub-item"
-      *ngFor="let subItem of headerItem.subItems"
-      (mouseenter)="handleHoverStart(subItem)"
-      (mouseleave)="handleHoverStop(subItem)"
+      *ngFor="let subItem of headerItem[1].subItems !== undefined ? Object.entries(headerItem[1].subItems) : []"
+      (mouseenter)="handleHoverStart(subItem[0])"
+      (mouseleave)="handleHoverStop(subItem[0])"
       [ngStyle]="{
-        backgroundColor: backgroundColor(subItem).css
+        backgroundColor: backgroundColor(subItem[0]).css
       }"
     >
       <a
         class="sub-item-text"
-        href="{{ subItem.link.link }}"
-        target="{{ subItem.link.target }}"
-        title="{{ subItem.link.title }}"
+        href="{{ subItem[1].link }}"
+        target="{{ subItem[1].target }}"
+        title="{{ subItem[1].title }}"
         [ngStyle]="{
-          color: textColor(subItem).css
+          color: textColor(subItem[0]).css
         }"
-      >{{ subItem.link.title }}</a>
+      >{{ subItem[1].title }}</a>
     </div>
   </div>
 

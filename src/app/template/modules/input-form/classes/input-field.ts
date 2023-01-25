@@ -1,7 +1,7 @@
-import { InputError } from "./input-error";
-import { ErrorLevel } from "./error-level";
-import { ValidationResult } from "./validation-result";
-import { Validator } from "./validator";
+import { InputError } from './input-error';
+import { ErrorLevel } from './error-level';
+import { ValidationResult } from './validation-result';
+import { Validator } from './validator';
 
 export class InputField<T> {
   private fieldValue: T;

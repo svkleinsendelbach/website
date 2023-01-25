@@ -11,7 +11,7 @@ export class SharedDataService<T extends { [key: string]: unknown }> {
   }
 
   public getValue<Key extends keyof T>(key: Key): T[Key] | undefined {
-    return this.data[key]
+    return this.data[key];
   }
 
   public removeValue<Key extends keyof T>(key: Key) {

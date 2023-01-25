@@ -39,7 +39,8 @@
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
-              "utf8"
+              "utf8",
+              "sha512-crypt-ts"
             ]
           },
           "configurations": {

@@ -6,36 +6,36 @@ import { AppearanceService } from './appearance.service';
   providedIn: 'root'
 })
 export class StyleConfigService {
-  private styleConfig?: StyleConfigService.StyleConfig
+  private styleConfig?: StyleConfigService.StyleConfig;
 
   public constructor(
     private readonly appearance: AppearanceService
   ) {}
 
   public setConfig(styleConfig: StyleConfigService.StyleConfig) {
-    this.styleConfig = styleConfig
+    this.styleConfig = styleConfig;
   }
 
   public setStyle<Key extends keyof StyleConfigService.StyleConfig>(key: Key, style: StyleConfigService.StyleConfig[Key]) {
     if (this.styleConfig === undefined) {
-      throw new Error('No style config is set.')
+      throw new Error('No style config is set.');
     }
-    this.styleConfig[key] = style
+    this.styleConfig[key] = style;
   }
 
   public style<Key extends keyof StyleConfigService.StyleConfig>(key: Key): StyleConfigService.StyleConfig[Key] {
     if (this.styleConfig === undefined) {
-      throw new Error('No style config is set.')
+      throw new Error('No style config is set.');
     }
-    return this.styleConfig[key]
+    return this.styleConfig[key];
   }
 
   public color<Key extends keyof StyleConfigService.StyleConfig>(key: Key): Style.Color {
-     return this.style(key).color(this.appearance.current)
+     return this.style(key).color(this.appearance.current);
   }
 
   public css<Key extends keyof StyleConfigService.StyleConfig>(key: Key): string {
-     return this.color(key).css
+     return this.color(key).css;
   }
 }
 

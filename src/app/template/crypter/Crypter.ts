@@ -46,14 +46,14 @@ export class Crypter {
         return this.decryptVernamCipher(aesDecrypted);
     }
 
-    public decryptDecode(data: string): any {
+    public decryptDecode(data: string): unknown {
         if (data === '') return {};
         const dataBytes = unishortBytes(data);
         const decryptedData = this.decryptAesAndVernam(dataBytes);
         return Json.parse(unishortString(decryptedData));
     }
 
-    public encodeEncrypt(data: any): string {
+    public encodeEncrypt(data: unknown): string {
         const encodedData = Json.stringify(data);
         const dataBytes = unishortBytes(encodedData ?? '');
         const encryptedData = this.encryptVernamAndAes(dataBytes);

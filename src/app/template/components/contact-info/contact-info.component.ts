@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DeviceTypeService } from '../../services/device-type.service';
-import { faPhone, faMobile, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faPhone, faMobile, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { StyleConfigService } from '../../services/style-config.service';
 
 @Component({
@@ -9,11 +9,11 @@ import { StyleConfigService } from '../../services/style-config.service';
   styleUrls: ['./contact-info.component.sass']
 })
 export class ContactInfoComponent {
-  public faPhone = faPhone
-  public faMobile = faMobile
-  public faEnvelope = faEnvelope
+  public faPhone = faPhone;
+  public faMobile = faMobile;
+  public faEnvelope = faEnvelope;
 
-  @Input() public contactData!: ContactInfoComponent.ContactItem[]
+  @Input() public contactData!: ContactInfoComponent.ContactItem[];
 
   public constructor(
     public readonly styleConfig: StyleConfigService,

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { eventGroupDescription, EventGroupId, InternalPath } from 'src/app/app.component';
+import { EventGroupId } from 'src/app/classes/EventGroupId';
+import { InternalPath } from 'src/app/classes/InternalPath';
 import { Link } from 'src/app/template/classes/link';
 import { ContactInfoComponent } from 'src/app/template/components/contact-info/contact-info.component';
 import { LinksComponent } from 'src/app/template/components/links/links.component';
@@ -13,7 +14,7 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
   styleUrls: ['./general.component.sass']
 })
 export class GeneralComponent {
-  public eventGroupDescription = eventGroupDescription
+  public eventGroupTitle = EventGroupId.title;
 
   public readonly links: LinksComponent.LinkData<InternalPath>[] = [
     {
@@ -58,7 +59,7 @@ export class GeneralComponent {
       title: 'G-Jugend',
       subtitle: 'G-Jugend des SV Kleinsendelbach'
     }
-  ]
+  ];
 
   public readonly eventGroupIds: EventGroupId[] = [
     'football-youth/general',
@@ -66,7 +67,7 @@ export class GeneralComponent {
     'football-youth/e-youth',
     'football-youth/f-youth',
     'football-youth/g-youth',
-  ]
+  ];
 
   public readonly contactData: ContactInfoComponent.ContactItem[] = [
     {
@@ -94,13 +95,13 @@ export class GeneralComponent {
         text: '0171 / 2447114'
       }
     }
-  ]
+  ];
 
   public constructor(
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('Jugendfußball')
+    this.titleService.setTitle('Jugendfußball');
   }
 }

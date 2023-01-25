@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { allInternalLinks } from 'src/app/app.component';
+import { InternalLink } from 'src/app/classes/InternalPath';
 import { News } from 'src/app/template/classes/news';
 import { ApiService } from 'src/app/template/services/api.service';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
@@ -14,8 +14,8 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
   styleUrls: ['./news.component.sass']
 })
 export class NewsComponent {
-  public logInPageLink = allInternalLinks['bearbeiten/anmelden'];
-  public mainEditingPageLink = allInternalLinks['bearbeiten']
+  public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
+  public mainEditingPageLink = InternalLink.all['bearbeiten'];
 
   public allNews: News.ReturnType[] | undefined = undefined;
 
@@ -29,7 +29,7 @@ export class NewsComponent {
     }>,
     private router: Router
   ) {
-    this.titleService.setTitle('Nachrichten bearbeiten')
+    this.titleService.setTitle('Nachrichten bearbeiten');
     this.getNews();
   }
 
@@ -50,11 +50,11 @@ export class NewsComponent {
 
   public async editNews(news: News.ReturnType) {
     this.sharedData.setValue('editNews', news);
-    await this.router.navigateByUrl(allInternalLinks['bearbeiten/nachrichten/bearbeiten'].link);
+    await this.router.navigateByUrl(InternalLink.all['bearbeiten/nachrichten/bearbeiten'].link);
   }
 
   public async addNewNews() {
     this.sharedData.removeValue('editNews');
-    await this.router.navigateByUrl(allInternalLinks['bearbeiten/nachrichten/bearbeiten'].link);
+    await this.router.navigateByUrl(InternalLink.all['bearbeiten/nachrichten/bearbeiten'].link);
   }
 }

@@ -1,7 +1,7 @@
-import { EditType } from "../classes/edit-type";
-import { Event, EventGroup } from "../classes/event";
-import { News } from "../classes/news";
-import { TeamSquad } from "../classes/team-squad";
+import { EditType } from '../classes/edit-type';
+import { Event, EventGroup } from '../classes/event';
+import { News } from '../classes/news';
+import { TeamSquad } from '../classes/team-squad';
 
 export type UserAuthenticationType = 'websiteEditing';
 

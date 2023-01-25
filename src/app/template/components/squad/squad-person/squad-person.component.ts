@@ -8,7 +8,7 @@ import { SquadComponent } from '../squad.component';
   styleUrls: ['./squad-person.component.sass']
 })
 export class SquadPersonComponent {
-  @Input() public person!: SquadComponent.SquadPersonInfo
+  @Input() public person!: SquadComponent.SquadPersonInfo;
 
   public constructor(
     public styleConfig: StyleConfigService

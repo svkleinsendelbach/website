@@ -9,9 +9,9 @@ import { StyleConfigService } from '../../services/style-config.service';
   styleUrls: ['./links.component.sass']
 })
 export class LinksComponent<InternalPath extends string> {
-  @Input() public links!: LinksComponent.LinkData<InternalPath>[]
+  @Input() public links!: LinksComponent.LinkData<InternalPath>[];
 
-  public hoveredLink: string | null = null
+  public hoveredLink: string | null = null;
 
   public constructor(
     public readonly deviceType: DeviceTypeService,
@@ -19,12 +19,12 @@ export class LinksComponent<InternalPath extends string> {
   ) {}
 
   public hoverLinkStart(link: string) {
-    this.hoveredLink = link
+    this.hoveredLink = link;
   }
 
   public hoverLinkStop(link: string) {
     if (this.hoveredLink === link) {
-      this.hoveredLink = null
+      this.hoveredLink = null;
     }
   }
 }

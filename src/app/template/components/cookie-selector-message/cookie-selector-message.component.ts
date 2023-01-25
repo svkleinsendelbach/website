@@ -36,12 +36,12 @@ export class CookieSelectorMessageComponent<InternalPath extends string> impleme
     necessary: 'selected',
     functionality: 'unselected',
     statistics: 'unselected'
-  }
+  };
 
   /**
    * Indicates whether details of cookies is shown.
    */
-  public detailsShown = false
+  public detailsShown = false;
 
   public constructor(
     public readonly cookieService: CookieService,
@@ -51,16 +51,16 @@ export class CookieSelectorMessageComponent<InternalPath extends string> impleme
 
   public ngOnInit() {
     this.cookieService.listeners.add('cookieSelectorMessage', newCookieSelection => {
-      this.cookiesSelection = newCookieSelection
-    })
-    const cookieSelection = this.cookieService.getCookiesSelection()
+      this.cookiesSelection = newCookieSelection;
+    });
+    const cookieSelection = this.cookieService.getCookiesSelection();
     if (cookieSelection == null) {
-      this.isShown = true
+      this.isShown = true;
     }
   }
 
   public ngOnDestroy() {
-    this.deviceType.listeners.remove('cookieSelectorMessage')
+    this.deviceType.listeners.remove('cookieSelectorMessage');
   }
 
   /**
@@ -70,13 +70,13 @@ export class CookieSelectorMessageComponent<InternalPath extends string> impleme
    */
   public handleCookieSelection(type: CookieService.CookieType) {
     switch (type) {
-      case CookieService.CookieType.Necessary: break
+      case CookieService.CookieType.Necessary: break;
       case CookieService.CookieType.Functionality:
-        this.cookiesSelection.functionality = this.cookiesSelection.functionality == 'selected' ? 'unselected' : 'selected'
-        break
+        this.cookiesSelection.functionality = this.cookiesSelection.functionality == 'selected' ? 'unselected' : 'selected';
+        break;
       case CookieService.CookieType.Statistics:
-        this.cookiesSelection.statistics = this.cookiesSelection.statistics == 'selected' ? 'unselected' : 'selected'
-        break
+        this.cookiesSelection.statistics = this.cookiesSelection.statistics == 'selected' ? 'unselected' : 'selected';
+        break;
     }
   }
 
@@ -85,15 +85,15 @@ export class CookieSelectorMessageComponent<InternalPath extends string> impleme
    * Shows details if these aren't shown and vice versa.
    */
   public handleShowDetails() {
-    this.detailsShown = !this.detailsShown
+    this.detailsShown = !this.detailsShown;
   }
 
   /**
    * Handles confirmation of the selected cookies.
    */
   public handleConfirmSelected() {
-    this.cookieService.saveCookieSelection(this.cookiesSelection)
-    this.isShown = false
+    this.cookieService.saveCookieSelection(this.cookiesSelection);
+    this.isShown = false;
   }
 
   /**
@@ -104,18 +104,18 @@ export class CookieSelectorMessageComponent<InternalPath extends string> impleme
       necessary: 'selected',
       functionality: 'selected',
       statistics: 'selected'
-    }
+    };
     this.handleConfirmSelected();
   }
 
   public selectionButtonStyle(type: CookieService.CookieType): {
     [key: string]: string | undefined
   } {
-    const isSelected = this.cookiesSelection[CookieService.CookieType.selectionString(type)] === 'selected'
+    const isSelected = this.cookiesSelection[CookieService.CookieType.selectionString(type)] === 'selected';
     return {
       color: this.styleConfig.css(isSelected ? 'backgroundColor' : 'textColor'),
       'background-color': this.styleConfig.css(isSelected ? 'primaryColor' : 'backgroundColor'),
       'border-color': this.styleConfig.css(isSelected ? 'primaryColor' : 'textColor')
-    }
+    };
   }
 }

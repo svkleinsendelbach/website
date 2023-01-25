@@ -21,6 +21,6 @@ export namespace guid {
      * @return { guid } Generated guid.
      */
     export function newGuid(): guid {
-      return new guid(uuidv4().toUpperCase())
+      return new guid(uuidv4().toUpperCase());
     }
 }

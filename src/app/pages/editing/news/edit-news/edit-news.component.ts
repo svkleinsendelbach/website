@@ -1,7 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { allInternalLinks } from 'src/app/app.component';
+import { InternalLink } from 'src/app/classes/InternalPath';
 import { guid } from 'src/app/template/classes/guid';
 import { News } from 'src/app/template/classes/news';
 import { ErrorLevel } from 'src/app/template/modules/input-form/classes/error-level';
@@ -23,8 +23,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./edit-news.component.sass']
 })
 export class EditNewsComponent implements AfterViewInit {
-  public logInPageLink = allInternalLinks['bearbeiten/anmelden'];
-  public editNewsLink = allInternalLinks['bearbeiten/nachrichten'];
+  public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
+  public editNewsLink = InternalLink.all['bearbeiten/nachrichten'];
 
   public previousNews: News.ReturnType | undefined;
 

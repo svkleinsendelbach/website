@@ -14,6 +14,6 @@ export class ChronicleComponent {
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('Chronik')
+    this.titleService.setTitle('Chronik');
   }
 }

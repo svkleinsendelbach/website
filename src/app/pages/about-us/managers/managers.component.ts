@@ -14,6 +14,6 @@ export class ManagersComponent {
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('Vorstandschaft')
+    this.titleService.setTitle('Vorstandschaft');
   }
 }

@@ -14,6 +14,6 @@ export class StatuteComponent {
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('Satzung')
+    this.titleService.setTitle('Satzung');
   }
 }

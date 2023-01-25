@@ -41,7 +41,7 @@ export class ApiService {
     const result = await this.callFunction<CheckUserAuthenticationFunction.Parameters, CheckUserAuthenticationFunction.ReturnType>('v2_checkUserAuthentication', parameters);
     if (result.state === 'failure' && result.error.code === 'permission-denied') return 'unauthorized';
     result.get();
-    return 'authorized'
+    return 'authorized';
   }
 
   public async editEvent<GroupId>(parameters: EditEventFunction.Parameters<GroupId>): Promise<EditEventFunction.ReturnType> {
@@ -104,7 +104,7 @@ export class ApiService {
         databaseType: environment.databaseType.value
       })
     }));
-    const result: FirebaseFunction.ResultType<ReturnType> = crypter.decryptDecode(data);
+    const result = crypter.decryptDecode(data) as FirebaseFunction.ResultType<ReturnType>;
     if (result.state === 'success')
       return Result.success(result.value);
     else
@@ -145,7 +145,7 @@ export class ApiService {
         bs: asAndBs.bs
       })
     }));
-    const functionResult: FirebaseFunction.ResultType<(0 | 1)[]> = crypter.decryptDecode(data);
+    const functionResult = crypter.decryptDecode(data) as FirebaseFunction.ResultType<(0 | 1)[]>;
     if (functionResult.state === 'failure')
       return Result.failure(functionResult.error);
     return Result.success({

@@ -15,15 +15,15 @@ export class Link<InternalPath extends string>{
   ) {}
 
   public get title(): string {
-    return this.value.title
+    return this.value.title;
   }
 
   public get link(): string {
-    return 'path' in this.value ? `/${this.value.path}` : this.value.link
+    return 'path' in this.value ? `/${this.value.path}` : this.value.link;
   }
 
   public get target(): '_self' | '_blank' {
-    return ('openInNewTab' in this.value ? this.value.openInNewTab : false) ? '_blank' : '_self'
+    return ('openInNewTab' in this.value ? this.value.openInNewTab : false) ? '_blank' : '_self';
   }
 }
 
@@ -32,7 +32,7 @@ export namespace Link {
     return new Link({
       title,
       path
-    })
+    });
   }
 
   export function external<InternalPath extends string>(title: string, link: string, openInNewTab: boolean): Link<InternalPath> {
@@ -40,6 +40,6 @@ export namespace Link {
       title,
       link,
       openInNewTab
-    })
+    });
   }
 }

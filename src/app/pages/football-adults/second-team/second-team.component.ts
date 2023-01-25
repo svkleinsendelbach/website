@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { eventGroupDescription, EventGroupId } from 'src/app/app.component';
+import { EventGroupId } from 'src/app/classes/EventGroupId';
 import { ContactInfoComponent } from 'src/app/template/components/contact-info/contact-info.component';
 import { AnpfiffTeamParameter } from 'src/app/template/services/api-functions-types';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
@@ -12,13 +12,13 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
   styleUrls: ['./second-team.component.sass']
 })
 export class SecondTeamComponent {
-  public eventGroupDescription = eventGroupDescription
+  public eventGroupTitle = EventGroupId.title;
 
   public readonly eventGroupIds: EventGroupId[] = [
     'football-adults/second-team'
-  ]
+  ];
 
-  public readonly teamId = '02EO9BK2JS000000VS5489B2VSAS84KM'
+  public readonly teamId = '02EO9BK2JS000000VS5489B2VSAS84KM';
 
   public readonly contactData: ContactInfoComponent.ContactItem[] = [
     {
@@ -38,7 +38,7 @@ export class SecondTeamComponent {
       },
       email: 'kellermann.tim@gmx.de'
     }
-  ]
+  ];
 
   public readonly mapOptions: google.maps.MapOptions = {
     zoom: 14,
@@ -49,22 +49,22 @@ export class SecondTeamComponent {
     scrollwheel: false,
     maxZoom: 18,
     minZoom: 5
-  }
+  };
 
   public readonly mapMarkers: google.maps.LatLngLiteral[] = [
     {
       lat: 49.589936,
       lng: 11.162849
     }
-  ]
+  ];
 
-  public readonly squadParametersType: AnpfiffTeamParameter.Type = 'second-team'
+  public readonly squadParametersType: AnpfiffTeamParameter.Type = 'second-team';
 
   public constructor(
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('Zweite Mannschaft')
+    this.titleService.setTitle('Zweite Mannschaft');
   }
 }

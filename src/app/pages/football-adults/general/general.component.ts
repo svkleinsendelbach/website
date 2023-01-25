@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { EventGroupId, InternalPath } from 'src/app/app.component';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
-import { eventGroupDescription } from 'src/app/app.component'
 import { ContactInfoComponent } from 'src/app/template/components/contact-info/contact-info.component';
 import { LinksComponent } from 'src/app/template/components/links/links.component';
 import { Link } from 'src/app/template/classes/link';
+import { EventGroupId } from 'src/app/classes/EventGroupId';
+import { InternalPath } from 'src/app/classes/InternalPath';
 
 @Component({
   selector: 'app-general',
@@ -14,7 +14,7 @@ import { Link } from 'src/app/template/classes/link';
   styleUrls: ['./general.component.sass']
 })
 export class GeneralComponent {
-  public eventGroupDescription = eventGroupDescription
+  public eventGroupTitle = EventGroupId.title;
 
   public readonly links: LinksComponent.LinkData<InternalPath>[] = [
     {
@@ -35,14 +35,14 @@ export class GeneralComponent {
       title: 'Alte Herren',
       subtitle: 'Alte Herren des SV Kleinsendelbach'
     }
-  ]
+  ];
 
   public readonly eventGroupIds: EventGroupId[] = [
     'football-adults/general',
     'football-adults/first-team',
     'football-adults/second-team',
     'football-adults/ah-team',
-  ]
+  ];
 
   public readonly contactData: ContactInfoComponent.ContactItem[] = [
     {
@@ -53,13 +53,13 @@ export class GeneralComponent {
         text: '0176 / 57857884'
       }
     }
-  ]
+  ];
 
   public constructor(
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('Herrenfußball')
+    this.titleService.setTitle('Herrenfußball');
   }
 }

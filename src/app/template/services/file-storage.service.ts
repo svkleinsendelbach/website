@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/compat/storage'
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { lastValueFrom } from 'rxjs';
 
 @Injectable({
@@ -31,6 +31,6 @@ export class FileStorageService {
   }
 
   public async download(url: string): Promise<string> {
-    return await (await fetch(url)).text()
+    return await (await fetch(url)).text();
   }
 }

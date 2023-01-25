@@ -12,14 +12,14 @@ export class DatabaseManagerTestService {
   ) {}
 
   public async setValue(referencePath: string, value: DatabaseManagerTestService.ValueType) {
-    const reference = this.firebaseDatabase.database.ref(referencePath)
+    const reference = this.firebaseDatabase.database.ref(referencePath);
     await reference.set(value);
   }
 
   public async getOptionalValue<T>(referencePath: string): Promise<T | null> {
-    const reference = this.firebaseDatabase.database.ref(referencePath)
-    const snapshot = await reference.once('value')
-    if (!snapshot.exists()) return null
+    const reference = this.firebaseDatabase.database.ref(referencePath);
+    const snapshot = await reference.once('value');
+    if (!snapshot.exists()) return null;
     return snapshot.val();
   }
 
@@ -48,7 +48,7 @@ export class DatabaseManagerTestService {
   }
 
   public async removeValue(referencePath: string) {
-    const reference = this.firebaseDatabase.database.ref(referencePath)
+    const reference = this.firebaseDatabase.database.ref(referencePath);
     await reference.remove();
   }
 }

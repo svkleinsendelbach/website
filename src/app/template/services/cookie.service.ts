@@ -5,32 +5,32 @@ import { EventListener } from '../classes/event-listener';
   providedIn: 'root'
 })
 export class CookieService {
-  public listeners = new EventListener<CookieService.CookiesSelection>()
+  public listeners = new EventListener<CookieService.CookiesSelection>();
 
   public getCookiesSelection(): CookieService.CookiesSelection | null {
-    const selectionJson = localStorage.getItem('cookies')
-    const selection = selectionJson != null ? JSON.parse(selectionJson) : null
+    const selectionJson = localStorage.getItem('cookies');
+    const selection = selectionJson != null ? JSON.parse(selectionJson) : null;
     if (selection != null) {
-      this.listeners.emitValue(selection)
+      this.listeners.emitValue(selection);
     }
-    return selection
+    return selection;
   }
 
   public saveCookieSelection(selection: CookieService.CookiesSelection) {
-    localStorage.setItem('cookies', JSON.stringify(selection))
-    this.listeners.emitValue(selection)
+    localStorage.setItem('cookies', JSON.stringify(selection));
+    this.listeners.emitValue(selection);
   }
 
   public changeCookieSelection(type: CookieService.CookieType, value: 'selected' | 'unselected') {
-    if (type === CookieService.CookieType.Necessary) { return }
-    const selection = this.getCookiesSelection() ?? CookieService.CookiesSelection.defaultSelection
-    selection[CookieService.CookieType.selectionString(type) as 'functionality' | 'statistics'] = value
-    this.saveCookieSelection(selection)
+    if (type === CookieService.CookieType.Necessary) { return; }
+    const selection = this.getCookiesSelection() ?? CookieService.CookiesSelection.defaultSelection;
+    selection[CookieService.CookieType.selectionString(type) as 'functionality' | 'statistics'] = value;
+    this.saveCookieSelection(selection);
   }
 
   public removeCookieSelection() {
-    localStorage.removeItem('cookies')
-    this.listeners.emitValue(CookieService.CookiesSelection.defaultSelection)
+    localStorage.removeItem('cookies');
+    this.listeners.emitValue(CookieService.CookiesSelection.defaultSelection);
   }
 }
 
@@ -48,9 +48,9 @@ export namespace CookieService {
   export namespace CookieType {
     export function selectionString(type: CookieType): 'necessary' | 'functionality' | 'statistics' {
       switch (type) {
-        case CookieType.Necessary: return 'necessary'
-        case CookieType.Functionality: return 'functionality'
-        case CookieType.Statistics: return 'statistics'
+        case CookieType.Necessary: return 'necessary';
+        case CookieType.Functionality: return 'functionality';
+        case CookieType.Statistics: return 'statistics';
       }
     }
   }
@@ -69,6 +69,6 @@ export namespace CookieService {
       necessary: 'selected',
       functionality: 'unselected',
       statistics: 'unselected'
-    }
+    };
   }
 }

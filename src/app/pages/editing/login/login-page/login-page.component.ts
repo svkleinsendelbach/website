@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { lastValueFrom } from 'rxjs';
-import { allInternalLinks } from 'src/app/app.component';
+import { InternalLink } from 'src/app/classes/InternalPath';
 import { ErrorLevel } from 'src/app/template/modules/input-form/classes/error-level';
 import { InputError } from 'src/app/template/modules/input-form/classes/input-error';
 import { InputField } from 'src/app/template/modules/input-form/classes/input-field';
@@ -144,7 +144,7 @@ export class LoginPageComponent {
     this.inputForm.status = 'valid';
     this.inputForm.reset();
     if (registrationStatus === 'registered') {
-      await this.router.navigateByUrl(allInternalLinks.bearbeiten.link);
+      await this.router.navigateByUrl(InternalLink.all.bearbeiten.link);
     } else {
       this.userUnregisteredEmitter.emit();
     }

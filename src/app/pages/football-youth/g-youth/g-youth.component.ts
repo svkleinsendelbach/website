@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { eventGroupDescription, EventGroupId } from 'src/app/app.component';
+import { EventGroupId } from 'src/app/classes/EventGroupId';
 import { ContactInfoComponent } from 'src/app/template/components/contact-info/contact-info.component';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
@@ -11,11 +11,11 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
   styleUrls: ['./g-youth.component.sass']
 })
 export class GYouthComponent {
-  public eventGroupDescription = eventGroupDescription
+  public eventGroupTitle = EventGroupId.title;
 
   public readonly eventGroupIds: EventGroupId[] = [
     'football-youth/g-youth'
-  ]
+  ];
 
   public readonly contactData: ContactInfoComponent.ContactItem[] = [
     {
@@ -34,7 +34,7 @@ export class GYouthComponent {
         text: '0170 / 8087516'
       }
     }
-  ]
+  ];
 
   public readonly mapOptions: google.maps.MapOptions = {
     zoom: 14,
@@ -45,20 +45,20 @@ export class GYouthComponent {
     scrollwheel: false,
     maxZoom: 18,
     minZoom: 5
-  }
+  };
 
   public readonly mapMarkers: google.maps.LatLngLiteral[] = [
     {
       lat: 49.59271272107774,
       lng: 11.158062149547574
     }
-  ]
+  ];
 
   public constructor(
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('G-Jugend')
+    this.titleService.setTitle('G-Jugend');
   }
 }

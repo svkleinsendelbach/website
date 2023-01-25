@@ -49,9 +49,9 @@
     *ngIf="isExpanded"
   >
     <app-mobile-header-item
-      *ngFor="let headerItem of headerData"
+      *ngFor="let headerItem of Object.entries(headerData)"
       [ngClass]="{
-        expanded: expandedHeaderItemId === headerItem.id
+        expanded: expandedHeaderItemId === headerItem[0]
       }"
       [headerItem]="headerItem"
       [expandedHeaderItemId]="expandedHeaderItemId"

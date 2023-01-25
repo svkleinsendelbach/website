@@ -9,11 +9,11 @@ import { DeviceTypeService } from '../../services/device-type.service';
   styleUrls: ['./header.component.sass']
 })
 export class HeaderComponent<InternalPath extends string> {
-  @Input() public headerDataForDeviceType!: HeaderComponent.HeaderDataForDeviceType<InternalPath>
+  @Input() public headerData!: Record<'desktop' | 'tablet' | 'mobile', HeaderComponent.HeaderData<InternalPath>>;
 
-  @Input() public homeLinkData!: HeaderComponent.HomeLinkData<InternalPath>
+  @Input() public homeLinkData!: HeaderComponent.HomeLinkData<InternalPath>;
 
-  @Input() public styleConfig!: HeaderComponent.StyleConfig
+  @Input() public styleConfig!: HeaderComponent.StyleConfig;
 
   public constructor(
     public readonly deviceType: DeviceTypeService
@@ -21,24 +21,12 @@ export class HeaderComponent<InternalPath extends string> {
 }
 
 export namespace HeaderComponent {
-  export interface HeaderItemLink<InternalPath extends string> {
-    id: string,
-    link: Link<InternalPath>
-  }
-
   export interface HeaderItem<InternalPath extends string> {
-    id: string,
-    topItem: HeaderItemLink<InternalPath>,
-    subItems?: HeaderItemLink<InternalPath>[]
+    topItem: Link<InternalPath>,
+    subItems?: Record<string, Link<InternalPath>>
   }
 
-  export type HeaderData<InternalPath extends string> = HeaderItem<InternalPath>[]
-
-  export interface HeaderDataForDeviceType<InternalPath extends string> {
-    desktop: HeaderData<InternalPath>,
-    tablet: HeaderData<InternalPath>,
-    mobile: HeaderData<InternalPath>
-  }
+  export type HeaderData<InternalPath extends string> = Record<string, HeaderItem<InternalPath>>
 
   export interface HomeLinkData<InternalPath extends string> {
     title: string,

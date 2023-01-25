@@ -10,7 +10,7 @@ import { StyleConfigService } from '../../services/style-config.service';
   styleUrls: ['./home-links.component.sass']
 })
 export class HomeLinksComponent<InternalPath extends string> {
-  @Input() public linkDataForDeviceType!: HomeLinksComponent.LinkDataForDeviceType<InternalPath>
+  @Input() public linkDataForDeviceType!: HomeLinksComponent.LinkDataForDeviceType<InternalPath>;
 
   public constructor(
     public readonly deviceType: DeviceTypeService,
@@ -18,7 +18,7 @@ export class HomeLinksComponent<InternalPath extends string> {
   ) {}
 
   public get linkData(): HomeLinksComponent.LinkItem<InternalPath>[][] {
-    return this.linkDataForDeviceType[this.deviceType.className]
+    return this.linkDataForDeviceType[this.deviceType.className];
   }
 }
 

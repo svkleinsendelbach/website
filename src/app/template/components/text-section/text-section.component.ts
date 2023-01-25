@@ -7,7 +7,7 @@ import { StyleConfigService } from '../../services/style-config.service';
   styleUrls: ['./text-section.component.sass']
 })
 export class TextSectionComponent {
-  @Input() title?: string
+  @Input() title?: string;
 
   public constructor(
     public readonly styleConfig: StyleConfigService

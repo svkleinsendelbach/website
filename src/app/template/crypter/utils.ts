@@ -1,4 +1,4 @@
-import { guid } from "../classes/guid";
+import { guid } from '../classes/guid';
 
 export function bits(byte: number): (0 | 1)[] {
     const totalBitsCount = 8;

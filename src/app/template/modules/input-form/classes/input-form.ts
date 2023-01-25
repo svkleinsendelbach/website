@@ -1,6 +1,6 @@
-import { InputField } from "./input-field";
-import { InputError } from "./input-error";
-import { ValidationResult } from "./validation-result";
+import { InputField } from './input-field';
+import { InputError } from './input-error';
+import { ValidationResult } from './validation-result';
 
 export class InputForm<
   InputFields extends Record<string, InputField<unknown>>,

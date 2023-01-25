@@ -12,11 +12,11 @@ import { StyleConfigService } from '../../services/style-config.service';
   styleUrls: ['./squad.component.sass']
 })
 export class SquadComponent implements OnInit {
-  public FetchState = FetchState
+  public FetchState = FetchState;
 
-  @Input() public parametersType!: AnpfiffTeamParameter.Type
+  @Input() public parametersType!: AnpfiffTeamParameter.Type;
 
-  public fetchedSquad: FetchState<TeamSquad> = FetchState.loading
+  public fetchedSquad: FetchState<TeamSquad> = FetchState.loading;
 
   public constructor(
     private readonly apiService: ApiService,
@@ -30,42 +30,42 @@ export class SquadComponent implements OnInit {
         type: this.parametersType
       })
       .then(squad => {
-        this.fetchedSquad = FetchState.success(squad)
+        this.fetchedSquad = FetchState.success(squad);
       })
       .catch(reason => {
-        this.fetchedSquad = FetchState.failure(reason)
-      })
+        this.fetchedSquad = FetchState.failure(reason);
+      });
   }
 
   private getFullName(person: { firstName: string | null, lastName: string | null }): string {
     if (person.firstName !== null && person.lastName !== null) {
-      return `${person.firstName} ${person.lastName}`
+      return `${person.firstName} ${person.lastName}`;
     } else if (person.firstName === null && person.lastName !== null) {
-      return person.lastName
+      return person.lastName;
     } else if (person.firstName !== null && person.lastName === null) {
-      return person.firstName
+      return person.firstName;
     } else {
-      return 'n.a.'
+      return 'n.a.';
     }
   }
 
   public squadPersonInfo(person: TeamSquad.Person): SquadComponent.SquadPersonInfo {
     let additionalText: string | null = null;
     if (person.goals !== null) {
-      additionalText = `${person.goals} Tore`
+      additionalText = `${person.goals} Tore`;
     }
     if (person.assists !== null) {
       if (additionalText === null) {
-        additionalText = `${person.assists} Assists`
+        additionalText = `${person.assists} Assists`;
       } else {
-        additionalText += ` und ${person.assists} Assists`
+        additionalText += ` und ${person.assists} Assists`;
       }
     }
     if (person.countInSquad !== null) {
       if (additionalText === null) {
-        additionalText = `${person.countInSquad} Spiele`
+        additionalText = `${person.countInSquad} Spiele`;
       } else {
-        additionalText += ` in ${person.countInSquad} Spielen`
+        additionalText += ` in ${person.countInSquad} Spielen`;
       }
     }
     return {
@@ -73,7 +73,7 @@ export class SquadComponent implements OnInit {
       name: this.getFullName(person),
       personParameters: person.personParameters,
       additionalText,
-    }
+    };
   }
 
   public coachPersonInfo(person: TeamSquad.Coach): SquadComponent.SquadPersonInfo {

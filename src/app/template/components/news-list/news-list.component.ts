@@ -12,11 +12,11 @@ import { StyleConfigService } from '../../services/style-config.service';
   styleUrls: ['./news-list.component.sass']
 })
 export class NewsListComponent implements OnInit {
-  public FetchState = FetchState
+  public FetchState = FetchState;
 
-  @Input() public maxListCount?: number
+  @Input() public maxListCount?: number;
 
-  public fetchedNews: FetchState<{ news: News[], hasMore: boolean }> = FetchState.loading
+  public fetchedNews: FetchState<{ news: News[], hasMore: boolean }> = FetchState.loading;
 
   public constructor(
     private readonly apiService: ApiService,
@@ -33,21 +33,21 @@ export class NewsListComponent implements OnInit {
         this.fetchedNews = FetchState.success({
           news: news.news.map(News.ReturnType.toNews),
           hasMore: news.hasMore
-        })
+        });
       })
       .catch(reason => {
-        this.fetchedNews = FetchState.failure(reason)
-      })
+        this.fetchedNews = FetchState.failure(reason);
+      });
   }
 
   public get notDisabledNews(): News[] | undefined {
     if (!FetchState.isSuccess(this.fetchedNews)) {
-      return undefined
+      return undefined;
     }
-    return FetchState.getContent(this.fetchedNews).news.filter(news => !news.disabled)
+    return FetchState.getContent(this.fetchedNews).news.filter(news => !news.disabled);
   }
 
   public getDateDescription(date: Date): string {
-    return Datum.description(Datum.fromDate(date))
+    return Datum.description(Datum.fromDate(date));
   }
 }

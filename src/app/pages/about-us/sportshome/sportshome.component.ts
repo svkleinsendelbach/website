@@ -10,7 +10,7 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
   styleUrls: ['./sportshome.component.sass']
 })
 export class SportshomeComponent {
-  public faPhone = faPhone
+  public faPhone = faPhone;
 
   public readonly openingHoursByDeviceType: SportshomeComponent.OpeningHoursByDeviceType = {
     desktop: [
@@ -29,18 +29,18 @@ export class SportshomeComponent {
       [SportshomeComponent.allOpeningHours.saturday],
       [SportshomeComponent.allOpeningHours.sunday],
     ],
-  }
+  };
 
   public constructor(
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('Sportheim')
+    this.titleService.setTitle('Sportheim');
   }
 
   public get openingHours(): SportshomeComponent.OpeningHour[][] {
-    return this.openingHoursByDeviceType[this.deviceType.className]
+    return this.openingHoursByDeviceType[this.deviceType.className];
   }
 }
 
@@ -85,5 +85,5 @@ export namespace SportshomeComponent {
       title: 'Sonntag',
       time: '9:30 – 12 Uhr und 17 – 20 Uhr, bei Heimspielen: 13:30 – 20 Uhr'
     }
-  }
+  };
 }

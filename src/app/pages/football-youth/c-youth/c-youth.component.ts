@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { eventGroupDescription, EventGroupId } from 'src/app/app.component';
+import { EventGroupId } from 'src/app/classes/EventGroupId';
 import { ContactInfoComponent } from 'src/app/template/components/contact-info/contact-info.component';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
@@ -11,15 +11,15 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
   styleUrls: ['./c-youth.component.sass']
 })
 export class CYouthComponent {
-  public eventGroupDescription = eventGroupDescription
+  public eventGroupTitle = EventGroupId.title;
 
   public readonly eventGroupIds: EventGroupId[] = [
     'football-youth/c-youth'
-  ]
+  ];
 
-  public readonly teamId1 = '02GKSI5N8O000037VS5489B4VSM5S7RJ'
+  public readonly teamId1 = '02GKSI5N8O000037VS5489B4VSM5S7RJ';
 
-  public readonly teamId2 = '02GKSOGF8K000006VS5489B4VSM5S7RJ'
+  public readonly teamId2 = '02GKSOGF8K000006VS5489B4VSM5S7RJ';
 
   public readonly contactData: ContactInfoComponent.ContactItem[] = [
     {
@@ -46,7 +46,7 @@ export class CYouthComponent {
         text: '0176 / 70820050'
       }
     }
-  ]
+  ];
 
   public readonly mapOptions: google.maps.MapOptions = {
     zoom: 14,
@@ -57,20 +57,20 @@ export class CYouthComponent {
     scrollwheel: false,
     maxZoom: 18,
     minZoom: 5
-  }
+  };
 
   public readonly mapMarkers: google.maps.LatLngLiteral[] = [
     {
       lat: 49.589936,
       lng: 11.162849
     }
-  ]
+  ];
 
   public constructor(
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('C-Jugend')
+    this.titleService.setTitle('C-Jugend');
   }
 }
