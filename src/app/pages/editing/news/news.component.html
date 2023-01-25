@@ -1,0 +1,82 @@
+<app-authentication-check
+  [authenticationType]="'websiteEditing'"
+  [logInPageLink]="logInPageLink"
+>
+  <div
+    id="back-btn-container"
+  >
+    <a
+      id="back-button"
+      title="Zurück"
+      href="{{ mainEditingPageLink.link }}"
+      [ngStyle]="{
+        color: styleConfig.css('textColor'),
+        backgroundColor: styleConfig.css('backgroundColor')
+      }"
+    >Zurück</a>
+  </div>
+  <app-text-section
+    [title]="'Nachrichten bearbeiten'"
+  >
+    <p
+      id="add-news"
+      (click)="$event.preventDefault(); $event.stopPropagation(); addNewNews()"
+      [ngStyle]="{
+        color: styleConfig.css('primaryColor'),
+        backgroundColor: styleConfig.css('backgroundColor'),
+        borderColor: styleConfig.css('textColor')
+      }"
+    >Neue Nachricht hinzufügen</p>
+    <p
+      *ngIf="allNews === undefined"
+      class="text margin-top-large"
+      [ngStyle]="{
+        color: styleConfig.css('secondaryTextColor')
+      }"
+    >Nachrichten werden geladen</p>
+    <div
+      class="container"
+    >
+      <div
+        *ngFor="let news of allNews"
+        class="news"
+        [ngStyle]="{
+          backgroundColor: styleConfig.css('backgroundColor'),
+          borderColor: styleConfig.css('textColor')
+        }"
+      >
+        <div
+          class="title-container"
+        >
+          <p
+            class="title"
+            [ngStyle]="{
+              color: styleConfig.css('textColor')
+            }"
+          >{{ news.title }}</p>
+          <p
+            *ngIf="news.subtitle !== undefined"
+            class="subtitle"
+            [ngStyle]="{
+              color: styleConfig.css('secondaryTextColor')
+            }"
+          >{{ news.subtitle }}</p>
+        </div>
+        <p
+          class="edit-button"
+          (click)="$event.preventDefault(); $event.stopPropagation(); editNews(news)"
+          [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+          }"
+        >Bearbeiten</p>
+        <p
+          class="delete-button"
+          (click)="$event.preventDefault(); $event.stopPropagation(); deleteNews(news.id)"
+          [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+          }"
+        >Löschen</p>
+      </div>
+    </div>
+  </app-text-section>
+</app-authentication-check>

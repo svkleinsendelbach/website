@@ -23,7 +23,7 @@ import { AngularFireModule } from '@angular/fire/compat'
 import { AngularFireFunctionsModule, REGION } from '@angular/fire/compat/functions'
 import { AngularFireAuthModule } from '@angular/fire/compat/auth'
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database'
-// import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage'
 import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics'
 import { AngularFirePerformanceModule, PerformanceMonitoringService } from '@angular/fire/compat/performance';
 import { NewsListComponent } from './template/components/news-list/news-list.component';
@@ -68,6 +68,11 @@ import { LoginAddUserWaitingComponent } from './pages/editing/login/login-add-us
 import { USE_DEVICE_LANGUAGE, PERSISTENCE } from '@angular/fire/compat/auth';
 import { EventsComponent as EventsComponent_1 } from './pages/editing/events/events.component';
 import { EditEventComponent } from './pages/editing/events/edit-event/edit-event.component';
+import { NewsComponent } from './pages/editing/news/news.component';
+import { EditNewsComponent } from './pages/editing/news/edit-news/edit-news.component';
+import { AngularEditorModule } from '@kolkov/angular-editor'
+import { FormsModule } from '@angular/forms';
+import { TextEditorComponent } from './template/components/text-editor/text-editor.component';
 
 @NgModule({
   declarations: [
@@ -122,7 +127,10 @@ import { EditEventComponent } from './pages/editing/events/edit-event/edit-event
     LoginPageComponent,
     LoginAddUserWaitingComponent,
     EventsComponent_1,
-    EditEventComponent
+    EditEventComponent,
+    NewsComponent,
+    EditNewsComponent,
+    TextEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -132,14 +140,15 @@ import { EditEventComponent } from './pages/editing/events/edit-event/edit-event
     AngularFireFunctionsModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
- //    AngularFirestoreModule,
+    AngularFireStorageModule,
     AngularFireAnalyticsModule,
     AngularFirePerformanceModule,
     GoogleMapsModule,
     HttpClientModule,
     HttpClientJsonpModule,
-    RecaptchaV3Module
-
+    RecaptchaV3Module,
+    AngularEditorModule,
+    FormsModule
   ],
   providers: [
     ScreenTrackingService,
@@ -148,7 +157,8 @@ import { EditEventComponent } from './pages/editing/events/edit-event/edit-event
     { provide: REGION, useValue: 'europe-west1' },
     { provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LdFFLgeAAAAAEzjFiR1X35IK7UHkL2Yx0EQ447i' },
     { provide: USE_DEVICE_LANGUAGE, useValue: true },
-    { provide: PERSISTENCE, useValue: 'session' }
+    { provide: PERSISTENCE, useValue: 'local' },
+    { provide: BUCKET, useValue: 'gs://svkleinsendelbach-website-v2' }
   ],
   bootstrap: [AppComponent]
 })

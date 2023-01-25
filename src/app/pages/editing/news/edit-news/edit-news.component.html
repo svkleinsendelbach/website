@@ -1,0 +1,53 @@
+<app-authentication-check
+  [authenticationType]="'websiteEditing'"
+  [logInPageLink]="logInPageLink"
+>
+  <div
+    id="back-btn-container"
+  >
+    <a
+      id="back-button"
+      title="Zurück"
+      href="{{ editNewsLink.link }}"
+      [ngStyle]="{
+        color: styleConfig.css('textColor'),
+        backgroundColor: styleConfig.css('backgroundColor')
+      }"
+    >Zurück</a>
+  </div>
+  <app-text-section
+    [title]="previousNews === undefined ? 'Nachricht hinzufügen' : 'Nachricht bearbeiten'"
+  >
+    <app-input-form
+      [inputForm]="inputForm"
+      [submitButtonText]="previousNews === undefined ? 'Hinzufügen' : 'Speichern'"
+      (submitButtonClicked)="saveNews()"
+    >
+      <img
+        *ngIf="thumbnailUrl !== undefined"
+        src="{{ thumbnailUrl }}"
+        class="thumbnail"
+      >
+      <input
+        type="file"
+        accept="image/*"
+        (change)="$event.preventDefault(); $event.stopPropagation(); uploadThumbnail($event)"
+        class="image-selector"
+        #imageSelector
+      >
+      <div
+        class="custom-image-selector"
+        (click)="$event.preventDefault(); $event.stopPropagation(); imageSelector.click()"
+        >{{ thumbnailUrl === undefined ? 'Bild auswählen' : 'Neues Bild auswählen' }}</div>
+      <p
+        *ngIf="inputForm.status === 'invalidInput' && thumbnailUrl === undefined"
+        class="error-msg ignore-text-style"
+      >Kein Bild ausgewählt.</p>
+      <app-text-editor
+        [placeholder]="'Nachricht'"
+        [(htmlContent)]="messageText"
+      ></app-text-editor>
+      {{ messageText }}
+    </app-input-form>
+  </app-text-section>
+</app-authentication-check>

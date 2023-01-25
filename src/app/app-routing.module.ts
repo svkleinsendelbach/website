@@ -27,6 +27,8 @@ import { MainComponent } from './pages/editing/main/main.component';
 import { LoginComponent } from './pages/editing/login/login.component';
 import { EventsComponent } from './pages/editing/events/events.component';
 import { EditEventComponent } from './pages/editing/events/edit-event/edit-event.component';
+import { NewsComponent } from './pages/editing/news/news.component';
+import { EditNewsComponent } from './pages/editing/news/edit-news/edit-news.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -55,6 +57,8 @@ const routes: Routes = [
   { path: 'bearbeiten/anmelden', component: LoginComponent },
   { path: 'bearbeiten/termine', component: EventsComponent },
   { path: 'bearbeiten/termine/bearbeiten', component: EditEventComponent },
+  { path: 'bearbeiten/nachrichten', component: NewsComponent },
+  { path: 'bearbeiten/nachrichten/bearbeiten', component: EditNewsComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
