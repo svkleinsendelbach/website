@@ -1,0 +1,48 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100%
+  margin-bottom: 20px
+
+#container
+  $width: 60px
+  $height: 34px
+  $slider-size: 26px
+  @include flex-row(center, flex-start)
+  width: 100%
+
+  #label
+    @include flex-row(center, center)
+    @include font-montserrat
+    @include font-size('large')
+    @include font-weight('normal')
+    height: $height
+    vertical-align: middle
+
+  #checkbox
+    $slider-margin: calc(($height - $slider-size) / 2)
+    width: $width
+    height: $height
+    cursor: pointer
+    border-radius: calc(min($width, $height) / 2)
+    z-index: 300
+    margin-left: 20px
+
+    #slider
+      position: relative
+      height: $slider-size
+      width: $slider-size
+      top: $slider-margin
+      bottom: $slider-margin
+      left: $slider-margin
+      right: calc($width - $slider-size - $slider-margin)
+      -webkit-transition: .4s
+      transition: .4s
+      border-radius: calc($slider-size / 2)
+      z-index: 301
+
+    &.checked #slider
+      left: calc($width - $slider-size - $slider-margin)
+      right: $slider-margin

@@ -19,7 +19,6 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
             "style": "camelCase"
           }
         ],
@@ -27,7 +26,6 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
             "style": "kebab-case"
           }
         ],
@@ -37,7 +35,9 @@
             "allowDeclarations": true
           }
         ],
-        "no-async-promise-executor": "off"
+        "no-async-promise-executor": "off",
+        "semi": ["warn", "always"],
+        "@typescript-eslint/no-inferrable-types": "off"
       }
     },
     {

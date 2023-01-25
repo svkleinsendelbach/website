@@ -1,0 +1,15 @@
+<label
+  [text]="label"
+></label>
+<angular-editor
+  [placeholder]="placeholder ?? label"
+  [(ngModel)]="htmlContent"
+  [config]="config"
+  [ngStyle]="{
+    border: inputField.error === undefined ? undefined : '1px solid ' + styleConfig.css('formErrorStatusColor')
+  }"
+></angular-editor>
+{{ inputField.value }}
+<error-message
+  [error]="inputField.error"
+></error-message>

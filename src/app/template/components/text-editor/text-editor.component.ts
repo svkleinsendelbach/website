@@ -43,7 +43,6 @@ export class TextEditorComponent {
       const filename = `${environment.databaseType.value}/uploads/editor/${guid.newGuid().guidString}${fileExtension}`;
       return new Observable<HttpResponse<UploadResponse>>(subscriber => {
           this.fileStorage.upload(file, filename).then(fileUrl => {
-            console.log(fileUrl)
             subscriber.next(new HttpResponse({
               body: {
                 imageUrl: fileUrl

@@ -1,0 +1,19 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100%
+  margin-bottom: 20px
+
+#input
+  @include font-montserrat
+  @include font-size('large')
+  @include font-weight('normal')
+  cursor: pointer
+  text-align: center
+  width: 100%
+  vertical-align: middle
+  border: solid 1px
+  border-radius: 8px
+  height: 48px

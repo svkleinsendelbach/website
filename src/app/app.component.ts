@@ -2,6 +2,8 @@ import { Component, HostListener } from '@angular/core';
 import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faAddressBook, faFileLines, faFutbol, faMap, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faAddressCard, faBook, faCalendarDays, faChild, faHouse, faHouseFlag, faInfo, faNewspaper, faRightToBracket, faShieldHalved, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { environment } from 'src/environments/environment';
+import { guid } from './template/classes/guid';
 import { Link } from './template/classes/link';
 import { Style } from './template/classes/style';
 import { ContactInfoComponent } from './template/components/contact-info/contact-info.component';
@@ -11,7 +13,13 @@ import { HomeBannerComponent } from './template/components/home-banner/home-bann
 import { HomeLinksComponent } from './template/components/home-links/home-links.component';
 import { SocialMediaLinksComponent } from './template/components/social-media-links/social-media-links.component';
 import { ToggleSwitchComponent } from './template/components/toggle-switch/toggle-switch.component';
+import { ErrorLevel } from './template/modules/input-form/classes/error-level';
+import { InputField } from './template/modules/input-form/classes/input-field';
+import { InputForm } from './template/modules/input-form/classes/input-form';
+import { Validator } from './template/modules/input-form/classes/validator';
+import { SelectOptions } from './template/modules/input-form/components/input-field/select/select.component';
 import { DeviceTypeService } from './template/services/device-type.service';
+import { FileStorageService } from './template/services/file-storage.service';
 import { StyleConfigService } from './template/services/style-config.service';
 
 @Component({
@@ -23,6 +31,114 @@ export class AppComponent {
   public DeviceType = DeviceTypeService.DeviceType
 
   public title = 'svkleinsendelbach-website';
+
+  public inputForm = new InputForm(
+    {
+      checkbox: new InputField<boolean>(
+        true,
+        {
+          checked: {
+            isValid: Validator.checked,
+            errorMessage: 'joikjnk'
+          }
+        }
+      ),
+      dateTime: new InputField<Date>(
+        new Date(),
+        {
+          futureDate: {
+            isValid: Validator.futureDate,
+            errorMessage: 'asdfoij'
+          }
+        }
+      ),
+      select: new InputField<'v1' | 'v2' | 'v3'>(
+        'v2',
+        {
+          notV2: {
+            isValid: Validator.custom(value => value !== 'v2'),
+            errorMessage: 'oiunuzg'
+          }
+        }
+      ),
+      textEditor: new InputField<string>(
+        '',
+        {
+          required: {
+            isValid: Validator.required,
+            errorMessage: 'Dsfalkn'
+          }
+        }
+      ),
+      text: new InputField<string>(
+        '',
+        {
+          required: {
+            isValid: Validator.required,
+            errorMessage: 'Dsfalkn'
+          }
+        }
+      ),
+      textarea: new InputField<string>(
+        'adf',
+        {
+          required: {
+            isValid: Validator.required,
+            errorMessage: 'oipujklmnkjh'
+          }
+        }
+      )
+    },
+    {
+      invalidInput: {
+        message: 'poik',
+        level: ErrorLevel.Error
+      },
+      loading: {
+        message: 'Loading',
+        level: ErrorLevel.Info
+      }
+    }
+  );
+
+  public selectOptions = SelectOptions.grouped<'v1' | 'v2' | 'v3'>([
+    {
+      title: 'Group 1',
+      options: [
+        {
+          id: 'v1',
+          text: 'V1'
+        },
+        {
+          id: 'v2',
+          text: 'V2'
+        }
+      ]
+    },
+    {
+      title: 'Group 2',
+      options: [
+        {
+          id: 'v3',
+          text: 'V3'
+        }
+      ]
+    }
+  ]);
+
+  public uploadFile = (file: File): Promise<string> => {
+    const fileExtension = /.[^/.]+$/.exec(file.name)?.[0];
+    const filename = `${environment.databaseType.value}/uploads/editor/${guid.newGuid().guidString}${fileExtension}`;
+    return this.fileStorage.upload(file, filename);
+  };
+
+  public onSubmit() {
+    this.inputForm.evaluate();
+  }
+
+  public onCancel() {
+    this.inputForm.status = 'loading';
+  }
 
   public linkDataForDeviceType: HomeLinksComponent.LinkDataForDeviceType<InternalPath> = {
     desktop: [
@@ -363,7 +479,8 @@ export class AppComponent {
 
   public constructor(
     public readonly deviceType: DeviceTypeService,
-    private readonly styleConfig: StyleConfigService
+    private readonly styleConfig: StyleConfigService,
+    private readonly fileStorage: FileStorageService
   ) {
     this.styleConfig.setConfig({
       primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),

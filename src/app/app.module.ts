@@ -73,6 +73,7 @@ import { EditNewsComponent } from './pages/editing/news/edit-news/edit-news.comp
 import { AngularEditorModule } from '@kolkov/angular-editor'
 import { FormsModule } from '@angular/forms';
 import { TextEditorComponent } from './template/components/text-editor/text-editor.component';
+import { InputFormModule } from './template/modules/input-form/input-form.module';
 
 @NgModule({
   declarations: [
@@ -148,7 +149,8 @@ import { TextEditorComponent } from './template/components/text-editor/text-edit
     HttpClientJsonpModule,
     RecaptchaV3Module,
     AngularEditorModule,
-    FormsModule
+    FormsModule,
+    InputFormModule
   ],
   providers: [
     ScreenTrackingService,
