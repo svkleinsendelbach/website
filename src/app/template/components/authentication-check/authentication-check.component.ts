@@ -29,7 +29,12 @@ export class AuthenticationCheckComponent<InternalPath extends string> implement
 
   private async checkAuthentication() {
     this.state = 'loading';
-    const isLoggedIn = await this.authService.isLoggedIn(this.authenticationType);
+    const isLoggedIn = await this.authService
+      .isLoggedIn(this.authenticationType)
+      .catch(reason => {
+        this.state = 'internalError';
+        throw reason;
+      });
     if (isLoggedIn) {
       this.state = 'registered';
     } else {
@@ -40,5 +45,5 @@ export class AuthenticationCheckComponent<InternalPath extends string> implement
 }
 
 export namespace AuthenticationCheckComponent {
-  export type State = 'loading' | AuthService.RegistrationStatus;
+  export type State = 'loading' | 'internalError' | AuthService.RegistrationStatus;
 }

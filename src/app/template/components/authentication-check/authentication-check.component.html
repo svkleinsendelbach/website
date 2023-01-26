@@ -11,6 +11,17 @@
 </app-text-section>
 <app-text-section
   [title]="'Authentifizierung fehlgeschlagen'"
+  *ngIf="state === 'internalError'"
+>
+  <p
+    class="text large margin-top-large"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Es konnte nicht überprüft werden, ob Sie berechtigt sind diese Seite zu besuchen. Bitte laden Sie die Seite neu, um es erneut zu versuchen.</p>
+</app-text-section>
+<app-text-section
+  [title]="'Authentifizierung fehlgeschlagen'"
   *ngIf="state === 'unregistered'"
 >
   <p

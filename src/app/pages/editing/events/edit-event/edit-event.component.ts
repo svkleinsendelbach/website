@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { EventGroupId } from 'src/app/classes/EventGroupId';
@@ -22,7 +22,7 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
   templateUrl: './edit-event.component.html',
   styleUrls: ['./edit-event.component.sass']
 })
-export class EditEventComponent implements AfterViewInit {
+export class EditEventComponent implements OnInit {
   public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
   public editEventsLink = InternalLink.all['bearbeiten/termine'];
 
@@ -84,7 +84,7 @@ export class EditEventComponent implements AfterViewInit {
     );
   }
 
-  public ngAfterViewInit(): void {
+  public ngOnInit() {
     if (this.previousEvent !== undefined) {
       this.inputForm.field('groupId').initialValue = this.previousEvent.groupId;
       this.inputForm.field('title').initialValue = this.previousEvent.event.title;

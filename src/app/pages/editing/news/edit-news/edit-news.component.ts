@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { InternalLink } from 'src/app/classes/InternalPath';
@@ -22,7 +22,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './edit-news.component.html',
   styleUrls: ['./edit-news.component.sass']
 })
-export class EditNewsComponent implements AfterViewInit {
+export class EditNewsComponent implements OnInit {
   public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
   public editNewsLink = InternalLink.all['bearbeiten/nachrichten'];
 
@@ -60,7 +60,7 @@ export class EditNewsComponent implements AfterViewInit {
     this.titleService.setTitle(this.previousNews === undefined ? 'Nachricht hinzufügen' : 'Nachricht bearbeiten');
   }
 
-  public ngAfterViewInit(): void {
+  public ngOnInit() {
     if (this.previousNews !== undefined) {
       this.inputForm.field('title').initialValue = this.previousNews.title;
       this.inputForm.field('subtitle').initialValue = this.previousNews.subtitle ?? '';
