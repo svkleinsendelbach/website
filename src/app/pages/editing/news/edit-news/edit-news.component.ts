@@ -84,7 +84,58 @@ export class EditNewsComponent implements AfterViewInit {
     const validation = this.inputForm.evaluate();
     if (validation === ValidationResult.Invalid)
       return;
+    if (this.thumbnailUrl === undefined) {
+      this.inputForm.status = 'invalidInput';
+      return;
+    }
     this.inputForm.status ='loading';
+    const newsId = this.previousNews?.id ?? this.createNewsId(this.inputForm.field('title').value);
+    const date = this.previousNews?.date ?? new Date().toISOString();
+    const newsUrl = await this.uploadNewsMessage(this.inputForm.field('message').value);
+    await this.apiService
+      .editNews({
+        editType: this.previousNews !== undefined ? 'change' : 'add',
+        id: newsId,
+        news: {
+          title: this.inputForm.field('title').value,
+          subtitle: this.inputForm.field('subtitle').value || undefined,
+          date: date,
+          shortDescription: this.inputForm.field('shortDescription').value || undefined,
+          newsUrl: newsUrl,
+          disabled: this.previousNews?.disabled ?? false,
+          thumbnailUrl: this.thumbnailUrl
+        }
+      });
+    await this.router.navigateByUrl(InternalLink.all['bearbeiten/nachrichten'].link);
+    this.inputForm.status = 'valid';
+  }
+
+  public createNewsId(title: string): string {
+    const validCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-#';
+    const replaceCharacters = { 'Ä': 'AE', 'Ö': 'OE', 'Ü': 'UE', 'ä': 'ae', 'ö': 'oe', 'ü': 'ue', 'ß': 'ss' };
+    let result = '';
+    function addCharacter(character: string) {
+      if (character === '-' && (result === '' || result.endsWith('-')))
+        return;
+      result += character;
+    }
+    for (const character of title) {
+      if (validCharacters.includes(character)) {
+        addCharacter(character);
+      } else if (character in replaceCharacters) {
+        addCharacter(replaceCharacters[character as keyof typeof replaceCharacters]);
+      } else {
+        addCharacter('-');
+      }
+    }
+    if (result.endsWith('-'))
+      result = result.slice(0, result.length - 1);
+    return result;
+  }
+
+  public async uploadNewsMessage(newsMessage: string): Promise<string> {
+    const filePath = `${environment.databaseType.value}/news/${guid.newGuid().guidString}.html`;
+    return await this.fileStorage.upload(newsMessage, filePath);
   }
 
   public async uploadThumbnail(event: Event) {

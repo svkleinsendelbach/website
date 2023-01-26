@@ -114,7 +114,7 @@ export class EditEventComponent implements AfterViewInit {
           link: this.inputForm.field('link').value || undefined
         }
       });
-      await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine'].link);
-      this.inputForm.status = 'valid';
+    await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine'].link);
+    this.inputForm.status = 'valid';
   }
 }

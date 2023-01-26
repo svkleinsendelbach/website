@@ -7,7 +7,7 @@ import { DatabaseType } from '../classes/database-type';
 import { lastValueFrom } from 'rxjs';
 import { FirebaseFunction } from '../classes/firebase-function';
 import { Result } from '../classes/result';
-import { VerifyRecaptchaFunction, SendContactMailFunction, AddUserForWaitingFunction, AcceptDeclineWaitingUserFunction, CheckUserAuthenticationFunction, EditEventFunction, EditNewsFunction, GetEventsFunction, GetNewsFunction, GetSingleNewsFunction, GetUnauthenticatedUsersFunction, GetTeamSquadFunction, DeleteAllDataFunction } from './api-functions-types';
+import { VerifyRecaptchaFunction, SendContactMailFunction, AddUserForWaitingFunction, AcceptDeclineWaitingUserFunction, CheckUserAuthenticationFunction, EditEventFunction, EditNewsFunction, GetEventsFunction, GetNewsFunction, GetSingleNewsFunction, GetUnauthenticatedUsersFunction, GetTeamSquadFunction, DeleteAllDataFunction, DisableNewsFunction } from './api-functions-types';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +42,11 @@ export class ApiService {
     if (result.state === 'failure' && result.error.code === 'permission-denied') return 'unauthorized';
     result.get();
     return 'authorized';
+  }
+
+  public async disableNews(parameters: DisableNewsFunction.Parameters): Promise<DisableNewsFunction.ReturnType> {
+    const result = await this.callFunction<DisableNewsFunction.Parameters, DisableNewsFunction.ReturnType>('v2_disableNews', parameters);
+    return result.get();
   }
 
   public async editEvent<GroupId>(parameters: EditEventFunction.Parameters<GroupId>): Promise<EditEventFunction.ReturnType> {

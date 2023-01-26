@@ -37,6 +37,15 @@ export namespace CheckUserAuthenticationFunction {
   export type ReturnType = void;
 }
 
+export namespace DisableNewsFunction {
+  export type Parameters = {
+    editType: 'disable' | 'enable',
+    id: string
+  }
+
+  export type ReturnType = void;
+}
+
 export namespace EditEventFunction {
   type NewType = Event.CallParameters;
 
@@ -69,7 +78,8 @@ export namespace GetEventsFunction {
 }
 export namespace GetNewsFunction {
   export type Parameters = {
-    numberNews?: number
+    numberNews?: number,
+    alsoDisabled?: boolean
   }
 
   export interface ReturnType {

@@ -41,7 +41,7 @@
         *ngFor="let news of allNews"
         class="news"
         [ngStyle]="{
-          backgroundColor: styleConfig.css('backgroundColor'),
+          backgroundColor: styleConfig.css(news.disabled ? 'hoveredBackgroundColor' : 'backgroundColor'),
           borderColor: styleConfig.css('textColor')
         }"
       >
@@ -76,6 +76,21 @@
             color: styleConfig.css('primaryColor')
           }"
         >Löschen</p>
+        <p
+          *ngIf="!currentDisableUpdatedNewsIds.hasOwnProperty(news.id)"
+          class="disable-button"
+          (click)="$event.preventDefault(); $event.stopPropagation(); handleDisableNews(news)"
+          [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+          }"
+        >{{ news.disabled ? 'Aktivieren' : 'Deaktivieren' }}</p>
+        <p
+          *ngIf="currentDisableUpdatedNewsIds.hasOwnProperty(news.id)"
+          class="disable-update-text"
+          [ngStyle]="{
+            color: styleConfig.css('textColor')
+          }"
+        >{{ news.disabled ? 'Wird Aktiviert' : 'Wird Deaktiviert' }}</p>
       </div>
     </div>
   </app-text-section>

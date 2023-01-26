@@ -5,3 +5,8 @@
   @include flex-column(flex-start, center)
   width: 100%
   margin-bottom: 20px
+
+::ng-deep :has(+ #foregroundColorPicker-), ::ng-deep :has(+ #backgroundColorPicker-)
+  display: inline !important
+  position: absolute
+  visibility: hidden

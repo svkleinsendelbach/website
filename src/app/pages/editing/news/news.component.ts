@@ -19,6 +19,8 @@ export class NewsComponent {
 
   public allNews: News.ReturnType[] | undefined = undefined;
 
+  public currentDisableUpdatedNewsIds: Record<string, true> = {};
+
   public constructor(
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
@@ -35,7 +37,8 @@ export class NewsComponent {
 
   private async getNews() {
     this.allNews = (await this.apiService.getNews({
-      numberNews: undefined
+      numberNews: undefined,
+      alsoDisabled: true
     })).news;
   }
 
@@ -51,6 +54,18 @@ export class NewsComponent {
   public async editNews(news: News.ReturnType) {
     this.sharedData.setValue('editNews', news);
     await this.router.navigateByUrl(InternalLink.all['bearbeiten/nachrichten/bearbeiten'].link);
+  }
+
+  public async handleDisableNews(news: News.ReturnType) {
+    if (news.id in this.currentDisableUpdatedNewsIds)
+      return;
+    this.currentDisableUpdatedNewsIds[news.id] = true;
+    await this.apiService.disableNews({
+      editType: news.disabled ? 'enable' : 'disable',
+      id: news.id
+    });
+    news.disabled = !news.disabled;
+    delete this.currentDisableUpdatedNewsIds[news.id];
   }
 
   public async addNewNews() {

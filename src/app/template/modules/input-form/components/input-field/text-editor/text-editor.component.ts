@@ -30,15 +30,19 @@ export class TextEditorComponent implements OnInit {
     translate: 'yes',
     enableToolbar: true,
     showToolbar: true,
-    defaultFontName: 'calibri',
+    defaultFontName: 'roboto',
     fonts: [
+      { class: 'roboto', name: 'Roboto' },
       { class: 'calibri', name: 'Calibri' },
       { class: 'arial', name: 'Arial' },
       { class: 'times-new-roman', name: 'Times New Roman' },
       { class: 'comic-sans-ms', name: 'Comic Sans MS' }
     ],
-    sanitize: true,
-    toolbarPosition: 'top'
+    sanitize: false,
+    toolbarPosition: 'top',
+    toolbarHiddenButtons: [[
+      'toggleEditorMode'
+    ]]
   };
 
   public constructor(
