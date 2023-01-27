@@ -1,56 +1,40 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HeaderComponent } from '../../header.component';
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
-import { Style } from 'src/app/template/classes/style';
-import { AppearanceService } from 'src/app/template/services/appearance.service';
+import { Link } from 'src/app/template/classes/link';
+import { StyleConfigService } from 'src/app/template/services/style-config.service';
 
 @Component({
   selector: 'app-desktop-header-item',
   templateUrl: './header-item.component.html',
   styleUrls: ['./header-item.component.sass']
 })
-export class DesktopHeaderItemComponent<InternalPath extends string>{
-  public Object = Object;
+export class DesktopHeaderItemComponent {
   public faCaretDown = faCaretDown;
   public faCaretUp = faCaretUp;
 
-  @Input() public headerItem!: [string, HeaderComponent.HeaderItem<InternalPath>];
+  @Input() public headerItem!: HeaderComponent.HeaderItem & { id: string };
 
   @Input() public expandedHeaderItemId!: string | null;
 
-  @Input() public styleConfig!: HeaderComponent.StyleConfig;
-
   @Output() public clickHeaderItemIdEmitter = new EventEmitter<string>();
 
-  public hoveredHeaderItemId: string | null = null;
-
   public constructor(
-    public readonly appearance: AppearanceService
+    public readonly styleConfig: StyleConfigService
   ) {}
 
   public handleHeaderItemClick() {
-    this.clickHeaderItemIdEmitter.emit(this.headerItem[0]);
+    this.clickHeaderItemIdEmitter.emit(this.headerItem.id);
   }
 
-  public handleHoverStart(id: string) {
-    this.hoveredHeaderItemId = id;
-  }
-
-  public handleHoverStop(id: string) {
-    if (this.hoveredHeaderItemId === id) {
-      this.hoveredHeaderItemId = null;
-    }
-  }
-
-  public textColor(id: string): Style.Color {
-    return this.hoveredHeaderItemId === id
-      ? this.styleConfig.primaryColor.color(this.appearance.current)
-      : this.styleConfig.textColor.color(this.appearance.current);
-  }
-
-  public backgroundColor(id: string): Style.Color {
-    return this.hoveredHeaderItemId === id
-      ? this.styleConfig.backgroundColorHover.color(this.appearance.current)
-      : this.styleConfig.backgroundColor.color(this.appearance.current);
+  public subItems(subItems: Record<string, Link> | undefined): { id: string, link: Link }[] {
+    if (subItems === undefined)
+      return [];
+    return Object.entries(subItems).map(entry => {
+      return {
+        id: entry[0],
+        link: entry[1]
+      };
+    });
   }
 }

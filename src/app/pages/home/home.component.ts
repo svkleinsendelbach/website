@@ -23,7 +23,7 @@ export class HomeComponent {
 
   public readonly bannerData: HomeBannerComponent.BannerItem[] = [];
 
-  public readonly linkData: HomeLinksComponent.LinkDataForDeviceType<InternalPath> = {
+  public readonly linkData: HomeLinksComponent.LinkDataForDeviceType = {
     desktop: [
       [HomeComponent.homeLink['über-uns'], HomeComponent.homeLink['fussball/herren'], HomeComponent.homeLink['fussball/jugend'], HomeComponent.homeLink.gymnastik],
       [HomeComponent.homeLink.tanzen, HomeComponent.homeLink.anfahrt, HomeComponent.homeLink.kontakt]
@@ -44,7 +44,7 @@ export class HomeComponent {
     ]
   };
 
-  public readonly socialMediaData: SocialMediaLinksComponent.SocialMediaDataForDeviceType<InternalPath> = {
+  public readonly socialMediaData: SocialMediaLinksComponent.SocialMediaDataForDeviceType = {
     desktop: [
       [HomeComponent.socialMediaLink.facebook, HomeComponent.socialMediaLink.instagram, HomeComponent.socialMediaLink.sgWebsite]
     ],
@@ -70,7 +70,7 @@ export class HomeComponent {
 }
 
 export namespace HomeComponent {
-  export const homeLink: Record<Exclude<InternalPath, 'nachricht'>, HomeLinksComponent.LinkItem<InternalPath>> = {
+  export const homeLink: Record<Exclude<InternalPath, 'nachricht'>, HomeLinksComponent.LinkItem> = {
     'home': {
       name: 'Home',
       link: InternalLink.all['home'],
@@ -269,7 +269,7 @@ export namespace HomeComponent {
     }
   };
 
-  export const socialMediaLink: Record<'facebook' | 'instagram' | 'sgWebsite', SocialMediaLinksComponent.SocialMediaItem<InternalPath>> = {
+  export const socialMediaLink: Record<'facebook' | 'instagram' | 'sgWebsite', SocialMediaLinksComponent.SocialMediaItem> = {
     facebook: {
       id: 'facebook',
       name: 'Facebook',

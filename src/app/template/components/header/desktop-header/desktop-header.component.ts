@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AppearanceService } from 'src/app/template/services/appearance.service';
+import { StyleConfigService } from 'src/app/template/services/style-config.service';
 import { HeaderComponent } from '../header.component';
 
 @Component({
@@ -7,19 +7,15 @@ import { HeaderComponent } from '../header.component';
   templateUrl: './desktop-header.component.html',
   styleUrls: ['./desktop-header.component.sass']
 })
-export class DesktopHeaderComponent<InternalPath extends string> {
-  public Object = Object;
+export class DesktopHeaderComponent {
+  @Input() public headerData!: HeaderComponent.HeaderData;
 
-  @Input() public headerData!: HeaderComponent.HeaderData<InternalPath>;
-
-  @Input() public homeLinkData!: HeaderComponent.HomeLinkData<InternalPath>;
-
-  @Input() public styleConfig!: HeaderComponent.StyleConfig;
+  @Input() public homeLinkData!: HeaderComponent.HomeLinkData;
 
   public expandedHeaderItemId: string | null = null;
 
   public constructor(
-    public readonly appearance: AppearanceService
+    public readonly styleConfig: StyleConfigService
   ) {}
 
   public handleHeaderItemClick(headerItemId: string) {
@@ -28,5 +24,14 @@ export class DesktopHeaderComponent<InternalPath extends string> {
     } else {
       this.expandedHeaderItemId = headerItemId;
     }
+  }
+
+  public get headerItems(): (HeaderComponent.HeaderItem & { id: string })[] {
+    return Object.entries(this.headerData).map(entry => {
+      return {
+        ...entry[1],
+        id: entry[0]
+      };
+    });
   }
 }

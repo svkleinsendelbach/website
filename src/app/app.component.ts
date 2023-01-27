@@ -13,7 +13,7 @@ import { StyleConfigService } from './template/services/style-config.service';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  public headerData: Record<'desktop' | 'tablet' | 'mobile', HeaderComponent.HeaderData<InternalPath>> = {
+  public headerData: Record<'desktop' | 'tablet' | 'mobile', HeaderComponent.HeaderData> = {
     desktop: {
       home: {
         topItem: InternalLink.all['home']
@@ -166,20 +166,13 @@ export class AppComponent {
     }
   };
 
-  public homeLinkData: HeaderComponent.HomeLinkData<InternalPath> = {
+  public homeLinkData: HeaderComponent.HomeLinkData = {
     title: 'SV Kleinsendelbach',
     logoSrc: 'assets/images/svk-logo.png',
     homeLink: InternalLink.all.home
   };
 
-  public headerStyleConfig: HeaderComponent.StyleConfig = {
-    backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
-    backgroundColorHover: new Style.AppearanceColor(Style.Color.hex('#F0F0F0'), Style.Color.hex('#44454A')),
-    primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
-    textColor: new Style.AppearanceColor(Style.Color.hex('#000000'), Style.Color.hex('#868E90'))
-  };
-
-  public footerData: FooterComponent.FooterData<InternalPath> = {
+  public footerData: FooterComponent.FooterData = {
     links: [
       {
         id: 'drive',
@@ -218,16 +211,6 @@ export class AppComponent {
         }
       }
     ]
-  };
-
-  public footerStyleConfig: FooterComponent.StyleConfig = {
-    backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
-    backgroundColorHover: new Style.AppearanceColor(Style.Color.hex('#F0F0F0'), Style.Color.hex('#44454A')),
-    contactBackgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#3C4A57')),
-    primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
-    textColor: new Style.AppearanceColor(Style.Color.hex('#000000'), Style.Color.hex('#868E90')),
-    contactTextColor: new Style.AppearanceColor(Style.Color.hex('#000000'), Style.Color.hex('#C8D6E5')),
-    contactShadow: new Style.AppearanceColor(Style.Color.hex('#80808080'), Style.Color.hex('#1C1A17'))
   };
 
   public privacyLink = InternalLink.all['datenschutz'];

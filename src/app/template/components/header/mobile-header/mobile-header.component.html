@@ -1,7 +1,7 @@
 <div
   id="container"
   [ngStyle]="{
-    backgroundColor: styleConfig.backgroundColor.css(appearance.current)
+    backgroundColor: styleConfig.css('backgroundColor')
   }"
 >
   <div
@@ -21,7 +21,7 @@
       <p
         id="logo-text"
         [ngStyle]="{
-          color:  styleConfig.textColor.css(appearance.current)
+          color:  styleConfig.css('textColor')
         }"
       >{{ homeLinkData.title }}</p>
     </a>
@@ -31,7 +31,7 @@
       [icon]="faBars"
       (click)="handleHamburgerMenuClick(true)"
       [ngStyle]="{
-        color:  styleConfig.textColor.css(appearance.current)
+        color:  styleConfig.css('textColor')
       }"
     ></fa-icon>
     <fa-icon
@@ -40,7 +40,7 @@
       [icon]="faTimes"
       (click)="handleHamburgerMenuClick(false)"
       [ngStyle]="{
-        color:  styleConfig.textColor.css(appearance.current)
+        color:  styleConfig.css('textColor')
       }"
     ></fa-icon>
   </div>
@@ -49,13 +49,12 @@
     *ngIf="isExpanded"
   >
     <app-mobile-header-item
-      *ngFor="let headerItem of Object.entries(headerData)"
+      *ngFor="let headerItem of headerItems"
       [ngClass]="{
-        expanded: expandedHeaderItemId === headerItem[0]
+        expanded: expandedHeaderItemId === headerItem.id
       }"
       [headerItem]="headerItem"
       [expandedHeaderItemId]="expandedHeaderItemId"
-      [styleConfig]="styleConfig"
       (clickHeaderItemIdEmitter)="handleHeaderItemClick($event)"
     ></app-mobile-header-item>
   </div>

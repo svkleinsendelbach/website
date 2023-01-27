@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Link } from '../../classes/link';
-import { Style } from '../../classes/style';
 import { DeviceTypeService } from '../../services/device-type.service';
 
 @Component({
@@ -8,12 +7,10 @@ import { DeviceTypeService } from '../../services/device-type.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.sass']
 })
-export class HeaderComponent<InternalPath extends string> {
-  @Input() public headerData!: Record<'desktop' | 'tablet' | 'mobile', HeaderComponent.HeaderData<InternalPath>>;
+export class HeaderComponent {
+  @Input() public headerData!: Record<'desktop' | 'tablet' | 'mobile', HeaderComponent.HeaderData>;
 
-  @Input() public homeLinkData!: HeaderComponent.HomeLinkData<InternalPath>;
-
-  @Input() public styleConfig!: HeaderComponent.StyleConfig;
+  @Input() public homeLinkData!: HeaderComponent.HomeLinkData;
 
   public constructor(
     public readonly deviceType: DeviceTypeService
@@ -21,23 +18,16 @@ export class HeaderComponent<InternalPath extends string> {
 }
 
 export namespace HeaderComponent {
-  export interface HeaderItem<InternalPath extends string> {
+  export interface HeaderItem {
     topItem: Link,
     subItems?: Record<string, Link>
   }
 
-  export type HeaderData<InternalPath extends string> = Record<string, HeaderItem<InternalPath>>
+  export type HeaderData = Record<string, HeaderItem>
 
-  export interface HomeLinkData<InternalPath extends string> {
+  export interface HomeLinkData {
     title: string,
     logoSrc: string,
     homeLink: Link
-  }
-
-  export interface StyleConfig {
-    backgroundColor: Style.AppearanceColor,
-    backgroundColorHover: Style.AppearanceColor,
-    primaryColor: Style.AppearanceColor,
-    textColor: Style.AppearanceColor
   }
 }

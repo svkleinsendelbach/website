@@ -10,7 +10,7 @@ import { StyleConfigService } from '../../services/style-config.service';
   templateUrl: './authentication-check.component.html',
   styleUrls: ['./authentication-check.component.sass']
 })
-export class AuthenticationCheckComponent<InternalPath extends string> implements OnInit {
+export class AuthenticationCheckComponent implements OnInit {
   @Input() public authenticationType!: UserAuthenticationType;
 
   @Input() public logInPageLink!: Link;

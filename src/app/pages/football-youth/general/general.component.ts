@@ -16,7 +16,7 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
 export class GeneralComponent {
   public eventGroupTitle = EventGroupId.title;
 
-  public readonly links: LinksComponent.LinkData<InternalPath>[] = [
+  public readonly links: LinksComponent.LinkData[] = [
     {
       id: 'a-jugend',
       link: Link.external('A-Jugend', 'http://sv-hetzles.de/index.php/a-junioren', true),

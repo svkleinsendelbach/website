@@ -12,7 +12,7 @@ import { StyleConfigService } from '../../services/style-config.service';
   templateUrl: './cookie-selector-message.component.html',
   styleUrls: ['./cookie-selector-message.component.sass']
 })
-export class CookieSelectorMessageComponent<InternalPath extends string> implements OnInit, OnDestroy {
+export class CookieSelectorMessageComponent implements OnInit, OnDestroy {
 
   /**
    * Defines a cookie type that can be selected.

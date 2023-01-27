@@ -1,14 +1,12 @@
 <app-header
   [headerData]="headerData"
   [homeLinkData]="homeLinkData"
-  [styleConfig]="headerStyleConfig"
 ></app-header>
 <router-outlet
   [ngClass]="deviceType.className"
 ></router-outlet>
 <app-footer
   [footerData]="footerData"
-  [styleConfig]="footerStyleConfig"
 ></app-footer>
 <app-cookie-selector-message
   [privacyLink]="privacyLink"

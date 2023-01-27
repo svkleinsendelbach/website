@@ -17,7 +17,7 @@ export class GeneralComponent {
   public eventGroupTitle = EventGroupId.title;
   public allInternalLinks = InternalLink.all;
 
-  public readonly links: LinksComponent.LinkData<InternalPath>[] = [
+  public readonly links: LinksComponent.LinkData[] = [
     {
       id: 'first-team',
       link: Link.internal<InternalPath>('1. Mannschaft', 'fussball/herren/erste-mannschaft'),

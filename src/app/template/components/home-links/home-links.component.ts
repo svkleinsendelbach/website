@@ -9,21 +9,21 @@ import { StyleConfigService } from '../../services/style-config.service';
   templateUrl: './home-links.component.html',
   styleUrls: ['./home-links.component.sass']
 })
-export class HomeLinksComponent<InternalPath extends string> {
-  @Input() public linkDataForDeviceType!: HomeLinksComponent.LinkDataForDeviceType<InternalPath>;
+export class HomeLinksComponent {
+  @Input() public linkDataForDeviceType!: HomeLinksComponent.LinkDataForDeviceType;
 
   public constructor(
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {}
 
-  public get linkData(): HomeLinksComponent.LinkItem<InternalPath>[][] {
+  public get linkData(): HomeLinksComponent.LinkItem[][] {
     return this.linkDataForDeviceType[this.deviceType.className];
   }
 }
 
 export namespace HomeLinksComponent {
-  export interface LinkItem<InternalPath extends string> {
+  export interface LinkItem {
     name: string,
     link: Link
     description: string,
@@ -31,9 +31,9 @@ export namespace HomeLinksComponent {
     animation: 'rotation' | 'jump' | 'shake'
   }
 
-  export interface LinkDataForDeviceType<InternalPath extends string> {
-    desktop: LinkItem<InternalPath>[][],
-    tablet: LinkItem<InternalPath>[][],
-    mobile: LinkItem<InternalPath>[][]
+  export interface LinkDataForDeviceType {
+    desktop: LinkItem[][],
+    tablet: LinkItem[][],
+    mobile: LinkItem[][]
   }
 }

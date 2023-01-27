@@ -12,7 +12,7 @@ import { StyleConfigService } from '../../services/style-config.service';
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.sass']
 })
-export class NewsListComponent<InternalPath extends string> implements OnInit {
+export class NewsListComponent implements OnInit {
   public FetchState = FetchState;
 
   @Input() public maxListCount?: number;

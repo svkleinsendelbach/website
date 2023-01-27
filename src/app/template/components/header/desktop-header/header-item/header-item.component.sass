@@ -18,6 +18,9 @@
     width: max-content
     padding: 0 24px
 
+    &:hover
+      background-color: #E0E0E0 !important
+
     #top-item-text
       @include font-metrophobic
       @include font-size('normal')
@@ -35,12 +38,14 @@
     width: max-content
     display: none
 
-
     .sub-item
       @include flex-row(center, center)
       width: 100%
       padding: 8px 16px
       cursor: pointer
+
+      &:hover
+        background-color: #E0E0E0 !important
 
       .sub-item-text
         @include font-metrophobic
@@ -55,3 +60,8 @@
   &.expanded #sub-items
     display: flex
     z-index: 1003
+
+@media screen and (prefers-color-scheme: dark)
+  #header-item
+    #top-item:hover, #sub-items .sub-item:hover
+      background-color: #44454A !important

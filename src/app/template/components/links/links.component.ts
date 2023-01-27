@@ -8,8 +8,8 @@ import { StyleConfigService } from '../../services/style-config.service';
   templateUrl: './links.component.html',
   styleUrls: ['./links.component.sass']
 })
-export class LinksComponent<InternalPath extends string> {
-  @Input() public links!: LinksComponent.LinkData<InternalPath>[];
+export class LinksComponent {
+  @Input() public links!: LinksComponent.LinkData[];
 
   public hoveredLink: string | null = null;
 
@@ -30,7 +30,7 @@ export class LinksComponent<InternalPath extends string> {
 }
 
 export namespace LinksComponent {
-  export interface LinkData<InternalPath extends string> {
+  export interface LinkData {
     id: string,
     link: Link,
     title: string,

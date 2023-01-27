@@ -10,10 +10,10 @@ import { StyleConfigService } from '../../services/style-config.service';
   templateUrl: './social-media-links.component.html',
   styleUrls: ['./social-media-links.component.sass']
 })
-export class SocialMediaLinksComponent<InternalPath extends string> {
+export class SocialMediaLinksComponent {
   public Appearance = AppearanceService.Appearance;
 
-  @Input() public socialMediaDataForDeviceType!: SocialMediaLinksComponent.SocialMediaDataForDeviceType<InternalPath>;
+  @Input() public socialMediaDataForDeviceType!: SocialMediaLinksComponent.SocialMediaDataForDeviceType;
 
   public hoveredItemId: string | null = null;
 
@@ -23,7 +23,7 @@ export class SocialMediaLinksComponent<InternalPath extends string> {
     public readonly appearance: AppearanceService
   ) {}
 
-  public get socialMediaData(): SocialMediaLinksComponent.SocialMediaItem<InternalPath>[][] {
+  public get socialMediaData(): SocialMediaLinksComponent.SocialMediaItem[][] {
     return this.socialMediaDataForDeviceType[this.deviceType.className];
   }
 
@@ -34,11 +34,11 @@ export class SocialMediaLinksComponent<InternalPath extends string> {
     return !('lightModeSource' in image);
   }
 
-  public handleHoverStart(socialMediaLink: SocialMediaLinksComponent.SocialMediaItem<InternalPath>) {
+  public handleHoverStart(socialMediaLink: SocialMediaLinksComponent.SocialMediaItem) {
     this.hoveredItemId = socialMediaLink.id;
   }
 
-  public handleHoverStop(socialMediaLink: SocialMediaLinksComponent.SocialMediaItem<InternalPath>) {
+  public handleHoverStop(socialMediaLink: SocialMediaLinksComponent.SocialMediaItem) {
     if (this.hoveredItemId === socialMediaLink.id) {
       this.hoveredItemId = null;
     }
@@ -46,7 +46,7 @@ export class SocialMediaLinksComponent<InternalPath extends string> {
 }
 
 export namespace SocialMediaLinksComponent {
-  export interface SocialMediaItem<InternalPath extends string> {
+  export interface SocialMediaItem {
     id: string,
     title: string,
     name: string,
@@ -57,9 +57,9 @@ export namespace SocialMediaLinksComponent {
     }
   }
 
-  export interface SocialMediaDataForDeviceType<InternalPath extends string> {
-    desktop: SocialMediaItem<InternalPath>[][],
-    tablet: SocialMediaItem<InternalPath>[][],
-    mobile: SocialMediaItem<InternalPath>[][]
+  export interface SocialMediaDataForDeviceType {
+    desktop: SocialMediaItem[][],
+    tablet: SocialMediaItem[][],
+    mobile: SocialMediaItem[][]
   }
 }

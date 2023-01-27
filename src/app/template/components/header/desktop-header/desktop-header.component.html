@@ -1,7 +1,7 @@
 <div
   id="container"
   [ngStyle]="{
-    backgroundColor: styleConfig.backgroundColor.css(appearance.current)
+    backgroundColor: styleConfig.css('backgroundColor')
   }"
 >
   <a
@@ -18,7 +18,7 @@
     <p
       id="logo-text"
       [ngStyle]="{
-        color:  styleConfig.textColor.css(appearance.current)
+        color:  styleConfig.css('textColor')
       }"
     >{{ homeLinkData.title }}</p>
   </a>
@@ -26,10 +26,9 @@
     id="header-items"
   >
     <app-desktop-header-item
-      *ngFor="let headerItem of Object.entries(headerData)"
+      *ngFor="let headerItem of headerItems"
       [headerItem]="headerItem"
       [expandedHeaderItemId]="expandedHeaderItemId"
-      [styleConfig]="styleConfig"
       (clickHeaderItemIdEmitter)="handleHeaderItemClick($event)"
     ></app-desktop-header-item>
   </div>
