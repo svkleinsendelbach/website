@@ -1,45 +1,25 @@
-export interface InternalLink<Path extends string> {
-  title: string
-  path: Path
-}
-
-export interface ExternalLink {
-  title: string
-  link: string
-  openInNewTab: boolean
-}
-
-export class Link<InternalPath extends string>{
+export class Link {
   public constructor(
-    private readonly value: InternalLink<InternalPath> | ExternalLink
+    public readonly title: string,
+    public readonly link: string,
+    private readonly openInNewTab: boolean
   ) {}
 
-  public get title(): string {
-    return this.value.title;
-  }
-
-  public get link(): string {
-    return 'path' in this.value ? `/${this.value.path}` : this.value.link;
-  }
-
   public get target(): '_self' | '_blank' {
-    return ('openInNewTab' in this.value ? this.value.openInNewTab : false) ? '_blank' : '_self';
+    return this.openInNewTab ? '_blank' : '_self';
   }
 }
 
 export namespace Link {
-  export function internal<Path extends string>(title: string, path: Path): Link<Path> {
-    return new Link({
-      title,
-      path
-    });
+  export function internal<InternalPath extends string>(title: string, path: InternalPath): Link {
+    return new Link(title, `/${path}`, false);
   }
 
-  export function external<InternalPath extends string>(title: string, link: string, openInNewTab: boolean): Link<InternalPath> {
-    return new Link({
-      title,
-      link,
-      openInNewTab
-    });
+  export function internalParam<InternalPath extends string>(title: string, path: InternalPath, param: string): Link {
+    return new Link(title, `/${path}/${param}`, false);
+  }
+
+  export function external(title: string, link: string, openInNewTab: boolean): Link {
+    return new Link(title, link, openInNewTab);
   }
 }

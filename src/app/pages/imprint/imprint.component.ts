@@ -4,6 +4,7 @@ import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { InternalLink } from 'src/app/classes/InternalPath';
 
 @Component({
   selector: 'app-imprint',
@@ -13,6 +14,7 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
 export class ImprintComponent {
   public faPhone = faPhone;
   public faEnvelope = faEnvelope;
+  public imprintLink = InternalLink.all['datenschutz'];
 
   public constructor(
     public readonly titleService: Title,

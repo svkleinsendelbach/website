@@ -50,7 +50,7 @@ export namespace SocialMediaLinksComponent {
     id: string,
     title: string,
     name: string,
-    link: Link<InternalPath>
+    link: Link
     image: IconDefinition | {
       lightModeSource: string,
       darkModeSource: string

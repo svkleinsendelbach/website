@@ -29,8 +29,9 @@ import { FYouthComponent } from '../pages/football-youth/f-youth/f-youth.compone
 import { GYouthComponent } from '../pages/football-youth/g-youth/g-youth.component';
 import { GymnasticsComponent } from '../pages/gymnastics/gymnastics.component';
 import { ImprintComponent } from '../pages/imprint/imprint.component';
+import { AllNewsComponent } from '../pages/news/all-news/all-news.component';
 
-const associatedRoute: Record<InternalPath, Type<unknown>> = {
+const associatedRoute: Record<Exclude<InternalPath, 'nachricht'>, Type<unknown>> = {
   'home': HomeComponent,
   'über-uns': ManagersComponent,
   'sportheim': SportshomeComponent,
@@ -52,6 +53,7 @@ const associatedRoute: Record<InternalPath, Type<unknown>> = {
   'tanzen': DancingComponent,
   'anfahrt': DriveComponent,
   'kontakt': ContactComponent,
+  'nachrichten': AllNewsComponent,
   'bearbeiten': MainComponent,
   'bearbeiten/anmelden': LoginComponent,
   'bearbeiten/termine': EventsComponent,

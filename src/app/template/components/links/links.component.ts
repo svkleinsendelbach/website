@@ -32,7 +32,7 @@ export class LinksComponent<InternalPath extends string> {
 export namespace LinksComponent {
   export interface LinkData<InternalPath extends string> {
     id: string,
-    link: Link<InternalPath>,
+    link: Link,
     title: string,
     subtitle: string
   }

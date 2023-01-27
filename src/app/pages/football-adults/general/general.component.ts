@@ -6,7 +6,7 @@ import { ContactInfoComponent } from 'src/app/template/components/contact-info/c
 import { LinksComponent } from 'src/app/template/components/links/links.component';
 import { Link } from 'src/app/template/classes/link';
 import { EventGroupId } from 'src/app/classes/EventGroupId';
-import { InternalPath } from 'src/app/classes/InternalPath';
+import { InternalLink, InternalPath } from 'src/app/classes/InternalPath';
 
 @Component({
   selector: 'app-general',
@@ -15,23 +15,24 @@ import { InternalPath } from 'src/app/classes/InternalPath';
 })
 export class GeneralComponent {
   public eventGroupTitle = EventGroupId.title;
+  public allInternalLinks = InternalLink.all;
 
   public readonly links: LinksComponent.LinkData<InternalPath>[] = [
     {
       id: 'first-team',
-      link: Link.internal('1. Mannschaft', 'fussball/herren/erste-mannschaft'),
+      link: Link.internal<InternalPath>('1. Mannschaft', 'fussball/herren/erste-mannschaft'),
       title: '1. Mannschaft',
       subtitle: '1. Mannschaft der SG Kleinsendelbach / Hetzles'
     },
     {
       id: 'second-team',
-      link: Link.internal('2. Mannschaft', 'fussball/herren/zweite-mannschaft'),
+      link: Link.internal<InternalPath>('2. Mannschaft', 'fussball/herren/zweite-mannschaft'),
       title: '2. Mannschaft',
       subtitle: '2. Mannschaft der SG Kleinsendelbach / Hetzles'
     },
     {
       id: 'ah-team',
-      link: Link.internal('Alte Herren', 'fussball/herren/alte-herren'),
+      link: Link.internal<InternalPath>('Alte Herren', 'fussball/herren/alte-herren'),
       title: 'Alte Herren',
       subtitle: 'Alte Herren des SV Kleinsendelbach'
     }

@@ -22,8 +22,8 @@ export class HeaderComponent<InternalPath extends string> {
 
 export namespace HeaderComponent {
   export interface HeaderItem<InternalPath extends string> {
-    topItem: Link<InternalPath>,
-    subItems?: Record<string, Link<InternalPath>>
+    topItem: Link,
+    subItems?: Record<string, Link>
   }
 
   export type HeaderData<InternalPath extends string> = Record<string, HeaderItem<InternalPath>>
@@ -31,7 +31,7 @@ export namespace HeaderComponent {
   export interface HomeLinkData<InternalPath extends string> {
     title: string,
     logoSrc: string,
-    homeLink: Link<InternalPath>
+    homeLink: Link
   }
 
   export interface StyleConfig {

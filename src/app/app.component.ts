@@ -255,9 +255,9 @@ export class AppComponent {
 }
 
 export namespace AppComponent {
-  export const headerItemLink: Record<'footballYouthA' | 'footballYouthB' | 'footballYouthD', Link<InternalPath>> = {
-    footballYouthA: Link.external<InternalPath>('A-Jugend (SV Hetzles)', 'http://sv-hetzles.de/index.php/a-junioren', true),
-    footballYouthB: Link.external<InternalPath>('B-Jugend (SV Hetzles)', 'http://sv-hetzles.de/index.php/b-junioren-u17', true),
-    footballYouthD: Link.external<InternalPath>('D-Jugend (TSV Neunk. a. B.)', 'http://www.tsv-neunkirchen-am-brand.de/fu/junioren', true)
+  export const headerItemLink: Record<'footballYouthA' | 'footballYouthB' | 'footballYouthD', Link> = {
+    footballYouthA: Link.external('A-Jugend (SV Hetzles)', 'http://sv-hetzles.de/index.php/a-junioren', true),
+    footballYouthB: Link.external('B-Jugend (SV Hetzles)', 'http://sv-hetzles.de/index.php/b-junioren-u17', true),
+    footballYouthD: Link.external('D-Jugend (TSV Neunk. a. B.)', 'http://www.tsv-neunkirchen-am-brand.de/fu/junioren', true)
   };
 }

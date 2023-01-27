@@ -13,7 +13,7 @@ import { StyleConfigService } from '../../services/style-config.service';
 export class AuthenticationCheckComponent<InternalPath extends string> implements OnInit {
   @Input() public authenticationType!: UserAuthenticationType;
 
-  @Input() public logInPageLink!: Link<InternalPath>;
+  @Input() public logInPageLink!: Link;
 
   public state: AuthenticationCheckComponent.State = 'loading';
 

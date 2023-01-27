@@ -27,7 +27,7 @@ export class CookieSelectorMessageComponent<InternalPath extends string> impleme
   /**
    * Link to privacy page
    */
-  @Input() public privacyLink?: Link<InternalPath>;
+  @Input() public privacyLink?: Link;
 
   /**
    * Contains the selected cookies.

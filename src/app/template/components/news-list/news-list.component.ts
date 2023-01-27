@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FetchState } from '../../classes/fetch-state';
 import { Datum } from '../../classes/full-datum';
+import { Link } from '../../classes/link';
 import { News } from '../../classes/news';
 import { ApiService } from '../../services/api.service';
 import { DeviceTypeService } from '../../services/device-type.service';
@@ -11,10 +12,14 @@ import { StyleConfigService } from '../../services/style-config.service';
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.sass']
 })
-export class NewsListComponent implements OnInit {
+export class NewsListComponent<InternalPath extends string> implements OnInit {
   public FetchState = FetchState;
 
   @Input() public maxListCount?: number;
+
+  @Input() public allNewsLink!: Link;
+
+  @Input() public newsLink!: (news: News) => Link;
 
   public fetchedNews: FetchState<{ news: News[], hasMore: boolean }> = FetchState.loading;
 

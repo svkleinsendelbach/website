@@ -1,4 +1,5 @@
 import { Link } from '../template/classes/link';
+import { News } from '../template/classes/news';
 
 export type InternalPath =
   | 'home'
@@ -22,6 +23,8 @@ export type InternalPath =
   | 'anfahrt'
   | 'kontakt'
   | 'impressum'
+  | 'nachrichten'
+  | 'nachricht'
   | 'bearbeiten'
   | 'bearbeiten/anmelden'
   | 'bearbeiten/termine'
@@ -52,6 +55,8 @@ export namespace InternalPath {
     'anfahrt',
     'kontakt',
     'impressum',
+    'nachrichten',
+    'nachricht',
     'bearbeiten',
     'bearbeiten/anmelden',
     'bearbeiten/termine',
@@ -82,6 +87,8 @@ export namespace InternalPath {
     'anfahrt': 'Anfahrt',
     'kontakt': 'Kontakt',
     'impressum': 'Impressum',
+    'nachrichten': 'Alle Nachrichten',
+    'nachricht': '',
     'bearbeiten': 'Website bearbeiten',
     'bearbeiten/anmelden': 'Anmelden',
     'bearbeiten/termine': 'Termine bearbeiten',
@@ -91,10 +98,18 @@ export namespace InternalPath {
   };
 }
 export namespace InternalLink {
-  export const all: Record<InternalPath, Link<InternalPath>> = (() => {
-    const allLinks: Record<InternalPath, Link<InternalPath>> = {} as Record<InternalPath, Link<InternalPath>>;
-    for (const internalPath of InternalPath.all)
+  export const all: Record<Exclude<InternalPath, 'nachricht'>, Link> & { 'nachricht': (news: News) => Link } = (() => {
+    const allLinks = {
+      'nachricht': (news: News) => {
+        return Link.internalParam<InternalPath>(news.title, 'nachricht', news.id);
+      },
+      ...{} as Record<Exclude<InternalPath, 'nachricht'>, Link>
+    };
+    for (const internalPath of InternalPath.all) {
+      if (internalPath === 'nachricht')
+        continue;
       allLinks[internalPath] = Link.internal<InternalPath>(InternalPath.title[internalPath], internalPath);
+    }
     return allLinks;
   })();
 }

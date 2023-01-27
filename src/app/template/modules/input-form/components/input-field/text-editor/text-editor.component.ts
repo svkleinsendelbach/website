@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { AngularEditorConfig, UploadResponse } from '@kolkov/angular-editor';
+import { AngularEditorConfig, SelectOption, UploadResponse } from '@kolkov/angular-editor';
 import { Observable } from 'rxjs';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
 import { InputField } from '../../../classes/input-field';
@@ -22,28 +22,25 @@ export class TextEditorComponent implements OnInit {
   public config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: 'auto',
     minHeight: '160px',
-    maxHeight: 'auto',
-    width: 'auto',
-    minWidth: '0',
+    width: '100%',
     translate: 'yes',
     enableToolbar: true,
     showToolbar: true,
-    defaultFontName: 'roboto',
-    fonts: [
-      { class: 'roboto', name: 'Roboto' },
-      { class: 'calibri', name: 'Calibri' },
-      { class: 'arial', name: 'Arial' },
-      { class: 'times-new-roman', name: 'Times New Roman' },
-      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
-    ],
     sanitize: false,
     toolbarPosition: 'top',
     toolbarHiddenButtons: [[
-      'toggleEditorMode'
+      'subscript', 'superscript', 'indent', 'outdent', 'insertUnorderedList', 'insertOrderedList', 'heading', 'fontName', 'textColor', 'backgroundColor', 'insertVideo', 'toggleEditorMode'
     ]]
   };
+
+  public colorSelectOptions: (SelectOption & { value: keyof StyleConfigService.StyleConfig })[] = [
+    { label: 'Standard Farbe', value: 'textColor' },
+    { label: 'Highlight Farbe', value: 'primaryColor' },
+    { label: 'Ausgegrauter Text', value: 'secondaryTextColor' }
+  ];
+
+  public selectedColor: keyof StyleConfigService.StyleConfig = 'textColor';
 
   public constructor(
     public styleConfig: StyleConfigService
@@ -65,6 +62,10 @@ export class TextEditorComponent implements OnInit {
           });
       });
     };
+  }
+
+  public setColor(executeCommand: (commandId: string, value?: string) => boolean) {
+    executeCommand('foreColor', this.styleConfig.css(this.selectedColor));
   }
 
   public get htmlContent(): string {

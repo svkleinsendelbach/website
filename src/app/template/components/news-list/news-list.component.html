@@ -36,8 +36,8 @@
     >
       <a
         class="thumbnail-link"
-        href="/nachricht/{{ news.id }}"
-        title="{{ news.title }}"
+        href="{{ newsLink(news).link }}"
+        title="{{ newsLink(news).title }}"
       >
         <img
           class="thumbnail"
@@ -58,8 +58,8 @@
         >{{ getDateDescription(news.date) }}</p>
         <a
           class="title"
-          href="/nachricht/{{ news.id }}"
-          title="{{ news.title }}"
+          href="{{ newsLink(news).link }}"
+          title="{{ newsLink(news).title }}"
           [ngStyle]="{
             color: styleConfig.css('primaryColor')
           }"
@@ -83,8 +83,8 @@
   </div>
   <a
     id="view-all-news"
-    href="/nachrichten"
-    title="Alle Nachrichten"
+    href="{{ allNewsLink.link }}"
+    title="{{ allNewsLink.title }}"
     *ngIf="FetchState.isSuccess(fetchedNews) && FetchState.getContent(fetchedNews).hasMore"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')

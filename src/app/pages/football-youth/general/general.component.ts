@@ -31,7 +31,7 @@ export class GeneralComponent {
     },
     {
       id: 'c-jugend',
-      link: Link.internal('C-Jugend', 'fussball/jugend/c-jugend'),
+      link: Link.internal<InternalPath>('C-Jugend', 'fussball/jugend/c-jugend'),
       title: 'C-Jugend',
       subtitle: 'C-Jugend der Jugend Spielgemeinschaft'
     },
@@ -43,19 +43,19 @@ export class GeneralComponent {
     },
     {
       id: 'e-jugend',
-      link: Link.internal('E-Jugend', 'fussball/jugend/e-jugend'),
+      link: Link.internal<InternalPath>('E-Jugend', 'fussball/jugend/e-jugend'),
       title: 'E-Jugend',
       subtitle: 'E-Jugend des SV Kleinsendelbach'
     },
     {
       id: 'f-jugend',
-      link: Link.internal('F-Jugend', 'fussball/jugend/f-jugend'),
+      link: Link.internal<InternalPath>('F-Jugend', 'fussball/jugend/f-jugend'),
       title: 'F-Jugend',
       subtitle: 'F-Jugend des SV Kleinsendelbach'
     },
     {
       id: 'g-jugend',
-      link: Link.internal('G-Jugend', 'fussball/jugend/g-jugend'),
+      link: Link.internal<InternalPath>('G-Jugend', 'fussball/jugend/g-jugend'),
       title: 'G-Jugend',
       subtitle: 'G-Jugend des SV Kleinsendelbach'
     }

@@ -1,0 +1,33 @@
+<app-text-section
+  *ngIf="FetchState.isLoading(fetchedNews)"
+  [title]="'Nachricht wird geladen'"
+>
+  <p
+    class="text center large"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Nachricht wird geladen</p>
+</app-text-section>
+<app-text-section
+  *ngIf="FetchState.isSuccess(fetchedNews)"
+  [title]="FetchState.getContent(fetchedNews).title"
+>
+  <p
+    *ngIf="FetchState.getContent(fetchedNews).subtitle !== undefined"
+    class="text center larger no-bottom-padding"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >{{ FetchState.getContent(fetchedNews).subtitle }}</p>
+  <p
+    class="text center margin-top-small"
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >{{ getDateDescription(FetchState.getContent(fetchedNews).date) }}</p>
+  <div
+    #message
+    id="message"
+  ></div>
+</app-text-section>

@@ -5,18 +5,18 @@ import { DeviceTypeService } from 'src/app/template/services/device-type.service
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
 
 @Component({
-  selector: 'app-page-not-found',
-  templateUrl: './page-not-found.component.html',
-  styleUrls: ['./page-not-found.component.sass']
+  selector: 'app-all-news',
+  templateUrl: './all-news.component.html',
+  styleUrls: ['./all-news.component.sass']
 })
-export class PageNotFoundComponent {
-  public homeLink = InternalLink.all['home'];
+export class AllNewsComponent {
+  public allInternalLinks = InternalLink.all;
 
   public constructor(
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {
-    this.titleService.setTitle('Seite nicht gefunden');
+    this.titleService.setTitle('Aktuelle Nachrichten');
   }
 }

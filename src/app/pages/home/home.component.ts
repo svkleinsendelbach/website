@@ -19,6 +19,7 @@ import { Link } from 'src/app/template/classes/link';
 })
 export class HomeComponent {
   public eventGroupTitle = EventGroupId.title;
+  public allInternalLinks = InternalLink.all;
 
   public readonly bannerData: HomeBannerComponent.BannerItem[] = [];
 
@@ -69,7 +70,7 @@ export class HomeComponent {
 }
 
 export namespace HomeComponent {
-  export const homeLink: Record<InternalPath, HomeLinksComponent.LinkItem<InternalPath>> = {
+  export const homeLink: Record<Exclude<InternalPath, 'nachricht'>, HomeLinksComponent.LinkItem<InternalPath>> = {
     'home': {
       name: 'Home',
       link: InternalLink.all['home'],
@@ -215,6 +216,13 @@ export namespace HomeComponent {
       link: InternalLink.all['impressum'],
       description: 'TODO',
       icon: faAddressBook,
+      animation: 'shake'
+    },
+    'nachrichten': {
+      name: 'Alle Nachrichten',
+      link: InternalLink.all['nachrichten'],
+      description: 'TODO',
+      icon: faNewspaper,
       animation: 'shake'
     },
     'bearbeiten': {

@@ -68,6 +68,8 @@ import { EditEventComponent } from './pages/editing/events/edit-event/edit-event
 import { NewsComponent } from './pages/editing/news/news.component';
 import { EditNewsComponent } from './pages/editing/news/edit-news/edit-news.component';
 import { InputFormModule } from './template/modules/input-form/input-form.module';
+import { AllNewsComponent } from './pages/news/all-news/all-news.component';
+import { NewsDetailComponent } from './pages/news/news-detail/news-detail.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +123,9 @@ import { InputFormModule } from './template/modules/input-form/input-form.module
     EventsComponent_1,
     EditEventComponent,
     NewsComponent,
-    EditNewsComponent
+    EditNewsComponent,
+    AllNewsComponent,
+    NewsDetailComponent
   ],
   imports: [
     BrowserModule,

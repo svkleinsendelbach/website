@@ -25,7 +25,7 @@ export class HomeLinksComponent<InternalPath extends string> {
 export namespace HomeLinksComponent {
   export interface LinkItem<InternalPath extends string> {
     name: string,
-    link: Link<InternalPath>
+    link: Link
     description: string,
     icon: IconDefinition,
     animation: 'rotation' | 'jump' | 'shake'

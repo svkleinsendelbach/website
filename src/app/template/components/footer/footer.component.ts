@@ -52,10 +52,10 @@ export namespace FooterComponent {
   export interface FooterData<InternalPath extends string>{
     links: {
       id: string,
-      link: Link<InternalPath>
+      link: Link
     }[],
     copyrightText: string,
-    editLink?: Link<InternalPath>,
+    editLink?: Link,
     contact: ContactData[]
   }
 
