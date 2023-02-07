@@ -168,7 +168,7 @@ export class AppComponent {
 
   public homeLinkData: HeaderComponent.HomeLinkData = {
     title: 'SV Kleinsendelbach',
-    logoSrc: 'assets/images/svk-logo.png',
+    logoSrc: 'assets/images/svk-logo.svg',
     homeLink: InternalLink.all.home
   };
 

@@ -70,6 +70,7 @@ import { EditNewsComponent } from './pages/editing/news/edit-news/edit-news.comp
 import { InputFormModule } from './template/modules/input-form/input-form.module';
 import { AllNewsComponent } from './pages/news/all-news/all-news.component';
 import { NewsDetailComponent } from './pages/news/news-detail/news-detail.component';
+import { LivetickerComponent } from './template/components/liveticker/liveticker.component';
 
 @NgModule({
   declarations: [
@@ -125,7 +126,8 @@ import { NewsDetailComponent } from './pages/news/news-detail/news-detail.compon
     NewsComponent,
     EditNewsComponent,
     AllNewsComponent,
-    NewsDetailComponent
+    NewsDetailComponent,
+    LivetickerComponent
   ],
   imports: [
     BrowserModule,
