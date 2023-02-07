@@ -1,15 +1,55 @@
-<span class="text-section">
-  <h1 class="no-bottom-space">E-Jugend des SV Kleinsendelbach</h1>
-</span>
-<app-component-events [eventGroupIds]="eventGroupIds">
-</app-component-events>
-<app-component-results [pageId]="'football-youth/e-youth'">
-</app-component-results>
-<app-component-contact [pageId]="'football-youth/e-youth'">
-</app-component-contact>
-<app-component-training-time [pageId]="'football-youth/e-youth'">
-</app-component-training-time>
-<span class="text-section">
-  <h1>Kader</h1>
-  <img class="image" src="assets/images/E-Jugend-2018.jpg" title="E-Jugend">
-</span>
+<app-text-section
+  [title]="'E-Jugend des SV Kleinsendelbach'"
+>
+  <p
+    class="text"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+</app-text-section>
+
+<app-events
+  [groupIds]="eventGroupIds"
+  [eventGroupTitle]="eventGroupTitle"
+></app-events>
+
+<app-text-section
+  [title]="'Ergebnisse und Tabellen'"
+>
+  <app-bfv-widget
+    [teamId]="teamId"
+  ></app-bfv-widget>
+</app-text-section>
+
+<app-contact-info
+  [contactData]="contactData"
+></app-contact-info>
+
+<app-text-section
+  [title]="'Trainingszeiten'"
+>
+  <p
+    class="text margin-bottom-normal"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Das Training findet jeden Mittwoch von 17:30Uhr - 19:00Uhr am A-Platz an der Hauptstraße statt.</p>
+  <app-maps
+    [options]="mapOptions"
+    [markers]="mapMarkers"
+  ></app-maps>
+</app-text-section>
+
+<app-text-section
+  [title]="'Kader'"
+>
+  <img
+    class="text-image"
+    src="assets/images/e-jugend.jpg"
+    title="E-Jugend"
+    [ngStyle]="{
+      borderColor: styleConfig.css('textColor')
+    }"
+  >
+</app-text-section>

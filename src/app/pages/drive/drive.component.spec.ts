@@ -11,9 +11,7 @@ describe('DriveComponent', () => {
       declarations: [ DriveComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(DriveComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

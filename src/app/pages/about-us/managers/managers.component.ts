@@ -1,20 +1,19 @@
 import { Component } from '@angular/core';
-import { HeaderIntransparentService } from '../../../services/header-intransparent.service';
 import { Title } from '@angular/platform-browser';
-import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { DeviceTypeService } from 'src/app/template/services/device-type.service';
+import { StyleConfigService } from 'src/app/template/services/style-config.service';
 
 @Component({
   selector: 'app-managers',
   templateUrl: './managers.component.html',
-  styleUrls: ['./managers.component.sass'],
+  styleUrls: ['./managers.component.sass']
 })
 export class ManagersComponent {
-  constructor(
-    private headerIntransparentService: HeaderIntransparentService,
-    private titleService: Title,
-    public deviceType: DeviceTypeService,
+  public constructor(
+    public readonly titleService: Title,
+    public readonly deviceType: DeviceTypeService,
+    public readonly styleConfig: StyleConfigService
   ) {
-    this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Vorstandschaft');
   }
 }

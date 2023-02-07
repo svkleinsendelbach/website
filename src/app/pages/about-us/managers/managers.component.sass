@@ -1,34 +1,27 @@
 @import '/src/sass/flex'
-@import '/src/sass/font'
+@import '/src/sass/text'
 
-:host
-  @include flex-column(center, flex-start)
-  width: 100%
-
-.managers-container
-  @include flex-row(space-around, flex-start)
+#managers-container
+  @include flex-row(flex-start, space-around)
   width: 100%
   margin-top: 25px
 
   .container
-    @include flex-column(center, flex-end)
+    @include flex-column(flex-end, center)
 
     .image
       height: 200px
       margin-bottom: 25px
 
     .name, .function
-      color: #868E90
+      @include font-montserrat
+      @include font-size('normal')
+      @include font-weight('small')
       white-space: nowrap
-      font:
-        size: 18px
-        weight: 400
-        family: 'Montserrat', sans-serif
       text-align: center
 
     .name
-      color: #CF1D16
       margin-bottom: 10px
 
   &.mobile
-    @include flex-column(center, flex-start)
+    @include flex-column(flex-start, center)

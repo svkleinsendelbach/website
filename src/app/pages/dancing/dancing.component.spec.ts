@@ -11,9 +11,7 @@ describe('DancingComponent', () => {
       declarations: [ DancingComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(DancingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

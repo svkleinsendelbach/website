@@ -1,17 +1,18 @@
-@import '/src/sass/flex'
+:host ::ng-deep router-outlet
+  &.desktop + *
+    display: block
+    min-height: calc(100vh - 368px)
+    & > *
+      margin-top: 80px
 
-:host
-  @include flex-column(center, flex-start)
-  width: 100%
+  &.tablet + *
+    display: block
+    min-height: calc(100vh - 368px)
+    & > *
+      margin-top: 80px
 
-:host ::ng-deep router-outlet.content-min-height-658 + *
-  min-height: calc(100vh - 658px)
-
-:host ::ng-deep router-outlet.content-min-height-285 + *
-  min-height: calc(100vh - 285px)
-
-:host ::ng-deep router-outlet.content-min-height-708 + *
-  min-height: calc(100vh - 708px)
-
-:host ::ng-deep router-outlet.content-min-height-360 + *
-  min-height: calc(100vh - 360px)
+  &.mobile + *
+    display: block
+    min-height: calc(100vh - 736px)
+    & > *
+      margin-top: 48px

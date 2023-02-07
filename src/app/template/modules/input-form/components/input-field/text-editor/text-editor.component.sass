@@ -1,0 +1,47 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100%
+  margin-bottom: 20px
+
+angular-editor
+  width: 100%
+
+::ng-deep .angular-editor-toolbar .select-color
+  width: 125px
+
+::ng-deep .angular-editor-toolbar .select-custom-style
+  width: 150px !important
+
+::ng-deep .angular-editor-placeholder
+  @include font-montserrat
+  @include font-size('large')
+  @include font-weight('medium')
+  width: 100%
+  text-align: center
+
+::ng-deep .angular-editor-textarea
+  @include font-montserrat
+  @include font-size('medium')
+  @include font-weight('normal')
+
+  a
+    text-decoration: none
+
+#guidance
+  @include flex-column(flex-start, flex-start)
+  width: 100%
+  margin-top: 15px
+
+  p
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    line-height: 24px
+    margin-top: 5px
+
+    &.indent
+      margin-left: 15px
+      margin-top: 0

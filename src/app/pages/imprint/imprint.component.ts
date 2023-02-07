@@ -1,20 +1,26 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
+import { faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { DeviceTypeService } from 'src/app/template/services/device-type.service';
+import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { InternalLink } from 'src/app/classes/InternalPath';
 
 @Component({
   selector: 'app-imprint',
   templateUrl: './imprint.component.html',
-  styleUrls: ['./imprint.component.sass'],
+  styleUrls: ['./imprint.component.sass']
 })
 export class ImprintComponent {
-  constructor(
-    private headerIntransparentService: HeaderIntransparentService,
-    private titleService: Title,
-    public deviceType: DeviceTypeService,
+  public faPhone = faPhone;
+  public faEnvelope = faEnvelope;
+  public imprintLink = InternalLink.all['datenschutz'];
+
+  public constructor(
+    public readonly titleService: Title,
+    public readonly deviceType: DeviceTypeService,
+    public readonly styleConfig: StyleConfigService
   ) {
-    this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Impressum und Datenschutz');
   }
 }

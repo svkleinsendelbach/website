@@ -1,0 +1,144 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100vw
+  margin-top: 48px
+
+#footer
+  @include flex-row(center, center)
+  width: 100%
+  box-shadow: #80808080 0 -4px 16px
+  padding: 32px 0
+
+  #links-copyright
+    @include flex-column(center, center)
+    flex: 1
+    margin: 0 16px
+
+    #links
+      @include flex-column(center, center)
+      width: 100%
+
+      .link
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('normal')
+        text-decoration: none
+        white-space: nowrap
+        padding: 8px
+        margin: 1px 0
+        width: 100%
+        border-radius: 4px
+        text-align: center
+
+    #copyright
+      @include font-montserrat
+      @include font-size('xx-small')
+      @include font-weight('light')
+      margin-top: 8px
+
+    #edit-link
+      @include font-montserrat
+      @include font-size('normal')
+      @include font-weight('small')
+      cursor: pointer
+      text-align: center
+      padding: 3px 8px
+      margin-top: 8px
+      border: 1px solid
+      border-radius: 4px
+      text-decoration: none
+
+  .address-card
+    $cover-height: 96px
+    $under-sheet-height: 80px
+    @include flex-column(center, center)
+    flex: 1
+    margin: 0 16px
+
+    .top
+      @include flex-column(center, center)
+      width: 100%
+      height: $cover-height
+      transition: .5s
+      transform: translateY(0.25 * ($cover-height + $under-sheet-height))
+      z-index: 902
+      border-radius: 8px
+      cursor: pointer
+      border: 1px solid
+
+      .function, .name
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('small')
+        white-space: nowrap
+        margin: 1px
+
+    .bottom
+      @include flex-column(center, center)
+      width: 100%
+      height: $under-sheet-height
+      transition: .5s
+      transform: translateY(-0.25 * ($cover-height + $under-sheet-height))
+      z-index: 901
+      border-radius: 8px
+      opacity: 0
+      border: 1px solid
+      border-top: 0
+
+      .street, .city
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('small')
+        white-space: nowrap
+        margin: 1px
+
+      .telephone
+        @include flex-row(center, center)
+        text-decoration: none
+        cursor: pointer
+
+        .icon, .number
+          @include font-size('normal')
+          @include font-weight('small')
+          white-space: nowrap
+          line-height: 16px
+
+        .number
+          @include font-montserrat
+          margin-left: 4px
+
+    &:hover
+      .top
+        transform: translateY(0)
+        border-radius: 8px 8px 0 0
+
+      .bottom
+        transform: translateY(0)
+        border-radius: 0 0 8px 8px
+        opacity: 1
+
+  &.desktop
+    #links-copyright, .address-card
+      margin: 0 32px
+
+  &.tablet, &.mobile
+    .address-card
+      .top
+        transform: translateY(0)
+        border-radius: 8px 8px 0 0
+
+      .bottom
+        transform: translateY(0)
+        border-radius: 0 0 8px 8px
+        opacity: 1
+
+    &.mobile
+      @include flex-column(center, center)
+
+      #links-copyright, .address-card
+        width: 90%
+        margin-bottom: 16px
+

@@ -11,9 +11,7 @@ describe('PrivacyComponent', () => {
       declarations: [ PrivacyComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(PrivacyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

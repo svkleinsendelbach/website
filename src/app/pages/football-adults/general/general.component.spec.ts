@@ -11,9 +11,7 @@ describe('GeneralComponent', () => {
       declarations: [ GeneralComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(GeneralComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

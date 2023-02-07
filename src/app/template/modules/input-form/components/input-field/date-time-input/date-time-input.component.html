@@ -1,0 +1,33 @@
+<label
+  [text]="label"
+></label>
+<div
+  id="container"
+  [ngClass]="deviceType.className"
+>
+  <input
+    #dateInput
+    id="dateInput"
+    type="date"
+    (blur)="onBlur()"
+    [ngStyle]="{
+      color: styleConfig.css('textColor'),
+      backgroundColor: styleConfig.css('backgroundColor'),
+      borderColor: styleConfig.css(inputField.error === undefined ? 'textColor' : 'formErrorStatusColor')
+    }"
+  >
+  <input
+    #timeInput
+    id="timeInput"
+    type="time"
+    (blur)="onBlur()"
+    [ngStyle]="{
+      color: styleConfig.css('textColor'),
+      backgroundColor: styleConfig.css('backgroundColor'),
+      borderColor: styleConfig.css(inputField.error === undefined ? 'textColor' : 'formErrorStatusColor')
+    }"
+  >
+</div>
+<error-message
+  [error]="inputField.error"
+></error-message>

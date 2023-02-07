@@ -1,20 +1,19 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
+import { DeviceTypeService } from 'src/app/template/services/device-type.service';
+import { StyleConfigService } from 'src/app/template/services/style-config.service';
 
 @Component({
   selector: 'app-request',
   templateUrl: './request.component.html',
-  styleUrls: ['./request.component.sass'],
+  styleUrls: ['./request.component.sass']
 })
 export class RequestComponent {
-  constructor(
-    private headerIntransparentService: HeaderIntransparentService,
-    private titleService: Title,
-    public deviceType: DeviceTypeService,
+  public constructor(
+    public readonly titleService: Title,
+    public readonly deviceType: DeviceTypeService,
+    public readonly styleConfig: StyleConfigService
   ) {
-    this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Mitgliedsantrag');
   }
 }

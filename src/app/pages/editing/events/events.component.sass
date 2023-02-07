@@ -1,139 +1,92 @@
 @import '/src/sass/flex'
-@import '/src/sass/font'
+@import '/src/sass/text'
 
 :host
-  @include flex-column(center, flex-start)
+  @include flex-column(flex-start, center)
   width: 100%
 
-.add-event
-  font:
-    family: 'Montserrat', sans-serif
-    size: 20px
-      weight: 400
-  flex: 1
-  color: #CF1D16
-  cursor: pointer
-  text-align: center
-  padding: 10px 25px
-  margin-bottom: 25px
-  background-color: #F8F9FA
-  box-shadow: 0 0 5px #aaaaaa
-  border-radius: 5px
-
-  &:hover
-    background-color: #e0e0e0
-
-.event-group-container
-  @include flex-column(center, flex-start)
+#back-btn-container
+  @include flex-row(center, flex-start)
   width: 100%
-  margin: 15px 0
+
+  #back-button
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    cursor: pointer
+    text-align: center
+    border: 1px solid
+    border-radius: 5px
+    padding: 5px 15px
+    margin-top: 20px
+    margin-left: 20px
+    text-decoration: none
+
+#add-event
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    cursor: pointer
+    text-align: center
+    border: 1px solid
+    border-radius: 5px
+    padding: 5px 15px
+    margin-bottom: 25px
+
+.event-group
+  @include flex-column(flex-start, center)
+  width: 100%
+  margin-bottom: 40px
+
+  &:last-child
+    margin-bottom: 0
 
   .group-name
-    font:
-      family: 'Montserrat', sans-serif
-      size: 24px
-      weight: 400
-    text-align: left
+    @include font-montserrat
+    @include font-size('large')
+    @include font-weight('small')
     width: 100%
-    color: #24252a
+    text-align: left
     margin-bottom: 15px
 
-  .event-container
+  .event
     @include flex-row(center, center)
     width: 95%
-    border-bottom: 1px solid #24252a80
-    background-color: #F8F9FA
-    box-shadow: 0 0 5px #aaaaaa
+    border: 1px solid
+    border-bottom: none
     padding: 5px
 
     &:nth-child(2)
       border-radius: 5px 5px 0 0
 
-    &:nth-last-child(1)
+    &:last-child
+      border-bottom: 1px solid
       border-radius: 0 0 5px 5px
-      border-bottom: none
 
-    &:nth-child(2):nth-last-child(1)
+    &:nth-child(2):last-child
       border-radius: 5px
 
     .title-container
       @include flex-column(center, flex-start)
       flex: 3
+      margin-left: 10px
 
       .title
-        font:
-          family: 'Montserrat', sans-serif
-          size: 20px
-          weight: 400
-        text-align: left
-        width: 100%
-        color: #24252a
-        white-space: nowrap
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('small')
+        margin-bottom: 2px
 
       .subtitle
-        font:
-          family: 'Montserrat', sans-serif
-          size: 18px
-          weight: 300
-        text-align: left
-        width: 100%
-        color: #868E90
-        white-space: nowrap
-        margin-top: 2.5px
+        @include font-montserrat
+        @include font-size('small')
+        @include font-weight('small')
 
-    .edit-btn, .delete-btn
-      font:
-        family: 'Montserrat', sans-serif
-        size: 20px
-          weight: 400
-      flex: 1
-      color: #CF1D16
+    .edit-button, .delete-button
+      @include flex-row(center, center)
+      @include font-montserrat
+      @include font-size('normal')
+      @include font-weight('small')
       cursor: pointer
-      text-align: center
-      padding: 10px 0
-
-      &:hover
-        background-color: #e0e0e0
-        border-radius: 5px
-
-  &.mobile .event-container
-    @include flex-column(center, flex-start)
-
-    .title-container
-      width: 100%
-      margin: 5px 0
-
-      .title, .subtitle
-        white-space: pre-wrap
-        text-align: center
-
-    .edit-btn, .delete-btn
-      width: calc(100% - 20px)
-
-@media screen and (prefers-color-scheme: dark)
-  .add-event
-    background-color: #24252a
-    box-shadow: 0 0 5px #111111
-
-    &:hover
-      background-color: #44454A
-
-  .event-group-container
-    .group-name
-      color: #868E90
-
-    .event-container
-      border-bottom: 1px solid #868E90
-      background-color: #24252a
-      box-shadow: 0 0 5px #111111
-
-      .title-container
-        .title
-          color: #C8D6E5
-
-        .subtitle
-          color: #868E90
-
-      .edit-btn, .delete-btn
-        &:hover
-          background-color: #44454A
+      flex: 1
+      margin: 10px

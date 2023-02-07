@@ -1,7 +1,9 @@
-
 @import '/src/sass/flex'
-@import '/src/sass/font'
 
 :host
-  @include flex-column(center, flex-start)
-  width: 100%
+  @include flex-column(flex-start, center)
+  width: 100vw
+
+  .container
+    @include flex-column(flex-start, center)
+    width: 100vw

@@ -1,86 +1,86 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
-import { WebsiteEditorAuthService } from 'src/app/services/api/website-editor-auth.service';
-import { EventsFetcherService, EventGroupId, Event } from '../../../services/api/events-fetcher.service';
-import { DeviceTypeService } from '../../../services/device-type.service';
-import { WebsiteEditingService } from '../../../services/api/website-editing.service';
-import { SharedEventEditService } from '../../../services/shared-data/shared-event-edit.service';
+import { EventGroup } from 'src/app/template/classes/event';
+import { GetEventsFunction } from 'src/app/template/services/api-functions-types';
+import { ApiService } from 'src/app/template/services/api.service';
+import { DeviceTypeService } from 'src/app/template/services/device-type.service';
+import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { Event } from 'src/app/template/classes/event';
+import { SharedDataService } from 'src/app/template/services/shared-data.service';
+import { InternalLink } from 'src/app/classes/InternalPath';
+import { EventGroupId } from 'src/app/classes/EventGroupId';
 
 @Component({
-  selector: 'app-events',
+  selector: 'app-editing-events',
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.sass'],
+  styleUrls: ['./events.component.sass']
 })
 export class EventsComponent {
-  public isStartupLoading: boolean = true;
+  public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
+  public mainEditingPageLink = InternalLink.all['bearbeiten'];
+  public allEventGroupIds = EventGroupId.all;
+  public eventGroupTitle = EventGroupId.title;
 
-  public allEvents:
-    | {
-        groupId: EventGroupId;
-        events: Event[];
-      }[]
-    | undefined = undefined;
+  public eventGroups: GetEventsFunction.ReturnType<EventGroupId> | undefined = undefined;
 
-  constructor(
-    private titleService: Title,
-    private headerIntransparentService: HeaderIntransparentService,
-    private authService: WebsiteEditorAuthService,
-    private router: Router,
-    private eventsFetcher: EventsFetcherService,
-    public deviceType: DeviceTypeService,
-    private websiteEditing: WebsiteEditingService,
-    private sharedEventEdit: SharedEventEditService,
-  ) {
-    this.titleService.setTitle('Termine Bearbeiten');
-    this.headerIntransparentService.makeIntransparent();
-    this.authService.isLoggedIn.then(isLoggedIn => {
-      if (!isLoggedIn) {
-        this.router.navigateByUrl('/bearbeiten/anmelden').then(success => {
-          if (!success) throw new Error("Couldn't navigate to url.");
-        });
-      } else {
-        this.isStartupLoading = false;
+  public constructor(
+    public readonly titleService: Title,
+    public readonly deviceType: DeviceTypeService,
+    public readonly styleConfig: StyleConfigService,
+    private readonly apiService: ApiService,
+    private readonly sharedData: SharedDataService<{
+      editEvent: {
+        groupId: EventGroupId,
+        event: Event.ReturnType
       }
+    }>,
+    private router: Router
+  ) {
+    this.titleService.setTitle('Termine bearbeiten');
+    this.getEvents();
+  }
+
+  private async getEvents() {
+    this.eventGroups = await this.apiService.getEvents<EventGroupId>({
+      groupIds: EventGroupId.all
     });
-    this.eventsFetcher.getEvents(EventGroupId.all).then(events => {
-      this.allEvents = events;
-    });
   }
 
-  public groupDescription(groupId: EventGroupId): string {
-    return EventGroupId.description(groupId);
+  public getEventGroupOf(groupId: EventGroupId): EventGroup<EventGroupId> | undefined {
+    return this.eventGroups?.find(eventGroup => eventGroup.groupId === groupId);
   }
 
-  public getEventsOf(groupId: EventGroupId): Event[] | undefined {
-    return this.allEvents?.find(e => e.groupId === groupId)?.events;
-  }
-
-  public deleteEvent(groupId: EventGroupId, eventId: string) {
-    this.allEvents = this.allEvents?.compactMap(eventGroup => {
-      if (eventGroup.groupId !== groupId) return eventGroup;
+  public async deleteEvent(groupId: EventGroupId, eventId: string) {
+    this.eventGroups = this.eventGroups?.flatMap(eventGroup => {
+      if (eventGroup.groupId !== groupId)
+        return eventGroup;
       const events = eventGroup.events.filter(event => event.id !== eventId);
-      if (events.length === 0) return undefined;
-      return { groupId: eventGroup.groupId, events };
+      if (events.length === 0)
+        return [];
+      return {
+        groupId: eventGroup.groupId,
+        events: events
+      };
     });
-    if (this.allEvents?.length === 0) this.allEvents = undefined;
-    this.websiteEditing
-      .editEvent({
-        editType: 'remove',
-        groupId,
-        eventId,
-      })
-      .catch(console.error);
+    await this.apiService.editEvent({
+      editType: 'remove',
+      groupId: groupId,
+      eventId: eventId,
+      event: undefined
+    });
   }
 
-  public editEvent(groupId: EventGroupId, event: Event) {
-    this.sharedEventEdit.event = { groupId, event };
-    this.router.navigateByUrl('/bearbeiten/termine/bearbeiten');
+  public async editEvent(groupId: EventGroupId, event: Event.ReturnType) {
+    this.sharedData.setValue('editEvent', {
+      groupId: groupId,
+      event: event
+    });
+    await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine/bearbeiten'].link);
   }
 
-  public addNewEvent() {
-    this.sharedEventEdit.event = undefined;
-    this.router.navigateByUrl('/bearbeiten/termine/bearbeiten');
+  public async addNewEvent() {
+    this.sharedData.removeValue('editEvent');
+    await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine/bearbeiten'].link);
   }
 }

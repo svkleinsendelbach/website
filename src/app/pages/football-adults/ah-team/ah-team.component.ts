@@ -1,23 +1,56 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { EventGroupId } from 'src/app/services/api/events-fetcher.service';
-import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
+import { EventGroupId } from 'src/app/classes/EventGroupId';
+import { ContactInfoComponent } from 'src/app/template/components/contact-info/contact-info.component';
+import { DeviceTypeService } from 'src/app/template/services/device-type.service';
+import { StyleConfigService } from 'src/app/template/services/style-config.service';
 
 @Component({
   selector: 'app-ah-team',
   templateUrl: './ah-team.component.html',
-  styleUrls: ['./ah-team.component.sass'],
+  styleUrls: ['./ah-team.component.sass']
 })
 export class AhTeamComponent {
-  eventGroupIds: EventGroupId[] = ['football-adults/ah-team'];
+  public eventGroupTitle = EventGroupId.title;
 
-  constructor(
-    private headerIntransparentService: HeaderIntransparentService,
-    private titleService: Title,
-    public deviceType: DeviceTypeService,
+  public readonly eventGroupIds: EventGroupId[] = [
+    'football-adults/ah-team'
+  ];
+
+  public readonly contactData: ContactInfoComponent.ContactItem[] = [
+    {
+      function: 'Ansprechpartner',
+      name: 'Jürgen Drummer',
+      mobile: {
+        number: '01703396915',
+        text: '0170 / 3396915'
+      }
+    }
+  ];
+
+  public readonly mapOptions: google.maps.MapOptions = {
+    zoom: 14,
+    center: {
+      lat: 49.589936,
+      lng: 11.162849
+    },
+    scrollwheel: false,
+    maxZoom: 18,
+    minZoom: 5
+  };
+
+  public readonly mapMarkers: google.maps.LatLngLiteral[] = [
+    {
+      lat: 49.589936,
+      lng: 11.162849
+    }
+  ];
+
+  public constructor(
+    public readonly titleService: Title,
+    public readonly deviceType: DeviceTypeService,
+    public readonly styleConfig: StyleConfigService
   ) {
-    this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Alte Herren');
   }
 }

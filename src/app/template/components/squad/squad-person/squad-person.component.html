@@ -1,0 +1,35 @@
+<img
+  *ngIf="person.imageId !== null"
+  id="image"
+  src="http://www.anpfiff.info/upload/images/Portrait4/{{ person.imageId }}.jpg"
+  title="{{ person.name }}">
+<img
+  *ngIf="person.imageId === null"
+  id="image" src="assets/images/profile.png"
+  title="{{ person.name }}"
+>
+<a
+  *ngIf="person.personParameters !== null"
+  href="http://www.anpfiff.info/sites/person/start.aspx?SK={{ person.personParameters.spielkreis }}&Pers={{ person.personParameters.personId }}"
+  target="_blank"
+  title="{{ person.name }} (anpfiff.info)"
+  id="name"
+  [ngStyle]="{
+    color: styleConfig.css('primaryColor')
+  }"
+>{{ person.name }}</a>
+<p
+  *ngIf="person.personParameters === null"
+  id="name"
+  [ngStyle]="{
+    color: styleConfig.css('primaryColor')
+  }"
+>{{ person.name }}</p>
+
+<p
+  *ngIf="person.additionalText !== null"
+  id="additionalText"
+  [ngStyle]="{
+    color: styleConfig.css('secondaryTextColor')
+  }"
+>{{ person.additionalText }}</p>

@@ -1,0 +1,116 @@
+<app-text-section
+  [title]="'Anmeldung um die Website zu bearbeiten'"
+>
+  <input-form
+    [inputForm]="inputForm"
+    [submitButtonText]="'Anmelden'"
+    (submitButtonClicked)="onSubmit()"
+  >
+    <input-field-text
+      [label]="'E-Mail Adresse'"
+      [inputField]="inputForm.field('email')"
+    ></input-field-text>
+    <input-field-text
+      [label]="'Passwort'"
+      [secure]="true"
+      [inputField]="inputForm.field('password')"
+    ></input-field-text>
+  </input-form>
+
+  <p
+    class="text margin-top-large large"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >oder</p>
+
+  <div
+   class="sign-in-container"
+   [ngClass]="deviceType.className"
+  >
+    <div
+      class="sign-in-button apple"
+      (click)="$event.preventDefault(); $event.stopPropagation(); loginWithApple()"
+      [ngStyle]="{
+        backgroundColor: appearance.current === Appearance.Light ? '#000000' : '#FFFFFF'
+      }"
+    >
+      <img
+        *ngIf="appearance.current === Appearance.Light"
+        src="assets/images/apple_logo_white.png"
+        title="Apple"
+        class="logo"
+      >
+      <img
+        *ngIf="appearance.current === Appearance.Dark"
+        src="assets/images/apple_logo_black.png"
+        title="Apple"
+        class="logo"
+      >
+      <p
+        class="button-text"
+        [ngStyle]="{
+          color: appearance.current === Appearance.Light ? '#FFFFFF' : '#000000'
+        }"
+      >Mit Apple Anmelden</p>
+    </div>
+    <p
+      *ngIf="signInWithAppleStatus === 'loading'"
+      class="status"
+      [ngStyle]="{
+        color: styleConfig.css('formInfoStatusColor')
+      }"
+    >Bitte melden Sie sich im seperaten Anmeldefenster an.</p>
+    <p
+      *ngIf="signInWithAppleStatus !== 'valid' && signInWithAppleStatus !== 'loading'"
+      class="status"
+      [ngStyle]="{
+        color: styleConfig.css('formErrorStatusColor')
+      }"
+    >{{ loginErrorMessage(signInWithAppleStatus) }}</p>
+  </div>
+
+  <div
+   class="sign-in-container"
+   [ngClass]="deviceType.className"
+  >
+    <div
+      class="sign-in-button google"
+      (click)="$event.preventDefault(); $event.stopPropagation(); loginWithGoogle()"
+      [ngStyle]="{
+        backgroundColor: appearance.current === Appearance.Light ? '#FFFFFF' : '#4285F4',
+        boxShadow: '0 0 4px ' + (appearance.current === Appearance.Light ? '#A0A0A0' : '#202020')
+      }"
+    >
+      <img
+        src="assets/images/google_logo.png"
+        title="Google"
+        class="logo"
+        [ngStyle]="{
+          backgroundColor: appearance.current === Appearance.Light ? undefined : '#FFFFFF'
+        }"
+      >
+      <p
+        class="button-text"
+        [ngStyle]="{
+          color: appearance.current === Appearance.Light ? '#6A6A6A' : '#FFFFFF'
+        }"
+      >Mit Google Anmelden</p>
+    </div>
+    <p
+      *ngIf="signInWithGoogleStatus === 'loading'"
+      class="status"
+      [ngStyle]="{
+        color: styleConfig.css('formInfoStatusColor')
+      }"
+    >Bitte melden Sie sich im seperaten Anmeldefenster an.</p>
+    <p
+      *ngIf="signInWithGoogleStatus !== 'valid' && signInWithGoogleStatus !== 'loading'"
+      class="status"
+      [ngStyle]="{
+        color: styleConfig.css('formErrorStatusColor')
+      }"
+    >{{ loginErrorMessage(signInWithGoogleStatus) }}</p>
+  </div>
+
+</app-text-section>

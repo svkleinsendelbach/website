@@ -1,29 +1,19 @@
 @import '/src/sass/flex'
-@import '/src/sass/font'
+@import '/src/sass/text'
 
-:host
-  @include flex-column(center, flex-start)
+#image-link
+  @include flex-row(center, center)
   width: 100%
+  margin-top: 64px
 
-.text-section
-  .img-link
-    @include flex-row(center, center)
-    width: 100%
-    margin-top: 64px
+  #image
+    width: 25%
+    margin-right: 80px
 
-    .img
-      border: none
-      width: 25%
-      margin-right: 80px
+  #link
+    @include font-montserrat
+    @include font-size('header')
+    @include font-weight('normal')
+    text-decoration: none
+    cursor: pointer
 
-    .link
-      font-size: 27px
-      width: auto
-
-  &.mobile .img-link
-    @include flex-column()
-
-    .img
-      width: 75%
-      margin-right: 0
-      margin-bottom: 64px

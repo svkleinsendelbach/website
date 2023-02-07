@@ -11,9 +11,7 @@ describe('EditNewsComponent', () => {
       declarations: [ EditNewsComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(EditNewsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

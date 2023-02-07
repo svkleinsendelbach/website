@@ -1,139 +1,90 @@
 @import '/src/sass/flex'
-@import '/src/sass/font'
+@import '/src/sass/text'
 
 :host
-  @include flex-column(center, flex-start)
+  @include flex-column(flex-start, center)
   width: 100%
 
-.log-out-container
-  @include flex-row(flex-end, center)
+#log-out-container
+  @include flex-row(center, flex-end)
   width: 100%
 
-  .log-out-btn
-    font:
-      family: 'Montserrat', sans-serif
-      size: 20px
-      weight: 300
+  #log-out-button
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
     cursor: pointer
     text-align: center
-    padding: 5px 15px
-    margin: 20px
-    border: 1px solid #24252A
+    border: 1px solid
     border-radius: 5px
-    color: #24252A
-    background-color: #F8F9FA
+    padding: 5px 15px
+    margin-top: 20px
+    margin-right: 20px
 
-    &:hover
-      background-color: #f0f0f0
-      color: #1f3a95
-      border: 1px solid #1f3a95
-
-.waiting-users-container
-  @include flex-column(center, flex-start)
+#unauthenticated-user-container
+  @include flex-column(flex-start, center)
   width: 100%
+  margin-top: 25px
 
-  .waiting-user
-    @include flex-row(flex-end, center)
+  .unauthenticated-user
+    @include flex-row(center, center)
     width: 95%
-    border-bottom: 1px solid #24252a80
-    background-color: #F8F9FA
-    box-shadow: 0 0 5px #aaaaaa
+    border:  1px solid
+    border-bottom: none
 
-    &:nth-child(1)
+    &:first-child
       border-radius: 5px 5px 0 0
 
-      .name, .accept, .decline
-        padding-top: 5px
-
-    &:nth-last-child(1)
+    &:last-child
+      border-bottom: 1px solid
       border-radius: 0 0 5px 5px
-      border-bottom: none
 
-      .name, .accept, .decline
-        padding-bottom: 5px
-
-    &:nth-child(1):nth-last-child(1)
+    &:first-child:last-child
       border-radius: 5px
 
-      .name, .accept, .decline
-        padding-top: 5px
-        padding-bottom: 5px
+    .name, .button
+      @include font-montserrat
+      @include font-size('normal')
+      @include font-weight('small')
+      text-align: center
+      padding: 5px 10px
 
     .name
+      flex: 5
+
+    .button
       flex: 2
-      text-align: center
-      color: #24252A
-      padding: 10px 0
-
-    .accept, .decline
-      flex: 1
-      padding: 10px 0
-      text-align: center
       cursor: pointer
-      color: #CF1D16
 
-      &:hover
-        background-color: #e0e0e0
-        border-radius: 5px
-
-  &.mobile .waiting-user
-    @include flex-column(center, flex-start)
+  &.mobile .unauthenticated-user
+    @include flex-column(center, center)
 
 .edit-container
-  @include flex-row(flex-start, center)
+  @include flex-row(center, flex-start)
   width: 100%
   margin-bottom: 15px
 
   .button
-    background-color: #F8F9FA
-    box-shadow: 0 0 5px #aaaaaa
-    flex: 1
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    cursor: pointer
     text-align: center
-    padding: 5px 0
-    border-radius: 7.5px
+    border: 1px solid
+    border-radius: 5px
+    padding: 5px 35px
+    text-decoration: none
 
-    &:hover
-      background-color: #e0e0e0
-  .text
-    flex: 3
-    text-align: left
-    margin-left: 20px
-    padding-bottom: 0
+  .title
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    margin-left: 25px
 
   &.mobile
-    @include flex-column(flex-start, center)
-    border-bottom: 1px solid #24252a80
-    padding-bottom: 10px
+    @include flex-column(center, center)
+    margin-bottom: 25px
 
-    .text
+    .title
+      margin-left: 0
       margin-top: 10px
-
-@media screen and (prefers-color-scheme: dark)
-  .log-out-container .log-out-btn
-    border: 1px solid #868E90
-    color: #868E90
-    background-color: #24252a
-
-    &:hover
-      background-color: #44454A
-      color: #7793F1
-      border: 1px solid #7793F1
-
-  .waiting-users-container .waiting-user
-    border-bottom: 1px solid #868E90
-    background-color: #24252a
-    box-shadow: 0 0 5px #333333
-
-    .name
-      color: #868E90
-
-    .accept, .decline
-      &:hover
-        background-color: #44454A
-
-  .edit-container .button
-    background-color: #24252a
-    box-shadow: 0 0 5px #333333
-
-    &:hover
-      background-color: #44454A

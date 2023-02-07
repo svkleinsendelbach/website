@@ -1,20 +1,22 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
+import { InternalLink } from 'src/app/classes/InternalPath';
+import { DeviceTypeService } from 'src/app/template/services/device-type.service';
+import { StyleConfigService } from 'src/app/template/services/style-config.service';
 
 @Component({
   selector: 'app-page-not-found',
   templateUrl: './page-not-found.component.html',
-  styleUrls: ['./page-not-found.component.sass'],
+  styleUrls: ['./page-not-found.component.sass']
 })
 export class PageNotFoundComponent {
-  constructor(
-    private headerIntransparentService: HeaderIntransparentService,
-    private titleService: Title,
-    public deviceType: DeviceTypeService,
+  public homeLink = InternalLink.all['home'];
+
+  public constructor(
+    public readonly titleService: Title,
+    public readonly deviceType: DeviceTypeService,
+    public readonly styleConfig: StyleConfigService
   ) {
-    this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Seite nicht gefunden');
   }
 }

@@ -1,3 +1,13 @@
-<app-header></app-header>
-<router-outlet [ngClass]="minContentHeightStyleClass" [ngStyle]="{ 'margin-top': marginTop }"></router-outlet>
-<app-footer></app-footer>
+<app-header
+  [headerData]="headerData"
+  [homeLinkData]="homeLinkData"
+></app-header>
+<router-outlet
+  [ngClass]="deviceType.className"
+></router-outlet>
+<app-footer
+  [footerData]="footerData"
+></app-footer>
+<app-cookie-selector-message
+  [privacyLink]="privacyLink"
+></app-cookie-selector-message>

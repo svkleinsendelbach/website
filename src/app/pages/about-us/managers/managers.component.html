@@ -1,51 +1,118 @@
-<span class="text-section">
-  <h1>Unsere Vorstände</h1>
-  <span [ngClass]="deviceType.stringValue"
-    class="managers-container">
-    <span class="container">
-      <img src="assets/images/profile.png"
+<app-text-section
+  [title]="'Unsere Vorstände'"
+>
+  <div
+    [ngClass]="deviceType.className"
+    id="managers-container"
+  >
+    <div
+      class="container"
+    >
+      <img
+        src="assets/images/profile.png"
         title="n. a."
         class="image">
-      <div class="name">n. a.</div>
-      <div class="function">1. Vorsitzender</div>
-    </span>
-    <span class="container">
-      <img src="assets/images/profile.png"
+      <div c
+        class="name"
+        [ngStyle]="{
+          color: styleConfig.css('primaryColor')
+        }"
+      >n. a.</div>
+      <div
+        class="function"
+        [ngStyle]="{
+          color: styleConfig.css('secondaryTextColor')
+        }"
+      >1. Vorsitzender</div>
+    </div>
+    <div
+      class="container"
+    >
+      <img
+        src="assets/images/profile.png"
         title="Sebastian Schuldes"
         class="image">
-      <div class="name">Sebastian Schuldes</div>
-      <div class="function">2. Vorsitzender</div>
-    </span>
-    <span class="container">
-      <img src="assets/images/profile.png"
+      <div
+        class="name"
+        [ngStyle]="{
+          color: styleConfig.css('primaryColor')
+        }"
+      >Sebastian Schuldes</div>
+      <div
+        class="function"
+        [ngStyle]="{
+          color: styleConfig.css('secondaryTextColor')
+        }"
+      >2. Vorsitzender</div>
+    </div>
+    <div
+      class="container"
+    >
+      <img
+        src="assets/images/profile.png"
         title="Josef Hoier"
         class="image">
-      <div class="name">Josef Hoier</div>
-      <div class="function">3. Vorsitzender</div>
-    </span>
-  </span>
-</span>
-<span class="text-section">
-  <h1>
-    Grußwort des Vorstands
-  </h1>
-  <p class="block">
-    Sehr geehrte Besucher unserer Homepage, liebe Mitglieder, Freunde und Förderer unseres Vereins,
-  </p>
-  <p class="block">
-    ich begrüße Sie ganz herzlich auf der Homepage des SV Kleinsendelbach e. V.! Hier besuchen Sie den Sportverein Kleinsendelbach nicht nur während seiner sportlichen und sonstigen Veranstaltungen, sondern Sie finden alle Informationen zu den Ansprechpartnern, Abteilungen, Feierlichkeiten und vielem mehr.
-  </p>
-  <p class="block">
-    Ehrenamtliche Vereinsarbeit ist nicht selbstverständlich. Denjenigen, die sich dazu bereit erklären und die vielfältige Arbeiten beim SVK unentgeltlich übernehmen, danken wir an dieser Stelle ganz herzlich! Wenn Sie Lust haben, uns ebenfalls zu unterstützen, so freuen wir uns natürlich darüber. Doch auch über finanzielle Unterstützung in Form einer (kleinen oder größeren) Spende freuen wir uns, selbstverständlich erhalten Sie dafür eine Spendenquittung. Bitte sprechen Sie uns an, wenn Sie uns – egal in welcher Form – unterstützen wollen und können. Außerdem freuen wir uns über Lob genauso wie über konstruktive Kritik. Sprechen Sie meine Vorstandskollegen oder mich an und kommen Sie mit uns ins Gespräch. Wir haben gerne ein offenes Ohr für Sie!
-  </p>
-  <p class="block">
-    Ich wünsche Ihnen nun noch viel Spaß beim Stöbern auf dieser Homepage und hoffe auf Ihre Mithilfe und Unterstützung für den Verein.
-  </p>
-  <p class="red top-space large center">
-    Mit sportlichen Grüßen
-  </p>
-  <p class="dark large small-bottom-space center">Sebastian Schuldes</p>
-  <p class="dark center">
-    -im Namen der Vorstandschaft-
-  </p>
-</span>
+      <div
+        class="name"
+        [ngStyle]="{
+          color: styleConfig.css('primaryColor')
+        }"
+      >Josef Hoier</div>
+      <div
+        class="function"
+        [ngStyle]="{
+          color: styleConfig.css('secondaryTextColor')
+        }"
+      >3. Vorsitzender</div>
+    </div>
+  </div>
+</app-text-section>
+
+<app-text-section
+  [title]="'Grußwort des Vorstands'"
+>
+
+  <p
+    class="text block"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Sehr geehrte Besucher unserer Homepage, liebe Mitglieder, Freunde und Förderer unseres Vereins,</p>
+  <p
+    class="text block margin-top-normal"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >ich begrüße Sie ganz herzlich auf der Homepage des SV Kleinsendelbach e. V.! Hier besuchen Sie den Sportverein Kleinsendelbach nicht nur während seiner sportlichen und sonstigen Veranstaltungen, sondern Sie finden alle Informationen zu den Ansprechpartnern, Abteilungen, Feierlichkeiten und vielem mehr.</p>
+  <p
+    class="text block margin-top-normal"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Ehrenamtliche Vereinsarbeit ist nicht selbstverständlich. Denjenigen, die sich dazu bereit erklären und die vielfältige Arbeiten beim SVK unentgeltlich übernehmen, danken wir an dieser Stelle ganz herzlich! Wenn Sie Lust haben, uns ebenfalls zu unterstützen, so freuen wir uns natürlich darüber. Doch auch über finanzielle Unterstützung in Form einer (kleinen oder größeren) Spende freuen wir uns, selbstverständlich erhalten Sie dafür eine Spendenquittung. Bitte sprechen Sie uns an, wenn Sie uns – egal in welcher Form – unterstützen wollen und können. Außerdem freuen wir uns über Lob genauso wie über konstruktive Kritik. Sprechen Sie meine Vorstandskollegen oder mich an und kommen Sie mit uns ins Gespräch. Wir haben gerne ein offenes Ohr für Sie!</p>
+  <p
+    class="text block margin-top-normal"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Ich wünsche Ihnen nun noch viel Spaß beim Stöbern auf dieser Homepage und hoffe auf Ihre Mithilfe und Unterstützung für den Verein.</p>
+  <p
+    class="text large margin-top-large"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Mit sportlichen Grüßen</p>
+  <p
+    class="text"
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >Sebastian Schuldes</p>
+  <p
+    class="text small margin-top-small"
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >-im Namen der Vorstandschaft-</p>
+
+</app-text-section>

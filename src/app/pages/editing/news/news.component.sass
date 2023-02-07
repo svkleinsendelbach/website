@@ -1,124 +1,83 @@
 @import '/src/sass/flex'
-@import '/src/sass/font'
+@import '/src/sass/text'
 
 :host
-  @include flex-column(center, flex-start)
+  @include flex-column(flex-start, center)
   width: 100%
 
-.add-news
-  font:
-    family: 'Montserrat', sans-serif
-    size: 20px
-      weight: 400
-  flex: 1
-  color: #CF1D16
-  cursor: pointer
-  text-align: center
-  padding: 10px 25px
-  margin-bottom: 50px
-  background-color: #F8F9FA
-  box-shadow: 0 0 5px #aaaaaa
-  border-radius: 5px
+#back-btn-container
+  @include flex-row(center, flex-start)
+  width: 100%
 
-  &:hover
-    background-color: #e0e0e0
-
-.news-container
-  @include flex-row(center, center)
-  width: 95%
-  border-bottom: 1px solid #24252a80
-  background-color: #F8F9FA
-  box-shadow: 0 0 5px #aaaaaa
-  padding: 5px
-
-  &:nth-child(3)
-    border-radius: 5px 5px 0 0
-
-  &:nth-last-child(1)
-    border-radius: 0 0 5px 5px
-    border-bottom: none
-
-  &:nth-child(3):nth-last-child(1)
-    border-radius: 5px
-
-  .title-container
-    @include flex-column(center, flex-start)
-    flex: 3
-    margin-left: 5px
-
-    .title
-      font:
-        family: 'Montserrat', sans-serif
-        size: 20px
-        weight: 400
-      text-align: left
-      width: 100%
-      color: #24252a
-      white-space: nowrap
-      margin: 0
-
-    .subtitle
-      font:
-        family: 'Montserrat', sans-serif
-        size: 18px
-        weight: 300
-      text-align: left
-      width: 100%
-      color: #868E90
-      white-space: nowrap
-      margin: 0
-      margin-top: 2.5px
-
-  .edit-btn
-    font:
-      family: 'Montserrat', sans-serif
-      size: 20px
-        weight: 400
-    flex: 1
-    color: #CF1D16
+  #back-button
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
     cursor: pointer
     text-align: center
-    padding: 10px 0
-    margin: 0
+    border: 1px solid
+    border-radius: 5px
+    padding: 5px 15px
+    margin-top: 20px
+    margin-left: 20px
+    text-decoration: none
 
-    &:hover
-      background-color: #e0e0e0
+#add-news
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    cursor: pointer
+    text-align: center
+    border: 1px solid
+    border-radius: 5px
+    padding: 5px 15px
+    margin-bottom: 25px
+
+.container
+  @include flex-column(flex-start, center)
+  width: 100%
+
+  .news
+    @include flex-row(center, center)
+    width: 95%
+    border: 1px solid
+    border-bottom: none
+    padding: 5px
+
+    &:first-child
+      border-radius: 5px 5px 0 0
+
+    &:last-child
+      border-bottom: 1px solid
+      border-radius: 0 0 5px 5px
+
+    &:first-child:last-child
       border-radius: 5px
 
-  &.mobile
-    @include flex-column(center, flex-start)
-
     .title-container
-      width: 100%
-      margin: 5px 0
+      @include flex-column(center, flex-start)
+      flex: 3
+      margin-left: 10px
 
-      .title, .subtitle
-        white-space: pre-wrap
-        text-align: center
-
-    .edit-btn, .delete-btn
-      width: calc(100% - 20px)
-
-@media screen and (prefers-color-scheme: dark)
-  .add-news
-    background-color: #24252a
-    box-shadow: 0 0 5px #111111
-
-    &:hover
-      background-color: #44454A
-
-  .news-container
-    border-bottom: 1px solid #868E90
-    background-color: #24252a
-    box-shadow: 0 0 5px #111111
-
-    .title-container
       .title
-        color: #C8D6E5
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('small')
+        margin-bottom: 2px
 
       .subtitle
-        color: #868E90
+        @include font-montserrat
+        @include font-size('small')
+        @include font-weight('small')
 
-    .edit-btn, .delete-btn
-      &:hover
-        background-color: #44454A
+    .edit-button, .delete-button, .disable-button, .disable-update-text
+      @include flex-row(center, center)
+      @include font-montserrat
+      @include font-size('normal')
+      @include font-weight('small')
+      cursor: pointer
+      flex: 1
+      margin: 10px
+
+    .disable-update-text
+      cursor: auto

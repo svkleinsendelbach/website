@@ -1,0 +1,40 @@
+<div
+  id="container"
+  [ngStyle]="{
+    backgroundColor: styleConfig.css('backgroundColor')
+  }"
+>
+  <a
+    href="{{ homeLinkData.homeLink.link }}"
+    target="{{ homeLinkData.homeLink.target }}"
+    title="Startseite"
+    id="logo-container"
+  >
+    <img
+      src="{{ homeLinkData.logoSrc }}"
+      alt="{{ homeLinkData.title }}"
+      id="logo"
+    >
+    <p
+      id="logo-text"
+      [ngStyle]="{
+        color:  styleConfig.css('textColor')
+      }"
+    >{{ homeLinkData.title }}</p>
+  </a>
+  <div
+    id="header-items"
+  >
+    <app-desktop-header-item
+      *ngFor="let headerItem of headerItems"
+      [headerItem]="headerItem"
+      [expandedHeaderItemId]="expandedHeaderItemId"
+      (clickHeaderItemIdEmitter)="handleHeaderItemClick($event)"
+    ></app-desktop-header-item>
+  </div>
+</div>
+<div
+  id="background"
+  *ngIf="expandedHeaderItemId !== null"
+  (click)="$event.preventDefault(); $event.stopPropagation(); expandedHeaderItemId = null"
+></div>

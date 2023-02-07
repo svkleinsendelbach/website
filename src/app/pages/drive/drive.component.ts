@@ -1,57 +1,40 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
-import { DarkModeService } from '../../services/dark-mode.service';
-import { mapStyleDarkAppearence } from '../../utils/mapStyleDarkAppearence';
+import { faPhone } from '@fortawesome/free-solid-svg-icons';
+import { DeviceTypeService } from 'src/app/template/services/device-type.service';
+import { StyleConfigService } from 'src/app/template/services/style-config.service';
 
 @Component({
   selector: 'app-drive',
   templateUrl: './drive.component.html',
-  styleUrls: ['./drive.component.sass'],
+  styleUrls: ['./drive.component.sass']
 })
-export class DriveComponent implements OnDestroy {
-  public map: {
-    zoom: number;
-    center: google.maps.LatLngLiteral | google.maps.LatLng;
-    marker: (google.maps.LatLngLiteral | google.maps.LatLng)[];
-  } = {
+export class DriveComponent {
+  public faPhone = faPhone;
+
+  public readonly mapOptions: google.maps.MapOptions = {
     zoom: 14,
     center: {
       lat: 49.59223121455868,
       lng: 11.15793746762878,
     },
-    marker: [
-      {
-        lat: 49.59223121455868,
-        lng: 11.15793746762878,
-      },
-    ],
-  };
-
-  public mapOptions: google.maps.MapOptions = {
     scrollwheel: false,
     maxZoom: 18,
-    minZoom: 5,
-    styles: this.darkMode.isDarkMode ? mapStyleDarkAppearence : null,
+    minZoom: 5
   };
 
-  constructor(
-    private headerIntransparentService: HeaderIntransparentService,
-    private titleService: Title,
-    public deviceType: DeviceTypeService,
-    public darkMode: DarkModeService,
+  public readonly mapMarkers: google.maps.LatLngLiteral[] = [
+    {
+      lat: 49.59223121455868,
+      lng: 11.15793746762878,
+    }
+  ];
+
+  public constructor(
+    public readonly titleService: Title,
+    public readonly deviceType: DeviceTypeService,
+    public readonly styleConfig: StyleConfigService
   ) {
-    this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Anfahrt');
-    this.darkMode.addListener('drive-map', isDarkMode => {
-      this.mapOptions = {
-        ...this.mapOptions,
-        styles: isDarkMode ? mapStyleDarkAppearence : null,
-      };
-    });
-  }
-  ngOnDestroy(): void {
-    this.darkMode.removeListener('drive-map');
   }
 }

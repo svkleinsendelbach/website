@@ -1,156 +1,120 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { InputFields, InputField, Validator } from 'src/app/components/input-form/input-form.component';
-import { EventGroupId, GroupedEventGroupId, Event } from 'src/app/services/api/events-fetcher.service';
-import { WebsiteEditingErrorCode, WebsiteEditingService } from 'src/app/services/api/website-editing.service';
-import { WebsiteEditorAuthService } from 'src/app/services/api/website-editor-auth.service';
-import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
-import { SharedEventEditService } from 'src/app/services/shared-data/shared-event-edit.service';
-import { DeviceTypeService } from '../../../../services/device-type.service';
-import * as uuid from 'uuid';
+import { EventGroupId } from 'src/app/classes/EventGroupId';
+import { InternalLink } from 'src/app/classes/InternalPath';
+import { Event } from 'src/app/template/classes/event';
+import { guid } from 'src/app/template/classes/guid';
+import { ErrorLevel } from 'src/app/template/modules/input-form/classes/error-level';
+import { InputError } from 'src/app/template/modules/input-form/classes/input-error';
+import { InputField } from 'src/app/template/modules/input-form/classes/input-field';
+import { InputForm } from 'src/app/template/modules/input-form/classes/input-form';
+import { ValidationResult } from 'src/app/template/modules/input-form/classes/validation-result';
+import { Validator } from 'src/app/template/modules/input-form/classes/validator';
+import { SelectOptions } from 'src/app/template/modules/input-form/components/input-field/select/select.component';
+import { ApiService } from 'src/app/template/services/api.service';
+import { DeviceTypeService } from 'src/app/template/services/device-type.service';
+import { SharedDataService } from 'src/app/template/services/shared-data.service';
+import { StyleConfigService } from 'src/app/template/services/style-config.service';
 
 @Component({
   selector: 'app-edit-event',
   templateUrl: './edit-event.component.html',
-  styleUrls: ['./edit-event.component.sass'],
+  styleUrls: ['./edit-event.component.sass']
 })
-export class EditEventComponent implements AfterViewInit {
-  public isStartupLoading: boolean = true;
+export class EditEventComponent implements OnInit {
+  public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
+  public editEventsLink = InternalLink.all['bearbeiten/termine'];
 
-  public editType: 'add' | 'update' = 'add';
+  public previousEvent: {
+    groupId: EventGroupId,
+    event: Event.ReturnType
+  } | undefined;
 
-  private event: { groupId: EventGroupId; event: Event } | undefined;
+  public inputForm = new InputForm({
+    groupId: new InputField<EventGroupId>('general', [
+      Validator.required('Ein zugehöiges Thema ist erforderlich.'),
+      Validator.isOneOf(EventGroupId.all, 'Das zugehörige Thema ist ungültig.')
+    ]),
+    title: new InputField<string>('', [
+      Validator.required('Der Titel is erfordelich.')
+    ]),
+    subtitle: new InputField<string>(''),
+    link: new InputField('', [
+      Validator.eitherOne('Das ist kein gültiger Link.', Validator.empty(''), Validator.url(''))
+    ]),
+    date: new InputField<Date>(new Date, [
+      Validator.futureDate('Das Datum muss in der Zukunft liegen')
+    ])
+  }, {
+    invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
+    loading: new InputError('Event wird gespeichert.', ErrorLevel.Info)
+  });
 
-  public inputFields = new InputFields(
-    {
-      groupId: new InputField({
-        required: Validator.required,
-        isOneOf: Validator.isOneOf(EventGroupId.all),
-      }),
-      title: new InputField({
-        required: Validator.required,
-      }),
-      subtitle: new InputField(),
-      link: new InputField({
-        url: Validator.eitherOne(Validator.empty, Validator.url),
-      }),
-      date: new InputField({
-        required: Validator.required,
-        date: Validator.date,
-        futureDate: Validator.custom(_ => {
-          const inputDate: Date = new Date(
-            `${this.inputFields.field('date').textValue}T${this.inputFields.field('time').textValue}:59.999Z`,
-          );
-          inputDate.setMinutes(inputDate.getMinutes() + inputDate.getTimezoneOffset());
-          return inputDate >= new Date() ? 'valid' : 'invalid';
-        }),
-      }),
-      time: new InputField({
-        required: Validator.required,
-        time: Validator.time,
-        futureDate: Validator.custom(_ => {
-          const inputDate: Date = new Date(
-            `${this.inputFields.field('date').textValue}T${this.inputFields.field('time').textValue}:59.999Z`,
-          );
-          inputDate.setMinutes(inputDate.getMinutes() + inputDate.getTimezoneOffset());
-          return inputDate >= new Date() ? 'valid' : 'invalid';
-        }),
-      }),
-    },
-    undefined as WebsiteEditingErrorCode | 'loading' | undefined,
-  );
-
-  public EventGroupId = EventGroupId;
-
-  public GroupedEventGroupId = GroupedEventGroupId;
-
-  public WebsiteEditingErrorCode = WebsiteEditingErrorCode;
-
-  constructor(
-    private titleService: Title,
-    private headerIntransparentService: HeaderIntransparentService,
-    private authService: WebsiteEditorAuthService,
-    private router: Router,
-    private sharedEventEdit: SharedEventEditService,
-    public deviceType: DeviceTypeService,
-    private websiteEditing: WebsiteEditingService,
-  ) {
-    this.headerIntransparentService.makeIntransparent();
-    this.event = this.sharedEventEdit.event;
-    this.editType = this.event === undefined ? 'add' : 'update';
-    if (this.editType === 'update') {
-      this.titleService.setTitle('Termin Bearbeiten');
-    } else {
-      this.titleService.setTitle('Termin Hinzufügen');
-    }
-    this.authService.isLoggedIn.then(isLoggedIn => {
-      if (!isLoggedIn) {
-        this.router.navigateByUrl('/bearbeiten/anmelden').then(success => {
-          if (!success) throw new Error("Couldn't navigate to url.");
-        });
-      } else {
-        this.isStartupLoading = false;
+  public constructor(
+    public readonly titleService: Title,
+    public readonly deviceType: DeviceTypeService,
+    public readonly styleConfig: StyleConfigService,
+    private readonly apiService: ApiService,
+    private readonly sharedData: SharedDataService<{
+      editEvent: {
+        groupId: EventGroupId,
+        event: Event.ReturnType
       }
-    });
+    }>,
+    private router: Router
+  ) {
+    this.previousEvent = this.sharedData.getValue('editEvent');
+    this.titleService.setTitle(this.previousEvent === undefined ? 'Termin hinzufügen' : 'Termin bearbeiten');
   }
 
-  ngAfterViewInit() {
-    if (this.editType === 'update' && this.event !== undefined) {
-      this.inputFields.field('groupId').textValue = this.event.groupId;
-      this.inputFields.field('title').textValue = this.event.event.title;
-      this.inputFields.field('subtitle').textValue = this.event.event.subtitle ?? '';
-      this.inputFields.field('link').textValue = this.event.event.link ?? '';
-      const dateTime = this.dateTime(new Date(this.event.event.date));
-      this.inputFields.field('date').textValue = dateTime.date;
-      this.inputFields.field('time').textValue = dateTime.time;
-    } else {
-      const dateTime = this.dateTime(new Date());
-      this.inputFields.field('date').textValue = dateTime.date;
-      this.inputFields.field('time').textValue = dateTime.time;
+  public get groupIdSelectOptions(): SelectOptions<EventGroupId> {
+    return SelectOptions.grouped<EventGroupId>(
+      EventGroupId.grouped.map(group => {
+        return {
+          title: group.title,
+          options: group.groupIds.map(groupId => {
+            return {
+              id: groupId,
+              text: EventGroupId.title[groupId]
+            };
+          })
+        };
+      })
+    );
+  }
+
+  public ngOnInit() {
+    if (this.previousEvent !== undefined) {
+      this.inputForm.field('groupId').initialValue = this.previousEvent.groupId;
+      this.inputForm.field('title').initialValue = this.previousEvent.event.title;
+      this.inputForm.field('subtitle').initialValue = this.previousEvent.event.subtitle ?? '';
+      this.inputForm.field('link').initialValue = this.previousEvent.event.link ?? '';
+      this.inputForm.field('date').initialValue = new Date(this.previousEvent.event.date);
     }
   }
 
-  private dateTime(date: Date): { date: string; time: string } {
-    const day = date.getDate() <= 9 ? `0${date.getDate()}` : `${date.getDate()}`;
-    const month = date.getMonth() + 1 <= 9 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
-    const hour = date.getHours() <= 9 ? `0${date.getHours()}` : `${date.getHours()}`;
-    const minute = date.getMinutes() <= 9 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
-    return {
-      date: `${date.getFullYear()}-${month}-${day}`,
-      time: `${hour}:${minute}`,
-    };
-  }
-
-  public get now(): { date: string; time: string } {
-    return this.dateTime(new Date());
-  }
-
-  public handleAddEditEvent() {
-    if (this.inputFields.status !== 'valid') return
-    const validation = this.inputFields.validationOfAllFields;
-    if (validation !== 'valid') return;
-    this.inputFields.setStatus('loading');
-    const eventId = this.editType === 'update' && this.event !== undefined ? this.event.event.id : uuid.v4();
-    this.websiteEditing
+  public async saveEvent() {
+    if (this.inputForm.status !== 'valid')
+      return;
+    const validation = this.inputForm.evaluate();
+    if (validation === ValidationResult.Invalid)
+      return;
+    this.inputForm.status ='loading';
+    const eventId = this.previousEvent?.event.id ?? guid.newGuid().guidString;
+    await this.apiService
       .editEvent({
-        editType: this.editType,
-        groupId: this.inputFields.field('groupId').textValue as EventGroupId,
+        editType: this.previousEvent !== undefined ? 'change' : 'add',
+        groupId: this.inputForm.field('groupId').value,
         eventId: eventId,
-        eventDate: `${this.inputFields.field('date').textValue}T${this.inputFields.field('time').textValue}:00.000Z`,
-        eventTitle: this.inputFields.field('title').textValue,
-        eventSubtitle: this.inputFields.field('subtitle').textValue || undefined,
-        eventLink: this.inputFields.field('link').textValue || undefined,
-      })
-      .then(() => {
-        this.inputFields.setStatus('valid');
-        this.router.navigateByUrl('/bearbeiten/termine');
-      })
-      .catch(error => {
-        if ('name' in error && error.name === 'WebsiteEditingServiceError' && 'code' in error)
-          this.inputFields.setStatus(error.code);
-        else this.inputFields.setStatus('unknown');
-        console.error(error);
+        event: {
+          date: this.inputForm.field('date').value.toISOString(),
+          title: this.inputForm.field('title').value,
+          subtitle: this.inputForm.field('subtitle').value || undefined,
+          link: this.inputForm.field('link').value || undefined
+        }
       });
+    await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine'].link);
+    this.inputForm.status = 'valid';
   }
 }

@@ -11,9 +11,7 @@ describe('GYouthComponent', () => {
       declarations: [ GYouthComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(GYouthComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

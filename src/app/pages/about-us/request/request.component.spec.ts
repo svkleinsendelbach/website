@@ -11,9 +11,7 @@ describe('RequestComponent', () => {
       declarations: [ RequestComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(RequestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

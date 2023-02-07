@@ -1,0 +1,32 @@
+<label
+  [text]="label"
+></label>
+<select
+  #select
+  id="select"
+  (blur)="onBlur()"
+  (change)="onBlur()"
+  [ngStyle]="{
+    color: styleConfig.css('textColor'),
+    backgroundColor: styleConfig.css('backgroundColor'),
+    borderColor: styleConfig.css(inputField.error === undefined ? 'textColor' : 'formErrorStatusColor')
+  }"
+>
+  <optgroup
+    *ngFor="let group of selectOptions.type === 'grouped' ? selectOptions.groups : []"
+    label="{{ group.title }}"
+  >
+    <option
+      *ngFor="let option of group.options"
+      value="{{ option.id }}"
+    >{{ option.text }}</option>
+  </optgroup>
+  <option
+    *ngFor="let option of selectOptions.type === 'ungrouped' ? selectOptions.options : []"
+    value="{{ option.id }}"
+  >{{ option.text }}</option>
+</select>
+<error-message
+  [error]="inputField.error"
+></error-message>
+

@@ -11,9 +11,7 @@ describe('EventsComponent', () => {
       declarations: [ EventsComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(EventsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

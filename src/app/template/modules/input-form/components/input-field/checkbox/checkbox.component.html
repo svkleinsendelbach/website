@@ -1,0 +1,31 @@
+<div
+  id="container"
+>
+  <p
+    id="label"
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >{{ label + ':' }}</p>
+  <div
+    id="checkbox"
+    (click)="onClick()"
+    [ngClass]="{
+      checked: checked
+    }"
+    [ngStyle]="{
+      backgroundColor: styleConfig.css('primaryColor'),
+      borderColor: styleConfig.css('textColor')
+    }"
+  >
+    <div
+      id="slider"
+      [ngStyle]="{
+        backgroundColor: styleConfig.css('backgroundColor')
+      }"
+    ></div>
+  </div>
+</div>
+<error-message
+  [error]="inputField.error"
+></error-message>

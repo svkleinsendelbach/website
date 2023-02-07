@@ -1,10 +1,40 @@
-<span class="text-section" [ngClass]="deviceType.stringValue">
-  <h1>Diese Seite ist leider nicht verfügbar</h1>
-  <p class="center">Entweder funktioniert der von Ihnen angeklickte Link nicht oder die Seite wurde entfernt.</p>
-  <p class="center">Ist dies der Fall, schreiben Sie uns dies bitte an folgende E-Mail - Adresse: <a class="inline"
-      href="mailto:vorstand@sv-kleinsendelbach.de">vorstand@sv-kleinsendelbach.de</a></p>
-  <span class="img-link">
-    <img src="assets/images/svk-logo.png" class="img">
-    <a href="/home" class="link" title="Startseite">Zur Startseite</a>
-  </span>
-</span>
+<app-text-section
+  [title]="'Diese Seite ist leider nicht verfügbar'"
+>
+  <p
+    class="text center"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Entweder funktioniert der von Ihnen angeklickte Link nicht oder die Seite wurde entfernt.</p>
+  <p
+    class="text center margin-top-normal"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Ist dies der Fall, schreiben Sie uns dies bitte an folgende E-Mail Adresse: <a
+    class="text"
+    href="mailto:vorstand@sv-kleinsendelbach.de"
+    title="vorstand@sv-kleinsendelbach.de"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >vorstand@sv-kleinsendelbach.de</a></p>
+  <div
+    id="image-link"
+  >
+    <img
+      id="image"
+      src="assets/images/svk-logo.svg"
+      title="SV Kleinsendelbach"
+    >
+    <a
+      id="link"
+      href="{{ homeLink.link }}"
+      title="{{ homeLink.title }}"
+      [ngStyle]="{
+        color: styleConfig.css('primaryColor')
+      }"
+    >Zur Startseite</a>
+  </div>
+</app-text-section>

@@ -1,125 +1,149 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { InputFields, InputField, Validator } from 'src/app/components/input-form/input-form.component';
-import { StorageFilesManagerService } from 'src/app/services/api/storage-files-manager.service';
-import { WebsiteEditingErrorCode, WebsiteEditingService } from 'src/app/services/api/website-editing.service';
-import { WebsiteEditorAuthService } from 'src/app/services/api/website-editor-auth.service';
-import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
-import { News, SharedNewsEditService } from 'src/app/services/shared-data/shared-news-edit.service';
-import * as uuid from 'uuid';
 import { Router } from '@angular/router';
+import { InternalLink } from 'src/app/classes/InternalPath';
+import { guid } from 'src/app/template/classes/guid';
+import { News } from 'src/app/template/classes/news';
+import { ErrorLevel } from 'src/app/template/modules/input-form/classes/error-level';
+import { InputError } from 'src/app/template/modules/input-form/classes/input-error';
+import { InputField } from 'src/app/template/modules/input-form/classes/input-field';
+import { InputForm } from 'src/app/template/modules/input-form/classes/input-form';
+import { ValidationResult } from 'src/app/template/modules/input-form/classes/validation-result';
+import { Validator } from 'src/app/template/modules/input-form/classes/validator';
+import { ApiService } from 'src/app/template/services/api.service';
+import { DeviceTypeService } from 'src/app/template/services/device-type.service';
+import { FileStorageService } from 'src/app/template/services/file-storage.service';
+import { SharedDataService } from 'src/app/template/services/shared-data.service';
+import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-news',
   templateUrl: './edit-news.component.html',
-  styleUrls: ['./edit-news.component.sass'],
+  styleUrls: ['./edit-news.component.sass']
 })
-export class EditNewsComponent implements AfterViewInit {
-  public WebsiteEditingErrorCode = WebsiteEditingErrorCode;
+export class EditNewsComponent implements OnInit {
+  public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
+  public editNewsLink = InternalLink.all['bearbeiten/nachrichten'];
 
-  public editType: 'add' | 'update' = 'add';
+  public previousNews: News.ReturnType | undefined;
 
-  public messageText: string = '';
+  public inputForm = new InputForm({
+    title: new InputField<string>('', [
+      Validator.required('Der Titel is erfordelich.')
+    ]),
+    subtitle: new InputField<string>(''),
+    shortDescription: new InputField<string>(''),
+    message: new InputField<string>('', [
+      Validator.required('Die Nachricht ist erfordelich.')
+    ])
+  },
+  {
+    invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
+    loading: new InputError('Nachricht wird gespeichert.', ErrorLevel.Info)
+  });
 
   public thumbnailUrl?: string;
 
-  public disabledChecked: boolean = false;
-
-  private news: News | undefined;
-
-  public inputFields = new InputFields(
-    {
-      title: new InputField({
-        required: Validator.required,
-      }),
-      subtitle: new InputField(),
-      shortDescription: new InputField(),
-    },
-    undefined as 'messageRequired' | WebsiteEditingErrorCode | 'noImageSelected' | 'loading' | undefined,
-  );
-
-  constructor(
-    private titleService: Title,
-    private headerIntransparentService: HeaderIntransparentService,
-    public authService: WebsiteEditorAuthService,
-    private sharedNewsEdit: SharedNewsEditService,
-    public deviceType: DeviceTypeService,
-    private storageFilesManager: StorageFilesManagerService,
-    private websiteEditing: WebsiteEditingService,
-    private router: Router,
+  public constructor(
+    public readonly titleService: Title,
+    public readonly deviceType: DeviceTypeService,
+    public readonly styleConfig: StyleConfigService,
+    private readonly apiService: ApiService,
+    private readonly fileStorage: FileStorageService,
+    private readonly sharedData: SharedDataService<{
+      editNews: News.ReturnType
+    }>,
+    private router: Router
   ) {
-    this.headerIntransparentService.makeIntransparent();
-    this.news = this.sharedNewsEdit.news;
-    this.editType = this.news === undefined ? 'add' : 'update';
-    if (this.editType === 'update') {
-      this.titleService.setTitle('Nachrichten Bearbeiten');
-    } else {
-      this.titleService.setTitle('Nachrichten Hinzufügen');
-    }
-    this.authService.checkLogInOrNavigateToLogInPage();
+    this.previousNews = this.sharedData.getValue('editNews');
+    this.titleService.setTitle(this.previousNews === undefined ? 'Nachricht hinzufügen' : 'Nachricht bearbeiten');
   }
 
-  ngAfterViewInit() {
-    if (this.editType === 'update' && this.news !== undefined) {
-      this.inputFields.field('title').textValue = this.news.title;
-      this.inputFields.field('subtitle').textValue = this.news.subtitle ?? '';
-      this.inputFields.field('shortDescription').textValue = this.news.shortDescription ?? '';
-      this.disabledChecked = this.news.disabled;
-      this.storageFilesManager.download(this.news.newsUrl).then(message => {
-        this.messageText = message;
+  public ngOnInit() {
+    if (this.previousNews !== undefined) {
+      this.inputForm.field('title').initialValue = this.previousNews.title;
+      this.inputForm.field('subtitle').initialValue = this.previousNews.subtitle ?? '';
+      this.inputForm.field('shortDescription').initialValue = this.previousNews.shortDescription ?? '';
+      this.thumbnailUrl = this.previousNews.thumbnailUrl;
+      this.fileStorage.download(this.previousNews.newsUrl).then(message => {
+        this.inputForm.field('message').initialValue = message;
       });
-      this.thumbnailUrl = this.news.thumbnailUrl;
     }
   }
 
-  public handleAddEditNews() {
-    const validation = this.inputFields.validationOfAllFields;
-    if (this.messageText === '') this.inputFields.setStatus('messageRequired');
-    if (this.thumbnailUrl === undefined) this.inputFields.setStatus('noImageSelected');
-    if (this.inputFields.status !== 'valid') return;
-    if (validation !== 'valid') return;
-    this.inputFields.setStatus('loading');
+  public uploadFile = (file: File): Promise<string> => {
+    const fileExtension = /.[^/.]+$/.exec(file.name)?.[0];
+    const filename = `${environment.databaseType.value}/uploads/editor/${guid.newGuid().guidString}${fileExtension}`;
+    return this.fileStorage.upload(file, filename);
+  };
 
-    const newsId = this.editType === 'update' && this.news !== undefined ? this.news.id : undefined;
-    const date = this.editType === 'update' && this.news !== undefined ? this.news.date : new Date().toISOString();
-    this.websiteEditing
-      .editNews(
-        {
-          editType: this.editType,
-          newsId: newsId,
-          title: this.inputFields.field('title').textValue,
-          subtitle: this.inputFields.field('subtitle').textValue || undefined,
-          shortDescription: this.inputFields.field('shortDescription').textValue || undefined,
+  public async saveNews() {
+    if (this.inputForm.status !== 'valid')
+      return;
+    const validation = this.inputForm.evaluate();
+    if (validation === ValidationResult.Invalid)
+      return;
+    if (this.thumbnailUrl === undefined) {
+      this.inputForm.status = 'invalidInput';
+      return;
+    }
+    this.inputForm.status ='loading';
+    const newsId = this.previousNews?.id ?? this.createNewsId(this.inputForm.field('title').value);
+    const date = this.previousNews?.date ?? new Date().toISOString();
+    const newsUrl = await this.uploadNewsMessage(this.inputForm.field('message').value);
+    await this.apiService
+      .editNews({
+        editType: this.previousNews !== undefined ? 'change' : 'add',
+        id: newsId,
+        news: {
+          title: this.inputForm.field('title').value,
+          subtitle: this.inputForm.field('subtitle').value || undefined,
           date: date,
-          disabled: this.disabledChecked,
-          thumbnailUrl: this.thumbnailUrl ?? '',
-        },
-        {
-          fileName: newsId ?? uuid.v4(),
-          message: this.messageText,
-        },
-      )
-      .then(() => {
-        this.inputFields.setStatus('valid');
-        this.router.navigateByUrl('/bearbeiten/nachrichten');
-      })
-      .catch(error => {
-        if ('name' in error && error.name === 'WebsiteEditingServiceError' && 'code' in error)
-          this.inputFields.setStatus(error.code);
-        else this.inputFields.setStatus('unknown');
-        console.error(error);
+          shortDescription: this.inputForm.field('shortDescription').value || undefined,
+          newsUrl: newsUrl,
+          disabled: this.previousNews?.disabled ?? false,
+          thumbnailUrl: this.thumbnailUrl
+        }
       });
+    await this.router.navigateByUrl(InternalLink.all['bearbeiten/nachrichten'].link);
+    this.inputForm.status = 'valid';
   }
 
-  uploadThumbnail(event: Event) {
-    const file: File | undefined = (event as any)?.srcElement?.files?.[0];
+  public createNewsId(title: string): string {
+    const validCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-#';
+    const replaceCharacters = { 'Ä': 'AE', 'Ö': 'OE', 'Ü': 'UE', 'ä': 'ae', 'ö': 'oe', 'ü': 'ue', 'ß': 'ss' };
+    let result = '';
+    function addCharacter(character: string) {
+      if (character === '-' && (result === '' || result.endsWith('-')))
+        return;
+      result += character;
+    }
+    for (const character of title) {
+      if (validCharacters.includes(character)) {
+        addCharacter(character);
+      } else if (character in replaceCharacters) {
+        addCharacter(replaceCharacters[character as keyof typeof replaceCharacters]);
+      } else {
+        addCharacter('-');
+      }
+    }
+    if (result.endsWith('-'))
+      result = result.slice(0, result.length - 1);
+    return result;
+  }
+
+  public async uploadNewsMessage(newsMessage: string): Promise<string> {
+    const filePath = `${environment.databaseType.value}/news/${guid.newGuid().guidString}.html`;
+    return await this.fileStorage.upload(newsMessage, filePath);
+  }
+
+  public async uploadThumbnail(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
     if (file === undefined) return;
     const fileExtension = /.[^/.]+$/.exec(file.name)?.[0];
-    const filePath = `uploads/${uuid.v4()}${fileExtension}`;
-    this.storageFilesManager
-      .upload(file, filePath)
-      .then(url => this.thumbnailUrl = url)
-      .catch(console.error);
+    if (fileExtension === undefined) return;
+    const filePath = `${environment.databaseType.value}/uploads/thumbnail/${guid.newGuid().guidString}${fileExtension}`;
+    this.thumbnailUrl = await this.fileStorage.upload(file, filePath);
   }
 }

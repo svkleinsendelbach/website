@@ -1,6 +1,3 @@
-// Karma configuration file, see link for more information
-// https://karma-runner.github.io/1.0/config/configuration-file.html
-
 module.exports = function (config) {
   config.set({
     basePath: '',
@@ -25,14 +22,11 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/svkleinsendelbach-website'),
+      dir: require('path').join(__dirname, './coverage/'),
       subdir: '.',
-      reporters: [{
-          type: 'html'
-        },
-        {
-          type: 'text-summary'
-        }
+      reporters: [
+        { type: 'html' },
+        { type: 'text-summary' }
       ]
     },
     reporters: ['progress', 'kjhtml'],
@@ -42,6 +36,23 @@ module.exports = function (config) {
     autoWatch: true,
     browsers: ['Chrome'],
     singleRun: false,
-    restartOnFileChange: true
+    restartOnFileChange: true,
+    coverageReporter: {
+      dir: require('path').join(__dirname, './coverage'),
+      subdir: '.',
+      reporters: [
+        { type: 'html' },
+        { type: 'text-summary' }
+      ],
+      check: {
+        global: {
+          statements: 80,
+          branches: 80,
+          functions: 80,
+          lines: 80
+        }
+      }
+    }
   });
 };
+

@@ -1,13 +1,46 @@
-<span class="text-section">
-  <h1 class="no-bottom-space">1. Mannschaft der SG Kleinsendelbach / Hetzles</h1>
-</span>
-<app-component-events [eventGroupIds]="eventGroupIds">
-</app-component-events>
-<app-component-results [pageId]="'football-adults/first-team'">
-</app-component-results>
-<app-component-contact [pageId]="'football-adults/first-team'">
-</app-component-contact>
-<app-component-training-time [pageId]="'football-adults/first-team'">
-</app-component-training-time>
-<app-component-squad [parametersPath]="'teamParameters/first-team'">
-</app-component-squad>
+<app-text-section
+  [title]="'1. Mannschaft der SG Kleinsendelbach / Hetzles'"
+>
+  <p
+    class="text"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+</app-text-section>
+
+<app-events
+  [groupIds]="eventGroupIds"
+  [eventGroupTitle]="eventGroupTitle"
+></app-events>
+
+<app-text-section
+  [title]="'Ergebnisse und Tabellen'"
+>
+  <app-bfv-widget
+    [teamId]="teamId"
+  ></app-bfv-widget>
+</app-text-section>
+
+<app-contact-info
+  [contactData]="contactData"
+></app-contact-info>
+
+<app-text-section
+  [title]="'Trainingszeiten'"
+>
+  <p
+    class="text margin-bottom-normal"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Das Training findet jeden Dienstag und Donnerstag von 19:00Uhr - 20:30Uhr abwechselnd in Kleinsendelbach und Hetzles, am B-Platz an der Sendelmühlstraße statt.</p>
+  <app-maps
+    [options]="mapOptions"
+    [markers]="mapMarkers"
+  ></app-maps>
+</app-text-section>
+
+<app-squad
+  [parametersType]="squadParametersType"
+></app-squad>

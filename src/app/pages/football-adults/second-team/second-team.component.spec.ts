@@ -11,9 +11,7 @@ describe('SecondTeamComponent', () => {
       declarations: [ SecondTeamComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(SecondTeamComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

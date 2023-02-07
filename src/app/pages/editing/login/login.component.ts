@@ -1,45 +1,51 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
 import { Router } from '@angular/router';
-import { WebsiteEditorAuthService } from '../../../services/api/website-editor-auth.service';
-import { DarkModeService } from 'src/app/services/dark-mode.service';
-import { DeviceTypeService } from '../../../services/device-type.service';
+import { InternalLink } from 'src/app/classes/InternalPath';
+import { AuthService } from 'src/app/template/services/auth.service';
+import { DeviceTypeService } from 'src/app/template/services/device-type.service';
+import { StyleConfigService } from 'src/app/template/services/style-config.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass'],
+  styleUrls: ['./login.component.sass']
 })
-export class LoginComponent {
-  public pageState: 'startupLoading' | 'loginFields' | 'userUnregistered' = 'startupLoading';
+export class LoginComponent implements OnInit {
+  public editPageLink = InternalLink.all.bearbeiten;
 
-  constructor(
-    private titleService: Title,
-    private headerIntransparentService: HeaderIntransparentService,
-    private authService: WebsiteEditorAuthService,
-    private router: Router,
-    public darkMode: DarkModeService,
-    public deviceType: DeviceTypeService,
+  public state: 'loading' | 'alreadyLoggedIn' | 'loginPage' | 'addToWaitingUserPage' = 'loading';
+
+  public constructor(
+    public readonly titleService: Title,
+    public readonly deviceType: DeviceTypeService,
+    public readonly styleConfig: StyleConfigService,
+    private readonly authService: AuthService,
+    private readonly router: Router,
   ) {
     this.titleService.setTitle('Anmelden');
-    this.headerIntransparentService.makeIntransparent();
-    this.authService.isLoggedIn.then(isLoggedIn => {
-      if (isLoggedIn) {
-        this.router.navigateByUrl('/bearbeiten').then(success => {
-          if (!success) throw new Error("Couldn't navigate to url.");
-        });
-      } else {
-        this.pageState = 'loginFields';
-      }
-    });
+  }
+
+  public ngOnInit() {
+    this.checkAuthentication();
+  }
+
+  private async checkAuthentication() {
+    this.state = 'loading';
+    const isLoggedIn = await this.authService.isLoggedIn('websiteEditing');
+    if (isLoggedIn) {
+      this.state = 'alreadyLoggedIn';
+      await this.router.navigateByUrl(this.editPageLink.link);
+    } else {
+      this.state = 'loginPage';
+    }
   }
 
   public handleUserUnregistered() {
-    this.pageState = 'userUnregistered';
+    this.state = 'addToWaitingUserPage';
   }
 
-  public handleUnregisteredCanceled() {
-    this.pageState = 'loginFields';
+  public handleAddToWaitingUserCanceled() {
+    this.state = 'loginPage';
   }
 }

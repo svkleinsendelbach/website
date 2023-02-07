@@ -1,0 +1,80 @@
+<app-text-section
+  [title]="'Sportheim in Kleinsendelbach'"
+>
+
+  <p
+    class="text block margin-top-normal"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Der SV Kleinsendelbach überträgt in seinem Sportheim die Spiele der Bundesliga auf Sky. Sie können live dabei sein, wenn Ihre Lieblingsmannschaft aufläuft. Frei nach dem Motto von Sky „Unsere Gäste haben das Beste verdient“, zeigen wir auch die Champions League Spiele mit deutscher Beteiligung, die nicht im freien Fernsehen ausgestrahlt werden.</p>
+  <p
+    class="text block margin-top-normal"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Der Sportverein freut sich zusammen mit Ihnen auf spannende Spiele!</p>
+
+</app-text-section>
+
+<app-text-section
+  [title]="'Unsere Öffnungszeiten'"
+>
+  <div
+    id="opening-hours"
+  >
+    <div
+      class="row"
+      *ngFor="let row of openingHours"
+    >
+      <div
+        class="opening-hour"
+        *ngFor="let openingHour of row"
+      >
+        <p
+          class="title"
+          [ngStyle]="{
+            color: styleConfig.css('textColor')
+          }"
+        >{{ openingHour.title }}</p>
+        <p
+          class="time"
+          [ngStyle]="{
+            color: styleConfig.css('secondaryTextColor')
+          }"
+        >{{ openingHour.time }}</p>
+      </div>
+    </div>
+  </div>
+</app-text-section>
+
+<app-text-section
+  [title]="' Sportheim des SV Kleinsendelbach e.V.'"
+>
+
+  <p
+    class="text"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Hauptstraße 21</p>
+  <p
+    class="text"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >91077 Kleinsendelbach</p>
+  <a
+    class="text"
+    href="tel:091268304"
+    title="Sportverein Kleinsendelbach e.V."
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >
+    <fa-icon
+      [icon]="faPhone"
+    ></fa-icon> 09126 / 8304
+  </a>
+
+</app-text-section>

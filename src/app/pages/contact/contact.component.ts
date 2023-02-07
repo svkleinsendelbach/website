@@ -1,141 +1,129 @@
-/* eslint-disable no-unused-vars */
-import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
-import { lastValueFrom, Observable } from 'rxjs';
-import { VerifyRecaptchaService } from '../../services/api/verify-recaptcha.service';
-import { SendContactMailService, MailRequest } from '../../services/api/send-contact-mail.service';
-
-enum Status {
-  input = '',
-  loading = 'loading',
-  success = 'success',
-  inputError = 'inputError',
-  failure = 'failure',
-  recaptchFailed = 'recaptchFailed'
-}
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { lastValueFrom } from 'rxjs';
+import { ErrorLevel } from 'src/app/template/modules/input-form/classes/error-level';
+import { InputError } from 'src/app/template/modules/input-form/classes/input-error';
+import { InputField } from 'src/app/template/modules/input-form/classes/input-field';
+import { InputForm } from 'src/app/template/modules/input-form/classes/input-form';
+import { ValidationResult } from 'src/app/template/modules/input-form/classes/validation-result';
+import { Validator } from 'src/app/template/modules/input-form/classes/validator';
+import { SelectOptions } from 'src/app/template/modules/input-form/components/input-field/select/select.component';
+import { SendContactMailFunction } from 'src/app/template/services/api-functions-types';
+import { ApiService } from 'src/app/template/services/api.service';
+import { DeviceTypeService } from 'src/app/template/services/device-type.service';
+import { StyleConfigService } from 'src/app/template/services/style-config.service';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.sass'],
+  styleUrls: ['./contact.component.sass']
 })
 export class ContactComponent {
-  public Status = Status;
+  public inputForm = new InputForm(
+    {
+      name: new InputField<string>('', [
+        Validator.required('Ihr Name ist erforderlich.')
+      ]),
+      email: new InputField<string>('', [
+          Validator.required('Ihre E-Mail Addresse ist erforderlich.'),
+          Validator.email('Das ist keine gültige E-Mail Addresse.')
+      ]),
+      receiver: new InputField<keyof typeof ContactComponent.receivers>('managers', [
+        Validator.required('Ein Empfänger ist erforderlich.'),
+        Validator.isOneOf(Object.keys(ContactComponent.receivers), 'Der Empfänger ist ungültig')
+      ]),
+      message: new InputField<string>('', [
+        Validator.required('Eine Nachricht ist erforderlich.')
+      ])
+    },
+    {
+      invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
+      loading: new InputError('Email wird versandt.', ErrorLevel.Info),
+      recaptchaFailed: new InputError('reCAPTCHA ungültig.'),
+      sendFailed: new InputError('Es gab einen Fehler beim Senden.'),
+      sendSucceded: new InputError('Email wurde versendet.', ErrorLevel.Success)
+    }
+  );
 
-  public formEvaluated = false;
-
-  public status: Status = Status.input;
-
-  private currentStatusTimeout: number | null = null;
-
-  public receivers = [
-    { name: 'Vorstandschaft', address: 'vorstand@sv-kleinsendelbach.de' },
-    { name: 'Herrenfußball', address: 'herrenfußball@sv-kleinsendelbach.de' },
-    { name: 'Jugendfußball', address: 'jugenfußball@sv-kleinsendelbach.de' },
-    { name: 'Gymnastik', address: 'gymnastik@sv-kleinsendelbach.de' },
-    { name: 'Tanzen', address: 'tanzen@sv-kleinsendelbach.de' },
-  ];
-
-  public contactForm = this.fb.group({
-    name: ['', Validators.required],
-    email: ['', Validators.compose([Validators.email, Validators.required])],
-    receiver: [this.receivers[0].name, Validators.required],
-    message: ['', Validators.required],
-  });
-
-  constructor(
-    private headerIntransparentService: HeaderIntransparentService,
-    private titleService: Title,
-    public deviceType: DeviceTypeService,
-    private fb: FormBuilder,
-    private recaptchaService: ReCaptchaV3Service,
-    private verifyRecaptchaService: VerifyRecaptchaService,
-    private sendContactMailService: SendContactMailService,
+  public constructor(
+    public readonly titleService: Title,
+    public readonly deviceType: DeviceTypeService,
+    public readonly styleConfig: StyleConfigService,
+    private readonly apiService: ApiService,
+    private recaptchaService: ReCaptchaV3Service
   ) {
-    this.headerIntransparentService.makeIntransparent();
     this.titleService.setTitle('Kontakt');
   }
 
-  public onSubmit(): void {
-    if (this.contactForm.invalid) {
-      this.formEvaluated = true;
-      this.setStatus(Status.inputError);
+  public get receiverSelectOptions(): SelectOptions<keyof typeof ContactComponent.receivers> {
+    return SelectOptions.ungrouped<keyof typeof ContactComponent.receivers>(
+      Object.entries(ContactComponent.receivers).map(receiverEntry => {
+        return {
+          id: receiverEntry[0] as keyof typeof ContactComponent.receivers,
+          text: receiverEntry[1].name
+        };
+      })
+    );
+  }
+
+  public onSubmit() {
+    if (this.inputForm.status !== 'valid')
       return;
-    }
+    const validation = this.inputForm.evaluate();
+    if (validation === ValidationResult.Invalid)
+      return;
     this.sendContactMail();
   }
 
   private async sendContactMail() {
-    const address = this.receivers.find(receiver => {
-      return receiver.name === this.contactForm.value.receiver;
-    })?.address;
-    if (address === undefined) {
-      this.setStatus(Status.inputError);
+    const receiver = ContactComponent.receivers[this.inputForm.field('receiver').value];
+    this.inputForm.status = 'loading';
+    const token = await lastValueFrom(this.recaptchaService.execute('contactForm'));
+    const verifyResponse = await this.apiService.verifyRecaptcha({
+      token: token
+    });
+    if (verifyResponse.action !== 'contactForm' || !verifyResponse.success) {
+      this.inputForm.status = 'recaptchaFailed';
       return;
     }
-    this.setStatus(Status.loading);
-    const token = await lastValueFrom(this.recaptchaService.execute('contactFormAction'));
-    const verifyResponse = await this.verifyRecaptchaService.fetch('contactForm', token);
-    if (!verifyResponse.success) {
-      this.setStatus(Status.recaptchFailed);
-      return;
-    }
-    const request: MailRequest = {
-      sender: {
-        name: this.contactForm.value.name,
-        address: this.contactForm.value.email,
-      },
-      receiver: {
-        name: this.contactForm.value.receiver,
-        address,
-      },
-      message: this.contactForm.value.message,
+    const request: SendContactMailFunction.Parameters = {
+      senderName: this.inputForm.field('name').value,
+      senderAddress: this.inputForm.field('email').value,
+      receiverName: receiver.name,
+      receiverAddress: receiver.address,
+      message: this.inputForm.field('message').value,
     };
-    const response = await this.sendContactMailService.sendMail(request);
-    const status = response === 'success' ? Status.success : Status.failure;
-    this.setStatus(status);
-    if (response === 'success') {
-      this.resetForm();
+    const response = await this.apiService.sendContactMail(request);
+    const status: 'sendSucceded' | 'sendFailed' = response.success ? 'sendSucceded' : 'sendFailed';
+    this.inputForm.status = status;
+    if (response.success) {
+      this.inputForm.reset();
     }
   }
+}
 
-  private resetForm(): void {
-    this.contactForm.reset();
-    this.contactForm.controls['receiver'].setValue(this.receivers[0].name);
-    this.formEvaluated = false;
-  }
-
-  private setStatus(status: Status): void {
-    this.status = status;
-    if (this.currentStatusTimeout) {
-      clearTimeout(this.currentStatusTimeout);
-    }
-    this.currentStatusTimeout = window.setTimeout(() => {
-      this.status = Status.input;
-    }, 5000);
-  }
-
-  public evaluateError(t: 'name' | 'receiver' | 'message'): 'fieldEmpty' | null;
-  public evaluateError(t: 'email'): 'fieldEmpty' | 'emailInvalid' | null;
-  public evaluateError(type: 'name' | 'email' | 'receiver' | 'message'): 'fieldEmpty' | 'emailInvalid' | null {
-    if (this.isInputInvalid(type, 'required')) {
-      return 'fieldEmpty';
-    } else if (type === 'email' && this.isInputInvalid('email', 'email')) {
-      return 'emailInvalid';
-    }
-    return null;
-  }
-
-  private isInputInvalid(t: 'name' | 'email' | 'receiver' | 'message', et: 'required'): boolean;
-  private isInputInvalid(t: 'email', et: 'email'): boolean;
-  private isInputInvalid(type: 'name' | 'email' | 'receiver' | 'message', errorType: 'required' | 'email'): boolean {
-    return (
-      (this.contactForm.controls[type].errors?.[errorType] ?? false) &&
-      (this.contactForm.controls[type].touched || this.formEvaluated)
-    );
-  }
+export namespace ContactComponent {
+  export const receivers = {
+    managers: {
+      name: 'Vorstandschaft',
+      address: 'vorstand@sv-kleinsendelbach.de'
+    },
+    footballAdults: {
+      name: 'Herrenfußball',
+      address: 'herrenfußball@sv-kleinsendelbach.de'
+    },
+    footballYouth: {
+      name: 'Jugendfußball',
+      address: 'jugenfußball@sv-kleinsendelbach.de'
+    },
+    gymnastics: {
+      name: 'Gymnastik',
+      address: 'gymnastik@sv-kleinsendelbach.de'
+    },
+    dancing: {
+      name: 'Tanzen',
+      address: 'tanzen@sv-kleinsendelbach.de'
+    },
+  };
 }

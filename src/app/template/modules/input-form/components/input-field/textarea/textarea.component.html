@@ -1,0 +1,17 @@
+<label
+  [text]="label"
+></label>
+<textarea
+  #textarea
+  id="textarea"
+  placeholder="{{ placeholder ?? label }}"
+  (blur)="onBlur()"
+  [ngStyle]="{
+    color: styleConfig.css('textColor'),
+    backgroundColor: styleConfig.css('backgroundColor'),
+    borderColor: styleConfig.css(inputField.error === undefined ? 'textColor' : 'formErrorStatusColor')
+  }"
+></textarea>
+<error-message
+  [error]="inputField.error"
+></error-message>

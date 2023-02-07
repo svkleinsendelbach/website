@@ -1,26 +1,108 @@
-<span class="log-out-container">
-    <p (click)="logOut(); $event.stopPropagation()" class="log-out-btn">Abmelden</p>
-</span>
-<span class="text-section" *ngIf="!isStartupLoading && waitingUsers !== undefined && waitingUsers.length !== 0">
-  <h1>Wartende Website Editors</h1>
-  <p class="medium center">Folgende Personen haben beantragt, die Website zu bearbeiten. Bestätige oder lehne die Anfrage ab.</p>
-  <span class="waiting-users-container" [ngClass]="deviceType.stringValue">
-    <span class="waiting-user" *ngFor="let user of waitingUsers">
-      <p class="name">{{ user.name.first }} {{ user.name.last }}</p>
-      <p class="accept" (click)="acceptDeclineUserWaiting('accept', user.id)">Bestätigen</p>
-      <p class="decline" (click)="acceptDeclineUserWaiting('decline', user.id)">Ablehnen</p>
-    </span>
-  </span>
-</span>
-<span class="text-section">
-  <h1>Webseite bearbeiten</h1>
-  <p *ngIf="isStartupLoading" class="large center red top-space">Anmeldedaten werden überprüft.</p>
-  <span *ngIf="!isStartupLoading" class="edit-container" [ngClass]="deviceType.stringValue">
-    <a href="/bearbeiten/termine" title="Events bearbeiten" class="button">Bearbeiten</a>
-    <p class="text">Kommende Termine bearbeiten</p>
-  </span>
-  <span *ngIf="!isStartupLoading" class="edit-container" [ngClass]="deviceType.stringValue">
-    <a href="/bearbeiten/nachrichten" title="Nachrichen bearbeiten" class="button">Bearbeiten</a>
-    <p class="text">Nachrichen bearbeiten</p>
-  </span>
-</span>
+<app-authentication-check
+  [authenticationType]="'websiteEditing'"
+  [logInPageLink]="logInPageLink"
+>
+  <div
+    id="log-out-container"
+  >
+    <p
+      id="log-out-button"
+      (click)="$event.preventDefault(); $event.stopPropagation(); logOut()"
+      [ngStyle]="{
+        color: styleConfig.css('textColor'),
+        backgroundColor: styleConfig.css('backgroundColor')
+      }"
+    >Abmelden</p>
+  </div>
+  <app-text-section
+    [title]="'Wartende Website Editors'"
+    *ngIf="unauthenticatedUsers !== undefined && unauthenticatedUsers.length !== 0"
+  >
+    <p
+      class="text"
+      [ngStyle]="{
+        color: styleConfig.css('secondaryTextColor')
+      }"
+    >Folgende Personen haben beantragt, die Website zu bearbeiten. Bestätige oder lehne die Anfrage ab.</p>
+    <div
+      id="unauthenticated-user-container"
+      [ngClass]="deviceType.className"
+    >
+      <div
+        class="unauthenticated-user"
+        *ngFor="let user of unauthenticatedUsers"
+        [ngStyle]="{
+          backgroundColor: styleConfig.css('backgroundColor'),
+          borderColor: styleConfig.css('textColor')
+        }"
+      >
+        <p
+          class="name"
+          [ngStyle]="{
+            color: styleConfig.css('textColor')
+          }"
+        >{{ user.firstName }} {{ user.lastName }}</p>
+        <p
+          class="button"
+          (click)="acceptDeclineUser('accept', user.hashedUserId)"
+          [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+          }"
+        >Bestätigen</p>
+        <p
+          class="button"
+          (click)="acceptDeclineUser('decline', user.hashedUserId)"
+          [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+          }"
+        >Ablehnen</p>
+      </div>
+    </div>
+  </app-text-section>
+  <app-text-section
+    [title]="'Website bearbeiten'"
+  >
+    <div
+      class="edit-container"
+      [ngClass]="deviceType.className"
+    >
+      <a
+        href="{{ allInternalLinks['bearbeiten/termine'].link }}"
+        title="{{ allInternalLinks['bearbeiten/termine'].title }}"
+        class="button"
+        [ngStyle]="{
+          color: styleConfig.css('primaryColor'),
+          backgroundColor: styleConfig.css('backgroundColor'),
+          borderColor: styleConfig.css('textColor')
+        }"
+      >Bearbeiten</a>
+      <p
+        class="title"
+        [ngStyle]="{
+          color: styleConfig.css('secondaryTextColor')
+        }"
+      >Kommende Termine bearbeiten</p>
+    </div>
+    <div
+      class="edit-container"
+      [ngClass]="deviceType.className"
+    >
+      <a
+        href="{{ allInternalLinks['bearbeiten/nachrichten'].link }}"
+        title="{{ allInternalLinks['bearbeiten/nachrichten'].title }}"
+        class="button"
+        [ngStyle]="{
+          color: styleConfig.css('primaryColor'),
+          backgroundColor: styleConfig.css('backgroundColor'),
+          borderColor: styleConfig.css('textColor')
+        }"
+      >Bearbeiten</a>
+      <p
+        class="title"
+        [ngStyle]="{
+          color: styleConfig.css('secondaryTextColor')
+        }"
+      >Nachrichten bearbeiten</p>
+    </div>
+  </app-text-section>
+</app-authentication-check>

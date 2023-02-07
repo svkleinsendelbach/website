@@ -1,0 +1,40 @@
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HeaderComponent } from '../../header.component';
+import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'src/app/template/classes/link';
+import { StyleConfigService } from 'src/app/template/services/style-config.service';
+
+@Component({
+  selector: 'app-desktop-header-item',
+  templateUrl: './header-item.component.html',
+  styleUrls: ['./header-item.component.sass']
+})
+export class DesktopHeaderItemComponent {
+  public faCaretDown = faCaretDown;
+  public faCaretUp = faCaretUp;
+
+  @Input() public headerItem!: HeaderComponent.HeaderItem & { id: string };
+
+  @Input() public expandedHeaderItemId!: string | null;
+
+  @Output() public clickHeaderItemIdEmitter = new EventEmitter<string>();
+
+  public constructor(
+    public readonly styleConfig: StyleConfigService
+  ) {}
+
+  public handleHeaderItemClick() {
+    this.clickHeaderItemIdEmitter.emit(this.headerItem.id);
+  }
+
+  public subItems(subItems: Record<string, Link> | undefined): { id: string, link: Link }[] {
+    if (subItems === undefined)
+      return [];
+    return Object.entries(subItems).map(entry => {
+      return {
+        id: entry[0],
+        link: entry[1]
+      };
+    });
+  }
+}

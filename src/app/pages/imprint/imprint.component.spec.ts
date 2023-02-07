@@ -11,9 +11,7 @@ describe('ImprintComponent', () => {
       declarations: [ ImprintComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(ImprintComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

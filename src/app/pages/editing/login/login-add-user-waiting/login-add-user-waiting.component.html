@@ -1,0 +1,26 @@
+<app-text-section
+  [title]="'Beantragen die Website zu bearbeiten'"
+>
+  <p
+    class="text margin-bottom-large"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Du bist nicht registriert um die Webseite zu bearbeiten. Um die Rechte dafür zu beantragen, gebe deinen Namen an und klicke auf 'Beantragen'. Dies kann einige Tage dauern. Ansonsten klicke auf 'Abbrechen'.</p>
+  <input-form
+    [inputForm]="inputForm"
+    [submitButtonText]="'Beantragen'"
+    (submitButtonClicked)="handleApply()"
+    [cancelButtonText]="'Abbrechen'"
+    (cancelButtonClicked)="handleCancel()"
+  >
+    <input-field-text
+      [label]="'Ihr Vorname'"
+      [inputField]="inputForm.field('firstName')"
+    ></input-field-text>
+    <input-field-text
+      [label]="'Ihr Nachname'"
+      [inputField]="inputForm.field('lastName')"
+    ></input-field-text>
+  </input-form>
+</app-text-section>

@@ -1,36 +1,99 @@
-<span class="text-section">
-  <h1>Abteilung Herrenfußball</h1>
-  <p class="medium small-bottom-space">Die <a href="/fussball/herren/erste-mannschaft" class="inline medium">1.
-      Mannschaft</a> spielt als Spielgemeinschaft SG Kleinsendelbach / Hetzles in der Kreisklasse Kreis Erlangen /
-    Pegnitzgrund Gruppe 3.
-  </p>
-  <p class="medium">Hier geht es zur <a href="http://sg-kh.de/sgkh-1-herren/" title="Homepage der 1. Mannschaft"
-      target="_blank" class="inline medium">Homepage</a> der 1. Mannschaft SG Kleinsendelbach / Hetzles.</p>
-  <p class="medium small-bottom-space big-top-space">Die <a href="/fussball/herren/zweite-mannschaft"
-      class="inline medium">2.
-      Mannschaft</a> spielt als Spielgemeinschaft SG Kleinsendelbach-Hetzles 2 in der B-Klasse Kreis Erlangen /
-    Pegnitzgrund Gruppe 3. </p>
-  <p class="medium">Hier geht es zur <a href="http://sg-kh.de/team-sg-2/" title="Homepage der 2. Mannschaft"
-      target="_blank" class="inline medium">Homepage</a> der 2. Mannschaft SG Kleinsendelbach / Hetzles.</p>
-</span>
-<span class="text-section-like links" [ngClass]="deviceType.stringValue">
-  <a href="/fussball/herren/erste-mannschaft" title="1. Mannschaft" class="container">
-    <p class="title">1. Mannschaft</p>
-    <p class="text">1. Mannschaft der SG Kleinsendelbach / Hetzles</p>
-  </a>
-  <a href="/fussball/herren/zweite-mannschaft" title="2. Mannschaft" class="container">
-    <p class="title">2. Mannschaft</p>
-    <p class="text">2. Mannschaft der SG Kleinsendelbach / Hetzles</p>
-  </a>
-  <a href="/fussball/herren/alte-herren" title="Alte Herren" class="container">
-    <p class="title">Alte Herren</p>
-    <p class="text">Alte Herren des SV Kleinsendelbach</p>
-  </a>
-</span>
-<app-component-events [eventGroupIds]="eventGroupIds"></app-component-events>
-<app-component-contact [pageId]="'football-adults/general'"></app-component-contact>
-<span class="text-section">
-  <img class="team-image" title="1. und 2. Mannschaft" src="assets/images/mannschaft.png">
-  <p class="big-top-space medium center small-bottom-space">Viel Spaß beim Sport wünscht</p>
-  <p class="red medium center">die Herrenabteilung</p>
-</span>
+<app-text-section
+  [title]="'Abteilung Herrenfußball'"
+>
+
+  <p
+    class="text left-align"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Die <a
+    class="text"
+    href="{{ allInternalLinks['fussball/herren/erste-mannschaft'].link }}"
+    title="{{ allInternalLinks['fussball/herren/erste-mannschaft'].title }}"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >1. Mannschaft</a> spielt als Spielgemeinschaft SG Kleinsendelbach / Hetzles in der Kreisklasse Kreis Erlangen / Pegnitzgrund Gruppe 3.</p>
+  <p
+    class="text left-align"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Hier geht es zur <a
+    class="text"
+    href="http://sg-kh.de/sgkh-1-herren/"
+    target="_blank"
+    title="1. Mannschaft"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Homepage</a> der 1. Mannschaft SG Kleinsendelbach / Hetzles.</p>
+
+  <p
+    class="text left-align margin-top-large"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Die <a
+    class="text"
+    href="{{ allInternalLinks['fussball/herren/zweite-mannschaft'].link }}"
+    title="{{ allInternalLinks['fussball/herren/zweite-mannschaft'].title }}"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >2. Mannschaft</a> spielt als Spielgemeinschaft SG Kleinsendelbach / Hetzles 2 in der B-Klasse Kreis Erlangen / Pegnitzgrund Gruppe 3.</p>
+  <p
+    class="text left-align"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Hier geht es zur <a
+    class="text"
+    href="http://sg-kh.de/sgkh-2-herren/"
+    target="_blank"
+    title="2. Mannschaft"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Homepage</a> der 2. Mannschaft SG Kleinsendelbach / Hetzles.</p>
+
+</app-text-section>
+
+<app-links
+  [links]="links"
+></app-links>
+
+<app-events
+  [groupIds]="eventGroupIds"
+  [eventGroupTitle]="eventGroupTitle"
+></app-events>
+
+<app-contact-info
+  [contactData]="contactData"
+></app-contact-info>
+
+<app-text-section>
+
+  <img
+    class="text-image"
+    src="assets/images/mannschaft.png"
+    title="Herrenabteilung"
+    [ngStyle]="{
+      borderColor: styleConfig.css('textColor')
+    }"
+  >
+  <p
+    class="text margin-top-large"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Viel Spaß beim Sport wünscht</p>
+  <p
+    class="text"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >die Herrenabteilung</p>
+
+</app-text-section>

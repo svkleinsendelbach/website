@@ -1,0 +1,15 @@
+<div
+  id="text-section"
+  [ngStyle]="{
+    borderColor: styleConfig.css('textColor')
+  }"
+>
+  <h1
+    id="title"
+    *ngIf="title !== undefined"
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >{{ title }}</h1>
+  <ng-content></ng-content>
+</div>

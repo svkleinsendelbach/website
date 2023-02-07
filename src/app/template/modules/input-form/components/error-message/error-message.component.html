@@ -1,0 +1,7 @@
+<p
+  *ngIf="error !== undefined"
+  id="error-message"
+  [ngStyle]="{
+    color: messageColor
+  }"
+>{{ error.message }}</p>

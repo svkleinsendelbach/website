@@ -1,0 +1,45 @@
+<app-text-section
+  [title]="'Authentifizierung wird überprüft'"
+  *ngIf="state === 'loading'"
+>
+  <p
+    class="text large margin-top-large"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Es wird überprüft, ob Sie berechtigt sind diese Seite zu besuchen.</p>
+</app-text-section>
+<app-text-section
+  [title]="'Authentifizierung fehlgeschlagen'"
+  *ngIf="state === 'internalError'"
+>
+  <p
+    class="text large margin-top-large"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Es konnte nicht überprüft werden, ob Sie berechtigt sind diese Seite zu besuchen. Bitte laden Sie die Seite neu, um es erneut zu versuchen.</p>
+</app-text-section>
+<app-text-section
+  [title]="'Authentifizierung fehlgeschlagen'"
+  *ngIf="state === 'unregistered'"
+>
+  <p
+    class="text large margin-top-large"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Sie sind nicht berechtigt diese Seite zu besuchen.</p>
+  <a
+    class="text large"
+    href="{{ logInPageLink.link }}"
+    target="{{ logInPageLink.target }}"
+    title="{{ logInPageLink.title }}"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Zur Anmeldung</a>
+</app-text-section>
+<ng-content
+  *ngIf="state === 'registered'"
+></ng-content>

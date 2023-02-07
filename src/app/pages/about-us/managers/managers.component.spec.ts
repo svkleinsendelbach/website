@@ -11,9 +11,7 @@ describe('ManagersComponent', () => {
       declarations: [ ManagersComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(ManagersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

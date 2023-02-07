@@ -1,0 +1,96 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(center, center)
+  width: 100vw
+
+#text-section
+  @include flex-column(center, center)
+  width: 85%
+  margin: 48px 0
+  padding-top: 48px
+  border-top: solid 1px
+
+  #title
+    @include font-montserrat
+    @include font-size('header')
+    @include font-weight('medium')
+    text-align: center
+    margin-bottom: 40px
+
+  ::ng-deep .text
+    @include font-montserrat
+    @include font-size('medium')
+    @include font-weight('normal')
+    padding-bottom: 8px
+    text-align: center
+    width: 100%
+
+    &.left-align
+      text-align: left
+
+    &.block
+      text-align: justify
+
+    &.small
+      @include font-size('small')
+
+    &.large
+      @include font-size('large')
+      padding-bottom: 32px
+
+    &.larger
+      @include font-size('x-large')
+      padding-bottom: 24px
+
+    &.x-large
+      @include font-size('x-large')
+      @include font-weight('medium')
+      padding-bottom: 24px
+
+    &.margin-top-small
+      margin-top: 8px
+
+    &.margin-top-normal
+      margin-top: 16px
+
+    &.margin-top-large
+      margin-top: 40px
+
+    &.margin-bottom-small
+      margin-bottom: 8px
+
+    &.margin-bottom-normal
+      margin-bottom: 16px
+
+    &.margin-bottom-large
+      margin-bottom: 40px
+
+    &.no-bottom-padding
+      padding-bottom: 0
+
+    &:is(a)
+      text-decoration: none
+      cursor: pointer
+
+  ::ng-deep .text-image
+    width: 100%
+    border: solid 1px
+
+  ::ng-deep .text-images-2
+    @include flex-row(center, space-between)
+    width: 100%
+
+    .text-image
+      width: 47.4%
+
+    &.mobile
+      @include flex-column(center, center)
+
+      .text-image
+        width: 100%
+        margin-bottom: 16px
+
+        &:last-child
+          margin-bottom: 0

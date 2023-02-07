@@ -1,0 +1,40 @@
+<div
+  id="form"
+  (keyup.enter)="'$event.preventDefault(); $event.stopPropagation(); submitButtonClicked.emit()'"
+  [ngClass]="deviceType.className"
+>
+
+  <!-- Input fields -->
+  <ng-content></ng-content>
+
+  <!-- Cancel and submit button -->
+  <div
+    id="cancel-submit-container"
+  >
+    <p
+      *ngIf="cancelButtonText !== undefined"
+      id="cancel-button"
+      (click)="$event.preventDefault(); $event.stopPropagation(); cancelButtonClicked.emit()"
+      [ngStyle]="{
+        color: styleConfig.css('textColor'),
+        backgroundColor: styleConfig.css('backgroundColor'),
+        borderColor: styleConfig.css('textColor')
+      }"
+    >{{ cancelButtonText }}</p>
+    <p
+      id="submit-button"
+      (click)="$event.preventDefault(); $event.stopPropagation(); submitButtonClicked.emit()"
+      [ngStyle]="{
+        color: styleConfig.css('textColor'),
+        backgroundColor: styleConfig.css('backgroundColor'),
+        borderColor: borderColor
+      }"
+    >{{ submitButtonText }}</p>
+  </div>
+
+  <!-- Error message -->
+  <error-message
+    [error]="inputForm.error"
+  ></error-message>
+
+</div>

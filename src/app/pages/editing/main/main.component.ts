@@ -1,56 +1,53 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { ApiService } from 'src/app/template/services/api.service';
+import { DeviceTypeService } from 'src/app/template/services/device-type.service';
+import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { GetUnauthenticatedUsersFunction } from 'src/app/template/services/api-functions-types';
+import { AuthService } from 'src/app/template/services/auth.service';
 import { Router } from '@angular/router';
-import { HeaderIntransparentService } from 'src/app/services/header-intransparent.service';
-import { WebsiteEditorAuthService } from 'src/app/services/api/website-editor-auth.service';
-import { WebsiteEditingService } from '../../../services/api/website-editing.service';
-import { DeviceTypeService } from '../../../services/device-type.service';
+import { InternalLink } from 'src/app/classes/InternalPath';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.sass'],
+  styleUrls: ['./main.component.sass']
 })
 export class MainComponent {
-  public isStartupLoading: boolean = true;
+  public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
+  public allInternalLinks = InternalLink.all;
 
-  public waitingUsers: WebsiteEditingService.WebsiteEditor[] | undefined = undefined;
+  public unauthenticatedUsers: GetUnauthenticatedUsersFunction.ReturnType | undefined = undefined;
 
-  constructor(
-    private titleService: Title,
-    private headerIntransparentService: HeaderIntransparentService,
-    private authService: WebsiteEditorAuthService,
-    private router: Router,
-    private websiteEditingService: WebsiteEditingService,
-    public deviceType: DeviceTypeService,
+  public constructor(
+    public readonly titleService: Title,
+    public readonly deviceType: DeviceTypeService,
+    public readonly styleConfig: StyleConfigService,
+    private readonly apiService: ApiService,
+    private readonly authService: AuthService,
+    private router: Router
   ) {
     this.titleService.setTitle('Bearbeiten');
-    this.headerIntransparentService.makeIntransparent();
-    this.authService.isLoggedIn.then(isLoggedIn => {
-      if (!isLoggedIn) {
-        this.router.navigateByUrl('/bearbeiten/anmelden').then(success => {
-          if (!success) throw new Error("Couldn't navigate to url.");
-        });
-      } else {
-          this.isStartupLoading = false;
-      }
-    });
-    this.websiteEditingService.getUsersWaitingForEditing().then(users => {
-      if (users.length !== 0)
-        this.waitingUsers = users;
+    this.getUnauthenticatedUsers();
+  }
+
+  private async getUnauthenticatedUsers() {
+    this.unauthenticatedUsers = await this.apiService.getUnauthenticatedUsers({
+      type: 'websiteEditing'
     });
   }
 
-  public logOut() {
-    this.authService.logOut().then(() => {
-      this.router.navigateByUrl('/bearbeiten/anmelden');
-    });
+  public async logOut() {
+    await this.authService.logOut();
+    await this.router.navigateByUrl(InternalLink.all['bearbeiten/anmelden'].link);
   }
 
-  public acceptDeclineUserWaiting(acceptDecline: 'accept' | 'decline', userId: string) {
-    this.websiteEditingService.acceptDeclineUserWaitingForEditing(acceptDecline, userId);
-    this.waitingUsers = this.waitingUsers?.filter(user => user.id !== userId);
-    if (this.waitingUsers?.length === 0)
-      this.waitingUsers = undefined;
+  public async acceptDeclineUser(action: 'accept' | 'decline', hashedUserId: string) {
+    this.unauthenticatedUsers = this.unauthenticatedUsers?.filter(user => user.hashedUserId !== hashedUserId);
+    await this.apiService.acceptDeclineWaitingUser({
+      type: 'websiteEditing',
+      action: action,
+      hashedUserId: hashedUserId
+    });
   }
 }

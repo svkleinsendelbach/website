@@ -1,0 +1,75 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100%
+
+#link-rows
+  @include flex-column(center, center)
+  width: 85%
+  padding-bottom: 64px
+
+  .link-row
+    @include flex-row(flex-start, center)
+    width: 100%
+    padding-top: 64px
+
+    .link-item
+      @include flex-column(center, center)
+      cursor: pointer
+      text-decoration: none
+      flex: 1
+      padding: 0 16px
+      height: 100%
+
+      .title, .description
+        @include font-montserrat
+        text-align: center
+
+      .icon
+        font-size: 48px
+        margin-bottom: 20px
+
+      .title
+        @include font-size('large')
+        @include font-weight('medium')
+        margin-bottom: 8px
+
+      .description
+        @include font-size('normal')
+        @include font-weight('small')
+
+      &:hover
+        .icon.jump
+          animation: icon-jump 1s linear infinite
+
+        .icon.shake
+          animation: icon-shake 1s linear infinite
+
+        .icon.rotation
+          animation: icon-rotation 1s linear infinite
+
+@keyframes icon-rotation
+    0%
+        transform: rotate(0)
+    100%
+        transform: rotate(360deg)
+
+@keyframes icon-jump
+    0%
+        transform: translateY(0)
+    65%
+        transform: translateY(-10px)
+    100%
+        transform: translateY(0)
+
+@keyframes icon-shake
+    0%
+        transform: rotate(0)
+    25%
+        transform: rotate(10deg)
+    75%
+        transform: rotate(-10deg)
+    100%
+        transform: rotate(0)

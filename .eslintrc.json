@@ -8,13 +8,9 @@
       "files": [
         "*.ts"
       ],
-      "parserOptions": {
-        "project": [
-          "tsconfig.json"
-        ],
-        "createDefaultProgram": true
-      },
       "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
@@ -23,7 +19,6 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
             "style": "camelCase"
           }
         ],
@@ -31,15 +26,20 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
             "style": "kebab-case"
           }
         ],
-        "no-unused-vars": [
-          "warn",
-          { "args": "none" }
+        "@typescript-eslint/no-namespace": [
+          "off",
+          {
+            "allowDeclarations": true
+          }
         ],
-        "indent": ["off", 4]
+        "no-async-promise-executor": "off",
+        "semi": ["warn", "always"],
+        "@typescript-eslint/no-inferrable-types": "off",
+        "no-inner-declarations": "off",
+        "quotes": ["warn", "single"]
       }
     },
     {

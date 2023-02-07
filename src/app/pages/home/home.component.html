@@ -1,49 +1,53 @@
-<app-top-news></app-top-news>
-<app-home-links></app-home-links>
-<span class="text-section">
-  <h1>
-    Schön, dass Sie unsere Website besuchen!
-  </h1>
-  <p class="medium center">
-    Haben Sie Lust auf Fußball, Gymnastik oder Kindertanz? Dann informieren Sie sich unter der entsprechenden Abteilung
-    auf unserer Homepage oder senden Sie uns eine Nachricht.
-  </p>
-  <p class="medium center">
-    Wir freuen uns auf Sie!
-    <br>
-    Ihre Vorstandschaft des SV Kleinsendelbach
-  </p>
-  <p class="medium red center">
-    Der SVK bedankt sich herzlich bei allen Sponsoren und Gönnern.
-  </p>
-</span>
-<app-news-list [maxListCount]="5"></app-news-list>
-<span class="social-media text-section">
-  <h2 class="large center black">
-    Schauen Sie auch mal bei unseren Social-Media Kanälen vorbei!
-  </h2>
-  <span [ngClass]="deviceType.stringValue" class="container">
-    <a href="https://www.facebook.com/svkleinsendelbach/" class="link" title="Facebook" target="_blank">
-      <i class="icon fab fa-facebook-f"></i>
-      <div class="text1">SV Kleinsendelbach</div>
-      <div class="text2">Facebook</div>
-    </a>
-    <a href="https://www.instagram.com/sgkleinsendelbachhetzles/" class="link" title="Instagram" target="_blank">
-      <i class="icon fab fa-instagram"></i>
-      <div class="text1">
-        SG Kleinsendelbach / Hetzles
-      </div>
-      <div class="text2">Instagram</div>
-    </a>
-    <a href="http://sg-kh.de" class="link" title="SG Kleinsendelbach / Hetzles" target="_blank">
-      <img *ngIf="!darkMode.isDarkMode" src="assets/images/sg-logo.png" title="SG Kleinsendelbach / Hetzles" class="icon">
-      <img *ngIf="darkMode.isDarkMode"  src="assets/images/sg-logo-dark-appearence.png" title="SG Kleinsendelbach / Hetzles"
-        class="icon">
-      <div class="text1">
-        SG Kleinsendelbach / Hetzles
-      </div>
-      <div class="text2">Website</div>
-    </a>
-  </span>
-</span>
-<app-component-events [eventGroupIds]="eventGroupIds"></app-component-events>
+<app-home-banner
+  [bannerData]="bannerData"
+></app-home-banner>
+
+<app-liveticker></app-liveticker>
+
+<app-home-links
+  [linkDataForDeviceType]="linkData"
+></app-home-links>
+
+<app-text-section
+  [title]="'Schön, dass Sie unsere Website besuchen!'"
+>
+  <p
+    class="text"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Haben Sie Lust auf Fußball, Gymnastik oder Kindertanz? Dann informieren Sie sich unter der entsprechenden Abteilung auf unserer Homepage oder senden Sie uns eine Nachricht.</p>
+  <p
+    class="text margin-top-normal"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Wir freuen uns auf Sie! </p>
+  <p
+    class="text"
+    [ngStyle]="{
+      color: styleConfig.css('secondaryTextColor')
+    }"
+  >Ihre Vorstandschaft des SV Kleinsendelbach</p>
+  <p
+    class="text margin-top-normal"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Der SVK bedankt sich herzlich bei allen Sponsoren und Gönnern.</p>
+</app-text-section>
+
+<app-news-list
+  [maxListCount]="5"
+  [allNewsLink]="allInternalLinks['nachrichten']"
+  [newsLink]="allInternalLinks['nachricht']"
+></app-news-list>
+
+<app-social-media-links
+  [socialMediaDataForDeviceType]="socialMediaData"
+></app-social-media-links>
+
+<app-events
+  [groupIds]="eventGroupIds"
+  [eventGroupTitle]="eventGroupTitle"
+></app-events>

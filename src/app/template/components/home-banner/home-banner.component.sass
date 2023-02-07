@@ -1,0 +1,73 @@
+@import '/src/sass/flex'
+
+$height: 480px
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100vw
+  position: relative
+
+#image-container
+  @include flex-row(flex-start, center)
+  position: absolute
+  top: 0
+  z-index: 100
+  width: 100vw
+  height: $height
+
+  .image
+    position: absolute
+    top: 0
+    object-fit: cover
+    width: 100vw
+    height: $height
+    overflow: hidden
+    transition: 0.5s
+
+#nav-bar-container
+  @include flex-column(center, center)
+  position: relative
+  z-index: 101
+  width: 100%
+  height: $height
+
+  #nav-button-container
+    @include flex-row(center, space-between)
+    width: 100%
+    height: calc($height - 48px)
+
+    #left-button, #right-button
+      @include flex-row(center, center)
+      cursor: pointer
+      font-size: 64px
+      opacity: 0.5
+
+      &:hover
+        opacity: 1
+
+    #left-button
+      margin-left: 16px
+
+    #right-button
+      margin-right: 16px
+
+  #nav-bar
+    @include flex-row(flex-start, center)
+    border-radius: 8px
+    padding: 4px 8px
+    margin-bottom: 16px
+
+    .circle
+      @include flex-row(center, center)
+      height: 16px
+      width: 16px
+      padding: 4px
+      cursor: pointer
+      font-size: 16px
+      opacity: 0.5
+
+      &.filled
+        opacity: 1
+
+      &:hover
+        opacity: 1

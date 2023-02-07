@@ -1,0 +1,83 @@
+<div
+  id="header-item"
+  [ngClass]="{
+    expanded: expandedHeaderItemId === headerItem.id
+  }"
+>
+
+  <!-- Top item without sub items -->
+  <a
+    id="top-item"
+    *ngIf="headerItem.subItems === undefined"
+    href="{{ headerItem.topItem.link }}"
+    target="{{ headerItem.topItem.target }}"
+    title="{{ headerItem.topItem.title }}"
+    [ngStyle]="{
+      backgroundColor: styleConfig.css('backgroundColor')
+    }"
+  >
+    <div
+      id="top-item-text"
+      [ngStyle]="{
+        color: styleConfig.css('textColor')
+      }"
+    >{{ headerItem.topItem.title }}</div>
+  </a>
+
+  <!-- Top item with sub items -->
+  <div
+    id="top-item"
+    *ngIf="headerItem.subItems !== undefined"
+    (click)="$event.preventDefault(); $event.stopPropagation(); handleHeaderItemClick()"
+    [ngStyle]="{
+      backgroundColor: styleConfig.css('backgroundColor')
+    }"
+  >
+    <div
+      id="top-item-text"
+      [ngStyle]="{
+        color: styleConfig.css('textColor')
+      }"
+    >{{ headerItem.topItem.title }}</div>
+    <fa-icon
+      *ngIf="expandedHeaderItemId !== headerItem.id"
+      [icon]="faCaretDown"
+      class="drop-down-arrow"
+      [ngStyle]="{
+        color: styleConfig.css('textColor')
+      }"
+    ></fa-icon>
+    <fa-icon
+      *ngIf="expandedHeaderItemId === headerItem.id"
+      [icon]="faCaretUp"
+      class="drop-down-arrow"
+      [ngStyle]="{
+        color: styleConfig.css('textColor')
+      }"
+    ></fa-icon>
+  </div>
+
+  <!-- Sub items -->
+  <div
+    id="sub-items"
+  >
+    <div
+      class="sub-item"
+      *ngFor="let subItem of subItems(headerItem.subItems)"
+      [ngStyle]="{
+        backgroundColor: styleConfig.css('backgroundColor')
+      }"
+    >
+      <a
+        class="sub-item-text"
+        href="{{ subItem.link.link }}"
+        target="{{ subItem.link.target }}"
+        title="{{ subItem.link.title }}"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ subItem.link.title }}</a>
+    </div>
+  </div>
+
+</div>
