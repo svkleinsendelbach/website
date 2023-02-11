@@ -1,0 +1,60 @@
+<div
+  id="result-team-spacer-container"
+>
+  <div
+    id="result-team-container"
+  >
+    <div
+      id="result-image-container"
+    >
+      <div
+        id="result-image-home-team"
+      >
+        <img
+          id="home-team-image"
+          src="{{ 'https://service-prod.bfv.de/export.media?action=getLogo&format=7&id=' + gameInfo.homeTeam.imageId }}"
+          title="{{ gameInfo.homeTeam.name }}"
+        >
+        <p
+          id="home-team-result"
+        >{{ gameInfo.result.home }}</p>
+      </div>
+      <p
+        id="result-spacer"
+      >:</p>
+      <div
+        id="result-image-away-team"
+      >
+        <p
+          id="away-team-result"
+        >{{ gameInfo.result.away }}</p>
+        <img
+          id="away-team-image"
+          src="{{ 'https://service-prod.bfv.de/export.media?action=getLogo&format=7&id=' + gameInfo.awayTeam.imageId }}"
+          title="{{ gameInfo.awayTeam.name }}"
+        >
+      </div>
+    </div>
+    <div
+      id="name-container"
+    >
+      <p
+        id="home-team-name"
+      >{{ gameInfo.homeTeam.name }}</p>
+      <p
+        id="away-team-name"
+      >{{ gameInfo.awayTeam.name }}</p>
+    </div>
+  </div>
+  <p
+    id="result-team-spacer"
+  ></p>
+</div>
+<div
+  id="results-container"
+>
+  <app-result
+    *ngFor="let result of liveticker.results"
+    [result]="result"
+  ></app-result>
+</div>

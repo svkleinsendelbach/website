@@ -1,0 +1,47 @@
+<app-text-section
+  [title]="gameInfo.homeTeam.name + ' gegen ' + gameInfo.awayTeam.name"
+>
+  <a
+    href="{{ gameInfo.competition.link }}"
+    title="{{ gameInfo.competition.name }}"
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >{{ gameInfo.competition.name }}</a>
+  <p
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >{{ gameInfo.competition.gameDay.toString() + '. Spieltag' }}</p>
+  <p
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >{{ gameDateDescription }}</p>
+  <a
+    *ngIf="gameInfo.adress !== undefined && gameInfo.adressDescription !== undefined"
+    href="{{ googleMapsLink(gameInfo.adress) }}"
+    title="{{ gameInfo.adressDescription }}"
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >{{ gameInfo.adressDescription }}</a>
+  <p
+    *ngIf="gameInfo.adress === undefined && gameInfo.adressDescription !== undefined"
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >{{ gameInfo.adressDescription }}</p>
+  <a
+    *ngIf="gameInfo.adress !== undefined"
+    href="{{ googleMapsLink(gameInfo.adress) }}"
+    title="{{ gameInfo.adressDescription ?? gameInfo.adress }}"
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >{{ gameInfo.adress }}</a>
+  <app-liveticker
+    [gameInfo]="gameInfo"
+    [liveticker]="gameInfo.livetickers[0]"
+  ></app-liveticker>
+</app-text-section>

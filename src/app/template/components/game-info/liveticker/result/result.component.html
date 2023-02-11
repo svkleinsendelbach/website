@@ -1,0 +1,268 @@
+<div
+  id="section-container"
+  *ngIf="result.type === 'section'"
+>
+  <p
+    id="left-spacer"
+  ></p>
+  <p
+    id="section-text"
+  >{{ result.text }}</p>
+  <p
+    id="right-spacer"
+  ></p>
+</div>
+<div
+  id="result-container"
+  *ngIf="result.type !== 'section'"
+  [ngClass]="deviceType.className"
+  [ngStyle]="{
+    borderColor: styleConfig.css('textColor')
+  }"
+>
+  <div
+    id="left-row"
+    *ngIf="result.type === 'comment' || result.type === 'whistle' || result.type === 'corner' || result.type === 'penalty' || result.type === 'ownGoal' || result.type === 'time' || result.type === 'specialAction' || result.type === 'freeKick' || result.type === 'shotOnGoal'"
+  ></div>
+  <div
+    id="left-row"
+    *ngIf="result.type === 'goal' || result.type === 'penaltyGoal'"
+  >
+    <div
+      id="goal-player"
+      *ngIf="result.team === 'home'"
+    >
+      <img
+        id="goal-player-image"
+        src="{{ 'https://cdn.bfv.de/public/' + result.player.imageId + '.web' }}"
+        title="{{ result.player.name }}"
+      >
+      <p
+        id="goal-player-name"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ result.player.name + ' (' + result.player.number.toString() + ')' }}</p>
+    </div>
+    <p
+      id="goal-player-spacer"
+      *ngIf="result.team === 'away'"
+    ></p>
+    <p
+      id="goal-result"
+      [ngStyle]="{
+        color: styleConfig.css('textColor')
+      }"
+    >{{ result.result.home.toString() + ' : ' + result.result.away.toString() }}</p>
+    <p
+      id="goal-player-spacer"
+      *ngIf="result.team === 'home'"
+    ></p>
+    <div
+      id="goal-player"
+      *ngIf="result.team === 'away'"
+    >
+      <p
+        id="goal-player-name"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ result.player.name + ' (' + result.player.number.toString() + ')' }}</p>
+      <img
+        id="goal-player-image"
+        src="{{ 'https://cdn.bfv.de/public/' + result.player.imageId + '.web' }}"
+        title="{{ result.player.name }}"
+      >
+    </div>
+  </div>
+  <div
+    id="left-row"
+    *ngIf="result.type === 'substitute'"
+  >
+    <p
+      id="substitution-spacer"
+      *ngIf="result.team === 'away'"
+    ></p>
+    <div
+      id="player-out"
+    >
+      <img
+        id="player-out-image"
+        src="{{ 'https://cdn.bfv.de/public/' + result.playerOut.imageId + '.web' }}"
+        title="{{ result.playerOut.name }}"
+      >
+      <p
+        id="player-out-name"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ result.playerOut.name + ' (' + result.playerOut.number.toString() + ')' }}</p>
+    </div>
+    <div
+      id="substitution-icon-container"
+    >
+      <img
+        id="substitution-icon"
+        src="assets/images/liveticker/substitution-icon.png"
+        title="Einwechslung"
+      >
+    </div>
+    <div
+      id="player-in"
+    >
+      <p
+        id="player-in-name"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ result.playerIn.name + ' (' + result.playerIn.number.toString() + ')' }}</p>
+      <img
+        id="player-in-image"
+        src="{{ 'https://cdn.bfv.de/public/' + result.playerIn.imageId + '.web' }}"
+        title="{{ result.playerIn.name }}"
+      >
+    </div>
+    <p
+      id="substitution-spacer"
+      *ngIf="result.team === 'home'"
+    ></p>
+  </div>
+  <div
+    id="left-row"
+    *ngIf="result.type === 'yellowCard' || result.type === 'secondYellowCard' || result.type === 'redCard'"
+  >
+    <p
+      id="card-spacer"
+      *ngIf="result.team === 'away'"
+    ></p>
+    <div
+      id="card-player"
+    >
+      <p
+        id="card-player-name"
+        *ngIf="result.team === 'away'"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ result.player.name + ' (' + result.player.number.toString() + ')' }}</p>
+      <img
+        id="card-player-image"
+        src="{{ 'https://cdn.bfv.de/public/' + result.player.imageId + '.web' }}"
+        title="{{ result.player.name }}"
+      >
+      <p
+        id="card-player-name"
+        *ngIf="result.team === 'home'"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ result.player.name + ' (' + result.player.number.toString() + ')' }}</p>
+    </div>
+    <p
+      id="card-spacer"
+      *ngIf="result.team === 'home'"
+    ></p>
+  </div>
+  <div
+    id="middle-row"
+  >
+    <div
+      id="middle-row-container"
+      [ngStyle]="{
+        backgroundColor: styleConfig.css('primaryColor')
+      }"
+    >
+      <img
+        id="icon"
+        src="{{ iconSource }}"
+        title="{{ iconTitle }}"
+      >
+      <p
+        id="time"
+        *ngIf="result.time !== null"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ result.time.toString() + '\'' }}</p>
+    </div>
+  </div>
+  <div
+    id="right-row"
+  >
+    <div
+      id="text-container"
+    >
+      <p
+        id="title"
+        *ngIf="result.type !== 'comment' && result.headline !== null"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ result.headline }}</p>
+      <p
+        id="text"
+        *ngIf="result.text !== null"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ result.text }}</p>
+    </div>
+    <div
+      id="links-container"
+    >
+      <fa-icon
+        id="like-heart"
+        title="Likes"
+        [icon]="heart"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      ></fa-icon>
+      <p
+        id="likes"
+        title="Likes"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ result.resultLikes.likes }}</p>
+      <fa-icon
+        *ngIf="!result.resultLikes.liked"
+        id="like-icon"
+        title="Beitrag gefällt"
+        [icon]="thumbsUpOutline"
+        (click)="$event.preventDefault(); $event.stopPropagation(); likeResult();"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      ></fa-icon>
+      <fa-icon
+        *ngIf="result.resultLikes.liked"
+        id="like-icon"
+        title="Beitrag gefällt"
+        [icon]="thumbsUpSolid"
+        [ngStyle]="{
+          color: styleConfig.css('primaryColor')
+        }"
+      ></fa-icon>
+      <fa-icon
+        id="unlike-icon"
+        title="Beitrag gefällt nicht"
+        [icon]="thumbsDownOutline"
+        (click)="$event.preventDefault(); $event.stopPropagation(); unlikeResult();"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      ></fa-icon>
+      <fa-icon
+        *ngIf="this.result.reportLink !== null"
+        id="report-icon"
+        title="Beitrag melden"
+        [icon]="reportFlag"
+        (click)="$event.preventDefault(); $event.stopPropagation(); reportResult();"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      ></fa-icon>
+    </div>
+  </div>
+</div>

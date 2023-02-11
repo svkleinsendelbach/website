@@ -1,0 +1,228 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-row(center, center)
+  width: 100%
+  margin-bottom: 50px
+
+#section-container
+  @include flex-row(center, center)
+  width: 100%
+
+  #left-spacer
+    flex: 5
+
+  #section-text
+    flex: 1
+    @include font-montserrat
+    @include font-size('medium')
+    @include font-weight('normal')
+    text-align: center
+    white-space: nowrap
+
+  #right-spacer
+    flex: 5
+
+#result-container
+  @include flex-row(center, center)
+  width: 100%
+
+  #left-row
+    @include flex-row(center, center)
+    flex: 5
+
+    #goal-player-spacer
+      flex: 1
+
+    #goal-player
+      @include flex-row(center, center)
+      flex: 4
+      margin: 0 10px
+      gap: 10px
+
+      #goal-player-image
+        width: 75px
+        border-radius: 37.5px
+
+      #goal-player-name
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('normal')
+        text-align: center
+        flex: 4
+
+    #goal-result
+      @include font-montserrat
+      @include font-size('large')
+      @include font-weight('semi-bold')
+      text-align: center
+      flex: 1
+
+    #player-out
+      @include flex-row(center, center)
+      flex: 2
+      margin: 0 10px
+      gap: 10px
+
+      #player-out-image
+        width: 50px
+        border-radius: 25px
+
+      #player-out-name
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('normal')
+        text-align: center
+        flex: 4
+
+    #substitution-icon-container
+      @include flex-row(center, center)
+      flex: 1
+
+      #substitution-icon
+        height: 35px
+
+    #player-in
+      @include flex-row(center, center)
+      flex: 2
+      margin: 0 10px
+      gap: 10px
+
+      #player-in-image
+        width: 50px
+        border-radius: 25px
+
+      #player-in-name
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('normal')
+        text-align: center
+        flex: 4
+
+    #substitution-spacer
+      flex: 1
+
+    #card-player
+      @include flex-row(center, center)
+      flex: 5
+      margin: 0 10px
+      gap: 10px
+
+      #card-player-image
+        width: 75px
+        border-radius: 37.5px
+
+      #card-player-name
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('normal')
+        text-align: center
+        flex: 4
+
+    #card-spacer
+      flex: 3
+
+  #middle-row
+    @include flex-row(center, center)
+    flex: 1
+    align-self: start
+    margin-top: 5px
+
+    #middle-row-container
+      @include flex-row(center, space-around)
+      width: 85px
+      padding: 5px 0
+      border-radius: 5px
+
+      #icon
+        height: 35px
+
+      #text
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('normal')
+
+  #right-row
+    @include flex-row(center, center)
+    flex: 5
+
+    #text-container
+      @include flex-column(center, left-align)
+      flex: 5
+      margin-right: 20px
+
+      #title
+        @include font-montserrat
+        @include font-size('medium')
+        @include font-weight('medium')
+
+      #text
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('small')
+        margin-top: 5px
+
+    #links-container
+      @include flex-row(center, center)
+      flex: 1
+      height: 45px
+      margin-top: 5px
+      align-self: start
+
+
+      #like-heart
+        font-size: 25px
+
+      #likes
+        @include font-montserrat
+        @include font-size('medium')
+        @include font-weight('normal')
+        margin-left: 5px
+
+      #like-icon
+        cursor: pointer
+        font-size: 25px
+        margin-left: 15px
+
+      #unlike-icon
+        cursor: pointer
+        font-size: 25px
+        margin-left: 5px
+
+      #report-icon
+        cursor: pointer
+        font-size: 25px
+        margin-left: 15px
+
+  &.mobile
+    @include flex-column(center, center)
+    border-bottom: 1px solid
+    padding-bottom: 20px
+
+    #left-row
+      flex: none
+      width: 100%
+
+    #middle-row
+      flex: none
+      width: 100%
+      margin-top: 10px
+
+    #right-row
+      @include flex-column(center, center)
+      flex: none
+      width: 100%
+      margin-top: 10px
+
+      #text-container
+        @include flex-column(center, center)
+        flex: none
+        width: 100%
+
+        #title, #text
+          text-align: center
+
+      #links-container
+        flex: none
+        width: 100%

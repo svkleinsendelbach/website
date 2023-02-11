@@ -70,7 +70,9 @@ import { EditNewsComponent } from './pages/editing/news/edit-news/edit-news.comp
 import { InputFormModule } from './template/modules/input-form/input-form.module';
 import { AllNewsComponent } from './pages/news/all-news/all-news.component';
 import { NewsDetailComponent } from './pages/news/news-detail/news-detail.component';
-import { LivetickerComponent } from './template/components/liveticker/liveticker.component';
+import { GameInfoComponent } from './template/components/game-info/game-info.component';
+import { LivetickerComponent } from './template/components/game-info/liveticker/liveticker.component';
+import { ResultComponent } from './template/components/game-info/liveticker/result/result.component';
 
 @NgModule({
   declarations: [
@@ -127,7 +129,9 @@ import { LivetickerComponent } from './template/components/liveticker/liveticker
     EditNewsComponent,
     AllNewsComponent,
     NewsDetailComponent,
-    LivetickerComponent
+    GameInfoComponent,
+    LivetickerComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,

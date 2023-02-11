@@ -1,4 +1,4 @@
-export type GameInfoLiveticker = {
+export type GameInfo = {
   id: string;
   competition: {
     name: string;
@@ -10,14 +10,14 @@ export type GameInfoLiveticker = {
       away: number;
   }
   date: string,
-  homeTeam: GameInfoLiveticker.Team;
-  awayTeam: GameInfoLiveticker.Team;
+  homeTeam: GameInfo.Team;
+  awayTeam: GameInfo.Team;
   adress: string | undefined;
   adressDescription: string | undefined;
   livetickers: ({ id: string; } & BfvLiveticker)[];
 };
 
-export namespace GameInfoLiveticker {
+export namespace GameInfo {
   export type Team = {
     id: string;
     name: string;
@@ -50,6 +50,7 @@ export namespace BfvLiveticker {
 
     export type Player = {
       id: string;
+      imageId: string;
       name: string;
       number: number;
     }

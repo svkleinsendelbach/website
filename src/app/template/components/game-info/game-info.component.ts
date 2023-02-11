@@ -1,20 +1,29 @@
 import { Component } from '@angular/core';
-import { BfvLiveticker } from '../../classes/game-info-liveticker';
+import { FullDatum } from '../../classes/full-datum';
+import { BfvLiveticker, GameInfo } from '../../classes/game-info';
 import { DeviceTypeService } from '../../services/device-type.service';
 import { StyleConfigService } from '../../services/style-config.service';
 
 @Component({
-  selector: 'app-liveticker',
-  templateUrl: './liveticker.component.html',
-  styleUrls: ['./liveticker.component.sass']
+  selector: 'app-game-info',
+  templateUrl: './game-info.component.html',
+  styleUrls: ['./game-info.component.sass']
 })
-export class LivetickerComponent {
-  public exampleLivetickerResults = exampleLivetickerResults;
+export class GameInfoComponent {
+  public gameInfo = exampleGameInfo;
 
   public constructor(
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService
   ) {}
+
+  public get gameDateDescription(): string {
+    return FullDatum.description(FullDatum.fromDate(new Date(this.gameInfo.date)));
+  }
+
+  public googleMapsLink(adress: string): string {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURI(adress)}&hl=de`;
+  }
 }
 
 export const exampleLivetickerResults: BfvLiveticker.Result[] = [
@@ -1223,6 +1232,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00QBTFDAVO000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Niclas Anspach',
       'number': 18
     },
@@ -1246,6 +1256,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00NKAT7PHC000000VV0AG85VVUH1CIQU',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Mathias Fetsch',
       'number': 11
     },
@@ -1269,6 +1280,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00NKAT7PHC000000VV0AG85VVUH1CIQU',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Mathias Fetsch',
       'number': 11
     },
@@ -1292,6 +1304,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00Q5Q9SCV8000000VV0AG85VVV05E0NJ',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Simon Skarlatidis',
       'number': 30
     },
@@ -1315,6 +1328,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00QBTFDAVO000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Niclas Anspach',
       'number': 18
     },
@@ -1338,6 +1352,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00Q5QHB18G000000VV0AG85VVV05E0NJ',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Hannes Pöschl',
       'number': 23
     },
@@ -1361,6 +1376,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00QBTBKNBG000000VV0AG819VSPRME8B',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Manuel Stiefler',
       'number': 8
     },
@@ -1384,6 +1400,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00T6885PC4000000VV0AG80NVTQIGFT0',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Yannick Glessing',
       'number': 21
     },
@@ -1407,6 +1424,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00Q5QHB18G000000VV0AG85VVV05E0NJ',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Hannes Pöschl',
       'number': 23
     },
@@ -1430,6 +1448,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '016H6SHNTO000000VV0AG811VSPMN858',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Tim Littmann',
       'number': 31
     },
@@ -1453,6 +1472,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00QBSH0KFO000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Patrick Hobsch',
       'number': 34
     },
@@ -1476,6 +1496,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00QBSPUSA4000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Arif Ekin',
       'number': 24
     },
@@ -1499,6 +1520,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '0149O33CB4000000VV0AG80NVS243I77',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Leonardo Vonic',
       'number': 23
     },
@@ -1522,6 +1544,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00QBTE7UQK000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Thomas Winklbauer',
       'number': 21
     },
@@ -1545,6 +1568,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00QBRTDVU4000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Benjamin Baier',
       'number': 10
     },
@@ -1568,6 +1592,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00QBRRTKQK000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Adam Jabiri',
       'number': 27
     },
@@ -1591,6 +1616,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00NKAU4HVS000000VV0AG85VVUH1CIQU',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Timo Kern',
       'number': 10
     },
@@ -1614,6 +1640,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00QBT991OS000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Thomas Stowasser',
       'number': 27
     },
@@ -1637,6 +1664,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00QBSPUSA4000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Arif Ekin',
       'number': 24
     },
@@ -1660,6 +1688,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '011Q85K6RS000000VV0AG811VVCD89UM',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Philipp Hack',
       'number': 7
     },
@@ -1683,11 +1712,13 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'playerIn': {
       'id': '00S6KF8U80000000VV0AG80NVTI1GQJD',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Leonard Grob',
       'number': 40
     },
     'playerOut': {
       'id': '00QBSH0KFO000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Patrick Hobsch',
       'number': 34
     },
@@ -1707,11 +1738,13 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'playerIn': {
       'id': '010004J0P4000000VV0AG80NVU29ORDR',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Sandro Porta',
       'number': 7
     },
     'playerOut': {
       'id': '00NKAT7PHC000000VV0AG85VVUH1CIQU',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Mathias Fetsch',
       'number': 11
     },
@@ -1731,11 +1764,13 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'playerIn': {
       'id': '00QRFTR600000000VV0AG83KVUE21VIT',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Florian Schmid',
       'number': 31
     },
     'playerOut': {
       'id': '00Q5Q9SCV8000000VV0AG85VVV05E0NJ',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Simon Skarlatidis',
       'number': 30
     },
@@ -1755,11 +1790,13 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'playerIn': {
       'id': '02164VK6JG000000VS54898GVUIPK31D',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Sebastian Burke',
       'number': 29
     },
     'playerOut': {
       'id': '016SFLN3KK000000VV0AG811VSFK1A39',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Reza Sakhi Zada',
       'number': 6
     },
@@ -1779,11 +1816,13 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'playerIn': {
       'id': '01M143NJCC000000VV0AG80NVSI4B8FE',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Viktor Zentrich',
       'number': 2
     },
     'playerOut': {
       'id': '00QBTFDAVO000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Niclas Anspach',
       'number': 18
     },
@@ -1803,11 +1842,13 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'playerIn': {
       'id': '01ABJIO6U4000000VV0AG811VUP4IALO',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Sebastian Maier',
       'number': 10
     },
     'playerOut': {
       'id': '00QBS234IO000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Maximilian Welzmüller',
       'number': 19
     },
@@ -1827,11 +1868,13 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'playerIn': {
       'id': '012I1CTUPG000000VV0AG80NVSN933FP',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Ben Biton',
       'number': 25
     },
     'playerOut': {
       'id': '010AV00OOG000000VV0AG811VTGVH5ON',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Alexis Fambo',
       'number': 32
     },
@@ -1851,11 +1894,13 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'playerIn': {
       'id': '013N3MJT1G000000VV0AG811VTES4D64',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Robert Manole',
       'number': 8
     },
     'playerOut': {
       'id': '00QBSKJJOO000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Lukas Riglewski',
       'number': 22
     },
@@ -1875,11 +1920,13 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'playerIn': {
       'id': '00S6KF8U80000000VV0AG80NVTI1GQJD',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Leonard Grob',
       'number': 40
     },
     'playerOut': {
       'id': '01AII7CKJ8000000VV0AG811VVUO230N',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Maurice Krattenmacher',
       'number': 17
     },
@@ -1899,11 +1946,13 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'playerIn': {
       'id': '00QRFTR600000000VV0AG83KVUE21VIT',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Florian Schmid',
       'number': 31
     },
     'playerOut': {
       'id': '00QBTFDAVO000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Niclas Anspach',
       'number': 18
     },
@@ -1923,6 +1972,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00QBSKJJOO000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Lukas Riglewski',
       'number': 22
     },
@@ -1949,6 +1999,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00QBTCN9A8000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Sandro Sengersdorf',
       'number': 16
     },
@@ -1975,6 +2026,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00SAHPL7TC000000VV0AG811VTP102JQ',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Jasper Maljojoki',
       'number': 5
     },
@@ -2001,6 +2053,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00KCJ25I0C000000VV0AG83KVUPEJPGB',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Markus Schwabl',
       'number': 23
     },
@@ -2021,6 +2074,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00QBT0UFE0000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Fabio Sabbagh',
       'number': 17
     },
@@ -2047,6 +2101,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00Q5QH83TC000000VV0AG85VVV05E0NJ',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Hendrik Hofgärtner',
       'number': 28
     },
@@ -2073,6 +2128,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00QBS234IO000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Maximilian Welzmüller',
       'number': 19
     },
@@ -2093,6 +2149,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00VGRU2KLS000000VV0AG80NVSS49TAG',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Timon Obermeier',
       'number': 15
     },
@@ -2113,6 +2170,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00T6885PC4000000VV0AG80NVTQIGFT0',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Yannick Glessing',
       'number': 21
     },
@@ -2133,6 +2191,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00KCJ25I0C000000VV0AG83KVUPEJPGB',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Markus Schwabl',
       'number': 23
     },
@@ -2153,6 +2212,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00Q5QGC524000000VV0AG85VVV05E0NJ',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Maurice Strobel',
       'number': 12
     },
@@ -2173,6 +2233,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '01A79C5CN8000000VV0AG811VV0EIA42',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Moritz Sommerauer',
       'number': 35
     },
@@ -2199,6 +2260,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '016SFLN3KK000000VV0AG811VSFK1A39',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Reza Sakhi Zada',
       'number': 6
     },
@@ -2225,6 +2287,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '0137UMI5QC000000VV0AG811VT42BEI9',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Nicolai Oppelt',
       'number': 22
     },
@@ -2245,6 +2308,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '0137UMI5QC000000VV0AG811VT42BEI9',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Nicolai Oppelt',
       'number': 22
     },
@@ -2265,6 +2329,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '0137UMI5QC000000VV0AG811VT42BEI9',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Nicolai Oppelt',
       'number': 22
     },
@@ -2285,6 +2350,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '0137UMI5QC000000VV0AG811VT42BEI9',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Nicolai Oppelt',
       'number': 22
     },
@@ -2305,6 +2371,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00QBTDCBIC000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Xaver Müller',
       'number': 21
     },
@@ -2331,6 +2398,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00QBSSGPB0000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Jannik Feidel',
       'number': 20
     },
@@ -2351,6 +2419,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00QBSSGPB0000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Jannik Feidel',
       'number': 20
     },
@@ -2371,6 +2440,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00QBRRTKQK000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Adam Jabiri',
       'number': 27
     },
@@ -2397,6 +2467,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '011HH2AQ2O000000VV0AG80NVV3499AR',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Halit Yilmaz',
       'number': 11
     },
@@ -2423,6 +2494,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00QBRRTKQK000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Adam Jabiri',
       'number': 27
     },
@@ -2449,6 +2521,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00QBTEGMH4000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Burak Ayvaz',
       'number': 7
     },
@@ -2469,6 +2542,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00QBT79Q5S000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Nico Ott',
       'number': 6
     },
@@ -2489,6 +2563,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '012836DHN8000000VV0AG811VVMSCOJA',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Daniel Winkler',
       'number': 20
     },
@@ -2515,6 +2590,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00QBSP3VFC000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Arijanit Kelmendi',
       'number': 5
     },
@@ -2535,6 +2611,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '017J2CN51O000000VV0AG811VVJ2MRI4',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Malik Salkic',
       'number': 33
     },
@@ -2561,6 +2638,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'away',
     'player': {
       'id': '00QBTB0OIO000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Turgay Karvar',
       'number': 2
     },
@@ -2587,6 +2665,7 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'team': 'home',
     'player': {
       'id': '00QBT81MQG000000VV0AG819VSKRC3V1',
+      'imageId': '029U6RQNHO000000VS5489B5VVJH11S3',
       'name': 'Christoph Neuwirth',
       'number': 5
     },
@@ -2609,3 +2688,37 @@ export const exampleLivetickerResults: BfvLiveticker.Result[] = [
     'reportLink': 'https://www.bfv.de/ticker/melden/02K03TT5LG000001VS5489B6VV4DR9A5/02K04J9KEO000000VS5489B5VT8CT2E0/02IHAAGDIK000000VS5489B3VS27R2HJ'
   }
 ];
+
+export const exampleGameInfo: GameInfo = {
+  id: 'game_id',
+  competition: {
+    name: 'competition_name',
+    link: 'competition_link',
+    gameDay: 12
+  },
+  result: {
+    home: 1,
+    away: 2
+  },
+  date: new Date().toISOString(),
+  homeTeam: {
+    id: 'home_team_id',
+    name: 'home_team_name',
+    imageId: 'home_team_image_id'
+  },
+  awayTeam: {
+    id: 'away_team_id',
+    name: 'away_team_name',
+    imageId: 'away_team_image_id'
+  },
+  adress: 'adress',
+  adressDescription: 'adress_description',
+  livetickers: [
+    {
+      id: 'liveticker_1_id',
+      loadNew: true,
+      ifModifiedSinceTimestamp: new Date().toISOString(),
+      results: exampleLivetickerResults
+    }
+  ]
+};

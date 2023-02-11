@@ -18,75 +18,75 @@ export class ApiService {
   ) {}
 
   public async verifyRecaptcha(parameters: VerifyRecaptchaFunction.Parameters): Promise<VerifyRecaptchaFunction.ReturnType> {
-    const result = await this.callFunction<VerifyRecaptchaFunction.Parameters, VerifyRecaptchaFunction.ReturnType>('v2_verifyRecaptcha', parameters);
+    const result = await this.callFunction<VerifyRecaptchaFunction.Parameters, VerifyRecaptchaFunction.ReturnType>('verifyRecaptcha', parameters);
     return result.get();
   }
 
   public async sendContactMail(parameters: SendContactMailFunction.Parameters): Promise<SendContactMailFunction.ReturnType> {
-    const result = await this.callFunction<SendContactMailFunction.Parameters, SendContactMailFunction.ReturnType>('v2_sendContactMail', parameters);
+    const result = await this.callFunction<SendContactMailFunction.Parameters, SendContactMailFunction.ReturnType>('sendContactMail', parameters);
     return result.get();
   }
 
   public async addUserForWaiting(parameters: AddUserForWaitingFunction.Parameters): Promise<AddUserForWaitingFunction.ReturnType> {
-    const result = await this.callFunction<AddUserForWaitingFunction.Parameters, AddUserForWaitingFunction.ReturnType>('v2_addUserForWaiting', parameters);
+    const result = await this.callFunction<AddUserForWaitingFunction.Parameters, AddUserForWaitingFunction.ReturnType>('addUserForWaiting', parameters);
     return result.get();
   }
 
   public async acceptDeclineWaitingUser(parameters: AcceptDeclineWaitingUserFunction.Parameters): Promise<AcceptDeclineWaitingUserFunction.ReturnType> {
-    const result = await this.callFunction<AcceptDeclineWaitingUserFunction.Parameters, AcceptDeclineWaitingUserFunction.ReturnType>('v2_acceptDeclineWaitingUser', parameters);
+    const result = await this.callFunction<AcceptDeclineWaitingUserFunction.Parameters, AcceptDeclineWaitingUserFunction.ReturnType>('acceptDeclineWaitingUser', parameters);
     return result.get();
   }
 
   public async checkUserAuthentication(parameters: CheckUserAuthenticationFunction.Parameters): Promise<'authorized' | 'unauthorized'> {
-    const result = await this.callFunction<CheckUserAuthenticationFunction.Parameters, CheckUserAuthenticationFunction.ReturnType>('v2_checkUserAuthentication', parameters);
+    const result = await this.callFunction<CheckUserAuthenticationFunction.Parameters, CheckUserAuthenticationFunction.ReturnType>('checkUserAuthentication', parameters);
     if (result.state === 'failure' && result.error.code === 'permission-denied') return 'unauthorized';
     result.get();
     return 'authorized';
   }
 
   public async disableNews(parameters: DisableNewsFunction.Parameters): Promise<DisableNewsFunction.ReturnType> {
-    const result = await this.callFunction<DisableNewsFunction.Parameters, DisableNewsFunction.ReturnType>('v2_disableNews', parameters);
+    const result = await this.callFunction<DisableNewsFunction.Parameters, DisableNewsFunction.ReturnType>('disableNews', parameters);
     return result.get();
   }
 
   public async editEvent<GroupId>(parameters: EditEventFunction.Parameters<GroupId>): Promise<EditEventFunction.ReturnType> {
-    const result = await this.callFunction<EditEventFunction.Parameters<GroupId>, EditEventFunction.ReturnType>('v2_editEvent', parameters);
+    const result = await this.callFunction<EditEventFunction.Parameters<GroupId>, EditEventFunction.ReturnType>('editEvent', parameters);
     return result.get();
   }
 
   public async editNews(parameters: EditNewsFunction.Parameters): Promise<EditNewsFunction.ReturnType> {
-    const result = await this.callFunction<EditNewsFunction.Parameters, EditNewsFunction.ReturnType>('v2_editNews', parameters);
+    const result = await this.callFunction<EditNewsFunction.Parameters, EditNewsFunction.ReturnType>('editNews', parameters);
     return result.get();
   }
 
   public async getEvents<GroupId>(parameters: GetEventsFunction.Parameters<GroupId>): Promise<GetEventsFunction.ReturnType<GroupId>> {
-    const result = await this.callFunction<GetEventsFunction.Parameters<GroupId>, GetEventsFunction.ReturnType<GroupId>>('v2_getEvents', parameters);
+    const result = await this.callFunction<GetEventsFunction.Parameters<GroupId>, GetEventsFunction.ReturnType<GroupId>>('getEvents', parameters);
     return result.get();
   }
 
   public async getNews(parameters: GetNewsFunction.Parameters): Promise<GetNewsFunction.ReturnType> {
-    const result = await this.callFunction<GetNewsFunction.Parameters, GetNewsFunction.ReturnType>('v2_getNews', parameters);
+    const result = await this.callFunction<GetNewsFunction.Parameters, GetNewsFunction.ReturnType>('getNews', parameters);
     return result.get();
   }
 
   public async getSingleNews(parameters: GetSingleNewsFunction.Parameters): Promise<GetSingleNewsFunction.ReturnType | null> {
-    const result = await this.callFunction<GetSingleNewsFunction.Parameters, GetSingleNewsFunction.ReturnType>('v2_getSingleNews', parameters);
+    const result = await this.callFunction<GetSingleNewsFunction.Parameters, GetSingleNewsFunction.ReturnType>('getSingleNews', parameters);
     if (result.state === 'failure' && result.error.code === 'unavailable') return null;
     if (result.state === 'failure' && result.error.code === 'not-found') return null;
     return result.get();
   }
 
   public async getUnauthenticatedUsers(parameters: GetUnauthenticatedUsersFunction.Parameters): Promise<GetUnauthenticatedUsersFunction.ReturnType> {
-    const result = await this.callFunction<GetUnauthenticatedUsersFunction.Parameters, GetUnauthenticatedUsersFunction.ReturnType>('v2_getUnauthenticatedUsers', parameters);
+    const result = await this.callFunction<GetUnauthenticatedUsersFunction.Parameters, GetUnauthenticatedUsersFunction.ReturnType>('getUnauthenticatedUsers', parameters);
     return result.get();
   }
 
   public async getTeamSquad(parameters: GetTeamSquadFunction.Parameters): Promise<GetTeamSquadFunction.ReturnType> {
-    const result = await this.callFunction<GetTeamSquadFunction.Parameters, GetTeamSquadFunction.ReturnType>('v2_getTeamSquad', parameters);
+    const result = await this.callFunction<GetTeamSquadFunction.Parameters, GetTeamSquadFunction.ReturnType>('getTeamSquad', parameters);
     return result.get();
   }
   public async deleteAllData(parameters: DeleteAllDataFunction.Parameters): Promise<DeleteAllDataFunction.ReturnType> {
-    const result = await this.callFunction<DeleteAllDataFunction.Parameters, DeleteAllDataFunction.ReturnType>('v2_deleteAllData', parameters);
+    const result = await this.callFunction<DeleteAllDataFunction.Parameters, DeleteAllDataFunction.ReturnType>('deleteAllData', parameters);
     return result.get();
   }
 
@@ -140,7 +140,7 @@ export class ApiService {
       verbose: ApiService.VerboseType,
       databaseType: DatabaseType.Value,
       parameters: string
-    }, string>('v2_fiatShamirChallengeGenerator');
+    }, string>('fiatShamirChallengeGenerator');
     const data = await lastValueFrom(callableFunction({
       verbose: environment.verbose,
       databaseType: environment.databaseType.value,
