@@ -1,47 +1,82 @@
 <app-text-section
-  [title]="gameInfo.homeTeam.name + ' gegen ' + gameInfo.awayTeam.name"
+  *ngIf="FetchState.isLoading(gameInfo)"
+  [title]="'Spiel Infos werden geladen'"
+></app-text-section>
+<app-text-section
+  *ngIf="FetchState.isFailure(gameInfo)"
+  [title]="'Spiel Infos konnten nicht geladen werden'"
+>
+  <p
+    class="text large"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Bitte landed Sie die Seite neu.</p>
+</app-text-section>
+<app-text-section
+  *ngIf="FetchState.isSuccess(gameInfo)"
+  [title]="FetchState.getContent(gameInfo).homeTeam.name + ' gegen ' + FetchState.getContent(gameInfo).awayTeam.name"
 >
   <a
-    href="{{ gameInfo.competition.link }}"
-    title="{{ gameInfo.competition.name }}"
+    id="competition"
+    href="{{ FetchState.getContent(gameInfo).competition.link }}"
+    title="{{ FetchState.getContent(gameInfo).competition.name }}"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >{{ FetchState.getContent(gameInfo).competition.name }}</a>
+  <p
+    id="game-day"
     [ngStyle]="{
       color: styleConfig.css('textColor')
     }"
-  >{{ gameInfo.competition.name }}</a>
+  >{{ FetchState.getContent(gameInfo).competition.gameDay.toString() + '. Spieltag' }}</p>
   <p
-    [ngStyle]="{
-      color: styleConfig.css('textColor')
-    }"
-  >{{ gameInfo.competition.gameDay.toString() + '. Spieltag' }}</p>
-  <p
+    id="date"
     [ngStyle]="{
       color: styleConfig.css('textColor')
     }"
   >{{ gameDateDescription }}</p>
   <a
-    *ngIf="gameInfo.adress !== undefined && gameInfo.adressDescription !== undefined"
-    href="{{ googleMapsLink(gameInfo.adress) }}"
-    title="{{ gameInfo.adressDescription }}"
+    id="adress"
+    *ngIf="FetchState.getContent(gameInfo).adress !== undefined && FetchState.getContent(gameInfo).adressDescription !== undefined"
+    href="{{ googleMapsLink(FetchState.getContent(gameInfo).adress!) }}"
+    title="{{ FetchState.getContent(gameInfo).adressDescription }}"
     [ngStyle]="{
-      color: styleConfig.css('textColor')
+      color: styleConfig.css('primaryColor')
     }"
-  >{{ gameInfo.adressDescription }}</a>
+  >{{ FetchState.getContent(gameInfo).adressDescription }}</a>
   <p
-    *ngIf="gameInfo.adress === undefined && gameInfo.adressDescription !== undefined"
+    id="adress"
+    class="no-link"
+    *ngIf="FetchState.getContent(gameInfo).adress === undefined && FetchState.getContent(gameInfo).adressDescription !== undefined"
     [ngStyle]="{
       color: styleConfig.css('textColor')
     }"
-  >{{ gameInfo.adressDescription }}</p>
+  >{{ FetchState.getContent(gameInfo).adressDescription }}</p>
   <a
-    *ngIf="gameInfo.adress !== undefined"
-    href="{{ googleMapsLink(gameInfo.adress) }}"
-    title="{{ gameInfo.adressDescription ?? gameInfo.adress }}"
+    id="adress-description"
+    *ngIf="FetchState.getContent(gameInfo).adress !== undefined"
+    href="{{ googleMapsLink(FetchState.getContent(gameInfo).adress!) }}"
+    title="{{ FetchState.getContent(gameInfo).adressDescription ?? FetchState.getContent(gameInfo).adress }}"
     [ngStyle]="{
-      color: styleConfig.css('textColor')
+      color: styleConfig.css('primaryColor')
     }"
-  >{{ gameInfo.adress }}</a>
+  >{{ FetchState.getContent(gameInfo).adress }}</a>
+  <select
+    id="select-liveticker"
+    *ngIf="FetchState.getContent(gameInfo).livetickers.length !== 0"
+    disabled="{{ FetchState.getContent(gameInfo).livetickers.length !== 1 }}"
+    (change)="selectLivetickerId($event)"
+  >
+    <option
+      *ngFor="let liveticker of FetchState.getContent(gameInfo).livetickers; index as index"
+      value="{{ liveticker.id }}"
+    >{{ 'Liveticker ' + (index + 1).toString() }}</option>
+  </select>
   <app-liveticker
-    [gameInfo]="gameInfo"
-    [liveticker]="gameInfo.livetickers[0]"
+    *ngIf="selectedLiveticker !== undefined"
+    [gameInfo]="FetchState.getContent(gameInfo)"
+    [liveticker]="selectedLiveticker"
   ></app-liveticker>
 </app-text-section>

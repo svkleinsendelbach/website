@@ -7,7 +7,7 @@ import { DatabaseType } from '../classes/database-type';
 import { lastValueFrom } from 'rxjs';
 import { FirebaseFunction } from '../classes/firebase-function';
 import { Result } from '../classes/result';
-import { VerifyRecaptchaFunction, SendContactMailFunction, AddUserForWaitingFunction, AcceptDeclineWaitingUserFunction, CheckUserAuthenticationFunction, EditEventFunction, EditNewsFunction, GetEventsFunction, GetNewsFunction, GetSingleNewsFunction, GetUnauthenticatedUsersFunction, GetTeamSquadFunction, DeleteAllDataFunction, DisableNewsFunction } from './api-functions-types';
+import { VerifyRecaptchaFunction, SendContactMailFunction, AddUserForWaitingFunction, AcceptDeclineWaitingUserFunction, CheckUserAuthenticationFunction, EditEventFunction, EditNewsFunction, GetEventsFunction, GetNewsFunction, GetSingleNewsFunction, GetUnauthenticatedUsersFunction, GetTeamSquadFunction, DeleteAllDataFunction, DisableNewsFunction, GetGameInfoFunction } from './api-functions-types';
 
 @Injectable({
   providedIn: 'root'
@@ -85,6 +85,12 @@ export class ApiService {
     const result = await this.callFunction<GetTeamSquadFunction.Parameters, GetTeamSquadFunction.ReturnType>('getTeamSquad', parameters);
     return result.get();
   }
+
+  public async getGameInfo(parameters: GetGameInfoFunction.Parameters): Promise<GetGameInfoFunction.ReturnType> {
+    const result = await this.callFunction<GetGameInfoFunction.Parameters, GetGameInfoFunction.ReturnType>('getGameInfo', parameters);
+    return result.get();
+  }
+
   public async deleteAllData(parameters: DeleteAllDataFunction.Parameters): Promise<DeleteAllDataFunction.ReturnType> {
     const result = await this.callFunction<DeleteAllDataFunction.Parameters, DeleteAllDataFunction.ReturnType>('deleteAllData', parameters);
     return result.get();

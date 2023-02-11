@@ -1,5 +1,6 @@
 import { EditType } from '../classes/edit-type';
 import { Event, EventGroup } from '../classes/event';
+import { GameInfo } from '../classes/game-info';
 import { News } from '../classes/news';
 import { TeamSquad } from '../classes/team-squad';
 
@@ -114,6 +115,14 @@ export namespace GetUnauthenticatedUsersFunction {
     firstName: string,
     lastName: string
   }[];
+}
+
+export namespace GetGameInfoFunction {
+  export type Parameters = {
+    gameId: string;
+  }
+
+  export type ReturnType = GameInfo;
 }
 
 export namespace SendContactMailFunction {

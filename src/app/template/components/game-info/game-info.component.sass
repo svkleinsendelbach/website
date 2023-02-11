@@ -1,0 +1,48 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(center, center)
+  width: 100%
+
+#competition
+  @include font-montserrat
+  @include font-size('medium')
+  @include font-weight('medium')
+  text-decoration: none
+  cursor: pointer
+  margin-bottom: 15px
+
+#game-day
+  @include font-montserrat
+  @include font-size('medium')
+  @include font-weight('normal')
+  margin-bottom: 5px
+
+#date
+  @include font-montserrat
+  @include font-size('medium')
+  @include font-weight('normal')
+  margin-bottom: 15px
+
+#adress
+  @include font-montserrat
+  @include font-size('medium')
+  @include font-weight('normal')
+  text-decoration: none
+  cursor: pointer
+  margin-bottom: 5px
+
+  &.no-link
+    cursor: default
+
+#adress-description
+  @include font-montserrat
+  @include font-size('medium')
+  @include font-weight('normal')
+  text-decoration: none
+  cursor: pointer
+  margin-bottom: 50px
+
+#select-liveticker
+  margin-bottom: 50px
