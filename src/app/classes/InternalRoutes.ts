@@ -31,7 +31,7 @@ import { GymnasticsComponent } from '../pages/gymnastics/gymnastics.component';
 import { ImprintComponent } from '../pages/imprint/imprint.component';
 import { AllNewsComponent } from '../pages/news/all-news/all-news.component';
 
-const associatedRoute: Record<Exclude<InternalPath, 'nachricht'>, Type<unknown>> = {
+const associatedRoute: Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, Type<unknown>> = {
   'home': HomeComponent,
   'über-uns': ManagersComponent,
   'sportheim': SportshomeComponent,

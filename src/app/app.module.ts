@@ -73,6 +73,7 @@ import { NewsDetailComponent } from './pages/news/news-detail/news-detail.compon
 import { GameInfoComponent } from './template/components/game-info/game-info.component';
 import { LivetickerComponent } from './template/components/game-info/liveticker/liveticker.component';
 import { ResultComponent } from './template/components/game-info/liveticker/result/result.component';
+import { GameDetailComponent } from './pages/game-detail/game-detail.component';
 
 @NgModule({
   declarations: [
@@ -131,7 +132,8 @@ import { ResultComponent } from './template/components/game-info/liveticker/resu
     NewsDetailComponent,
     GameInfoComponent,
     LivetickerComponent,
-    ResultComponent
+    ResultComponent,
+    GameDetailComponent
   ],
   imports: [
     BrowserModule,

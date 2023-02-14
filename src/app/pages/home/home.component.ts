@@ -70,7 +70,7 @@ export class HomeComponent {
 }
 
 export namespace HomeComponent {
-  export const homeLink: Record<Exclude<InternalPath, 'nachricht'>, HomeLinksComponent.LinkItem> = {
+  export const homeLink: Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, HomeLinksComponent.LinkItem> = {
     'home': {
       name: 'Home',
       link: InternalLink.all['home'],

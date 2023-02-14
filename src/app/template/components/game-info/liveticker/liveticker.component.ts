@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BfvLiveticker, GameInfo } from 'src/app/template/classes/game-info';
+import { BfvLiveticker } from 'src/app/template/classes/game-info';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
 
@@ -9,8 +9,6 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
   styleUrls: ['./liveticker.component.sass']
 })
 export class LivetickerComponent {
-  @Input() gameInfo!: Omit<GameInfo, 'livetickers'>;
-
   @Input() liveticker!: BfvLiveticker;
 
   public constructor(

@@ -25,6 +25,7 @@ export type InternalPath =
   | 'impressum'
   | 'nachrichten'
   | 'nachricht'
+  | 'spiel'
   | 'bearbeiten'
   | 'bearbeiten/anmelden'
   | 'bearbeiten/termine'
@@ -33,7 +34,7 @@ export type InternalPath =
   | 'bearbeiten/nachrichten/bearbeiten'
 
 export namespace InternalPath {
-  export const all: InternalPath[] = [
+  export const all: Exclude<InternalPath, 'nachricht' | 'spiel'>[] = [
     'home',
     'über-uns',
     'sportheim',
@@ -56,7 +57,6 @@ export namespace InternalPath {
     'kontakt',
     'impressum',
     'nachrichten',
-    'nachricht',
     'bearbeiten',
     'bearbeiten/anmelden',
     'bearbeiten/termine',
@@ -65,7 +65,7 @@ export namespace InternalPath {
     'bearbeiten/nachrichten/bearbeiten'
   ];
 
-  export const title: Record<InternalPath, string> = {
+  export const title: Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, string> = {
     'home': 'Home',
     'über-uns': 'Über uns',
     'sportheim': 'Sportheim',
@@ -88,7 +88,6 @@ export namespace InternalPath {
     'kontakt': 'Kontakt',
     'impressum': 'Impressum',
     'nachrichten': 'Alle Nachrichten',
-    'nachricht': '',
     'bearbeiten': 'Website bearbeiten',
     'bearbeiten/anmelden': 'Anmelden',
     'bearbeiten/termine': 'Termine bearbeiten',
@@ -98,16 +97,17 @@ export namespace InternalPath {
   };
 }
 export namespace InternalLink {
-  export const all: Record<Exclude<InternalPath, 'nachricht'>, Link> & { 'nachricht': (news: News) => Link } = (() => {
+  export const all: Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, Link> & { 'nachricht': (news: News) => Link, 'spiel': (id: string) => Link} = (() => {
     const allLinks = {
       'nachricht': (news: News) => {
         return Link.internalParam<InternalPath>(news.title, 'nachricht', news.id);
       },
-      ...{} as Record<Exclude<InternalPath, 'nachricht'>, Link>
+      'spiel': (id: string) => {
+        return Link.internalParam<InternalPath>('Spiel', 'spiel', id);
+      },
+      ...{} as Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, Link>
     };
     for (const internalPath of InternalPath.all) {
-      if (internalPath === 'nachricht')
-        continue;
       allLinks[internalPath] = Link.internal<InternalPath>(InternalPath.title[internalPath], internalPath);
     }
     return allLinks;

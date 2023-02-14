@@ -6,8 +6,8 @@ export type GameInfo = {
     gameDay: number;
   };
   result: {
-      home: number;
-      away: number;
+      home: number | undefined;
+      away: number | undefined;
   }
   date: string,
   homeTeam: GameInfo.Team;

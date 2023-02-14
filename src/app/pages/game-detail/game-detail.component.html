@@ -1,0 +1,5 @@
+<app-game-info
+  *ngIf="gameId !== null"
+  [gameId]="gameId"
+  (title)="titleChanged($event)"
+></app-game-info>

@@ -44,5 +44,59 @@
   cursor: pointer
   margin-bottom: 50px
 
+#result-container
+  @include flex-row(center, center)
+  width: 100%
+  margin-bottom: 75px
+
+  #home-team
+    @include flex-column(center, center)
+    margin-right: 15px
+    flex: 5
+
+    #home-team-image
+      width: 100px
+      height: 100px
+      object-fit: cover
+
+    #home-team-name
+      @include font-montserrat
+      @include font-size('medium')
+      @include font-weight('medium')
+      margin-top: 10px
+
+  #result
+    @include font-montserrat
+    @include font-size('xl-header')
+    @include font-weight('bold')
+    flex: 1
+
+  #away-team
+    @include flex-column(center, center)
+    margin-left: 15px
+    flex: 5
+
+    #away-team-image
+      width: 100px
+      height: 100px
+      object-fit: cover
+
+    #away-team-name
+      @include font-montserrat
+      @include font-size('medium')
+      @include font-weight('medium')
+      margin-top: 10px
+
+  &.mobile
+    @include flex-column(center, center)
+
+    #home-team
+      margin-right: 0
+      margin-bottom: 15px
+
+    #away-team
+      margin-left: 0
+      margin-top: 15px
+
 #select-liveticker
   margin-bottom: 50px

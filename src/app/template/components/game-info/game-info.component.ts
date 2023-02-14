@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FetchState } from '../../classes/fetch-state';
 import { FullDatum } from '../../classes/full-datum';
 import { BfvLiveticker, GameInfo } from '../../classes/game-info';
@@ -15,6 +15,8 @@ export class GameInfoComponent implements OnInit {
   public FetchState = FetchState;
 
   @Input() public gameId!: string;
+
+  @Output() public title = new EventEmitter<string>();
 
   public gameInfo: FetchState<GameInfo> = FetchState.loading;
 
@@ -40,6 +42,7 @@ export class GameInfoComponent implements OnInit {
     if (gameInfo.livetickers.length !== 0) {
       this.selectedLivetickerId = gameInfo.livetickers[0].id;
     }
+    this.title.emit(`${gameInfo.homeTeam.name} gegen ${gameInfo.awayTeam.name}`);
     this.gameInfo = FetchState.success(gameInfo);
     for (const liveticker of FetchState.getContent(this.gameInfo).livetickers) {
       if (liveticker.loadNew) {

@@ -1,45 +1,4 @@
 <div
-  id="container"
-  [ngClass]="deviceType.className"
->
-  <div
-    id="home-team"
-  >
-    <img
-      id="home-team-image"
-      src="{{ 'https://service-prod.bfv.de/export.media?action=getLogo&format=7&id=' + gameInfo.homeTeam.imageId }}"
-      title="{{ gameInfo.homeTeam.name }}"
-    >
-    <p
-      id="home-team-name"
-      [ngStyle]="{
-        color: styleConfig.css('textColor')
-      }"
-    >{{ gameInfo.homeTeam.name }}</p>
-  </div>
-  <p
-    id="result"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >{{ gameInfo.result.home.toString() + ' : ' + gameInfo.result.away.toString() }}</p>
-  <div
-    id="away-team"
-  >
-    <img
-      id="away-team-image"
-      src="{{ 'https://service-prod.bfv.de/export.media?action=getLogo&format=7&id=' + gameInfo.awayTeam.imageId }}"
-      title="{{ gameInfo.awayTeam.name }}"
-    >
-    <p
-      id="away-team-name"
-      [ngStyle]="{
-        color: styleConfig.css('textColor')
-      }"
-    >{{ gameInfo.awayTeam.name }}</p>
-  </div>
-</div>
-<div
   id="results-container"
 >
   <app-result

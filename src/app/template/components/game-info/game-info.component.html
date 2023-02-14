@@ -11,7 +11,7 @@
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
     }"
-  >Bitte landed Sie die Seite neu.</p>
+  >Bitte landen Sie die Seite neu.</p>
 </app-text-section>
 <app-text-section
   *ngIf="FetchState.isSuccess(gameInfo)"
@@ -42,6 +42,7 @@
     *ngIf="FetchState.getContent(gameInfo).adress !== undefined && FetchState.getContent(gameInfo).adressDescription !== undefined"
     href="{{ googleMapsLink(FetchState.getContent(gameInfo).adress!) }}"
     title="{{ FetchState.getContent(gameInfo).adressDescription }}"
+    target="_blank"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
     }"
@@ -59,10 +60,52 @@
     *ngIf="FetchState.getContent(gameInfo).adress !== undefined"
     href="{{ googleMapsLink(FetchState.getContent(gameInfo).adress!) }}"
     title="{{ FetchState.getContent(gameInfo).adressDescription ?? FetchState.getContent(gameInfo).adress }}"
+    target="_blank"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
     }"
   >{{ FetchState.getContent(gameInfo).adress }}</a>
+  <div
+    id="result-container"
+    [ngClass]="deviceType.className"
+  >
+    <div
+      id="home-team"
+    >
+      <img
+        id="home-team-image"
+        src="{{ 'https://service-prod.bfv.de/export.media?action=getLogo&format=7&id=' + FetchState.getContent(gameInfo).homeTeam.imageId }}"
+        title="{{ FetchState.getContent(gameInfo).homeTeam.name }}"
+      >
+      <p
+        id="home-team-name"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ FetchState.getContent(gameInfo).homeTeam.name }}</p>
+    </div>
+    <p
+      id="result"
+      [ngStyle]="{
+        color: styleConfig.css('primaryColor')
+      }"
+    >{{ (FetchState.getContent(gameInfo).result.home?.toString() ?? '-') + ' : ' + (FetchState.getContent(gameInfo).result.away?.toString() ?? '-') }}</p>
+    <div
+      id="away-team"
+    >
+      <img
+        id="away-team-image"
+        src="{{ 'https://service-prod.bfv.de/export.media?action=getLogo&format=7&id=' + FetchState.getContent(gameInfo).awayTeam.imageId }}"
+        title="{{ FetchState.getContent(gameInfo).awayTeam.name }}"
+      >
+      <p
+        id="away-team-name"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ FetchState.getContent(gameInfo).awayTeam.name }}</p>
+    </div>
+  </div>
   <select
     id="select-liveticker"
     *ngIf="FetchState.getContent(gameInfo).livetickers.length !== 0"
@@ -76,7 +119,6 @@
   </select>
   <app-liveticker
     *ngIf="selectedLiveticker !== undefined"
-    [gameInfo]="FetchState.getContent(gameInfo)"
     [liveticker]="selectedLiveticker"
   ></app-liveticker>
 </app-text-section>
