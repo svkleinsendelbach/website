@@ -74,4 +74,13 @@
       ></p>
     </div>
   </div>
+  <p
+    *ngIf="FetchState.isSuccess(fetchedEventGroups) && FetchState.getContent(fetchedEventGroups).length !== 0"
+    id="download-calendar"
+    (click)="downloadCalendar()"
+    [ngStyle]="{
+      color: styleConfig.css('textColor'),
+      borderColor: styleConfig.css('textColor')
+    }"
+  >ics-Kalender herunterladen</p>
 </app-text-section>

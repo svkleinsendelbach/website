@@ -41,7 +41,8 @@
             "scripts": [],
             "allowedCommonJsDependencies": [
               "utf8",
-              "sha512-crypt-ts"
+              "sha512-crypt-ts",
+              "ical-generator"
             ]
           },
           "configurations": {

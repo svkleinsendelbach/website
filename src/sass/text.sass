@@ -25,4 +25,4 @@ $font-size-map: ('xx-small': 12px, 'x-small': 16px, 'small': 18px, 'normal': 20p
 
 @mixin font-size($size)
     font-size: map.get($font-size-map, $size)
-
+    line-height: calc(1.25 * map.get($font-size-map, $size))

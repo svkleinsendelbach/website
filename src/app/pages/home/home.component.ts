@@ -286,7 +286,7 @@ export namespace HomeComponent {
     },
     sgWebsite: {
       id: 'sgWebsite',
-      name: 'Website',
+      name: 'Website der SG',
       title: 'SG Kleinsendelbach / Hetzles',
       link: Link.external('SG Kleinsendelbach / Hetzles', 'http://sg-kh.de', true),
       image: {

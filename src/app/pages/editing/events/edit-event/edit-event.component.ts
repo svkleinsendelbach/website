@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { EventGroupId } from 'src/app/classes/EventGroupId';
 import { InternalLink } from 'src/app/classes/InternalPath';
 import { Event } from 'src/app/template/classes/event';
-import { FullDatum } from 'src/app/template/classes/full-datum';
 import { guid } from 'src/app/template/classes/guid';
 import { ErrorLevel } from 'src/app/template/modules/input-form/classes/error-level';
 import { InputError } from 'src/app/template/modules/input-form/classes/input-error';
@@ -134,7 +133,6 @@ export class EditEventComponent implements OnInit {
         isSg2 = isKleinsendelbachHetzles2Regex.test(gameInfo.awayTeam.name);
       this.inputForm.field('groupId').inputValue = isSg2 ? 'football-adults/second-team' : 'football-adults/first-team';
       this.inputForm.field('title').inputValue = `${gameInfo.homeTeam.name} gegen ${gameInfo.awayTeam.name}`;
-      this.inputForm.field('subtitle').inputValue = `${gameInfo.homeTeam.name} gegen ${gameInfo.awayTeam.name} am ${FullDatum.description(FullDatum.fromDate(new Date(gameInfo.date)))}${gameInfo.adressDescription !== undefined ? `, ${gameInfo.adressDescription}`: ''}`;
       this.inputForm.field('link').inputValue = InternalLink.all.spiel(gameId).link;
       this.inputForm.field('date').inputValue = new Date(gameInfo.date);
     } catch (error) {
