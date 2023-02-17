@@ -36,7 +36,7 @@
   <p
     class="text left-align x-large margin-top-normal"
     *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.goalkeeper !== null && FetchState.getContent(fetchedSquad).squad!.goalkeeper!.length !== 0"
-  >goalkeeper</p>
+  >Torwart</p>
   <div
     class="container"
     *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.goalkeeper !== null && FetchState.getContent(fetchedSquad).squad!.goalkeeper!.length !== 0"
@@ -53,7 +53,7 @@
   <p
     class="text left-align x-large margin-top-normal"
     *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.defence !== null && FetchState.getContent(fetchedSquad).squad!.defence!.length !== 0"
-  >defence</p>
+  >Abwehr</p>
   <div
     class="container"
     *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.defence !== null && FetchState.getContent(fetchedSquad).squad!.defence!.length !== 0"
@@ -70,7 +70,7 @@
   <p
     class="text left-align x-large margin-top-normal"
     *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.midfield !== null && FetchState.getContent(fetchedSquad).squad!.midfield!.length !== 0"
-  >midfield</p>
+  >Mittelfeld</p>
   <div
     class="container"
     *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.midfield !== null && FetchState.getContent(fetchedSquad).squad!.midfield!.length !== 0"
@@ -87,7 +87,7 @@
   <p
     class="text left-align x-large margin-top-normal"
     *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.offence !== null && FetchState.getContent(fetchedSquad).squad!.offence!.length !== 0"
-  >offence</p>
+  >Sturm</p>
   <div
     class="container"
     *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.offence !== null && FetchState.getContent(fetchedSquad).squad!.offence!.length !== 0"

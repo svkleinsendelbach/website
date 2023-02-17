@@ -74,7 +74,7 @@ export namespace HomeComponent {
     'home': {
       name: 'Home',
       link: InternalLink.all['home'],
-      description: 'TODO',
+      description: '',
       icon: faHouse,
       animation: 'shake'
     },
@@ -88,35 +88,35 @@ export namespace HomeComponent {
     'sportheim': {
       name: 'Sportheim',
       link: InternalLink.all['sportheim'],
-      description: 'TODO',
+      description: '',
       icon: faHouseFlag,
       animation: 'shake'
     },
     'chroniken': {
       name: 'Chronik',
       link: InternalLink.all['chroniken'],
-      description: 'TODO',
+      description: '',
       icon: faBook,
       animation: 'shake'
     },
     'satzung': {
       name: 'Satzung',
       link: InternalLink.all['satzung'],
-      description: 'TODO',
+      description: '',
       icon: faFileLines,
       animation: 'shake'
     },
     'datenschutz': {
       name: 'Datenschutz',
       link: InternalLink.all['datenschutz'],
-      description: 'TODO',
+      description: '',
       icon: faShieldHalved,
       animation: 'shake'
     },
     'mitgliedsantrag': {
       name: 'Mitgliedsantrag',
       link: InternalLink.all['mitgliedsantrag'],
-      description: 'TODO',
+      description: '',
       icon: faFileLines,
       animation: 'shake'
     },
@@ -130,21 +130,21 @@ export namespace HomeComponent {
     'fussball/herren/erste-mannschaft': {
       name: '1. Mannschaft',
       link: InternalLink.all['fussball/herren/erste-mannschaft'],
-      description: 'TODO',
+      description: '',
       icon: faFutbol,
       animation: 'rotation'
     },
     'fussball/herren/zweite-mannschaft': {
       name: '2. Mannschaft',
       link: InternalLink.all['fussball/herren/zweite-mannschaft'],
-      description: 'TODO',
+      description: '',
       icon: faFutbol,
       animation: 'rotation'
     },
     'fussball/herren/alte-herren': {
       name: 'Alte Herren',
       link: InternalLink.all['fussball/herren/alte-herren'],
-      description: 'TODO',
+      description: '',
       icon: faFutbol,
       animation: 'rotation'
     },
@@ -158,28 +158,28 @@ export namespace HomeComponent {
     'fussball/jugend/c-jugend': {
       name: 'C-Jugend',
       link: InternalLink.all['fussball/jugend/c-jugend'],
-      description: 'TODO',
+      description: '',
       icon: faFutbol,
       animation: 'rotation'
     },
     'fussball/jugend/e-jugend': {
       name: 'E-Jugend',
       link: InternalLink.all['fussball/jugend/e-jugend'],
-      description: 'TODO',
+      description: '',
       icon: faFutbol,
       animation: 'rotation'
     },
     'fussball/jugend/f-jugend': {
       name: 'F-Jugend',
       link: InternalLink.all['fussball/jugend/f-jugend'],
-      description: 'TODO',
+      description: '',
       icon: faFutbol,
       animation: 'rotation'
     },
     'fussball/jugend/g-jugend': {
       name: 'G-Jugend',
       link: InternalLink.all['fussball/jugend/g-jugend'],
-      description: 'TODO',
+      description: '',
       icon: faFutbol,
       animation: 'rotation'
     },
@@ -214,56 +214,56 @@ export namespace HomeComponent {
     'impressum': {
       name: 'Impressum',
       link: InternalLink.all['impressum'],
-      description: 'TODO',
+      description: '',
       icon: faAddressBook,
       animation: 'shake'
     },
     'nachrichten': {
       name: 'Alle Nachrichten',
       link: InternalLink.all['nachrichten'],
-      description: 'TODO',
+      description: '',
       icon: faNewspaper,
       animation: 'shake'
     },
     'bearbeiten': {
       name: 'Website bearbeiten',
       link: InternalLink.all['bearbeiten'],
-      description: 'TODO',
+      description: '',
       icon: faPenToSquare,
       animation: 'shake'
     },
     'bearbeiten/anmelden': {
       name: 'Anmelden',
       link: InternalLink.all['bearbeiten/anmelden'],
-      description: 'TODO',
+      description: '',
       icon: faRightToBracket,
       animation: 'shake'
     },
     'bearbeiten/termine': {
       name: 'Termine bearbeiten',
       link: InternalLink.all['bearbeiten/termine'],
-      description: 'TODO',
+      description: '',
       icon: faCalendarDays,
       animation: 'shake'
     },
     'bearbeiten/nachrichten': {
       name: 'Nachrichten bearbeiten',
       link: InternalLink.all['bearbeiten/nachrichten'],
-      description: 'TODO',
+      description: '',
       icon: faNewspaper,
       animation: 'shake'
     },
     'bearbeiten/termine/bearbeiten': {
       name: 'Termin bearbeiten',
       link: InternalLink.all['bearbeiten/termine/bearbeiten'],
-      description: 'TODO',
+      description: '',
       icon: faCalendarDays,
       animation: 'shake'
     },
     'bearbeiten/nachrichten/bearbeiten': {
       name: 'Nachricht bearbeiten',
       link: InternalLink.all['bearbeiten/nachrichten/bearbeiten'],
-      description: 'TODO',
+      description: '',
       icon: faNewspaper,
       animation: 'shake'
     }
