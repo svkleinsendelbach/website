@@ -101,13 +101,12 @@ export class AuthService {
   }
 
   private async checkAuthenticationAndStoreLocal(authenticationType: UserAuthenticationType, user: firebase.User | null = null): Promise<'authorized' | 'unauthorized'> {
-    if (user === null) {
+    if (user === null)
       user = await new Promise<firebase.User | null>(resolve => {
         this.firebaseAuth.onAuthStateChanged(user => {
           resolve(user);
         });
       });
-    }
     if (user === null)
       return 'unauthorized';
     const expirationTime = this.authenticationExpirationTime[authenticationType];

@@ -22,8 +22,8 @@ import { AngularFireFunctionsModule, REGION } from '@angular/fire/compat/functio
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
-import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
-import { AngularFirePerformanceModule, PerformanceMonitoringService } from '@angular/fire/compat/performance';
+import { AngularFireAnalyticsModule, COLLECTION_ENABLED, CONFIG } from '@angular/fire/compat/analytics';
+import { AngularFirePerformanceModule, DATA_COLLECTION_ENABLED, INSTRUMENTATION_ENABLED, PerformanceMonitoringService } from '@angular/fire/compat/performance';
 import { NewsListComponent } from './template/components/news-list/news-list.component';
 import { HomeLinksComponent } from './template/components/home-links/home-links.component';
 import { SocialMediaLinksComponent } from './template/components/social-media-links/social-media-links.component';
@@ -160,7 +160,14 @@ import { GameDetailComponent } from './pages/game-detail/game-detail.component';
     { provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LdFFLgeAAAAAEzjFiR1X35IK7UHkL2Yx0EQ447i' },
     { provide: USE_DEVICE_LANGUAGE, useValue: true },
     { provide: PERSISTENCE, useValue: 'local' },
-    { provide: BUCKET, useValue: 'gs://svkleinsendelbach-website-v2' }
+    { provide: BUCKET, useValue: 'gs://svkleinsendelbach-website-v2' },
+    { provide: CONFIG, useValue: {
+      send_page_view: false,
+      anonymize_ip: true
+    }},
+    { provide: COLLECTION_ENABLED, useValue: false },
+    { provide: INSTRUMENTATION_ENABLED, useValue: false },
+    { provide: DATA_COLLECTION_ENABLED, useValue: false }
   ],
   bootstrap: [AppComponent]
 })

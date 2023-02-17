@@ -1,9 +1,12 @@
 import { Component, HostListener } from '@angular/core';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
+import { AngularFirePerformance } from '@angular/fire/compat/performance';
 import { InternalLink, InternalPath } from './classes/InternalPath';
 import { Link } from './template/classes/link';
 import { Style } from './template/classes/style';
 import { FooterComponent } from './template/components/footer/footer.component';
 import { HeaderComponent } from './template/components/header/header.component';
+import { CookieService } from './template/services/cookie.service';
 import { DeviceTypeService } from './template/services/device-type.service';
 import { StyleConfigService } from './template/services/style-config.service';
 
@@ -217,7 +220,10 @@ export class AppComponent {
 
   public constructor(
     public readonly deviceType: DeviceTypeService,
-    private readonly styleConfig: StyleConfigService
+    private readonly styleConfig: StyleConfigService,
+    private readonly cookieService: CookieService,
+    private fireAnalytics: AngularFireAnalytics,
+    private firePerformance: AngularFirePerformance
   ) {
     this.styleConfig.setConfig({
       primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
@@ -229,6 +235,15 @@ export class AppComponent {
       formSuccessStatusColor: new Style.AppearanceColor(Style.Color.hex('#54B435'), Style.Color.hex('#B6E2A1')),
       formErrorStatusColor: new Style.AppearanceColor(Style.Color.hex('#CE3A0F'), Style.Color.hex('#EB4511')),
       formInfoStatusColor: new Style.AppearanceColor(Style.Color.hex('#FFBF00'), Style.Color.hex('#FFE15D'))
+    });
+    const statisticsCookie = this.cookieService.getCookiesSelection()?.statistics;
+    this.fireAnalytics.setAnalyticsCollectionEnabled(statisticsCookie === 'selected');
+    this.firePerformance.instrumentationEnabled = (statisticsCookie === 'selected') as unknown as Promise<boolean>;
+    this.firePerformance.dataCollectionEnabled = (statisticsCookie === 'selected') as unknown as Promise<boolean>;
+    this.cookieService.listeners.add('fireAnalytics', selection => {
+      this.fireAnalytics.setAnalyticsCollectionEnabled(selection.functionality === 'selected');
+      this.firePerformance.instrumentationEnabled = (selection.functionality === 'selected') as unknown as Promise<boolean>;
+      this.firePerformance.dataCollectionEnabled = (selection.functionality === 'selected') as unknown as Promise<boolean>;
     });
   }
 

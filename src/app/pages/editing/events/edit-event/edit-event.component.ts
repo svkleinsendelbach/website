@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { EventGroupId } from 'src/app/classes/EventGroupId';
 import { InternalLink } from 'src/app/classes/InternalPath';
 import { Event } from 'src/app/template/classes/event';
+import { FullDatum } from 'src/app/template/classes/full-datum';
 import { guid } from 'src/app/template/classes/guid';
 import { ErrorLevel } from 'src/app/template/modules/input-form/classes/error-level';
 import { InputError } from 'src/app/template/modules/input-form/classes/input-error';
@@ -30,6 +31,19 @@ export class EditEventComponent implements OnInit {
     groupId: EventGroupId,
     event: Event.ReturnType
   } | undefined;
+
+  public bfvGameInputForm = new InputForm({
+    bfvGameLink: new InputField<string>('', [
+      Validator.required('Der BFV Link ist erforderlich.'),
+      Validator.url('Das ist kein gültiger Link.'),
+      Validator.pattern(/^https:\/\/www\.bfv\.de\/spiele\/\S+$/g, 'Der Link führt nicht zur BFV Spiele Seite, bsp: \'https://www.bfv.de/spiele/...\'.')
+    ])
+  }, {
+    invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
+    gameIdNotFound: new InputError('Im BFV Link konnte die Spiel-Id nicht gefunden werden.'),
+    gameNotFound: new InputError('Das Spiel konnte nicht beim BFV gefunden werden.'),
+    loading: new InputError('Daten werden vom BFV übernommen.', ErrorLevel.Info)
+  });
 
   public inputForm = new InputForm({
     groupId: new InputField<EventGroupId>('general', [
@@ -94,9 +108,48 @@ export class EditEventComponent implements OnInit {
     }
   }
 
-  public async saveEvent() {
-    if (this.inputForm.status !== 'valid')
+  public async takeBfvGame() {
+    if (this.bfvGameInputForm.status === 'loading')
       return;
+    this.bfvGameInputForm.status = 'valid';
+    const validation = this.bfvGameInputForm.evaluate();
+    if (validation === ValidationResult.Invalid)
+      return;
+    this.bfvGameInputForm.status ='loading';
+    const gameId = /^https:\/\/www\.bfv\.de\/spiele\/(?:\S+?\/)?(?<id>\S+?)$/.exec(this.bfvGameInputForm.field('bfvGameLink').value)?.groups?.['id'];
+    if (gameId === undefined) {
+      this.bfvGameInputForm.status = 'gameIdNotFound';
+      return;
+    }
+    try {
+      const gameInfo = await this.apiService.getGameInfo({
+        gameId: gameId
+      });
+      const isKleinsendelbachHetzlesRegex = /Kleinsendelbach.*Hetzles|Hetzles.*Kleinsendelbach/g;
+      const isKleinsendelbachHetzles2Regex = /Kleinsendelbach.*Hetzles.*2|Kleinsendelbach.*2.*Hetzles|Hetzles.*Kleinsendelbach.*2|Hetzles.*2.*Kleinsendelbach/g;
+      let isSg2 = false;
+      if (isKleinsendelbachHetzlesRegex.test(gameInfo.homeTeam.name))
+        isSg2 = isKleinsendelbachHetzles2Regex.test(gameInfo.homeTeam.name);
+      else if (isKleinsendelbachHetzlesRegex.test(gameInfo.awayTeam.name))
+        isSg2 = isKleinsendelbachHetzles2Regex.test(gameInfo.awayTeam.name);
+      this.inputForm.field('groupId').inputValue = isSg2 ? 'football-adults/second-team' : 'football-adults/first-team';
+      this.inputForm.field('title').inputValue = `${gameInfo.homeTeam.name} gegen ${gameInfo.awayTeam.name}`;
+      this.inputForm.field('subtitle').inputValue = `${gameInfo.homeTeam.name} gegen ${gameInfo.awayTeam.name} am ${FullDatum.description(FullDatum.fromDate(new Date(gameInfo.date)))}${gameInfo.adressDescription !== undefined ? `, ${gameInfo.adressDescription}`: ''}`;
+      this.inputForm.field('link').inputValue = InternalLink.all.spiel(gameId).link;
+      this.inputForm.field('date').inputValue = new Date(gameInfo.date);
+    } catch (error) {
+      if (error === null || typeof error !== 'object' || !('code' in error) || error.code !== 'not-found')
+        throw error;
+      this.bfvGameInputForm.status = 'gameNotFound';
+      return;
+    }
+    this.bfvGameInputForm.status = 'valid';
+  }
+
+  public async saveEvent() {
+    if (this.inputForm.status === 'loading')
+      return;
+    this.inputForm.status = 'valid';
     const validation = this.inputForm.evaluate();
     if (validation === ValidationResult.Invalid)
       return;

@@ -79,8 +79,9 @@ export class EditNewsComponent implements OnInit {
   };
 
   public async saveNews() {
-    if (this.inputForm.status !== 'valid')
+    if (this.inputForm.status === 'loading')
       return;
+    this.inputForm.status = 'valid';
     const validation = this.inputForm.evaluate();
     if (validation === ValidationResult.Invalid)
       return;

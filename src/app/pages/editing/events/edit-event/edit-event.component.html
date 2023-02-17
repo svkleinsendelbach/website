@@ -16,6 +16,28 @@
     >Zurück</a>
   </div>
   <app-text-section
+    *ngIf="previousEvent === undefined"
+    [title]="'Spiel vom BFV übernehmen'"
+  >
+    <p
+      class="text margin-bottom-large"
+      [ngStyle]="{
+        color: styleConfig.css('textColor')
+      }"
+    >Um ein Spiel vom BFV zu übernehmen, fügen Sie den Link zum BFV Spiel hier ein. Bsp: 'https://www.bfv.de/spiele/...'</p>
+    <input-form
+      [inputForm]="bfvGameInputForm"
+      [submitButtonText]="'Übernehmen'"
+      (submitButtonClicked)="takeBfvGame()"
+    >
+      <input-field-text
+        [label]="'BFV Spiele Link'"
+        [placeholder]="'BFV Spiele Link'"
+        [inputField]="bfvGameInputForm.field('bfvGameLink')"
+      ></input-field-text>
+    </input-form>
+  </app-text-section>
+  <app-text-section
     [title]="previousEvent === undefined ? 'Termin hinzufügen' : 'Termin bearbeiten'"
   >
     <input-form
