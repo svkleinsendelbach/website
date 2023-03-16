@@ -5,7 +5,6 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FooterComponent } from './template/components/footer/footer.component';
 import { ContactInfoComponent } from './template/components/contact-info/contact-info.component';
 import { TextSectionComponent } from './template/components/text-section/text-section.component';
 import { environment } from '../environments/environment';
@@ -70,11 +69,11 @@ import { LivetickerComponent } from './template/components/game-info/liveticker/
 import { ResultComponent } from './template/components/game-info/liveticker/result/result.component';
 import { GameDetailComponent } from './pages/game-detail/game-detail.component';
 import { HeaderModule } from './modules/header/header.module';
+import { FooterModule } from './modules/footer/footer.module';
 
 @NgModule({
     declarations: [
         AppComponent,
-        FooterComponent,
         ContactInfoComponent,
         TextSectionComponent,
         EventsComponent,
@@ -142,7 +141,8 @@ import { HeaderModule } from './modules/header/header.module';
         RecaptchaV3Module,
         InputFormModule,
         CookieSelectorModule,
-        HeaderModule
+        HeaderModule,
+        FooterModule
     ],
     providers: [
         ScreenTrackingService,

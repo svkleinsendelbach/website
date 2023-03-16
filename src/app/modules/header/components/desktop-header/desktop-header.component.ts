@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
-import { HeaderData, HeaderItem } from '../../types/HeaderData';
-import { HomeLinkData } from '../../types/HomeLinkData';
+import { HeaderData, HeaderItem } from '../../types/header-data';
+import { HomeLinkData } from '../../types/home-link-data';
 
 @Component({
     selector: 'desktop-header',

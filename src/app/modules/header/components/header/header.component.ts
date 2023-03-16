@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { DeviceType, DeviceTypeService } from 'src/app/template/services/device-type.service';
-import { HeaderData } from '../../types/HeaderData';
-import { HomeLinkData } from '../../types/HomeLinkData';
+import { HeaderData } from '../../types/header-data';
+import { HomeLinkData } from '../../types/home-link-data';
 
 @Component({
     selector: 'header',

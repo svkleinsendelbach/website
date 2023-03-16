@@ -3,11 +3,11 @@ import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { AngularFirePerformance } from '@angular/fire/compat/performance';
 import { InternalLink, InternalPath } from './classes/InternalPath';
 import { CookieService } from './modules/cookie-selector/services/cookie.service';
-import { HeaderData } from './modules/header/types/HeaderData';
-import { HomeLinkData } from './modules/header/types/HomeLinkData';
+import { FooterData } from './modules/footer/types/footer-data';
+import { HeaderData } from './modules/header/types/header-data';
+import { HomeLinkData } from './modules/header/types/home-link-data';
 import { Link } from './template/classes/link';
 import { Style } from './template/classes/style';
-import { FooterComponent } from './template/components/footer/footer.component';
 import { DeviceTypeService } from './template/services/device-type.service';
 import { StyleConfigService } from './template/services/style-config.service';
 
@@ -176,7 +176,7 @@ export class AppComponent {
         homeLink: InternalLink.all.home
     };
 
-    public footerData: FooterComponent.FooterData = {
+    public footerData: FooterData = {
         links: [
             {
                 id: 'drive',
