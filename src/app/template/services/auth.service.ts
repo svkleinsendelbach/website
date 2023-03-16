@@ -4,7 +4,7 @@ import { ApiService } from './api.service';
 import firebase from 'firebase/compat/app';
 import { OAuthProvider } from '@angular/fire/auth';
 import { UserAuthenticationType } from './api-functions-types';
-import { InputError } from '../modules/input-form/classes/input-error';
+import { InputError } from '../../modules/input-form/types/input-error';
 
 @Injectable({
   providedIn: 'root'

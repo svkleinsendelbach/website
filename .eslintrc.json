@@ -6,6 +6,18 @@
   "overrides": [
     {
       "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    },
+    {
+      "parserOptions": {
+        "project": "tsconfig.(app|spec).json"
+      },
+      "files": [
         "*.ts"
       ],
       "extends": [
@@ -15,41 +27,27 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "style": "camelCase"
+        "semi": ["error", "always"],
+        "quotes": ["error", "single"],
+        "indent": ["error", 4],
+        "@typescript-eslint/semi": ["error", "always"],
+        "@typescript-eslint/indent": "off",
+        "@typescript-eslint/no-empty-function": ["error", {
+          "allow": ["functions", "arrowFunctions", "methods", "constructors", "asyncFunctions", "asyncMethods"]
+        }],
+        "@typescript-eslint/method-signature-style": ["error", "method"],
+        "@typescript-eslint/member-delimiter-style": ["error", {
+          "multiline": {
+            "delimiter": "semi",
+            "requireLast": true
           }
-        ],
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "style": "kebab-case"
-          }
-        ],
-        "@typescript-eslint/no-namespace": [
-          "off",
-          {
-            "allowDeclarations": true
-          }
-        ],
-        "no-async-promise-executor": "off",
-        "semi": ["warn", "always"],
-        "@typescript-eslint/no-inferrable-types": "off",
-        "no-inner-declarations": "off",
-        "quotes": ["warn", "single"]
+        }],
+        "@typescript-eslint/space-before-function-paren": ["error", "never"],
+        "@typescript-eslint/no-namespace": "off",
+        "@typescript-eslint/consistent-type-imports": "off",
+        "eqeqeq": ["error", "always"],
+        "no-inner-declarations": "off"
       }
-    },
-    {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
-      "rules": {}
     }
   ]
 }

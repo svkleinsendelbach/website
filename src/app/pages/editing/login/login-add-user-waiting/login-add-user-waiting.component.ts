@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { InternalLink } from 'src/app/classes/InternalPath';
-import { ErrorLevel } from 'src/app/template/modules/input-form/classes/error-level';
-import { InputError } from 'src/app/template/modules/input-form/classes/input-error';
-import { InputField } from 'src/app/template/modules/input-form/classes/input-field';
-import { InputForm } from 'src/app/template/modules/input-form/classes/input-form';
-import { ValidationResult } from 'src/app/template/modules/input-form/classes/validation-result';
-import { Validator } from 'src/app/template/modules/input-form/classes/validator';
+import { ErrorLevel } from 'src/app/modules/input-form/types/error-level';
+import { InputError } from 'src/app/modules/input-form/types/input-error';
+import { InputField } from 'src/app/modules/input-form/types/input-field';
+import { InputForm } from 'src/app/modules/input-form/types/input-form';
+import { ValidationResult } from 'src/app/modules/input-form/types/validation-result';
+import { Validator } from 'src/app/modules/input-form/types/validator';
 import { AuthService } from 'src/app/template/services/auth.service';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';

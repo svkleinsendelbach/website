@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CookieSelectorMessageComponent } from './template/components/cookie-selector-message/cookie-selector-message.component';
 import { HeaderComponent } from './template/components/header/header.component';
 import { DesktopHeaderComponent } from './template/components/header/desktop-header/desktop-header.component';
 import { DesktopHeaderItemComponent } from './template/components/header/desktop-header/header-item/header-item.component';
@@ -67,7 +66,8 @@ import { EventsComponent as EventsComponent_1 } from './pages/editing/events/eve
 import { EditEventComponent } from './pages/editing/events/edit-event/edit-event.component';
 import { NewsComponent } from './pages/editing/news/news.component';
 import { EditNewsComponent } from './pages/editing/news/edit-news/edit-news.component';
-import { InputFormModule } from './template/modules/input-form/input-form.module';
+import { InputFormModule } from './modules/input-form/input-form.module';
+import { CookieSelectorModule } from './modules/cookie-selector/cookie-selector.module';
 import { AllNewsComponent } from './pages/news/all-news/all-news.component';
 import { NewsDetailComponent } from './pages/news/news-detail/news-detail.component';
 import { GameInfoComponent } from './template/components/game-info/game-info.component';
@@ -76,99 +76,99 @@ import { ResultComponent } from './template/components/game-info/liveticker/resu
 import { GameDetailComponent } from './pages/game-detail/game-detail.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CookieSelectorMessageComponent,
-    HeaderComponent,
-    DesktopHeaderComponent,
-    DesktopHeaderItemComponent,
-    MobileHeaderComponent,
-    MobileHeaderItemComponent,
-    FooterComponent,
-    ContactInfoComponent,
-    TextSectionComponent,
-    EventsComponent,
-    NewsListComponent,
-    HomeLinksComponent,
-    SocialMediaLinksComponent,
-    HomeBannerComponent,
-    PageNotFoundComponent,
-    ImprintComponent,
-    PrivacyComponent,
-    RequestComponent,
-    StatuteComponent,
-    ChronicleComponent,
-    SportshomeComponent,
-    ManagersComponent,
-    FootballAdultsGeneralComponent,
-    MapsComponent,
-    BfvWidgetComponent,
-    SquadComponent,
-    SquadPersonComponent,
-    LinksComponent,
-    FirstTeamComponent,
-    SecondTeamComponent,
-    AhTeamComponent,
-    FootballYouthGeneralComponent,
-    CYouthComponent,
-    EYouthComponent,
-    FYouthComponent,
-    GYouthComponent,
-    GymnasticsComponent,
-    DancingComponent,
-    DriveComponent,
-    ContactComponent,
-    HomeComponent,
-    MainComponent,
-    AuthenticationCheckComponent,
-    LoginComponent,
-    LoginPageComponent,
-    LoginAddUserWaitingComponent,
-    EventsComponent_1,
-    EditEventComponent,
-    NewsComponent,
-    EditNewsComponent,
-    AllNewsComponent,
-    NewsDetailComponent,
-    GameInfoComponent,
-    LivetickerComponent,
-    ResultComponent,
-    GameDetailComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FontAwesomeModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireFunctionsModule,
-    AngularFireAuthModule,
-    AngularFireDatabaseModule,
-    AngularFireStorageModule,
-    AngularFireAnalyticsModule,
-    AngularFirePerformanceModule,
-    GoogleMapsModule,
-    HttpClientModule,
-    HttpClientJsonpModule,
-    RecaptchaV3Module,
-    InputFormModule
-  ],
-  providers: [
-    ScreenTrackingService,
-    UserTrackingService,
-    PerformanceMonitoringService,
-    { provide: REGION, useValue: 'europe-west1' },
-    { provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LdFFLgeAAAAAEzjFiR1X35IK7UHkL2Yx0EQ447i' },
-    { provide: USE_DEVICE_LANGUAGE, useValue: true },
-    { provide: PERSISTENCE, useValue: 'local' },
-    { provide: BUCKET, useValue: 'gs://svkleinsendelbach-website-v2' },
-    { provide: CONFIG, useValue: {
-      send_page_view: false,
-      anonymize_ip: true
-    }},
-    { provide: COLLECTION_ENABLED, useValue: false },
-    { provide: INSTRUMENTATION_ENABLED, useValue: false },
-    { provide: DATA_COLLECTION_ENABLED, useValue: false }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        DesktopHeaderComponent,
+        DesktopHeaderItemComponent,
+        MobileHeaderComponent,
+        MobileHeaderItemComponent,
+        FooterComponent,
+        ContactInfoComponent,
+        TextSectionComponent,
+        EventsComponent,
+        NewsListComponent,
+        HomeLinksComponent,
+        SocialMediaLinksComponent,
+        HomeBannerComponent,
+        PageNotFoundComponent,
+        ImprintComponent,
+        PrivacyComponent,
+        RequestComponent,
+        StatuteComponent,
+        ChronicleComponent,
+        SportshomeComponent,
+        ManagersComponent,
+        FootballAdultsGeneralComponent,
+        MapsComponent,
+        BfvWidgetComponent,
+        SquadComponent,
+        SquadPersonComponent,
+        LinksComponent,
+        FirstTeamComponent,
+        SecondTeamComponent,
+        AhTeamComponent,
+        FootballYouthGeneralComponent,
+        CYouthComponent,
+        EYouthComponent,
+        FYouthComponent,
+        GYouthComponent,
+        GymnasticsComponent,
+        DancingComponent,
+        DriveComponent,
+        ContactComponent,
+        HomeComponent,
+        MainComponent,
+        AuthenticationCheckComponent,
+        LoginComponent,
+        LoginPageComponent,
+        LoginAddUserWaitingComponent,
+        EventsComponent_1,
+        EditEventComponent,
+        NewsComponent,
+        EditNewsComponent,
+        AllNewsComponent,
+        NewsDetailComponent,
+        GameInfoComponent,
+        LivetickerComponent,
+        ResultComponent,
+        GameDetailComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FontAwesomeModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireFunctionsModule,
+        AngularFireAuthModule,
+        AngularFireDatabaseModule,
+        AngularFireStorageModule,
+        AngularFireAnalyticsModule,
+        AngularFirePerformanceModule,
+        GoogleMapsModule,
+        HttpClientModule,
+        HttpClientJsonpModule,
+        RecaptchaV3Module,
+        InputFormModule,
+        CookieSelectorModule
+    ],
+    providers: [
+        ScreenTrackingService,
+        UserTrackingService,
+        PerformanceMonitoringService,
+        { provide: REGION, useValue: 'europe-west1' },
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LdFFLgeAAAAAEzjFiR1X35IK7UHkL2Yx0EQ447i' },
+        { provide: USE_DEVICE_LANGUAGE, useValue: true },
+        { provide: PERSISTENCE, useValue: 'local' },
+        { provide: BUCKET, useValue: 'gs://svkleinsendelbach-website-v2' },
+        { provide: CONFIG, useValue: {
+            send_page_view: false,
+            anonymize_ip: true
+        }},
+        { provide: COLLECTION_ENABLED, useValue: false },
+        { provide: INSTRUMENTATION_ENABLED, useValue: false },
+        { provide: DATA_COLLECTION_ENABLED, useValue: false }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,132 @@
+<div
+    id="message-box"
+    *ngIf="isShown"
+    [ngClass]="deviceType.className"
+    [ngStyle]="{
+        backgroundColor: styleConfig.css('backgroundColor')
+    }"
+>
+    <p
+        id="header"
+        [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+        }"
+    >Cookie-Einstellungen</p>
+    <p
+        class="text"
+        [ngStyle]="{
+            color: styleConfig.css('textColor')
+        }"
+    >Wir verwenden Cookies, um Ihnen ein optimales Webseiten-Erlebnis zu bieten.</p>
+    <p
+        class="text"
+        [ngStyle]="{
+            color: styleConfig.css('textColor')
+         }"
+    >Mit der Nutzung unserer Webseite stimmen Sie der Verwendung von Cookies zu. Weitere Informationen über die Verwendung von Cookies und wie Sie Ihre Einwilligung für die Zukunft widerrufen können, finden Sie in unseren Datenschutzhinweisen.</p>
+    <a
+        id="privacy"
+        *ngIf="privacyLink !== undefined"
+        href="{{ privacyLink.link }}"
+        target="{{ privacyLink.target }}"
+        title="{{ privacyLink.title }}"
+        [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+        }"
+    >{{ privacyLink.title }}</a>
+    <p
+        id="extra-text"
+        [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+        }"
+    >Welchen Cookies stimmen Sie zu?</p>
+    <div
+        id="selection-buttons"
+    >
+        <p
+            class="button unchangable"
+            [ngStyle]="selectionButtonStyle('necessary')"
+        >Notwendig</p>
+        <p
+            class="button"
+            [ngStyle]="selectionButtonStyle('functionality')"
+            (click)="handleCookieSelection('functionality')"
+        >Funktionalität</p>
+        <p
+            class="button"
+            [ngStyle]="selectionButtonStyle('statistics')"
+            (click)="handleCookieSelection('statistics')"
+        >Statistik</p>
+    </div>
+    <p
+        id="details-button"
+        [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+        }"
+        (click)="handleShowDetails()"
+    >{{ detailsShown ? "Details ausblenden" : "Details zeigen" }}</p>
+    <p
+        class="details-topic"
+        *ngIf="detailsShown"
+        [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+        }"
+    >Notwendig</p>
+    <p
+        class="details-description"
+        *ngIf="detailsShown"
+        [ngStyle]="{
+            color: styleConfig.css('textColor')
+        }"
+    >Diese Cookies sind für den Betrieb unserer Seite unbedingt notwendig. Sie ermöglichen beispielsweise sicherheitsrelevante Funktionalitäten, die Sprachumschaltung oder die Speicherung der von Ihnen festgelegten Cookie-Einstellungen.</p>
+    <p
+        class="details-topic"
+        *ngIf="detailsShown"
+        [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+        }"
+    >Funktionalität</p>
+    <p
+        class="details-description"
+        *ngIf="detailsShown"
+        [ngStyle]="{
+            color: styleConfig.css('textColor')
+        }"
+    >Funktionale Cookies ermöglichen es, Inhalte von Dritten, wie BFV oder Google Maps, anzuzeigen.</p>
+    <p
+        class="details-topic"
+        *ngIf="detailsShown"
+        [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+        }"
+    >Statistik</p>
+    <p
+        class="details-description"
+        *ngIf="detailsShown"
+        [ngStyle]="{
+            color: styleConfig.css('textColor')
+        }"
+    >Um unsere Webseite weiter zu verbessern, erfassen wir anonymisiert Daten für Statistiken und Analysen. Mit Hilfe dieser Cookies können wir beispielsweise die Anzahl der Website-Besucher und Zugriffe auf bestimmte Seiten ermitteln, um auf dieser Grundlage unsere Inhalte zu verbessern.</p>
+    <div
+        id="confirm-buttons"
+    >
+        <p
+            id="confirm-selected"
+            [ngStyle]="{
+                color: styleConfig.css('textColor'),
+                'background-color': styleConfig.css('backgroundColor'),
+                'border-color': styleConfig.css('textColor')
+            }"
+            (click)="handleConfirmSelected()"
+        >Auswahl akzeptieren</p>
+        <p
+            id="confirm-all"
+            [ngStyle]="{
+                color: styleConfig.css('backgroundColor'),
+                'background-color': styleConfig.css('primaryColor'),
+                'border-color': styleConfig.css('primaryColor')
+            }"
+            (click)="handleConfirmAll()"
+        >Alle akzeptieren</p>
+    </div>
+</div>
