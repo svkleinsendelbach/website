@@ -26,7 +26,7 @@ export class EditNewsComponent implements OnInit {
   public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
   public editNewsLink = InternalLink.all['bearbeiten/nachrichten'];
 
-  public previousNews: News.ReturnType | undefined;
+  public previousNews: News.Flatten | undefined;
 
   public inputForm = new InputForm({
     title: new InputField<string>('', [
@@ -52,7 +52,7 @@ export class EditNewsComponent implements OnInit {
     private readonly apiService: ApiService,
     private readonly fileStorage: FileStorageService,
     private readonly sharedData: SharedDataService<{
-      editNews: News.ReturnType
+      editNews: News.Flatten
     }>,
     private router: Router
   ) {
@@ -94,9 +94,9 @@ export class EditNewsComponent implements OnInit {
     const date = this.previousNews?.date ?? new Date().toISOString();
     const newsUrl = await this.uploadNewsMessage(this.inputForm.field('message').value);
     await this.apiService
-      .editNews({
+      .newsEdit({
         editType: this.previousNews !== undefined ? 'change' : 'add',
-        id: newsId,
+        newsId: newsId,
         news: {
           title: this.inputForm.field('title').value,
           subtitle: this.inputForm.field('subtitle').value || undefined,

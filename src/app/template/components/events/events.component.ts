@@ -19,7 +19,7 @@ export class EventsComponent<GroupId extends string> implements OnInit {
 
   @Input() public eventGroupTitle!: Record<GroupId, string>;
 
-  public fetchedEventGroups: FetchState<EventGroup<GroupId>[]> = FetchState.loading;
+  public fetchedEventGroups: FetchState<EventGroup.Flatten<GroupId>[]> = FetchState.loading;
 
   public constructor(
     private readonly apiService: ApiService,
@@ -29,7 +29,7 @@ export class EventsComponent<GroupId extends string> implements OnInit {
 
   public ngOnInit() {
     this.apiService
-      .getEvents({
+      .eventGet({
         groupIds: this.groupIds
       })
       .then(eventGroups => {

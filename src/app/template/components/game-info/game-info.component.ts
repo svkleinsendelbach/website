@@ -33,7 +33,7 @@ export class GameInfoComponent implements OnInit {
   }
 
   private async fetchGameInfo() {
-    const gameInfo = await this.apiService.getGameInfo({
+    const gameInfo = await this.apiService.gameInfoGet({
       gameId: this.gameId
     }).catch((reason) => {
       this.gameInfo = FetchState.failure(reason);

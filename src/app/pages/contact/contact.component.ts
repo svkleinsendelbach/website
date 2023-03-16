@@ -9,7 +9,7 @@ import { InputForm } from 'src/app/template/modules/input-form/classes/input-for
 import { ValidationResult } from 'src/app/template/modules/input-form/classes/validation-result';
 import { Validator } from 'src/app/template/modules/input-form/classes/validator';
 import { SelectOptions } from 'src/app/template/modules/input-form/components/input-field/select/select.component';
-import { SendContactMailFunction } from 'src/app/template/services/api-functions-types';
+import { SendMailContactFunction } from 'src/app/template/services/api-functions-types';
 import { ApiService } from 'src/app/template/services/api.service';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
@@ -88,14 +88,14 @@ export class ContactComponent {
       this.inputForm.status = 'recaptchaFailed';
       return;
     }
-    const request: SendContactMailFunction.Parameters = {
+    const request: SendMailContactFunction.Parameters = {
       senderName: this.inputForm.field('name').value,
       senderAddress: this.inputForm.field('email').value,
       receiverName: receiver.name,
       receiverAddress: receiver.address,
       message: this.inputForm.field('message').value,
     };
-    const response = await this.apiService.sendContactMail(request);
+    const response = await this.apiService.sendMailContact(request);
     const status: 'sendSucceded' | 'sendFailed' = response.success ? 'sendSucceded' : 'sendFailed';
     this.inputForm.status = status;
     if (response.success) {

@@ -28,7 +28,7 @@ export class EditEventComponent implements OnInit {
 
   public previousEvent: {
     groupId: EventGroupId,
-    event: Event.ReturnType
+    event: Event.Flatten
   } | undefined;
 
   public bfvGameInputForm = new InputForm({
@@ -72,7 +72,7 @@ export class EditEventComponent implements OnInit {
     private readonly sharedData: SharedDataService<{
       editEvent: {
         groupId: EventGroupId,
-        event: Event.ReturnType
+        event: Event.Flatten
       }
     }>,
     private router: Router
@@ -121,7 +121,7 @@ export class EditEventComponent implements OnInit {
       return;
     }
     try {
-      const gameInfo = await this.apiService.getGameInfo({
+      const gameInfo = await this.apiService.gameInfoGet({
         gameId: gameId
       });
       const isKleinsendelbachHetzlesRegex = /Kleinsendelbach.*Hetzles|Hetzles.*Kleinsendelbach/g;
@@ -154,7 +154,7 @@ export class EditEventComponent implements OnInit {
     this.inputForm.status ='loading';
     const eventId = this.previousEvent?.event.id ?? guid.newGuid().guidString;
     await this.apiService
-      .editEvent({
+      .eventEdit({
         editType: this.previousEvent !== undefined ? 'change' : 'add',
         groupId: this.inputForm.field('groupId').value,
         eventId: eventId,

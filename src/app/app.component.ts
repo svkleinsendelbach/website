@@ -190,7 +190,7 @@ export class AppComponent {
         link: Link.internal<InternalPath>('Impressum und Datenschutz', 'impressum')
       }
     ],
-    copyrightText: '2022 SV Kleinsendelbach e.V.',
+    copyrightText: '2023 SV Kleinsendelbach e.V.',
     editLink: Link.internal<InternalPath>('Website bearbeite', 'bearbeiten'),
     contact: [
       {

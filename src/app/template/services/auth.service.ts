@@ -113,7 +113,7 @@ export class AuthService {
     if (expirationTime !== undefined && expirationTime >= new Date())
       return 'authorized';
     this.authenticationExpirationTime[authenticationType] = undefined;
-    return await this.apiService.checkUserAuthentication({
+    return await this.apiService.userAuthenticationCheck({
       type: authenticationType
     });
   }
@@ -136,7 +136,7 @@ export class AuthService {
     const user = await this.firebaseAuth.currentUser;
     if (user === null)
       throw new AuthService.LoginError('unknown');
-    this.apiService.addUserForWaiting({
+    this.apiService.userAuthenticationAdd({
       type: authenticationType,
       firstName: firstName,
       lastName: lastName

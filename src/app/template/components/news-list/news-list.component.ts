@@ -31,12 +31,13 @@ export class NewsListComponent implements OnInit {
 
   public ngOnInit() {
     this.apiService
-      .getNews({
-        numberNews: this.maxListCount
+      .newsGet({
+        numberNews: this.maxListCount,
+        alsoDisabled: false
       })
       .then(news => {
         this.fetchedNews = FetchState.success({
-          news: news.news.map(News.ReturnType.toNews),
+          news: news.news.map(news => News.unflatten(news)),
           hasMore: news.hasMore
         });
       })

@@ -41,7 +41,7 @@ export class NewsDetailComponent {
       await this.router.navigateByUrl(InternalLink.all['nachrichten'].link);
       return;
     }
-    const news = await this.apiService.getSingleNews({
+    const news = await this.apiService.newsGetSingle({
       newsId: newsId
     });
     if (news === null) {
@@ -49,7 +49,7 @@ export class NewsDetailComponent {
       return;
     }
     this.titleService.setTitle(news.title);
-    this.fetchedNews = FetchState.success(News.ReturnType.toNews(news));
+    this.fetchedNews = FetchState.success(News.unflatten(news));
     const message = await this.fileStorage.download(news.newsUrl);
     this.messageElement.nativeElement.innerHTML = message;
   }

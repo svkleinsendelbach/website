@@ -10,7 +10,7 @@ import { Crypter } from '../crypter/Crypter';
 import { ApiService } from './api.service';
 import { DatabaseManagerTestService } from './test-services/database-manager.service';
 import { teamSquadData } from 'src/test/dataset/teamSquadData';
-import { GetUnauthenticatedUsersFunction } from './api-functions-types';
+import { UserAuthenticationGetAllUnauthenticatedFunction } from './api-functions-types';
 
 type ArrayElement<T> = T extends (infer Element)[] ? Element : never;
 
@@ -63,7 +63,7 @@ describe('ApiService', () => {
         firstName: 'first',
         lastName: 'last'
     }));
-    await service.acceptDeclineWaitingUser({
+    await service.userAuthenticationAcceptDecline({
         type: 'websiteEditing',
         hashedUserId: 'asdf',
         action: 'accept'
@@ -88,7 +88,7 @@ describe('ApiService', () => {
         firstName: 'first',
         lastName: 'last'
     }));
-    await service.acceptDeclineWaitingUser({
+    await service.userAuthenticationAcceptDecline({
         type: 'websiteEditing',
         hashedUserId: 'asdf',
         action: 'decline'
@@ -105,7 +105,7 @@ describe('ApiService', () => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const hashedUserId = Crypter.sha512(user!.uid);
     await databaseManager.removeValue(`users/authentication/websiteEditing/${hashedUserId}`);
-    await service.addUserForWaiting({
+    await service.userAuthenticationAdd({
         type: 'websiteEditing',
         firstName: 'first',
         lastName: 'last'
@@ -131,7 +131,7 @@ describe('ApiService', () => {
         title: 'title'
     });
     expect(await databaseManager.existsValue(`events/general/${eventId.guidString}`)).toBeTrue();
-    await service.editEvent({
+    await service.eventEdit({
         editType: 'remove',
         groupId: 'general',
         eventId: eventId.guidString,
@@ -144,7 +144,7 @@ describe('ApiService', () => {
     const databaseManager = TestBed.inject(DatabaseManagerTestService);
     const eventId = guid.newGuid();
     const date = new Date();
-    await service.editEvent({
+    await service.eventEdit({
         editType: 'add',
         groupId: 'general',
         eventId: eventId.guidString,
@@ -168,7 +168,7 @@ describe('ApiService', () => {
         title: 'title'
     });
     const date = new Date();
-    await service.editEvent({
+    await service.eventEdit({
         editType: 'change',
         groupId: 'general',
         eventId: eventId.guidString,
@@ -191,9 +191,9 @@ describe('ApiService', () => {
         title: 'title'
     });
     expect(await databaseManager.existsValue('news/news_id')).toBeTrue();
-    const result = await service.editNews({
+    const result = await service.newsEdit({
         editType: 'remove',
-        id: 'news_id',
+        newsId: 'news_id',
         news: undefined
     });
     expect(result).toEqual('news_id');
@@ -203,9 +203,9 @@ describe('ApiService', () => {
   it('add news', async () => {
     const databaseManager = TestBed.inject(DatabaseManagerTestService);
     const date = new Date();
-    const result = await service.editNews({
+    const result = await service.newsEdit({
         editType: 'add',
-        id: 'news_id',
+        newsId: 'news_id',
         news: {
             date: date.toISOString(),
             title: 'title',
@@ -235,9 +235,9 @@ describe('ApiService', () => {
         thumbnailUrl: 'thumbnailUrl'
     });
     const date = new Date();
-    const result = await service.editNews({
+    const result = await service.newsEdit({
         editType: 'change',
-        id: 'news_id',
+        newsId: 'news_id',
         news: {
             date: date.toISOString(),
             title: 'title2',
@@ -284,7 +284,7 @@ describe('ApiService', () => {
       date: date4.toISOString(),
       title: 'event4'
     }));
-    const result = await service.getEvents({
+    const result = await service.eventGet({
       groupIds: ['general', 'football-adults/first-team']
     });
     expect(result).toEqual([
@@ -316,7 +316,7 @@ describe('ApiService', () => {
     ]);
   });
 
-  async function addNews(number: number, disabled: boolean): Promise<News.ReturnType> {
+  async function addNews(number: number, disabled: boolean): Promise<News.Flatten> {
     const databaseManager = TestBed.inject(DatabaseManagerTestService);
       const crypter = new Crypter(environment.cryptionKeys);
       const news = {
@@ -341,27 +341,33 @@ describe('ApiService', () => {
     await addNews(5, true);
     const news1 = await addNews(1, false);
     await addNews(2, true);
-    const result1 = await service.getNews({});
+    const result1 = await service.newsGet({
+      numberNews: undefined,
+      alsoDisabled: false
+    });
     expect(result1).toEqual({
         hasMore: false,
         news: [news4, news3, news1]
     });
-    const result2 = await service.getNews({
-        numberNews: 5
+    const result2 = await service.newsGet({
+      numberNews: 5,
+      alsoDisabled: false
     });
     expect(result2).toEqual({
         hasMore: false,
         news: [news4, news3, news1]
     });
-    const result3 = await service.getNews({
-        numberNews: 3
+    const result3 = await service.newsGet({
+        numberNews: 3,
+        alsoDisabled: false
     });
     expect(result3).toEqual({
         hasMore: false,
         news: [news4, news3, news1]
     });
-    const result4 = await service.getNews({
-        numberNews: 1
+    const result4 = await service.newsGet({
+        numberNews: 1,
+        alsoDisabled: false
     });
     expect(result4).toEqual({
         hasMore: true,
@@ -371,7 +377,7 @@ describe('ApiService', () => {
 
   it('get single news', async () => {
     const news = await addNews(1, false);
-    const result = await service.getSingleNews({
+    const result = await service.newsGetSingle({
         newsId: 'news_id_1'
     });
     expect(result).toEqual(news);
@@ -379,14 +385,14 @@ describe('ApiService', () => {
 
   it('get disabled single news', async () => {
     await addNews(1, true);
-    const result = await service.getSingleNews({
+    const result = await service.newsGetSingle({
         newsId: 'news_id_1'
     });
     expect(result).toBeNull();
   });
 
   it('get not existing single news', async () => {
-    const result = await service.getSingleNews({
+    const result = await service.newsGetSingle({
         newsId: 'news_id_1'
     });
     expect(result).toBeNull();
@@ -402,13 +408,13 @@ describe('ApiService', () => {
         teamId: 30675,
         vereinId: 294
     });
-    const result = await service.getTeamSquad({
+    const result = await service.teamSquadGet({
         type: 'first-team'
     });
     expect(result).toEqual(teamSquadData);
   });
 
-  async function addUser(number: number, state: 'authenticated' | 'unauthenticated'): Promise<ArrayElement<GetUnauthenticatedUsersFunction.ReturnType>> {
+  async function addUser(number: number, state: 'authenticated' | 'unauthenticated'): Promise<ArrayElement<UserAuthenticationGetAllUnauthenticatedFunction.ReturnType>> {
     const databaseManager = TestBed.inject(DatabaseManagerTestService);
       const crypter = new Crypter(environment.cryptionKeys);
       const user = {
@@ -431,7 +437,7 @@ describe('ApiService', () => {
       const user4 = await addUser(4, 'unauthenticated');
       await addUser(5, 'authenticated');
       await addUser(6, 'authenticated');
-      const result = await service.getUnauthenticatedUsers({
+      const result = await service.userAuthenticationGetAllUnauthenticated({
           type: 'websiteEditing'
       });
       expect(result).toEqual([

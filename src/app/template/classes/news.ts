@@ -1,5 +1,5 @@
 export interface News {
-    id: string,
+    id: string;
     title: string;
     subtitle?: string;
     date: Date;
@@ -10,7 +10,8 @@ export interface News {
 }
 
 export namespace News {
-    export type CallParameters = {
+    export type Flatten = {
+        id: string;
         title: string;
         subtitle?: string;
         date: string;
@@ -18,31 +19,35 @@ export namespace News {
         newsUrl: string;
         disabled: boolean;
         thumbnailUrl: string;
-    }
+    };
 
-    export interface ReturnType {
-        id: string,
-        title: string;
-        subtitle?: string;
-        date: string;
-        shortDescription?: string;
-        newsUrl: string;
-        disabled: boolean;
-        thumbnailUrl: string;
-    }
-
-    export namespace ReturnType {
-      export function toNews(news: News.ReturnType): News {
+    export function flatten(news: News): News.Flatten;
+    export function flatten(news: Omit<News, 'id'>): Omit<News.Flatten, 'id'>;
+    export function flatten(news: News | Omit<News, 'id'>): News.Flatten | Omit<News.Flatten, 'id'> {
         return {
-          id: news.id,
-          title: news.title,
-          subtitle: news.subtitle,
-          date: new Date(news.date),
-          shortDescription: news.shortDescription,
-          newsUrl: news.newsUrl,
-          disabled: news.disabled,
-          thumbnailUrl: news.thumbnailUrl
+            ...('id' in news ? { id: news.id } : {}),
+            title: news.title,
+            subtitle: news.subtitle,
+            date: news.date.toISOString(),
+            shortDescription: news.shortDescription,
+            newsUrl: news.newsUrl,
+            disabled: news.disabled,
+            thumbnailUrl: news.thumbnailUrl
         };
-      }
+    }
+
+    export function unflatten(news: News.Flatten): News;
+    export function unflatten(news: Omit<News.Flatten, 'id'>): Omit<News, 'id'>;
+    export function unflatten(news: News.Flatten | Omit<News.Flatten, 'id'>): News | Omit<News, 'id'> {
+        return {
+            ...('id' in news ? { id: news.id } : {}),
+            title: news.title,
+            subtitle: news.subtitle,
+            date: new Date(news.date),
+            shortDescription: news.shortDescription,
+            newsUrl: news.newsUrl,
+            disabled: news.disabled,
+            thumbnailUrl: news.thumbnailUrl
+        };
     }
 }

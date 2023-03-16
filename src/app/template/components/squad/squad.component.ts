@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FetchState } from '../../classes/fetch-state';
 import { PersonParameters, TeamSquad } from '../../classes/team-squad';
-import { AnpfiffTeamParameter } from '../../services/api-functions-types';
+import { AnpfiffInfoTeamParameters } from '../../services/api-functions-types';
 import { ApiService } from '../../services/api.service';
 import { DeviceTypeService } from '../../services/device-type.service';
 import { StyleConfigService } from '../../services/style-config.service';
@@ -14,7 +14,7 @@ import { StyleConfigService } from '../../services/style-config.service';
 export class SquadComponent implements OnInit {
   public FetchState = FetchState;
 
-  @Input() public parametersType!: AnpfiffTeamParameter.Type;
+  @Input() public parametersType!: AnpfiffInfoTeamParameters.Type;
 
   public fetchedSquad: FetchState<TeamSquad> = FetchState.loading;
 
@@ -26,7 +26,7 @@ export class SquadComponent implements OnInit {
 
   public ngOnInit() {
     this.apiService
-      .getTeamSquad({
+      .teamSquadGet({
         type: this.parametersType
       })
       .then(squad => {

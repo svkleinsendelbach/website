@@ -17,7 +17,7 @@ export class NewsComponent {
   public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
   public mainEditingPageLink = InternalLink.all['bearbeiten'];
 
-  public allNews: News.ReturnType[] | undefined = undefined;
+  public allNews: News.Flatten[] | undefined = undefined;
 
   public currentDisableUpdatedNewsIds: Record<string, true> = {};
 
@@ -27,7 +27,7 @@ export class NewsComponent {
     public readonly styleConfig: StyleConfigService,
     private readonly apiService: ApiService,
     private readonly sharedData: SharedDataService<{
-      editNews: News.ReturnType
+      editNews: News.Flatten
     }>,
     private router: Router
   ) {
@@ -36,7 +36,7 @@ export class NewsComponent {
   }
 
   private async getNews() {
-    this.allNews = (await this.apiService.getNews({
+    this.allNews = (await this.apiService.newsGet({
       numberNews: undefined,
       alsoDisabled: true
     })).news;
@@ -44,25 +44,25 @@ export class NewsComponent {
 
   public async deleteNews(id: string) {
     this.allNews = this.allNews?.filter(news => news.id !== id);
-    await this.apiService.editNews({
+    await this.apiService.newsEdit({
       editType: 'remove',
-      id: id,
+      newsId: id,
       news: undefined
     });
   }
 
-  public async editNews(news: News.ReturnType) {
+  public async editNews(news: News.Flatten) {
     this.sharedData.setValue('editNews', news);
     await this.router.navigateByUrl(InternalLink.all['bearbeiten/nachrichten/bearbeiten'].link);
   }
 
-  public async handleDisableNews(news: News.ReturnType) {
+  public async handleDisableNews(news: News.Flatten) {
     if (news.id in this.currentDisableUpdatedNewsIds)
       return;
     this.currentDisableUpdatedNewsIds[news.id] = true;
-    await this.apiService.disableNews({
+    await this.apiService.newsDisable({
       editType: news.disabled ? 'enable' : 'disable',
-      id: news.id
+      newsId: news.id
     });
     news.disabled = !news.disabled;
     delete this.currentDisableUpdatedNewsIds[news.id];

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { EventGroupId } from 'src/app/classes/EventGroupId';
 import { ContactInfoComponent } from 'src/app/template/components/contact-info/contact-info.component';
-import { AnpfiffTeamParameter } from 'src/app/template/services/api-functions-types';
+import { AnpfiffInfoTeamParameters } from 'src/app/template/services/api-functions-types';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
 
@@ -57,7 +57,7 @@ export class FirstTeamComponent {
     }
   ];
 
-  public readonly squadParametersType: AnpfiffTeamParameter.Type = 'first-team';
+  public readonly squadParametersType: AnpfiffInfoTeamParameters.Type = 'first-team';
 
   public constructor(
     public readonly titleService: Title,

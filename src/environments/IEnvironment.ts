@@ -15,10 +15,7 @@ export interface IEnvironment {
   }
   verbose: ApiService.VerboseType,
   cryptionKeys: Crypter.Keys,
-  fiatShamirKeys: {
-    N: bigint,
-    e: bigint
-  },
+  callSecretKey: string,
   production: boolean,
   name: string
 }

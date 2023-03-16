@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { EventGroup } from 'src/app/template/classes/event';
-import { GetEventsFunction } from 'src/app/template/services/api-functions-types';
 import { ApiService } from 'src/app/template/services/api.service';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
@@ -22,7 +21,7 @@ export class EventsComponent {
   public allEventGroupIds = EventGroupId.all;
   public eventGroupTitle = EventGroupId.title;
 
-  public eventGroups: GetEventsFunction.ReturnType<EventGroupId> | undefined = undefined;
+  public eventGroups: EventGroup.Flatten<EventGroupId>[] | undefined = undefined;
 
   public constructor(
     public readonly titleService: Title,
@@ -32,7 +31,7 @@ export class EventsComponent {
     private readonly sharedData: SharedDataService<{
       editEvent: {
         groupId: EventGroupId,
-        event: Event.ReturnType
+        event: Event.Flatten
       }
     }>,
     private router: Router
@@ -42,12 +41,12 @@ export class EventsComponent {
   }
 
   private async getEvents() {
-    this.eventGroups = await this.apiService.getEvents<EventGroupId>({
+    this.eventGroups = await this.apiService.eventGet<EventGroupId>({
       groupIds: EventGroupId.all
     });
   }
 
-  public getEventGroupOf(groupId: EventGroupId): EventGroup<EventGroupId> | undefined {
+  public getEventGroupOf(groupId: EventGroupId): EventGroup.Flatten<EventGroupId> | undefined {
     return this.eventGroups?.find(eventGroup => eventGroup.groupId === groupId);
   }
 
@@ -63,7 +62,7 @@ export class EventsComponent {
         events: events
       };
     });
-    await this.apiService.editEvent({
+    await this.apiService.eventEdit({
       editType: 'remove',
       groupId: groupId,
       eventId: eventId,
@@ -71,7 +70,7 @@ export class EventsComponent {
     });
   }
 
-  public async editEvent(groupId: EventGroupId, event: Event.ReturnType) {
+  public async editEvent(groupId: EventGroupId, event: Event.Flatten) {
     this.sharedData.setValue('editEvent', {
       groupId: groupId,
       event: event
