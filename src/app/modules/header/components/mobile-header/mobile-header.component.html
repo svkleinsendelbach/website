@@ -48,7 +48,7 @@
     id="header-items"
     *ngIf="isExpanded"
   >
-    <app-mobile-header-item
+    <mobile-header-item
       *ngFor="let headerItem of headerItems"
       [ngClass]="{
         expanded: expandedHeaderItemId === headerItem.id
@@ -56,7 +56,7 @@
       [headerItem]="headerItem"
       [expandedHeaderItemId]="expandedHeaderItemId"
       (clickHeaderItemIdEmitter)="handleHeaderItemClick($event)"
-    ></app-mobile-header-item>
+    ></mobile-header-item>
   </div>
 </div>
 <div

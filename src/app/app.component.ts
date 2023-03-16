@@ -3,10 +3,11 @@ import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { AngularFirePerformance } from '@angular/fire/compat/performance';
 import { InternalLink, InternalPath } from './classes/InternalPath';
 import { CookieService } from './modules/cookie-selector/services/cookie.service';
+import { HeaderData } from './modules/header/types/HeaderData';
+import { HomeLinkData } from './modules/header/types/HomeLinkData';
 import { Link } from './template/classes/link';
 import { Style } from './template/classes/style';
 import { FooterComponent } from './template/components/footer/footer.component';
-import { HeaderComponent } from './template/components/header/header.component';
 import { DeviceTypeService } from './template/services/device-type.service';
 import { StyleConfigService } from './template/services/style-config.service';
 
@@ -16,7 +17,7 @@ import { StyleConfigService } from './template/services/style-config.service';
     styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-    public headerData: Record<'desktop' | 'tablet' | 'mobile', HeaderComponent.HeaderData> = {
+    public headerData: Record<'desktop' | 'tablet' | 'mobile', HeaderData> = {
         desktop: {
             home: {
                 topItem: InternalLink.all['home']
@@ -169,7 +170,7 @@ export class AppComponent {
         }
     };
 
-    public homeLinkData: HeaderComponent.HomeLinkData = {
+    public homeLinkData: HomeLinkData = {
         title: 'SV Kleinsendelbach',
         logoSrc: 'assets/images/svk-logo.svg',
         homeLink: InternalLink.all.home

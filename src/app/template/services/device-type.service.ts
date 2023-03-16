@@ -64,3 +64,5 @@ export namespace DeviceTypeService {
     Desktop
   }
 }
+
+export type DeviceType = 'mobile' | 'tablet' | 'desktop';

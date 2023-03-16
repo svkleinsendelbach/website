@@ -4,12 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './template/components/header/header.component';
-import { DesktopHeaderComponent } from './template/components/header/desktop-header/desktop-header.component';
-import { DesktopHeaderItemComponent } from './template/components/header/desktop-header/header-item/header-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MobileHeaderComponent } from './template/components/header/mobile-header/mobile-header.component';
-import { MobileHeaderItemComponent } from './template/components/header/mobile-header/header-item/header-item.component';
 import { FooterComponent } from './template/components/footer/footer.component';
 import { ContactInfoComponent } from './template/components/contact-info/contact-info.component';
 import { TextSectionComponent } from './template/components/text-section/text-section.component';
@@ -74,15 +69,11 @@ import { GameInfoComponent } from './template/components/game-info/game-info.com
 import { LivetickerComponent } from './template/components/game-info/liveticker/liveticker.component';
 import { ResultComponent } from './template/components/game-info/liveticker/result/result.component';
 import { GameDetailComponent } from './pages/game-detail/game-detail.component';
+import { HeaderModule } from './modules/header/header.module';
 
 @NgModule({
     declarations: [
         AppComponent,
-        HeaderComponent,
-        DesktopHeaderComponent,
-        DesktopHeaderItemComponent,
-        MobileHeaderComponent,
-        MobileHeaderItemComponent,
         FooterComponent,
         ContactInfoComponent,
         TextSectionComponent,
@@ -150,7 +141,8 @@ import { GameDetailComponent } from './pages/game-detail/game-detail.component';
         HttpClientJsonpModule,
         RecaptchaV3Module,
         InputFormModule,
-        CookieSelectorModule
+        CookieSelectorModule,
+        HeaderModule
     ],
     providers: [
         ScreenTrackingService,

@@ -25,12 +25,12 @@
   <div
     id="header-items"
   >
-    <app-desktop-header-item
+    <desktop-header-item
       *ngFor="let headerItem of headerItems"
       [headerItem]="headerItem"
       [expandedHeaderItemId]="expandedHeaderItemId"
       (clickHeaderItemIdEmitter)="handleHeaderItemClick($event)"
-    ></app-desktop-header-item>
+    ></desktop-header-item>
   </div>
 </div>
 <div
