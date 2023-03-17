@@ -1,10 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Link } from 'src/app/template/classes/link';
 import { CookieService } from '../../services/cookie.service';
 import { DeviceTypeService } from '../../../../template/services/device-type.service';
 import { StyleConfigService } from '../../../../template/services/style-config.service';
 import { CookiesSelection } from '../../types/cookie-selection';
 import { CookieType } from '../../types/cookie-type';
+import { Link } from 'src/app/types/link';
 
 @Component({
     selector: 'cookie-selector',

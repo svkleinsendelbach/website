@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EventListener } from '../classes/event-listener';
+import { EventListener } from '../../types/event-listener';
 
 @Injectable({
   providedIn: 'root'

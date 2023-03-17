@@ -2,21 +2,21 @@
   [title]="'Aktuelle Nachrichten'"
 >
   <p
-    *ngIf="FetchState.isLoading(fetchedNews)"
+    *ngIf="fetchedNews.isLoading()"
     class="text center large"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
     }"
   >Nachrichten werden geladen</p>
   <p
-    *ngIf="FetchState.isFailure(fetchedNews)"
+    *ngIf="fetchedNews.isFailure()"
     class="text center large"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
     }"
   >Nachrichten konnten nicht geladen werden</p>
   <p
-    *ngIf="FetchState.isSuccess(fetchedNews) && FetchState.getContent(fetchedNews).news.length === 0"
+    *ngIf="fetchedNews.isSuccess() && fetchedNews.content.news.length === 0"
     class="text center large"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
@@ -24,7 +24,7 @@
   >Keine Nachrichten</p>
   <div
     id="all-news"
-    *ngIf="FetchState.isSuccess(fetchedNews) && FetchState.getContent(fetchedNews).news.length !== 0"
+    *ngIf="fetchedNews.isSuccess() && fetchedNews.content.news.length !== 0"
     [ngClass]="deviceType.className"
   >
     <div
@@ -55,7 +55,7 @@
           [ngStyle]="{
             color: styleConfig.css('textColor')
           }"
-        >{{ getDateDescription(news.date) }}</p>
+        >{{ Datum.fromDate(news.date).dateDescription }}</p>
         <a
           class="title"
           href="{{ newsLink(news).link }}"
@@ -85,7 +85,7 @@
     id="view-all-news"
     href="{{ allNewsLink.link }}"
     title="{{ allNewsLink.title }}"
-    *ngIf="FetchState.isSuccess(fetchedNews) && FetchState.getContent(fetchedNews).hasMore"
+    *ngIf="fetchedNews.isSuccess() && fetchedNews.content.hasMore"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
     }"

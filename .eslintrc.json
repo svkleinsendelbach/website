@@ -42,11 +42,11 @@
             "requireLast": true
           }
         }],
-        "@typescript-eslint/space-before-function-paren": ["error", "never"],
         "@typescript-eslint/no-namespace": "off",
         "@typescript-eslint/consistent-type-imports": "off",
         "eqeqeq": ["error", "always"],
-        "no-inner-declarations": "off"
+        "no-inner-declarations": "off",
+        "@typescript-eslint/space-before-function-paren": "off"
       }
     }
   ]

@@ -2,21 +2,21 @@
   [title]="'Kommende Termine'"
 >
   <p
-    *ngIf="FetchState.isLoading(fetchedEventGroups)"
+    *ngIf="fetchedEventGroups.isLoading()"
     class="text center large"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
     }"
   >Termine werden geladen</p>
   <p
-    *ngIf="FetchState.isFailure(fetchedEventGroups)"
+    *ngIf="fetchedEventGroups.isFailure()"
     class="text center large"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
     }"
   >Termine konnten nicht geladen werden</p>
   <p
-    *ngIf="FetchState.isSuccess(fetchedEventGroups) && FetchState.getContent(fetchedEventGroups).length === 0"
+    *ngIf="fetchedEventGroups.isSuccess() && fetchedEventGroups.content.length === 0"
     class="text center large"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
@@ -24,7 +24,7 @@
   >Keine Termine</p>
   <div
     id="event-groups"
-    *ngFor="let eventGroup of FetchState.getContent(fetchedEventGroups)"
+    *ngFor="let eventGroup of fetchedEventGroups.content"
     [ngClass]="deviceType.className"
   >
     <p
@@ -45,7 +45,7 @@
         [ngStyle]="{
           color: styleConfig.css('secondaryTextColor')
         }"
-      >{{ getDateDescription(event.date) }}</p>
+      >{{ Datum.fromIsoDate(event.date).description }}</p>
       <p
         class="title"
         [ngStyle]="{
@@ -75,7 +75,7 @@
     </div>
   </div>
   <p
-    *ngIf="FetchState.isSuccess(fetchedEventGroups) && FetchState.getContent(fetchedEventGroups).length !== 0"
+    *ngIf="fetchedEventGroups.isSuccess() && fetchedEventGroups.content.length !== 0"
     id="download-calendar"
     (click)="downloadCalendar()"
     [ngStyle]="{

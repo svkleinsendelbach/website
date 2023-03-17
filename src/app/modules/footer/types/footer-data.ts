@@ -1,4 +1,4 @@
-import { Link } from 'src/app/template/classes/link';
+import { Link } from 'src/app/types/link';
 import { ContactData } from './contact-data';
 
 export interface FooterData{

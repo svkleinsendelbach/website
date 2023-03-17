@@ -1,24 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { InternalPath } from 'src/app/app.component';
 
 import { HomeLinksComponent } from './home-links.component';
 
 describe('HomeLinksComponent', () => {
-  let component: HomeLinksComponent<InternalPath>;
-  let fixture: ComponentFixture<HomeLinksComponent<InternalPath>>;
+    let component: HomeLinksComponent;
+    let fixture: ComponentFixture<HomeLinksComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ HomeLinksComponent ]
-    })
-    .compileComponents();
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [ HomeLinksComponent ]
+        })
+            .compileComponents();
 
-    fixture = TestBed.createComponent(HomeLinksComponent<InternalPath>);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(HomeLinksComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

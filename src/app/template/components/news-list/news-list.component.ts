@@ -1,19 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FetchState } from '../../classes/fetch-state';
-import { Datum } from '../../classes/full-datum';
-import { Link } from '../../classes/link';
-import { News } from '../../classes/news';
-import { ApiService } from '../../services/api.service';
+import { FirebaseFunctions } from 'src/app/modules/firebase-api/firebase-functions';
+import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
+import { News } from 'src/app/modules/firebase-api/types/news';
+import { FetchState } from 'src/app/types/fetch-state';
+import { Datum } from 'src/app/types/datum';
+import { Link } from 'src/app/types/link';
 import { DeviceTypeService } from '../../services/device-type.service';
 import { StyleConfigService } from '../../services/style-config.service';
 
 @Component({
-  selector: 'app-news-list',
-  templateUrl: './news-list.component.html',
-  styleUrls: ['./news-list.component.sass']
+    selector: 'app-news-list',
+    templateUrl: './news-list.component.html',
+    styleUrls: ['./news-list.component.sass']
 })
 export class NewsListComponent implements OnInit {
-  public FetchState = FetchState;
+    public FetchState = FetchState;
+    public Datum = Datum;
 
   @Input() public maxListCount?: number;
 
@@ -21,39 +23,32 @@ export class NewsListComponent implements OnInit {
 
   @Input() public newsLink!: (news: News) => Link;
 
-  public fetchedNews: FetchState<{ news: News[], hasMore: boolean }> = FetchState.loading;
+  public fetchedNews: FetchState<{ news: News[]; hasMore: boolean }> = FetchState.loading;
 
   public constructor(
-    private readonly apiService: ApiService,
+    private readonly firebaseApiService: FirebaseApiService<FirebaseFunctions>,
     public readonly styleConfig: StyleConfigService,
     public readonly deviceType: DeviceTypeService
   ) {}
 
   public ngOnInit() {
-    this.apiService
-      .newsGet({
-        numberNews: this.maxListCount,
-        alsoDisabled: false
-      })
-      .then(news => {
-        this.fetchedNews = FetchState.success({
-          news: news.news.map(news => News.unflatten(news)),
-          hasMore: news.hasMore
-        });
-      })
-      .catch(reason => {
-        this.fetchedNews = FetchState.failure(reason);
+      this.firebaseApiService.function('news').function('get').call({
+          numberNews: this.maxListCount,
+          alsoDisabled: false
+      }).then(news => {
+          this.fetchedNews = FetchState.success({
+              news: news.news.map(news => News.concrete(news)),
+              hasMore: news.hasMore
+          });
+      }).catch(reason => {
+          this.fetchedNews = FetchState.failure(reason);
       });
   }
 
   public get notDisabledNews(): News[] | undefined {
-    if (!FetchState.isSuccess(this.fetchedNews)) {
-      return undefined;
-    }
-    return FetchState.getContent(this.fetchedNews).news.filter(news => !news.disabled);
-  }
-
-  public getDateDescription(date: Date): string {
-    return Datum.description(Datum.fromDate(date));
+      if (!this.fetchedNews.isSuccess()) {
+          return undefined;
+      }
+      return this.fetchedNews.content.news.filter(news => !news.disabled);
   }
 }

@@ -1,17 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Link } from '../../classes/link';
-import { UserAuthenticationType } from '../../services/api-functions-types';
+import { UserAuthenticationType } from 'src/app/modules/firebase-api/types/user-authentication';
+import { Link } from 'src/app/types/link';
 import { AuthService } from '../../services/auth.service';
 import { StyleConfigService } from '../../services/style-config.service';
 
 @Component({
-  selector: 'app-authentication-check',
-  templateUrl: './authentication-check.component.html',
-  styleUrls: ['./authentication-check.component.sass']
+    selector: 'app-authentication-check',
+    templateUrl: './authentication-check.component.html',
+    styleUrls: ['./authentication-check.component.sass']
 })
 export class AuthenticationCheckComponent implements OnInit {
-  @Input() public authenticationType!: UserAuthenticationType;
+  @Input() public authenticationTypes!: UserAuthenticationType[];
 
   @Input() public logInPageLink!: Link;
 
@@ -24,23 +24,23 @@ export class AuthenticationCheckComponent implements OnInit {
   ) {}
 
   public ngOnInit() {
-    this.checkAuthentication();
+      this.checkAuthentication();
   }
 
   private async checkAuthentication() {
-    this.state = 'loading';
-    const isLoggedIn = await this.authService
-      .isLoggedIn(this.authenticationType)
-      .catch(reason => {
-        this.state = 'internalError';
-        throw reason;
-      });
-    if (isLoggedIn) {
-      this.state = 'registered';
-    } else {
-      this.state = 'unregistered';
-      await this.router.navigateByUrl(this.logInPageLink.link);
-    }
+      this.state = 'loading';
+      const isLoggedIn = await this.authService
+          .isLoggedIn(this.authenticationTypes)
+          .catch(reason => {
+              this.state = 'internalError';
+              throw reason;
+          });
+      if (isLoggedIn) {
+          this.state = 'registered';
+      } else {
+          this.state = 'unregistered';
+          await this.router.navigateByUrl(this.logInPageLink.link);
+      }
   }
 }
 

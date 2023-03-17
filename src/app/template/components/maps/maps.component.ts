@@ -5,7 +5,7 @@ import { environment } from '../../../../environments/environment';
 import { DeviceTypeService } from '../../services/device-type.service';
 import { StyleConfigService } from '../../services/style-config.service';
 import { AppearanceService } from '../../services/appearance.service';
-import { mapStyleDarkAppearence } from '../../utils/mapStyleDarkAppearence';
+import { mapStyleDarkAppearence } from '../../../utils/mapStyleDarkAppearence';
 import { CookieService } from 'src/app/modules/cookie-selector/services/cookie.service';
 
 @Component({

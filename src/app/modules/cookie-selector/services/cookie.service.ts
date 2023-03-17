@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EventListener } from '../../../template/classes/event-listener';
+import { EventListener } from '../../../types/event-listener';
 import { CookiesSelection } from '../types/cookie-selection';
 import { CookieType } from '../types/cookie-type';
 import { SelectionType } from '../types/selection-type';

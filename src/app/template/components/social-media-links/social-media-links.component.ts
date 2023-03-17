@@ -1,17 +1,17 @@
 import { Component, Input } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
-import { Link } from '../../classes/link';
+import { Link } from 'src/app/types/link';
 import { AppearanceService } from '../../services/appearance.service';
 import { DeviceTypeService } from '../../services/device-type.service';
 import { StyleConfigService } from '../../services/style-config.service';
 
 @Component({
-  selector: 'app-social-media-links',
-  templateUrl: './social-media-links.component.html',
-  styleUrls: ['./social-media-links.component.sass']
+    selector: 'app-social-media-links',
+    templateUrl: './social-media-links.component.html',
+    styleUrls: ['./social-media-links.component.sass']
 })
 export class SocialMediaLinksComponent {
-  public Appearance = AppearanceService.Appearance;
+    public Appearance = AppearanceService.Appearance;
 
   @Input() public socialMediaDataForDeviceType!: SocialMediaLinksComponent.SocialMediaDataForDeviceType;
 
@@ -24,42 +24,42 @@ export class SocialMediaLinksComponent {
   ) {}
 
   public get socialMediaData(): SocialMediaLinksComponent.SocialMediaItem[][] {
-    return this.socialMediaDataForDeviceType[this.deviceType.className];
+      return this.socialMediaDataForDeviceType[this.deviceType.className];
   }
 
   public isIcon(image: IconDefinition | {
-    lightModeSource: string,
-    darkModeSource: string
+    lightModeSource: string;
+    darkModeSource: string;
   }): image is IconDefinition {
-    return !('lightModeSource' in image);
+      return !('lightModeSource' in image);
   }
 
   public handleHoverStart(socialMediaLink: SocialMediaLinksComponent.SocialMediaItem) {
-    this.hoveredItemId = socialMediaLink.id;
+      this.hoveredItemId = socialMediaLink.id;
   }
 
   public handleHoverStop(socialMediaLink: SocialMediaLinksComponent.SocialMediaItem) {
-    if (this.hoveredItemId === socialMediaLink.id) {
-      this.hoveredItemId = null;
-    }
+      if (this.hoveredItemId === socialMediaLink.id) {
+          this.hoveredItemId = null;
+      }
   }
 }
 
 export namespace SocialMediaLinksComponent {
   export interface SocialMediaItem {
-    id: string,
-    title: string,
-    name: string,
-    link: Link
+    id: string;
+    title: string;
+    name: string;
+    link: Link;
     image: IconDefinition | {
-      lightModeSource: string,
-      darkModeSource: string
-    }
+      lightModeSource: string;
+      darkModeSource: string;
+    };
   }
 
   export interface SocialMediaDataForDeviceType {
-    desktop: SocialMediaItem[][],
-    tablet: SocialMediaItem[][],
-    mobile: SocialMediaItem[][]
+    desktop: SocialMediaItem[][];
+    tablet: SocialMediaItem[][];
+    mobile: SocialMediaItem[][];
   }
 }

@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { Link } from '../../classes/link';
+import { Link } from 'src/app/types/link';
 import { DeviceTypeService } from '../../services/device-type.service';
 import { StyleConfigService } from '../../services/style-config.service';
 
 @Component({
-  selector: 'app-links',
-  templateUrl: './links.component.html',
-  styleUrls: ['./links.component.sass']
+    selector: 'app-links',
+    templateUrl: './links.component.html',
+    styleUrls: ['./links.component.sass']
 })
 export class LinksComponent {
   @Input() public links!: LinksComponent.LinkData[];
@@ -19,21 +19,21 @@ export class LinksComponent {
   ) {}
 
   public hoverLinkStart(link: string) {
-    this.hoveredLink = link;
+      this.hoveredLink = link;
   }
 
   public hoverLinkStop(link: string) {
-    if (this.hoveredLink === link) {
-      this.hoveredLink = null;
-    }
+      if (this.hoveredLink === link) {
+          this.hoveredLink = null;
+      }
   }
 }
 
 export namespace LinksComponent {
   export interface LinkData {
-    id: string,
-    link: Link,
-    title: string,
-    subtitle: string
+    id: string;
+    link: Link;
+    title: string;
+    subtitle: string;
   }
 }

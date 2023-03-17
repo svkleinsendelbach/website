@@ -11,9 +11,7 @@ import { environment } from '../environments/environment';
 import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { EventsComponent } from './template/components/events/events.component';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireFunctionsModule, REGION } from '@angular/fire/compat/functions';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
 import { AngularFireAnalyticsModule, COLLECTION_ENABLED, CONFIG } from '@angular/fire/compat/analytics';
 import { AngularFirePerformanceModule, DATA_COLLECTION_ENABLED, INSTRUMENTATION_ENABLED, PerformanceMonitoringService } from '@angular/fire/compat/performance';
@@ -70,6 +68,7 @@ import { ResultComponent } from './template/components/game-info/liveticker/resu
 import { GameDetailComponent } from './pages/game-detail/game-detail.component';
 import { HeaderModule } from './modules/header/header.module';
 import { FooterModule } from './modules/footer/footer.module';
+import { FirebaseApiModule } from './modules/firebase-api/firebase-api.module';
 
 @NgModule({
     declarations: [
@@ -129,9 +128,7 @@ import { FooterModule } from './modules/footer/footer.module';
         AppRoutingModule,
         FontAwesomeModule,
         AngularFireModule.initializeApp(environment.firebase),
-        AngularFireFunctionsModule,
         AngularFireAuthModule,
-        AngularFireDatabaseModule,
         AngularFireStorageModule,
         AngularFireAnalyticsModule,
         AngularFirePerformanceModule,
@@ -142,13 +139,13 @@ import { FooterModule } from './modules/footer/footer.module';
         InputFormModule,
         CookieSelectorModule,
         HeaderModule,
-        FooterModule
+        FooterModule,
+        FirebaseApiModule
     ],
     providers: [
         ScreenTrackingService,
         UserTrackingService,
         PerformanceMonitoringService,
-        { provide: REGION, useValue: 'europe-west1' },
         { provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LdFFLgeAAAAAEzjFiR1X35IK7UHkL2Yx0EQ447i' },
         { provide: USE_DEVICE_LANGUAGE, useValue: true },
         { provide: PERSISTENCE, useValue: 'local' },

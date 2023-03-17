@@ -1,9 +1,9 @@
 <app-text-section
-  *ngIf="FetchState.isLoading(gameInfo)"
+  *ngIf="fetchedGameInfo.isLoading()"
   [title]="'Spiel Infos werden geladen'"
 ></app-text-section>
 <app-text-section
-  *ngIf="FetchState.isFailure(gameInfo)"
+  *ngIf="fetchedGameInfo.isFailure()"
   [title]="'Spiel Infos konnten nicht geladen werden'"
 >
   <p
@@ -14,57 +14,57 @@
   >Bitte landen Sie die Seite neu.</p>
 </app-text-section>
 <app-text-section
-  *ngIf="FetchState.isSuccess(gameInfo)"
-  [title]="FetchState.getContent(gameInfo).homeTeam.name + ' gegen ' + FetchState.getContent(gameInfo).awayTeam.name"
+  *ngIf="fetchedGameInfo.isSuccess()"
+  [title]="fetchedGameInfo.content.homeTeam.name + ' gegen ' + fetchedGameInfo.content.awayTeam.name"
 >
   <a
     id="competition"
-    href="{{ FetchState.getContent(gameInfo).competition.link }}"
-    title="{{ FetchState.getContent(gameInfo).competition.name }}"
+    href="{{ fetchedGameInfo.content.competition.link }}"
+    title="{{ fetchedGameInfo.content.competition.name }}"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
     }"
-  >{{ FetchState.getContent(gameInfo).competition.name }}</a>
+  >{{ fetchedGameInfo.content.competition.name }}</a>
   <p
     id="game-day"
     [ngStyle]="{
       color: styleConfig.css('textColor')
     }"
-  >{{ FetchState.getContent(gameInfo).competition.gameDay.toString() + '. Spieltag' }}</p>
+  >{{ fetchedGameInfo.content.competition.gameDay.toString() + '. Spieltag' }}</p>
   <p
     id="date"
     [ngStyle]="{
       color: styleConfig.css('textColor')
     }"
-  >{{ gameDateDescription }}</p>
+  >{{ Datum.fromIsoDate(fetchedGameInfo.content.date).description }}</p>
   <a
     id="adress"
-    *ngIf="FetchState.getContent(gameInfo).adress !== undefined && FetchState.getContent(gameInfo).adressDescription !== undefined"
-    href="{{ googleMapsLink(FetchState.getContent(gameInfo).adress!) }}"
-    title="{{ FetchState.getContent(gameInfo).adressDescription }}"
+    *ngIf="fetchedGameInfo.content.adress !== undefined && fetchedGameInfo.content.adressDescription !== undefined"
+    href="{{ googleMapsLink(fetchedGameInfo.content.adress!) }}"
+    title="{{ fetchedGameInfo.content.adressDescription }}"
     target="_blank"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
     }"
-  >{{ FetchState.getContent(gameInfo).adressDescription }}</a>
+  >{{ fetchedGameInfo.content.adressDescription }}</a>
   <p
     id="adress"
     class="no-link"
-    *ngIf="FetchState.getContent(gameInfo).adress === undefined && FetchState.getContent(gameInfo).adressDescription !== undefined"
+    *ngIf="fetchedGameInfo.content.adress === undefined && fetchedGameInfo.content.adressDescription !== undefined"
     [ngStyle]="{
       color: styleConfig.css('textColor')
     }"
-  >{{ FetchState.getContent(gameInfo).adressDescription }}</p>
+  >{{ fetchedGameInfo.content.adressDescription }}</p>
   <a
     id="adress-description"
-    *ngIf="FetchState.getContent(gameInfo).adress !== undefined"
-    href="{{ googleMapsLink(FetchState.getContent(gameInfo).adress!) }}"
-    title="{{ FetchState.getContent(gameInfo).adressDescription ?? FetchState.getContent(gameInfo).adress }}"
+    *ngIf="fetchedGameInfo.content.adress !== undefined"
+    href="{{ googleMapsLink(fetchedGameInfo.content.adress!) }}"
+    title="{{ fetchedGameInfo.content.adressDescription ?? fetchedGameInfo.content.adress }}"
     target="_blank"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
     }"
-  >{{ FetchState.getContent(gameInfo).adress }}</a>
+  >{{ fetchedGameInfo.content.adress }}</a>
   <div
     id="result-container"
     [ngClass]="deviceType.className"
@@ -74,46 +74,46 @@
     >
       <img
         id="home-team-image"
-        src="{{ 'https://service-prod.bfv.de/export.media?action=getLogo&format=7&id=' + FetchState.getContent(gameInfo).homeTeam.imageId }}"
-        title="{{ FetchState.getContent(gameInfo).homeTeam.name }}"
+        src="{{ 'https://service-prod.bfv.de/export.media?action=getLogo&format=7&id=' + fetchedGameInfo.content.homeTeam.imageId }}"
+        title="{{ fetchedGameInfo.content.homeTeam.name }}"
       >
       <p
         id="home-team-name"
         [ngStyle]="{
           color: styleConfig.css('textColor')
         }"
-      >{{ FetchState.getContent(gameInfo).homeTeam.name }}</p>
+      >{{ fetchedGameInfo.content.homeTeam.name }}</p>
     </div>
     <p
       id="result"
       [ngStyle]="{
         color: styleConfig.css('primaryColor')
       }"
-    >{{ (FetchState.getContent(gameInfo).result.home?.toString() ?? '-') + ' : ' + (FetchState.getContent(gameInfo).result.away?.toString() ?? '-') }}</p>
+    >{{ (fetchedGameInfo.content.result.home?.toString() ?? '-') + ' : ' + (fetchedGameInfo.content.result.away?.toString() ?? '-') }}</p>
     <div
       id="away-team"
     >
       <img
         id="away-team-image"
-        src="{{ 'https://service-prod.bfv.de/export.media?action=getLogo&format=7&id=' + FetchState.getContent(gameInfo).awayTeam.imageId }}"
-        title="{{ FetchState.getContent(gameInfo).awayTeam.name }}"
+        src="{{ 'https://service-prod.bfv.de/export.media?action=getLogo&format=7&id=' + fetchedGameInfo.content.awayTeam.imageId }}"
+        title="{{ fetchedGameInfo.content.awayTeam.name }}"
       >
       <p
         id="away-team-name"
         [ngStyle]="{
           color: styleConfig.css('textColor')
         }"
-      >{{ FetchState.getContent(gameInfo).awayTeam.name }}</p>
+      >{{ fetchedGameInfo.content.awayTeam.name }}</p>
     </div>
   </div>
   <select
     id="select-liveticker"
-    *ngIf="FetchState.getContent(gameInfo).livetickers.length !== 0"
-    disabled="{{ FetchState.getContent(gameInfo).livetickers.length !== 1 }}"
+    *ngIf="fetchedGameInfo.content.livetickers.length !== 0"
+    disabled="{{ fetchedGameInfo.content.livetickers.length !== 1 }}"
     (change)="selectLivetickerId($event)"
   >
     <option
-      *ngFor="let liveticker of FetchState.getContent(gameInfo).livetickers; index as index"
+      *ngFor="let liveticker of fetchedGameInfo.content.livetickers; index as index"
       value="{{ liveticker.id }}"
     >{{ 'Liveticker ' + (index + 1).toString() }}</option>
   </select>

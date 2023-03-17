@@ -1,5 +1,5 @@
 <app-text-section
-  *ngIf="FetchState.isLoading(fetchedNews)"
+  *ngIf="fetchedNews.isLoading()"
   [title]="'Nachricht wird geladen'"
 >
   <p
@@ -10,22 +10,22 @@
   >Nachricht wird geladen</p>
 </app-text-section>
 <app-text-section
-  *ngIf="FetchState.isSuccess(fetchedNews)"
-  [title]="FetchState.getContent(fetchedNews).title"
+  *ngIf="fetchedNews.isSuccess()"
+  [title]="fetchedNews.content.title"
 >
   <p
-    *ngIf="FetchState.getContent(fetchedNews).subtitle !== undefined"
+    *ngIf="fetchedNews.content.subtitle !== undefined"
     class="text center larger no-bottom-padding"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
     }"
-  >{{ FetchState.getContent(fetchedNews).subtitle }}</p>
+  >{{ fetchedNews.content.subtitle }}</p>
   <p
     class="text center margin-top-small"
     [ngStyle]="{
       color: styleConfig.css('textColor')
     }"
-  >{{ getDateDescription(FetchState.getContent(fetchedNews).date) }}</p>
+  >{{ Datum.fromDate(fetchedNews.content.date).description }}</p>
   <div
     #message
     id="message"

@@ -2,14 +2,14 @@
   [title]="'Kader'"
 >
   <p
-    *ngIf="FetchState.isLoading(fetchedSquad)"
+    *ngIf="fetchedSquad.isLoading()"
     class="text center large"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
     }"
   >Kader wird geladen</p>
   <p
-    *ngIf="FetchState.isFailure(fetchedSquad)"
+    *ngIf="fetchedSquad.isFailure()"
     class="text center large"
     [ngStyle]="{
       color: styleConfig.css('primaryColor')
@@ -19,15 +19,15 @@
   <!-- Coach -->
   <p
     class="text left-align x-large margin-top-normal"
-    *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).coach !== null"
+    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.coach !== null"
   >Trainer</p>
   <div
     class="container"
-    *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).coach !== null"
+    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.coach !== null"
   >
     <app-squad-person
       class="person"
-      [person]="coachPersonInfo(FetchState.getContent(fetchedSquad).coach!)"
+      [person]="coachPersonInfo(fetchedSquad.content.coach!)"
       [ngClass]="deviceType.className"
     ></app-squad-person>
   </div>
@@ -35,15 +35,15 @@
   <!-- Goal keeper -->
   <p
     class="text left-align x-large margin-top-normal"
-    *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.goalkeeper !== null && FetchState.getContent(fetchedSquad).squad!.goalkeeper!.length !== 0"
+    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.goalkeeper !== null && fetchedSquad.content.squad!.goalkeeper!.length !== 0"
   >Torwart</p>
   <div
     class="container"
-    *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.goalkeeper !== null && FetchState.getContent(fetchedSquad).squad!.goalkeeper!.length !== 0"
+    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.goalkeeper !== null && fetchedSquad.content.squad!.goalkeeper!.length !== 0"
   >
     <app-squad-person
       class="person"
-      *ngFor="let person of FetchState.getContent(fetchedSquad).squad!.goalkeeper!"
+      *ngFor="let person of fetchedSquad.content.squad!.goalkeeper!"
       [person]="squadPersonInfo(person)"
       [ngClass]="deviceType.className"
     ></app-squad-person>
@@ -52,15 +52,15 @@
   <!-- Defence -->
   <p
     class="text left-align x-large margin-top-normal"
-    *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.defence !== null && FetchState.getContent(fetchedSquad).squad!.defence!.length !== 0"
+    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.defence !== null && fetchedSquad.content.squad!.defence!.length !== 0"
   >Abwehr</p>
   <div
     class="container"
-    *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.defence !== null && FetchState.getContent(fetchedSquad).squad!.defence!.length !== 0"
+    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.defence !== null && fetchedSquad.content.squad!.defence!.length !== 0"
   >
     <app-squad-person
       class="person"
-      *ngFor="let person of FetchState.getContent(fetchedSquad).squad!.defence!"
+      *ngFor="let person of fetchedSquad.content.squad!.defence!"
       [person]="squadPersonInfo(person)"
       [ngClass]="deviceType.className"
     ></app-squad-person>
@@ -69,15 +69,15 @@
   <!-- Midfield -->
   <p
     class="text left-align x-large margin-top-normal"
-    *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.midfield !== null && FetchState.getContent(fetchedSquad).squad!.midfield!.length !== 0"
+    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.midfield !== null && fetchedSquad.content.squad!.midfield!.length !== 0"
   >Mittelfeld</p>
   <div
     class="container"
-    *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.midfield !== null && FetchState.getContent(fetchedSquad).squad!.midfield!.length !== 0"
+    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.midfield !== null && fetchedSquad.content.squad!.midfield!.length !== 0"
   >
     <app-squad-person
       class="person"
-      *ngFor="let person of FetchState.getContent(fetchedSquad).squad!.midfield!"
+      *ngFor="let person of fetchedSquad.content.squad!.midfield!"
       [person]="squadPersonInfo(person)"
       [ngClass]="deviceType.className"
     ></app-squad-person>
@@ -86,15 +86,15 @@
   <!-- Offence -->
   <p
     class="text left-align x-large margin-top-normal"
-    *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.offence !== null && FetchState.getContent(fetchedSquad).squad!.offence!.length !== 0"
+    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.offence !== null && fetchedSquad.content.squad!.offence!.length !== 0"
   >Sturm</p>
   <div
     class="container"
-    *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.offence !== null && FetchState.getContent(fetchedSquad).squad!.offence!.length !== 0"
+    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.offence !== null && fetchedSquad.content.squad!.offence!.length !== 0"
   >
     <app-squad-person
       class="person"
-      *ngFor="let person of FetchState.getContent(fetchedSquad).squad!.offence!"
+      *ngFor="let person of fetchedSquad.content.squad!.offence!"
       [person]="squadPersonInfo(person)"
       [ngClass]="deviceType.className"
     ></app-squad-person>
@@ -103,15 +103,15 @@
   <!-- Without disclosures -->
   <p
     class="text left-align x-large margin-top-normal"
-    *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.notSpecified !== null && FetchState.getContent(fetchedSquad).squad!.notSpecified!.length !== 0"
+    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.notSpecified !== null && fetchedSquad.content.squad!.notSpecified!.length !== 0"
   >Ohne Angaben</p>
   <div
     class="container"
-    *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).squad !== null && FetchState.getContent(fetchedSquad).squad!.notSpecified !== null && FetchState.getContent(fetchedSquad).squad!.notSpecified!.length !== 0"
+    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.notSpecified !== null && fetchedSquad.content.squad!.notSpecified!.length !== 0"
   >
     <app-squad-person
       class="person"
-      *ngFor="let person of FetchState.getContent(fetchedSquad).squad!.notSpecified!"
+      *ngFor="let person of fetchedSquad.content.squad!.notSpecified!"
       [person]="squadPersonInfo(person)"
       [ngClass]="deviceType.className"
     ></app-squad-person>
@@ -120,15 +120,15 @@
   <!-- Staff -->
   <p
     class="text left-align x-large margin-top-normal"
-    *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).stab !== null && FetchState.getContent(fetchedSquad).stab!.length !== 0"
+    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.stab !== null && fetchedSquad.content.stab!.length !== 0"
   >Stab</p>
   <div
     class="container"
-    *ngIf="FetchState.isSuccess(fetchedSquad) && FetchState.getContent(fetchedSquad).stab !== null && FetchState.getContent(fetchedSquad).stab!.length !== 0"
+    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.stab !== null && fetchedSquad.content.stab!.length !== 0"
   >
     <app-squad-person
       class="person"
-      *ngFor="let person of FetchState.getContent(fetchedSquad).stab!"
+      *ngFor="let person of fetchedSquad.content.stab!"
       [person]="staffPersonInfo(person)"
       [ngClass]="deviceType.className"
     ></app-squad-person>

@@ -1,21 +1,21 @@
 import { FirebaseOptions } from '@angular/fire/app';
-import { DatabaseType } from 'src/app/template/classes/database-type';
-import { Crypter } from 'src/app/template/crypter/Crypter';
-import { ApiService } from 'src/app/template/services/api.service';
+import { Crypter } from 'src/app/modules/firebase-api/crypter/Crypter';
+import { DatabaseType } from 'src/app/modules/firebase-api/types/database-type';
+import { VerboseType } from 'src/app/modules/firebase-api/types/verbose-type';
 
 export interface IEnvironment {
-  firebase: FirebaseOptions,
+  firebase: FirebaseOptions;
   googleMaps: {
-    apiKey: string
-  },
-  databaseType: DatabaseType,
+    apiKey: string;
+  };
+  databaseType: DatabaseType;
   testUser?: {
-    email: string,
-    password: string
-  }
-  verbose: ApiService.VerboseType,
-  cryptionKeys: Crypter.Keys,
-  callSecretKey: string,
-  production: boolean,
-  name: string
+    email: string;
+    password: string;
+  };
+  verbose: VerboseType;
+  cryptionKeys: Crypter.Keys;
+  callSecretKey: string;
+  production: boolean;
+  name: string;
 }

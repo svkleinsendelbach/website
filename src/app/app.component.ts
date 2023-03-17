@@ -1,15 +1,15 @@
 import { Component, HostListener } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { AngularFirePerformance } from '@angular/fire/compat/performance';
-import { InternalLink, InternalPath } from './classes/InternalPath';
+import { InternalLink, InternalPath } from './types/InternalPath';
 import { CookieService } from './modules/cookie-selector/services/cookie.service';
 import { FooterData } from './modules/footer/types/footer-data';
 import { HeaderData } from './modules/header/types/header-data';
 import { HomeLinkData } from './modules/header/types/home-link-data';
-import { Link } from './template/classes/link';
-import { Style } from './template/classes/style';
 import { DeviceTypeService } from './template/services/device-type.service';
 import { StyleConfigService } from './template/services/style-config.service';
+import { Link } from './types/link';
+import { Style } from './types/style';
 
 @Component({
     selector: 'app-root',
