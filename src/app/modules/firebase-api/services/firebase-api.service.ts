@@ -9,16 +9,17 @@ import { FirebaseFunctionsType } from '../types/firebase-functions-type';
 import { FunctionType } from '../types/function-type';
 import { ResultType } from '../types/result-type';
 import { VerboseType } from '../types/verbose-type';
+import { FirebaseFunctions as FFunctions } from '../firebase-functions';
 
 @Injectable({
     providedIn: 'root'
 })
-export class FirebaseApiService<FFunctions extends FirebaseFunctionsType>  {
+export class FirebaseApiService  {
     public constructor(
       private readonly firebaseFunctions: AngularFireFunctions
     ) {}
 
-    public function<Key extends (FFunctions extends FunctionType<unknown, unknown> ? never : (keyof FFunctions & string))>(key: Key): FirebaseFunctions<FFunctions extends FunctionType<unknown, unknown> ? never : FFunctions[Key]> {
+    public function<Key extends keyof FFunctions & string>(key: Key): FirebaseFunctions<FFunctions[Key]> {
         return new FirebaseFunctions(this.firebaseFunctions, key);
     }
 }

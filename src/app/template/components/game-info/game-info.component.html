@@ -1,8 +1,8 @@
-<app-text-section
+<text-section
   *ngIf="fetchedGameInfo.isLoading()"
   [title]="'Spiel Infos werden geladen'"
-></app-text-section>
-<app-text-section
+></text-section>
+<text-section
   *ngIf="fetchedGameInfo.isFailure()"
   [title]="'Spiel Infos konnten nicht geladen werden'"
 >
@@ -12,8 +12,8 @@
       color: styleConfig.css('primaryColor')
     }"
   >Bitte landen Sie die Seite neu.</p>
-</app-text-section>
-<app-text-section
+</text-section>
+<text-section
   *ngIf="fetchedGameInfo.isSuccess()"
   [title]="fetchedGameInfo.content.homeTeam.name + ' gegen ' + fetchedGameInfo.content.awayTeam.name"
 >
@@ -121,4 +121,4 @@
     *ngIf="selectedLiveticker !== undefined"
     [liveticker]="selectedLiveticker"
   ></app-liveticker>
-</app-text-section>
+</text-section>

@@ -1,4 +1,4 @@
-<app-text-section
+<text-section
   [title]="'Alte Herren des SV Kleinsendelbach'"
 >
   <p
@@ -7,18 +7,17 @@
       color: styleConfig.css('secondaryTextColor')
     }"
   >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-</app-text-section>
+</text-section>
 
-<app-events
+<events
   [groupIds]="eventGroupIds"
-  [eventGroupTitle]="eventGroupTitle"
-></app-events>
+></events>
 
 <app-contact-info
   [contactData]="contactData"
 ></app-contact-info>
 
-<app-text-section
+<text-section
   [title]="'Trainingszeiten'"
 >
   <p
@@ -31,4 +30,4 @@
     [options]="mapOptions"
     [markers]="mapMarkers"
   ></app-maps>
-</app-text-section>
+</text-section>

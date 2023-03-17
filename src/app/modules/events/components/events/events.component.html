@@ -1,4 +1,4 @@
-<app-text-section
+<text-section
   [title]="'Kommende Termine'"
 >
   <p
@@ -32,7 +32,7 @@
       [ngStyle]="{
         color: styleConfig.css('textColor')
       }"
-    >{{ eventGroupTitle[eventGroup.groupId] }}</p>
+    >{{ EventGroupId.title[eventGroup.groupId] }}</p>
     <div
       class="event"
       *ngFor="let event of eventGroup.events"
@@ -83,4 +83,4 @@
       borderColor: styleConfig.css('textColor')
     }"
   >ics-Kalender herunterladen</p>
-</app-text-section>
+</text-section>

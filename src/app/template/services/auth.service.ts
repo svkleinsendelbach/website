@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { OAuthProvider } from '@angular/fire/auth';
 import { InputError } from '../../modules/input-form/types/input-error';
-import { FirebaseFunctions } from 'src/app/modules/firebase-api/firebase-functions';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { UserAuthenticationType } from 'src/app/modules/firebase-api/types/user-authentication';
 
@@ -13,7 +12,7 @@ import { UserAuthenticationType } from 'src/app/modules/firebase-api/types/user-
 export class AuthService {
     constructor(
       private readonly firebaseAuth: AngularFireAuth,
-      private readonly firebaseApiService: FirebaseApiService<FirebaseFunctions>,
+      private readonly firebaseApiService: FirebaseApiService,
     ) {}
 
     public async loginWithEmail(authenticationTypes: UserAuthenticationType[], email: string, password: string): Promise<AuthService.RegistrationStatus> {

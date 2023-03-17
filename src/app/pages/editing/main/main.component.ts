@@ -6,7 +6,6 @@ import { AuthService } from 'src/app/template/services/auth.service';
 import { Router } from '@angular/router';
 import { InternalLink } from 'src/app/types/InternalPath';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { FirebaseFunctions } from 'src/app/modules/firebase-api/firebase-functions';
 import { FunctionType } from 'src/app/modules/firebase-api/types/function-type';
 import { UserAuthenticationGetAllUnauthenticatedFunctionType } from 'src/app/modules/firebase-api/function-types';
 
@@ -25,7 +24,7 @@ export class MainComponent {
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService,
-    private readonly firebaseApiService: FirebaseApiService<FirebaseFunctions>,
+    private readonly firebaseApiService: FirebaseApiService,
     private readonly authService: AuthService,
     private router: Router
     ) {

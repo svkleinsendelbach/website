@@ -1,4 +1,4 @@
-<app-text-section
+<text-section
   *ngIf="fetchedNews.isLoading()"
   [title]="'Nachricht wird geladen'"
 >
@@ -8,8 +8,8 @@
       color: styleConfig.css('primaryColor')
     }"
   >Nachricht wird geladen</p>
-</app-text-section>
-<app-text-section
+</text-section>
+<text-section
   *ngIf="fetchedNews.isSuccess()"
   [title]="fetchedNews.content.title"
 >
@@ -30,4 +30,4 @@
     #message
     id="message"
   ></div>
-</app-text-section>
+</text-section>

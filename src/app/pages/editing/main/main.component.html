@@ -14,7 +14,7 @@
       }"
     >Abmelden</p>
   </div>
-  <app-text-section
+  <text-section
     [title]="'Wartende Website Editors'"
     *ngIf="unauthenticatedUsers !== undefined && unauthenticatedUsers.length !== 0"
   >
@@ -58,8 +58,8 @@
         >Ablehnen</p>
       </div>
     </div>
-  </app-text-section>
-  <app-text-section
+  </text-section>
+  <text-section
     [title]="'Website bearbeiten'"
   >
     <div
@@ -104,5 +104,5 @@
         }"
       >Nachrichten bearbeiten</p>
     </div>
-  </app-text-section>
+  </text-section>
 </app-authentication-check>

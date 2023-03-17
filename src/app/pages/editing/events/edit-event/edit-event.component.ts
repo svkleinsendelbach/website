@@ -14,7 +14,6 @@ import { SharedDataService } from 'src/app/template/services/shared-data.service
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
 import { Event, EventGroupId } from 'src/app/modules/firebase-api/types/event';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { FirebaseFunctions } from 'src/app/modules/firebase-api/firebase-functions';
 import { Guid } from 'src/app/modules/firebase-api/types/guid';
 
 @Component({
@@ -68,7 +67,7 @@ export class EditEventComponent implements OnInit {
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService,
-    private readonly firebaseApiService: FirebaseApiService<FirebaseFunctions>,
+    private readonly firebaseApiService: FirebaseApiService,
     private readonly sharedData: SharedDataService<{
       editEvent: {
         groupId: EventGroupId;

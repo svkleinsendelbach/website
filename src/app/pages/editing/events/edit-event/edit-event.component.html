@@ -15,7 +15,7 @@
       }"
     >Zurück</a>
   </div>
-  <app-text-section
+  <text-section
     *ngIf="previousEvent === undefined"
     [title]="'Spiel vom BFV übernehmen'"
   >
@@ -36,8 +36,8 @@
         [inputField]="bfvGameInputForm.field('bfvGameLink')"
       ></input-field-text>
     </input-form>
-  </app-text-section>
-  <app-text-section
+  </text-section>
+  <text-section
     [title]="previousEvent === undefined ? 'Termin hinzufügen' : 'Termin bearbeiten'"
   >
     <input-form
@@ -69,5 +69,5 @@
         [inputField]="inputForm.field('date')"
       ></input-field-date-time>
     </input-form>
-  </app-text-section>
+  </text-section>
 </app-authentication-check>

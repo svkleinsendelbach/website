@@ -6,7 +6,6 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
 import { SharedDataService } from 'src/app/template/services/shared-data.service';
 import { InternalLink } from 'src/app/types/InternalPath';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { FirebaseFunctions } from 'src/app/modules/firebase-api/firebase-functions';
 import { Event, EventGroup, EventGroupId } from 'src/app/modules/firebase-api/types/event';
 
 @Component({
@@ -26,7 +25,7 @@ export class EventsComponent {
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService,
-    private readonly firebaseApiService: FirebaseApiService<FirebaseFunctions>,
+    private readonly firebaseApiService: FirebaseApiService,
     private readonly sharedData: SharedDataService<{
       editEvent: {
         groupId: EventGroupId;

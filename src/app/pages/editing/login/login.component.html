@@ -1,4 +1,4 @@
-<app-text-section
+<text-section
   [title]="'Authentifizierung wird überprüft'"
   *ngIf="state === 'loading'"
 >
@@ -8,8 +8,8 @@
       color: styleConfig.css('primaryColor')
     }"
   >Es wird überprüft, ob Sie berechtigt sind diese Seite zu besuchen.</p>
-</app-text-section>
-<app-text-section
+</text-section>
+<text-section
   [title]="'Authentifizierung bestätigt'"
   *ngIf="state === 'alreadyLoggedIn'"
 >
@@ -28,7 +28,7 @@
       color: styleConfig.css('primaryColor')
     }"
   >Website bearbeiten</a>
-</app-text-section>
+</text-section>
 <div
   class="container"
   *ngIf="state === 'loginPage'"

@@ -6,10 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContactInfoComponent } from './template/components/contact-info/contact-info.component';
-import { TextSectionComponent } from './template/components/text-section/text-section.component';
 import { environment } from '../environments/environment';
 import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
-import { EventsComponent } from './template/components/events/events.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
@@ -54,7 +52,7 @@ import { LoginComponent } from './pages/editing/login/login.component';
 import { LoginPageComponent } from './pages/editing/login/login-page/login-page.component';
 import { LoginAddUserWaitingComponent } from './pages/editing/login/login-add-user-waiting/login-add-user-waiting.component';
 import { USE_DEVICE_LANGUAGE, PERSISTENCE } from '@angular/fire/compat/auth';
-import { EventsComponent as EventsComponent_1 } from './pages/editing/events/events.component';
+import { EventsComponent } from './pages/editing/events/events.component';
 import { EditEventComponent } from './pages/editing/events/edit-event/edit-event.component';
 import { NewsComponent } from './pages/editing/news/news.component';
 import { EditNewsComponent } from './pages/editing/news/edit-news/edit-news.component';
@@ -69,13 +67,13 @@ import { GameDetailComponent } from './pages/game-detail/game-detail.component';
 import { HeaderModule } from './modules/header/header.module';
 import { FooterModule } from './modules/footer/footer.module';
 import { FirebaseApiModule } from './modules/firebase-api/firebase-api.module';
+import { TextSectionModule } from './modules/text-section/text-section.module';
+import { EventsModule } from './modules/events/events.module';
 
 @NgModule({
     declarations: [
         AppComponent,
         ContactInfoComponent,
-        TextSectionComponent,
-        EventsComponent,
         NewsListComponent,
         HomeLinksComponent,
         SocialMediaLinksComponent,
@@ -112,7 +110,7 @@ import { FirebaseApiModule } from './modules/firebase-api/firebase-api.module';
         LoginComponent,
         LoginPageComponent,
         LoginAddUserWaitingComponent,
-        EventsComponent_1,
+        EventsComponent,
         EditEventComponent,
         NewsComponent,
         EditNewsComponent,
@@ -140,7 +138,9 @@ import { FirebaseApiModule } from './modules/firebase-api/firebase-api.module';
         CookieSelectorModule,
         HeaderModule,
         FooterModule,
-        FirebaseApiModule
+        FirebaseApiModule,
+        TextSectionModule,
+        EventsModule
     ],
     providers: [
         ScreenTrackingService,

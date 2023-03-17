@@ -12,7 +12,6 @@ import { SelectOptions } from 'src/app/modules/input-form/components/input-field
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { FirebaseFunctions } from 'src/app/modules/firebase-api/firebase-functions';
 import { FunctionType } from 'src/app/modules/firebase-api/types/function-type';
 import { SendMailContactFunctionType } from 'src/app/modules/firebase-api/function-types';
 
@@ -52,7 +51,7 @@ export class ContactComponent {
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService,
-    private readonly firebaseApiService: FirebaseApiService<FirebaseFunctions>,
+    private readonly firebaseApiService: FirebaseApiService,
     private recaptchaService: ReCaptchaV3Service
     ) {
         this.titleService.setTitle('Kontakt');

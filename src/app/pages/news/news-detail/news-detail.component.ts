@@ -8,7 +8,6 @@ import { StyleConfigService } from 'src/app/template/services/style-config.servi
 import { FetchState } from 'src/app/types/fetch-state';
 import { News } from 'src/app/modules/firebase-api/types/news';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { FirebaseFunctions } from 'src/app/modules/firebase-api/firebase-functions';
 import { Datum } from 'src/app/types/datum';
 
 @Component({
@@ -17,7 +16,6 @@ import { Datum } from 'src/app/types/datum';
     styleUrls: ['./news-detail.component.sass']
 })
 export class NewsDetailComponent {
-    public FetchState = FetchState;
     public Datum = Datum;
 
     public fetchedNews: FetchState<News> = FetchState.loading;
@@ -28,7 +26,7 @@ export class NewsDetailComponent {
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService,
-    private readonly firebaseApiService: FirebaseApiService<FirebaseFunctions>,
+    private readonly firebaseApiService: FirebaseApiService,
     private readonly fileStorage: FileStorageService,
     private route: ActivatedRoute,
     private router: Router

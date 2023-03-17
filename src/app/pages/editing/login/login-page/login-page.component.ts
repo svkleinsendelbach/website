@@ -14,7 +14,6 @@ import { AuthService } from 'src/app/template/services/auth.service';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { FirebaseFunctions } from 'src/app/modules/firebase-api/firebase-functions';
 
 @Component({
     selector: 'app-login-page',
@@ -57,7 +56,7 @@ export class LoginPageComponent {
     public readonly styleConfig: StyleConfigService,
     public readonly appearance: AppearanceService,
     private readonly authService: AuthService,
-    private readonly firebaseApiService: FirebaseApiService<FirebaseFunctions>,
+    private readonly firebaseApiService: FirebaseApiService,
     private recaptchaService: ReCaptchaV3Service,
     private router: Router
   ) {}

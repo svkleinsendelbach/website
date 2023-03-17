@@ -1,32 +1,29 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DeviceTypeService } from '../../services/device-type.service';
+import { DeviceTypeService } from '../../../../template/services/device-type.service';
 import ical from 'ical-generator';
-import { StyleConfigService } from '../../services/style-config.service';
+import { StyleConfigService } from '../../../../template/services/style-config.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { FetchState } from 'src/app/types/fetch-state';
 import { EventGroup, EventGroupId } from 'src/app/modules/firebase-api/types/event';
-import { FirebaseFunctions } from 'src/app/modules/firebase-api/firebase-functions';
 import { Datum } from 'src/app/types/datum';
 
 @Component({
-    selector: 'app-events',
+    selector: 'events',
     templateUrl: './events.component.html',
     styleUrls: ['./events.component.sass']
 })
 export class EventsComponent implements OnInit {
-    public FetchState = FetchState;
     public Datum = Datum;
+    public EventGroupId = EventGroupId;
 
   @Input() public groupIds!: EventGroupId[];
-
-  @Input() public eventGroupTitle!: Record<EventGroupId, string>;
 
   public fetchedEventGroups: FetchState<EventGroup.Flatten[]> = FetchState.loading;
 
   public constructor(
-    private readonly firebaseApiService: FirebaseApiService<FirebaseFunctions>,
-    public readonly styleConfig: StyleConfigService,
-    public readonly deviceType: DeviceTypeService
+      private readonly firebaseApiService: FirebaseApiService,
+      public readonly styleConfig: StyleConfigService,
+      public readonly deviceType: DeviceTypeService
   ) {}
 
   public ngOnInit() {
@@ -43,8 +40,8 @@ export class EventsComponent implements OnInit {
       if (!this.fetchedEventGroups.isSuccess())
           return;
       const calender = ical({
-          name: this.fetchedEventGroups.content.length === 1 ? this.eventGroupTitle[this.fetchedEventGroups.content[0].groupId] : 'SV Kleinsendelbach',
-          description: `Exportierter Kalender von der SV Kleinsendelbach Website für ${this.fetchedEventGroups.content.map(eventGroup => this.eventGroupTitle[eventGroup.groupId]).join(', ')}`,
+          name: this.fetchedEventGroups.content.length === 1 ? EventGroupId.title[this.fetchedEventGroups.content[0].groupId] : 'SV Kleinsendelbach',
+          description: `Exportierter Kalender von der SV Kleinsendelbach Website für ${this.fetchedEventGroups.content.map(eventGroup => EventGroupId.title[eventGroup.groupId]).join(', ')}`,
           timezone: 'Europe/Berlin'
       });
       for (const eventGroup of this.fetchedEventGroups.content) {

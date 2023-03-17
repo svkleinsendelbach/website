@@ -14,7 +14,6 @@ import { SharedDataService } from 'src/app/template/services/shared-data.service
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
 import { environment } from 'src/environments/environment';
 import { News } from 'src/app/modules/firebase-api/types/news';
-import { FirebaseFunctions } from 'src/app/modules/firebase-api/firebase-functions';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { Guid } from 'src/app/modules/firebase-api/types/guid';
 
@@ -50,7 +49,7 @@ export class EditNewsComponent implements OnInit {
     public readonly titleService: Title,
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService,
-    private readonly firebaseApiService: FirebaseApiService<FirebaseFunctions>,
+    private readonly firebaseApiService: FirebaseApiService,
     private readonly fileStorage: FileStorageService,
     private readonly sharedData: SharedDataService<{
       editNews: News.Flatten;

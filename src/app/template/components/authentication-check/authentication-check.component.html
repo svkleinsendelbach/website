@@ -1,4 +1,4 @@
-<app-text-section
+<text-section
   [title]="'Authentifizierung wird überprüft'"
   *ngIf="state === 'loading'"
 >
@@ -8,8 +8,8 @@
       color: styleConfig.css('primaryColor')
     }"
   >Es wird überprüft, ob Sie berechtigt sind diese Seite zu besuchen.</p>
-</app-text-section>
-<app-text-section
+</text-section>
+<text-section
   [title]="'Authentifizierung fehlgeschlagen'"
   *ngIf="state === 'internalError'"
 >
@@ -19,8 +19,8 @@
       color: styleConfig.css('primaryColor')
     }"
   >Es konnte nicht überprüft werden, ob Sie berechtigt sind diese Seite zu besuchen. Bitte laden Sie die Seite neu, um es erneut zu versuchen.</p>
-</app-text-section>
-<app-text-section
+</text-section>
+<text-section
   [title]="'Authentifizierung fehlgeschlagen'"
   *ngIf="state === 'unregistered'"
 >
@@ -39,7 +39,7 @@
       color: styleConfig.css('primaryColor')
     }"
   >Zur Anmeldung</a>
-</app-text-section>
+</text-section>
 <ng-content
   *ngIf="state === 'registered'"
 ></ng-content>

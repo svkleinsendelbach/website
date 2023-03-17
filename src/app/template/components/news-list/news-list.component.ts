@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FirebaseFunctions } from 'src/app/modules/firebase-api/firebase-functions';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { News } from 'src/app/modules/firebase-api/types/news';
 import { FetchState } from 'src/app/types/fetch-state';
@@ -14,7 +13,6 @@ import { StyleConfigService } from '../../services/style-config.service';
     styleUrls: ['./news-list.component.sass']
 })
 export class NewsListComponent implements OnInit {
-    public FetchState = FetchState;
     public Datum = Datum;
 
   @Input() public maxListCount?: number;
@@ -26,7 +24,7 @@ export class NewsListComponent implements OnInit {
   public fetchedNews: FetchState<{ news: News[]; hasMore: boolean }> = FetchState.loading;
 
   public constructor(
-    private readonly firebaseApiService: FirebaseApiService<FirebaseFunctions>,
+    private readonly firebaseApiService: FirebaseApiService,
     public readonly styleConfig: StyleConfigService,
     public readonly deviceType: DeviceTypeService
   ) {}

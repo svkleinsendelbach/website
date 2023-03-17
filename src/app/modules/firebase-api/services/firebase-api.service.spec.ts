@@ -5,7 +5,6 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireFunctions, REGION } from '@angular/fire/compat/functions';
 import { environment } from 'src/environments/environment';
 import { FirebaseApiService } from './firebase-api.service';
-import { FirebaseFunctions } from '../firebase-functions';
 import { DatabaseManagerTestService } from './database-manager.service';
 import { DatabaseScheme } from '../database-scheme';
 import { UserAuthenticationType } from '../types/user-authentication';
@@ -15,7 +14,7 @@ import { News } from '../types/news';
 import { UserAuthenticationGetAllUnauthenticatedFunction } from '../function-types';
 
 describe('ApiService', () => {
-    let firebaseApi: FirebaseApiService<FirebaseFunctions>;
+    let firebaseApi: FirebaseApiService;
     let database: DatabaseManagerTestService<DatabaseScheme>;
     let firebaseAuth: AngularFireAuth;
 

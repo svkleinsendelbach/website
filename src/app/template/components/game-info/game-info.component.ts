@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FirebaseFunctions } from 'src/app/modules/firebase-api/firebase-functions';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { GameInfo, BfvLiveticker } from 'src/app/modules/firebase-api/types/game-info';
 import { FetchState } from 'src/app/types/fetch-state';
@@ -13,7 +12,6 @@ import { StyleConfigService } from '../../services/style-config.service';
     styleUrls: ['./game-info.component.sass']
 })
 export class GameInfoComponent implements OnInit {
-    public FetchState = FetchState;
     public Datum = Datum;
 
   @Input() public gameId!: string;
@@ -27,7 +25,7 @@ export class GameInfoComponent implements OnInit {
   public constructor(
     public readonly deviceType: DeviceTypeService,
     public readonly styleConfig: StyleConfigService,
-    private readonly firebaseApiService: FirebaseApiService<FirebaseFunctions>,
+    private readonly firebaseApiService: FirebaseApiService,
   ) {}
 
   public ngOnInit() {
