@@ -9,7 +9,7 @@ export class StyleConfigService {
     private styleConfig?: StyleConfigService.StyleConfig;
 
     public constructor(
-    private readonly appearance: AppearanceService
+        private readonly appearance: AppearanceService
     ) {}
 
     public setConfig(styleConfig: StyleConfigService.StyleConfig) {
@@ -17,16 +17,14 @@ export class StyleConfigService {
     }
 
     public setStyle<Key extends keyof StyleConfigService.StyleConfig>(key: Key, style: StyleConfigService.StyleConfig[Key]) {
-        if (this.styleConfig === undefined) {
+        if (this.styleConfig === undefined)
             throw new Error('No style config is set.');
-        }
         this.styleConfig[key] = style;
     }
 
     public style<Key extends keyof StyleConfigService.StyleConfig>(key: Key): StyleConfigService.StyleConfig[Key] {
-        if (this.styleConfig === undefined) {
+        if (this.styleConfig === undefined)
             throw new Error('No style config is set.');
-        }
         return this.styleConfig[key];
     }
 
@@ -40,15 +38,15 @@ export class StyleConfigService {
 }
 
 export namespace StyleConfigService {
-  export interface StyleConfig {
-    primaryColor: Style.AppearanceColor;
-    backgroundColor: Style.AppearanceColor;
-    secondaryBackgroundColor: Style.AppearanceColor;
-    hoveredBackgroundColor: Style.AppearanceColor;
-    textColor: Style.AppearanceColor;
-    secondaryTextColor: Style.AppearanceColor;
-    formSuccessStatusColor: Style.AppearanceColor;
-    formErrorStatusColor: Style.AppearanceColor;
-    formInfoStatusColor: Style.AppearanceColor;
-  }
+    export interface StyleConfig {
+        primaryColor: Style.AppearanceColor;
+        backgroundColor: Style.AppearanceColor;
+        secondaryBackgroundColor: Style.AppearanceColor;
+        hoveredBackgroundColor: Style.AppearanceColor;
+        textColor: Style.AppearanceColor;
+        secondaryTextColor: Style.AppearanceColor;
+        formSuccessStatusColor: Style.AppearanceColor;
+        formErrorStatusColor: Style.AppearanceColor;
+        formInfoStatusColor: Style.AppearanceColor;
+    }
 }

@@ -28,7 +28,7 @@
     <app-squad-person
       class="person"
       [person]="coachPersonInfo(fetchedSquad.content.coach!)"
-      [ngClass]="deviceType.className"
+      [ngClass]="deviceType.current"
     ></app-squad-person>
   </div>
 
@@ -45,7 +45,7 @@
       class="person"
       *ngFor="let person of fetchedSquad.content.squad!.goalkeeper!"
       [person]="squadPersonInfo(person)"
-      [ngClass]="deviceType.className"
+      [ngClass]="deviceType.current"
     ></app-squad-person>
   </div>
 
@@ -62,7 +62,7 @@
       class="person"
       *ngFor="let person of fetchedSquad.content.squad!.defence!"
       [person]="squadPersonInfo(person)"
-      [ngClass]="deviceType.className"
+      [ngClass]="deviceType.current"
     ></app-squad-person>
   </div>
 
@@ -79,7 +79,7 @@
       class="person"
       *ngFor="let person of fetchedSquad.content.squad!.midfield!"
       [person]="squadPersonInfo(person)"
-      [ngClass]="deviceType.className"
+      [ngClass]="deviceType.current"
     ></app-squad-person>
   </div>
 
@@ -96,7 +96,7 @@
       class="person"
       *ngFor="let person of fetchedSquad.content.squad!.offence!"
       [person]="squadPersonInfo(person)"
-      [ngClass]="deviceType.className"
+      [ngClass]="deviceType.current"
     ></app-squad-person>
   </div>
 
@@ -113,7 +113,7 @@
       class="person"
       *ngFor="let person of fetchedSquad.content.squad!.notSpecified!"
       [person]="squadPersonInfo(person)"
-      [ngClass]="deviceType.className"
+      [ngClass]="deviceType.current"
     ></app-squad-person>
   </div>
 
@@ -130,7 +130,7 @@
       class="person"
       *ngFor="let person of fetchedSquad.content.stab!"
       [person]="staffPersonInfo(person)"
-      [ngClass]="deviceType.className"
+      [ngClass]="deviceType.current"
     ></app-squad-person>
   </div>
 

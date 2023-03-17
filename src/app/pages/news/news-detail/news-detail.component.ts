@@ -2,13 +2,13 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InternalLink } from 'src/app/types/InternalPath';
-import { DeviceTypeService } from 'src/app/template/services/device-type.service';
-import { FileStorageService } from 'src/app/template/services/file-storage.service';
-import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 import { FetchState } from 'src/app/types/fetch-state';
 import { News } from 'src/app/modules/firebase-api/types/news';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { Datum } from 'src/app/types/datum';
+import { FileStorageService } from 'src/app/modules/firebase-api/services/file-storage.service';
 
 @Component({
     selector: 'app-news-detail',

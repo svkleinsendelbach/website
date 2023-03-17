@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Link } from 'src/app/types/link';
-import { DeviceTypeService } from '../../services/device-type.service';
-import { StyleConfigService } from '../../services/style-config.service';
+import { DeviceTypeService } from '../../../services/device-type.service';
+import { StyleConfigService } from '../../../services/style-config.service';
 
 @Component({
     selector: 'app-links',

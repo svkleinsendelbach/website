@@ -1,4 +1,4 @@
-import { AppearanceService } from '../template/services/appearance.service';
+import { Appearance } from '../services/appearance.service';
 
 export namespace Style {
     export class DecodingError implements Error {
@@ -107,14 +107,14 @@ export namespace Style {
             return this.darkColor ?? this.lightColor;
         }
 
-        public color(appearance: AppearanceService.Appearance): Color {
+        public color(appearance: Appearance): Color {
             switch (appearance) {
-            case AppearanceService.Appearance.Light: return this.light;
-            case AppearanceService.Appearance.Dark: return this.dark;
+            case 'light': return this.light;
+            case 'dark': return this.dark;
             }
         }
 
-        public css(appearance: AppearanceService.Appearance): string {
+        public css(appearance: Appearance): string {
             return this.color(appearance).css;
         }
 

@@ -1,7 +1,7 @@
 <div
     id="message-box"
     *ngIf="isShown"
-    [ngClass]="deviceType.className"
+    [ngClass]="deviceType.current"
     [ngStyle]="{
         backgroundColor: styleConfig.css('backgroundColor')
     }"

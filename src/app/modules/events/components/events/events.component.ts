@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DeviceTypeService } from '../../../../template/services/device-type.service';
+import { DeviceTypeService } from '../../../../services/device-type.service';
 import ical from 'ical-generator';
-import { StyleConfigService } from '../../../../template/services/style-config.service';
+import { StyleConfigService } from '../../../../services/style-config.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { FetchState } from 'src/app/types/fetch-state';
 import { EventGroup, EventGroupId } from 'src/app/modules/firebase-api/types/event';

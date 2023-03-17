@@ -6,8 +6,8 @@ import { CookieService } from './modules/cookie-selector/services/cookie.service
 import { FooterData } from './modules/footer/types/footer-data';
 import { HeaderData } from './modules/header/types/header-data';
 import { HomeLinkData } from './modules/header/types/home-link-data';
-import { DeviceTypeService } from './template/services/device-type.service';
-import { StyleConfigService } from './template/services/style-config.service';
+import { DeviceTypeService } from './services/device-type.service';
+import { StyleConfigService } from './services/style-config.service';
 import { Link } from './types/link';
 import { Style } from './types/style';
 

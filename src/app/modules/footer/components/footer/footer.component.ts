@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
-import { DeviceTypeService } from 'src/app/template/services/device-type.service';
-import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 import { FooterData } from '../../types/footer-data';
 
 @Component({

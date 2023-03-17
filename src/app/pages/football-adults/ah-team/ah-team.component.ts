@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
 import { ContactInfoComponent } from 'src/app/template/components/contact-info/contact-info.component';
-import { DeviceTypeService } from 'src/app/template/services/device-type.service';
-import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 
 @Component({
     selector: 'app-ah-team',

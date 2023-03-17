@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { faThumbsUp as faThumbsUpSolid } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp as faThumbsUpOutline, faThumbsDown as faThumbsDownOutline, faFlag, faHeart } from '@fortawesome/free-regular-svg-icons';
-import { DeviceTypeService } from 'src/app/template/services/device-type.service';
-import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { BfvLiveticker } from 'src/app/modules/firebase-api/types/game-info';

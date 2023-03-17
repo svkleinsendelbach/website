@@ -26,23 +26,23 @@
 
   <div
    class="sign-in-container"
-   [ngClass]="deviceType.className"
+   [ngClass]="deviceType.current"
   >
     <div
       class="sign-in-button apple"
       (click)="$event.preventDefault(); $event.stopPropagation(); loginWithApple()"
       [ngStyle]="{
-        backgroundColor: appearance.current === Appearance.Light ? '#000000' : '#FFFFFF'
+        backgroundColor: appearance.current === 'light' ? '#000000' : '#FFFFFF'
       }"
     >
       <img
-        *ngIf="appearance.current === Appearance.Light"
+        *ngIf="appearance.current === 'light'"
         src="assets/images/apple_logo_white.png"
         title="Apple"
         class="logo"
       >
       <img
-        *ngIf="appearance.current === Appearance.Dark"
+        *ngIf="appearance.current === 'dark'"
         src="assets/images/apple_logo_black.png"
         title="Apple"
         class="logo"
@@ -50,7 +50,7 @@
       <p
         class="button-text"
         [ngStyle]="{
-          color: appearance.current === Appearance.Light ? '#FFFFFF' : '#000000'
+          color: appearance.current === 'light' ? '#FFFFFF' : '#000000'
         }"
       >Mit Apple Anmelden</p>
     </div>
@@ -72,14 +72,14 @@
 
   <div
    class="sign-in-container"
-   [ngClass]="deviceType.className"
+   [ngClass]="deviceType.current"
   >
     <div
       class="sign-in-button google"
       (click)="$event.preventDefault(); $event.stopPropagation(); loginWithGoogle()"
       [ngStyle]="{
-        backgroundColor: appearance.current === Appearance.Light ? '#FFFFFF' : '#4285F4',
-        boxShadow: '0 0 4px ' + (appearance.current === Appearance.Light ? '#A0A0A0' : '#202020')
+        backgroundColor: appearance.current === 'light' ? '#FFFFFF' : '#4285F4',
+        boxShadow: '0 0 4px ' + (appearance.current === 'light' ? '#A0A0A0' : '#202020')
       }"
     >
       <img
@@ -87,13 +87,13 @@
         title="Google"
         class="logo"
         [ngStyle]="{
-          backgroundColor: appearance.current === Appearance.Light ? undefined : '#FFFFFF'
+          backgroundColor: appearance.current === 'light' ? undefined : '#FFFFFF'
         }"
       >
       <p
         class="button-text"
         [ngStyle]="{
-          color: appearance.current === Appearance.Light ? '#6A6A6A' : '#FFFFFF'
+          color: appearance.current === 'light' ? '#6A6A6A' : '#FFFFFF'
         }"
       >Mit Google Anmelden</p>
     </div>

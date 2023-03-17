@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 import { HeaderData, HeaderItem } from '../../types/header-data';
 import { HomeLinkData } from '../../types/home-link-data';
 

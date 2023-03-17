@@ -4,8 +4,8 @@ import { AnpfiffInfoPersonParameters } from 'src/app/modules/firebase-api/types/
 import { AnpfiffInfoTeamParameters } from 'src/app/modules/firebase-api/types/anpfiff-info-team-parameters';
 import { TeamSquad } from 'src/app/modules/firebase-api/types/team-squad';
 import { FetchState } from 'src/app/types/fetch-state';
-import { DeviceTypeService } from '../../services/device-type.service';
-import { StyleConfigService } from '../../services/style-config.service';
+import { DeviceTypeService } from '../../../services/device-type.service';
+import { StyleConfigService } from '../../../services/style-config.service';
 
 @Component({
     selector: 'app-squad',

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { BfvLiveticker } from 'src/app/modules/firebase-api/types/game-info';
-import { DeviceTypeService } from 'src/app/template/services/device-type.service';
-import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 
 @Component({
     selector: 'app-liveticker',

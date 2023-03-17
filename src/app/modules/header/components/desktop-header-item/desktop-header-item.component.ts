@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
-import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Link } from 'src/app/types/link';
 import { HeaderItem } from '../../types/header-data';
 

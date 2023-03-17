@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 import { InputError } from '../../types/input-error';
 import { ErrorLevel } from '../../types/error-level';
 

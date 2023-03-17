@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { DeviceTypeService } from '../../services/device-type.service';
+import { DeviceTypeService } from '../../../services/device-type.service';
 import { faPhone, faMobile, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { StyleConfigService } from '../../services/style-config.service';
+import { StyleConfigService } from '../../../services/style-config.service';
 
 @Component({
   selector: 'app-contact-info',

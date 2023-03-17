@@ -3,8 +3,8 @@ import { Title } from '@angular/platform-browser';
 import { InternalPath } from 'src/app/types/InternalPath';
 import { ContactInfoComponent } from 'src/app/template/components/contact-info/contact-info.component';
 import { LinksComponent } from 'src/app/template/components/links/links.component';
-import { DeviceTypeService } from 'src/app/template/services/device-type.service';
-import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
 import { Link } from 'src/app/types/link';
 

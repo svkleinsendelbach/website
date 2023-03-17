@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Link } from 'src/app/types/link';
-import { DeviceTypeService } from '../../services/device-type.service';
-import { StyleConfigService } from '../../services/style-config.service';
+import { DeviceTypeService } from '../../../services/device-type.service';
+import { StyleConfigService } from '../../../services/style-config.service';
 
 @Component({
     selector: 'app-home-links',
@@ -18,7 +18,7 @@ export class HomeLinksComponent {
   ) {}
 
   public get linkData(): HomeLinksComponent.LinkItem[][] {
-      return this.linkDataForDeviceType[this.deviceType.className];
+      return this.linkDataForDeviceType[this.deviceType.current];
   }
 }
 

@@ -8,14 +8,14 @@ import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';
 import { ValidationResult } from 'src/app/modules/input-form/types/validation-result';
 import { Validator } from 'src/app/modules/input-form/types/validator';
-import { DeviceTypeService } from 'src/app/template/services/device-type.service';
-import { FileStorageService } from 'src/app/template/services/file-storage.service';
-import { SharedDataService } from 'src/app/template/services/shared-data.service';
-import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { SharedDataService } from 'src/app/services/shared-data.service';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 import { environment } from 'src/environments/environment';
 import { News } from 'src/app/modules/firebase-api/types/news';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { Guid } from 'src/app/modules/firebase-api/types/guid';
+import { FileStorageService } from 'src/app/modules/firebase-api/services/file-storage.service';
 
 @Component({
     selector: 'app-edit-news',

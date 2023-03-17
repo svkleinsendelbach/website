@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { CookieService } from 'src/app/modules/cookie-selector/services/cookie.service';
-import { AppearanceService } from '../../services/appearance.service';
-import { DeviceTypeService } from '../../services/device-type.service';
-import { StyleConfigService } from '../../services/style-config.service';
+import { AppearanceService } from '../../../services/appearance.service';
+import { DeviceTypeService } from '../../../services/device-type.service';
+import { StyleConfigService } from '../../../services/style-config.service';
 
 @Component({
     selector: 'app-bfv-widget',

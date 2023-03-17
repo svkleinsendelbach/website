@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faChevronLeft, faChevronRight, faCircle } from '@fortawesome/free-solid-svg-icons';
-import { DeviceTypeService } from '../../services/device-type.service';
-import { StyleConfigService } from '../../services/style-config.service';
+import { DeviceTypeService } from '../../../services/device-type.service';
+import { StyleConfigService } from '../../../services/style-config.service';
 
 @Component({
   selector: 'app-home-banner',

@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { UserAuthenticationType } from 'src/app/modules/firebase-api/types/user-authentication';
 import { Link } from 'src/app/types/link';
 import { AuthService } from '../../services/auth.service';
-import { StyleConfigService } from '../../../../template/services/style-config.service';
+import { StyleConfigService } from '../../../../services/style-config.service';
 import { RegistrationStatus } from '../../types/registration-status';
 
 @Component({
-    selector: 'app-authentication-check',
+    selector: 'authentication-check',
     templateUrl: './authentication-check.component.html',
     styleUrls: ['./authentication-check.component.sass']
 })

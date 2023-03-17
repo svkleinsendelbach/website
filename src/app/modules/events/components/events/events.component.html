@@ -25,7 +25,7 @@
   <div
     id="event-groups"
     *ngFor="let eventGroup of fetchedEventGroups.content"
-    [ngClass]="deviceType.className"
+    [ngClass]="deviceType.current"
   >
     <p
       class="event-group"

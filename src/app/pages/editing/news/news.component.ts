@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { InternalLink } from 'src/app/types/InternalPath';
-import { DeviceTypeService } from 'src/app/template/services/device-type.service';
-import { SharedDataService } from 'src/app/template/services/shared-data.service';
-import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { SharedDataService } from 'src/app/services/shared-data.service';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 import { News } from 'src/app/modules/firebase-api/types/news';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 

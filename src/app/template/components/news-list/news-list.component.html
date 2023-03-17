@@ -25,7 +25,7 @@
   <div
     id="all-news"
     *ngIf="fetchedNews.isSuccess() && fetchedNews.content.news.length !== 0"
-    [ngClass]="deviceType.className"
+    [ngClass]="deviceType.current"
   >
     <div
       class="news"

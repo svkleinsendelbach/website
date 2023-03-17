@@ -1,4 +1,4 @@
-<app-authentication-check
+<authentication-check
   [authenticationTypes]="['editEvents']"
   [logInPageLink]="logInPageLink"
 >
@@ -37,7 +37,7 @@
     <div
       *ngFor="let eventGroup of eventGroups"
       class="event-group"
-      [ngClass]="deviceType.className"
+      [ngClass]="deviceType.current"
     >
       <p
         class="group-name"
@@ -87,4 +87,4 @@
       </div>
     </div>
   </text-section>
-</app-authentication-check>
+</authentication-check>

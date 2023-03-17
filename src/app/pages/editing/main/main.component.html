@@ -1,4 +1,4 @@
-<app-authentication-check
+<authentication-check
   [authenticationTypes]="['editEvents', 'editNews', 'editReports', 'authenticateUser', 'notification']"
   [logInPageLink]="logInPageLink"
 >
@@ -26,7 +26,7 @@
     >Folgende Personen haben beantragt, die Website zu bearbeiten. Bestätige oder lehne die Anfrage ab.</p>
     <div
       id="unauthenticated-user-container"
-      [ngClass]="deviceType.className"
+      [ngClass]="deviceType.current"
     >
       <div
         class="unauthenticated-user"
@@ -64,7 +64,7 @@
   >
     <div
       class="edit-container"
-      [ngClass]="deviceType.className"
+      [ngClass]="deviceType.current"
     >
       <a
         href="{{ allInternalLinks['bearbeiten/termine'].link }}"
@@ -85,7 +85,7 @@
     </div>
     <div
       class="edit-container"
-      [ngClass]="deviceType.className"
+      [ngClass]="deviceType.current"
     >
       <a
         href="{{ allInternalLinks['bearbeiten/nachrichten'].link }}"
@@ -105,4 +105,4 @@
       >Nachrichten bearbeiten</p>
     </div>
   </text-section>
-</app-authentication-check>
+</authentication-check>

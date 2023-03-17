@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DeviceType, DeviceTypeService } from 'src/app/template/services/device-type.service';
+import { DeviceType, DeviceTypeService } from 'src/app/services/device-type.service';
 import { HeaderData } from '../../types/header-data';
 import { HomeLinkData } from '../../types/home-link-data';
 

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { StyleConfigService } from '../../../../template/services/style-config.service';
+import { StyleConfigService } from '../../../../services/style-config.service';
 
 @Component({
     selector: 'text-section',

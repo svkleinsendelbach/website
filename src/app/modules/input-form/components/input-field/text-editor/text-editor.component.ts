@@ -2,7 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularEditorConfig, SelectOption, UploadResponse } from '@kolkov/angular-editor';
 import { Observable } from 'rxjs';
-import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 import { InputField } from '../../../types/input-field';
 
 @Component({

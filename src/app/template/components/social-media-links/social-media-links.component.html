@@ -29,13 +29,13 @@
           }"
         ></fa-icon>
         <img
-          *ngIf="!isIcon(socialMediaLink.image) && appearance.current === Appearance.Light"
+          *ngIf="!isIcon(socialMediaLink.image) && appearance.current === 'light'"
           class="icon"
           src="{{ socialMediaLink.image.lightModeSource }}"
           title="{{ socialMediaLink.title }}"
         >
         <img
-        *ngIf="!isIcon(socialMediaLink.image) && appearance.current === Appearance.Dark"
+        *ngIf="!isIcon(socialMediaLink.image) && appearance.current === 'dark'"
           class="icon"
           src="{{ socialMediaLink.image.darkModeSource }}"
           title="{{ socialMediaLink.title }}"

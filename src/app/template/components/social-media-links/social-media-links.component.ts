@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'src/app/types/link';
-import { AppearanceService } from '../../services/appearance.service';
-import { DeviceTypeService } from '../../services/device-type.service';
-import { StyleConfigService } from '../../services/style-config.service';
+import { AppearanceService } from '../../../services/appearance.service';
+import { DeviceTypeService } from '../../../services/device-type.service';
+import { StyleConfigService } from '../../../services/style-config.service';
 
 @Component({
     selector: 'app-social-media-links',
@@ -11,8 +11,6 @@ import { StyleConfigService } from '../../services/style-config.service';
     styleUrls: ['./social-media-links.component.sass']
 })
 export class SocialMediaLinksComponent {
-    public Appearance = AppearanceService.Appearance;
-
   @Input() public socialMediaDataForDeviceType!: SocialMediaLinksComponent.SocialMediaDataForDeviceType;
 
   public hoveredItemId: string | null = null;
@@ -24,7 +22,7 @@ export class SocialMediaLinksComponent {
   ) {}
 
   public get socialMediaData(): SocialMediaLinksComponent.SocialMediaItem[][] {
-      return this.socialMediaDataForDeviceType[this.deviceType.className];
+      return this.socialMediaDataForDeviceType[this.deviceType.current];
   }
 
   public isIcon(image: IconDefinition | {

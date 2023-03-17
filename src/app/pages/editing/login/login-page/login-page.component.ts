@@ -9,9 +9,9 @@ import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';
 import { ValidationResult } from 'src/app/modules/input-form/types/validation-result';
 import { Validator } from 'src/app/modules/input-form/types/validator';
-import { AppearanceService } from 'src/app/template/services/appearance.service';
-import { DeviceTypeService } from 'src/app/template/services/device-type.service';
-import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { AppearanceService } from 'src/app/services/appearance.service';
+import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { AuthService } from 'src/app/modules/authentication/services/auth.service';
 import { LoginError } from 'src/app/modules/authentication/types/login-error';
@@ -23,8 +23,6 @@ import { RegistrationStatus } from 'src/app/modules/authentication/types/registr
     styleUrls: ['./login-page.component.sass']
 })
 export class LoginPageComponent {
-    public Appearance = AppearanceService.Appearance;
-
   @Output() private userUnregisteredEmitter = new EventEmitter<void>();
 
   public signInWithAppleStatus: LoginError.Code | 'loading' | 'valid' = 'valid';

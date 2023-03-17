@@ -4,8 +4,8 @@ import { News } from 'src/app/modules/firebase-api/types/news';
 import { FetchState } from 'src/app/types/fetch-state';
 import { Datum } from 'src/app/types/datum';
 import { Link } from 'src/app/types/link';
-import { DeviceTypeService } from '../../services/device-type.service';
-import { StyleConfigService } from '../../services/style-config.service';
+import { DeviceTypeService } from '../../../services/device-type.service';
+import { StyleConfigService } from '../../../services/style-config.service';
 
 @Component({
     selector: 'app-news-list',

@@ -2,9 +2,9 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { DeviceTypeService } from '../../services/device-type.service';
-import { StyleConfigService } from '../../services/style-config.service';
-import { AppearanceService } from '../../services/appearance.service';
+import { DeviceTypeService } from '../../../services/device-type.service';
+import { StyleConfigService } from '../../../services/style-config.service';
+import { AppearanceService } from '../../../services/appearance.service';
 import { mapStyleDarkAppearence } from '../../../utils/mapStyleDarkAppearence';
 import { CookieService } from 'src/app/modules/cookie-selector/services/cookie.service';
 
@@ -48,12 +48,12 @@ export class MapsComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
       this.mapOptions = {
           ...this.options,
-          styles: this.appearance.current === AppearanceService.Appearance.Light ? undefined : mapStyleDarkAppearence
+          styles: this.appearance.current === 'light' ? undefined : mapStyleDarkAppearence
       };
       this.appearance.listeners.add('maps-component', appearance => {
           this.mapOptions = {
               ...this.options,
-              styles: appearance === AppearanceService.Appearance.Light ? undefined : mapStyleDarkAppearence
+              styles: appearance === 'light' ? undefined : mapStyleDarkAppearence
           };
       });
   }

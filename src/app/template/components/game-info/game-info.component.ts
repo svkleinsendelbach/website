@@ -3,8 +3,8 @@ import { FirebaseApiService } from 'src/app/modules/firebase-api/services/fireba
 import { GameInfo, BfvLiveticker } from 'src/app/modules/firebase-api/types/game-info';
 import { FetchState } from 'src/app/types/fetch-state';
 import { Datum } from 'src/app/types/datum';
-import { DeviceTypeService } from '../../services/device-type.service';
-import { StyleConfigService } from '../../services/style-config.service';
+import { DeviceTypeService } from '../../../services/device-type.service';
+import { StyleConfigService } from '../../../services/style-config.service';
 
 @Component({
     selector: 'app-game-info',
