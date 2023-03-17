@@ -1,6 +1,5 @@
 import { AppearanceService } from '../template/services/appearance.service';
 
-
 export namespace Style {
     export class DecodingError implements Error {
         public readonly name = 'StyleDecodingError';

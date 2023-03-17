@@ -97,7 +97,7 @@ export namespace InternalPath {
   };
 }
 export namespace InternalLink {
-  export const all: Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, Link> & { 'nachricht'(news: News): Link; 'spiel'(id: string): Link} = (() => {
+  export const all: Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, Link> & { 'nachricht'(news: News): Link; 'spiel'(id: string): Link } = (() => {
       const allLinks = {
           'nachricht': (news: News) => {
               return Link.internalParam<InternalPath>(news.title, 'nachricht', news.id);

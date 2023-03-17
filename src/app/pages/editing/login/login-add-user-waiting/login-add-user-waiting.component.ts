@@ -7,9 +7,10 @@ import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';
 import { ValidationResult } from 'src/app/modules/input-form/types/validation-result';
 import { Validator } from 'src/app/modules/input-form/types/validator';
-import { AuthService } from 'src/app/template/services/auth.service';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { AuthService } from 'src/app/modules/authentication/services/auth.service';
+import { LoginError } from 'src/app/modules/authentication/types/login-error';
 
 @Component({
     selector: 'app-login-add-user-waiting',
@@ -31,7 +32,7 @@ export class LoginAddUserWaitingComponent {
   {
       invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
       loading: new InputError('Antrag wird übermittelt.',  ErrorLevel.Info),
-      ...AuthService.LoginError.Code.statusMessages
+      ...LoginError.Code.statusMessages
   });
 
   public constructor(
@@ -71,11 +72,11 @@ export class LoginAddUserWaitingComponent {
           this.inputForm.status = 'unknown';
           return 'error';
       }
-      if (!('code' in reason) || typeof (reason as Record<'code', unknown>).code !== 'string' || !AuthService.LoginError.Code.isLoginErrorCode((reason as Record<'code', string>).code)) {
+      if (!('code' in reason) || typeof (reason as Record<'code', unknown>).code !== 'string' || !LoginError.Code.typeGuard((reason as Record<'code', string>).code)) {
           this.inputForm.status = 'unknown';
           return 'error';
       }
-      this.inputForm.status = (reason as Record<'code', AuthService.LoginError.Code>).code;
+      this.inputForm.status = (reason as Record<'code', LoginError.Code>).code;
       return 'error';
   }
 }

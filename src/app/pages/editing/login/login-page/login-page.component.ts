@@ -10,10 +10,12 @@ import { InputForm } from 'src/app/modules/input-form/types/input-form';
 import { ValidationResult } from 'src/app/modules/input-form/types/validation-result';
 import { Validator } from 'src/app/modules/input-form/types/validator';
 import { AppearanceService } from 'src/app/template/services/appearance.service';
-import { AuthService } from 'src/app/template/services/auth.service';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
+import { AuthService } from 'src/app/modules/authentication/services/auth.service';
+import { LoginError } from 'src/app/modules/authentication/types/login-error';
+import { RegistrationStatus } from 'src/app/modules/authentication/types/registration-status';
 
 @Component({
     selector: 'app-login-page',
@@ -25,9 +27,9 @@ export class LoginPageComponent {
 
   @Output() private userUnregisteredEmitter = new EventEmitter<void>();
 
-  public signInWithAppleStatus: AuthService.LoginError.Code | 'loading' | 'valid' = 'valid';
+  public signInWithAppleStatus: LoginError.Code | 'loading' | 'valid' = 'valid';
 
-  public signInWithGoogleStatus: AuthService.LoginError.Code | 'loading' | 'valid' = 'valid';
+  public signInWithGoogleStatus: LoginError.Code | 'loading' | 'valid' = 'valid';
 
   public inputForm = new InputForm(
       {
@@ -47,7 +49,7 @@ export class LoginPageComponent {
           invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
           loading: new InputError('Anmeldung wird geprüft.', ErrorLevel.Info),
           recaptchaFailed: new InputError('reCAPTCHA ungültig.'),
-          ...AuthService.LoginError.Code.statusMessages
+          ...LoginError.Code.statusMessages
       }
   );
 
@@ -118,12 +120,12 @@ export class LoginPageComponent {
           return this.setStatus(type, 'unknown');
       if (!('name' in reason) || (reason as Record<'name', unknown>).name !== 'WebsiteEditorAuthServiceLoginError')
           return this.setStatus(type, 'unknown');
-      if (!('code' in reason) || typeof (reason as Record<'code', unknown>).code !== 'string' || !AuthService.LoginError.Code.isLoginErrorCode((reason as Record<'code', string>).code))
+      if (!('code' in reason) || typeof (reason as Record<'code', unknown>).code !== 'string' || !LoginError.Code.typeGuard((reason as Record<'code', string>).code))
           return this.setStatus(type, 'unknown');
-      return this.setStatus(type, (reason as Record<'code', AuthService.LoginError.Code>).code);
+      return this.setStatus(type, (reason as Record<'code', LoginError.Code>).code);
   }
 
-  private setStatus(type: 'inputForm' | 'apple' | 'google', status: AuthService.LoginError.Code): 'error' {
+  private setStatus(type: 'inputForm' | 'apple' | 'google', status: LoginError.Code): 'error' {
       switch(type) {
       case 'inputForm':
           this.inputForm.status = status;
@@ -138,7 +140,7 @@ export class LoginPageComponent {
       return 'error';
   }
 
-  private async handleRegistrationStatus(registrationStatus: AuthService.RegistrationStatus) {
+  private async handleRegistrationStatus(registrationStatus: RegistrationStatus) {
       this.signInWithAppleStatus = 'valid';
       this.signInWithGoogleStatus = 'valid';
       this.inputForm.status = 'valid';
@@ -150,7 +152,7 @@ export class LoginPageComponent {
       }
   }
 
-  public loginErrorMessage(code: AuthService.LoginError.Code): string {
-      return AuthService.LoginError.Code.statusMessages[code].message;
+  public loginErrorMessage(code: LoginError.Code): string {
+      return LoginError.Code.statusMessages[code].message;
   }
 }

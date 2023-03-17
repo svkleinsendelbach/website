@@ -1,8 +1,8 @@
 export class Link {
     public constructor(
-    public readonly title: string,
-    public readonly link: string,
-    private readonly openInNewTab: boolean
+        public readonly title: string,
+        public readonly link: string,
+        private readonly openInNewTab: boolean
     ) {}
 
     public get target(): '_self' | '_blank' {
@@ -11,15 +11,15 @@ export class Link {
 }
 
 export namespace Link {
-  export function internal<InternalPath extends string>(title: string, path: InternalPath): Link {
-      return new Link(title, `/${path}`, false);
-  }
+    export function internal<InternalPath extends string>(title: string, path: InternalPath): Link {
+        return new Link(title, `/${path}`, false);
+    }
 
-  export function internalParam<InternalPath extends string>(title: string, path: InternalPath, param: string): Link {
-      return new Link(title, `/${path}/${param}`, false);
-  }
+    export function internalParam<InternalPath extends string>(title: string, path: InternalPath, param: string): Link {
+        return new Link(title, `/${path}/${param}`, false);
+    }
 
-  export function external(title: string, link: string, openInNewTab: boolean): Link {
-      return new Link(title, link, openInNewTab);
-  }
+    export function external(title: string, link: string, openInNewTab: boolean): Link {
+        return new Link(title, link, openInNewTab);
+    }
 }

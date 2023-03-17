@@ -1,6 +1,6 @@
 export class EventListener<T> {
     private listeners: {
-     [key: string | number]: (newValue: T) => void;
+        [key: string | number]: (newValue: T) => void;
     };
 
     public constructor() {

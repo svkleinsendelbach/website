@@ -47,7 +47,6 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 import { HomeComponent } from './pages/home/home.component';
 import { MainComponent } from './pages/editing/main/main.component';
-import { AuthenticationCheckComponent } from './template/components/authentication-check/authentication-check.component';
 import { LoginComponent } from './pages/editing/login/login.component';
 import { LoginPageComponent } from './pages/editing/login/login-page/login-page.component';
 import { LoginAddUserWaitingComponent } from './pages/editing/login/login-add-user-waiting/login-add-user-waiting.component';
@@ -69,6 +68,7 @@ import { FooterModule } from './modules/footer/footer.module';
 import { FirebaseApiModule } from './modules/firebase-api/firebase-api.module';
 import { TextSectionModule } from './modules/text-section/text-section.module';
 import { EventsModule } from './modules/events/events.module';
+import { AuthenticationModule } from './modules/authentication/authentication.module';
 
 @NgModule({
     declarations: [
@@ -106,7 +106,6 @@ import { EventsModule } from './modules/events/events.module';
         ContactComponent,
         HomeComponent,
         MainComponent,
-        AuthenticationCheckComponent,
         LoginComponent,
         LoginPageComponent,
         LoginAddUserWaitingComponent,
@@ -140,7 +139,8 @@ import { EventsModule } from './modules/events/events.module';
         FooterModule,
         FirebaseApiModule,
         TextSectionModule,
-        EventsModule
+        EventsModule,
+        AuthenticationModule
     ],
     providers: [
         ScreenTrackingService,

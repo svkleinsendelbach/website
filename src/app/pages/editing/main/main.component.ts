@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
-import { AuthService } from 'src/app/template/services/auth.service';
 import { Router } from '@angular/router';
 import { InternalLink } from 'src/app/types/InternalPath';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { FunctionType } from 'src/app/modules/firebase-api/types/function-type';
 import { UserAuthenticationGetAllUnauthenticatedFunctionType } from 'src/app/modules/firebase-api/function-types';
+import { AuthService } from 'src/app/modules/authentication/services/auth.service';
 
 @Component({
     selector: 'app-main',

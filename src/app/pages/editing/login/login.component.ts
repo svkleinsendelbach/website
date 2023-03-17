@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { InternalLink } from 'src/app/types/InternalPath';
-import { AuthService } from 'src/app/template/services/auth.service';
 import { DeviceTypeService } from 'src/app/template/services/device-type.service';
 import { StyleConfigService } from 'src/app/template/services/style-config.service';
+import { AuthService } from 'src/app/modules/authentication/services/auth.service';
 
 @Component({
     selector: 'app-login',
