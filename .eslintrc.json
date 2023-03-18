@@ -29,7 +29,32 @@
       "rules": {
         "semi": ["error", "always"],
         "quotes": ["error", "single"],
-        "indent": ["error", 4],
+        "indent": ["error", 4, {
+            "SwitchCase": 0,
+            "VariableDeclarator": 1,
+            "outerIIFEBody": 1,
+            "MemberExpression": 1,
+            "FunctionDeclaration": {
+                "body": 1,
+                "parameters": 1
+            },
+            "FunctionExpression": {
+                "body": 1,
+                "parameters": 1
+            },
+            "StaticBlock": {
+                "body": 1
+            },
+            "CallExpression": {
+                "arguments": 1
+            },
+            "ArrayExpression": 1,
+            "ObjectExpression": 1,
+            "ImportDeclaration": 1,
+            "flatTernaryExpressions": false,
+            "offsetTernaryExpressions": false,
+            "ignoreComments": false
+        }],
         "@typescript-eslint/semi": ["error", "always"],
         "@typescript-eslint/indent": "off",
         "@typescript-eslint/no-empty-function": ["error", {
