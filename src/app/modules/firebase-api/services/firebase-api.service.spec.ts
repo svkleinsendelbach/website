@@ -6,7 +6,6 @@ import { AngularFireFunctions, REGION } from '@angular/fire/compat/functions';
 import { environment } from 'src/environments/environment';
 import { FirebaseApiService } from './firebase-api.service';
 import { DatabaseManagerTestService } from './database-manager.service';
-import { DatabaseScheme } from '../database-scheme';
 import { UserAuthenticationType } from '../types/user-authentication';
 import { Crypter } from '../crypter/Crypter';
 import { Guid } from '../types/guid';
@@ -15,7 +14,7 @@ import { UserAuthenticationGetAllUnauthenticatedFunction } from '../function-typ
 
 describe('ApiService', () => {
     let firebaseApi: FirebaseApiService;
-    let database: DatabaseManagerTestService<DatabaseScheme>;
+    let database: DatabaseManagerTestService;
     let firebaseAuth: AngularFireAuth;
 
     beforeEach(async() => {
@@ -35,7 +34,7 @@ describe('ApiService', () => {
         firebaseApi = TestBed.inject(FirebaseApiService);
         expect(firebaseApi).toBeTruthy();
         firebaseAuth = TestBed.inject(AngularFireAuth);
-        database = TestBed.inject(DatabaseManagerTestService<DatabaseScheme>);
+        database = TestBed.inject(DatabaseManagerTestService);
         expect(environment.testUser).not.toBeUndefined();
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const credential = await firebaseAuth.signInWithEmailAndPassword(environment.testUser!.email, environment.testUser!.password);

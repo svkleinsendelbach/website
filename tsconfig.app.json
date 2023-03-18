@@ -13,5 +13,9 @@
   ],
   "exclude": [
     "src/**/*.spec.ts",
+    "src/environments/environment.test.ts",
+    "src/app/modules/firebase-api/database-scheme.ts",
+    "src/app/modules/firebase-api/types/scheme-type.ts",
+    "src/app/modules/firebase-api/services/database-manager.service.ts"
   ]
 }

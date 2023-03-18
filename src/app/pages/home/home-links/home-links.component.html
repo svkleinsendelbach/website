@@ -1,0 +1,36 @@
+<div
+  id="link-rows"
+>
+  <div
+    class="link-row"
+    *ngFor="let linkRow of links"
+  >
+    <a
+      *ngFor="let linkItem of linkRow"
+      class="link-item"
+      href="{{ linkItem.link.link }}"
+      target="{{ linkItem.link.target }}"
+      title="{{ linkItem.name }}"
+    >
+      <fa-icon
+        class="icon {{ linkItem.animation }}"
+        [icon]="linkItem.icon"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      ></fa-icon>
+      <p
+        class="title"
+        [ngStyle]="{
+          color: styleConfig.css('primaryColor')
+        }"
+      >{{ linkItem.name }}</p>
+      <p
+        class="description"
+        [ngStyle]="{
+          color: styleConfig.css('secondaryTextColor')
+        }"
+      >{{ linkItem.description }}</p>
+    </a>
+  </div>
+</div>

@@ -1,14 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { DatabaseScheme } from '../database-scheme';
 
 import { DatabaseManagerTestService } from './database-manager.service';
 
 describe('DatabaseManagerService', () => {
-    let service: DatabaseManagerTestService<DatabaseScheme>;
+    let service: DatabaseManagerTestService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({});
-        service = TestBed.inject(DatabaseManagerTestService<DatabaseScheme>);
+        service = TestBed.inject(DatabaseManagerTestService);
     });
 
     it('should be created', () => {

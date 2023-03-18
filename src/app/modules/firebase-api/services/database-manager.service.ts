@@ -2,17 +2,18 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { environment } from 'src/environments/environment';
 import { Crypter } from '../crypter/Crypter';
+import { DatabaseScheme } from '../database-scheme';
 import { GetCryptedScheme, IsCryptedScheme, SchemeType } from '../types/scheme-type';
 
 @Injectable({
     providedIn: 'root'
 })
-export class DatabaseManagerTestService<Scheme extends SchemeType> {
+export class DatabaseManagerTestService {
     public constructor(
         private readonly firebaseDatabase: AngularFireDatabase
     ) {}
 
-    public child<Key extends true extends IsCryptedScheme<Scheme> ? never : (keyof Scheme & string)>(key: Key): FirebaseDatabase<Scheme extends Record<string, SchemeType> ? Scheme[Key] : never> {
+    public child<Key extends keyof DatabaseScheme & string>(key: Key): FirebaseDatabase<DatabaseScheme[Key]> {
         return new FirebaseDatabase(this.firebaseDatabase, key.replaceAll('/', '_'));
     }
 }

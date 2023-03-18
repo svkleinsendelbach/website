@@ -1,105 +1,112 @@
+import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
+import { environment } from '../environments/environment';
+import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
+import { USE_DEVICE_LANGUAGE, PERSISTENCE } from '@angular/fire/compat/auth';
+
+// Imported Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { environment } from '../environments/environment';
-import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
 import { AngularFireAnalyticsModule, COLLECTION_ENABLED, CONFIG } from '@angular/fire/compat/analytics';
 import { AngularFirePerformanceModule, DATA_COLLECTION_ENABLED, INSTRUMENTATION_ENABLED, PerformanceMonitoringService } from '@angular/fire/compat/performance';
-import { HomeLinksComponent } from './template/components/home-links/home-links.component';
-import { SocialMediaLinksComponent } from './template/components/social-media-links/social-media-links.component';
-import { HomeBannerComponent } from './template/components/home-banner/home-banner.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { ImprintComponent } from './pages/imprint/imprint.component';
-import { PrivacyComponent } from './pages/about-us/privacy/privacy.component';
-import { RequestComponent } from './pages/about-us/request/request.component';
-import { StatuteComponent } from './pages/about-us/statute/statute.component';
-import { ChronicleComponent } from './pages/about-us/chronicle/chronicle.component';
-import { SportshomeComponent } from './pages/about-us/sportshome/sportshome.component';
-import { ManagersComponent } from './pages/about-us/managers/managers.component';
-import { GeneralComponent as FootballAdultsGeneralComponent } from './pages/football-adults/general/general.component';
-import { FirstTeamComponent } from './pages/football-adults/first-team/first-team.component';
-import { SecondTeamComponent } from './pages/football-adults/second-team/second-team.component';
-import { AhTeamComponent } from './pages/football-adults/ah-team/ah-team.component';
-import { GeneralComponent as FootballYouthGeneralComponent } from './pages/football-youth/general/general.component';
-import { CYouthComponent } from './pages/football-youth/c-youth/c-youth.component';
-import { EYouthComponent } from './pages/football-youth/e-youth/e-youth.component';
-import { FYouthComponent } from './pages/football-youth/f-youth/f-youth.component';
-import { GYouthComponent } from './pages/football-youth/g-youth/g-youth.component';
-import { GymnasticsComponent } from './pages/gymnastics/gymnastics.component';
-import { DancingComponent } from './pages/dancing/dancing.component';
-import { DriveComponent } from './pages/drive/drive.component';
-import { ContactComponent } from './pages/contact/contact.component';
-import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
-import { HomeComponent } from './pages/home/home.component';
-import { MainComponent } from './pages/editing/main/main.component';
-import { LoginComponent } from './pages/editing/login/login.component';
-import { LoginPageComponent } from './pages/editing/login/login-page/login-page.component';
-import { LoginAddUserWaitingComponent } from './pages/editing/login/login-add-user-waiting/login-add-user-waiting.component';
-import { USE_DEVICE_LANGUAGE, PERSISTENCE } from '@angular/fire/compat/auth';
-import { EventsComponent } from './pages/editing/events/events.component';
-import { EditEventComponent } from './pages/editing/events/edit-event/edit-event.component';
-import { NewsComponent } from './pages/editing/news/news.component';
-import { EditNewsComponent } from './pages/editing/news/edit-news/edit-news.component';
-import { InputFormModule } from './modules/input-form/input-form.module';
-import { CookieSelectorModule } from './modules/cookie-selector/cookie-selector.module';
-import { AllNewsComponent } from './pages/news/all-news/all-news.component';
-import { NewsDetailComponent } from './pages/news/news-detail/news-detail.component';
-import { GameDetailComponent } from './pages/game-detail/game-detail.component';
-import { HeaderModule } from './modules/header/header.module';
-import { FooterModule } from './modules/footer/footer.module';
-import { FirebaseApiModule } from './modules/firebase-api/firebase-api.module';
-import { TextSectionModule } from './modules/text-section/text-section.module';
-import { EventsModule } from './modules/events/events.module';
+
+// Internal Modules
 import { AuthenticationModule } from './modules/authentication/authentication.module';
+import { CookieSelectorModule } from './modules/cookie-selector/cookie-selector.module';
+import { EventsModule } from './modules/events/events.module';
+import { FirebaseApiModule } from './modules/firebase-api/firebase-api.module';
+import { FooterModule } from './modules/footer/footer.module';
 import { GeneralComponentsModule } from './modules/general-components/general-components.module';
+import { HeaderModule } from './modules/header/header.module';
+import { InputFormModule } from './modules/input-form/input-form.module';
 import { NewsModule } from './modules/news/news.module';
+import { TextSectionModule } from './modules/text-section/text-section.module';
+
+// Components
+import { AppComponent } from './app.component';
+import { HomeBannerComponent } from './pages/home/home-banner/home-banner.component';
+import { HomeLinksComponent } from './pages/home/home-links/home-links.component';
+import { SocialMediaLinksComponent } from './pages/home/social-media-links/social-media-links.component';
+import { LoginAddUserWaitingComponent } from './pages/editing/login/login-add-user-waiting/login-add-user-waiting.component';
+import { LoginPageComponent } from './pages/editing/login/login-page/login-page.component';
+
+// Pages
+import { PageNotFoundPage } from './pages/page-not-found/page-not-found.page';
+import { HomePage } from './pages/home/home.page';
+import { ManagersPage } from './pages/about-us/managers/managers.page';
+import { SportshomePage } from './pages/about-us/sportshome/sportshome.page';
+import { ChroniclePage } from './pages/about-us/chronicle/chronicle.page';
+import { StatutePage } from './pages/about-us/statute/statute.page';
+import { PrivacyPage } from './pages/about-us/privacy/privacy.page';
+import { RequestPage } from './pages/about-us/request/request.page';
+import { FootballAdultsGeneralPage } from './pages/football-adults/general/football-adults-general.page';
+import { FirstTeamPage } from './pages/football-adults/first-team/first-team.page';
+import { SecondTeamPage } from './pages/football-adults/second-team/second-team.page';
+import { AhTeamPage } from './pages/football-adults/ah-team/ah-team.page';
+import { FootballYouthGeneralPage } from './pages/football-youth/general/football-youth-general.page';
+import { CYouthPage } from './pages/football-youth/c-youth/c-youth.page';
+import { EYouthPage } from './pages/football-youth/e-youth/e-youth.page';
+import { FYouthPage } from './pages/football-youth/f-youth/f-youth.page';
+import { GYouthPage } from './pages/football-youth/g-youth/g-youth.page';
+import { GymnasticsPage } from './pages/gymnastics/gymnastics.page';
+import { DancingPage } from './pages/dancing/dancing.page';
+import { DrivePage } from './pages/drive/drive.page';
+import { ContactPage } from './pages/contact/contact.page';
+import { ImprintPage } from './pages/imprint/imprint.page';
+import { NewsDetailPage } from './pages/news/news-detail/news-detail.page';
+import { AllNewsPage } from './pages/news/all-news/all-news.page';
+import { GameDetailPage } from './pages/game-detail/game-detail.page';
+import { EditingMainPage } from './pages/editing/main/editing-main.page';
+import { LoginPage } from './pages/editing/login/login.page';
+import { EditingEventsPage } from './pages/editing/events/editing-events.page';
+import { EditEventPage } from './pages/editing/events/edit-event/edit-event.page';
+import { EditingNewsPage } from './pages/editing/news/editing-news.page';
+import { EditNewsPage } from './pages/editing/news/edit-news/edit-news.page';
 
 @NgModule({
     declarations: [
         AppComponent,
+        HomeBannerComponent,
         HomeLinksComponent,
         SocialMediaLinksComponent,
-        HomeBannerComponent,
-        PageNotFoundComponent,
-        ImprintComponent,
-        PrivacyComponent,
-        RequestComponent,
-        StatuteComponent,
-        ChronicleComponent,
-        SportshomeComponent,
-        ManagersComponent,
-        FootballAdultsGeneralComponent,
-        FirstTeamComponent,
-        SecondTeamComponent,
-        AhTeamComponent,
-        FootballYouthGeneralComponent,
-        CYouthComponent,
-        EYouthComponent,
-        FYouthComponent,
-        GYouthComponent,
-        GymnasticsComponent,
-        DancingComponent,
-        DriveComponent,
-        ContactComponent,
-        HomeComponent,
-        MainComponent,
-        LoginComponent,
-        LoginPageComponent,
         LoginAddUserWaitingComponent,
-        EventsComponent,
-        EditEventComponent,
-        NewsComponent,
-        EditNewsComponent,
-        AllNewsComponent,
-        NewsDetailComponent,
-        GameDetailComponent
+        LoginPageComponent,
+        PageNotFoundPage,
+        HomePage,
+        ManagersPage,
+        SportshomePage,
+        ChroniclePage,
+        StatutePage,
+        PrivacyPage,
+        RequestPage,
+        FootballAdultsGeneralPage,
+        FirstTeamPage,
+        SecondTeamPage,
+        AhTeamPage,
+        FootballYouthGeneralPage,
+        CYouthPage,
+        EYouthPage,
+        FYouthPage,
+        GYouthPage,
+        GymnasticsPage,
+        DancingPage,
+        DrivePage,
+        ContactPage,
+        ImprintPage,
+        NewsDetailPage,
+        AllNewsPage,
+        GameDetailPage,
+        EditingMainPage,
+        LoginPage,
+        EditingEventsPage,
+        EditEventPage,
+        EditingNewsPage,
+        EditNewsPage
     ],
     imports: [
         BrowserModule,
@@ -128,7 +135,7 @@ import { NewsModule } from './modules/news/news.module';
         ScreenTrackingService,
         UserTrackingService,
         PerformanceMonitoringService,
-        { provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LdFFLgeAAAAAEzjFiR1X35IK7UHkL2Yx0EQ447i' },
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.recaptchaApiKey },
         { provide: USE_DEVICE_LANGUAGE, useValue: true },
         { provide: PERSISTENCE, useValue: 'local' },
         { provide: BUCKET, useValue: 'gs://svkleinsendelbach-website-v2' },

@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { internalRoutes } from './types/InternalRoutes';
-import { NewsDetailComponent } from './pages/news/news-detail/news-detail.component';
-import { GameDetailComponent } from './pages/game-detail/game-detail.component';
+import { PageNotFoundPage } from './pages/page-not-found/page-not-found.page';
+import { NewsDetailPage } from './pages/news/news-detail/news-detail.page';
+import { GameDetailPage } from './pages/game-detail/game-detail.page';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
-  ...internalRoutes,
-  { path: 'nachricht/:id', component: NewsDetailComponent },
-  { path: 'spiel/:id', component: GameDetailComponent},
-  { path: '**', component: PageNotFoundComponent }
+    { path: '', redirectTo: 'home', pathMatch: 'full'},
+    ...internalRoutes,
+    { path: 'nachricht/:id', component: NewsDetailPage },
+    { path: 'spiel/:id', component: GameDetailPage},
+    { path: '**', component: PageNotFoundPage }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

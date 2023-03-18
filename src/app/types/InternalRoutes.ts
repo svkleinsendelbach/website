@@ -2,64 +2,64 @@ import { Route } from '@angular/router';
 import { InternalPath } from './InternalPath';
 import { Type } from '@angular/core';
 
-import { HomeComponent } from '../pages/home/home.component';
-import { ChronicleComponent } from '../pages/about-us/chronicle/chronicle.component';
-import { ManagersComponent } from '../pages/about-us/managers/managers.component';
-import { GeneralComponent as FootballAdultsGeneralComponent } from '../pages/football-adults/general/general.component';
-import { FirstTeamComponent } from '../pages/football-adults/first-team/first-team.component';
-import { SecondTeamComponent } from '../pages/football-adults/second-team/second-team.component';
-import { AhTeamComponent } from '../pages/football-adults/ah-team/ah-team.component';
-import { GeneralComponent as FootballYouthGeneralComponent } from '../pages/football-youth/general/general.component';
-import { PrivacyComponent } from '../pages/about-us/privacy/privacy.component';
-import { RequestComponent } from '../pages/about-us/request/request.component';
-import { SportshomeComponent } from '../pages/about-us/sportshome/sportshome.component';
-import { StatuteComponent } from '../pages/about-us/statute/statute.component';
-import { ContactComponent } from '../pages/contact/contact.component';
-import { DancingComponent } from '../pages/dancing/dancing.component';
-import { DriveComponent } from '../pages/drive/drive.component';
-import { EditEventComponent } from '../pages/editing/events/edit-event/edit-event.component';
-import { EventsComponent } from '../pages/editing/events/events.component';
-import { LoginComponent } from '../pages/editing/login/login.component';
-import { MainComponent } from '../pages/editing/main/main.component';
-import { EditNewsComponent } from '../pages/editing/news/edit-news/edit-news.component';
-import { NewsComponent } from '../pages/editing/news/news.component';
-import { CYouthComponent } from '../pages/football-youth/c-youth/c-youth.component';
-import { EYouthComponent } from '../pages/football-youth/e-youth/e-youth.component';
-import { FYouthComponent } from '../pages/football-youth/f-youth/f-youth.component';
-import { GYouthComponent } from '../pages/football-youth/g-youth/g-youth.component';
-import { GymnasticsComponent } from '../pages/gymnastics/gymnastics.component';
-import { ImprintComponent } from '../pages/imprint/imprint.component';
-import { AllNewsComponent } from '../pages/news/all-news/all-news.component';
+import { HomePage } from '../pages/home/home.page';
+import { ManagersPage } from '../pages/about-us/managers/managers.page';
+import { SportshomePage } from '../pages/about-us/sportshome/sportshome.page';
+import { ChroniclePage } from '../pages/about-us/chronicle/chronicle.page';
+import { StatutePage } from '../pages/about-us/statute/statute.page';
+import { PrivacyPage } from '../pages/about-us/privacy/privacy.page';
+import { RequestPage } from '../pages/about-us/request/request.page';
+import { FootballAdultsGeneralPage } from '../pages/football-adults/general/football-adults-general.page';
+import { FirstTeamPage } from '../pages/football-adults/first-team/first-team.page';
+import { SecondTeamPage } from '../pages/football-adults/second-team/second-team.page';
+import { AhTeamPage } from '../pages/football-adults/ah-team/ah-team.page';
+import { FootballYouthGeneralPage } from '../pages/football-youth/general/football-youth-general.page';
+import { CYouthPage } from '../pages/football-youth/c-youth/c-youth.page';
+import { EYouthPage } from '../pages/football-youth/e-youth/e-youth.page';
+import { FYouthPage } from '../pages/football-youth/f-youth/f-youth.page';
+import { GYouthPage } from '../pages/football-youth/g-youth/g-youth.page';
+import { GymnasticsPage } from '../pages/gymnastics/gymnastics.page';
+import { DancingPage } from '../pages/dancing/dancing.page';
+import { DrivePage } from '../pages/drive/drive.page';
+import { ContactPage } from '../pages/contact/contact.page';
+import { ImprintPage } from '../pages/imprint/imprint.page';
+import { AllNewsPage } from '../pages/news/all-news/all-news.page';
+import { EditingMainPage } from '../pages/editing/main/editing-main.page';
+import { LoginPage } from '../pages/editing/login/login.page';
+import { EditingEventsPage } from '../pages/editing/events/editing-events.page';
+import { EditEventPage } from '../pages/editing/events/edit-event/edit-event.page';
+import { EditingNewsPage } from '../pages/editing/news/editing-news.page';
+import { EditNewsPage } from '../pages/editing/news/edit-news/edit-news.page';
 
 const associatedRoute: Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, Type<unknown>> = {
-    'home': HomeComponent,
-    'über-uns': ManagersComponent,
-    'sportheim': SportshomeComponent,
-    'chroniken': ChronicleComponent,
-    'satzung': StatuteComponent,
-    'datenschutz': PrivacyComponent,
-    'mitgliedsantrag': RequestComponent,
-    'impressum': ImprintComponent,
-    'fussball/herren': FootballAdultsGeneralComponent,
-    'fussball/herren/erste-mannschaft': FirstTeamComponent,
-    'fussball/herren/zweite-mannschaft': SecondTeamComponent,
-    'fussball/herren/alte-herren': AhTeamComponent,
-    'fussball/jugend': FootballYouthGeneralComponent,
-    'fussball/jugend/c-jugend': CYouthComponent,
-    'fussball/jugend/e-jugend': EYouthComponent,
-    'fussball/jugend/f-jugend': FYouthComponent,
-    'fussball/jugend/g-jugend': GYouthComponent,
-    'gymnastik': GymnasticsComponent,
-    'tanzen': DancingComponent,
-    'anfahrt': DriveComponent,
-    'kontakt': ContactComponent,
-    'nachrichten': AllNewsComponent,
-    'bearbeiten': MainComponent,
-    'bearbeiten/anmelden': LoginComponent,
-    'bearbeiten/termine': EventsComponent,
-    'bearbeiten/termine/bearbeiten': EditEventComponent,
-    'bearbeiten/nachrichten': NewsComponent,
-    'bearbeiten/nachrichten/bearbeiten': EditNewsComponent
+    'home': HomePage,
+    'über-uns': ManagersPage,
+    'sportheim': SportshomePage,
+    'chroniken': ChroniclePage,
+    'satzung': StatutePage,
+    'datenschutz': PrivacyPage,
+    'mitgliedsantrag': RequestPage,
+    'fussball/herren': FootballAdultsGeneralPage,
+    'fussball/herren/erste-mannschaft': FirstTeamPage,
+    'fussball/herren/zweite-mannschaft': SecondTeamPage,
+    'fussball/herren/alte-herren': AhTeamPage,
+    'fussball/jugend': FootballYouthGeneralPage,
+    'fussball/jugend/c-jugend': CYouthPage,
+    'fussball/jugend/e-jugend': EYouthPage,
+    'fussball/jugend/f-jugend': FYouthPage,
+    'fussball/jugend/g-jugend': GYouthPage,
+    'gymnastik': GymnasticsPage,
+    'tanzen': DancingPage,
+    'anfahrt': DrivePage,
+    'kontakt': ContactPage,
+    'impressum': ImprintPage,
+    'nachrichten': AllNewsPage,
+    'bearbeiten': EditingMainPage,
+    'bearbeiten/anmelden': LoginPage,
+    'bearbeiten/termine': EditingEventsPage,
+    'bearbeiten/termine/bearbeiten': EditEventPage,
+    'bearbeiten/nachrichten': EditingNewsPage,
+    'bearbeiten/nachrichten/bearbeiten': EditNewsPage
 };
 
 export const internalRoutes: Route[] = (() => {
