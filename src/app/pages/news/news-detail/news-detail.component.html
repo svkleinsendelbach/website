@@ -1,33 +1,4 @@
-<text-section
-  *ngIf="fetchedNews.isLoading()"
-  [title]="'Nachricht wird geladen'"
->
-  <p
-    class="text center large"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >Nachricht wird geladen</p>
-</text-section>
-<text-section
-  *ngIf="fetchedNews.isSuccess()"
-  [title]="fetchedNews.content.title"
->
-  <p
-    *ngIf="fetchedNews.content.subtitle !== undefined"
-    class="text center larger no-bottom-padding"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >{{ fetchedNews.content.subtitle }}</p>
-  <p
-    class="text center margin-top-small"
-    [ngStyle]="{
-      color: styleConfig.css('textColor')
-    }"
-  >{{ Datum.fromDate(fetchedNews.content.date).description }}</p>
-  <div
-    #message
-    id="message"
-  ></div>
-</text-section>
+<news-detail
+  *ngIf="newsId !== null"
+  [newsId]="newsId"
+></news-detail>

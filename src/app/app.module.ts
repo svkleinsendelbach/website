@@ -12,7 +12,6 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
 import { AngularFireAnalyticsModule, COLLECTION_ENABLED, CONFIG } from '@angular/fire/compat/analytics';
 import { AngularFirePerformanceModule, DATA_COLLECTION_ENABLED, INSTRUMENTATION_ENABLED, PerformanceMonitoringService } from '@angular/fire/compat/performance';
-import { NewsListComponent } from './template/components/news-list/news-list.component';
 import { HomeLinksComponent } from './template/components/home-links/home-links.component';
 import { SocialMediaLinksComponent } from './template/components/social-media-links/social-media-links.component';
 import { HomeBannerComponent } from './template/components/home-banner/home-banner.component';
@@ -60,11 +59,11 @@ import { TextSectionModule } from './modules/text-section/text-section.module';
 import { EventsModule } from './modules/events/events.module';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
 import { GeneralComponentsModule } from './modules/general-components/general-components.module';
+import { NewsModule } from './modules/news/news.module';
 
 @NgModule({
     declarations: [
         AppComponent,
-        NewsListComponent,
         HomeLinksComponent,
         SocialMediaLinksComponent,
         HomeBannerComponent,
@@ -122,7 +121,8 @@ import { GeneralComponentsModule } from './modules/general-components/general-co
         TextSectionModule,
         EventsModule,
         AuthenticationModule,
-        GeneralComponentsModule
+        GeneralComponentsModule,
+        NewsModule
     ],
     providers: [
         ScreenTrackingService,
