@@ -9,11 +9,11 @@ import { HomeLinkData } from '../../types/home-link-data';
     styleUrls: ['./header.component.sass']
 })
 export class HeaderComponent {
-  @Input() public headerData!: Record<DeviceType, HeaderData>;
+    @Input() public headerData!: Record<DeviceType, HeaderData>;
 
-  @Input() public homeLinkData!: HomeLinkData;
+    @Input() public homeLinkData!: HomeLinkData;
 
-  public constructor(
-    public readonly deviceType: DeviceTypeService
-  ) {}
+    public constructor(
+        public readonly deviceType: DeviceTypeService
+    ) {}
 }

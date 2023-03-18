@@ -46,8 +46,8 @@ export namespace EventGroupId {
     };
 
     export interface Grouped {
-      title: string;
-      groupIds: EventGroupId[];
+        title: string;
+        groupIds: EventGroupId[];
     }
 
     export const grouped: Grouped[] = [

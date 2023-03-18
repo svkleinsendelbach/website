@@ -13,28 +13,28 @@ export class MobileHeaderItemComponent {
     public faCaretDown = faCaretDown;
     public faCaretUp = faCaretUp;
 
-  @Input() public headerItem!: HeaderItem & { id: string };
+    @Input() public headerItem!: HeaderItem & { id: string };
 
-  @Input() public expandedHeaderItemId!: string | null;
+    @Input() public expandedHeaderItemId!: string | null;
 
-  @Output() public clickHeaderItemIdEmitter = new EventEmitter<string>();
+    @Output() public clickHeaderItemIdEmitter = new EventEmitter<string>();
 
-  public constructor(
-    public readonly styleConfig: StyleConfigService
-  ) {}
+    public constructor(
+        public readonly styleConfig: StyleConfigService
+    ) {}
 
-  public handleHeaderItemClick() {
-      this.clickHeaderItemIdEmitter.emit(this.headerItem.id);
-  }
+    public handleHeaderItemClick() {
+        this.clickHeaderItemIdEmitter.emit(this.headerItem.id);
+    }
 
-  public subItems(subItems: Record<string, Link> | undefined): { id: string; link: Link }[] {
-      if (subItems === undefined)
-          return [];
-      return Object.entries(subItems).map(entry => {
-          return {
-              id: entry[0],
-              link: entry[1]
-          };
-      });
-  }
+    public subItems(subItems: Record<string, Link> | undefined): { id: string; link: Link }[] {
+        if (subItems === undefined)
+            return [];
+        return Object.entries(subItems).map(entry => {
+            return {
+                id: entry[0],
+                link: entry[1]
+            };
+        });
+    }
 }

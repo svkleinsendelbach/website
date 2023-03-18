@@ -9,30 +9,30 @@ import { HomeLinkData } from '../../types/home-link-data';
     styleUrls: ['./desktop-header.component.sass']
 })
 export class DesktopHeaderComponent {
-  @Input() public headerData!: HeaderData;
+    @Input() public headerData!: HeaderData;
 
-  @Input() public homeLinkData!: HomeLinkData;
+    @Input() public homeLinkData!: HomeLinkData;
 
-  public expandedHeaderItemId: string | null = null;
+    public expandedHeaderItemId: string | null = null;
 
-  public constructor(
-    public readonly styleConfig: StyleConfigService
-  ) {}
+    public constructor(
+        public readonly styleConfig: StyleConfigService
+    ) {}
 
-  public handleHeaderItemClick(headerItemId: string) {
-      if (this.expandedHeaderItemId === headerItemId) {
-          this.expandedHeaderItemId = null;
-      } else {
-          this.expandedHeaderItemId = headerItemId;
-      }
-  }
+    public handleHeaderItemClick(headerItemId: string) {
+        if (this.expandedHeaderItemId === headerItemId) {
+            this.expandedHeaderItemId = null;
+        } else {
+            this.expandedHeaderItemId = headerItemId;
+        }
+    }
 
-  public get headerItems(): (HeaderItem & { id: string })[] {
-      return Object.entries(this.headerData).map(entry => {
-          return {
-              ...entry[1],
-              id: entry[0]
-          };
-      });
-  }
+    public get headerItems(): (HeaderItem & { id: string })[] {
+        return Object.entries(this.headerData).map(entry => {
+            return {
+                ...entry[1],
+                id: entry[0]
+            };
+        });
+    }
 }

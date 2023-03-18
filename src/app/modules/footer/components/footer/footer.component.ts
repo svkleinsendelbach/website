@@ -12,23 +12,23 @@ import { FooterData } from '../../types/footer-data';
 export class FooterComponent {
     public faPhone = faPhone;
 
-  @Input() public footerData!: FooterData;
+    @Input() public footerData!: FooterData;
 
-  public hoveredLinkId: string | null = null;
+    public hoveredLinkId: string | null = null;
 
-  public editButtonHovered = false;
+    public editButtonHovered = false;
 
-  public constructor(
-    public readonly styleConfig: StyleConfigService,
-    public readonly deviceType: DeviceTypeService
-  ) {}
+    public constructor(
+        public readonly styleConfig: StyleConfigService,
+        public readonly deviceType: DeviceTypeService
+    ) {}
 
-  public handleLinkHoverStart(link: { id: string }) {
-      this.hoveredLinkId = link.id;
-  }
+    public handleLinkHoverStart(link: { id: string }) {
+        this.hoveredLinkId = link.id;
+    }
 
-  public handleLinkHoverStop(link: { id: string }) {
-      if (this.hoveredLinkId === link.id)
-          this.hoveredLinkId = null;
-  }
+    public handleLinkHoverStop(link: { id: string }) {
+        if (this.hoveredLinkId === link.id)
+            this.hoveredLinkId = null;
+    }
 }

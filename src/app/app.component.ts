@@ -220,11 +220,11 @@ export class AppComponent {
     public privacyLink = InternalLink.all['datenschutz'];
 
     public constructor(
-    public readonly deviceType: DeviceTypeService,
-    private readonly styleConfig: StyleConfigService,
-    private readonly cookieService: CookieService,
-    private fireAnalytics: AngularFireAnalytics,
-    private firePerformance: AngularFirePerformance
+        public readonly deviceType: DeviceTypeService,
+        private readonly styleConfig: StyleConfigService,
+        private readonly cookieService: CookieService,
+        private fireAnalytics: AngularFireAnalytics,
+        private firePerformance: AngularFirePerformance
     ) {
         this.styleConfig.setConfig({
             primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
@@ -248,15 +248,15 @@ export class AppComponent {
         });
     }
 
-  @HostListener('window:resize') onResize() {
+    @HostListener('window:resize') onResize() {
         this.deviceType.windowResized();
     }
 }
 
 export namespace AppComponent {
-  export const headerItemLink: Record<'footballYouthA' | 'footballYouthB' | 'footballYouthD', Link> = {
-      footballYouthA: Link.external('A-Jugend (SV Hetzles)', 'http://sv-hetzles.de/index.php/a-junioren', true),
-      footballYouthB: Link.external('B-Jugend (SV Hetzles)', 'http://sv-hetzles.de/index.php/b-junioren-u17', true),
-      footballYouthD: Link.external('D-Jugend (TSV Neunk. a. B.)', 'http://www.tsv-neunkirchen-am-brand.de/fu/junioren', true)
-  };
+    export const headerItemLink: Record<'footballYouthA' | 'footballYouthB' | 'footballYouthD', Link> = {
+        footballYouthA: Link.external('A-Jugend (SV Hetzles)', 'http://sv-hetzles.de/index.php/a-junioren', true),
+        footballYouthB: Link.external('B-Jugend (SV Hetzles)', 'http://sv-hetzles.de/index.php/b-junioren-u17', true),
+        footballYouthD: Link.external('D-Jugend (TSV Neunk. a. B.)', 'http://www.tsv-neunkirchen-am-brand.de/fu/junioren', true)
+    };
 }

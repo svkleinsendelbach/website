@@ -32,9 +32,9 @@ export class SportshomePage {
     };
 
     public constructor(
-    public readonly titleService: Title,
-    public readonly deviceType: DeviceTypeService,
-    public readonly styleConfig: StyleConfigService
+        public readonly titleService: Title,
+        public readonly deviceType: DeviceTypeService,
+        public readonly styleConfig: StyleConfigService
     ) {
         this.titleService.setTitle('Sportheim');
     }
@@ -45,45 +45,45 @@ export class SportshomePage {
 }
 
 export namespace SportshomePage {
-  export interface OpeningHour {
-    title: string;
-    time: string;
-  }
+    export interface OpeningHour {
+        title: string;
+        time: string;
+    }
 
-  export interface OpeningHoursByDeviceType {
-    desktop: OpeningHour[][];
-    tablet: OpeningHour[][];
-    mobile: OpeningHour[][];
-  }
+    export interface OpeningHoursByDeviceType {
+        desktop: OpeningHour[][];
+        tablet: OpeningHour[][];
+        mobile: OpeningHour[][];
+    }
 
-  export const allOpeningHours = {
-      monday: {
-          title: 'Montag',
-          time: 'geschlossen'
-      },
-      tuesday: {
-          title: 'Dienstag',
-          time: 'geschlossen'
-      },
-      wednesday: {
-          title: 'Mittwoch',
-          time: 'geschlossen'
-      },
-      thursday: {
-          title: 'Donnerstag',
-          time: 'geschlossen'
-      },
-      friday: {
-          title: 'Freitag',
-          time: '19 - 22 Uhr'
-      },
-      saturday: {
-          title: 'Samstag',
-          time: '18 - 21 Uhr'
-      },
-      sunday: {
-          title: 'Sonntag',
-          time: '9:30 – 12 Uhr und 17 – 20 Uhr, bei Heimspielen: 13:30 – 20 Uhr'
-      }
-  };
+    export const allOpeningHours = {
+        monday: {
+            title: 'Montag',
+            time: 'geschlossen'
+        },
+        tuesday: {
+            title: 'Dienstag',
+            time: 'geschlossen'
+        },
+        wednesday: {
+            title: 'Mittwoch',
+            time: 'geschlossen'
+        },
+        thursday: {
+            title: 'Donnerstag',
+            time: 'geschlossen'
+        },
+        friday: {
+            title: 'Freitag',
+            time: '19 - 22 Uhr'
+        },
+        saturday: {
+            title: 'Samstag',
+            time: '18 - 21 Uhr'
+        },
+        sunday: {
+            title: 'Sonntag',
+            time: '9:30 – 12 Uhr und 17 – 20 Uhr, bei Heimspielen: 13:30 – 20 Uhr'
+        }
+    };
 }

@@ -16,7 +16,7 @@ import { FirebaseFunctions as FFunctions } from '../firebase-functions';
 })
 export class FirebaseApiService  {
     public constructor(
-      private readonly firebaseFunctions: AngularFireFunctions
+        private readonly firebaseFunctions: AngularFireFunctions
     ) {}
 
     public function<Key extends keyof FFunctions & string>(key: Key): FirebaseFunctions<FFunctions[Key]> {
@@ -26,8 +26,8 @@ export class FirebaseApiService  {
 
 class FirebaseFunctions<FFunctions extends FirebaseFunctionsType>  {
     public constructor(
-      private readonly firebaseFunctions: AngularFireFunctions,
-      private readonly functionName: string
+        private readonly firebaseFunctions: AngularFireFunctions,
+        private readonly functionName: string
     ) {}
 
     public function<Key extends (FFunctions extends FunctionType<unknown, unknown> ? never : (keyof FFunctions & string))>(key: Key): FirebaseFunctions<FFunctions extends FunctionType<unknown, unknown> ? never : FFunctions[Key]> {

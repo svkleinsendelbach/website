@@ -27,7 +27,7 @@ export class EditingNewsPage {
         public readonly styleConfig: StyleConfigService,
         private readonly firebaseApiService: FirebaseApiService,
         private readonly sharedData: SharedDataService<{
-        editNews: News.Flatten;
+            editNews: News.Flatten;
         }>,
         private router: Router
     ) {

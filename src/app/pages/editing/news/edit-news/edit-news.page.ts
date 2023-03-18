@@ -52,7 +52,7 @@ export class EditNewsPage implements OnInit {
         private readonly firebaseApiService: FirebaseApiService,
         private readonly fileStorage: FileStorageService,
         private readonly sharedData: SharedDataService<{
-        editNews: News.Flatten;
+            editNews: News.Flatten;
         }>,
         private router: Router
     ) {

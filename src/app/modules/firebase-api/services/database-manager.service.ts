@@ -20,7 +20,7 @@ export class DatabaseManagerTestService {
 
 class FirebaseDatabase<Scheme extends SchemeType> {
     public constructor(
-      private readonly firebaseDatabase: AngularFireDatabase,
+        private readonly firebaseDatabase: AngularFireDatabase,
         private readonly path: string
     ) {}
 

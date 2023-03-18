@@ -13,124 +13,124 @@ import { UserAuthenticationType } from './types/user-authentication';
 export type DeleteAllDataFunctionType = FunctionType<Record<string, never>, void>;
 
 export type EventEditFunctionType = FunctionType<{
-  editType: EditType;
-  groupId: EventGroupId;
-  eventId: string;
-  event: Omit<Event.Flatten, 'id'> | undefined;
+    editType: EditType;
+    groupId: EventGroupId;
+    eventId: string;
+    event: Omit<Event.Flatten, 'id'> | undefined;
 }, void>;
 
 export type EventGetFunctionType = FunctionType<{
-  groupIds: EventGroupId[];
+    groupIds: EventGroupId[];
 }, EventGroup.Flatten[]>;
 
 export type GameInfoGetFunctionType = FunctionType<{
-  gameId: string;
+    gameId: string;
 }, GameInfo>;
 
 export type NewsDisableFunctionType = FunctionType<{
-  editType: 'disable' | 'enable';
-  newsId: string;
+    editType: 'disable' | 'enable';
+    newsId: string;
 }, void>;
 
 export type NewsEditFunctionType = FunctionType<{
-  editType: EditType;
-  newsId: string;
-  news: Omit<News.Flatten, 'id'> | undefined;
+    editType: EditType;
+    newsId: string;
+    news: Omit<News.Flatten, 'id'> | undefined;
 }, string>;
 
 export type NewsGetFunctionType = FunctionType< {
-  numberNews: number | undefined;
-  alsoDisabled: boolean;
+    numberNews: number | undefined;
+    alsoDisabled: boolean;
 }, {
-  news: News.Flatten[];
-  hasMore: boolean;
+    news: News.Flatten[];
+    hasMore: boolean;
 }>;
 
 export type NewsGetSingleFunctionType = FunctionType<{
-  newsId: string;
+    newsId: string;
 }, News.Flatten>;
 
 export type NotificationPushFunctionType = FunctionType<{
-  notificationType: NotificationType;
-  payload: NotifactionPayload;
+    notificationType: NotificationType;
+    payload: NotifactionPayload;
 }, void>;
 
 export type NotificationRegisterFunctionType = FunctionType<{
-  notificationType: NotificationType;
-  token: string;
+    notificationType: NotificationType;
+    token: string;
 }, void>;
 
 export type ReportEditFunctionType = FunctionType<{
-  editType: EditType;
-  groupId: ReportGroupId;
-  reportId: string;
-  report: Omit<Report.Flatten, 'id'> | undefined;
+    editType: EditType;
+    groupId: ReportGroupId;
+    reportId: string;
+    report: Omit<Report.Flatten, 'id'> | undefined;
 }, void>;
 
 export type ReportGetFunctionType = FunctionType<{
-  groupId: ReportGroupId;
-  numberReports: number | undefined;
+    groupId: ReportGroupId;
+    numberReports: number | undefined;
 }, {
-  reports: Report.Flatten[];
-  hasMore: boolean;
+    reports: Report.Flatten[];
+    hasMore: boolean;
 }>;
 
 export type SearchEntityFunctionType<T extends SearchEntityType = SearchEntityType> = FunctionType<{
-  searchEntityTypes: T[];
-  searchText: string;
+    searchEntityTypes: T[];
+    searchText: string;
 }, TypedSearchEntity.Flatten<T>[]>;
 
 export type SendMailContactFunctionType = FunctionType<{
-  senderName: string;
-  senderAddress: string;
-  receiverName: string;
-  receiverAddress: string;
-  message: string;
+    senderName: string;
+    senderAddress: string;
+    receiverName: string;
+    receiverAddress: string;
+    message: string;
 }, {
-  success: boolean;
-  message: string;
+    success: boolean;
+    message: string;
 }>;
 
 export type TeamSquadGetFunctionType = FunctionType<{
-  type: AnpfiffInfoTeamParameters.Type;
+    type: AnpfiffInfoTeamParameters.Type;
 }, TeamSquad>;
 
 
 export type UserAuthenticationAcceptDeclineFunctionType = FunctionType<{
-  authenticationTypes: UserAuthenticationType[];
-  hashedUserId: string;
-  action: 'accept' | 'decline';
+    authenticationTypes: UserAuthenticationType[];
+    hashedUserId: string;
+    action: 'accept' | 'decline';
 }, void>;
 
 export type UserAuthenticationAddFunctionType = FunctionType<{
-  authenticationTypes: UserAuthenticationType[];
-  firstName: string;
-  lastName: string;
+    authenticationTypes: UserAuthenticationType[];
+    firstName: string;
+    lastName: string;
 }, void>;
 
 export type UserAuthenticationCheckFunctionType = FunctionType<{
-  authenicationTypes: UserAuthenticationType[];
+    authenicationTypes: UserAuthenticationType[];
 }, void>;
 
 export namespace UserAuthenticationGetAllUnauthenticatedFunction {
-  export type User = {
-      hashedUserId: string;
-      firstName: string;
-      lastName: string;
-  };
+    export type User = {
+        hashedUserId: string;
+        firstName: string;
+        lastName: string;
+    };
 }
 
 export type UserAuthenticationGetAllUnauthenticatedFunctionType = FunctionType<{
-  authenticationTypes: UserAuthenticationType[];
+    authenticationTypes: UserAuthenticationType[];
 }, UserAuthenticationGetAllUnauthenticatedFunction.User[]>;
 
 export type VerifyRecaptchaFunctionType = FunctionType<{
-  token: string;
+    token: string;
 }, {
-  success: boolean;
-  score: number;
-  action: string;
-  challenge_ts: string;
-  hostname: string;
-  errorCodes?: string[];
+    success: boolean;
+    score: number;
+    action: string;
+    challenge_ts: string;
+    hostname: string;
+    errorCodes?: string[];
 }>;

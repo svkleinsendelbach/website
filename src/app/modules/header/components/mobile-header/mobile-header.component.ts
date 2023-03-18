@@ -13,36 +13,36 @@ export class MobileHeaderComponent {
     public faBars = faBars;
     public faTimes = faTimes;
 
-  @Input() public headerData!: HeaderData;
+    @Input() public headerData!: HeaderData;
 
-  @Input() public homeLinkData!: HomeLinkData;
+    @Input() public homeLinkData!: HomeLinkData;
 
-  public isExpanded = false;
+    public isExpanded = false;
 
-  public expandedHeaderItemId: string | null = null;
+    public expandedHeaderItemId: string | null = null;
 
-  public constructor(
-    public readonly styleConfig: StyleConfigService
-  ) {}
+    public constructor(
+        public readonly styleConfig: StyleConfigService
+    ) {}
 
-  public handleHamburgerMenuClick(toExpanded: boolean) {
-      this.isExpanded = toExpanded;
-  }
+    public handleHamburgerMenuClick(toExpanded: boolean) {
+        this.isExpanded = toExpanded;
+    }
 
-  public handleHeaderItemClick(headerItemId: string) {
-      if (this.expandedHeaderItemId === headerItemId) {
-          this.expandedHeaderItemId = null;
-      } else {
-          this.expandedHeaderItemId = headerItemId;
-      }
-  }
+    public handleHeaderItemClick(headerItemId: string) {
+        if (this.expandedHeaderItemId === headerItemId) {
+            this.expandedHeaderItemId = null;
+        } else {
+            this.expandedHeaderItemId = headerItemId;
+        }
+    }
 
-  public get headerItems(): (HeaderItem & { id: string })[] {
-      return Object.entries(this.headerData).map(entry => {
-          return {
-              ...entry[1],
-              id: entry[0]
-          };
-      });
-  }
+    public get headerItems(): (HeaderItem & { id: string })[] {
+        return Object.entries(this.headerData).map(entry => {
+            return {
+                ...entry[1],
+                id: entry[0]
+            };
+        });
+    }
 }

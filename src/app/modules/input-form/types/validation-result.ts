@@ -1,4 +1,4 @@
 export enum ValidationResult {
-  Valid,
-  Invalid
+    Valid,
+    Invalid
 }

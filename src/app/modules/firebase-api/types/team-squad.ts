@@ -32,9 +32,9 @@ export namespace TeamSquad {
     };
 
     export type StabPerson = {
-      imageId: number | null;
-      function: string | null;
-      name: string | null;
-      personParameters: AnpfiffInfoPersonParameters | null;
-  };
+        imageId: number | null;
+        function: string | null;
+        name: string | null;
+        personParameters: AnpfiffInfoPersonParameters | null;
+    };
 }

@@ -3,8 +3,8 @@ import { InputError } from './input-error';
 import { ValidationResult } from './validation-result';
 
 export class InputForm<
-  InputFields extends Record<string, InputField<unknown>>,
-  ExtraStatus extends PropertyKey = never
+    InputFields extends Record<string, InputField<unknown>>,
+    ExtraStatus extends PropertyKey = never
 > {
     public status: 'valid' | 'invalidInput' | ExtraStatus = 'valid';
 

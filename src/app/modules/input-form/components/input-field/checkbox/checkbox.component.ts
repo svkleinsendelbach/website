@@ -9,23 +9,23 @@ import { InputField } from '../../../types/input-field';
 })
 export class CheckboxComponent {
 
-  @Input() public label!: string;
+    @Input() public label!: string;
 
-  @Input() public inputField!: InputField<boolean>;
+    @Input() public inputField!: InputField<boolean>;
 
-  public constructor(
-    public styleConfig: StyleConfigService
-  ) {}
+    public constructor(
+        public styleConfig: StyleConfigService
+    ) {}
 
-  public get checked(): boolean {
-      return this.inputField.value;
-  }
+    public get checked(): boolean {
+        return this.inputField.value;
+    }
 
-  public set checked(checked: boolean) {
-      this.inputField.inputValue = checked;
-  }
+    public set checked(checked: boolean) {
+        this.inputField.inputValue = checked;
+    }
 
-  public onClick() {
-      this.checked = !this.inputField.value;
-  }
+    public onClick() {
+        this.checked = !this.inputField.value;
+    }
 }

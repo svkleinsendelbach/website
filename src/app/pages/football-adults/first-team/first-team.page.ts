@@ -60,9 +60,9 @@ export class FirstTeamPage {
     public readonly squadParametersType: AnpfiffInfoTeamParameters.Type = 'first-team';
 
     public constructor(
-    public readonly titleService: Title,
-    public readonly deviceType: DeviceTypeService,
-    public readonly styleConfig: StyleConfigService
+        public readonly titleService: Title,
+        public readonly deviceType: DeviceTypeService,
+        public readonly styleConfig: StyleConfigService
     ) {
         this.titleService.setTitle('Erste Mannschaft');
     }

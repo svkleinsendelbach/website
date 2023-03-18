@@ -1,5 +1,5 @@
 export enum ErrorLevel {
-  Error,
-  Info,
-  Success
+    Error,
+    Info,
+    Success
 }

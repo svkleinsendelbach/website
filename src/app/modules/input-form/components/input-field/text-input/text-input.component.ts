@@ -8,25 +8,25 @@ import { InputField } from '../../../types/input-field';
     styleUrls: ['./text-input.component.sass']
 })
 export class TextInputComponent implements AfterViewInit {
-  @Input() public secure = false;
+    @Input() public secure = false;
 
-  @Input() public label!: string;
+    @Input() public label!: string;
 
-  @Input() public placeholder: string | undefined = undefined;
+    @Input() public placeholder: string | undefined = undefined;
 
-  @Input() public inputField!: InputField<string>;
+    @Input() public inputField!: InputField<string>;
 
-  @ViewChild('input') private inputElement!: ElementRef<HTMLInputElement>;
+    @ViewChild('input') private inputElement!: ElementRef<HTMLInputElement>;
 
-  public constructor(
-    public styleConfig: StyleConfigService
-  ) {}
+    public constructor(
+        public styleConfig: StyleConfigService
+    ) {}
 
-  public ngAfterViewInit() {
-      this.inputElement.nativeElement.value = this.inputField.value;
-  }
+    public ngAfterViewInit() {
+        this.inputElement.nativeElement.value = this.inputField.value;
+    }
 
-  public onBlur() {
-      this.inputField.inputValue = this.inputElement.nativeElement.value;
-  }
+    public onBlur() {
+        this.inputField.inputValue = this.inputElement.nativeElement.value;
+    }
 }

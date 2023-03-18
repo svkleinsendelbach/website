@@ -13,9 +13,9 @@ export class AllNewsPage {
     public allInternalLinks = InternalLink.all;
 
     public constructor(
-      public readonly titleService: Title,
-      public readonly deviceType: DeviceTypeService,
-      public readonly styleConfig: StyleConfigService
+        public readonly titleService: Title,
+        public readonly deviceType: DeviceTypeService,
+        public readonly styleConfig: StyleConfigService
     ) {
         this.titleService.setTitle('Aktuelle Nachrichten');
     }

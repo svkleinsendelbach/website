@@ -69,10 +69,10 @@ export class EditEventPage implements OnInit {
         public readonly styleConfig: StyleConfigService,
         private readonly firebaseApiService: FirebaseApiService,
         private readonly sharedData: SharedDataService<{
-        editEvent: {
-            groupId: EventGroupId;
-            event: Event.Flatten;
-        };
+            editEvent: {
+                groupId: EventGroupId;
+                event: Event.Flatten;
+            };
         }>,
         private router: Router
     ) {

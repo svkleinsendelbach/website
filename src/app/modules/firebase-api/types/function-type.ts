@@ -1,6 +1,6 @@
 export interface FunctionType<Parameters, ReturnType> {
-  parameters: Parameters;
-  return: ReturnType;
+    parameters: Parameters;
+    return: ReturnType;
 }
 
 export declare namespace FunctionType {

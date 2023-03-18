@@ -7,9 +7,9 @@ import { StyleConfigService } from 'src/app/services/style-config.service';
     styleUrls: ['./label.component.sass']
 })
 export class LabelComponent {
-  @Input() public text!: string;
+    @Input() public text!: string;
 
-  public constructor(
-    public styleConfig: StyleConfigService
-  ) {}
+    public constructor(
+        public styleConfig: StyleConfigService
+    ) {}
 }

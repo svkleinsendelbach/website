@@ -21,12 +21,12 @@ export class EditingMainPage {
     public unauthenticatedUsers: FunctionType.ReturnType<UserAuthenticationGetAllUnauthenticatedFunctionType> | undefined = undefined;
 
     public constructor(
-    public readonly titleService: Title,
-    public readonly deviceType: DeviceTypeService,
-    public readonly styleConfig: StyleConfigService,
-    private readonly firebaseApiService: FirebaseApiService,
-    private readonly authService: AuthService,
-    private router: Router
+        public readonly titleService: Title,
+        public readonly deviceType: DeviceTypeService,
+        public readonly styleConfig: StyleConfigService,
+        private readonly firebaseApiService: FirebaseApiService,
+        private readonly authService: AuthService,
+        private router: Router
     ) {
         this.titleService.setTitle('Bearbeiten');
         this.getUnauthenticatedUsers();

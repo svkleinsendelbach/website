@@ -106,26 +106,26 @@ export class ContactPage {
 }
 
 export namespace ContactPage {
-  export const receivers = {
-      managers: {
-          name: 'Vorstandschaft',
-          address: 'vorstand@sv-kleinsendelbach.de'
-      },
-      footballAdults: {
-          name: 'Herrenfußball',
-          address: 'herrenfußball@sv-kleinsendelbach.de'
-      },
-      footballYouth: {
-          name: 'Jugendfußball',
-          address: 'jugenfußball@sv-kleinsendelbach.de'
-      },
-      gymnastics: {
-          name: 'Gymnastik',
-          address: 'gymnastik@sv-kleinsendelbach.de'
-      },
-      dancing: {
-          name: 'Tanzen',
-          address: 'tanzen@sv-kleinsendelbach.de'
-      },
-  };
+    export const receivers = {
+        managers: {
+            name: 'Vorstandschaft',
+            address: 'vorstand@sv-kleinsendelbach.de'
+        },
+        footballAdults: {
+            name: 'Herrenfußball',
+            address: 'herrenfußball@sv-kleinsendelbach.de'
+        },
+        footballYouth: {
+            name: 'Jugendfußball',
+            address: 'jugenfußball@sv-kleinsendelbach.de'
+        },
+        gymnastics: {
+            name: 'Gymnastik',
+            address: 'gymnastik@sv-kleinsendelbach.de'
+        },
+        dancing: {
+            name: 'Tanzen',
+            address: 'tanzen@sv-kleinsendelbach.de'
+        },
+    };
 }

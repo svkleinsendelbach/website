@@ -14,58 +14,58 @@ import { CookieService } from 'src/app/modules/cookie-selector/services/cookie.s
     styleUrls: ['./maps.component.sass']
 })
 export class MapsComponent implements OnInit, OnDestroy {
-  @Input() public options!: google.maps.MapOptions;
+    @Input() public options!: google.maps.MapOptions;
 
-  @Input() public markers: google.maps.LatLngLiteral[] = [];
+    @Input() public markers: google.maps.LatLngLiteral[] = [];
 
-  public apiLoaded = false;
+    public apiLoaded = false;
 
-  public functionalityCookiesSelected: boolean;
+    public functionalityCookiesSelected: boolean;
 
-  public mapOptions: google.maps.MapOptions = {};
+    public mapOptions: google.maps.MapOptions = {};
 
-  public constructor(
-      private httpClient: HttpClient,
-      public deviceType: DeviceTypeService,
-      public styleConfig: StyleConfigService,
-      public cookieService: CookieService,
-      public appearance: AppearanceService
-  ) {
-      this.checkApiLoaded();
-      this.functionalityCookiesSelected = this.cookieService.cookiesSelection?.functionality === 'selected';
-      this.cookieService.listeners.add('maps-component', selection => {
-          this.functionalityCookiesSelected = selection.functionality === 'selected';
-      });
-  }
+    public constructor(
+        private httpClient: HttpClient,
+        public deviceType: DeviceTypeService,
+        public styleConfig: StyleConfigService,
+        public cookieService: CookieService,
+        public appearance: AppearanceService
+    ) {
+        this.checkApiLoaded();
+        this.functionalityCookiesSelected = this.cookieService.cookiesSelection?.functionality === 'selected';
+        this.cookieService.listeners.add('maps-component', selection => {
+            this.functionalityCookiesSelected = selection.functionality === 'selected';
+        });
+    }
 
-  public ngOnInit(): void {
-      this.setMapOptions(this.appearance.current);
-      this.appearance.listeners.add('maps-component', appearance => {
-          this.setMapOptions(appearance);
-      });
-  }
+    public ngOnInit(): void {
+        this.setMapOptions(this.appearance.current);
+        this.appearance.listeners.add('maps-component', appearance => {
+            this.setMapOptions(appearance);
+        });
+    }
 
-  public ngOnDestroy(): void {
-      this.appearance.listeners.remove('maps-component');
-      this.cookieService.listeners.remove('maps-component');
-  }
+    public ngOnDestroy(): void {
+        this.appearance.listeners.remove('maps-component');
+        this.cookieService.listeners.remove('maps-component');
+    }
 
-  private async checkApiLoaded() {
-      this.apiLoaded = await new Promise<boolean>(resolve => {
-          lastValueFrom(this.httpClient.jsonp(`https://maps.googleapis.com/maps/api/js?key=${environment.googleMaps.apiKey}`, 'callback'))
-              .then(() => resolve(true))
-              .catch(() => resolve(false));
-      });
-  }
+    private async checkApiLoaded() {
+        this.apiLoaded = await new Promise<boolean>(resolve => {
+            lastValueFrom(this.httpClient.jsonp(`https://maps.googleapis.com/maps/api/js?key=${environment.googleMaps.apiKey}`, 'callback'))
+                .then(() => resolve(true))
+                .catch(() => resolve(false));
+        });
+    }
 
-  private setMapOptions(appearance: Appearance) {
-      this.mapOptions = {
-          ...this.options,
-          styles: appearance === 'light' ? undefined : mapStyleDarkAppearence
-      };
-  }
+    private setMapOptions(appearance: Appearance) {
+        this.mapOptions = {
+            ...this.options,
+            styles: appearance === 'light' ? undefined : mapStyleDarkAppearence
+        };
+    }
 
-  public acceptFunctionalityCookies() {
-      this.cookieService.changeCookieSelection('functionality', 'selected');
-  }
+    public acceptFunctionalityCookies() {
+        this.cookieService.changeCookieSelection('functionality', 'selected');
+    }
 }
