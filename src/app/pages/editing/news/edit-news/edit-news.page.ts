@@ -40,7 +40,8 @@ export class EditNewsPage implements OnInit {
     },
     {
         invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
-        loading: new InputError('Nachricht wird gespeichert.', ErrorLevel.Info)
+        loading: new InputError('Nachricht wird gespeichert.', ErrorLevel.Info),
+        failed: new InputError('Nachricht konnte nicht gespeichert werden.')
     });
 
     public thumbnailUrl?: string;
@@ -89,7 +90,7 @@ export class EditNewsPage implements OnInit {
             this.inputForm.status = 'invalidInput';
             return;
         }
-        this.inputForm.status ='loading';
+        this.inputForm.status = 'loading';
         const newsId = this.previousNews?.id ?? this.createNewsId(this.inputForm.field('title').value);
         const date = this.previousNews?.date ?? new Date().toISOString();
         const newsUrl = await this.uploadNewsMessage(this.inputForm.field('message').value);
@@ -105,6 +106,9 @@ export class EditNewsPage implements OnInit {
                 disabled: this.previousNews?.disabled ?? false,
                 thumbnailUrl: this.thumbnailUrl
             }
+        }).catch(reason => {
+            this.inputForm.status = 'failed';
+            throw reason;
         });
         await this.router.navigateByUrl(InternalLink.all['bearbeiten/nachrichten'].link);
         this.inputForm.status = 'valid';

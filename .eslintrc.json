@@ -72,7 +72,8 @@
         "eqeqeq": ["error", "always"],
         "no-inner-declarations": "off",
         "@typescript-eslint/space-before-function-paren": "off",
-        "@angular-eslint/component-class-suffix": "off"
+        "@angular-eslint/component-class-suffix": "off",
+        "space-infix-ops": "error"
       }
     }
   ]

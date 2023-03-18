@@ -96,7 +96,11 @@ export class ContactPage {
             receiverAddress: receiver.address,
             message: this.inputForm.field('message').value,
         };
-        const response = await this.firebaseApiService.function('sendMail').function('contact').call(request);
+        const response = await this.firebaseApiService.function('sendMail').function('contact').call(request)
+            .catch(reason => {
+                this.inputForm.status = 'sendFailed';
+                throw reason;
+            });
         const status: 'sendSucceded' | 'sendFailed' = response.success ? 'sendSucceded' : 'sendFailed';
         this.inputForm.status = status;
         if (response.success) {

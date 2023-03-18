@@ -15,6 +15,7 @@ export type DeleteAllDataFunctionType = FunctionType<Record<string, never>, void
 export type EventEditFunctionType = FunctionType<{
     editType: EditType;
     groupId: EventGroupId;
+    previousGroupId: EventGroupId | undefined;
     eventId: string;
     event: Omit<Event.Flatten, 'id'> | undefined;
 }, void>;
@@ -63,6 +64,7 @@ export type NotificationRegisterFunctionType = FunctionType<{
 export type ReportEditFunctionType = FunctionType<{
     editType: EditType;
     groupId: ReportGroupId;
+    previousGroupId: ReportGroupId | undefined;
     reportId: string;
     report: Omit<Report.Flatten, 'id'> | undefined;
 }, void>;

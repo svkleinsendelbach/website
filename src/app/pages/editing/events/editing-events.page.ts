@@ -63,6 +63,7 @@ export class EditingEventsPage {
         await this.firebaseApiService.function('event').function('edit').call({
             editType: 'remove',
             groupId: groupId,
+            previousGroupId: undefined,
             eventId: eventId,
             event: undefined
         });
