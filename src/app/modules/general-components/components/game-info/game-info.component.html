@@ -1,0 +1,124 @@
+<text-section
+  *ngIf="fetchedGameInfo.isLoading()"
+  [title]="'Spiel Infos werden geladen'"
+></text-section>
+<text-section
+  *ngIf="fetchedGameInfo.isFailure()"
+  [title]="'Spiel Infos konnten nicht geladen werden'"
+>
+  <p
+    class="text large"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Bitte landen Sie die Seite neu.</p>
+</text-section>
+<text-section
+  *ngIf="fetchedGameInfo.isSuccess()"
+  [title]="fetchedGameInfo.content.homeTeam.name + ' gegen ' + fetchedGameInfo.content.awayTeam.name"
+>
+  <a
+    id="competition"
+    href="{{ fetchedGameInfo.content.competition.link }}"
+    title="{{ fetchedGameInfo.content.competition.name }}"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >{{ fetchedGameInfo.content.competition.name }}</a>
+  <p
+    id="game-day"
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >{{ fetchedGameInfo.content.competition.gameDay.toString() + '. Spieltag' }}</p>
+  <p
+    id="date"
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >{{ Datum.fromIsoDate(fetchedGameInfo.content.date).description }}</p>
+  <a
+    id="adress"
+    *ngIf="fetchedGameInfo.content.adress !== undefined && fetchedGameInfo.content.adressDescription !== undefined"
+    href="{{ googleMapsLink(fetchedGameInfo.content.adress!) }}"
+    title="{{ fetchedGameInfo.content.adressDescription }}"
+    target="_blank"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >{{ fetchedGameInfo.content.adressDescription }}</a>
+  <p
+    id="adress"
+    class="no-link"
+    *ngIf="fetchedGameInfo.content.adress === undefined && fetchedGameInfo.content.adressDescription !== undefined"
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >{{ fetchedGameInfo.content.adressDescription }}</p>
+  <a
+    id="adress-description"
+    *ngIf="fetchedGameInfo.content.adress !== undefined"
+    href="{{ googleMapsLink(fetchedGameInfo.content.adress!) }}"
+    title="{{ fetchedGameInfo.content.adressDescription ?? fetchedGameInfo.content.adress }}"
+    target="_blank"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >{{ fetchedGameInfo.content.adress }}</a>
+  <div
+    id="result-container"
+    [ngClass]="deviceType.current"
+  >
+    <div
+      id="home-team"
+    >
+      <img
+        id="home-team-image"
+        src="{{ 'https://service-prod.bfv.de/export.media?action=getLogo&format=7&id=' + fetchedGameInfo.content.homeTeam.imageId }}"
+        title="{{ fetchedGameInfo.content.homeTeam.name }}"
+      >
+      <p
+        id="home-team-name"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ fetchedGameInfo.content.homeTeam.name }}</p>
+    </div>
+    <p
+      id="result"
+      [ngStyle]="{
+        color: styleConfig.css('primaryColor')
+      }"
+    >{{ (fetchedGameInfo.content.result.home?.toString() ?? '-') + ' : ' + (fetchedGameInfo.content.result.away?.toString() ?? '-') }}</p>
+    <div
+      id="away-team"
+    >
+      <img
+        id="away-team-image"
+        src="{{ 'https://service-prod.bfv.de/export.media?action=getLogo&format=7&id=' + fetchedGameInfo.content.awayTeam.imageId }}"
+        title="{{ fetchedGameInfo.content.awayTeam.name }}"
+      >
+      <p
+        id="away-team-name"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ fetchedGameInfo.content.awayTeam.name }}</p>
+    </div>
+  </div>
+  <select
+    id="select-liveticker"
+    *ngIf="fetchedGameInfo.content.livetickers.length !== 0"
+    disabled="{{ fetchedGameInfo.content.livetickers.length !== 1 }}"
+    (change)="selectLivetickerId($event)"
+  >
+    <option
+      *ngFor="let liveticker of fetchedGameInfo.content.livetickers; index as index"
+      value="{{ liveticker.id }}"
+    >{{ 'Liveticker ' + (index + 1).toString() }}</option>
+  </select>
+  <liveticker
+    *ngIf="selectedLiveticker !== undefined"
+    [liveticker]="selectedLiveticker"
+  ></liveticker>
+</text-section>

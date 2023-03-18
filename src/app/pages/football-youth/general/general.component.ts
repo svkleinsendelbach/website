@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { InternalPath } from 'src/app/types/InternalPath';
-import { ContactInfoComponent } from 'src/app/template/components/contact-info/contact-info.component';
-import { LinksComponent } from 'src/app/template/components/links/links.component';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
 import { Link } from 'src/app/types/link';
+import { ContactItem } from 'src/app/modules/general-components/types/contact-item';
+import { LinkData } from 'src/app/modules/general-components/types/link-data';
 
 @Component({
     selector: 'app-general',
@@ -16,7 +16,7 @@ import { Link } from 'src/app/types/link';
 export class GeneralComponent {
     public eventGroupTitle = EventGroupId.title;
 
-    public readonly links: LinksComponent.LinkData[] = [
+    public readonly links: LinkData[] = [
         {
             id: 'a-jugend',
             link: Link.external('A-Jugend', 'http://sv-hetzles.de/index.php/a-junioren', true),
@@ -69,7 +69,7 @@ export class GeneralComponent {
         'football-youth/g-youth',
     ];
 
-    public readonly contactData: ContactInfoComponent.ContactItem[] = [
+    public readonly contactData: ContactItem[] = [
         {
             function: 'Jugendleiter Großfeld',
             name: 'Tim Kellermann',

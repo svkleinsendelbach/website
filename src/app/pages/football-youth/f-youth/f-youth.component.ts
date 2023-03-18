@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
-import { ContactInfoComponent } from 'src/app/template/components/contact-info/contact-info.component';
+import { ContactItem } from 'src/app/modules/general-components/types/contact-item';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 
@@ -19,7 +19,7 @@ export class FYouthComponent {
 
     public readonly teamId = '01DVQP0J40000000VV0AG80NVSNQSIQV';
 
-    public readonly contactData: ContactInfoComponent.ContactItem[] = [
+    public readonly contactData: ContactItem[] = [
         {
             function: 'Trainer',
             name: 'Bernd Aumüller',

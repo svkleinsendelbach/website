@@ -16,14 +16,14 @@
 <text-section
   [title]="'Ergebnisse und Tabellen'"
 >
-  <app-bfv-widget
+  <bfv-widget
     [teamId]="teamId"
-  ></app-bfv-widget>
+  ></bfv-widget>
 </text-section>
 
-<app-contact-info
+<contact
   [contactData]="contactData"
-></app-contact-info>
+></contact>
 
 <text-section
   [title]="'Trainingszeiten'"
@@ -34,12 +34,12 @@
       color: styleConfig.css('secondaryTextColor')
     }"
   >Das Training findet jeden Dienstag und Donnerstag von 19:00Uhr - 20:30Uhr abwechselnd in Kleinsendelbach und Hetzles, am B-Platz an der Sendelmühlstraße statt.</p>
-  <app-maps
+  <maps
     [options]="mapOptions"
     [markers]="mapMarkers"
-  ></app-maps>
+  ></maps>
 </text-section>
 
-<app-squad
+<squad
   [parametersType]="squadParametersType"
-></app-squad>
+></squad>

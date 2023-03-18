@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
-import { ContactInfoComponent } from 'src/app/template/components/contact-info/contact-info.component';
-import { LinksComponent } from 'src/app/template/components/links/links.component';
 import { InternalLink, InternalPath } from 'src/app/types/InternalPath';
 import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
 import { Link } from 'src/app/types/link';
+import { ContactItem } from 'src/app/modules/general-components/types/contact-item';
+import { LinkData } from 'src/app/modules/general-components/types/link-data';
 
 @Component({
     selector: 'app-general',
@@ -17,7 +17,7 @@ export class GeneralComponent {
     public eventGroupTitle = EventGroupId.title;
     public allInternalLinks = InternalLink.all;
 
-    public readonly links: LinksComponent.LinkData[] = [
+    public readonly links: LinkData[] = [
         {
             id: 'first-team',
             link: Link.internal<InternalPath>('1. Mannschaft', 'fussball/herren/erste-mannschaft'),
@@ -45,7 +45,7 @@ export class GeneralComponent {
         'football-adults/ah-team',
     ];
 
-    public readonly contactData: ContactInfoComponent.ContactItem[] = [
+    public readonly contactData: ContactItem[] = [
         {
             function: 'Abteilungsleiter Fußball',
             name: 'Josef Hoier',

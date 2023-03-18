@@ -5,7 +5,6 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ContactInfoComponent } from './template/components/contact-info/contact-info.component';
 import { environment } from '../environments/environment';
 import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -26,12 +25,6 @@ import { ChronicleComponent } from './pages/about-us/chronicle/chronicle.compone
 import { SportshomeComponent } from './pages/about-us/sportshome/sportshome.component';
 import { ManagersComponent } from './pages/about-us/managers/managers.component';
 import { GeneralComponent as FootballAdultsGeneralComponent } from './pages/football-adults/general/general.component';
-import { MapsComponent } from './template/components/maps/maps.component';
-import { GoogleMapsModule } from '@angular/google-maps';
-import { BfvWidgetComponent } from './template/components/bfv-widget/bfv-widget.component';
-import { SquadComponent } from './template/components/squad/squad.component';
-import { SquadPersonComponent } from './template/components/squad/squad-person/squad-person.component';
-import { LinksComponent } from './template/components/links/links.component';
 import { FirstTeamComponent } from './pages/football-adults/first-team/first-team.component';
 import { SecondTeamComponent } from './pages/football-adults/second-team/second-team.component';
 import { AhTeamComponent } from './pages/football-adults/ah-team/ah-team.component';
@@ -59,9 +52,6 @@ import { InputFormModule } from './modules/input-form/input-form.module';
 import { CookieSelectorModule } from './modules/cookie-selector/cookie-selector.module';
 import { AllNewsComponent } from './pages/news/all-news/all-news.component';
 import { NewsDetailComponent } from './pages/news/news-detail/news-detail.component';
-import { GameInfoComponent } from './template/components/game-info/game-info.component';
-import { LivetickerComponent } from './template/components/game-info/liveticker/liveticker.component';
-import { ResultComponent } from './template/components/game-info/liveticker/result/result.component';
 import { GameDetailComponent } from './pages/game-detail/game-detail.component';
 import { HeaderModule } from './modules/header/header.module';
 import { FooterModule } from './modules/footer/footer.module';
@@ -69,11 +59,11 @@ import { FirebaseApiModule } from './modules/firebase-api/firebase-api.module';
 import { TextSectionModule } from './modules/text-section/text-section.module';
 import { EventsModule } from './modules/events/events.module';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
+import { GeneralComponentsModule } from './modules/general-components/general-components.module';
 
 @NgModule({
     declarations: [
         AppComponent,
-        ContactInfoComponent,
         NewsListComponent,
         HomeLinksComponent,
         SocialMediaLinksComponent,
@@ -87,11 +77,6 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
         SportshomeComponent,
         ManagersComponent,
         FootballAdultsGeneralComponent,
-        MapsComponent,
-        BfvWidgetComponent,
-        SquadComponent,
-        SquadPersonComponent,
-        LinksComponent,
         FirstTeamComponent,
         SecondTeamComponent,
         AhTeamComponent,
@@ -115,9 +100,6 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
         EditNewsComponent,
         AllNewsComponent,
         NewsDetailComponent,
-        GameInfoComponent,
-        LivetickerComponent,
-        ResultComponent,
         GameDetailComponent
     ],
     imports: [
@@ -129,7 +111,6 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
         AngularFireStorageModule,
         AngularFireAnalyticsModule,
         AngularFirePerformanceModule,
-        GoogleMapsModule,
         HttpClientModule,
         HttpClientJsonpModule,
         RecaptchaV3Module,
@@ -140,7 +121,8 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
         FirebaseApiModule,
         TextSectionModule,
         EventsModule,
-        AuthenticationModule
+        AuthenticationModule,
+        GeneralComponentsModule
     ],
     providers: [
         ScreenTrackingService,

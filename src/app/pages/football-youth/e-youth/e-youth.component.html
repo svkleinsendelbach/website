@@ -16,14 +16,14 @@
 <text-section
   [title]="'Ergebnisse und Tabellen'"
 >
-  <app-bfv-widget
+  <bfv-widget
     [teamId]="teamId"
-  ></app-bfv-widget>
+  ></bfv-widget>
 </text-section>
 
-<app-contact-info
+<contact
   [contactData]="contactData"
-></app-contact-info>
+></contact>
 
 <text-section
   [title]="'Trainingszeiten'"
@@ -34,10 +34,10 @@
       color: styleConfig.css('secondaryTextColor')
     }"
   >Das Training findet jeden Mittwoch von 17:30Uhr - 19:00Uhr am A-Platz an der Hauptstraße statt.</p>
-  <app-maps
+  <maps
     [options]="mapOptions"
     [markers]="mapMarkers"
-  ></app-maps>
+  ></maps>
 </text-section>
 
 <text-section

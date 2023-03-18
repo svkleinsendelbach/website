@@ -22,23 +22,23 @@
       color: styleConfig.css('textColor')
     }"
   >Ergebnisse der 1. Mannschaft</p>
-  <app-bfv-widget
+  <bfv-widget
     [teamId]="teamId1"
-  ></app-bfv-widget>
+  ></bfv-widget>
   <p
     class="text large margin-top-large"
     [ngStyle]="{
       color: styleConfig.css('textColor')
     }"
   >Ergebnisse der 2. Mannschaft</p>
-  <app-bfv-widget
+  <bfv-widget
     [teamId]="teamId2"
-  ></app-bfv-widget>
+  ></bfv-widget>
 </text-section>
 
-<app-contact-info
+<contact
   [contactData]="contactData"
-></app-contact-info>
+></contact>
 
 <text-section
   [title]="'Trainingszeiten'"
@@ -49,10 +49,10 @@
       color: styleConfig.css('secondaryTextColor')
     }"
   >Das Training findet jeden Dienstag und Donnerstag von 17:00Uhr - 18:30Uhr am B-Platz an der Sendelmühlstraße statt.</p>
-  <app-maps
+  <maps
     [options]="mapOptions"
     [markers]="mapMarkers"
-  ></app-maps>
+  ></maps>
 </text-section>
 
 <text-section

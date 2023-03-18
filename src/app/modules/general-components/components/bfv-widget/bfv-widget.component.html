@@ -1,0 +1,30 @@
+<div
+  *ngIf="!functionalityCookiesSelected"
+  id="cookie-container"
+  [ngStyle]="{
+    borderColor: styleConfig.css('textColor'),
+    backgroundColor: styleConfig.css('backgroundColor')
+  }"
+>
+  <p
+    id="text1"
+    [ngStyle]="{
+      color: styleConfig.css('textColor')
+    }"
+  >BFV Widget konnte nicht geladen werden, da Sie nicht den erforderlichen Cookies zugestimmt haben.</p>
+  <p
+    id="button"
+    (click)="acceptFunctionalityCookies()"
+    [ngStyle]="{
+      color: styleConfig.css('primaryColor')
+    }"
+  >Funktionelle Cookies jetzt akzeptieren</p>
+</div>
+<div
+  id="bfv-widget"
+  #bfvWidget
+  [hidden]="!functionalityCookiesSelected"
+  [ngStyle]="{
+    borderColor: styleConfig.css('textColor')
+  }"
+></div>

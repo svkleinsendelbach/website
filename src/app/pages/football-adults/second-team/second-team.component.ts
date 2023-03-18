@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { AnpfiffInfoTeamParameters } from 'src/app/modules/firebase-api/types/anpfiff-info-team-parameters';
 import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
-import { ContactInfoComponent } from 'src/app/template/components/contact-info/contact-info.component';
+import { ContactItem } from 'src/app/modules/general-components/types/contact-item';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 
@@ -20,7 +20,7 @@ export class SecondTeamComponent {
 
     public readonly teamId = '02EO9BK2JS000000VS5489B2VSAS84KM';
 
-    public readonly contactData: ContactInfoComponent.ContactItem[] = [
+    public readonly contactData: ContactItem[] = [
         {
             function: 'Abteilungsleiter Fußball',
             name: 'Josef Hoier',
