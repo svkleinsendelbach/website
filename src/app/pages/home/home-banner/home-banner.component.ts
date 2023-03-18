@@ -63,6 +63,12 @@ export class HomeBannerComponent implements OnInit {
             break;
         }
     }
+
+    public get heightStyle(): string {
+        if (this.deviceType.isMobile)
+            return '360px';
+        return '720px';
+    }
 }
 
 export interface BannerItem {

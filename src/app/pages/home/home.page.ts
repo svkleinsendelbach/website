@@ -21,7 +21,16 @@ export class HomePage {
     public eventGroupTitle = EventGroupId.title;
     public allInternalLinks = InternalLink.all;
 
-    public readonly bannerData: BannerItem[] = [];
+    public readonly bannerData: BannerItem[] = [
+        {
+            imageSource: 'assets/images/mannschaft.png',
+            title: 'Herren Mannschaft'
+        },
+        {
+            imageSource: 'assets/images/kleinfeldmannschaften.jpg',
+            title: 'Kleinfeld Mannschaften'
+        }
+    ];
 
     public readonly linkData: LinkData = {
         desktop: [

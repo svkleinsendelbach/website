@@ -1,7 +1,5 @@
 @import '/src/sass/flex'
 
-$height: 480px
-
 :host
   @include flex-column(flex-start, center)
   width: 100vw
@@ -13,14 +11,12 @@ $height: 480px
   top: 0
   z-index: 100
   width: 100vw
-  height: $height
 
   .image
     position: absolute
     top: 0
     object-fit: cover
     width: 100vw
-    height: $height
     overflow: hidden
     transition: 0.5s
 
@@ -29,12 +25,11 @@ $height: 480px
   position: relative
   z-index: 101
   width: 100%
-  height: $height
 
   #nav-button-container
     @include flex-row(center, space-between)
     width: 100%
-    height: calc($height - 48px)
+    height: calc(100% - 48px)
 
     #left-button, #right-button
       @include flex-row(center, center)

@@ -1,5 +1,8 @@
 <div
   id="image-container"
+  [ngStyle]="{
+    height: heightStyle
+  }"
 >
   <img
     *ngFor="let bannerItem of bannerData; index as index"
@@ -7,12 +10,16 @@
     src="{{ bannerItem.imageSource }}"
     title="{{ bannerItem.title }}"
     [ngStyle]="{
+        height: heightStyle,
       transform: 'translateX(' + (index - currentPage + 1) + '00%)'
     }"
   >
 </div>
 <div
   id="nav-bar-container"
+  [ngStyle]="{
+    height: heightStyle
+  }"
 >
   <div
     id="nav-button-container"
