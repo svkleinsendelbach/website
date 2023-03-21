@@ -61,6 +61,7 @@ import { ContactPage } from './pages/contact/contact.page';
 import { ImprintPage } from './pages/imprint/imprint.page';
 import { NewsDetailPage } from './pages/news/news-detail/news-detail.page';
 import { AllNewsPage } from './pages/news/all-news/all-news.page';
+import { AllReportsPage } from './pages/reports/all-reports/all-reports.page';
 import { GameDetailPage } from './pages/game-detail/game-detail.page';
 import { EditingMainPage } from './pages/editing/main/editing-main.page';
 import { LoginPage } from './pages/editing/login/login.page';
@@ -103,6 +104,7 @@ import { EditReportPage } from './pages/editing/reports/edit-report/edit-report.
         ImprintPage,
         NewsDetailPage,
         AllNewsPage,
+        AllReportsPage,
         GameDetailPage,
         EditingMainPage,
         LoginPage,

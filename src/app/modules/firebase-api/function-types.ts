@@ -69,6 +69,8 @@ export type ReportEditFunctionType = FunctionType<{
     report: Omit<Report.Flatten, 'id'> | undefined;
 }, void>;
 
+export type ReportGetAllFunctionType = FunctionType<Record<string, never>, (Report.Flatten & { groupId: ReportGroupId })[]>;
+
 export type ReportGetFunctionType = FunctionType<{
     groupId: ReportGroupId;
     numberReports: number | undefined;

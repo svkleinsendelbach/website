@@ -23,6 +23,7 @@ export class ReportMessageParser {
             const link = document.createElement('a');
             link.style.color = this.linkColor;
             link.href = match.groups['link'];
+            link.target = '_blank';
             const content = this.parseFormatting([match.groups['content']]);
             if (content === null)
                 return null;

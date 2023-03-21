@@ -32,6 +32,7 @@ import { EditingNewsPage } from '../pages/editing/news/editing-news.page';
 import { EditNewsPage } from '../pages/editing/news/edit-news/edit-news.page';
 import { EditingReportsPage } from '../pages/editing/reports/editing-reports.page';
 import { EditReportPage } from '../pages/editing/reports/edit-report/edit-report.page';
+import { AllReportsPage } from '../pages/reports/all-reports/all-reports.page';
 
 const associatedRoute: Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, Type<unknown>> = {
     'home': HomePage,
@@ -56,6 +57,7 @@ const associatedRoute: Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, Type
     'kontakt': ContactPage,
     'impressum': ImprintPage,
     'nachrichten': AllNewsPage,
+    'berichte': AllReportsPage,
     'bearbeiten': EditingMainPage,
     'bearbeiten/anmelden': LoginPage,
     'bearbeiten/termine': EditingEventsPage,

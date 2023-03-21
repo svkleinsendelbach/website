@@ -1,0 +1,30 @@
+<text-section
+    [title]="'Aktuelle Berichte'"
+>
+    <p
+    *ngIf="fetchedReports.isLoading()"
+    class="text center large"
+    [ngStyle]="{
+        color: styleConfig.css('primaryColor')
+    }"
+    >Berichte werden geladen</p>
+    <p
+    *ngIf="fetchedReports.isFailure()"
+    class="text center large"
+    [ngStyle]="{
+        color: styleConfig.css('primaryColor')
+    }"
+    >Berichte konnten nicht geladen werden</p>
+    <p
+    *ngIf="fetchedReports.isSuccess() && fetchedReports.content.length === 0"
+    class="text center large"
+    [ngStyle]="{
+        color: styleConfig.css('primaryColor')
+    }"
+    >Keine Berichte</p>
+    <report
+        *ngFor="let report of fetchedReports.content"
+        [report]="report"
+        [groupId]="report.groupId"
+    ></report>
+</text-section>

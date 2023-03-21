@@ -18,7 +18,7 @@ export class ReportsComponent implements OnInit {
 
     @Input() public maxListCount?: number;
 
-    public readonly allReportsLink = InternalLink.all['nachrichten']; // TODO: reports
+    public readonly allReportsLink = InternalLink.all['berichte'];
 
     public fetchedReports: FetchState<{ reports: Report.Flatten[]; hasMore: boolean }> = FetchState.loading;
 

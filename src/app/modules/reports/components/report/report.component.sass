@@ -8,34 +8,54 @@
 #report
     @include flex-column(center, flex-start)
     width: 100%
-    margin-bottom: 16px
-    padding-bottom: 16px
+    margin-bottom: 25px
+    padding-bottom: 25px
     border-bottom: solid 1px
 
-    #date, #message
-        @include font-montserrat
-        @include font-size('medium')
-        @include font-weight('small')
-
-    #message
-        text-align: justify
-
-        &::ng-deep
-            *
-                display: inline-block
-
-            a
-                text-decoration: none
-                cursor: pointer
-
-            .italic
-                font-style: italic
-
-            .strong
-                @include font-weight('medium')
-
-    #date
+    #date-container
+        @include flex-row(center, flex-start)
         width: 100%
+        margin-bottom: 10px
+
+        #group-title, #date-spacer, #date
+            @include font-montserrat
+            @include font-size('medium')
+            @include font-weight('small')
+
+        #date-spacer
+            margin: 0 10px
+
+    #message-container
+        @include flex-row(center, flex-start)
+        width: 100%
+        overflow: hidden
+
+        #bar
+            width: 5px
+            padding: 99999px 0
+            margin: -99999px 0
+            margin-right: 10px
+
+        #message
+            @include font-montserrat
+            @include font-size('medium')
+            @include font-weight('small')
+            text-align: justify
+            width: calc(100% - 15px)
+
+            &::ng-deep
+                *
+                    display: inline-block
+
+                a
+                    text-decoration: none
+                    cursor: pointer
+
+                .italic
+                    font-style: italic
+
+                .strong
+                    @include font-weight('medium')
 
 :host:nth-last-child(1) #report
     border-bottom: none

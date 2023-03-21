@@ -8,6 +8,7 @@ import {
     NewsGetSingleFunctionType,
     EventGetFunctionType,
     EventEditFunctionType,
+    ReportGetAllFunctionType,
     ReportGetFunctionType,
     ReportEditFunctionType,
     GameInfoGetFunctionType,
@@ -37,6 +38,7 @@ export type FirebaseFunctions = {
     };
     report: {
         get: ReportGetFunctionType;
+        getAll: ReportGetAllFunctionType;
         edit: ReportEditFunctionType;
     };
     bfvData: {

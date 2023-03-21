@@ -25,6 +25,7 @@ export type InternalPath =
   | 'impressum'
   | 'nachricht'
   | 'nachrichten'
+  | 'berichte'
   | 'spiel'
   | 'bearbeiten'
   | 'bearbeiten/anmelden'
@@ -59,6 +60,7 @@ export namespace InternalPath {
         'kontakt',
         'impressum',
         'nachrichten',
+        'berichte',
         'bearbeiten',
         'bearbeiten/anmelden',
         'bearbeiten/termine',
@@ -92,6 +94,7 @@ export namespace InternalPath {
         'kontakt': 'Kontakt',
         'impressum': 'Impressum',
         'nachrichten': 'Alle Nachrichten',
+        'berichte': 'Alle Berichte',
         'bearbeiten': 'Website bearbeiten',
         'bearbeiten/anmelden': 'Anmelden',
         'bearbeiten/termine': 'Termine bearbeiten',

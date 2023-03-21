@@ -15,6 +15,7 @@ export class SharedDataService<T extends { [key: string]: unknown }> {
     }
 
     public removeValue<Key extends keyof T>(key: Key) {
-        delete this.data[key];
+        if (key in this.data)
+            delete this.data[key];
     }
 }

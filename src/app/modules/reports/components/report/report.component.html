@@ -4,17 +4,39 @@
         borderColor: styleConfig.css('textColor')
     }"
 >
-    <p
-        id="date"
-        [ngStyle]="{
-            color: styleConfig.css('secondaryTextColor')
-        }"
+    <div
+        id="date-container"
+    >
+        <p
+            id="group-title"
+            *ngIf="groupId !== undefined"
+        >{{ ReportGroupId.title[groupId] }}</p>
+        <p
+            id="date-spacer"
+            *ngIf="groupId !== undefined"
+        >|</p>
+        <p
+            id="date"
+            [ngStyle]="{
+                color: styleConfig.css('secondaryTextColor')
+            }"
         >{{ Datum.fromIsoDate(report.createDate).description }}</p>
-    <p
-        #message
-        id="message"
-        [ngStyle]="{
-            color: styleConfig.css('textColor')
-        }"
-    ></p>
+    </div>
+    <div
+        id="message-container"
+    >
+        <div
+            id="bar"
+            [ngStyle]="{
+                backgroundColor: styleConfig.css(isRecent ? 'primaryColor' : 'secondaryTextColor')
+            }"
+        ></div>
+        <p
+            #message
+            id="message"
+            [ngStyle]="{
+                color: styleConfig.css('textColor')
+            }"
+        ></p>
+    </div>
 </div>

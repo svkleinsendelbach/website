@@ -14,7 +14,8 @@ import { ReportComponent } from './components/report/report.component';
         TextSectionModule
     ],
     exports: [
-        ReportsComponent
+        ReportsComponent,
+        ReportComponent
     ]
 })
 export class ReportsModule { }
