@@ -53,7 +53,7 @@
 
   .address-card
     $cover-height: 96px
-    $under-sheet-height: 80px
+    $under-sheet-height: 88px
     @include flex-column(center, center)
     flex: 1
     margin: 0 16px
@@ -66,8 +66,8 @@
       transform: translateY(0.25 * ($cover-height + $under-sheet-height))
       z-index: 902
       border-radius: 8px
-      cursor: pointer
       border: 1px solid
+      cursor: pointer
 
       .function, .name
         @include font-montserrat

@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { AngularFirePerformance } from '@angular/fire/compat/performance';
-import { InternalLink, InternalPath } from './types/InternalPath';
+import { InternalLink, InternalPath } from './types/internal-path';
 import { CookieService } from './modules/cookie-selector/services/cookie.service';
 import { FooterData } from './modules/footer/types/footer-data';
 import { HeaderData } from './modules/header/types/header-data';

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
+import { ReportGroupId } from 'src/app/modules/firebase-api/types/report';
 import { ContactItem } from 'src/app/modules/general-components/types/contact-item';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
@@ -16,6 +17,8 @@ export class EYouthPage {
     public readonly eventGroupIds: EventGroupId[] = [
         'football-youth/e-youth'
     ];
+
+    public readonly reportGroupId: ReportGroupId = 'football-youth/e-youth/game-report';
 
     public readonly teamId = '01L3BHPM88000000VV0AG811VV4PB99G';
 

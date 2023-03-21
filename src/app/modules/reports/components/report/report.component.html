@@ -1,0 +1,20 @@
+<div
+    id="report"
+    [ngStyle]="{
+        borderColor: styleConfig.css('textColor')
+    }"
+>
+    <p
+        id="date"
+        [ngStyle]="{
+            color: styleConfig.css('secondaryTextColor')
+        }"
+        >{{ Datum.fromIsoDate(report.createDate).description }}</p>
+    <p
+        #message
+        id="message"
+        [ngStyle]="{
+            color: styleConfig.css('textColor')
+        }"
+    ></p>
+</div>

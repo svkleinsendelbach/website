@@ -1,0 +1,89 @@
+<authentication-check
+  [authenticationTypes]="['editReports']"
+  [logInPageLink]="logInPageLink"
+>
+  <div
+    id="back-btn-container"
+  >
+    <a
+      id="back-button"
+      title="Zurück"
+      href="{{ mainEditingPageLink.link }}"
+      [ngStyle]="{
+        color: styleConfig.css('textColor'),
+        backgroundColor: styleConfig.css('backgroundColor')
+      }"
+    >Zurück</a>
+  </div>
+  <text-section
+    [title]="'Berichte bearbeiten'"
+  >
+    <p
+      id="add-report"
+      (click)="$event.preventDefault(); $event.stopPropagation(); addNewReport()"
+      [ngStyle]="{
+        color: styleConfig.css('primaryColor'),
+        backgroundColor: styleConfig.css('backgroundColor'),
+        borderColor: styleConfig.css('textColor')
+      }"
+    >Neuen Bericht hinzufügen</p>
+    <p
+      *ngIf="reportGroups === undefined"
+      class="text margin-top-large"
+      [ngStyle]="{
+        color: styleConfig.css('secondaryTextColor')
+      }"
+    >Berichte werden geladen</p>
+    <div
+      *ngFor="let reportGroup of reportGroups"
+      class="report-group"
+      [ngClass]="deviceType.current"
+    >
+      <p
+        class="group-name"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >{{ reportGroupTitle[reportGroup.groupId] }}</p>
+      <div
+        *ngFor="let report of reportGroup.reports"
+        class="report"
+        [ngStyle]="{
+          backgroundColor: styleConfig.css('backgroundColor'),
+          borderColor: styleConfig.css('textColor')
+        }"
+      >
+        <div
+          class="title-container"
+        >
+          <p
+            class="date"
+            [ngStyle]="{
+              color: styleConfig.css('textColor')
+            }"
+          >{{ Datum.fromIsoDate(report.createDate).description }}</p>
+          <p
+            class="message"
+            [ngStyle]="{
+              color: styleConfig.css('secondaryTextColor')
+            }"
+          >{{ report.message }}</p>
+        </div>
+        <p
+          class="edit-button"
+          (click)="$event.preventDefault(); $event.stopPropagation(); editReport(reportGroup.groupId, report)"
+          [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+          }"
+        >Bearbeiten</p>
+        <p
+          class="delete-button"
+          (click)="$event.preventDefault(); $event.stopPropagation(); deleteReport(reportGroup.groupId, report.id)"
+          [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+          }"
+        >Löschen</p>
+      </div>
+    </div>
+  </text-section>
+</authentication-check>

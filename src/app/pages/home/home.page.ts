@@ -8,9 +8,10 @@ import { StyleConfigService } from 'src/app/services/style-config.service';
 import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faFutbol, faMap } from '@fortawesome/free-regular-svg-icons';
 import { faAddressCard, faChild, faInfo, faUserFriends } from '@fortawesome/free-solid-svg-icons';
-import { InternalLink } from 'src/app/types/InternalPath';
+import { InternalLink } from 'src/app/types/internal-path';
 import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
 import { Link } from 'src/app/types/link';
+import { ReportGroupId } from 'src/app/modules/firebase-api/types/report';
 
 @Component({
     selector: 'pages-home',
@@ -52,6 +53,8 @@ export class HomePage {
             [HomePage.homeLink.kontakt]
         ]
     };
+
+    public readonly reportGroupId: ReportGroupId = 'general';
 
     public readonly socialMediaData: SocialMediaData = {
         desktop: [

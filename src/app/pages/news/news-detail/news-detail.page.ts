@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { InternalLink } from 'src/app/types/InternalPath';
+import { InternalLink } from 'src/app/types/internal-path';
 
 @Component({
     selector: 'pages-news-detail',

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { lastValueFrom } from 'rxjs';
-import { InternalLink } from 'src/app/types/InternalPath';
+import { InternalLink } from 'src/app/types/internal-path';
 import { ErrorLevel } from 'src/app/modules/input-form/types/error-level';
 import { InputError } from 'src/app/modules/input-form/types/input-error';
 import { InputField } from 'src/app/modules/input-form/types/input-field';

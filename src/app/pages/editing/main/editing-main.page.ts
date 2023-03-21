@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Router } from '@angular/router';
-import { InternalLink } from 'src/app/types/InternalPath';
+import { InternalLink } from 'src/app/types/internal-path';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { FunctionType } from 'src/app/modules/firebase-api/types/function-type';
 import { UserAuthenticationGetAllUnauthenticatedFunctionType } from 'src/app/modules/firebase-api/function-types';

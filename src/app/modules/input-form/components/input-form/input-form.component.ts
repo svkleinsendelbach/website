@@ -11,7 +11,8 @@ import { InputForm } from '../../types/input-form';
     styleUrls: ['./input-form.component.sass']
 })
 export class InputFormComponent<ExtraStatus extends PropertyKey> {
-    @Input() public inputForm!: InputForm<Record<string, InputField<unknown>>, ExtraStatus>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    @Input() public inputForm!: InputForm<Record<string, InputField<any>>, ExtraStatus>;
 
     @Input() public submitButtonText!: string;
 

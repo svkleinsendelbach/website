@@ -1,0 +1,96 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100%
+
+#back-btn-container
+  @include flex-row(center, flex-start)
+  width: 100%
+
+  #back-button
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    cursor: pointer
+    text-align: center
+    border: 1px solid
+    border-radius: 5px
+    padding: 5px 15px
+    margin-top: 20px
+    margin-left: 20px
+    text-decoration: none
+
+#add-report
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    cursor: pointer
+    text-align: center
+    border: 1px solid
+    border-radius: 5px
+    padding: 5px 15px
+    margin-bottom: 25px
+
+.report-group
+  @include flex-column(flex-start, center)
+  width: 100%
+  margin-bottom: 40px
+
+  &:last-child
+    margin-bottom: 0
+
+  .group-name
+    @include font-montserrat
+    @include font-size('large')
+    @include font-weight('small')
+    width: 100%
+    text-align: left
+    margin-bottom: 15px
+
+  .report
+    @include flex-row(center, center)
+    width: 95%
+    border: 1px solid
+    border-bottom: none
+    padding: 5px
+
+    &:nth-child(2)
+      border-radius: 5px 5px 0 0
+
+    &:last-child
+      border-bottom: 1px solid
+      border-radius: 0 0 5px 5px
+
+    &:nth-child(2):last-child
+      border-radius: 5px
+
+    .title-container
+      @include flex-column(center, flex-start)
+      margin-left: 10px
+      width: 60%
+
+      .date
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('small')
+        margin-bottom: 2px
+
+      .message
+        @include font-montserrat
+        @include font-size('small')
+        @include font-weight('small')
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+        width: 100%
+
+    .edit-button, .delete-button
+      @include flex-row(center, center)
+      @include font-montserrat
+      @include font-size('normal')
+      @include font-weight('small')
+      cursor: pointer
+      width: 20%
+      margin: 10px

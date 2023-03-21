@@ -104,5 +104,26 @@
         }"
       >Nachrichten bearbeiten</p>
     </div>
+    <div
+      class="edit-container"
+      [ngClass]="deviceType.current"
+    >
+      <a
+        href="{{ allInternalLinks['bearbeiten/berichte'].link }}"
+        title="{{ allInternalLinks['bearbeiten/berichte'].title }}"
+        class="button"
+        [ngStyle]="{
+          color: styleConfig.css('primaryColor'),
+          backgroundColor: styleConfig.css('backgroundColor'),
+          borderColor: styleConfig.css('textColor')
+        }"
+      >Bearbeiten</a>
+      <p
+        class="title"
+        [ngStyle]="{
+          color: styleConfig.css('secondaryTextColor')
+        }"
+      >Berichte bearbeiten</p>
+    </div>
   </text-section>
 </authentication-check>

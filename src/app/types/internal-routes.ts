@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { InternalPath } from './InternalPath';
+import { InternalPath } from './internal-path';
 import { Type } from '@angular/core';
 
 import { HomePage } from '../pages/home/home.page';
@@ -30,6 +30,8 @@ import { EditingEventsPage } from '../pages/editing/events/editing-events.page';
 import { EditEventPage } from '../pages/editing/events/edit-event/edit-event.page';
 import { EditingNewsPage } from '../pages/editing/news/editing-news.page';
 import { EditNewsPage } from '../pages/editing/news/edit-news/edit-news.page';
+import { EditingReportsPage } from '../pages/editing/reports/editing-reports.page';
+import { EditReportPage } from '../pages/editing/reports/edit-report/edit-report.page';
 
 const associatedRoute: Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, Type<unknown>> = {
     'home': HomePage,
@@ -59,7 +61,9 @@ const associatedRoute: Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, Type
     'bearbeiten/termine': EditingEventsPage,
     'bearbeiten/termine/bearbeiten': EditEventPage,
     'bearbeiten/nachrichten': EditingNewsPage,
-    'bearbeiten/nachrichten/bearbeiten': EditNewsPage
+    'bearbeiten/nachrichten/bearbeiten': EditNewsPage,
+    'bearbeiten/berichte': EditingReportsPage,
+    'bearbeiten/berichte/bearbeiten': EditReportPage
 };
 
 export const internalRoutes: Route[] = (() => {

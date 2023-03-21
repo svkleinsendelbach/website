@@ -1,7 +1,7 @@
 import { OnInit, Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { InternalLink } from 'src/app/types/InternalPath';
+import { InternalLink } from 'src/app/types/internal-path';
 import { ErrorLevel } from 'src/app/modules/input-form/types/error-level';
 import { InputError } from 'src/app/modules/input-form/types/input-error';
 import { InputField } from 'src/app/modules/input-form/types/input-field';

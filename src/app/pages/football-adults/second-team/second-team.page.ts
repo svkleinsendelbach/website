@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { AnpfiffInfoTeamParameters } from 'src/app/modules/firebase-api/types/anpfiff-info-team-parameters';
 import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
+import { ReportGroupId } from 'src/app/modules/firebase-api/types/report';
 import { ContactItem } from 'src/app/modules/general-components/types/contact-item';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
@@ -17,6 +18,8 @@ export class SecondTeamPage {
     public readonly eventGroupIds: EventGroupId[] = [
         'football-adults/second-team'
     ];
+
+    public readonly reportGroupId: ReportGroupId = 'football-adults/second-team/game-report';
 
     public readonly teamId = '02EO9BK2JS000000VS5489B2VSAS84KM';
 

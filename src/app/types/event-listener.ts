@@ -12,7 +12,8 @@ export class EventListener<T> {
     }
 
     public remove(key: string | number) {
-        delete this.listeners[key];
+        if (key in this.listeners)
+            delete this.listeners[key];
     }
 
     public emitValue(value: T) {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { InternalPath } from 'src/app/types/InternalPath';
+import { InternalPath } from 'src/app/types/internal-path';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { EventGroupId } from 'src/app/modules/firebase-api/types/event';

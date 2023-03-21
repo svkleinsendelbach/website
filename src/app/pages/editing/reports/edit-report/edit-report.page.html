@@ -1,0 +1,54 @@
+<authentication-check
+  [authenticationTypes]="['editEvents']"
+  [logInPageLink]="logInPageLink"
+>
+  <div
+    id="back-btn-container"
+  >
+    <a
+      id="back-button"
+      title="Zurück"
+      href="{{ editReportsLink.link }}"
+      [ngStyle]="{
+        color: styleConfig.css('textColor'),
+        backgroundColor: styleConfig.css('backgroundColor')
+      }"
+    >Zurück</a>
+  </div>
+  <text-section
+    [title]="previousReport === undefined ? 'Bericht hinzufügen' : 'Bericht bearbeiten'"
+  >
+    <input-form
+      [inputForm]="inputForm"
+      [submitButtonText]="previousReport === undefined ? 'Hinzufügen' : 'Speichern'"
+      (submitButtonClicked)="saveReport()"
+    >
+      <input-field-select
+        [label]="'Zugehöriges Thema'"
+        [selectOptions]="groupIdSelectOptions"
+        [inputField]="inputForm.field('groupId')"
+      ></input-field-select>
+      <input-field-textarea
+        [label]="'Nachricht'"
+        [inputField]="inputForm.field('message')"
+      ></input-field-textarea>
+        <div
+            id="preview-message"
+        >
+            <p
+                id="preview-text"
+                [ngStyle]="{
+                    color: styleConfig.css('textColor')
+                }"
+            >Vorschau:</p>
+            <div
+                #messagePreview
+                id="message-preview"
+                [ngStyle]="{
+                    color: styleConfig.css('textColor')
+                }"
+            ></div>
+        </div>
+    </input-form>
+  </text-section>
+</authentication-check>

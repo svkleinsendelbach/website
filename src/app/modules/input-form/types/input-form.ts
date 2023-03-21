@@ -3,7 +3,8 @@ import { InputError } from './input-error';
 import { ValidationResult } from './validation-result';
 
 export class InputForm<
-    InputFields extends Record<string, InputField<unknown>>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    InputFields extends Record<string, InputField<any>>,
     ExtraStatus extends PropertyKey = never
 > {
     public status: 'valid' | 'invalidInput' | ExtraStatus = 'valid';

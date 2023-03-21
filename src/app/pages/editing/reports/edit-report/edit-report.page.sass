@@ -1,0 +1,56 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+
+:host
+  @include flex-column(flex-start, center)
+  width: 100%
+
+#back-btn-container
+  @include flex-row(center, flex-start)
+  width: 100%
+
+  #back-button
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    cursor: pointer
+    text-align: center
+    border: 1px solid
+    border-radius: 5px
+    padding: 5px 15px
+    margin-top: 20px
+    margin-left: 20px
+    text-decoration: none
+
+#preview-message
+    @include flex-column(center, flex-start)
+    width: 100%
+    margin:
+        top: 10px
+        bottom: 20px
+
+    #preview-text
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('small')
+        margin-bottom: 10px
+
+    #message-preview
+        @include font-montserrat
+        @include font-size('medium')
+        @include font-weight('small')
+        text-align: justify
+
+        &::ng-deep
+            *
+                display: inline-block
+
+            a
+                text-decoration: none
+                cursor: pointer
+
+            .italic
+                font-style: italic
+
+            .strong
+                @include font-weight('medium')

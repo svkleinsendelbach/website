@@ -25,6 +25,7 @@ import { GeneralComponentsModule } from './modules/general-components/general-co
 import { HeaderModule } from './modules/header/header.module';
 import { InputFormModule } from './modules/input-form/input-form.module';
 import { NewsModule } from './modules/news/news.module';
+import { ReportsModule } from './modules/reports/reports.module';
 import { TextSectionModule } from './modules/text-section/text-section.module';
 
 // Components
@@ -67,6 +68,8 @@ import { EditingEventsPage } from './pages/editing/events/editing-events.page';
 import { EditEventPage } from './pages/editing/events/edit-event/edit-event.page';
 import { EditingNewsPage } from './pages/editing/news/editing-news.page';
 import { EditNewsPage } from './pages/editing/news/edit-news/edit-news.page';
+import { EditingReportsPage } from './pages/editing/reports/editing-reports.page';
+import { EditReportPage } from './pages/editing/reports/edit-report/edit-report.page';
 
 @NgModule({
     declarations: [
@@ -106,7 +109,9 @@ import { EditNewsPage } from './pages/editing/news/edit-news/edit-news.page';
         EditingEventsPage,
         EditEventPage,
         EditingNewsPage,
-        EditNewsPage
+        EditNewsPage,
+        EditingReportsPage,
+        EditReportPage
     ],
     imports: [
         BrowserModule,
@@ -129,7 +134,8 @@ import { EditNewsPage } from './pages/editing/news/edit-news/edit-news.page';
         EventsModule,
         AuthenticationModule,
         GeneralComponentsModule,
-        NewsModule
+        NewsModule,
+        ReportsModule
     ],
     providers: [
         ScreenTrackingService,

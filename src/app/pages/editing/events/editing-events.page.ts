@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { SharedDataService } from 'src/app/services/shared-data.service';
-import { InternalLink } from 'src/app/types/InternalPath';
+import { InternalLink } from 'src/app/types/internal-path';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { Event, EventGroup, EventGroupId } from 'src/app/modules/firebase-api/types/event';
 

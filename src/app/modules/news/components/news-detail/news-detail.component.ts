@@ -8,7 +8,7 @@ import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Datum } from 'src/app/types/datum';
 import { FetchState } from 'src/app/types/fetch-state';
-import { InternalLink } from 'src/app/types/InternalPath';
+import { InternalLink } from 'src/app/types/internal-path';
 
 @Component({
     selector: 'news-detail',

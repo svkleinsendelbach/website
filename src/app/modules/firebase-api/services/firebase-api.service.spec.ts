@@ -107,7 +107,7 @@ describe('ApiService', () => {
                 title: 'title2'
             }
         });
-        const databaseValue =await database.child('events').child('general').child(eventId.guidString).get('decrypt');
+        const databaseValue = await database.child('events').child('general').child(eventId.guidString).get('decrypt');
         expect(databaseValue).toEqual({
             date: date.toISOString(),
             title: 'title2'

@@ -73,7 +73,8 @@
         "no-inner-declarations": "off",
         "@typescript-eslint/space-before-function-paren": "off",
         "@angular-eslint/component-class-suffix": "off",
-        "space-infix-ops": "error"
+        "space-infix-ops": "error",
+        "@typescript-eslint/no-inferrable-types": "off"
       }
     }
   ]
