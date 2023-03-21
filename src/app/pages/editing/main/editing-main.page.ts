@@ -34,7 +34,7 @@ export class EditingMainPage {
 
     private async getUnauthenticatedUsers() {
         this.unauthenticatedUsers = await this.firebaseApiService.function('userAuthentication').function('getAllUnauthenticated').call({
-            authenticationTypes: ['authenticateUser', 'editEvents', 'editNews', 'editReports', 'notification']
+            authenticationTypes: ['authenticateUser', 'editEvents', 'editReports', 'notification']
         });
     }
 
@@ -46,7 +46,7 @@ export class EditingMainPage {
     public async acceptDeclineUser(action: 'accept' | 'decline', hashedUserId: string) {
         this.unauthenticatedUsers = this.unauthenticatedUsers?.filter(user => user.hashedUserId !== hashedUserId);
         await this.firebaseApiService.function('userAuthentication').function('acceptDecline').call({
-            authenticationTypes: ['authenticateUser', 'editEvents', 'editNews', 'editReports', 'notification'],
+            authenticationTypes: ['authenticateUser', 'editEvents', 'editReports', 'notification'],
             action: action,
             hashedUserId: hashedUserId
         });

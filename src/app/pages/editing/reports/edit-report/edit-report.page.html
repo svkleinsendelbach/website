@@ -28,6 +28,42 @@
         [selectOptions]="groupIdSelectOptions"
         [inputField]="inputForm.field('groupId')"
       ></input-field-select>
+      <input-field-text
+        [label]="'Titel'"
+        [inputField]="inputForm.field('title')"
+      ></input-field-text>
+      <p
+      id="input-field-label"
+        [ngStyle]="{
+          color: styleConfig.css('textColor')
+        }"
+      >Bild (optional):</p>
+      <img
+        *ngIf="imageUrl !== undefined"
+        src="{{ imageUrl }}"
+        title="Bild"
+        id="image"
+        [ngStyle]="{
+          borderColor: styleConfig.css('textColor')
+        }"
+      >
+      <input
+        type="file"
+        accept="image/*"
+        (change)="$event.preventDefault(); $event.stopPropagation(); uploadImage($event)"
+        id="image-selector"
+        #imageSelector
+      >
+      <div
+        id="custom-image-selector"
+        (click)="$event.preventDefault(); $event.stopPropagation(); imageSelector.click()"
+        [ngStyle]="{
+          color: styleConfig.css('textColor'),
+          backgroundColor: styleConfig.css('backgroundColor'),
+          borderColor: styleConfig.css(inputForm.status === 'invalidInput' && imageUrl === undefined ? 'formErrorStatusColor' : 'textColor')
+        }"
+      >{{ imageUrl === undefined ? 'Bild auswählen' : 'Neues Bild auswählen' }}</div>
+      <div id="spacer"></div>
       <input-field-textarea
         [label]="'Nachricht'"
         [inputField]="inputForm.field('message')"

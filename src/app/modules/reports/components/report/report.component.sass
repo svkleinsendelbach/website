@@ -26,7 +26,7 @@
             margin: 0 10px
 
     #message-container
-        @include flex-row(center, flex-start)
+        @include flex-row(flex-start, flex-start)
         width: 100%
         overflow: hidden
 
@@ -36,26 +36,42 @@
             margin: -99999px 0
             margin-right: 10px
 
-        #message
-            @include font-montserrat
-            @include font-size('medium')
-            @include font-weight('small')
-            text-align: justify
+        #image
+            border: solid 1px
+            border-radius: 4px
+            height: 200px
+            width: 200px
+            object-fit: cover
+            margin-right: 15px
+
+        #title-message
+            @include flex-column(flex-start, flex-start)
             width: calc(100% - 15px)
 
-            &::ng-deep
-                *
-                    display: inline-block
+            #title
+                @include font-montserrat
+                @include font-size('large')
+                @include font-weight('medium')
 
-                a
-                    text-decoration: none
-                    cursor: pointer
+            #message
+                @include font-montserrat
+                @include font-size('medium')
+                @include font-weight('small')
+                text-align: justify
 
-                .italic
-                    font-style: italic
+                &::ng-deep
+                    *
+                        display: inline-block
 
-                .strong
-                    @include font-weight('medium')
+                    a
+                        text-decoration: none
+                        cursor: pointer
+
+                    .italic
+                        font-style: italic
+
+                    .strong
+                        @include font-weight('medium')
 
 :host:nth-last-child(1) #report
     border-bottom: none

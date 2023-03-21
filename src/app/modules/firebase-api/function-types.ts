@@ -3,7 +3,6 @@ import { EditType } from './types/edit-type';
 import { Event, EventGroup, EventGroupId } from './types/event';
 import { FunctionType } from './types/function-type';
 import { GameInfo } from './types/game-info';
-import { News } from './types/news';
 import { NotifactionPayload, NotificationType } from './types/notification';
 import { Report, ReportGroupId } from './types/report';
 import { SearchEntityType, TypedSearchEntity } from './types/search-entitiy';
@@ -27,29 +26,6 @@ export type EventGetFunctionType = FunctionType<{
 export type GameInfoGetFunctionType = FunctionType<{
     gameId: string;
 }, GameInfo>;
-
-export type NewsDisableFunctionType = FunctionType<{
-    editType: 'disable' | 'enable';
-    newsId: string;
-}, void>;
-
-export type NewsEditFunctionType = FunctionType<{
-    editType: EditType;
-    newsId: string;
-    news: Omit<News.Flatten, 'id'> | undefined;
-}, string>;
-
-export type NewsGetFunctionType = FunctionType< {
-    numberNews: number | undefined;
-    alsoDisabled: boolean;
-}, {
-    news: News.Flatten[];
-    hasMore: boolean;
-}>;
-
-export type NewsGetSingleFunctionType = FunctionType<{
-    newsId: string;
-}, News.Flatten>;
 
 export type NotificationPushFunctionType = FunctionType<{
     notificationType: NotificationType;

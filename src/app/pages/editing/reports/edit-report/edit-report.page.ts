@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { FileStorageService } from 'src/app/modules/firebase-api/services/file-storage.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { Guid } from 'src/app/modules/firebase-api/types/guid';
 import { Report, ReportGroupId } from 'src/app/modules/firebase-api/types/report';
@@ -16,6 +17,7 @@ import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { InternalLink } from 'src/app/types/internal-path';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'pages-edit-report',
@@ -36,14 +38,19 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
             Validator.required('Ein zugehöiges Thema ist erforderlich.'),
             Validator.isOneOf(ReportGroupId.all, 'Das zugehörige Thema ist ungültig.')
         ]),
+        title: new InputField<string>('', [
+            Validator.required('Der Titel ist erfordelich.')
+        ]),
         message: new InputField<string>('', [
-            Validator.required('Die Nachricht is erfordelich.')
+            Validator.required('Die Nachricht ist erfordelich.')
         ]),
     }, {
         invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
         loading: new InputError('Bericht wird gespeichert.', ErrorLevel.Info),
         failed: new InputError('Bericht konnte nicht gespeichert werden.')
     });
+
+    public imageUrl?: string;
 
     @ViewChild('messagePreview') public messagePreviewElement?: ElementRef<HTMLElement>;
 
@@ -52,6 +59,7 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
         public readonly deviceType: DeviceTypeService,
         public readonly styleConfig: StyleConfigService,
         private readonly firebaseApiService: FirebaseApiService,
+        private readonly fileStorage: FileStorageService,
         private readonly sharedData: SharedDataService<{
             editReport: {
                 groupId: ReportGroupId;
@@ -86,7 +94,9 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
         });
         if (this.previousReport !== undefined) {
             this.inputForm.field('groupId').initialValue = this.previousReport.groupId;
+            this.inputForm.field('title').initialValue = this.previousReport.report.title;
             this.inputForm.field('message').initialValue = this.previousReport.report.message;
+            this.imageUrl = this.previousReport.report.imageUrl;
         }
     }
 
@@ -115,6 +125,15 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
+    public async uploadImage(event: Event) {
+        const file = (event.target as HTMLInputElement).files?.[0];
+        if (file === undefined) return;
+        const fileExtension = /.[^/.]+$/.exec(file.name)?.[0];
+        if (fileExtension === undefined) return;
+        const filePath = `${environment.databaseType}/uploads/images/${Guid.newGuid().guidString}${fileExtension}`;
+        this.imageUrl = await this.fileStorage.upload(file, filePath);
+    }
+
     public async saveReport() {
         if (this.inputForm.status === 'loading')
             return;
@@ -131,7 +150,9 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
             previousGroupId: this.previousReport?.groupId,
             reportId: reportId,
             report: {
+                title: this.inputForm.field('title').value,
                 message: this.inputForm.field('message').value,
+                imageUrl: this.imageUrl,
                 createDate: createDate
             }
         }).catch(reason => {

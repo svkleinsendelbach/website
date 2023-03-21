@@ -1,5 +1,5 @@
 <text-section
-  [title]="'Abteilung Herrenfußball'"
+  [title]="'Abteilung Jugendfußball'"
 >
   <p
     class="text block"
@@ -40,6 +40,12 @@
 <events
   [groupIds]="eventGroupIds"
 ></events>
+
+<reports
+    [isGameReport]="false"
+    [groupId]="reportGroupId"
+    [maxListCount]="5"
+></reports>
 
 <contact
   [contactData]="contactData"

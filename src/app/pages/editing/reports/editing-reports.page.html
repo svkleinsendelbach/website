@@ -57,11 +57,11 @@
           class="title-container"
         >
           <p
-            class="date"
+            class="title"
             [ngStyle]="{
               color: styleConfig.css('textColor')
             }"
-          >{{ Datum.fromIsoDate(report.createDate).description }}</p>
+          >{{ report.title }} | {{ Datum.fromIsoDate(report.createDate).description }}</p>
           <p
             class="message"
             [ngStyle]="{

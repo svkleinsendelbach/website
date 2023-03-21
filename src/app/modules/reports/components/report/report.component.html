@@ -31,12 +31,40 @@
                 backgroundColor: styleConfig.css(isRecent ? 'primaryColor' : 'secondaryTextColor')
             }"
         ></div>
-        <p
-            #message
-            id="message"
+        <img
+            id="image"
+            *ngIf="report.imageUrl !== undefined && !deviceType.isMobile"
+            src="{{ report.imageUrl }}"
+            title="{{ report.title }}"
             [ngStyle]="{
-                color: styleConfig.css('textColor')
+                borderColor: styleConfig.css('textColor')
             }"
-        ></p>
+        >
+        <div
+            id="title-message"
+        >
+            <img
+                id="image"
+                *ngIf="report.imageUrl !== undefined && deviceType.isMobile"
+                src="{{ report.imageUrl }}"
+                title="{{ report.title }}"
+                [ngStyle]="{
+                    borderColor: styleConfig.css('textColor')
+                }"
+            >
+            <p
+                id="title"
+                [ngStyle]="{
+                    color: styleConfig.css('primaryColor')
+                }"
+            >{{ report.title }}</p>
+            <p
+                #message
+                id="message"
+                [ngStyle]="{
+                    color: styleConfig.css('textColor')
+                }"
+            ></p>
+        </div>
     </div>
 </div>

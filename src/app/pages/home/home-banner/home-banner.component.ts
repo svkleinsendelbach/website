@@ -38,7 +38,7 @@ export class HomeBannerComponent implements OnInit {
             } else {
                 this.setPage(1);
             }
-        }, 5000);
+        }, 10000);
     }
 
     public handleNavBarClick(page: number) {

@@ -1,5 +1,5 @@
 <authentication-check
-  [authenticationTypes]="['editEvents', 'editNews', 'editReports', 'authenticateUser', 'notification']"
+  [authenticationTypes]="['editEvents', 'editReports', 'authenticateUser', 'notification']"
   [logInPageLink]="logInPageLink"
 >
   <div
@@ -82,27 +82,6 @@
           color: styleConfig.css('secondaryTextColor')
         }"
       >Kommende Termine bearbeiten</p>
-    </div>
-    <div
-      class="edit-container"
-      [ngClass]="deviceType.current"
-    >
-      <a
-        href="{{ allInternalLinks['bearbeiten/nachrichten'].link }}"
-        title="{{ allInternalLinks['bearbeiten/nachrichten'].title }}"
-        class="button"
-        [ngStyle]="{
-          color: styleConfig.css('primaryColor'),
-          backgroundColor: styleConfig.css('backgroundColor'),
-          borderColor: styleConfig.css('textColor')
-        }"
-      >Bearbeiten</a>
-      <p
-        class="title"
-        [ngStyle]="{
-          color: styleConfig.css('secondaryTextColor')
-        }"
-      >Nachrichten bearbeiten</p>
     </div>
     <div
       class="edit-container"

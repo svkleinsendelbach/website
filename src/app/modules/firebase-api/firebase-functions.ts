@@ -2,10 +2,6 @@ import {
     VerifyRecaptchaFunctionType,
     DeleteAllDataFunctionType,
     SearchEntityFunctionType,
-    NewsGetFunctionType,
-    NewsEditFunctionType,
-    NewsDisableFunctionType,
-    NewsGetSingleFunctionType,
     EventGetFunctionType,
     EventEditFunctionType,
     ReportGetAllFunctionType,
@@ -26,12 +22,6 @@ export type FirebaseFunctions = {
     verifyRecaptcha: VerifyRecaptchaFunctionType;
     deleteAllData: DeleteAllDataFunctionType;
     searchEntity: SearchEntityFunctionType;
-    news: {
-        get: NewsGetFunctionType;
-        edit: NewsEditFunctionType;
-        disable: NewsDisableFunctionType;
-        getSingle: NewsGetSingleFunctionType;
-    };
     event: {
         get: EventGetFunctionType;
         edit: EventEditFunctionType;

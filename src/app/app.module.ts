@@ -24,7 +24,6 @@ import { FooterModule } from './modules/footer/footer.module';
 import { GeneralComponentsModule } from './modules/general-components/general-components.module';
 import { HeaderModule } from './modules/header/header.module';
 import { InputFormModule } from './modules/input-form/input-form.module';
-import { NewsModule } from './modules/news/news.module';
 import { ReportsModule } from './modules/reports/reports.module';
 import { TextSectionModule } from './modules/text-section/text-section.module';
 
@@ -59,16 +58,12 @@ import { DancingPage } from './pages/dancing/dancing.page';
 import { DrivePage } from './pages/drive/drive.page';
 import { ContactPage } from './pages/contact/contact.page';
 import { ImprintPage } from './pages/imprint/imprint.page';
-import { NewsDetailPage } from './pages/news/news-detail/news-detail.page';
-import { AllNewsPage } from './pages/news/all-news/all-news.page';
 import { AllReportsPage } from './pages/reports/all-reports/all-reports.page';
 import { GameDetailPage } from './pages/game-detail/game-detail.page';
 import { EditingMainPage } from './pages/editing/main/editing-main.page';
 import { LoginPage } from './pages/editing/login/login.page';
 import { EditingEventsPage } from './pages/editing/events/editing-events.page';
 import { EditEventPage } from './pages/editing/events/edit-event/edit-event.page';
-import { EditingNewsPage } from './pages/editing/news/editing-news.page';
-import { EditNewsPage } from './pages/editing/news/edit-news/edit-news.page';
 import { EditingReportsPage } from './pages/editing/reports/editing-reports.page';
 import { EditReportPage } from './pages/editing/reports/edit-report/edit-report.page';
 
@@ -102,16 +97,12 @@ import { EditReportPage } from './pages/editing/reports/edit-report/edit-report.
         DrivePage,
         ContactPage,
         ImprintPage,
-        NewsDetailPage,
-        AllNewsPage,
         AllReportsPage,
         GameDetailPage,
         EditingMainPage,
         LoginPage,
         EditingEventsPage,
         EditEventPage,
-        EditingNewsPage,
-        EditNewsPage,
         EditingReportsPage,
         EditReportPage
     ],
@@ -136,7 +127,6 @@ import { EditReportPage } from './pages/editing/reports/edit-report/edit-report.
         EventsModule,
         AuthenticationModule,
         GeneralComponentsModule,
-        NewsModule,
         ReportsModule
     ],
     providers: [

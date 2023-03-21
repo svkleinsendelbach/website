@@ -1,6 +1,5 @@
 import { AnpfiffInfoTeamParameters } from './types/anpfiff-info-team-parameters';
 import { Event, EventGroupId } from './types/event';
-import { News } from './types/news';
 import { NotificationType } from './types/notification';
 import { Report, ReportGroupId } from './types/report';
 import { CryptedScheme, DatabaseSchemeType } from './types/scheme-type';
@@ -14,9 +13,6 @@ export type DatabaseScheme = DatabaseSchemeType<{
         [Key in EventGroupId]: {
             [Key in string]: CryptedScheme<Omit<Event.Flatten, 'id'>>
         }
-    };
-    news: {
-        [Key in string]: CryptedScheme<Omit<News.Flatten, 'id'>>
     };
     reports: {
         [Key in ReportGroupId]: {

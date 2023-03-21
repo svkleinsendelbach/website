@@ -7,6 +7,7 @@ import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
 import { Link } from 'src/app/types/link';
 import { ContactItem } from 'src/app/modules/general-components/types/contact-item';
 import { LinkData } from 'src/app/modules/general-components/types/link-data';
+import { ReportGroupId } from 'src/app/modules/firebase-api/types/report';
 
 @Component({
     selector: 'pages-football-adults-general',
@@ -44,6 +45,8 @@ export class FootballAdultsGeneralPage {
         'football-adults/second-team',
         'football-adults/ah-team',
     ];
+
+    public readonly reportGroupId: ReportGroupId = 'football-youth/general';
 
     public readonly contactData: ContactItem[] = [
         {

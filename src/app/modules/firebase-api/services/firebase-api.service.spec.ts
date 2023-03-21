@@ -9,7 +9,6 @@ import { DatabaseManagerTestService } from './database-manager.service';
 import { UserAuthenticationType } from '../types/user-authentication';
 import { Crypter } from '../crypter/Crypter';
 import { Guid } from '../types/guid';
-import { News } from '../types/news';
 import { UserAuthenticationGetAllUnauthenticatedFunction } from '../function-types';
 
 describe('ApiService', () => {
@@ -41,7 +40,7 @@ describe('ApiService', () => {
         expect(credential.user).not.toBeNull();
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const hashedUserId = Crypter.sha512(credential.user!.uid);
-        const authenticationTypes: UserAuthenticationType[] = ['editEvents', 'editNews', 'editReports', 'authenticateUser', 'notification'];
+        const authenticationTypes: UserAuthenticationType[] = ['editEvents', 'editReports', 'authenticateUser', 'notification'];
         for (const authenticationType of authenticationTypes) {
             await database.child('users').child('authentication').child(authenticationType).child(hashedUserId).set({
                 state: 'authenticated',
@@ -66,6 +65,7 @@ describe('ApiService', () => {
         await firebaseApi.function('event').function('edit').call({
             editType: 'remove',
             groupId: 'general',
+            previousGroupId: undefined,
             eventId: eventId.guidString,
             event: undefined
         });
@@ -78,6 +78,7 @@ describe('ApiService', () => {
         await firebaseApi.function('event').function('edit').call({
             editType: 'add',
             groupId: 'general',
+            previousGroupId: undefined,
             eventId: eventId.guidString,
             event: {
                 date: date.toISOString(),
@@ -101,6 +102,7 @@ describe('ApiService', () => {
         await firebaseApi.function('event').function('edit').call({
             editType: 'change',
             groupId: 'general',
+            previousGroupId: 'general',
             eventId: eventId.guidString,
             event: {
                 date: date.toISOString(),
@@ -171,149 +173,6 @@ describe('ApiService', () => {
         ]);
     });
 
-    async function addNews(number: number, disabled: boolean): Promise<News.Flatten> {
-        const news = {
-            title: `title${number}`,
-            subtitle: `subtitle${number}`,
-            date: new Date(new Date().getTime() + number * 100000).toISOString(),
-            shortDescription: `shortDescription${number}`,
-            newsUrl: `newsUrl${number}`,
-            disabled: disabled,
-            thumbnailUrl: `tumbnailUrl${number}`
-        };
-        await database.child('news').child(`news_id_${number}`).set(news, 'encrypt');
-        return {
-            id: `news_id_${number}`,
-            ...news
-        };
-    }
-
-    it('enable news', async () => {
-        const news = await addNews(0, true);
-        await firebaseApi.function('news').function('disable').call({
-            editType: 'enable',
-            newsId: news.id
-        });
-        expect((await database.child('news').child(news.id).get('decrypt')).disabled).toBeFalse();
-    });
-
-    it('disable news', async () => {
-        const news = await addNews(0, false);
-        await firebaseApi.function('news').function('disable').call({
-            editType: 'disable',
-            newsId: news.id
-        });
-        expect((await database.child('news').child(news.id).get('decrypt')).disabled).toBeTrue();
-    });
-
-    it('remove news', async() => {
-        const news = await addNews(0, false);
-        const result = await firebaseApi.function('news').function('edit').call({
-            editType: 'remove',
-            newsId: news.id,
-            news: undefined
-        });
-        expect(result).toEqual(news.id);
-        expect(await database.child('news').child(news.id).exists()).toBeFalse();
-    });
-
-    it('add news', async() => {
-        const date = new Date();
-        const result = await firebaseApi.function('news').function('edit').call({
-            editType: 'add',
-            newsId: 'news_id',
-            news: {
-                date: date.toISOString(),
-                title: 'title',
-                newsUrl: 'newsUrls',
-                disabled: true,
-                thumbnailUrl: 'thumbnailUrl'
-            }
-        });
-        expect(result).toEqual('news_id');
-        const databaseValue = await database.child('news').child('news_id').get('decrypt');
-        expect(databaseValue).toEqual({
-            date: date.toISOString(),
-            title: 'title',
-            newsUrl: 'newsUrls',
-            disabled: true,
-            thumbnailUrl: 'thumbnailUrl'
-        });
-    });
-
-    it('update news', async() => {
-        const news = await addNews(1, true);
-        const date = new Date();
-        const result = await firebaseApi.function('news').function('edit').call({
-            editType: 'change',
-            newsId: news.id,
-            news: {
-                date: date.toISOString(),
-                title: 'title2',
-                newsUrl: 'newsUrls2',
-                disabled: false,
-                thumbnailUrl: 'thumbnailUrl2'
-            }
-        });
-        expect(result).toEqual('news_id_1');
-        const databaseValue = await database.child('news').child(news.id).get('decrypt');
-        expect(databaseValue).toEqual({
-            date: date.toISOString(),
-            title: 'title2',
-            newsUrl: 'newsUrls2',
-            disabled: false,
-            thumbnailUrl: 'thumbnailUrl2'
-        });
-    });
-
-    it('get news', async() => {
-        const news3 = await addNews(3, false);
-        const news4 = await addNews(4, false);
-        await addNews(5, true);
-        const news1 = await addNews(1, false);
-        await addNews(2, true);
-        const result1 = await firebaseApi.function('news').function('get').call({
-            numberNews: undefined,
-            alsoDisabled: false
-        });
-        expect(result1).toEqual({
-            hasMore: false,
-            news: [news4, news3, news1]
-        });
-        const result2 = await firebaseApi.function('news').function('get').call({
-            numberNews: 5,
-            alsoDisabled: false
-        });
-        expect(result2).toEqual({
-            hasMore: false,
-            news: [news4, news3, news1]
-        });
-        const result3 = await firebaseApi.function('news').function('get').call({
-            numberNews: 3,
-            alsoDisabled: false
-        });
-        expect(result3).toEqual({
-            hasMore: false,
-            news: [news4, news3, news1]
-        });
-        const result4 = await firebaseApi.function('news').function('get').call({
-            numberNews: 1,
-            alsoDisabled: false
-        });
-        expect(result4).toEqual({
-            hasMore: true,
-            news: [news4]
-        });
-    });
-
-    it('get single news', async() => {
-        const news = await addNews(1, false);
-        const result = await firebaseApi.function('news').function('getSingle').call({
-            newsId: 'news_id_1'
-        });
-        expect(result).toEqual(news);
-    });
-
     it('accept waiting user', async() => {
         await database.child('users').child('authentication').child('editEvents').child('asdf').set({
             state: 'unauthenticated',
@@ -373,7 +232,7 @@ describe('ApiService', () => {
             firstName: `first_${number}`,
             lastName: `last_${number}`
         };
-        await database.child('users').child('authentication').child('editNews').child(`user_id_${number}`).set({
+        await database.child('users').child('authentication').child('editReports').child(`user_id_${number}`).set({
             firstName: user.firstName,
             lastName: user.lastName,
             state: state
@@ -389,7 +248,7 @@ describe('ApiService', () => {
         await addUser(5, 'authenticated');
         await addUser(6, 'authenticated');
         const result = await firebaseApi.function('userAuthentication').function('getAllUnauthenticated').call({
-            authenticationTypes: ['editNews']
+            authenticationTypes: ['editReports']
         });
         expect(result).toEqual([
             user1, user3, user4
