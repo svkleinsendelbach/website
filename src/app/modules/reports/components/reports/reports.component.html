@@ -34,9 +34,9 @@
         id="view-all-reports"
         href="{{ allReportsLink.link }}"
         title="{{ allReportsLink.title }}"
-        *ngIf="fetchedReports.isSuccess() && fetchedReports.content.hasMore"
+        *ngIf="showAllReportsButton || (fetchedReports.isSuccess() && fetchedReports.content.hasMore)"
         [ngStyle]="{
             color: styleConfig.css('primaryColor')
         }"
-    >Alle {{ isGameReport ? 'Spielberichte' : 'Berichte' }}</a>
+    >{{ showAllReportsButton ? 'Alle Berichte der anderen Abteilungen anzeigen' : isGameReport ? 'Alle Spielberichte' : 'Alle Berichte' }}</a>
 </text-section>
