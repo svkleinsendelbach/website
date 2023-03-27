@@ -5,23 +5,17 @@
     }"
 >
     <div
-        id="date-container"
-    >
-        <p
-            id="group-title"
-            *ngIf="groupId !== undefined"
-        >{{ ReportGroupId.title[groupId] }}</p>
-        <p
-            id="date-spacer"
-            *ngIf="groupId !== undefined"
-        >|</p>
-        <p
-            id="date"
-            [ngStyle]="{
-                color: styleConfig.css('secondaryTextColor')
-            }"
-        >{{ Datum.fromIsoDate(report.createDate).description }}</p>
-    </div>
+        id="date"
+        [ngStyle]="{
+            color: styleConfig.css('secondaryTextColor')
+        }"
+    ><p
+        id="group-title"
+        *ngIf="groupId !== undefined"
+        [ngStyle]="{
+            color: styleConfig.css('textColor')
+        }"
+    >{{ ReportGroupId.title[groupId] }} | </p>{{ Datum.fromIsoDate(report.createDate).description }}</div>
     <div
         id="message-container"
     >
@@ -31,15 +25,6 @@
                 backgroundColor: styleConfig.css(isRecent ? 'primaryColor' : 'secondaryTextColor')
             }"
         ></div>
-        <img
-            id="image"
-            *ngIf="report.imageUrl !== undefined && !deviceType.isMobile"
-            src="{{ report.imageUrl }}"
-            title="{{ report.title }}"
-            [ngStyle]="{
-                borderColor: styleConfig.css('textColor')
-            }"
-        >
         <div
             id="title-message"
         >
@@ -66,5 +51,14 @@
                 }"
             ></p>
         </div>
+        <img
+            id="image"
+            *ngIf="report.imageUrl !== undefined && !deviceType.isMobile"
+            src="{{ report.imageUrl }}"
+            title="{{ report.title }}"
+            [ngStyle]="{
+                borderColor: styleConfig.css('textColor')
+            }"
+        >
     </div>
 </div>

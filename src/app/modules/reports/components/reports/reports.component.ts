@@ -18,6 +18,8 @@ export class ReportsComponent implements OnInit {
 
     @Input() public maxListCount?: number;
 
+    @Input() public showAllReportsButton: boolean = false;
+
     public readonly allReportsLink = InternalLink.all['berichte'];
 
     public fetchedReports: FetchState<{ reports: Report.Flatten[]; hasMore: boolean }> = FetchState.loading;
