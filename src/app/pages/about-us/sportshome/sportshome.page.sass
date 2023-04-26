@@ -2,26 +2,32 @@
 @import '/src/sass/text'
 
 #opening-hours
-  @include flex-column(flex-start, center)
-  width: 100%
-
-  .row
-    @include flex-row(flex-start, center)
+    @include flex-column(flex-start, center)
     width: 100%
-    margin-bottom: 512px
 
-    .opening-hour
-      @include flex-column(flex-start, center)
-      flex: 1
+    .row
+        @include flex-row(flex-start, center)
+        width: 100%
+        margin-bottom: 512px
 
-      .title, .time
-        @include font-montserrat
-        @include font-size('normal')
-        @include font-weight('small')
-        text-align: center
+        .opening-hour
+            @include flex-column(flex-start, center)
+            flex: 1
 
-      .title
-        margin-bottom: 12px
+        .title, .time
+            @include font-montserrat
+            @include font-size('normal')
+            @include font-weight('small')
+            text-align: center
 
-    &:last-child
-      margin-bottom: 0
+        .title
+            margin-bottom: 12px
+
+        &:last-child
+            margin-bottom: 0
+
+    &.mobile .row
+        margin-bottom: 16px
+
+        .title
+            margin-bottom: 4px
