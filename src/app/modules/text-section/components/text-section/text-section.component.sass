@@ -18,6 +18,8 @@
     @include font-weight('medium')
     text-align: center
     margin-bottom: 40px
+    width: 100%
+    overflow-wrap: break-word
 
   ::ng-deep .text
     @include font-montserrat
@@ -73,6 +75,7 @@
     &:is(a)
       text-decoration: none
       cursor: pointer
+      overflow-wrap: break-word
 
   ::ng-deep .text-image
     width: 100%
