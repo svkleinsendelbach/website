@@ -20,6 +20,7 @@
     >Wir verwenden Cookies, um Ihnen ein optimales Webseiten-Erlebnis zu bieten.</p>
     <p
         class="text"
+        *ngIf="showSelection"
         [ngStyle]="{
             color: styleConfig.css('textColor')
          }"
@@ -36,12 +37,14 @@
     >{{ privacyLink.title }}</a>
     <p
         id="extra-text"
+        *ngIf="showSelection"
         [ngStyle]="{
             color: styleConfig.css('primaryColor')
         }"
     >Welchen Cookies stimmen Sie zu?</p>
     <div
         id="selection-buttons"
+        *ngIf="showSelection"
     >
         <p
             class="button unchangable"
@@ -63,46 +66,55 @@
         [ngStyle]="{
             color: styleConfig.css('primaryColor')
         }"
+        *ngIf="showSelection"
         (click)="handleShowDetails()"
     >{{ detailsShown ? "Details ausblenden" : "Details zeigen" }}</p>
     <p
+        id="show-selection-button"
+        [ngStyle]="{
+            color: styleConfig.css('primaryColor')
+        }"
+        *ngIf="deviceType.current === 'mobile'"
+        (click)="handleShowSelction()"
+    >{{ showSelection ? "Auswahl ausblenden" : "Auswahl zeigen" }}</p>
+    <p
         class="details-topic"
-        *ngIf="detailsShown"
+        *ngIf="detailsShown && showSelection"
         [ngStyle]="{
             color: styleConfig.css('primaryColor')
         }"
     >Notwendig</p>
     <p
         class="details-description"
-        *ngIf="detailsShown"
+        *ngIf="detailsShown && showSelection"
         [ngStyle]="{
             color: styleConfig.css('textColor')
         }"
     >Diese Cookies sind für den Betrieb unserer Seite unbedingt notwendig. Sie ermöglichen beispielsweise sicherheitsrelevante Funktionalitäten, die Sprachumschaltung oder die Speicherung der von Ihnen festgelegten Cookie-Einstellungen.</p>
     <p
         class="details-topic"
-        *ngIf="detailsShown"
+        *ngIf="detailsShown && showSelection"
         [ngStyle]="{
             color: styleConfig.css('primaryColor')
         }"
     >Funktionalität</p>
     <p
         class="details-description"
-        *ngIf="detailsShown"
+        *ngIf="detailsShown && showSelection"
         [ngStyle]="{
             color: styleConfig.css('textColor')
         }"
     >Funktionale Cookies ermöglichen es, Inhalte von Dritten, wie BFV oder Google Maps, anzuzeigen.</p>
     <p
         class="details-topic"
-        *ngIf="detailsShown"
+        *ngIf="detailsShown && showSelection"
         [ngStyle]="{
             color: styleConfig.css('primaryColor')
         }"
     >Statistik</p>
     <p
         class="details-description"
-        *ngIf="detailsShown"
+        *ngIf="detailsShown && showSelection"
         [ngStyle]="{
             color: styleConfig.css('textColor')
         }"

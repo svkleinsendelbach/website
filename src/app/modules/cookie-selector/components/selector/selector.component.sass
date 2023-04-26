@@ -32,7 +32,7 @@
     @include font-roboto
     @include font-weight('light')
     @include font-size('small')
-    padding-bottom: 32px
+    padding-bottom: 16px
     text-decoration: none
     cursor: pointer
 
@@ -60,7 +60,7 @@
       &.unchangable
         cursor: not-allowed
 
-  #details-button
+  #details-button, #show-selection-button
     @include font-roboto
     @include font-weight('light')
     @include font-size('small')
@@ -110,6 +110,13 @@
       .button
         width: 100%
         margin-bottom: 12px
+
+    #confirm-buttons
+        @include flex-column(flex-start, center)
+
+        #confirm-selected, #confirm-all
+            width: 100%
+            margin-bottom: 12px
 
 @media screen and (prefers-color-scheme: dark)
   #message-box
