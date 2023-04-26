@@ -23,6 +23,10 @@
 >
   <div
     id="nav-button-container"
+    (mousedown)="onMouseDown($event)"
+    (mouseup)="onMouseUp($event)"
+    (touchstart)="onMouseDown($event)"
+    (touchend)="onMouseUp($event)"
   >
     <fa-icon
       id="left-button"

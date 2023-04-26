@@ -19,6 +19,8 @@ export class HomeBannerComponent implements OnInit {
 
     private nextPageTimeout: number | null = null;
 
+    private mouseDownPosition: [number, number] | undefined;
+
     public constructor(
         public readonly deviceType: DeviceTypeService,
         public readonly styleConfig: StyleConfigService
@@ -68,6 +70,45 @@ export class HomeBannerComponent implements OnInit {
         if (this.deviceType.isMobile)
             return '360px';
         return '720px';
+    }
+
+    private getTapPosition(event: MouseEvent | TouchEvent): [number, number] | undefined {
+        if ('pageX' in event && 'pageY' in event)
+            return [event.pageX, event.pageY];
+        if ('touches' in event) {
+            if (event.touches.length !== 1)
+                return undefined;
+            const touch = event.touches.item(0);
+            if (touch === null)
+                return undefined;
+            return [touch.screenX, touch.screenY];
+        }
+        return undefined;
+    }
+
+    onMouseDown(event: MouseEvent | TouchEvent): void {
+        this.mouseDownPosition = this.getTapPosition(event);
+    }
+
+    onMouseUp(event: MouseEvent | TouchEvent): void {
+        if (this.mouseDownPosition === undefined)
+            return;
+        const position = this.getTapPosition(event);
+        if (position === undefined)
+            return;
+        const absX = Math.abs(this.mouseDownPosition[0] - position[0]);
+        const absY = Math.abs(this.mouseDownPosition[1] - position[1]);
+        const direction = this.mouseDownPosition[0] >= position[0] ? 'left' : 'right';
+        if (absY > absX)
+            return;
+        if (this.deviceType.current === 'desktop' && absX < 250)
+            return;
+        if (this.deviceType.current === 'tablet' && absX < 150)
+            return;
+        if (this.deviceType.current === 'mobile' && absX < 50)
+            return;
+        this.handleButtonClick(direction);
+        this.mouseDownPosition = undefined;
     }
 }
 
