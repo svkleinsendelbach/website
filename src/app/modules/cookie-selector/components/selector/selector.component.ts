@@ -16,6 +16,8 @@ export class CookieSelectorComponent implements OnInit, OnDestroy {
 
     @Input() public privacyLink?: Link;
 
+    public showSelection: boolean;
+
     public detailsShown = false;
 
     public cookiesSelection: CookiesSelection = CookiesSelection.defaultSelection;
@@ -24,7 +26,9 @@ export class CookieSelectorComponent implements OnInit, OnDestroy {
         public readonly cookieService: CookieService,
         public readonly styleConfig: StyleConfigService,
         public readonly deviceType: DeviceTypeService
-    ) {}
+    ) {
+        this.showSelection = this.deviceType.current !== 'mobile';
+    }
 
     public ngOnInit() {
         this.cookieService.listeners.add('cookieSelector', newCookieSelection => {
@@ -50,6 +54,13 @@ export class CookieSelectorComponent implements OnInit, OnDestroy {
         case 'statistics':
             this.cookiesSelection.statistics = this.cookiesSelection.statistics === 'selected' ? 'unselected' : 'selected';
             break;
+        }
+    }
+
+    public handleShowSelction() {
+        this.showSelection = !this.showSelection;
+        if (!this.showSelection) {
+            this.detailsShown = false;
         }
     }
 
