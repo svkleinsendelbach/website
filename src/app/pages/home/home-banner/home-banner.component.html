@@ -1,5 +1,11 @@
 <div
+    [ngStyle]="{
+        height: heightStyle
+    }"
+></div>
+<div
   id="image-container"
+  [ngClass]="deviceType.current"
   [ngStyle]="{
     height: heightStyle
   }"
@@ -11,22 +17,42 @@
     title="{{ bannerItem.title }}"
     [ngStyle]="{
         height: heightStyle,
-      transform: 'translateX(' + (index - currentPage + 1) + '00%)'
+        transform: 'translateX(' + (index - currentPage + 1) + '00%)'
     }"
   >
 </div>
 <div
+    id="text-container"
+    [ngClass]="deviceType.current"
+    [ngStyle]="{
+        height: 'calc(' + heightStyle + ' - 30px)'
+    }"
+>
+    <p
+        id="actual"
+        *ngIf="current.isActual"
+    >Aktuell</p>
+    <p
+        id="title"
+    >{{ current.title }}</p>
+    <p
+        id="subtitle"
+        *ngIf="current.subTitle !== undefined"
+    >{{ current.subTitle }}</p>
+</div>
+<div
   id="nav-bar-container"
+  [ngClass]="deviceType.current"
+  (mousedown)="onMouseDown($event)"
+  (mouseup)="onMouseUp($event)"
+  (touchstart)="onMouseDown($event)"
+  (touchend)="onMouseUp($event)"
   [ngStyle]="{
     height: heightStyle
   }"
 >
   <div
     id="nav-button-container"
-    (mousedown)="onMouseDown($event)"
-    (mouseup)="onMouseUp($event)"
-    (touchstart)="onMouseDown($event)"
-    (touchend)="onMouseUp($event)"
   >
     <fa-icon
       id="left-button"

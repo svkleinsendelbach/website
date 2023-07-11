@@ -29,7 +29,8 @@ export type InternalPath =
   | 'bearbeiten/termine'
   | 'bearbeiten/termine/bearbeiten'
   | 'bearbeiten/berichte'
-  | 'bearbeiten/berichte/bearbeiten';
+  | 'bearbeiten/berichte/bearbeiten'
+  | 'bearbeiten/belegungsplan';
 
 export namespace InternalPath {
     export const all: Exclude<InternalPath, 'spiel'>[] = [
@@ -60,7 +61,8 @@ export namespace InternalPath {
         'bearbeiten/termine',
         'bearbeiten/termine/bearbeiten',
         'bearbeiten/berichte',
-        'bearbeiten/berichte/bearbeiten'
+        'bearbeiten/berichte/bearbeiten',
+        'bearbeiten/belegungsplan'
     ];
 
     export const title: Record<Exclude<InternalPath, 'spiel'>, string> = {
@@ -91,7 +93,8 @@ export namespace InternalPath {
         'bearbeiten/termine': 'Termine bearbeiten',
         'bearbeiten/termine/bearbeiten': 'Termin bearbeiten',
         'bearbeiten/berichte': 'Berichte bearbeiten',
-        'bearbeiten/berichte/bearbeiten': 'Bericht bearbeiten'
+        'bearbeiten/berichte/bearbeiten': 'Bericht bearbeiten',
+        'bearbeiten/belegungsplan': 'Belegungsplan'
     };
 }
 export namespace InternalLink {

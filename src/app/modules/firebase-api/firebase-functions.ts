@@ -15,7 +15,10 @@ import {
     UserAuthenticationAcceptDeclineFunctionType,
     UserAuthenticationGetAllUnauthenticatedFunctionType,
     NotificationRegisterFunctionType,
-    NotificationPushFunctionType
+    NotificationPushFunctionType,
+    OccupancyLocationEditFunctionType,
+    OccupancyAssignmentEditFunctionType,
+    OccupancyAssignmentGetFunctionType
 } from './function-types';
 
 export type FirebaseFunctions = {
@@ -47,5 +50,14 @@ export type FirebaseFunctions = {
     notification: {
         register: NotificationRegisterFunctionType;
         push: NotificationPushFunctionType;
+    };
+    occupancy: {
+        location: {
+            edit: OccupancyLocationEditFunctionType;
+        };
+        assignment: {
+            edit: OccupancyAssignmentEditFunctionType;
+            get: OccupancyAssignmentGetFunctionType;
+        };
     };
 };

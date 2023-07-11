@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import firebase from 'firebase/compat/app';
 import { OAuthProvider } from '@angular/fire/auth';
-import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { UserAuthenticationType } from 'src/app/modules/firebase-api/types/user-authentication';
 import { RegistrationStatus } from '../types/registration-status';
 import { LoginError } from '../types/login-error';
 import { AuthenticationStatus } from '../types/authentication-status';
+import { Crypter } from '../../firebase-api/crypter/Crypter';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
+
     constructor(
         private readonly firebaseAuth: AngularFireAuth,
-        private readonly firebaseApiService: FirebaseApiService,
+        private readonly firebaseApiService: FirebaseApiService
     ) {}
 
     public async loginWithEmail(authenticationTypes: UserAuthenticationType[], email: string, password: string): Promise<RegistrationStatus> {
@@ -92,37 +95,47 @@ export class AuthService {
         throw new LoginError('unknown');
     }
 
-    private async checkAuthentication(authenticationTypes: UserAuthenticationType[], user: firebase.User | null = null): Promise<AuthenticationStatus> {
-        if (user === null)
-            user = await new Promise<firebase.User | null>(resolve => {
-                this.firebaseAuth.onAuthStateChanged(user => {
-                    resolve(user);
-                });
-            });
-        if (user === null)
-            return 'unauthenticated';
-        try {
-            await this.firebaseApiService.function('userAuthentication').function('check').call({
-                authenicationTypes: authenticationTypes
-            });
-            return 'authenticated';
-        } catch {
-            return 'unauthenticated';
+    private async checkAuthentication(authenticationTypes: UserAuthenticationType[]): Promise<AuthenticationStatus> {
+        const status = await this.firebaseApiService.function('userAuthentication').function('check').call({
+            authenicationTypes: authenticationTypes
+        }).then(() => 'authenticated' as const)
+            .catch(() => 'unauthenticated' as const);
+        if (status === 'authenticated') {
+            const crypter = new Crypter(environment.cryptionKeys);
+            localStorage.setItem('userAuthentication', crypter.encodeEncrypt(authenticationTypes));
+        } else {
+            localStorage.removeItem('userAuthentication');
         }
+        return status;
     }
 
     private async handleLoginCredential(authenticationTypes: UserAuthenticationType[], credential: firebase.auth.UserCredential): Promise<RegistrationStatus> {
         if (credential.user === null)
             throw new LoginError('unknown');
-        const authenticated = await this.checkAuthentication(authenticationTypes, credential.user);
+        const authenticated = await this.checkAuthentication(authenticationTypes);
         return authenticated === 'authenticated' ? 'registered' : 'unregistered';
     }
 
     public async logOut() {
+        localStorage.removeItem('userAuthentication');
         await this.firebaseAuth.signOut();
     }
 
     public async isLoggedIn(authenticationTypes: UserAuthenticationType[]): Promise<boolean> {
+        const storedAuthentication = localStorage.getItem('userAuthentication');
+        if (storedAuthentication !== null) {
+            const crypter = new Crypter(environment.cryptionKeys);
+            const storedAuthenticationTypes: UserAuthenticationType[] = crypter.decryptDecode(storedAuthentication);
+            let authenticated = true;
+            for (const authentication of authenticationTypes) {
+                if (storedAuthenticationTypes.includes(authentication))
+                    continue;
+                authenticated = false;
+                break;
+            }
+            if (authenticated)
+                return true;
+        }
         const authenticated = await this.checkAuthentication(authenticationTypes);
         return authenticated === 'authenticated';
     }

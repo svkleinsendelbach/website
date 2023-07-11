@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { faChevronLeft, faChevronRight, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { DeviceTypeService } from '../../../services/device-type.service';
 import { StyleConfigService } from '../../../services/style-config.service';
+import { Link } from 'src/app/types/link';
 
 @Component({
     selector: 'app-home-banner',
@@ -27,6 +28,7 @@ export class HomeBannerComponent implements OnInit {
     ) {}
 
     public ngOnInit() {
+        this.bannerData.sort((lhs, rhs) => lhs.isActual ? -1 : (rhs.isActual ? 1 : 0));
         this.setPage(1);
     }
 
@@ -66,6 +68,14 @@ export class HomeBannerComponent implements OnInit {
         }
     }
 
+    public get current(): BannerItem {
+        return this.bannerData[this.currentPage - 1];
+    }
+
+    public openCurrentLink() {
+        window.open(this.current.link.link, this.current.link.target);
+    }
+
     public get heightStyle(): string {
         if (this.deviceType.isMobile)
             return '360px';
@@ -86,11 +96,23 @@ export class HomeBannerComponent implements OnInit {
         return undefined;
     }
 
+    private isClickOnNavContainer(event: MouseEvent | TouchEvent): boolean {
+        if (event.target === null)
+            return false;
+        if (!('id' in event.target) || typeof event.target.id !== 'string')
+            return false;
+        return event.target.id === 'nav-bar-container' || event.target.id === 'nav-button-container';
+    }
+
     onMouseDown(event: MouseEvent | TouchEvent): void {
+        if (!this.isClickOnNavContainer(event))
+            return;
         this.mouseDownPosition = this.getTapPosition(event);
     }
 
     onMouseUp(event: MouseEvent | TouchEvent): void {
+        if (!this.isClickOnNavContainer(event))
+            return;
         if (this.mouseDownPosition === undefined)
             return;
         const position = this.getTapPosition(event);
@@ -98,7 +120,11 @@ export class HomeBannerComponent implements OnInit {
             return;
         const absX = Math.abs(this.mouseDownPosition[0] - position[0]);
         const absY = Math.abs(this.mouseDownPosition[1] - position[1]);
-        const direction = this.mouseDownPosition[0] >= position[0] ? 'left' : 'right';
+        if (absX <= 10 && absY <= 10) {
+            this.openCurrentLink();
+            this.mouseDownPosition = undefined;
+            return;
+        }
         if (absY > absX)
             return;
         if (this.deviceType.current === 'desktop' && absX < 250)
@@ -107,6 +133,7 @@ export class HomeBannerComponent implements OnInit {
             return;
         if (this.deviceType.current === 'mobile' && absX < 50)
             return;
+        const direction = this.mouseDownPosition[0] >= position[0] ? 'left' : 'right';
         this.handleButtonClick(direction);
         this.mouseDownPosition = undefined;
     }
@@ -115,4 +142,7 @@ export class HomeBannerComponent implements OnInit {
 export interface BannerItem {
     imageSource: string;
     title: string;
+    subTitle?: string;
+    link: Link;
+    isActual: boolean;
 }

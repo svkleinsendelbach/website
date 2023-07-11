@@ -67,7 +67,7 @@ export type Report = {
     id: Guid;
     title: string;
     message: string;
-    imageUrl: string | undefined;
+    imageUrl?: string;
     createDate: Date;
 };
 
@@ -76,7 +76,7 @@ export namespace Report {
         id: string;
         title: string;
         message: string;
-        imageUrl: string | undefined;
+        imageUrl?: string;
         createDate: string;
     };
 

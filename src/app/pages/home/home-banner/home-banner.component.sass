@@ -1,69 +1,129 @@
 @import '/src/sass/flex'
+@import '/src/sass/color'
+@import '/src/sass/text'
 
 :host
-  @include flex-column(flex-start, center)
-  width: 100vw
-  position: relative
+    @include flex-column(flex-start, center)
+    width: 100vw
+    position: relative
 
 #image-container
-  @include flex-row(flex-start, center)
-  position: absolute
-  top: 0
-  z-index: 100
-  width: 100vw
-  overflow: hidden
-
-  .image
+    @include flex-row(flex-start, center)
     position: absolute
     top: 0
-    object-fit: cover
-    width: 100vw
+    z-index: 100
+    width: 85vw
     overflow: hidden
-    transition: 0.5s
+
+    .image
+        position: absolute
+        top: 0
+        object-fit: cover
+        width: 100%
+        overflow: hidden
+        transition: 0.5s
+
+    &.mobile
+        width: 100vw
+
+#text-container
+    @include flex-column(flex-end, flex-start)
+    position: absolute
+    top: 0
+    z-index: 101
+    width: 85vw
+
+    #actual, #title, #subtitle
+        @include font-roboto
+        padding: 5px 10px
+        padding-left: 25px
+        color: color('text')
+        background-color: color('background')
+        box-shadow: 0 0 16px #80808080
+
+    #actual
+        color: color('primary')
+        font-weight: 300
+        font-size: 20px
+
+    #title
+        font-weight: 500
+        font-size: 40px
+
+    #subtitle
+        font-weight: 300
+        font-size: 35px
+
+    &.mobile
+        width: 100vw
+
+        #title
+            font-size: 30px
+
+        #subtitle
+            font-size: 25px
 
 #nav-bar-container
-  @include flex-column(center, center)
-  position: relative
-  z-index: 101
-  width: 100%
+    @include flex-column(center, center)
+    position: absolute
+    top: 0
+    z-index: 102
+    width: calc(85vw + 110px)
+    cursor: pointer
 
-  #nav-button-container
-    @include flex-row(center, space-between)
-    width: 100%
-    height: calc(100% - 48px)
+    #nav-button-container
+        @include flex-row(center, space-between)
+        width: 100%
+        height: calc(100% - 48px)
 
-    #left-button, #right-button
-      @include flex-row(center, center)
-      cursor: pointer
-      font-size: 64px
-      opacity: 0.5
+        #left-button, #right-button
+            @include flex-row(center, center)
+            cursor: pointer
+            font-size: 64px
+            opacity: 0.5
+            width: 45px
+            padding: 5px
+            height: 100%
 
-      &:hover
-        opacity: 1
+            &:hover
+                opacity: 1
 
-    #left-button
-      margin-left: 16px
+    #nav-bar
+        @include flex-row(flex-start, center)
+        border-radius: 8px
+        padding: 4px 8px
+        margin-bottom: 16px
 
-    #right-button
-      margin-right: 16px
+        .circle
+            @include flex-row(center, center)
+            height: 16px
+            width: 16px
+            padding: 4px
+            cursor: pointer
+            font-size: 16px
+            opacity: 0.5
 
-  #nav-bar
-    @include flex-row(flex-start, center)
-    border-radius: 8px
-    padding: 4px 8px
-    margin-bottom: 16px
+            &.filled
+                opacity: 1
 
-    .circle
-      @include flex-row(center, center)
-      height: 16px
-      width: 16px
-      padding: 4px
-      cursor: pointer
-      font-size: 16px
-      opacity: 0.5
+            &:hover
+                opacity: 1
 
-      &.filled
-        opacity: 1
+    &.mobile
+        width: 100vw
 
-      &:hover
-        opacity: 1
+        #nav-button-container
+            #left-button, #right-button
+                width: auto
+                height: auto
+
+@media screen and (prefers-color-scheme: dark)
+    #text-container
+        #actual, #title, #subtitle
+            color: darkColor('text')
+            background-color: darkColor('secondaryBackground')
+
+        #actual
+            font-weight: 500
+            color: darkColor('primary')
+

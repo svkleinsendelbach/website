@@ -1,3 +1,5 @@
+
+<!-- Authentication is currently checked -->
 <text-section
   [title]="'Authentifizierung wird überprüft'"
   *ngIf="state === 'loading'"
@@ -9,6 +11,9 @@
     }"
   >Es wird überprüft, ob Sie berechtigt sind diese Seite zu besuchen.</p>
 </text-section>
+
+
+<!-- Authentication failed with an error -->
 <text-section
   [title]="'Authentifizierung fehlgeschlagen'"
   *ngIf="state === 'internalError'"
@@ -20,6 +25,9 @@
     }"
   >Es konnte nicht überprüft werden, ob Sie berechtigt sind diese Seite zu besuchen. Bitte laden Sie die Seite neu, um es erneut zu versuchen.</p>
 </text-section>
+
+
+<!-- Authentication failed, user is not allowed to view this page -->
 <text-section
   [title]="'Authentifizierung fehlgeschlagen'"
   *ngIf="state === 'unregistered'"
@@ -40,6 +48,8 @@
     }"
   >Zur Anmeldung</a>
 </text-section>
+
+<!-- Authenication successful -->
 <ng-content
-  *ngIf="state === 'registered'"
+    *ngIf="state === 'registered'"
 ></ng-content>

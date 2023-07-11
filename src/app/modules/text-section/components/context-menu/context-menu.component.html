@@ -1,0 +1,22 @@
+<fa-icon
+    [icon]="ellipsisVertical"
+    id="dots"
+    #dots
+    (click)="$event.preventDefault(); $event.stopPropagation(); toggleMenu()"
+    [ngStyle]="{
+        color: styleConfig.css('textColor'),
+        zIndex: isShown ? 911 : undefined
+    }"
+></fa-icon>
+<div
+    id="elements"
+    *ngIf="isShown"
+    (click)="$event.preventDefault(); $event.stopPropagation(); dismissMenu()"
+>
+    <ng-content></ng-content>
+</div>
+<div
+    id="background"
+    *ngIf="isShown"
+    (click)="$event.preventDefault(); $event.stopPropagation(); dismissMenu()"
+></div>

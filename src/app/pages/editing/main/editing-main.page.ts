@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { InternalLink } from 'src/app/types/internal-path';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Router } from '@angular/router';
-import { InternalLink } from 'src/app/types/internal-path';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { FunctionType } from 'src/app/modules/firebase-api/types/function-type';
 import { UserAuthenticationGetAllUnauthenticatedFunctionType } from 'src/app/modules/firebase-api/function-types';
@@ -34,7 +34,7 @@ export class EditingMainPage {
 
     private async getUnauthenticatedUsers() {
         this.unauthenticatedUsers = await this.firebaseApiService.function('userAuthentication').function('getAllUnauthenticated').call({
-            authenticationTypes: ['authenticateUser', 'editEvents', 'editReports', 'notification']
+            authenticationTypes: ['authenticateUser', 'editEvents', 'editReports']
         });
     }
 
@@ -46,7 +46,7 @@ export class EditingMainPage {
     public async acceptDeclineUser(action: 'accept' | 'decline', hashedUserId: string) {
         this.unauthenticatedUsers = this.unauthenticatedUsers?.filter(user => user.hashedUserId !== hashedUserId);
         await this.firebaseApiService.function('userAuthentication').function('acceptDecline').call({
-            authenticationTypes: ['authenticateUser', 'editEvents', 'editReports', 'notification'],
+            authenticationTypes: ['authenticateUser', 'editEvents', 'editReports', 'editOccupancy'],
             action: action,
             hashedUserId: hashedUserId
         });

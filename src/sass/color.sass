@@ -1,0 +1,13 @@
+@use 'sass:map'
+
+$light-colors-map: ('primary': #C90024, 'background': #FFFFFF, 'secondaryBackground': #FFFFFF, 'hoveredBackground': #E0E0E0, 'text': #24252A, 'secondaryText': #868E90, 'formSuccessStatus': #54B435, 'formErrorStatus': #CE3A0F, 'formInfoStatus': #FFBF00)
+$dark-colors-map: ('primary': #C4354F, 'background': #24252A, 'secondaryBackground': #3C4A57, 'hoveredBackground': #44454A, 'text': #C8D6E5, 'secondaryText': #868E90, 'formSuccessStatus': #B6E2A1, 'formErrorStatus': #EB4511, 'formInfoStatus': #FFE15D)
+
+@function color($name, $light: true)
+    @if $light
+        @return map.get($light-colors-map, $name)
+    @else
+        @return map.get($dark-colors-map, $name)
+
+@function darkColor($name)
+    @return color($name, false)

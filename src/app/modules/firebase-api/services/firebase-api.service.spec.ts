@@ -10,8 +10,9 @@ import { UserAuthenticationType } from '../types/user-authentication';
 import { Crypter } from '../crypter/Crypter';
 import { Guid } from '../types/guid';
 import { UserAuthenticationGetAllUnauthenticatedFunction } from '../function-types';
+import { OccupancyAssignment } from '../types/occupancy-assignment';
 
-describe('ApiService', () => {
+fdescribe('ApiService', () => {
     let firebaseApi: FirebaseApiService;
     let database: DatabaseManagerTestService;
     let firebaseAuth: AngularFireAuth;
@@ -40,7 +41,7 @@ describe('ApiService', () => {
         expect(credential.user).not.toBeNull();
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const hashedUserId = Crypter.sha512(credential.user!.uid);
-        const authenticationTypes: UserAuthenticationType[] = ['editEvents', 'editReports', 'authenticateUser', 'notification'];
+        const authenticationTypes: UserAuthenticationType[] = ['editEvents', 'editReports', 'authenticateUser', 'editOccupancy'];
         for (const authenticationType of authenticationTypes) {
             await database.child('users').child('authentication').child(authenticationType).child(hashedUserId).set({
                 state: 'authenticated',
@@ -253,5 +254,205 @@ describe('ApiService', () => {
         expect(result).toEqual([
             user1, user3, user4
         ]);
+    });
+
+    it('remove occupancy location', async() => {
+        const locationId = Guid.newGuid();
+        await database.child('occupancy').child('locations').child(locationId.guidString).set({
+            name: 'sportshome',
+            color: '#AB4503'
+        }, 'encrypt');
+        expect(await database.child('occupancy').child('locations').child(locationId.guidString).exists()).toBeTrue();
+        await firebaseApi.function('occupancy').function('location').function('edit').call({
+            editType: 'remove',
+            locationId: locationId.guidString,
+            location: undefined
+        });
+        expect(await database.child('occupancy').child('locations').child(locationId.guidString).exists()).toBeFalse();
+    });
+
+    it('add occupancy location', async() => {
+        const locationId = Guid.newGuid();
+        await firebaseApi.function('occupancy').function('location').function('edit').call({
+            editType: 'add',
+            locationId: locationId.guidString,
+            location: {
+                name: 'sportshome',
+                color: '#AB4503'
+            }
+        });
+        const databaseValue = await database.child('occupancy').child('locations').child(locationId.guidString).get('decrypt');
+        expect(databaseValue).toEqual({
+            name: 'sportshome',
+            color: '#AB4503'
+        });
+    });
+
+    it('update occupancy location', async() => {
+        const locationId = Guid.newGuid();
+        await database.child('occupancy').child('locations').child(locationId.guidString).set({
+            name: 'sportshome',
+            color: '#AB4503'
+        }, 'encrypt');
+        const date = new Date();
+        await firebaseApi.function('occupancy').function('location').function('edit').call({
+            editType: 'change',
+            locationId: locationId.guidString,
+            location: {
+                name: 'field',
+                color: '#012344'
+            }
+        });
+        const databaseValue = await database.child('occupancy').child('locations').child(locationId.guidString).get('decrypt');
+        expect(databaseValue).toEqual({
+            name: 'field',
+            color: '#012344'
+        });
+    });
+
+    it('remove occupancy assignment', async() => {
+        const assignmentId = Guid.newGuid();
+        await database.child('occupancy').child('assignments').child(assignmentId.guidString).set({
+            title: 'assignment 1',
+            locationIds: [Guid.newGuid().guidString],
+            startDate: new Date().toISOString(),
+            endDate: new Date().toISOString()
+        }, 'encrypt');
+        expect(await database.child('occupancy').child('assignments').child(assignmentId.guidString).exists()).toBeTrue();
+        await firebaseApi.function('occupancy').function('assignment').function('edit').call({
+            editType: 'remove',
+            assignmentId: assignmentId.guidString,
+            assignment: undefined
+        });
+        expect(await database.child('occupancy').child('assignments').child(assignmentId.guidString).exists()).toBeFalse();
+    });
+
+    it('add occupancy assignment', async() => {
+        const assignmentId = Guid.newGuid();
+        const assignment: Omit<OccupancyAssignment, 'id'> = {
+            title: 'assignment 1',
+            locationIds: [Guid.newGuid()],
+            startDate: new Date(),
+            endDate: new Date()
+        }
+        await firebaseApi.function('occupancy').function('assignment').function('edit').call({
+            editType: 'add',
+            assignmentId: assignmentId.guidString,
+            assignment: OccupancyAssignment.flatten(assignment)
+        });
+        const databaseValue = await database.child('occupancy').child('assignments').child(assignmentId.guidString).get('decrypt');
+        expect(databaseValue).toEqual(OccupancyAssignment.flatten(assignment));
+    });
+
+    it('update occupancy assignment', async() => {
+        const assignmentId = Guid.newGuid();
+        await database.child('occupancy').child('assignments').child(assignmentId.guidString).set({
+            title: 'assignment 1',
+            locationIds: [Guid.newGuid().guidString],
+            startDate: new Date().toISOString(),
+            endDate: new Date().toISOString()
+        }, 'encrypt');
+        const assignment: Omit<OccupancyAssignment, 'id'> = {
+            title: 'assignment 2',
+            locationIds: [Guid.newGuid()],
+            startDate: new Date(),
+            endDate: new Date()
+        }
+        await firebaseApi.function('occupancy').function('assignment').function('edit').call({
+            editType: 'change',
+            assignmentId: assignmentId.guidString,
+            assignment: OccupancyAssignment.flatten(assignment)
+        });
+        const databaseValue = await database.child('occupancy').child('assignments').child(assignmentId.guidString).get('decrypt');
+        expect(databaseValue).toEqual(OccupancyAssignment.flatten(assignment));
+    });
+
+    it('get occupancy assignment', async () => {
+        const locationId1 = Guid.newGuid();
+        await database.child('occupancy').child('locations').child(locationId1.guidString).set({
+            name: 'location 1',
+            color: '#3A894F'
+        }, 'encrypt');
+        const locationId2 = Guid.newGuid();
+        await database.child('occupancy').child('locations').child(locationId2.guidString).set({
+            name: 'location 2',
+            color: '#A842BB'
+        }, 'encrypt');
+        const endDate = new Date(new Date().getTime() + 100000);
+        const date1 = new Date(new Date().getTime() + 50000);
+        const assignmentId1 = Guid.newGuid();
+        await database.child('occupancy').child('assignments').child(assignmentId1.guidString).set({
+            locationIds: [locationId1.guidString],
+            title: 'assignment 1',
+            startDate: date1.toISOString(),
+            endDate: endDate.toISOString()
+        }, 'encrypt');
+        const date2 = new Date(new Date().getTime() + 30000);
+        const assignmentId2 = Guid.newGuid();
+        await database.child('occupancy').child('assignments').child(assignmentId2.guidString).set({
+            locationIds: [locationId2.guidString],
+            title: 'assignment 2',
+            startDate: date2.toISOString(),
+            endDate: endDate.toISOString()
+        }, 'encrypt');
+        const date3 = new Date(new Date().getTime() + 20000);
+        const assignmentId3 = Guid.newGuid();
+        await database.child('occupancy').child('assignments').child(assignmentId3.guidString).set({
+            locationIds: [locationId2.guidString],
+            title: 'assignment 3',
+            startDate: date3.toISOString(),
+            endDate: endDate.toISOString()
+        }, 'encrypt');
+        const date4 = new Date(new Date().getTime() - 30000);
+        const assignmentId4 = Guid.newGuid();
+        await database.child('occupancy').child('assignments').child(assignmentId4.guidString).set({
+            locationIds: [locationId1.guidString, locationId2.guidString],
+            title: 'assignment 4',
+            startDate: date4.toISOString(),
+            endDate: endDate.toISOString()
+        }, 'encrypt');
+        const result = await firebaseApi.function('occupancy').function('assignment').function('get').call({});
+        expect(result).toEqual({
+            locations: {
+                [locationId1.guidString]: {
+                    name: 'location 1',
+                    color: '#3A894F'
+                },
+                [locationId2.guidString]: {
+                    name: 'location 2',
+                    color: '#A842BB'
+                }
+            },
+            assignments: [
+                {
+                    id: assignmentId4.guidString,
+                    locationIds: [locationId1.guidString, locationId2.guidString],
+                    title: 'assignment 4',
+                    startDate: date4.toISOString(),
+                    endDate: endDate.toISOString()
+                },
+                {
+                    id: assignmentId3.guidString,
+                    locationIds: [locationId2.guidString],
+                    title: 'assignment 3',
+                    startDate: date3.toISOString(),
+                    endDate: endDate.toISOString()
+                },
+                {
+                    id: assignmentId2.guidString,
+                    locationIds: [locationId2.guidString],
+                    title: 'assignment 2',
+                    startDate: date2.toISOString(),
+                    endDate: endDate.toISOString()
+                },
+                {
+                    id: assignmentId1.guidString,
+                    locationIds: [locationId1.guidString],
+                    title: 'assignment 1',
+                    startDate: date1.toISOString(),
+                    endDate: endDate.toISOString()
+                }
+            ]
+        });
     });
 });

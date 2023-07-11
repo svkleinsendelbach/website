@@ -1,0 +1,25 @@
+@import '/src/sass/color'
+@import '/src/sass/text'
+@import '/src/sass/flex'
+
+#spacer
+    height: 20px
+
+#title-container
+    @include flex-row(center, center)
+    width: 100%
+
+    .logo
+        height: 75px
+
+    #title
+        @include font-metrophobic
+        font-weight: 400
+        font-size: 50px
+        color: color('text')
+        margin: 0 35px
+        text-align: center
+
+@media screen and (prefers-color-scheme: dark)
+    #title-container #title
+        color: darkColor('text')

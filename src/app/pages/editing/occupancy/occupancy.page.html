@@ -1,0 +1,48 @@
+<authentication-check
+  [authenticationTypes]="['editOccupancy']"
+>
+    <text-section
+        [title]="'Belegungsplan'"
+    >
+        <p
+            *ngIf="occupancyResult.isLoading()"
+            class="text center large"
+            [ngStyle]="{
+                color: styleConfig.css('primaryColor')
+            }"
+            >Belegungsplan wird geladen</p>
+        <p
+            *ngIf="occupancyResult.isFailure()"
+            class="text center large"
+            [ngStyle]="{
+                color: styleConfig.css('primaryColor')
+            }"
+        >Belegungsplan konnten nicht geladen werden</p>
+        <div
+            *ngIf="locationsResult.isSuccess()"
+            id="locations-assignments"
+        >
+            <section
+                [title]="'Verfügbare Orte'"
+            >
+                <list>
+                    <div
+                        *ngFor="let location of locationsResult.content"
+                        class="location"
+                    >
+                        <p
+                            [ngStyle]="{
+                                color: location.color
+                            }"
+                        >{{ location.name }}</p>
+                        <context-menu>
+                            <p (click)="$event.preventDefault(); clicked(1)" >E1</p>
+                            <p (click)="$event.preventDefault(); clicked(2)" >E2</p>
+                            <p (click)="$event.preventDefault(); clicked(3)" >E3</p>
+                        </context-menu>
+                    </div>
+                </list>
+            </section>
+        </div>
+    </text-section>
+</authentication-check>

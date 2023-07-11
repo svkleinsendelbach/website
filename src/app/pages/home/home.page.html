@@ -1,6 +1,32 @@
+<div
+    id="spacer"
+></div>
+
 <app-home-banner
   [bannerData]="bannerData"
 ></app-home-banner>
+
+<text-section
+    *ngIf="!deviceType.isMobile"
+>
+    <div
+        id="title-container"
+    >
+        <img
+            src="assets/images/svk-logo.svg"
+            title="SV Kleinsendelbach"
+            class="logo"
+        >
+        <p
+            id="title"
+        >SV Kleinsendelbach e.V.</p>
+        <img
+            src="assets/images/svk-logo.svg"
+            title="SV Kleinsendelbach"
+            class="logo"
+        >
+    </div>
+</text-section>
 
 <app-home-links
   [linkData]="linkData"

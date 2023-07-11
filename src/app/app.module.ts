@@ -66,6 +66,7 @@ import { EditingEventsPage } from './pages/editing/events/editing-events.page';
 import { EditEventPage } from './pages/editing/events/edit-event/edit-event.page';
 import { EditingReportsPage } from './pages/editing/reports/editing-reports.page';
 import { EditReportPage } from './pages/editing/reports/edit-report/edit-report.page';
+import { OccupancyPage } from './pages/editing/occupancy/occupancy.page';
 
 @NgModule({
     declarations: [
@@ -104,7 +105,8 @@ import { EditReportPage } from './pages/editing/reports/edit-report/edit-report.
         EditingEventsPage,
         EditEventPage,
         EditingReportsPage,
-        EditReportPage
+        EditReportPage,
+        OccupancyPage
     ],
     imports: [
         BrowserModule,

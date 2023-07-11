@@ -1,6 +1,5 @@
 <authentication-check
-  [authenticationTypes]="['editEvents', 'editReports', 'authenticateUser', 'notification']"
-  [logInPageLink]="logInPageLink"
+  [authenticationTypes]="['editEvents', 'editReports', 'authenticateUser', 'editOccupancy']"
 >
   <div
     id="log-out-container"
@@ -104,5 +103,26 @@
         }"
       >Berichte bearbeiten</p>
     </div>
+    <!--div
+        class="edit-container"
+        [ngClass]="deviceType.current"
+>
+        <a
+            href="{{ allInternalLinks['bearbeiten/belegungsplan'].link }}"
+            title="{{ allInternalLinks['bearbeiten/belegungsplan'].title }}"
+            class="button"
+            [ngStyle]="{
+                color: styleConfig.css('primaryColor'),
+                backgroundColor: styleConfig.css('backgroundColor'),
+                borderColor: styleConfig.css('textColor')
+            }"
+        >Belegungsplan</a>
+        <p
+        class="title"
+        [ngStyle]="{
+            color: styleConfig.css('secondaryTextColor')
+        }"
+        >Belegungsplan ansehen</p>
+    </div-->
   </text-section>
 </authentication-check>

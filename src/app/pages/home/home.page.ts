@@ -25,11 +25,16 @@ export class HomePage {
     public readonly bannerData: BannerItem[] = [
         {
             imageSource: 'assets/images/mannschaft.png',
-            title: 'Herren Mannschaft'
+            title: 'Herren Mannschaft',
+            subTitle: '1. und 2. Mannschaft 2019 / 2020',
+            link: InternalLink.all['fussball/herren'],
+            isActual: true
         },
         {
             imageSource: 'assets/images/kleinfeldmannschaften.jpg',
-            title: 'Kleinfeld Mannschaften'
+            title: 'Kleinfeld Mannschaften',
+            link: InternalLink.all['fussball/jugend'],
+            isActual: false
         }
     ];
 
