@@ -1,24 +1,23 @@
-import { TestBed } from '@angular/core/testing';
-import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { AngularFireFunctions, REGION } from '@angular/fire/compat/functions';
 import { environment } from 'src/environments/environment';
 import { FirebaseApiService } from './firebase-api.service';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { AngularFireFunctions, REGION } from '@angular/fire/compat/functions';
 import { DatabaseManagerTestService } from './database-manager.service';
-import { UserAuthenticationType } from '../types/user-authentication';
+import { TestBed } from '@angular/core/testing';
 import { Crypter } from '../crypter/Crypter';
+import { UserAuthenticationType } from '../types/user-authentication';
 import { Guid } from '../types/guid';
 import { UserAuthenticationGetAllUnauthenticatedFunction } from '../function-types';
 import { OccupancyAssignment } from '../types/occupancy-assignment';
 
-fdescribe('ApiService', () => {
+describe('ApiService', () => {
     let firebaseApi: FirebaseApiService;
-    let database: DatabaseManagerTestService;
     let firebaseAuth: AngularFireAuth;
+    let database: DatabaseManagerTestService;
 
-    beforeEach(async() => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
+    beforeEach(async () => {
         expect(environment.name).toBe('test');
         TestBed.configureTestingModule({
             imports: [
@@ -32,16 +31,16 @@ fdescribe('ApiService', () => {
             ]
         });
         firebaseApi = TestBed.inject(FirebaseApiService);
-        expect(firebaseApi).toBeTruthy();
         firebaseAuth = TestBed.inject(AngularFireAuth);
         database = TestBed.inject(DatabaseManagerTestService);
+        expect(firebaseApi).toBeTruthy();
+        expect(firebaseAuth).toBeTruthy();
+        expect(database).toBeTruthy();
         expect(environment.testUser).not.toBeUndefined();
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const credential = await firebaseAuth.signInWithEmailAndPassword(environment.testUser!.email, environment.testUser!.password);
         expect(credential.user).not.toBeNull();
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const hashedUserId = Crypter.sha512(credential.user!.uid);
-        const authenticationTypes: UserAuthenticationType[] = ['editEvents', 'editReports', 'authenticateUser', 'editOccupancy'];
+        const authenticationTypes: UserAuthenticationType[] = ['editEvents', 'editReports', 'authenticateUser', 'notification', 'editOccupancy'];
         for (const authenticationType of authenticationTypes) {
             await database.child('users').child('authentication').child(authenticationType).child(hashedUserId).set({
                 state: 'authenticated',
@@ -51,12 +50,12 @@ fdescribe('ApiService', () => {
         }
     });
 
-    afterEach(async() => {
+    afterEach(async () => {
         await firebaseAuth.signOut();
         await firebaseApi.function('deleteAllData').call({});
     });
 
-    it('remove event', async() => {
+    it('remove event', async () => {
         const eventId = Guid.newGuid();
         await database.child('events').child('general').child(eventId.guidString).set({
             date: new Date().toISOString(),
@@ -73,7 +72,7 @@ fdescribe('ApiService', () => {
         expect(await database.child('events').child('general').child(eventId.guidString).exists()).toBeFalse();
     });
 
-    it('add event', async() => {
+    it('add event', async () => {
         const eventId = Guid.newGuid();
         const date = new Date();
         await firebaseApi.function('event').function('edit').call({
@@ -93,7 +92,7 @@ fdescribe('ApiService', () => {
         });
     });
 
-    it('update event', async() => {
+    it('update event', async () => {
         const eventId = Guid.newGuid();
         await database.child('events').child('general').child(eventId.guidString).set({
             date: new Date().toISOString(),
@@ -117,7 +116,7 @@ fdescribe('ApiService', () => {
         });
     });
 
-    it('get event', async() => {
+    it('get event', async () => {
         const date1 = new Date(new Date().getTime() + 50000);
         const eventId1 = Guid.newGuid();
         await database.child('events').child('general').child(eventId1.guidString).set({
@@ -174,7 +173,7 @@ fdescribe('ApiService', () => {
         ]);
     });
 
-    it('accept waiting user', async() => {
+    it('accept waiting user', async () => {
         await database.child('users').child('authentication').child('editEvents').child('asdf').set({
             state: 'unauthenticated',
             firstName: 'first',
@@ -193,7 +192,7 @@ fdescribe('ApiService', () => {
         });
     });
 
-    it('decline waiting user', async() => {
+    it('decline waiting user', async () => {
         await database.child('users').child('authentication').child('editEvents').child('asdf').set({
             state: 'unauthenticated',
             firstName: 'first',
@@ -208,7 +207,7 @@ fdescribe('ApiService', () => {
         expect(existsValue).toBeFalse();
     });
 
-    it('add user for waiting', async() => {
+    it('add user for waiting', async () => {
         const user = await firebaseAuth.currentUser;
         expect(user).not.toBeNull();
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -241,7 +240,7 @@ fdescribe('ApiService', () => {
         return user;
     }
 
-    it('get unauthenticated users', async() => {
+    it('get unauthenticated users', async () => {
         const user1 = await addUser(1, 'unauthenticated');
         await addUser(2, 'authenticated');
         const user3 = await addUser(3, 'unauthenticated');
@@ -256,7 +255,7 @@ fdescribe('ApiService', () => {
         ]);
     });
 
-    it('remove occupancy location', async() => {
+    it('remove occupancy location', async () => {
         const locationId = Guid.newGuid();
         await database.child('occupancy').child('locations').child(locationId.guidString).set({
             name: 'sportshome',
@@ -271,7 +270,7 @@ fdescribe('ApiService', () => {
         expect(await database.child('occupancy').child('locations').child(locationId.guidString).exists()).toBeFalse();
     });
 
-    it('add occupancy location', async() => {
+    it('add occupancy location', async () => {
         const locationId = Guid.newGuid();
         await firebaseApi.function('occupancy').function('location').function('edit').call({
             editType: 'add',
@@ -288,13 +287,12 @@ fdescribe('ApiService', () => {
         });
     });
 
-    it('update occupancy location', async() => {
+    it('update occupancy location', async () => {
         const locationId = Guid.newGuid();
         await database.child('occupancy').child('locations').child(locationId.guidString).set({
             name: 'sportshome',
             color: '#AB4503'
         }, 'encrypt');
-        const date = new Date();
         await firebaseApi.function('occupancy').function('location').function('edit').call({
             editType: 'change',
             locationId: locationId.guidString,
@@ -310,7 +308,7 @@ fdescribe('ApiService', () => {
         });
     });
 
-    it('remove occupancy assignment', async() => {
+    it('remove occupancy assignment', async () => {
         const assignmentId = Guid.newGuid();
         await database.child('occupancy').child('assignments').child(assignmentId.guidString).set({
             title: 'assignment 1',
@@ -327,14 +325,14 @@ fdescribe('ApiService', () => {
         expect(await database.child('occupancy').child('assignments').child(assignmentId.guidString).exists()).toBeFalse();
     });
 
-    it('add occupancy assignment', async() => {
+    it('add occupancy assignment', async () => {
         const assignmentId = Guid.newGuid();
         const assignment: Omit<OccupancyAssignment, 'id'> = {
             title: 'assignment 1',
             locationIds: [Guid.newGuid()],
             startDate: new Date(),
             endDate: new Date()
-        }
+        };
         await firebaseApi.function('occupancy').function('assignment').function('edit').call({
             editType: 'add',
             assignmentId: assignmentId.guidString,
@@ -344,7 +342,7 @@ fdescribe('ApiService', () => {
         expect(databaseValue).toEqual(OccupancyAssignment.flatten(assignment));
     });
 
-    it('update occupancy assignment', async() => {
+    it('update occupancy assignment', async () => {
         const assignmentId = Guid.newGuid();
         await database.child('occupancy').child('assignments').child(assignmentId.guidString).set({
             title: 'assignment 1',
@@ -357,7 +355,7 @@ fdescribe('ApiService', () => {
             locationIds: [Guid.newGuid()],
             startDate: new Date(),
             endDate: new Date()
-        }
+        };
         await firebaseApi.function('occupancy').function('assignment').function('edit').call({
             editType: 'change',
             assignmentId: assignmentId.guidString,

@@ -37,13 +37,14 @@ class FirebaseFunctions<FFunctions extends FirebaseFunctionsType>  {
     public async call(parameters: FFunctions extends FunctionType<unknown, unknown> ? FunctionType.Parameters<FFunctions> : never): Promise<FFunctions extends FunctionType<unknown, unknown> ? FunctionType.ReturnType<FFunctions> : never> {
         const crypter = new Crypter(environment.cryptionKeys);
         const expiresAtIsoDate = new Date(new Date().getTime() + 60000).toISOString();
+        const functionName = environment.databaseType === 'release' ? this.functionName : `debug-${this.functionName}`;
         const callableFunction = this.firebaseFunctions.httpsCallable<{
             verbose: VerboseType;
             databaseType: DatabaseType;
             callSecret: CallSecret.Flatten;
             parameters: string;
-        }, string>(this.functionName ?? '');
-        const encryptedResult = await lastValueFrom(callableFunction({
+        }, { result: string; context: unknown }>(functionName ?? '');
+        const returnValue = await lastValueFrom(callableFunction({
             verbose: environment.verbose,
             databaseType: environment.databaseType,
             callSecret: {
@@ -52,7 +53,7 @@ class FirebaseFunctions<FFunctions extends FirebaseFunctionsType>  {
             },
             parameters: crypter.encodeEncrypt(parameters)
         }));
-        const result = crypter.decryptDecode<ResultType<FFunctions extends FunctionType<unknown, unknown> ? FunctionType.ReturnType<FFunctions> : never>>(encryptedResult);
+        const result = crypter.decryptDecode<ResultType<FFunctions extends FunctionType<unknown, unknown> ? FunctionType.ReturnType<FFunctions> : never>>(returnValue.result);
         if (result.state === 'failure')
             throw result.error;
         return result.value;
