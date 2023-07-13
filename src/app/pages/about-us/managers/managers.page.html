@@ -6,64 +6,25 @@
     id="managers-container"
   >
     <div
+      *ngFor="let manager of managers"
       class="container"
     >
       <img
-        src="assets/images/profile.png"
-        title="n. a."
-        class="image">
-      <div c
-        class="name"
-        [ngStyle]="{
-          color: styleConfig.css('primaryColor')
-        }"
-      >n. a.</div>
-      <div
-        class="function"
-        [ngStyle]="{
-          color: styleConfig.css('secondaryTextColor')
-        }"
-      >1. Vorsitzender</div>
-    </div>
-    <div
-      class="container"
-    >
-      <img
-        src="assets/images/profile.png"
-        title="Sebastian Schuldes"
+        src="{{ manager.imageSrc ?? 'assets/images/profile.png' }}"
+        title="{{ manager.name }}"
         class="image">
       <div
         class="name"
         [ngStyle]="{
           color: styleConfig.css('primaryColor')
         }"
-      >Sebastian Schuldes</div>
+      >{{ manager.name }}</div>
       <div
         class="function"
         [ngStyle]="{
           color: styleConfig.css('secondaryTextColor')
         }"
-      >2. Vorsitzender</div>
-    </div>
-    <div
-      class="container"
-    >
-      <img
-        src="assets/images/profile.png"
-        title="Josef Hoier"
-        class="image">
-      <div
-        class="name"
-        [ngStyle]="{
-          color: styleConfig.css('primaryColor')
-        }"
-      >Josef Hoier</div>
-      <div
-        class="function"
-        [ngStyle]="{
-          color: styleConfig.css('secondaryTextColor')
-        }"
-      >3. Vorsitzender</div>
+      >{{ manager.function }}</div>
     </div>
   </div>
 </text-section>

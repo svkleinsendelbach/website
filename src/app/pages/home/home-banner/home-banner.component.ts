@@ -28,7 +28,7 @@ export class HomeBannerComponent implements OnInit {
     ) {}
 
     public ngOnInit() {
-        this.bannerData.sort((lhs, rhs) => lhs.isActual ? -1 : (rhs.isActual ? 1 : 0));
+        this.bannerData.sort((lhs, rhs) => lhs.isCurrent ? -1 : (rhs.isCurrent ? 1 : 0));
         this.setPage(1);
     }
 
@@ -144,5 +144,5 @@ export interface BannerItem {
     title: string;
     subTitle?: string;
     link: Link;
-    isActual: boolean;
+    isCurrent: boolean;
 }

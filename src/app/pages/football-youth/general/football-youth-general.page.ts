@@ -8,6 +8,7 @@ import { Link } from 'src/app/types/link';
 import { ContactItem } from 'src/app/modules/general-components/types/contact-item';
 import { LinkData } from 'src/app/modules/general-components/types/link-data';
 import { ReportGroupId } from 'src/app/modules/firebase-api/types/report';
+import { websiteConfig } from 'src/app/config/website-config';
 
 @Component({
     selector: 'pages-football-youth-general',
@@ -72,33 +73,7 @@ export class FootballYouthGeneralPage {
 
     public readonly reportGroupId: ReportGroupId = 'football-adults/general';
 
-    public readonly contactData: ContactItem[] = [
-        {
-            function: 'Jugendleiter Großfeld',
-            name: 'Tim Kellermann',
-            mobile: {
-                number: '015112441784',
-                text: '0151/ 12441784'
-            },
-            email: 'kellermann.tim@gmx.de'
-        },
-        {
-            function: 'Jugendleiter Kleinfeld',
-            name: 'Matthias Iberl',
-            mobile: {
-                number: '01606120508',
-                text: '0160 / 6120508'
-            }
-        },
-        {
-            function: 'Jugendleiter Kleinfeld',
-            name: 'Stefan Seubert',
-            mobile: {
-                number: '01712447114',
-                text: '0171 / 2447114'
-            }
-        }
-    ];
+    public readonly contactData: ContactItem[] = websiteConfig.contact['football-youth'];
 
     public constructor(
         public readonly titleService: Title,

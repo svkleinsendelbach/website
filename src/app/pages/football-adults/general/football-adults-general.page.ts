@@ -8,6 +8,7 @@ import { Link } from 'src/app/types/link';
 import { ContactItem } from 'src/app/modules/general-components/types/contact-item';
 import { LinkData } from 'src/app/modules/general-components/types/link-data';
 import { ReportGroupId } from 'src/app/modules/firebase-api/types/report';
+import { websiteConfig } from 'src/app/config/website-config';
 
 @Component({
     selector: 'pages-football-adults-general',
@@ -48,16 +49,7 @@ export class FootballAdultsGeneralPage {
 
     public readonly reportGroupId: ReportGroupId = 'football-youth/general';
 
-    public readonly contactData: ContactItem[] = [
-        {
-            function: 'Abteilungsleiter Fußball',
-            name: 'Josef Hoier',
-            mobile: {
-                number: '017657857884',
-                text: '0176 / 57857884'
-            }
-        }
-    ];
+    public readonly contactData: ContactItem[] = websiteConfig.contact['football-adults'];
 
     public constructor(
         public readonly titleService: Title,

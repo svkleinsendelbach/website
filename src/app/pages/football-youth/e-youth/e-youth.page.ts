@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { websiteConfig } from 'src/app/config/website-config';
 import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
 import { ReportGroupId } from 'src/app/modules/firebase-api/types/report';
 import { ContactItem } from 'src/app/modules/general-components/types/contact-item';
@@ -20,44 +21,17 @@ export class EYouthPage {
 
     public readonly reportGroupId: ReportGroupId = 'football-youth/e-youth/game-report';
 
-    public readonly teamId = '01L3BHPM88000000VV0AG811VV4PB99G';
+    public readonly teamId = websiteConfig.bfvTeamIds['e-youth'];
 
-    public readonly contactData: ContactItem[] = [
-        {
-            function: 'Trainer',
-            name: 'Matthias Iberl',
-            mobile: {
-                number: '01606120508',
-                text: '0160 / 6120508'
-            }
-        },
-        {
-            function: 'Trainer',
-            name: 'Steven Kellner',
-            mobile: {
-                number: '01702911886',
-                text: '0170 / 2911886'
-            }
-        }
-    ];
+    public readonly contactData: ContactItem[] = websiteConfig.contact['e-youth'];
 
-    public readonly mapOptions: google.maps.MapOptions = {
-        zoom: 14,
-        center: {
-            lat: 49.59271272107774,
-            lng: 11.158062149547574
-        },
+    public readonly mapOptions: google.maps.MapOptions & { center: google.maps.LatLngLiteral } = {
+        zoom: 16,
+        center: websiteConfig.coordinates['a-field'],
         scrollwheel: false,
-        maxZoom: 18,
+        maxZoom: 20,
         minZoom: 5
     };
-
-    public readonly mapMarkers: google.maps.LatLngLiteral[] = [
-        {
-            lat: 49.59271272107774,
-            lng: 11.158062149547574
-        }
-    ];
 
     public constructor(
         public readonly titleService: Title,

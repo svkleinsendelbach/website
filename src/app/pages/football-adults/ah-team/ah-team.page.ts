@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { websiteConfig } from 'src/app/config/website-config';
 import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
 import { ContactItem } from 'src/app/modules/general-components/types/contact-item';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
@@ -17,34 +18,15 @@ export class AhTeamPage {
         'football-adults/ah-team'
     ];
 
-    public readonly contactData: ContactItem[] = [
-        {
-            function: 'Ansprechpartner',
-            name: 'Jürgen Drummer',
-            mobile: {
-                number: '01703396915',
-                text: '0170 / 3396915'
-            }
-        }
-    ];
+    public readonly contactData: ContactItem[] = websiteConfig.contact['ah-team'];
 
-    public readonly mapOptions: google.maps.MapOptions = {
-        zoom: 14,
-        center: {
-            lat: 49.589936,
-            lng: 11.162849
-        },
+    public readonly mapOptions: google.maps.MapOptions & { center: google.maps.LatLngLiteral } = {
+        zoom: 16,
+        center: websiteConfig.coordinates['b-field'],
         scrollwheel: false,
-        maxZoom: 18,
+        maxZoom: 20,
         minZoom: 5
     };
-
-    public readonly mapMarkers: google.maps.LatLngLiteral[] = [
-        {
-            lat: 49.589936,
-            lng: 11.162849
-        }
-    ];
 
     public constructor(
         public readonly titleService: Title,
