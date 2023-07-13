@@ -28,7 +28,7 @@ export class ReportComponent implements AfterViewInit {
     public ngAfterViewInit() {
         if (this.messageElement === undefined)
             return;
-        const parser = new ReportMessageParser(this.styleConfig.css('primaryColor'));
+        const parser = new ReportMessageParser();
         const elements = parser.parse(this.report.message);
         if (elements === null) {
             this.messageElement.nativeElement.style.color = this.styleConfig.css('primaryColor');

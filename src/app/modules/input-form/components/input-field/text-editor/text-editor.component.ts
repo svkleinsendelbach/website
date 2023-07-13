@@ -4,6 +4,9 @@ import { AngularEditorConfig, SelectOption, UploadResponse } from '@kolkov/angul
 import { Observable } from 'rxjs';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { InputField } from '../../../types/input-field';
+import { FileStorageService } from 'src/app/modules/firebase-api/services/file-storage.service';
+import { environment } from 'src/environments/environment';
+import { Guid } from 'src/app/modules/firebase-api/types/guid';
 
 @Component({
     selector: 'input-field-text-editor',
@@ -16,8 +19,6 @@ export class TextEditorComponent implements OnInit {
     @Input() public placeholder: string | undefined = undefined;
 
     @Input() public inputField!: InputField<string>;
-
-    @Input() public uploadFile?: (file: File) => Promise<string>;
 
     public config: AngularEditorConfig = {
         editable: true,
@@ -43,15 +44,13 @@ export class TextEditorComponent implements OnInit {
     public selectedColor: keyof StyleConfigService.StyleConfig = 'textColor';
 
     public constructor(
+        private readonly fileStorage: FileStorageService,
         public styleConfig: StyleConfigService
     ) {}
 
     public ngOnInit() {
-        this.config.upload = this.uploadFile === undefined ? undefined : (file: File) => {
+        this.config.upload = (file: File) => {
             return new Observable<HttpResponse<UploadResponse>>(subscriber => {
-                if (this.uploadFile === undefined) {
-                    return subscriber.complete();
-                }
                 this.uploadFile(file).then(fileUrl => {
                     subscriber.next(new HttpResponse({
                         body: {
@@ -62,6 +61,12 @@ export class TextEditorComponent implements OnInit {
                 });
             });
         };
+    }
+
+    public async uploadFile(file: File): Promise<string> {
+        const fileExtension = /.[^/.]+$/.exec(file.name)?.[0] ?? '';
+        const filePath = `${environment.databaseType}/uploads/files/${Guid.newGuid().guidString}${fileExtension}`;
+        return await this.fileStorage.upload(file, filePath);
     }
 
     public setColor(executeCommand: (commandId: string, value?: string) => boolean) {

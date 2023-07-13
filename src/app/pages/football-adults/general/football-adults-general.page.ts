@@ -47,7 +47,7 @@ export class FootballAdultsGeneralPage {
         'football-adults/ah-team',
     ];
 
-    public readonly reportGroupId: ReportGroupId = 'football-youth/general';
+    public readonly reportGroupId: ReportGroupId = 'football-adults/general';
 
     public readonly contactData: ContactItem[] = websiteConfig.contact['football-adults'];
 

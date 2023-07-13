@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { Crypter } from 'src/app/modules/firebase-api/crypter/Crypter';
+import { unishortBytes, unishortString } from 'src/app/modules/firebase-api/crypter/utils';
 import { FileStorageService } from 'src/app/modules/firebase-api/services/file-storage.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { Guid } from 'src/app/modules/firebase-api/types/guid';
@@ -114,7 +116,7 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
         while (this.messagePreviewElement.nativeElement.firstChild !== null)
             this.messagePreviewElement.nativeElement.removeChild(this.messagePreviewElement.nativeElement.firstChild);
         this.messagePreviewElement.nativeElement.style.color = this.styleConfig.css('textColor');
-        const parser = new ReportMessageParser(this.styleConfig.css('primaryColor'));
+        const parser = new ReportMessageParser();
         const elements = parser.parse(message);
         if (elements === null) {
             this.messagePreviewElement.nativeElement.style.color = this.styleConfig.css('primaryColor');

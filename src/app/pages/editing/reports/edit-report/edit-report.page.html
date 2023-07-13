@@ -72,9 +72,7 @@
         >
             <p
                 id="preview-text"
-                [ngStyle]="{
-                    color: styleConfig.css('textColor')
-                }"
+                *ngIf="inputForm.field('message').value !== ''"
             >Vorschau:</p>
             <div
                 #messagePreview

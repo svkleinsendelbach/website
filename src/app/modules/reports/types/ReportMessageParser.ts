@@ -1,18 +1,22 @@
 import { RegexIterable } from 'src/app/types/regex-iterable';
 
 export class ReportMessageParser {
-    public constructor(
-        private readonly linkColor: string
-    ) {}
+    public constructor() {}
 
     public parse(message: string): (string | HTMLElement)[] | null {
-        const elements = this.parseLinks(message);
+        let elements = this.parseLinks(message);
+        if (elements === null)
+            return null;
+        elements = this.parseNewLines(elements);
+        if (elements === null)
+            return null;
+        elements = this.parseHorizonalLine(elements);
         if (elements === null)
             return null;
         return this.parseFormatting(elements);
     }
 
-    private parseLinks(message: string): (string | HTMLAnchorElement)[] | null {
+    private parseLinks(message: string): (string | HTMLElement)[] | null {
         let lastIndex = 0;
         const elements: (string | HTMLAnchorElement)[] = [];
         const regexIt = new RegexIterable(/\[(?<content>[\S\s]+?)\]\((?<link>[\S\s]+?)\)/g, message);
@@ -21,7 +25,6 @@ export class ReportMessageParser {
             if (match.groups === undefined)
                 continue;
             const link = document.createElement('a');
-            link.style.color = this.linkColor;
             link.href = match.groups['link'];
             link.target = '_blank';
             const content = this.parseFormatting([match.groups['content']]);
@@ -37,9 +40,47 @@ export class ReportMessageParser {
         return elements;
     }
 
+    private parseNewLines(elements: (string | HTMLElement)[]): (string | HTMLElement)[] | null {
+        const result: (string | HTMLElement)[] = [];
+        for (const element of elements) {
+            if (typeof element === 'string') {
+                const regexIt = new RegexIterable(/\n/g, element);
+                let lastIndex = 0;
+                for (const match of regexIt) {
+                    result.push(element.slice(lastIndex, match.startIndex));
+                    result.push(document.createElement('br'));
+                    lastIndex = match.endIndex + 1;
+                }
+                result.push(element.slice(lastIndex));
+            } else {
+                result.push(element);
+            }
+        }
+        return result;
+    }
+
+    private parseHorizonalLine(elements: (string | HTMLElement)[]): (string | HTMLElement)[] | null {
+        const result: (string | HTMLElement)[] = [];
+        for (const element of elements) {
+            if (typeof element === 'string') {
+                const match = /^\s*---\s*$/g.exec(element);
+                if (match !== null) {
+                    const line = document.createElement('div');
+                    line.classList.add('horizontal-line');
+                    line.append(document.createElement('div'));
+                    result.push(line);
+                } else {
+                    result.push(element);
+                }
+            } else {
+                result.push(element);
+            }
+        }
+        return result;
+    }
+
     private parseFormatting(elements: (string | HTMLElement)[]): (string | HTMLElement)[] | null {
         const result: (string | HTMLElement)[] = [];
-        let lastIndex = 0;
         let components: ['***' | '**' | '*', (string | HTMLElement)[]][] = [];
         for (const element of elements) {
             if (typeof element !== 'string') {
@@ -49,6 +90,7 @@ export class ReportMessageParser {
                     components[components.length - 1][1].push(element);
                 continue;
             }
+            let lastIndex = 0;
             const regexIt = new RegexIterable(/(?<three>\*\*\*)|(?<two>\*\*)|(?<one>\*)/g, element);
             for (const match of regexIt) {
                 const format = match.groups?.['three'] !== undefined ? '***' : match.groups?.['two'] !== undefined ? '**' : match.groups?.['one'] !== undefined ? '*' : null;
@@ -123,7 +165,10 @@ export class ReportMessageParser {
                 }
                 lastIndex = match.endIndex + 1;
             }
-            result.push(element.slice(lastIndex));
+            if (components.length === 0)
+                result.push(element.slice(lastIndex));
+            else
+                components[components.length - 1][1].push(element.slice(lastIndex));
         }
         if (components.length !== 0)
             return null;

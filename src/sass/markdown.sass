@@ -1,0 +1,36 @@
+@import '/src/sass/text'
+@import '/src/sass/color'
+@import '/src/sass/flex'
+
+@mixin markdown-container
+    @include font-montserrat
+    @include font-size('medium')
+    @include font-weight('small')
+    text-align: justify
+    @include dynamic-color(color, 'secondaryText')
+
+    &::ng-deep
+        *
+            display: inline-block
+
+        a
+            text-decoration: none
+            cursor: pointer
+            @include dynamic-color(color, 'primary')
+
+        .italic
+            font-style: italic
+
+        .strong
+            @include font-weight('medium')
+            @include dynamic-color(color, 'text')
+
+        .horizontal-line
+            @include flex-row(center, center)
+            width: 100%
+            height: 2px
+
+            > *
+                width: 90%
+                height: 1px
+                @include dynamic-color(background-color, 'text')

@@ -60,7 +60,6 @@ export class EventsComponent implements OnInit {
                 });
             }
         }
-        console.log(calender.toJSON());
         const downloadElement = document.createElement('a');
         downloadElement.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(calender.toString())}`);
         downloadElement.setAttribute('download', 'sv-kleinsendelbach-kalender.ics');

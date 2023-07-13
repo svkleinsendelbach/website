@@ -7,6 +7,7 @@ import { SharedDataService } from 'src/app/services/shared-data.service';
 import { InternalLink } from 'src/app/types/internal-path';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { Event, EventGroup, EventGroupId } from 'src/app/modules/firebase-api/types/event';
+import { Datum } from 'src/app/types/datum';
 
 @Component({
     selector: 'pages-editing-events',
@@ -14,6 +15,8 @@ import { Event, EventGroup, EventGroupId } from 'src/app/modules/firebase-api/ty
     styleUrls: ['./editing-events.page.sass']
 })
 export class EditingEventsPage {
+    public Datum = Datum;
+
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
     public mainEditingPageLink = InternalLink.all['bearbeiten'];
     public allEventGroupIds = EventGroupId.all;

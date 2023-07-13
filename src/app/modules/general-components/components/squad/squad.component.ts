@@ -29,7 +29,6 @@ export class SquadComponent implements OnInit {
         }).then(squad => {
             this.fetchedSquad = FetchState.success(squad);
         }).catch(reason => {
-            console.log(reason);
             this.fetchedSquad = FetchState.failure(reason);
         });
     }

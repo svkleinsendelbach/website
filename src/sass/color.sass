@@ -11,3 +11,8 @@ $dark-colors-map: ('primary': #C4354F, 'background': #24252A, 'secondaryBackgrou
 
 @function darkColor($name)
     @return color($name, false)
+
+@mixin dynamic-color($property, $name)
+    #{$property}: color($name)
+    @media screen and (prefers-color-scheme: dark)
+        #{$property}: darkColor($name)
