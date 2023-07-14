@@ -2,9 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { GameInfo, BfvLiveticker } from 'src/app/modules/firebase-api/types/game-info';
 import { FetchState } from 'src/app/types/fetch-state';
-import { Datum } from 'src/app/types/datum';
 import { DeviceTypeService } from '../../../../services/device-type.service';
 import { StyleConfigService } from '../../../../services/style-config.service';
+import { UtcDate } from 'src/app/types/utc-date';
 
 @Component({
     selector: 'game-info',
@@ -12,7 +12,7 @@ import { StyleConfigService } from '../../../../services/style-config.service';
     styleUrls: ['./game-info.component.sass']
 })
 export class GameInfoComponent implements OnInit {
-    public Datum = Datum;
+    public UtcDate = UtcDate;
 
     @Input() public gameId!: string;
 

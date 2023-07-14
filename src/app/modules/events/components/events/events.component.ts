@@ -4,8 +4,8 @@ import ical from 'ical-generator';
 import { StyleConfigService } from '../../../../services/style-config.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { FetchState } from 'src/app/types/fetch-state';
-import { EventGroup, EventGroupId } from 'src/app/modules/firebase-api/types/event';
-import { Datum } from 'src/app/types/datum';
+import { Event, EventGroup, EventGroupId } from 'src/app/modules/firebase-api/types/event';
+import { UtcDate } from 'src/app/types/utc-date';
 
 @Component({
     selector: 'events',
@@ -13,12 +13,11 @@ import { Datum } from 'src/app/types/datum';
     styleUrls: ['./events.component.sass']
 })
 export class EventsComponent implements OnInit {
-    public Datum = Datum;
     public EventGroupId = EventGroupId;
 
     @Input() public groupIds!: EventGroupId[];
 
-    public fetchedEventGroups: FetchState<EventGroup.Flatten[]> = FetchState.loading;
+    public fetchedEventGroups: FetchState<EventGroup[]> = FetchState.loading;
 
     public constructor(
         private readonly firebaseApiService: FirebaseApiService,
@@ -30,10 +29,20 @@ export class EventsComponent implements OnInit {
         this.firebaseApiService.function('event').function('get').call({
             groupIds: this.groupIds
         }).then(eventGroups => {
-            this.fetchedEventGroups = FetchState.success(eventGroups);
+            this.fetchedEventGroups = FetchState.success(eventGroups.map(eventGroup => {
+                return {
+                    groupId: eventGroup.groupId,
+                    events: eventGroup.events.map(event => Event.concrete(event))
+                };
+            }));
         }).catch(reason => {
             this.fetchedEventGroups = FetchState.failure(reason);
         });
+    }
+
+    public isRecent(event: Event): boolean {
+        const referenceDate = UtcDate.now.advanced({ day: 3 });
+        return event.date.compare(referenceDate) !== 'greater';
     }
 
     public downloadCalendar() {
@@ -47,9 +56,9 @@ export class EventsComponent implements OnInit {
         for (const eventGroup of this.fetchedEventGroups.content) {
             for (const event of eventGroup.events) {
                 calender.createEvent({
-                    id: event.id,
-                    start: new Date(event.date),
-                    end: new Date(new Date(event.date).getTime() + 5400000), // 1,5h
+                    id: event.id.guidString,
+                    start: event.date.localized,
+                    end: event.date.advanced({ hour: 1, minute: 30 }).localized,
                     timezone: 'Europe/Berlin',
                     summary: event.title,
                     description: event.subtitle,

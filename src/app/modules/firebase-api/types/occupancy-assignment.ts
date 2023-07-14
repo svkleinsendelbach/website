@@ -1,11 +1,12 @@
+import { UtcDate } from 'src/app/types/utc-date';
 import { Guid } from './guid';
 
 export type OccupancyAssignment = {
     id: Guid;
     locationIds: Guid[];
     title: string;
-    startDate: Date;
-    endDate: Date;
+    startDate: UtcDate;
+    endDate: UtcDate;
 };
 
 export namespace OccupancyAssignment {
@@ -24,8 +25,8 @@ export namespace OccupancyAssignment {
             ...('id' in assignment ? { id: assignment.id.guidString } : {}),
             locationIds: assignment.locationIds.map(id => id.guidString),
             title: assignment.title,
-            startDate: assignment.startDate.toISOString(),
-            endDate: assignment.endDate.toISOString()
+            startDate: assignment.startDate.encoded,
+            endDate: assignment.endDate.encoded
         };
     }
 
@@ -36,8 +37,8 @@ export namespace OccupancyAssignment {
             ...('id' in assignment ? { id: new Guid(assignment.id) } : {}),
             locationIds: assignment.locationIds.map(id => new Guid(id)),
             title: assignment.title,
-            startDate: new Date(assignment.startDate),
-            endDate: new Date(assignment.endDate)
+            startDate: UtcDate.decode(assignment.startDate),
+            endDate: UtcDate.decode(assignment.endDate)
         };
     }
 }

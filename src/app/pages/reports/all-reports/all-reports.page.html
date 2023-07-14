@@ -24,7 +24,7 @@
     >Keine Berichte</p>
     <report
         *ngFor="let report of fetchedReports.content"
-        [report]="report"
+        [report]="Report.concrete(report)"
         [groupId]="report.groupId"
     ></report>
 </text-section>

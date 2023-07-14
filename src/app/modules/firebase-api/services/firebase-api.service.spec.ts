@@ -11,6 +11,7 @@ import { UserAuthenticationType } from '../types/user-authentication';
 import { Guid } from '../types/guid';
 import { UserAuthenticationGetAllUnauthenticatedFunction } from '../function-types';
 import { OccupancyAssignment } from '../types/occupancy-assignment';
+import { UtcDate } from 'src/app/types/utc-date';
 
 describe('ApiService', () => {
     let firebaseApi: FirebaseApiService;
@@ -58,7 +59,7 @@ describe('ApiService', () => {
     it('remove event', async () => {
         const eventId = Guid.newGuid();
         await database.child('events').child('general').child(eventId.guidString).set({
-            date: new Date().toISOString(),
+            date: UtcDate.now.encoded,
             title: 'title'
         }, 'encrypt');
         expect(await database.child('events').child('general').child(eventId.guidString).exists()).toBeTrue();
@@ -74,20 +75,20 @@ describe('ApiService', () => {
 
     it('add event', async () => {
         const eventId = Guid.newGuid();
-        const date = new Date();
+        const date = UtcDate.now;
         await firebaseApi.function('event').function('edit').call({
             editType: 'add',
             groupId: 'general',
             previousGroupId: undefined,
             eventId: eventId.guidString,
             event: {
-                date: date.toISOString(),
+                date: date.encoded,
                 title: 'title'
             }
         });
         const databaseValue = await database.child('events').child('general').child(eventId.guidString).get('decrypt');
         expect(databaseValue).toEqual({
-            date: date.toISOString(),
+            date: date.encoded,
             title: 'title'
         });
     });
@@ -95,50 +96,50 @@ describe('ApiService', () => {
     it('update event', async () => {
         const eventId = Guid.newGuid();
         await database.child('events').child('general').child(eventId.guidString).set({
-            date: new Date().toISOString(),
+            date: UtcDate.now.encoded,
             title: 'title'
         }, 'encrypt');
-        const date = new Date();
+        const date = UtcDate.now;
         await firebaseApi.function('event').function('edit').call({
             editType: 'change',
             groupId: 'general',
             previousGroupId: 'general',
             eventId: eventId.guidString,
             event: {
-                date: date.toISOString(),
+                date: date.encoded,
                 title: 'title2'
             }
         });
         const databaseValue = await database.child('events').child('general').child(eventId.guidString).get('decrypt');
         expect(databaseValue).toEqual({
-            date: date.toISOString(),
+            date: date.encoded,
             title: 'title2'
         });
     });
 
     it('get event', async () => {
-        const date1 = new Date(new Date().getTime() + 50000);
+        const date1 = UtcDate.now.advanced({ minute: 50 });
         const eventId1 = Guid.newGuid();
         await database.child('events').child('general').child(eventId1.guidString).set({
-            date: date1.toISOString(),
+            date: date1.encoded,
             title: 'event1'
         }, 'encrypt');
-        const date2 = new Date(new Date().getTime() + 30000);
+        const date2 = UtcDate.now.advanced({ minute: 30 });
         const eventId2 = Guid.newGuid();
         await database.child('events').child('general').child(eventId2.guidString).set({
-            date: date2.toISOString(),
+            date: date2.encoded,
             title: 'event2'
         }, 'encrypt');
-        const date3 = new Date(new Date().getTime() + 20000);
+        const date3 = UtcDate.now.advanced({ minute: 20 });
         const eventId3 = Guid.newGuid();
         await database.child('events').child('football-adults/first-team').child(eventId3.guidString).set({
-            date: date3.toISOString(),
+            date: date3.encoded,
             title: 'event3'
         }, 'encrypt');
-        const date4 = new Date(new Date().getTime() - 30000);
+        const date4 = UtcDate.now.advanced({ minute: -30 });
         const eventId4 = Guid.newGuid();
         await database.child('events').child('football-adults/first-team').child(eventId4.guidString).set({
-            date: date4.toISOString(),
+            date: date4.encoded,
             title: 'event4'
         }, 'encrypt');
         const result = await firebaseApi.function('event').function('get').call({
@@ -150,12 +151,12 @@ describe('ApiService', () => {
                 events: [
                     {
                         id: eventId2.guidString,
-                        date: date2.toISOString(),
+                        date: date2.encoded,
                         title: 'event2'
                     },
                     {
                         id: eventId1.guidString,
-                        date: date1.toISOString(),
+                        date: date1.encoded,
                         title: 'event1'
                     }
                 ]
@@ -165,7 +166,7 @@ describe('ApiService', () => {
                 events: [
                     {
                         id: eventId3.guidString,
-                        date: date3.toISOString(),
+                        date: date3.encoded,
                         title: 'event3'
                     }
                 ]
@@ -313,8 +314,8 @@ describe('ApiService', () => {
         await database.child('occupancy').child('assignments').child(assignmentId.guidString).set({
             title: 'assignment 1',
             locationIds: [Guid.newGuid().guidString],
-            startDate: new Date().toISOString(),
-            endDate: new Date().toISOString()
+            startDate: UtcDate.now.encoded,
+            endDate: UtcDate.now.encoded
         }, 'encrypt');
         expect(await database.child('occupancy').child('assignments').child(assignmentId.guidString).exists()).toBeTrue();
         await firebaseApi.function('occupancy').function('assignment').function('edit').call({
@@ -330,8 +331,8 @@ describe('ApiService', () => {
         const assignment: Omit<OccupancyAssignment, 'id'> = {
             title: 'assignment 1',
             locationIds: [Guid.newGuid()],
-            startDate: new Date(),
-            endDate: new Date()
+            startDate: UtcDate.now,
+            endDate: UtcDate.now
         };
         await firebaseApi.function('occupancy').function('assignment').function('edit').call({
             editType: 'add',
@@ -347,14 +348,14 @@ describe('ApiService', () => {
         await database.child('occupancy').child('assignments').child(assignmentId.guidString).set({
             title: 'assignment 1',
             locationIds: [Guid.newGuid().guidString],
-            startDate: new Date().toISOString(),
-            endDate: new Date().toISOString()
+            startDate: UtcDate.now.encoded,
+            endDate: UtcDate.now.encoded
         }, 'encrypt');
         const assignment: Omit<OccupancyAssignment, 'id'> = {
             title: 'assignment 2',
             locationIds: [Guid.newGuid()],
-            startDate: new Date(),
-            endDate: new Date()
+            startDate: UtcDate.now,
+            endDate: UtcDate.now
         };
         await firebaseApi.function('occupancy').function('assignment').function('edit').call({
             editType: 'change',
@@ -376,38 +377,38 @@ describe('ApiService', () => {
             name: 'location 2',
             color: '#A842BB'
         }, 'encrypt');
-        const endDate = new Date(new Date().getTime() + 100000);
-        const date1 = new Date(new Date().getTime() + 50000);
+        const endDate = UtcDate.now.advanced({ minute: 100 });
+        const date1 = UtcDate.now.advanced({ minute: 50 });
         const assignmentId1 = Guid.newGuid();
         await database.child('occupancy').child('assignments').child(assignmentId1.guidString).set({
             locationIds: [locationId1.guidString],
             title: 'assignment 1',
-            startDate: date1.toISOString(),
-            endDate: endDate.toISOString()
+            startDate: date1.encoded,
+            endDate: endDate.encoded
         }, 'encrypt');
-        const date2 = new Date(new Date().getTime() + 30000);
+        const date2 = UtcDate.now.advanced({ minute: 30 });
         const assignmentId2 = Guid.newGuid();
         await database.child('occupancy').child('assignments').child(assignmentId2.guidString).set({
             locationIds: [locationId2.guidString],
             title: 'assignment 2',
-            startDate: date2.toISOString(),
-            endDate: endDate.toISOString()
+            startDate: date2.encoded,
+            endDate: endDate.encoded
         }, 'encrypt');
-        const date3 = new Date(new Date().getTime() + 20000);
+        const date3 = UtcDate.now.advanced({ minute: 20 });
         const assignmentId3 = Guid.newGuid();
         await database.child('occupancy').child('assignments').child(assignmentId3.guidString).set({
             locationIds: [locationId2.guidString],
             title: 'assignment 3',
-            startDate: date3.toISOString(),
-            endDate: endDate.toISOString()
+            startDate: date3.encoded,
+            endDate: endDate.encoded
         }, 'encrypt');
-        const date4 = new Date(new Date().getTime() - 30000);
+        const date4 = UtcDate.now.advanced({ minute: -30 });
         const assignmentId4 = Guid.newGuid();
         await database.child('occupancy').child('assignments').child(assignmentId4.guidString).set({
             locationIds: [locationId1.guidString, locationId2.guidString],
             title: 'assignment 4',
-            startDate: date4.toISOString(),
-            endDate: endDate.toISOString()
+            startDate: date4.encoded,
+            endDate: endDate.encoded
         }, 'encrypt');
         const result = await firebaseApi.function('occupancy').function('assignment').function('get').call({});
         expect(result).toEqual({
@@ -426,29 +427,29 @@ describe('ApiService', () => {
                     id: assignmentId4.guidString,
                     locationIds: [locationId1.guidString, locationId2.guidString],
                     title: 'assignment 4',
-                    startDate: date4.toISOString(),
-                    endDate: endDate.toISOString()
+                    startDate: date4.encoded,
+                    endDate: endDate.encoded
                 },
                 {
                     id: assignmentId3.guidString,
                     locationIds: [locationId2.guidString],
                     title: 'assignment 3',
-                    startDate: date3.toISOString(),
-                    endDate: endDate.toISOString()
+                    startDate: date3.encoded,
+                    endDate: endDate.encoded
                 },
                 {
                     id: assignmentId2.guidString,
                     locationIds: [locationId2.guidString],
                     title: 'assignment 2',
-                    startDate: date2.toISOString(),
-                    endDate: endDate.toISOString()
+                    startDate: date2.encoded,
+                    endDate: endDate.encoded
                 },
                 {
                     id: assignmentId1.guidString,
                     locationIds: [locationId1.guidString],
                     title: 'assignment 1',
-                    startDate: date1.toISOString(),
-                    endDate: endDate.toISOString()
+                    startDate: date1.encoded,
+                    endDate: endDate.encoded
                 }
             ]
         });

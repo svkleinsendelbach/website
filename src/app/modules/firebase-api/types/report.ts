@@ -1,3 +1,4 @@
+import { UtcDate } from 'src/app/types/utc-date';
 import { Guid } from './guid';
 
 export type ReportGroupId =
@@ -68,7 +69,7 @@ export type Report = {
     title: string;
     message: string;
     imageUrl?: string;
-    createDate: Date;
+    createDate: UtcDate;
 };
 
 export namespace Report {
@@ -88,7 +89,7 @@ export namespace Report {
             title: report.title,
             message: report.message,
             imageUrl: report.imageUrl,
-            createDate: report.createDate.toISOString()
+            createDate: report.createDate.encoded
         };
     }
 
@@ -100,7 +101,7 @@ export namespace Report {
             title: report.title,
             message: report.message,
             imageUrl: report.imageUrl,
-            createDate: new Date(report.createDate)
+            createDate: UtcDate.decode(report.createDate)
         };
     }
 }

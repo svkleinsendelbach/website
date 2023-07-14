@@ -2,8 +2,8 @@ import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular
 import { Report, ReportGroupId } from 'src/app/modules/firebase-api/types/report';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
-import { Datum } from 'src/app/types/datum';
 import { ReportMessageParser } from '../../types/ReportMessageParser';
+import { UtcDate } from 'src/app/types/utc-date';
 
 @Component({
     selector: 'report',
@@ -11,14 +11,17 @@ import { ReportMessageParser } from '../../types/ReportMessageParser';
     styleUrls: ['./report.component.sass']
 })
 export class ReportComponent implements AfterViewInit {
-    public Datum = Datum;
     public ReportGroupId = ReportGroupId;
 
-    @Input() report!: Report.Flatten;
+    @Input() report!: Report;
 
     @Input() groupId?: ReportGroupId;
 
     @ViewChild('message') public messageElement?: ElementRef<HTMLElement>;
+
+    public isMessageClipped = true;
+
+    public isShownMore = false;
 
     public constructor(
         public readonly styleConfig: StyleConfigService,
@@ -37,10 +40,15 @@ export class ReportComponent implements AfterViewInit {
             for (const element of elements)
                 this.messageElement.nativeElement.append(element);
         }
+        this.isMessageClipped = this.messageElement.nativeElement.clientHeight >= 150;
     }
 
     public get isRecent(): boolean {
-        const referenceDate = new Date(new Date().getTime() - 3 * 24 * 60 * 60 * 1000); // Three days
-        return new Date(this.report.createDate) >= referenceDate;
+        const referenceDate = UtcDate.now.advanced({ day: -3 });
+        return this.report.createDate.compare(referenceDate) !== 'less';
+    }
+
+    public toggleShowMore() {
+        this.isShownMore = !this.isShownMore;
     }
 }

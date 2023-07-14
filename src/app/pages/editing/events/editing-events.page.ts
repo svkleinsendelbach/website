@@ -7,7 +7,7 @@ import { SharedDataService } from 'src/app/services/shared-data.service';
 import { InternalLink } from 'src/app/types/internal-path';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { Event, EventGroup, EventGroupId } from 'src/app/modules/firebase-api/types/event';
-import { Datum } from 'src/app/types/datum';
+import { Guid } from 'src/app/modules/firebase-api/types/guid';
 
 @Component({
     selector: 'pages-editing-events',
@@ -15,14 +15,12 @@ import { Datum } from 'src/app/types/datum';
     styleUrls: ['./editing-events.page.sass']
 })
 export class EditingEventsPage {
-    public Datum = Datum;
-
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
     public mainEditingPageLink = InternalLink.all['bearbeiten'];
     public allEventGroupIds = EventGroupId.all;
     public eventGroupTitle = EventGroupId.title;
 
-    public eventGroups: EventGroup.Flatten[] | undefined = undefined;
+    public eventGroups: EventGroup[] | undefined = undefined;
 
     public constructor(
         public readonly titleService: Title,
@@ -44,18 +42,25 @@ export class EditingEventsPage {
     private async getEvents() {
         this.eventGroups = await this.firebaseApiService.function('event').function('get').call({
             groupIds: EventGroupId.all
+        }).then(eventGroups => {
+            return eventGroups.map(eventGroup => {
+                return {
+                    groupId: eventGroup.groupId,
+                    events: eventGroup.events.map(event => Event.concrete(event))
+                };
+            });
         });
     }
 
-    public getEventGroupOf(groupId: EventGroupId): EventGroup.Flatten | undefined {
+    public getEventGroupOf(groupId: EventGroupId): EventGroup | undefined {
         return this.eventGroups?.find(eventGroup => eventGroup.groupId === groupId);
     }
 
-    public async deleteEvent(groupId: EventGroupId, eventId: string) {
+    public async deleteEvent(groupId: EventGroupId, eventId: Guid) {
         this.eventGroups = this.eventGroups?.flatMap(eventGroup => {
             if (eventGroup.groupId !== groupId)
                 return eventGroup;
-            const events = eventGroup.events.filter(event => event.id !== eventId);
+            const events = eventGroup.events.filter(event => event.id.guidString !== eventId.guidString);
             if (events.length === 0)
                 return [];
             return {
@@ -67,15 +72,15 @@ export class EditingEventsPage {
             editType: 'remove',
             groupId: groupId,
             previousGroupId: undefined,
-            eventId: eventId,
+            eventId: eventId.guidString,
             event: undefined
         });
     }
 
-    public async editEvent(groupId: EventGroupId, event: Event.Flatten) {
+    public async editEvent(groupId: EventGroupId, event: Event) {
         this.sharedData.setValue('editEvent', {
             groupId: groupId,
-            event: event
+            event: Event.flatten(event)
         });
         await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine/bearbeiten'].link);
     }

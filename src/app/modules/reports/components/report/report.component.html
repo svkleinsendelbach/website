@@ -15,7 +15,7 @@
         [ngStyle]="{
             color: styleConfig.css('textColor')
         }"
-    >{{ ReportGroupId.title[groupId] }} | </p>{{ Datum.fromIsoDate(report.createDate).description }}</div>
+    >{{ ReportGroupId.title[groupId] }} | </p>{{ report.createDate.description }}</div>
     <div
         id="message-container"
     >
@@ -40,13 +40,24 @@
             <p
                 id="title"
                 [ngStyle]="{
-                    color: styleConfig.css('primaryColor')
+                    color: styleConfig.css('textColor')
                 }"
             >{{ report.title }}</p>
             <p
                 #message
                 id="message"
+                [ngStyle]="{
+                    height: isMessageClipped && !isShownMore ? '150px' : undefined
+                }"
             ></p>
+            <p
+                id="show-more-button"
+                *ngIf="isMessageClipped"
+                (click)="toggleShowMore()"
+                [ngStyle]="{
+                    color: styleConfig.css('primaryColor')
+                }"
+            >{{ isShownMore ? 'Weniger anzeigen ' : 'Mehr anzeigen' }}</p>
         </div>
         <img
             id="image"

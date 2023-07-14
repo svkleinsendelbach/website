@@ -27,7 +27,7 @@
     >
         <report
             *ngFor="let report of fetchedReports.content?.reports"
-            [report]="report"
+            [report]="Report.concrete(report)"
         ></report>
     </div>
     <a

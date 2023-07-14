@@ -1,3 +1,4 @@
+import { UtcDate } from 'src/app/types/utc-date';
 import { Guid } from './guid';
 
 export type EventGroupId =
@@ -68,7 +69,7 @@ export namespace EventGroupId {
 
 export type Event = {
     id: Guid;
-    date: Date;
+    date: UtcDate;
     title: string;
     subtitle?: string;
     link?: string;
@@ -88,7 +89,7 @@ export namespace Event {
     export function flatten(event: Event | Omit<Event, 'id'>): Event.Flatten | Omit<Event.Flatten, 'id'> {
         return {
             ...('id' in event ? { id: event.id.guidString } : {}),
-            date: event.date.toISOString(),
+            date: event.date.encoded,
             title: event.title,
             subtitle: event.subtitle,
             link: event.link
@@ -100,7 +101,7 @@ export namespace Event {
     export function concrete(event: Event.Flatten | Omit<Event.Flatten, 'id'>): Event | Omit<Event, 'id'> {
         return {
             ...('id' in event ? { id: new Guid(event.id) } : {}),
-            date: new Date(event.date),
+            date: UtcDate.decode(event.date),
             title: event.title,
             subtitle: event.subtitle,
             link: event.link

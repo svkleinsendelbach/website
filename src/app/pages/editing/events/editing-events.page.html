@@ -60,7 +60,7 @@
             [ngStyle]="{
               color: styleConfig.css('textColor')
             }"
-          >{{ event.title + ' | ' + Datum.fromIsoDate(event.date).description }}</p>
+          >{{ event.title + ' | ' + event.date.description }}</p>
           <p
             *ngIf="event.subtitle !== undefined"
             class="subtitle"

@@ -56,7 +56,7 @@ export class EditEventPage implements OnInit {
         link: new InputField('', [
             Validator.eitherOne('Das ist kein gültiger Link.', Validator.empty(''), Validator.url(''))
         ]),
-        date: new InputField<Date>(new Date, [
+        date: new InputField<Date>(new Date(), [
             Validator.futureDate('Das Datum muss in der Zukunft liegen')
         ])
     }, {

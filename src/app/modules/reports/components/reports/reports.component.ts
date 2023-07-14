@@ -12,6 +12,8 @@ import { InternalLink } from 'src/app/types/internal-path';
     styleUrls: ['./reports.component.sass']
 })
 export class ReportsComponent implements OnInit {
+    public Report = Report;
+
     @Input() isGameReport: boolean = false;
 
     @Input() public groupId!: ReportGroupId;

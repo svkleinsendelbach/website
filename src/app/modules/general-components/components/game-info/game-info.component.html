@@ -36,7 +36,7 @@
     [ngStyle]="{
       color: styleConfig.css('textColor')
     }"
-  >{{ Datum.fromIsoDate(fetchedGameInfo.content.date).description }}</p>
+  >{{ UtcDate.fromIsoDate(fetchedGameInfo.content.date).description }}</p>
   <a
     id="adress"
     *ngIf="fetchedGameInfo.content.adress !== undefined && fetchedGameInfo.content.adressDescription !== undefined"

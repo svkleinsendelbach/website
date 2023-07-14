@@ -43,9 +43,9 @@
       <p
         class="date"
         [ngStyle]="{
-          color: styleConfig.css('secondaryTextColor')
+          color: styleConfig.css(isRecent(event) ? 'primaryColor' : 'secondaryTextColor')
         }"
-      >{{ Datum.fromIsoDate(event.date).description }}</p>
+      >{{ event.date.description }}</p>
       <p
         class="title"
         [ngStyle]="{

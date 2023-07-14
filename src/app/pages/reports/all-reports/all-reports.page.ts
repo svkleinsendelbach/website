@@ -12,6 +12,8 @@ import { FetchState } from 'src/app/types/fetch-state';
     styleUrls: ['./all-reports.page.sass']
 })
 export class AllReportsPage implements OnInit {
+    public Report = Report;
+
     public fetchedReports: FetchState<(Report.Flatten & { groupId: ReportGroupId })[]> = FetchState.loading;
 
     public constructor(

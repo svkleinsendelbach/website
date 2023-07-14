@@ -53,6 +53,16 @@
 
             #message
                 @include markdown-container
+                overflow: scroll
+                line-height: 30px
+
+            #show-more-button
+                cursor: pointer
+                @include font-montserrat
+                @include font-size('normal')
+                @include font-weight('normal')
+                width: 100%
+                text-align: end
 
 :host:nth-last-child(1) #report
     border-bottom: none
