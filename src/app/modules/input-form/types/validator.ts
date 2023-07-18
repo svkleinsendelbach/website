@@ -1,3 +1,4 @@
+import { UtcDate } from 'src/app/types/utc-date';
 import { ValidationResult } from './validation-result';
 
 export interface Validator<T> {
@@ -69,11 +70,9 @@ export namespace Validator {
         });
     }
 
-    export function futureDate(errorMessage: string): Validator<Date> {
-        return validator(errorMessage, (value: Date) => {
-            const date = new Date(value);
-            date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-            if (date >= new Date())
+    export function futureDate(errorMessage: string): Validator<UtcDate> {
+        return validator(errorMessage, (value: UtcDate) => {
+            if (value.compare(UtcDate.now) !== 'less')
                 return ValidationResult.Valid;
             return ValidationResult.Invalid;
         });

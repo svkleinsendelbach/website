@@ -5,6 +5,7 @@ import { Crypter } from 'src/app/modules/firebase-api/crypter/Crypter';
 import { unishortBytes, unishortString } from 'src/app/modules/firebase-api/crypter/utils';
 import { FileStorageService } from 'src/app/modules/firebase-api/services/file-storage.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
+import { GameInfo } from 'src/app/modules/firebase-api/types/game-info';
 import { Guid } from 'src/app/modules/firebase-api/types/guid';
 import { Report, ReportGroupId } from 'src/app/modules/firebase-api/types/report';
 import { SelectOptions } from 'src/app/modules/input-form/components/input-field/select/select.component';
@@ -19,6 +20,7 @@ import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { InternalLink } from 'src/app/types/internal-path';
+import { UtcDate } from 'src/app/types/utc-date';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -32,8 +34,22 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
 
     public previousReport: {
         groupId: ReportGroupId;
-        report: Report.Flatten;
+        report: Report;
     } | undefined;
+
+    public bfvGameInputForm = new InputForm({
+        bfvGameLink: new InputField<string>('', [
+            Validator.required('Der BFV Link ist erforderlich.'),
+            Validator.url('Das ist kein gültiger Link.')
+        ])
+    }, {
+        invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
+        gameIdNotFound: new InputError('Die Spiel-Id wurde im Link nicht gefunden.'),
+        gameNotFound: new InputError('Das Spiel wurde bei BFV nicht gefunden.'),
+        reportNotFound: new InputError('Das Spiel hat keinen Bericht bei BFV.'),
+        loading: new InputError('BFV Daten werden übernommen.', ErrorLevel.Info),
+        failed: new InputError('Der Bericht konnte nicht gefunden werden.')
+    });
 
     public inputForm = new InputForm({
         groupId: new InputField<ReportGroupId>('general', [
@@ -48,8 +64,8 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
         ]),
     }, {
         invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
-        loading: new InputError('Bericht wird gespeichert.', ErrorLevel.Info),
-        failed: new InputError('Bericht konnte nicht gespeichert werden.')
+        loading: new InputError('Der Bericht wird gespeichert.', ErrorLevel.Info),
+        failed: new InputError('Der Bericht konnte nicht gespeichert werden.')
     });
 
     public imageUrl?: string;
@@ -70,7 +86,13 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
         }>,
         private router: Router
     ) {
-        this.previousReport = this.sharedData.getValue('editReport');
+        const previousReport = this.sharedData.getValue('editReport');
+        if (previousReport !== undefined) {
+            this.previousReport = {
+                groupId: previousReport.groupId,
+                report: Report.concrete(previousReport.report)
+            };
+        }
         this.titleService.setTitle(this.previousReport === undefined ? 'Bericht hinzufügen' : 'Bericht bearbeiten');
     }
 
@@ -110,6 +132,49 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
         this.inputForm.field('message').listeners.remove('report-message-preview');
     }
 
+    public async takeBfvGame() {
+        if (this.bfvGameInputForm.status === 'loading')
+            return;
+        this.bfvGameInputForm.status = 'valid';
+        const validation = this.bfvGameInputForm.evaluate();
+        if (validation === ValidationResult.Invalid)
+            return;
+        this.bfvGameInputForm.status = 'loading';
+        const gameId = /^(?:https:\/\/)?(?:www\.)?bfv\.de\/spiele\/(?:\S+?\/)?(?<id>\S+?)$/g.exec(this.bfvGameInputForm.field('bfvGameLink').value)?.groups?.['id'];
+        if (gameId === undefined) {
+            this.bfvGameInputForm.status = 'gameIdNotFound';
+            return;
+        }
+        try {
+            const gameInfo = await this.firebaseApiService.function('bfvData').function('gameInfo').call({
+                gameId: gameId
+            });
+            if (gameInfo.report === undefined) {
+                this.bfvGameInputForm.status = 'reportNotFound';
+                return;
+            }
+            const { isSg2, sgHomeAway } = GameInfo.additionalProperties(gameInfo);
+            this.inputForm.field('groupId').initialValue = isSg2 ? 'football-adults/second-team/game-report' : 'football-adults/first-team/game-report';
+            this.inputForm.field('title').initialValue = UtcDate.decode(gameInfo.date).description + ' | ' + gameInfo.report.title;
+            this.inputForm.field('message').initialValue = gameInfo.report.paragraphs.reduce((result, paragraph) => {
+                return result + paragraph.reduce((result, value) => {
+                    if (value.link === undefined)
+                        return result + value.text;
+                    return result + `[${value.text}](${value.link})`;
+                }, '') + '\n\n';
+            }, '').trim();
+            this.imageUrl = `https://service-prod.bfv.de/export.media?action=getLogo&format=16&id=${sgHomeAway === 'home' ? gameInfo.awayTeam.imageId : gameInfo.homeTeam.imageId }`;
+        } catch (error) {
+            if (error === null || typeof error !== 'object' || !('code' in error) || error.code !== 'not-found') {
+                this.bfvGameInputForm.status = 'failed';
+                throw error;
+            }
+            this.bfvGameInputForm.status = 'gameNotFound';
+            return;
+        }
+        this.bfvGameInputForm.status = 'valid';
+    }
+
     private updateMessagePreview(message: string) {
         if (this.messagePreviewElement === undefined)
             return;
@@ -144,13 +209,13 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
         if (validation === ValidationResult.Invalid)
             return;
         this.inputForm.status = 'loading';
-        const reportId = this.previousReport?.report.id ?? Guid.newGuid().guidString;
-        const createDate = this.previousReport?.report.createDate ?? new Date().toISOString();
+        const reportId = this.previousReport?.report.id ?? Guid.newGuid();
+        const createDate = (this.previousReport?.report.createDate ?? UtcDate.now).encoded;
         await this.firebaseApiService.function('report').function('edit').call({
             editType: this.previousReport !== undefined ? 'change' : 'add',
             groupId: this.inputForm.field('groupId').value,
             previousGroupId: this.previousReport?.groupId,
-            reportId: reportId,
+            reportId: reportId.guidString,
             report: {
                 title: this.inputForm.field('title').value,
                 message: this.inputForm.field('message').value,

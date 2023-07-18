@@ -15,6 +15,34 @@
     >Zurück</a>
   </div>
   <text-section
+    *ngIf="previousReport === undefined"
+    [title]="'Spiel von BFV übernehmen'"
+  >
+    <p
+        class="text margin-bottom-large"
+        [ngStyle]="{
+            color: styleConfig.css('textColor')
+        }"
+    >Um ein Spiel der 1. oder 2. Mannschaft von BFV zu übernehmen, fügen Sie den Link zum BFV Spiel hier ein, bsp: www.bfv.de/spiele/.</p>
+    <input-form
+        [inputForm]="bfvGameInputForm"
+        [submitButtonText]="'Übernehmen'"
+        (submitButtonClicked)="takeBfvGame()"
+    >
+        <input-field-text
+            [label]="'BFV Spiele Link'"
+            [placeholder]="'BFV Spiele Link'"
+            [inputField]="bfvGameInputForm.field('bfvGameLink')"
+        ></input-field-text>
+        <p
+            class="hint"
+            [ngStyle]="{
+              color: styleConfig.css('textColor')
+            }"
+        >Achtung! Die Anzeige hat einen Fehler. Die Felder werden nicht ausgefüllt, werden aber trotzdem übernommen. Um das Spiel as Termin zu speichern, klicke auf erst auf 'Übernehmen' und dann auf 'Hinzufüen' unten auf der Seite.</p>
+      </input-form>
+  </text-section>
+  <text-section
     [title]="previousReport === undefined ? 'Bericht hinzufügen' : 'Bericht bearbeiten'"
   >
     <input-form

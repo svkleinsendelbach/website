@@ -19,6 +19,8 @@ export class EventsComponent implements OnInit {
 
     public fetchedEventGroups: FetchState<EventGroup[]> = FetchState.loading;
 
+    public expandedGroupId: EventGroupId | null = null;
+
     public constructor(
         private readonly firebaseApiService: FirebaseApiService,
         public readonly styleConfig: StyleConfigService,
@@ -42,7 +44,22 @@ export class EventsComponent implements OnInit {
 
     public isRecent(event: Event): boolean {
         const referenceDate = UtcDate.now.advanced({ day: 3 });
+        console.log(event.date, referenceDate, event.date.compare(referenceDate));
         return event.date.compare(referenceDate) !== 'greater';
+    }
+
+    public expandGroup(id: EventGroupId) {
+        this.expandedGroupId = id;
+    }
+
+    public collapseGroups() {
+        this.expandedGroupId = null;
+    }
+
+    public events(eventGroup: EventGroup): Event[] {
+        if (eventGroup.groupId === this.expandedGroupId)
+            return eventGroup.events;
+        return eventGroup.events.slice(0, 5);
     }
 
     public downloadCalendar() {

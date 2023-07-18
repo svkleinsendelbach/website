@@ -60,7 +60,8 @@ describe('ApiService', () => {
         const eventId = Guid.newGuid();
         await database.child('events').child('general').child(eventId.guidString).set({
             date: UtcDate.now.encoded,
-            title: 'title'
+            title: 'title',
+            isImportant: false
         }, 'encrypt');
         expect(await database.child('events').child('general').child(eventId.guidString).exists()).toBeTrue();
         await firebaseApi.function('event').function('edit').call({
@@ -83,13 +84,15 @@ describe('ApiService', () => {
             eventId: eventId.guidString,
             event: {
                 date: date.encoded,
-                title: 'title'
+                title: 'title',
+                isImportant: false
             }
         });
         const databaseValue = await database.child('events').child('general').child(eventId.guidString).get('decrypt');
         expect(databaseValue).toEqual({
             date: date.encoded,
-            title: 'title'
+            title: 'title',
+            isImportant: false
         });
     });
 
@@ -97,7 +100,8 @@ describe('ApiService', () => {
         const eventId = Guid.newGuid();
         await database.child('events').child('general').child(eventId.guidString).set({
             date: UtcDate.now.encoded,
-            title: 'title'
+            title: 'title',
+            isImportant: false
         }, 'encrypt');
         const date = UtcDate.now;
         await firebaseApi.function('event').function('edit').call({
@@ -107,13 +111,15 @@ describe('ApiService', () => {
             eventId: eventId.guidString,
             event: {
                 date: date.encoded,
-                title: 'title2'
+                title: 'title2',
+                isImportant: false
             }
         });
         const databaseValue = await database.child('events').child('general').child(eventId.guidString).get('decrypt');
         expect(databaseValue).toEqual({
             date: date.encoded,
-            title: 'title2'
+            title: 'title2',
+            isImportant: false
         });
     });
 
@@ -122,25 +128,29 @@ describe('ApiService', () => {
         const eventId1 = Guid.newGuid();
         await database.child('events').child('general').child(eventId1.guidString).set({
             date: date1.encoded,
-            title: 'event1'
+            title: 'event1',
+            isImportant: false
         }, 'encrypt');
         const date2 = UtcDate.now.advanced({ minute: 30 });
         const eventId2 = Guid.newGuid();
         await database.child('events').child('general').child(eventId2.guidString).set({
             date: date2.encoded,
-            title: 'event2'
+            title: 'event2',
+            isImportant: false
         }, 'encrypt');
         const date3 = UtcDate.now.advanced({ minute: 20 });
         const eventId3 = Guid.newGuid();
         await database.child('events').child('football-adults/first-team').child(eventId3.guidString).set({
             date: date3.encoded,
-            title: 'event3'
+            title: 'event3',
+            isImportant: false
         }, 'encrypt');
         const date4 = UtcDate.now.advanced({ minute: -30 });
         const eventId4 = Guid.newGuid();
         await database.child('events').child('football-adults/first-team').child(eventId4.guidString).set({
             date: date4.encoded,
-            title: 'event4'
+            title: 'event4',
+            isImportant: false
         }, 'encrypt');
         const result = await firebaseApi.function('event').function('get').call({
             groupIds: ['general', 'football-adults/first-team']
@@ -152,12 +162,14 @@ describe('ApiService', () => {
                     {
                         id: eventId2.guidString,
                         date: date2.encoded,
-                        title: 'event2'
+                        title: 'event2',
+                        isImportant: false
                     },
                     {
                         id: eventId1.guidString,
                         date: date1.encoded,
-                        title: 'event1'
+                        title: 'event1',
+                        isImportant: false
                     }
                 ]
             },
@@ -167,7 +179,8 @@ describe('ApiService', () => {
                     {
                         id: eventId3.guidString,
                         date: date3.encoded,
-                        title: 'event3'
+                        title: 'event3',
+                        isImportant: false
                     }
                 ]
             }

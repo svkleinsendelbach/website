@@ -17,6 +17,7 @@ export type GameInfo = {
     livetickers: Array<{
         id: string;
     } & BfvLiveticker>;
+    report: GameInfo.Report | undefined;
 };
 
 export namespace GameInfo {
@@ -25,6 +26,26 @@ export namespace GameInfo {
         name: string;
         imageId: string;
     };
+
+    export type Report = {
+        title: string;
+        paragraphs: { text: string; link: string | undefined }[][];
+    };
+
+    export function additionalProperties(gameInfo: GameInfo): { isSg2: boolean; sgHomeAway: 'home' | 'away'} {
+        const isKleinsendelbachHetzlesRegex = /Kleinsendelbach.*Hetzles|Hetzles.*Kleinsendelbach/g;
+        const isKleinsendelbachHetzles2Regex = /Kleinsendelbach.*Hetzles.*2|Kleinsendelbach.*2.*Hetzles|Hetzles.*Kleinsendelbach.*2|Hetzles.*2.*Kleinsendelbach/g;
+        if (isKleinsendelbachHetzlesRegex.test(gameInfo.homeTeam.name)) {
+            return {
+                isSg2: isKleinsendelbachHetzles2Regex.test(gameInfo.homeTeam.name),
+                sgHomeAway: 'home'
+            };
+        }
+        return {
+            isSg2: isKleinsendelbachHetzles2Regex.test(gameInfo.awayTeam.name),
+            sgHomeAway: 'away'
+        };
+    }
 }
 export type BfvLiveticker = {
     loadNew: boolean;

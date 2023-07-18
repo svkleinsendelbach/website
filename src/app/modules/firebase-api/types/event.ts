@@ -71,6 +71,7 @@ export type Event = {
     id: Guid;
     date: UtcDate;
     title: string;
+    isImportant: boolean;
     subtitle?: string;
     link?: string;
 };
@@ -80,6 +81,7 @@ export namespace Event {
         id: string;
         date: string;
         title: string;
+        isImportant: boolean;
         subtitle?: string;
         link?: string;
     };
@@ -91,6 +93,7 @@ export namespace Event {
             ...('id' in event ? { id: event.id.guidString } : {}),
             date: event.date.encoded,
             title: event.title,
+            isImportant: event.isImportant,
             subtitle: event.subtitle,
             link: event.link
         };
@@ -103,6 +106,7 @@ export namespace Event {
             ...('id' in event ? { id: new Guid(event.id) } : {}),
             date: UtcDate.decode(event.date),
             title: event.title,
+            isImportant: event.isImportant,
             subtitle: event.subtitle,
             link: event.link
         };

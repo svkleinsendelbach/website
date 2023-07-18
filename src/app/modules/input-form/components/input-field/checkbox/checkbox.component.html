@@ -14,7 +14,7 @@
       checked: checked
     }"
     [ngStyle]="{
-      backgroundColor: styleConfig.css('primaryColor'),
+      backgroundColor: styleConfig.css(checked ? 'primaryColor' : 'textColor'),
       borderColor: styleConfig.css('textColor')
     }"
   >

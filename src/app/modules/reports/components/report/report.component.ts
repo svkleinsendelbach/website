@@ -19,7 +19,7 @@ export class ReportComponent implements AfterViewInit {
 
     @ViewChild('message') public messageElement?: ElementRef<HTMLElement>;
 
-    public isMessageClipped = true;
+    public isMessageClipped = false;
 
     public isShownMore = false;
 

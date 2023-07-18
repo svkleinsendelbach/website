@@ -1,14 +1,14 @@
 export class UtcDate {
-    private constructor(
-        private readonly year: number,
-        private readonly month: number,
-        private readonly day: number,
-        private readonly hour: number,
-        private readonly minute: number
+    public constructor(
+        public readonly year: number,
+        public readonly month: number,
+        public readonly day: number,
+        public readonly hour: number,
+        public readonly minute: number
     ) {}
 
     public static fromDate(date: Date): UtcDate {
-        return new UtcDate(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes());
+        return new UtcDate(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes());
     }
 
     public static fromIsoDate(date: string): UtcDate {
@@ -49,7 +49,7 @@ export class UtcDate {
         date.setUTCDate(date.getUTCDate() + (components.day ?? 0));
         date.setUTCHours(date.getUTCHours() + (components.hour ?? 0));
         date.setUTCMinutes(date.getUTCMinutes() + (components.minute ?? 0));
-        return UtcDate.fromDate(date);
+        return new UtcDate(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes());
     }
 
     public compare(other: UtcDate): 'less' | 'equal' | 'greater' {
@@ -82,7 +82,7 @@ export class UtcDate {
 
     public get dateShortDescription(): string {
         const monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
-        return `${this.localized.getDate()}. ${monthNames[this.localized.getMonth()]}`;
+        return `${this.localized.getDate()}. ${monthNames[this.localized.getMonth() - 1]}`;
     }
 
     public get dateDescription(): string {
@@ -90,7 +90,7 @@ export class UtcDate {
     }
 
     public get timeDescription(): string {
-        const minute = this.localized.getMinutes() <= 9 ? `0${this.localized.getMinutes()}` : this.localized.getMinutes.toString();
+        const minute = this.localized.getMinutes() <= 9 ? `0${this.localized.getMinutes()}` : this.localized.getMinutes().toString();
         return `${this.localized.getHours()}:${minute} Uhr`;
     }
 

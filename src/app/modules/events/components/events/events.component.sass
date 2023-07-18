@@ -18,29 +18,45 @@
     text-align: left
 
   .event
-    @include flex-row(flex-start, flex-start)
     width: 100%
-    margin-bottom: 16px
-    padding-bottom: 16px
+    margin-bottom: 8px
+    padding-bottom: 8px
     border-bottom: solid 1px
 
-    .date, .title, .subtitle, .link
-      @include font-montserrat
-      @include font-size('medium')
-      @include font-weight('small')
-      flex: 3
+    .inner-container
+        @include flex-row(flex-start, flex-start)
+        overflow: hidden
+        padding: 8px 0
 
-    .date
-      flex: 4
+        .bar
+            width: 5px
+            padding: 99999px 0
+            margin: -99999px 0
 
-    .link
-      width: auto
-      padding-bottom: 0
-      text-decoration: none
-      cursor: pointer
+        .date, .title, .subtitle, .link
+            @include font-montserrat
+            @include font-size('medium')
+            @include font-weight('small')
+            flex: 3
+            margin-left: 10px
 
-    &:nth-last-child(1)
+        .date
+            flex: 4
+
+        .link
+            width: auto
+            padding-bottom: 0
+            text-decoration: none
+            cursor: pointer
+
+    &:nth-last-child(2)
       border-bottom: none
+
+  .show-more-button
+    cursor: pointer
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('normal')
 
   &.mobile .event
     @include flex-column(flex-start, center)

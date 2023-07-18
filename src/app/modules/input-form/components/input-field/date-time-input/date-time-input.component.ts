@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { InputField } from '../../../types/input-field';
+import { UtcDate } from 'src/app/types/utc-date';
 
 @Component({
     selector: 'input-field-date-time',
@@ -11,7 +12,7 @@ import { InputField } from '../../../types/input-field';
 export class DateTimeInputComponent implements AfterViewInit {
     @Input() public label!: string;
 
-    @Input() public inputField!: InputField<Date>;
+    @Input() public inputField!: InputField<UtcDate>;
 
     @ViewChild('dateInput') private dateInputElement!: ElementRef<HTMLInputElement>;
 
@@ -32,18 +33,30 @@ export class DateTimeInputComponent implements AfterViewInit {
         this.inputField.inputValue = this.toDate(this.dateInputElement.nativeElement.value, this.timeInputElement.nativeElement.value);
     }
 
-    private toDateTime(date: Date): { date: string; time: string } {
-        const day = date.getDate() <= 9 ? `0${date.getDate()}` : `${date.getDate()}`;
-        const month = date.getMonth() + 1 <= 9 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
-        const hour = date.getHours() <= 9 ? `0${date.getHours()}` : `${date.getHours()}`;
-        const minute = date.getMinutes() <= 9 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
+    private toDateTime(date: UtcDate): { date: string; time: string } {
+        const day = date.day <= 9 ? `0${date.day}` : `${date.day}`;
+        const month = date.month <= 9 ? `0${date.month}` : `${date.month}`;
+        const hour = date.hour <= 9 ? `0${date.hour}` : `${date.hour}`;
+        const minute = date.minute <= 9 ? `0${date.minute}` : `${date.minute}`;
         return {
-            date: `${date.getFullYear()}-${month}-${day}`,
+            date: `${date.year}-${month}-${day}`,
             time: `${hour}:${minute}`,
         };
     }
 
-    private toDate(date: string, time: string): Date {
-        return new Date(`${date}T${time}:00.000Z`);
+    private toDate(date: string, time: string): UtcDate {
+        const dateRegex = /^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})$/g;
+        const timeRegex = /^(?<hour>\d{2}):(?<minute>\d{2})$/g;
+        const dateMatch = dateRegex.exec(date);
+        const timeMatch = timeRegex.exec(time);
+        if (dateMatch === null || dateMatch.groups === undefined || timeMatch === null || timeMatch.groups === undefined)
+            return new UtcDate(0, 0, 0, 0, 0);
+        return new UtcDate(
+            Number.parseInt(dateMatch.groups['year']),
+            Number.parseInt(dateMatch.groups['month']),
+            Number.parseInt(dateMatch.groups['day']),
+            Number.parseInt(timeMatch.groups['hour']),
+            Number.parseInt(timeMatch.groups['minute'])
+        );
     }
 }
