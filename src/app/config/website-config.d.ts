@@ -22,4 +22,7 @@ export type WebsiteConfig = {
 
     // Data for home banner
     homeBanner: BannerItem[];
+
+    // Map options for google maps
+    mapOptions: google.maps.MapOptions;
 };

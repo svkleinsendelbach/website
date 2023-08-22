@@ -44,7 +44,6 @@ export class EventsComponent implements OnInit {
 
     public isRecent(event: Event): boolean {
         const referenceDate = UtcDate.now.advanced({ day: 3 });
-        console.log(event.date, referenceDate, event.date.compare(referenceDate));
         return event.date.compare(referenceDate) !== 'greater';
     }
 

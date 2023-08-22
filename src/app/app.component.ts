@@ -2,14 +2,13 @@ import { Component, HostListener } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { AngularFirePerformance } from '@angular/fire/compat/performance';
 import { InternalLink, InternalPath } from './types/internal-path';
-import { CookieService } from './modules/cookie-selector/services/cookie.service';
+import { CookieSelectionService } from './modules/cookie-selector/services/cookie-selection.service';
 import { FooterData } from './modules/footer/types/footer-data';
 import { HeaderData } from './modules/header/types/header-data';
 import { HomeLinkData } from './modules/header/types/home-link-data';
 import { DeviceTypeService } from './services/device-type.service';
 import { StyleConfigService } from './services/style-config.service';
 import { Link } from './types/link';
-import { Style } from './types/style';
 
 @Component({
     selector: 'app-root',
@@ -222,16 +221,16 @@ export class AppComponent {
     public constructor(
         public readonly deviceType: DeviceTypeService,
         private readonly styleConfig: StyleConfigService,
-        private readonly cookieService: CookieService,
+        private readonly cookieSelectionService: CookieSelectionService,
         private fireAnalytics: AngularFireAnalytics,
         private firePerformance: AngularFirePerformance
     ) {
         this.styleConfig.setConfig();
-        const statisticsCookie = this.cookieService.cookiesSelection?.statistics;
+        const statisticsCookie = this.cookieSelectionService.cookiesSelection?.statistics;
         this.fireAnalytics.setAnalyticsCollectionEnabled(statisticsCookie === 'selected');
         this.firePerformance.instrumentationEnabled = (statisticsCookie === 'selected') as unknown as Promise<boolean>;
         this.firePerformance.dataCollectionEnabled = (statisticsCookie === 'selected') as unknown as Promise<boolean>;
-        this.cookieService.listeners.add('fireAnalytics', selection => {
+        this.cookieSelectionService.listeners.add('fireAnalytics', selection => {
             this.fireAnalytics.setAnalyticsCollectionEnabled(selection.functionality === 'selected');
             this.firePerformance.instrumentationEnabled = (selection.functionality === 'selected') as unknown as Promise<boolean>;
             this.firePerformance.dataCollectionEnabled = (selection.functionality === 'selected') as unknown as Promise<boolean>;

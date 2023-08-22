@@ -14,11 +14,8 @@ export class DrivePage {
     public faPhone = faPhone;
 
     public readonly mapOptions: google.maps.MapOptions & { center: google.maps.LatLngLiteral } = {
-        zoom: 16,
-        center: websiteConfig.coordinates.sportshome,
-        scrollwheel: false,
-        maxZoom: 20,
-        minZoom: 5
+        ...websiteConfig.mapOptions,
+        center: websiteConfig.coordinates.sportshome
     };
 
     public constructor(

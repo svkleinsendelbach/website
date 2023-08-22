@@ -46,7 +46,7 @@ export class EditingMainPage {
     public async acceptDeclineUser(action: 'accept' | 'decline', hashedUserId: string) {
         this.unauthenticatedUsers = this.unauthenticatedUsers?.filter(user => user.hashedUserId !== hashedUserId);
         await this.firebaseApiService.function('userAuthentication').function('acceptDecline').call({
-            authenticationTypes: ['authenticateUser', 'editEvents', 'editReports', 'editOccupancy'],
+            authenticationTypes: ['authenticateUser', 'editEvents', 'editReports'],
             action: action,
             hashedUserId: hashedUserId
         });

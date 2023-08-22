@@ -251,5 +251,13 @@ export const websiteConfig: WebsiteConfig = {
             link: InternalLink.all['fussball/jugend'],
             isCurrent: false
         }
-    ]
+    ],
+    mapOptions: {
+        zoom: 14,
+        maxZoom: 20,
+        minZoom: 5,
+        scrollwheel: false,
+        clickableIcons: false,
+        mapTypeId: 'hybrid'
+    }
 };

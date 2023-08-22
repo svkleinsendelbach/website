@@ -66,7 +66,7 @@ import { EditingEventsPage } from './pages/editing/events/editing-events.page';
 import { EditEventPage } from './pages/editing/events/edit-event/edit-event.page';
 import { EditingReportsPage } from './pages/editing/reports/editing-reports.page';
 import { EditReportPage } from './pages/editing/reports/edit-report/edit-report.page';
-import { OccupancyPage } from './pages/editing/occupancy/occupancy.page';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 @NgModule({
     declarations: [
@@ -105,8 +105,7 @@ import { OccupancyPage } from './pages/editing/occupancy/occupancy.page';
         EditingEventsPage,
         EditEventPage,
         EditingReportsPage,
-        EditReportPage,
-        OccupancyPage
+        EditReportPage
     ],
     imports: [
         BrowserModule,
@@ -117,6 +116,7 @@ import { OccupancyPage } from './pages/editing/occupancy/occupancy.page';
         AngularFireStorageModule,
         AngularFireAnalyticsModule,
         AngularFirePerformanceModule,
+        AngularFireDatabaseModule,
         HttpClientModule,
         HttpClientJsonpModule,
         RecaptchaV3Module,

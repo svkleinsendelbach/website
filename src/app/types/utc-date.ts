@@ -42,14 +42,24 @@ export class UtcDate {
         return `${year}-${month}-${day}-${hour}-${minute}`;
     }
 
+    public setted(components: { year?: number; month?: number; day?: number; hour?: number; minute?: number }): UtcDate {
+        const date = new Date(Date.UTC(this.year, this.month, this.day, this.hour, this.minute));
+        date.setUTCFullYear(components.year ?? date.getUTCFullYear());
+        date.setUTCMonth((components.month ?? date.getUTCMonth()) - 1);
+        date.setUTCDate(components.day ?? date.getUTCDate());
+        date.setUTCHours(components.hour ?? date.getUTCHours());
+        date.setUTCMinutes(components.minute ?? date.getUTCMinutes());
+        return UtcDate.fromDate(date);
+    }
+
     public advanced(components: { year?: number; month?: number; day?: number; hour?: number; minute?: number }): UtcDate {
-        const date = this.localized;
+        const date = new Date(Date.UTC(this.year, this.month - 1, this.day, this.hour, this.minute));
         date.setUTCFullYear(date.getUTCFullYear() + (components.year ?? 0));
         date.setUTCMonth(date.getUTCMonth() + (components.month ?? 0));
         date.setUTCDate(date.getUTCDate() + (components.day ?? 0));
         date.setUTCHours(date.getUTCHours() + (components.hour ?? 0));
         date.setUTCMinutes(date.getUTCMinutes() + (components.minute ?? 0));
-        return new UtcDate(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes());
+        return UtcDate.fromDate(date);
     }
 
     public compare(other: UtcDate): 'less' | 'equal' | 'greater' {

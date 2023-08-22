@@ -3,23 +3,29 @@ import { EventListener } from '../../../types/event-listener';
 import { CookiesSelection } from '../types/cookie-selection';
 import { CookieType } from '../types/cookie-type';
 import { SelectionType } from '../types/selection-type';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class CookieService {
+export class CookieSelectionService {
     public listeners = new EventListener<CookiesSelection>();
 
+    constructor(
+        private readonly cookieService: CookieService
+    ) {}
+
     public get cookiesSelection(): CookiesSelection | null {
-        const selectionJson = localStorage.getItem('cookies');
-        const selection = selectionJson !== null ? JSON.parse(selectionJson) : null;
-        if (selection !== null)
-            this.listeners.emitValue(selection);
+        if (!this.cookieService.check('cookies-selection'))
+            return null;
+        const selectionJson = this.cookieService.get('cookies-selection');
+        const selection = JSON.parse(selectionJson);
+        this.listeners.emitValue(selection);
         return selection;
     }
 
     public saveCookieSelection(selection: CookiesSelection) {
-        localStorage.setItem('cookies', JSON.stringify(selection));
+        this.cookieService.set('cookies-selection', JSON.stringify(selection));
         this.listeners.emitValue(selection);
     }
 
@@ -32,7 +38,7 @@ export class CookieService {
     }
 
     public removeCookieSelection() {
-        localStorage.removeItem('cookies');
+        this.cookieService.delete('cookies-selection');
         this.listeners.emitValue(CookiesSelection.defaultSelection);
     }
 }

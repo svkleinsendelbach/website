@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
-import { CookieService } from 'src/app/modules/cookie-selector/services/cookie.service';
+import { CookieSelectionService } from 'src/app/modules/cookie-selector/services/cookie-selection.service';
 import { AppearanceService } from 'src/app/services/appearance.service';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
@@ -19,11 +19,11 @@ export class BfvWidgetComponent implements AfterViewInit, OnDestroy {
     public constructor(
         public deviceType: DeviceTypeService,
         public styleConfig: StyleConfigService,
-        public cookieService: CookieService,
+        public cookieSelectionService: CookieSelectionService,
         public appearance: AppearanceService
     ) {
-        this.functionalityCookiesSelected = this.cookieService.cookiesSelection?.functionality === 'selected';
-        this.cookieService.listeners.add('bfv-widget-component', selection => {
+        this.functionalityCookiesSelected = this.cookieSelectionService.cookiesSelection?.functionality === 'selected';
+        this.cookieSelectionService.listeners.add('bfv-widget-component', selection => {
             this.functionalityCookiesSelected = selection.functionality === 'selected';
             if (this.functionalityCookiesSelected)
                 this.appendBfvWidgetChild();
@@ -35,7 +35,7 @@ export class BfvWidgetComponent implements AfterViewInit, OnDestroy {
     }
 
     public ngOnDestroy(): void {
-        this.cookieService.listeners.remove('bfv-widget-component');
+        this.cookieSelectionService.listeners.remove('bfv-widget-component');
     }
 
     private appendBfvWidgetChild() {
@@ -62,6 +62,6 @@ export class BfvWidgetComponent implements AfterViewInit, OnDestroy {
     }
 
     public acceptFunctionalityCookies() {
-        this.cookieService.changeCookieSelection('functionality', 'selected');
+        this.cookieSelectionService.changeCookieSelection('functionality', 'selected');
     }
 }

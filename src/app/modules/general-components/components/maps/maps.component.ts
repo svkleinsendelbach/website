@@ -6,7 +6,7 @@ import { DeviceTypeService } from '../../../../services/device-type.service';
 import { StyleConfigService } from '../../../../services/style-config.service';
 import { Appearance, AppearanceService } from '../../../../services/appearance.service';
 import { mapStyleDarkAppearence } from '../../../../utils/mapStyleDarkAppearence';
-import { CookieService } from 'src/app/modules/cookie-selector/services/cookie.service';
+import { CookieSelectionService } from 'src/app/modules/cookie-selector/services/cookie-selection.service';
 
 @Component({
     selector: 'maps',
@@ -28,12 +28,12 @@ export class MapsComponent implements OnInit, OnDestroy {
         private httpClient: HttpClient,
         public deviceType: DeviceTypeService,
         public styleConfig: StyleConfigService,
-        public cookieService: CookieService,
+        public cookieSelectionService: CookieSelectionService,
         public appearance: AppearanceService
     ) {
         this.checkApiLoaded();
-        this.functionalityCookiesSelected = this.cookieService.cookiesSelection?.functionality === 'selected';
-        this.cookieService.listeners.add('maps-component', selection => {
+        this.functionalityCookiesSelected = this.cookieSelectionService.cookiesSelection?.functionality === 'selected';
+        this.cookieSelectionService.listeners.add('maps-component', selection => {
             this.functionalityCookiesSelected = selection.functionality === 'selected';
         });
     }
@@ -47,7 +47,7 @@ export class MapsComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy(): void {
         this.appearance.listeners.remove('maps-component');
-        this.cookieService.listeners.remove('maps-component');
+        this.cookieSelectionService.listeners.remove('maps-component');
     }
 
     private async checkApiLoaded() {
@@ -66,6 +66,6 @@ export class MapsComponent implements OnInit, OnDestroy {
     }
 
     public acceptFunctionalityCookies() {
-        this.cookieService.changeCookieSelection('functionality', 'selected');
+        this.cookieSelectionService.changeCookieSelection('functionality', 'selected');
     }
 }

@@ -26,11 +26,8 @@ export class FYouthPage {
     public readonly contactData: ContactItem[] = websiteConfig.contact['f-youth'];
 
     public readonly mapOptions: google.maps.MapOptions & { center: google.maps.LatLngLiteral } = {
-        zoom: 16,
-        center: websiteConfig.coordinates['a-field'],
-        scrollwheel: false,
-        maxZoom: 20,
-        minZoom: 5
+        ...websiteConfig.mapOptions,
+        center: websiteConfig.coordinates['a-field']
     };
 
     public constructor(

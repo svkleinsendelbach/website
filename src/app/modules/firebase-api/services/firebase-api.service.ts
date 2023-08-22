@@ -10,6 +10,7 @@ import { FunctionType } from '../types/function-type';
 import { ResultType } from '../types/result-type';
 import { VerboseType } from '../types/verbose-type';
 import { FirebaseFunctions as FFunctions } from '../firebase-functions';
+import { UtcDate } from 'src/app/types/utc-date';
 
 @Injectable({
     providedIn: 'root'
@@ -36,7 +37,7 @@ class FirebaseFunctions<FFunctions extends FirebaseFunctionsType>  {
 
     public async call(parameters: FFunctions extends FunctionType<unknown, unknown> ? FunctionType.Parameters<FFunctions> : never): Promise<FFunctions extends FunctionType<unknown, unknown> ? FunctionType.ReturnType<FFunctions> : never> {
         const crypter = new Crypter(environment.cryptionKeys);
-        const expiresAtIsoDate = new Date(new Date().getTime() + 60000).toISOString();
+        const expiresAtUtcDate = UtcDate.now.advanced({ minute: 1 });
         const functionName = environment.databaseType === 'release' ? this.functionName : `debug-${this.functionName}`;
         const callableFunction = this.firebaseFunctions.httpsCallable<{
             verbose: VerboseType;
@@ -48,8 +49,8 @@ class FirebaseFunctions<FFunctions extends FirebaseFunctionsType>  {
             verbose: environment.verbose,
             databaseType: environment.databaseType,
             callSecret: {
-                expiresAt: expiresAtIsoDate,
-                hashedData: Crypter.sha512(expiresAtIsoDate, environment.callSecretKey)
+                expiresAt: expiresAtUtcDate.encoded,
+                hashedData: Crypter.sha512(expiresAtUtcDate.encoded, environment.callSecretKey)
             },
             parameters: crypter.encodeEncrypt(parameters)
         }));

@@ -1,7 +1,6 @@
 import {
     VerifyRecaptchaFunctionType,
     DeleteAllDataFunctionType,
-    SearchEntityFunctionType,
     EventGetFunctionType,
     EventEditFunctionType,
     ReportGetAllFunctionType,
@@ -15,16 +14,12 @@ import {
     UserAuthenticationAcceptDeclineFunctionType,
     UserAuthenticationGetAllUnauthenticatedFunctionType,
     NotificationRegisterFunctionType,
-    NotificationPushFunctionType,
-    OccupancyLocationEditFunctionType,
-    OccupancyAssignmentEditFunctionType,
-    OccupancyAssignmentGetFunctionType
+    NotificationPushFunctionType
 } from './function-types';
 
 export type FirebaseFunctions = {
     verifyRecaptcha: VerifyRecaptchaFunctionType;
     deleteAllData: DeleteAllDataFunctionType;
-    searchEntity: SearchEntityFunctionType;
     event: {
         get: EventGetFunctionType;
         edit: EventEditFunctionType;
@@ -50,14 +45,5 @@ export type FirebaseFunctions = {
     notification: {
         register: NotificationRegisterFunctionType;
         push: NotificationPushFunctionType;
-    };
-    occupancy: {
-        location: {
-            edit: OccupancyLocationEditFunctionType;
-        };
-        assignment: {
-            edit: OccupancyAssignmentEditFunctionType;
-            get: OccupancyAssignmentGetFunctionType;
-        };
     };
 };

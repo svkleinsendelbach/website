@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { InternalPath } from 'src/app/types/internal-path';
+import { InternalLink, InternalPath } from 'src/app/types/internal-path';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
@@ -33,7 +33,7 @@ export class FootballYouthGeneralPage {
         },
         {
             id: 'c-jugend',
-            link: Link.internal<InternalPath>('C-Jugend', 'fussball/jugend/c-jugend'),
+            link: InternalLink.all['fussball/jugend/c-jugend'],
             title: 'C-Jugend',
             subtitle: 'C-Jugend der Jugend Spielgemeinschaft'
         },
@@ -45,19 +45,19 @@ export class FootballYouthGeneralPage {
         },
         {
             id: 'e-jugend',
-            link: Link.internal<InternalPath>('E-Jugend', 'fussball/jugend/e-jugend'),
+            link: InternalLink.all['fussball/jugend/e-jugend'],
             title: 'E-Jugend',
             subtitle: 'E-Jugend des SV Kleinsendelbach'
         },
         {
             id: 'f-jugend',
-            link: Link.internal<InternalPath>('F-Jugend', 'fussball/jugend/f-jugend'),
+            link: InternalLink.all['fussball/jugend/f-jugend'],
             title: 'F-Jugend',
             subtitle: 'F-Jugend des SV Kleinsendelbach'
         },
         {
             id: 'g-jugend',
-            link: Link.internal<InternalPath>('G-Jugend', 'fussball/jugend/g-jugend'),
+            link: InternalLink.all['fussball/jugend/g-jugend'],
             title: 'G-Jugend',
             subtitle: 'G-Jugend des SV Kleinsendelbach'
         }

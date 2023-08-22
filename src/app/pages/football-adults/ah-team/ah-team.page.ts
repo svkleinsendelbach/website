@@ -21,11 +21,8 @@ export class AhTeamPage {
     public readonly contactData: ContactItem[] = websiteConfig.contact['ah-team'];
 
     public readonly mapOptions: google.maps.MapOptions & { center: google.maps.LatLngLiteral } = {
-        zoom: 16,
-        center: websiteConfig.coordinates['b-field'],
-        scrollwheel: false,
-        maxZoom: 20,
-        minZoom: 5
+        ...websiteConfig.mapOptions,
+        center: websiteConfig.coordinates['b-field']
     };
 
     public constructor(

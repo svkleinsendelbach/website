@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { CookieService } from '../../services/cookie.service';
+import { CookieSelectionService } from '../../services/cookie-selection.service';
 import { DeviceTypeService } from '../../../../services/device-type.service';
 import { StyleConfigService } from '../../../../services/style-config.service';
 import { CookiesSelection } from '../../types/cookie-selection';
@@ -23,7 +23,7 @@ export class CookieSelectorComponent implements OnInit, OnDestroy {
     public cookiesSelection: CookiesSelection = CookiesSelection.defaultSelection;
 
     public constructor(
-        public readonly cookieService: CookieService,
+        public readonly cookieSelectionService: CookieSelectionService,
         public readonly styleConfig: StyleConfigService,
         public readonly deviceType: DeviceTypeService
     ) {
@@ -31,10 +31,10 @@ export class CookieSelectorComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit() {
-        this.cookieService.listeners.add('cookieSelector', newCookieSelection => {
+        this.cookieSelectionService.listeners.add('cookieSelector', newCookieSelection => {
             this.cookiesSelection = newCookieSelection;
         });
-        const cookieSelection = this.cookieService.cookiesSelection;
+        const cookieSelection = this.cookieSelectionService.cookiesSelection;
         if (cookieSelection === null)
             this.isShown = true;
     }
@@ -69,7 +69,7 @@ export class CookieSelectorComponent implements OnInit, OnDestroy {
     }
 
     public handleConfirmSelected() {
-        this.cookieService.saveCookieSelection(this.cookiesSelection);
+        this.cookieSelectionService.saveCookieSelection(this.cookiesSelection);
         this.isShown = false;
     }
 

@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
 
     private async checkAuthentication() {
         this.state = 'loading';
-        const isLoggedIn = await this.authService.isLoggedIn(['editEvents', 'editReports', 'authenticateUser', 'editOccupancy']);
+        const isLoggedIn = await this.authService.isLoggedIn(['editEvents', 'editReports', 'authenticateUser']);
         if (isLoggedIn) {
             this.state = 'alreadyLoggedIn';
             await this.router.navigateByUrl(this.editPageLink.link);

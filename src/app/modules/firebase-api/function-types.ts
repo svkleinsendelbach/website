@@ -4,10 +4,7 @@ import { Event, EventGroup, EventGroupId } from './types/event';
 import { FunctionType } from './types/function-type';
 import { GameInfo } from './types/game-info';
 import { NotifactionPayload, NotificationType } from './types/notification';
-import { OccupancyAssignment } from './types/occupancy-assignment';
-import { OccupancyLocation } from './types/occupancy-location';
 import { Report, ReportGroupId } from './types/report';
-import { SearchEntityType, TypedSearchEntity } from './types/search-entitiy';
 import { TeamSquad } from './types/team-squad';
 import { UserAuthenticationType } from './types/user-authentication';
 
@@ -56,11 +53,6 @@ export type ReportGetFunctionType = FunctionType<{
     reports: Report.Flatten[];
     hasMore: boolean;
 }>;
-
-export type SearchEntityFunctionType<T extends SearchEntityType = SearchEntityType> = FunctionType<{
-    searchEntityTypes: T[];
-    searchText: string;
-}, TypedSearchEntity.Flatten<T>[]>;
 
 export type SendMailContactFunctionType = FunctionType<{
     senderName: string;
@@ -115,22 +107,4 @@ export type VerifyRecaptchaFunctionType = FunctionType<{
     challenge_ts: string;
     hostname: string;
     errorCodes?: string[];
-}>;
-
-export type OccupancyLocationEditFunctionType = FunctionType<{
-    editType: EditType;
-    locationId: string;
-    location: Omit<OccupancyLocation.Flatten, 'id'> | undefined;
-}, void>;
-
-
-export type OccupancyAssignmentEditFunctionType = FunctionType<{
-    editType: EditType;
-    assignmentId: string;
-    assignment: Omit<OccupancyAssignment.Flatten, 'id'> | undefined;
-}, void>;
-
-export type OccupancyAssignmentGetFunctionType = FunctionType<Record<string, never>, {
-    locations: Record<string, Omit<OccupancyLocation.Flatten, 'id'>>;
-    assignments: OccupancyAssignment.Flatten[];
 }>;

@@ -30,7 +30,6 @@ import { EditEventPage } from '../pages/editing/events/edit-event/edit-event.pag
 import { EditingReportsPage } from '../pages/editing/reports/editing-reports.page';
 import { EditReportPage } from '../pages/editing/reports/edit-report/edit-report.page';
 import { AllReportsPage } from '../pages/reports/all-reports/all-reports.page';
-import { OccupancyPage } from '../pages/editing/occupancy/occupancy.page';
 
 const associatedRoute: Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, Type<unknown>> = {
     'home': HomePage,
@@ -60,8 +59,7 @@ const associatedRoute: Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, Type
     'bearbeiten/termine': EditingEventsPage,
     'bearbeiten/termine/bearbeiten': EditEventPage,
     'bearbeiten/berichte': EditingReportsPage,
-    'bearbeiten/berichte/bearbeiten': EditReportPage,
-    'bearbeiten/belegungsplan': OccupancyPage
+    'bearbeiten/berichte/bearbeiten': EditReportPage
 };
 
 export const internalRoutes: Route[] = (() => {

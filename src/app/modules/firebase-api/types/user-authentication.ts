@@ -1,4 +1,4 @@
-export type UserAuthenticationType = 'editEvents' | 'editReports' | 'authenticateUser' | 'notification' | 'editOccupancy';
+export type UserAuthenticationType = 'editEvents' | 'editReports' | 'authenticateUser' | 'notification';
 
 export type UserAuthentication = {
     state: 'authenticated' | 'unauthenticated';
@@ -7,5 +7,5 @@ export type UserAuthentication = {
 };
 
 export namespace UserAuthenticationType {
-    export const all: UserAuthenticationType[] = ['editEvents', 'editReports', 'authenticateUser', 'notification', 'editOccupancy'];
+    export const all: UserAuthenticationType[] = ['editEvents', 'editReports', 'authenticateUser', 'notification'];
 }
