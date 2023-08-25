@@ -8,10 +8,16 @@
     @include font-weight('small')
     text-align: justify
     @include dynamic-color(color, 'secondaryText')
+    width: 100%
 
     &::ng-deep
         *
             display: inline-block
+
+        img
+            display: block
+            margin-left: auto
+            margin-right: auto
 
         a
             text-decoration: none
@@ -34,3 +40,4 @@
                 width: 90%
                 height: 1px
                 @include dynamic-color(background-color, 'text')
+
