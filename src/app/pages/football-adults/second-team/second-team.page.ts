@@ -1,24 +1,22 @@
-import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { websiteConfig } from 'src/app/config/website-config';
 import { AnpfiffInfoTeamParameters } from 'src/app/modules/firebase-api/types/anpfiff-info-team-parameters';
-import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
-import { ReportGroupId } from 'src/app/modules/firebase-api/types/report';
+import { Component } from '@angular/core';
 import { ContactItem } from 'src/app/modules/general-components/types/contact-item';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
+import { ReportGroupId } from 'src/app/modules/firebase-api/types/report';
 import { StyleConfigService } from 'src/app/services/style-config.service';
+import { Title } from '@angular/platform-browser';
+import { websiteConfig } from 'src/app/config/website-config';
 
 @Component({
     selector: 'pages-second-team',
-    templateUrl: './second-team.page.html',
-    styleUrls: ['./second-team.page.sass']
+    styleUrls: ['./second-team.page.sass'],
+    templateUrl: './second-team.page.html'
 })
 export class SecondTeamPage {
     public eventGroupTitle = EventGroupId.title;
 
-    public readonly eventGroupIds: EventGroupId[] = [
-        'football-adults/second-team'
-    ];
+    public readonly eventGroupIds: EventGroupId[] = ['football-adults/second-team'];
 
     public readonly reportGroupId: ReportGroupId = 'football-adults/second-team/game-report';
 

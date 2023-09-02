@@ -1,16 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { AnpfiffInfoTeamParameters } from 'src/app/modules/firebase-api/types/anpfiff-info-team-parameters';
-import { TeamSquad } from 'src/app/modules/firebase-api/types/team-squad';
-import { FetchState } from 'src/app/types/fetch-state';
 import { DeviceTypeService } from '../../../../services/device-type.service';
-import { StyleConfigService } from '../../../../services/style-config.service';
+import { FetchState } from 'src/app/types/fetch-state';
+import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { SquadPerson } from '../../types/squad-person';
+import { StyleConfigService } from '../../../../services/style-config.service';
+import { TeamSquad } from 'src/app/modules/firebase-api/types/team-squad';
 
 @Component({
     selector: 'squad',
-    templateUrl: './squad.component.html',
-    styleUrls: ['./squad.component.sass']
+    styleUrls: ['./squad.component.sass'],
+    templateUrl: './squad.component.html'
 })
 export class SquadComponent implements OnInit {
     @Input() public parametersType!: AnpfiffInfoTeamParameters.Type;
@@ -24,13 +24,16 @@ export class SquadComponent implements OnInit {
     ) {}
 
     public ngOnInit() {
-        this.firebaseApiService.function('bfvData').function('teamSquad').call({
-            type: this.parametersType
-        }).then(squad => {
-            this.fetchedSquad = FetchState.success(squad);
-        }).catch(reason => {
-            this.fetchedSquad = FetchState.failure(reason);
-        });
+        this.firebaseApiService.function('bfvData').function('teamSquad')
+            .call({
+                type: this.parametersType
+            })
+            .then(squad => {
+                this.fetchedSquad = FetchState.success(squad);
+            })
+            .catch(reason => {
+                this.fetchedSquad = FetchState.failure(reason);
+            });
     }
 
     public squadPersonInfo(person: TeamSquad.Person): SquadPerson {
@@ -38,54 +41,51 @@ export class SquadComponent implements OnInit {
         if (person.goals !== null)
             additionalText = `${person.goals} Tore`;
         if (person.assists !== null) {
-            if (additionalText === null) {
+            if (additionalText === null)
                 additionalText = `${person.assists} Assists`;
-            } else {
+            else
                 additionalText += ` und ${person.assists} Assists`;
-            }
         }
         if (person.countInSquad !== null) {
-            if (additionalText === null) {
+            if (additionalText === null)
                 additionalText = `${person.countInSquad} Spiele`;
-            } else {
+            else
                 additionalText += ` in ${person.countInSquad} Spielen`;
-            }
         }
         return {
+            additionalText: additionalText,
             imageId: person.imageId,
             name: this.getFullName(person),
-            personParameters: person.personParameters,
-            additionalText
+            personParameters: person.personParameters
         };
     }
 
     public coachPersonInfo(person: TeamSquad.Coach): SquadPerson {
         return {
+            additionalText: null,
             imageId: person.imageId,
             name: person.name ?? 'n.a.',
-            personParameters: person.personParameters,
-            additionalText: null
+            personParameters: person.personParameters
         };
     }
 
     public staffPersonInfo(person: TeamSquad.StabPerson): SquadPerson {
         return {
+            additionalText: person.function,
             imageId: person.imageId,
             name: person.name ?? 'n.a.',
-            personParameters: person.personParameters,
-            additionalText: person.function
+            personParameters: person.personParameters
         };
     }
 
     private getFullName(person: { firstName: string | null; lastName: string | null }): string {
-        if (person.firstName !== null && person.lastName !== null) {
+        if (person.firstName !== null && person.lastName !== null)
             return `${person.firstName} ${person.lastName}`;
-        } else if (person.firstName === null && person.lastName !== null) {
+        else if (person.firstName === null && person.lastName !== null)
             return person.lastName;
-        } else if (person.firstName !== null && person.lastName === null) {
+        else if (person.firstName !== null && person.lastName === null)
             return person.firstName;
-        } else {
-            return 'n.a.';
-        }
+
+        return 'n.a.';
     }
 }

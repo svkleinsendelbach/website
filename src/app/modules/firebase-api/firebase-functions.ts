@@ -1,20 +1,20 @@
 import {
-    VerifyRecaptchaFunctionType,
     DeleteAllDataFunctionType,
-    EventGetFunctionType,
     EventEditFunctionType,
+    EventGetFunctionType,
+    GameInfoGetFunctionType,
+    NotificationPushFunctionType,
+    NotificationRegisterFunctionType,
+    ReportEditFunctionType,
     ReportGetAllFunctionType,
     ReportGetFunctionType,
-    ReportEditFunctionType,
-    GameInfoGetFunctionType,
-    TeamSquadGetFunctionType,
     SendMailContactFunctionType,
+    TeamSquadGetFunctionType,
+    UserAuthenticationAcceptDeclineFunctionType,
     UserAuthenticationAddFunctionType,
     UserAuthenticationCheckFunctionType,
-    UserAuthenticationAcceptDeclineFunctionType,
     UserAuthenticationGetAllUnauthenticatedFunctionType,
-    NotificationRegisterFunctionType,
-    NotificationPushFunctionType
+    VerifyRecaptchaFunctionType
 } from './function-types';
 
 export interface FirebaseFunctions {

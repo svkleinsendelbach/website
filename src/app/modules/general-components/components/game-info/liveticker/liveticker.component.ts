@@ -5,8 +5,8 @@ import { StyleConfigService } from 'src/app/services/style-config.service';
 
 @Component({
     selector: 'liveticker',
-    templateUrl: './liveticker.component.html',
-    styleUrls: ['./liveticker.component.sass']
+    styleUrls: ['./liveticker.component.sass'],
+    templateUrl: './liveticker.component.html'
 })
 export class LivetickerComponent {
     @Input() public liveticker!: BfvLiveticker;

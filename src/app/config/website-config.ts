@@ -1,59 +1,56 @@
 import { InternalLink } from '../types/internal-path';
 import { WebsiteConfig } from './website-config.d';
 
+/* eslint-disable sort-keys */
 export const websiteConfig: WebsiteConfig = {
     openingHours: {
         monday: {
-            title: 'Montag',
-            time: 'geschlossen'
+            time: 'geschlossen',
+            title: 'Montag'
         },
         tuesday: {
-            title: 'Dienstag',
-            time: 'geschlossen'
+            time: 'geschlossen',
+            title: 'Dienstag'
         },
         wednesday: {
-            title: 'Mittwoch',
-            time: 'geschlossen'
+            time: 'geschlossen',
+            title: 'Mittwoch'
         },
         thursday: {
-            title: 'Donnerstag',
-            time: 'geschlossen'
+            time: 'geschlossen',
+            title: 'Donnerstag'
         },
         friday: {
-            title: 'Freitag',
-            time: '19 - 22 Uhr'
+            time: '19 - 22 Uhr',
+            title: 'Freitag'
         },
         saturday: {
-            title: 'Samstag',
-            time: '18 - 21 Uhr'
+            time: '18 - 21 Uhr',
+            title: 'Samstag'
         },
         sunday: {
-            title: 'Sonntag',
-            time: '9:30 – 12 Uhr und 17 – 20 Uhr, bei Heimspielen: 13:30 – 20 Uhr'
+            time: '9:30 – 12 Uhr und 17 – 20 Uhr, bei Heimspielen: 13:30 – 20 Uhr',
+            title: 'Sonntag'
         }
     },
     managers: [
         {
-            name: 'n.a.',
             function: '1. Vorsitzender',
-            imageSrc: null
+            imageSrc: null,
+            name: 'n.a.'
         },
         {
-            name: 'Sebastian Schuldes',
             function: '2. Vorsitzender',
-            imageSrc: null
+            imageSrc: null,
+            name: 'Sebastian Schuldes'
         },
         {
-            name: 'Josef Hoier',
             function: '3. Vorsitzender',
-            imageSrc: null
+            imageSrc: null,
+            name: 'Josef Hoier'
         }
     ],
     coordinates: {
-        sportshome: {
-            lat: 49.59228025815224,
-            lng: 11.157803435569505
-        },
         'a-field': {
             lat: 49.59270166222209,
             lng: 11.158047221011378
@@ -61,6 +58,10 @@ export const websiteConfig: WebsiteConfig = {
         'b-field': {
             lat: 49.589930544472566,
             lng: 11.162866292827417
+        },
+        'sportshome': {
+            lat: 49.59228025815224,
+            lng: 11.157803435569505
         }
     },
     contact: {
@@ -71,7 +72,9 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '017657857884',
                     text: '0176 / 57857884'
-                }
+                },
+                email: null,
+                telephone: null
             }
         ],
         'first-team': [
@@ -81,7 +84,9 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '017657857884',
                     text: '0176 / 57857884'
-                }
+                },
+                email: null,
+                telephone: null
             },
             {
                 function: 'Trainer',
@@ -89,7 +94,9 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '015901094261',
                     text: '0159 / 01094261'
-                }
+                },
+                email: null,
+                telephone: null
             }
         ],
         'second-team': [
@@ -99,7 +106,9 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '017657857884',
                     text: '0176 / 57857884'
-                }
+                },
+                email: null,
+                telephone: null
             },
             {
                 function: 'Trainer',
@@ -108,7 +117,8 @@ export const websiteConfig: WebsiteConfig = {
                     number: '015112441784',
                     text: '0151 / 12441784'
                 },
-                email: 'kellermann.tim@gmx.de'
+                email: 'kellermann.tim@gmx.de',
+                telephone: null
             }
         ],
         'ah-team': [
@@ -118,7 +128,9 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '01703396915',
                     text: '0170 / 3396915'
-                }
+                },
+                email: null,
+                telephone: null
             }
         ],
         'football-youth': [
@@ -129,7 +141,8 @@ export const websiteConfig: WebsiteConfig = {
                     number: '015112441784',
                     text: '0151/ 12441784'
                 },
-                email: 'kellermann.tim@gmx.de'
+                email: 'kellermann.tim@gmx.de',
+                telephone: null
             },
             {
                 function: 'Jugendleiter Kleinfeld',
@@ -137,7 +150,9 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '01606120508',
                     text: '0160 / 6120508'
-                }
+                },
+                email: null,
+                telephone: null
             },
             {
                 function: 'Jugendleiter Kleinfeld',
@@ -145,7 +160,9 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '01712447114',
                     text: '0171 / 2447114'
-                }
+                },
+                email: null,
+                telephone: null
             }
         ],
         'c-youth': [
@@ -155,7 +172,9 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '01772485421',
                     text: '0177 / 2485421'
-                }
+                },
+                email: null,
+                telephone: null
             },
             {
                 function: 'Trainer',
@@ -163,7 +182,9 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '017653935160',
                     text: '0176 / 53935160'
-                }
+                },
+                email: null,
+                telephone: null
             },
             {
                 function: 'Trainer',
@@ -171,7 +192,9 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '017670820050',
                     text: '0176 / 70820050'
-                }
+                },
+                email: null,
+                telephone: null
             }
         ],
         'e-youth': [
@@ -181,7 +204,9 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '01606120508',
                     text: '0160 / 6120508'
-                }
+                },
+                email: null,
+                telephone: null
             },
             {
                 function: 'Trainer',
@@ -189,7 +214,9 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '01702911886',
                     text: '0170 / 2911886'
-                }
+                },
+                email: null,
+                telephone: null
             }
         ],
         'f-youth': [
@@ -199,7 +226,9 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '01729915405',
                     text: '0172 / 9915405'
-                }
+                },
+                email: null,
+                telephone: null
             },
             {
                 function: 'Trainer',
@@ -207,7 +236,9 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '01712447114',
                     text: '0171 / 2447114'
-                }
+                },
+                email: null,
+                telephone: null
             }
         ],
         'g-youth': [
@@ -217,7 +248,9 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '017632844763',
                     text: '0176 / 32844763'
-                }
+                },
+                email: null,
+                telephone: null
             },
             {
                 function: 'Trainer',
@@ -225,39 +258,42 @@ export const websiteConfig: WebsiteConfig = {
                 mobile: {
                     number: '01708087516',
                     text: '0170 / 8087516'
-                }
+                },
+                email: null,
+                telephone: null
             }
         ]
     },
     bfvTeamIds: {
-        'first-team': '02EO9A1SNG000000VS5489B2VSAS84KM',
-        'second-team': '02EO9BK2JS000000VS5489B2VSAS84KM',
         'c-youth-1': '02GKSI5N8O000037VS5489B4VSM5S7RJ',
         'c-youth-2': '02GKSOGF8K000006VS5489B4VSM5S7RJ',
         'e-youth': '01L3BHPM88000000VV0AG811VV4PB99G',
-        'f-youth': '01DVQP0J40000000VV0AG80NVSNQSIQV'
+        'f-youth': '01DVQP0J40000000VV0AG80NVSNQSIQV',
+        'first-team': '02EO9A1SNG000000VS5489B2VSAS84KM',
+        'second-team': '02EO9BK2JS000000VS5489B2VSAS84KM'
     },
     homeBanner: [
         {
             imageSource: 'assets/images/mannschaft.png',
-            title: 'Herren Mannschaft',
-            subTitle: '1. und 2. Mannschaft 2019 / 2020',
+            isCurrent: true,
             link: InternalLink.all['fussball/herren'],
-            isCurrent: true
+            subTitle: '1. und 2. Mannschaft 2019 / 2020',
+            title: 'Herren Mannschaft'
         },
         {
             imageSource: 'assets/images/kleinfeldmannschaften.jpg',
-            title: 'Kleinfeld Mannschaften',
+            isCurrent: false,
             link: InternalLink.all['fussball/jugend'],
-            isCurrent: false
+            subTitle: null,
+            title: 'Kleinfeld Mannschaften'
         }
     ],
     mapOptions: {
-        zoom: 14,
+        clickableIcons: false,
+        mapTypeId: 'hybrid',
         maxZoom: 20,
         minZoom: 5,
         scrollwheel: false,
-        clickableIcons: false,
-        mapTypeId: 'hybrid'
+        zoom: 14
     }
 };

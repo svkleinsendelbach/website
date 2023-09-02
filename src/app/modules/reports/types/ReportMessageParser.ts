@@ -1,7 +1,6 @@
 import { RegexIterable } from 'src/app/types/regex-iterable';
 
 class Elements implements Iterable<HTMLElement | string> {
-
     public constructor(
         private readonly elements: (HTMLElement | string)[] = []
     ) {}
@@ -11,7 +10,7 @@ class Elements implements Iterable<HTMLElement | string> {
     }
 
     public get htmlElements(): HTMLElement[] {
-        return this.elements.flatMap(element => typeof element !== 'string' ? element : []);
+        return this.elements.flatMap(element => typeof element === 'string' ? [] : element);
     }
 
     public static fromContent(content: string): Elements {
@@ -26,8 +25,8 @@ class Elements implements Iterable<HTMLElement | string> {
         this.elements.push(element);
     }
 
-    public copy(elements?: 'html' | 'string' | ['html', 'string'] | ['string', 'html']): Elements {
-        if (elements === undefined)
+    public copy(elements: 'all' | 'html' | 'string' | ['html', 'string'] | ['string', 'html'] = 'all'): Elements {
+        if (elements === 'all')
             return new Elements();
         if (elements === 'string')
             return new Elements(this.stringElements);
@@ -56,35 +55,33 @@ export class ReportMessageParser {
         const result = elements.copy('html');
         for (const element of elements.stringElements) {
             let lastIndex = 0;
-            const regexIt = new RegexIterable(/!\[(?<title>[\S\s]+?)\]\((?<link>[\S\s]+?)(?:\s*,\s*(?<width>\d*%)\s*)?\)/g, element);
+            const regexIt = new RegexIterable(/!\[(?<title>[\S\s]+?)\]\((?<link>[\S\s]+?)(?:\s*,\s*(?<width>\d*%)\s*)?\)/gu, element);
             for (const match of regexIt) {
                 result.push(element.slice(lastIndex, match.startIndex));
-                if (match.groups === undefined)
+                if (!match.groups)
                     continue;
                 const image = document.createElement('img');
                 image.src = match.groups['link'];
                 image.title = match.groups['title'];
                 image.alt = match.groups['title'];
-                console.log(match.groups);
                 if ('width' in match.groups)
                     image.style.width = match.groups['width'];
                 result.push(image);
                 lastIndex = match.endIndex + 1;
             }
             result.push(element.slice(lastIndex));
-
         }
         return result;
     }
 
     private parseLinks(elements: Elements): Elements | null {
         const result = elements.copy('html');
-        for (const element of elements.stringElements) {
+        for (const element1 of elements.stringElements) {
             let lastIndex = 0;
-            const regexIt = new RegexIterable(/\[(?<content>[\S\s]+?)\]\((?<link>[\S\s]+?)\)/g, element);
+            const regexIt = new RegexIterable(/\[(?<content>[\S\s]+?)\]\((?<link>[\S\s]+?)\)/gu, element1);
             for (const match of regexIt) {
-                result.push(element.slice(lastIndex, match.startIndex));
-                if (match.groups === undefined)
+                result.push(element1.slice(lastIndex, match.startIndex));
+                if (!match.groups)
                     continue;
                 const link = document.createElement('a');
                 link.href = match.groups['link'];
@@ -92,14 +89,13 @@ export class ReportMessageParser {
                 const content = this.parseFormatting(new Elements([match.groups['content']]));
                 if (content === null)
                     return null;
-                for (const _element of content)
-                    link.append(_element);
+                for (const element2 of content)
+                    link.append(element2);
                 link.title = link.innerText;
                 result.push(link);
                 lastIndex = match.endIndex + 1;
             }
-            result.push(element.slice(lastIndex));
-
+            result.push(element1.slice(lastIndex));
         }
         return result;
     }
@@ -107,7 +103,7 @@ export class ReportMessageParser {
     private parseNewLines(elements: Elements): Elements | null {
         const result = elements.copy('html');
         for (const element of elements.stringElements) {
-            const regexIt = new RegexIterable(/\n/g, element);
+            const regexIt = new RegexIterable(/\n/gu, element);
             let lastIndex = 0;
             for (const match of regexIt) {
                 result.push(element.slice(lastIndex, match.startIndex));
@@ -122,15 +118,14 @@ export class ReportMessageParser {
     private parseHorizonalLine(elements: Elements): Elements | null {
         const result = elements.copy('html');
         for (const element of elements.stringElements) {
-            const match = /^\s*---\s*$/g.exec(element);
-            if (match !== null) {
+            const match = (/^\s*---\s*$/gu).exec(element);
+            if (match) {
                 const line = document.createElement('div');
                 line.classList.add('horizontal-line');
                 line.append(document.createElement('div'));
                 result.push(line);
-            } else {
+            } else
                 result.push(element);
-            }
         }
         return result;
     }
@@ -147,9 +142,11 @@ export class ReportMessageParser {
                 continue;
             }
             let lastIndex = 0;
-            const regexIt = new RegexIterable(/(?<three>\*\*\*)|(?<two>\*\*)|(?<one>\*)/g, element);
+            const regexIt = new RegexIterable(/(?<three>\*\*\*)|(?<two>\*\*)|(?<one>\*)/gu, element);
             for (const match of regexIt) {
-                const format = match.groups?.['three'] !== undefined ? '***' : match.groups?.['two'] !== undefined ? '**' : match.groups?.['one'] !== undefined ? '*' : null;
+                if (!match.groups)
+                    continue;
+                const format = match.groups['three'] ? '***' : match.groups['two'] ? '**' : match.groups['one'] ? '*' : null;
                 if (format === null)
                     continue;
                 const currentValue = element.slice(lastIndex, match.startIndex);
@@ -237,9 +234,9 @@ export class ReportMessageParser {
         if (Array.isArray(elements)) {
             for (const child of elements)
                 element.append(child);
-        } else {
+        } else
             element.append(elements);
-        }
+
         return element;
     }
 }

@@ -1,16 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { StyleConfigService } from 'src/app/services/style-config.service';
 import { FooterData } from '../../types/footer-data';
+import { StyleConfigService } from 'src/app/services/style-config.service';
+import { faPhone } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'footer',
-    templateUrl: './footer.component.html',
-    styleUrls: ['./footer.component.sass']
+    styleUrls: ['./footer.component.sass'],
+    templateUrl: './footer.component.html'
 })
 export class FooterComponent {
-
     @Input() public footerData!: FooterData;
 
     public faPhone = faPhone;

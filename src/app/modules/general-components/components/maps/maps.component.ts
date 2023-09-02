@@ -1,17 +1,17 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
-import { environment } from '../../../../../environments/environment';
-import { DeviceTypeService } from '../../../../services/device-type.service';
-import { StyleConfigService } from '../../../../services/style-config.service';
 import { Appearance, AppearanceService } from '../../../../services/appearance.service';
-import { mapStyleDarkAppearence } from '../../../../utils/mapStyleDarkAppearence';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CookieSelectionService } from 'src/app/modules/cookie-selector/services/cookie-selection.service';
+import { DeviceTypeService } from '../../../../services/device-type.service';
+import { HttpClient } from '@angular/common/http';
+import { StyleConfigService } from '../../../../services/style-config.service';
+import { environment } from '../../../../../environments/environment';
+import { lastValueFrom } from 'rxjs';
+import { mapStyleDarkAppearence } from '../../../../utils/mapStyleDarkAppearence';
 
 @Component({
     selector: 'maps',
-    templateUrl: './maps.component.html',
-    styleUrls: ['./maps.component.sass']
+    styleUrls: ['./maps.component.sass'],
+    templateUrl: './maps.component.html'
 })
 export class MapsComponent implements OnInit, OnDestroy {
     @Input() public options!: google.maps.MapOptions;
@@ -32,7 +32,7 @@ export class MapsComponent implements OnInit, OnDestroy {
         public appearance: AppearanceService
     ) {
         void this.checkApiLoaded();
-        this.functionalityCookiesSelected = this.cookieSelectionService.cookiesSelection?.functionality === 'selected';
+        this.functionalityCookiesSelected = this.cookieSelectionService.cookiesSelection !== null && this.cookieSelectionService.cookiesSelection.functionality === 'selected';
         this.cookieSelectionService.listeners.add('maps-component', selection => {
             this.functionalityCookiesSelected = selection.functionality === 'selected';
         });
@@ -69,7 +69,7 @@ export class MapsComponent implements OnInit, OnDestroy {
     private setMapOptions(appearance: Appearance) {
         this.mapOptions = {
             ...this.options,
-            styles: appearance === 'light' ? undefined : mapStyleDarkAppearence
+            styles: appearance === 'light' ? [] : mapStyleDarkAppearence
         };
     }
 }

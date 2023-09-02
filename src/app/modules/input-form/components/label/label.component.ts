@@ -3,8 +3,8 @@ import { StyleConfigService } from 'src/app/services/style-config.service';
 
 @Component({
     selector: 'label',
-    templateUrl: './label.component.html',
-    styleUrls: ['./label.component.sass']
+    styleUrls: ['./label.component.sass'],
+    templateUrl: './label.component.html'
 })
 export class LabelComponent {
     @Input() public text!: string;

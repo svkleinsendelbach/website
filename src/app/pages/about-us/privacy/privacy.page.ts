@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'pages-privacy',
-    templateUrl: './privacy.page.html',
-    styleUrls: ['./privacy.page.sass']
+    styleUrls: ['./privacy.page.sass'],
+    templateUrl: './privacy.page.html'
 })
 export class PrivacyPage {
     public constructor(

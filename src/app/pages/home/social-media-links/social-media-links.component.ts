@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
-import { Link } from 'src/app/types/link';
 import { AppearanceService } from '../../../services/appearance.service';
 import { DeviceTypeService } from '../../../services/device-type.service';
+import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
+import { Link } from 'src/app/types/link';
 import { StyleConfigService } from '../../../services/style-config.service';
 
 @Component({
     selector: 'app-social-media-links',
-    templateUrl: './social-media-links.component.html',
-    styleUrls: ['./social-media-links.component.sass']
+    styleUrls: ['./social-media-links.component.sass'],
+    templateUrl: './social-media-links.component.html'
 })
 export class SocialMediaLinksComponent {
     @Input() public socialMediaData!: SocialMediaData;

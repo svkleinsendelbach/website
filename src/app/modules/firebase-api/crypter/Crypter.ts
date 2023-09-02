@@ -1,10 +1,10 @@
-import { RandomBitIterator } from './RandomBitIterator';
+import { CBCDecryptor, CBCEncryptor } from 'aes-ts';
+import { addPadding, bitIteratorToBytes, randomBytes, removePadding, unishortBytes, unishortString, xor } from './utils';
+import { Base64 } from 'js-base64';
 import { BytesToBitIterator } from './BytesToBitIterator';
 import { CombineIterator } from './CombineIterator';
-import { bitIteratorToBytes, randomBytes, xor, addPadding, removePadding, unishortBytes, unishortString } from './utils';
-import { CBCEncryptor, CBCDecryptor } from 'aes-ts';
-import { sha512 as crypt_sha512 } from 'sha512-crypt-ts';
-import { Base64 } from 'js-base64';
+import { RandomBitIterator } from './RandomBitIterator';
+import { sha512 as cryptSha512 } from 'sha512-crypt-ts';
 
 export class Crypter {
     public constructor(
@@ -53,11 +53,11 @@ export class Crypter {
         return Base64.fromUint8Array(encryptedData, true);
     }
 
-    public decryptDecode(data: ''): undefined;
+    public decryptDecode(data: ''): null;
     public decryptDecode<T = unknown>(data: string): T;
-    public decryptDecode<T = unknown>(data: string): T | undefined {
+    public decryptDecode<T = unknown>(data: string): T | null {
         if (data === '')
-            return undefined;
+            return null;
         const dataBytes = Base64.toUint8Array(data);
         const decryptedData = this.decryptAesAndVernam(dataBytes);
         const decodedData = unishortString(decryptedData);
@@ -72,8 +72,8 @@ export namespace Crypter {
         vernamKey: Uint8Array;
     }
 
-    export function sha512(value: string, key?: string): string {
-        const hashedValue = key === undefined ? crypt_sha512.base64(value) : crypt_sha512.base64Hmac(key, value);
+    export function sha512(value: string, key: string | null = null): string {
+        const hashedValue = key === null ? cryptSha512.base64(value) : cryptSha512.base64Hmac(key, value);
         return hashedValue.replaceAll('/', '_');
     }
 }

@@ -5,8 +5,8 @@ import { HomeLinkData } from '../../types/home-link-data';
 
 @Component({
     selector: 'header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.sass']
+    styleUrls: ['./header.component.sass'],
+    templateUrl: './header.component.html'
 })
 export class HeaderComponent {
     @Input() public headerData!: Record<DeviceType, HeaderData>;

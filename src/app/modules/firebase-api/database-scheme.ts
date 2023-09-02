@@ -1,9 +1,9 @@
-import { AnpfiffInfoTeamParameters } from './types/anpfiff-info-team-parameters';
-import { Event, EventGroupId } from './types/event';
-import { NotificationType } from './types/notification';
-import { Report, ReportGroupId } from './types/report';
 import { CryptedScheme, DatabaseSchemeType } from './types/scheme-type';
+import { Event, EventGroupId } from './types/event';
+import { Report, ReportGroupId } from './types/report';
 import { UserAuthentication, UserAuthenticationType } from './types/user-authentication';
+import { AnpfiffInfoTeamParameters } from './types/anpfiff-info-team-parameters';
+import { NotificationType } from './types/notification';
 
 export type DatabaseScheme = DatabaseSchemeType<{
     anpfiffInfoTeamParameters: {

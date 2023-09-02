@@ -1,7 +1,7 @@
 export interface FetchState<Content, Failure extends Error = Error> {
     readonly state: 'failure' | 'loading' | 'success';
-    content: Content | undefined;
-    error: Failure | undefined;
+    content: Content | null;
+    error: Failure | null;
     isLoading(): this is FetchState.Loading;
     isSuccess(): this is FetchState.Success<Content>;
     isFailure(): this is FetchState.Failure<Failure>;
@@ -11,9 +11,9 @@ export namespace FetchState {
     export class Loading implements FetchState<never, never> {
         public readonly state = 'loading';
 
-        public readonly content = undefined;
+        public readonly content = null;
 
-        public readonly error = undefined;
+        public readonly error = null;
 
         public isLoading = (): true => true;
 
@@ -25,7 +25,7 @@ export namespace FetchState {
     export class Success<Content> implements FetchState<Content, never> {
         public readonly state = 'success';
 
-        public readonly error = undefined;
+        public readonly error = null;
 
         public constructor(
             public readonly content: Content
@@ -41,7 +41,7 @@ export namespace FetchState {
     export class Failure<Failure extends Error = Error> implements FetchState<never, Failure> {
         public readonly state = 'failure';
 
-        public readonly content = undefined;
+        public readonly content = null;
 
         public constructor(
             public readonly error: Failure

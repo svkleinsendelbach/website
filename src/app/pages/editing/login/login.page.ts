@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { InternalLink } from 'src/app/types/internal-path';
-import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { StyleConfigService } from 'src/app/services/style-config.service';
 import { AuthService } from 'src/app/modules/authentication/services/auth.service';
+import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { InternalLink } from 'src/app/types/internal-path';
+import { Router } from '@angular/router';
+import { StyleConfigService } from 'src/app/services/style-config.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'pages-login',
-    templateUrl: './login.page.html',
-    styleUrls: ['./login.page.sass']
+    styleUrls: ['./login.page.sass'],
+    templateUrl: './login.page.html'
 })
 export class LoginPage implements OnInit {
     public editPageLink = InternalLink.all.bearbeiten;
@@ -44,8 +44,7 @@ export class LoginPage implements OnInit {
         if (isLoggedIn) {
             this.state = 'alreadyLoggedIn';
             await this.router.navigateByUrl(this.editPageLink.link);
-        } else {
+        } else
             this.state = 'loginPage';
-        }
     }
 }

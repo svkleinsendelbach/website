@@ -1,7 +1,7 @@
+import { OpeningHour, Weekdays } from '../pages/about-us/sportshome/sportshome.page';
+import { BannerItem } from '../pages/home/home-banner/home-banner.component';
 import { ContactItem } from '../modules/general-components/types/contact-item';
 import { Manager } from '../pages/about-us/managers/managers.page';
-import { Weekdays, OpeningHour } from '../pages/about-us/sportshome/sportshome.page';
-import { BannerItem } from '../pages/home/home-banner/home-banner.component';
 
 export interface WebsiteConfig {
 

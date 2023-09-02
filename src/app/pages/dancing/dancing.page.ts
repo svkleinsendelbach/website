@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'pages-dancing',
-    templateUrl: './dancing.page.html',
-    styleUrls: ['./dancing.page.sass']
+    styleUrls: ['./dancing.page.sass'],
+    templateUrl: './dancing.page.html'
 })
 export class DancingPage {
     public constructor(

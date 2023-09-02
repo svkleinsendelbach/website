@@ -1,22 +1,21 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Report, ReportGroupId } from 'src/app/modules/firebase-api/types/report';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { StyleConfigService } from 'src/app/services/style-config.service';
 import { ReportMessageParser } from '../../types/ReportMessageParser';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 import { UtcDate } from 'src/app/types/utc-date';
 
 @Component({
     selector: 'report',
-    templateUrl: './report.component.html',
-    styleUrls: ['./report.component.sass']
+    styleUrls: ['./report.component.sass'],
+    templateUrl: './report.component.html'
 })
 export class ReportComponent implements AfterViewInit {
-
     @Input() public report!: Report;
 
-    @Input() public groupId?: ReportGroupId;
+    @Input() public groupId: ReportGroupId | null = null;
 
-    @ViewChild('message') public messageElement?: ElementRef<HTMLElement>;
+    @ViewChild('message') public messageElement: ElementRef<HTMLElement> | null = null;
 
     public ReportGroupId = ReportGroupId;
 
@@ -35,7 +34,7 @@ export class ReportComponent implements AfterViewInit {
     }
 
     public ngAfterViewInit() {
-        if (this.messageElement === undefined)
+        if (!this.messageElement)
             return;
         const parser = new ReportMessageParser();
         const elements = parser.parse(this.report.message);

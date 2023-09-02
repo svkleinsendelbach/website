@@ -1,11 +1,11 @@
 import { FunctionsErrorCodeCore } from '@angular/fire/functions';
 import { Result } from './result';
 
-export interface FirebaseFunctionError {
+export interface FirebaseFunctionError extends Error {
     name: 'FirebaseFunctionError';
     code: FunctionsErrorCodeCore;
     message: string;
-    details?: unknown;
+    details: unknown;
     stack?: string;
 }
 

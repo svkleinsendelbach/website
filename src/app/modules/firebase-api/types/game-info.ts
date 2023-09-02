@@ -6,18 +6,18 @@ export interface GameInfo {
         gameDay: number;
     };
     result: {
-        home: number | undefined;
-        away: number | undefined;
+        home: number | null;
+        away: number | null;
     };
     date: string;
     homeTeam: GameInfo.Team;
     awayTeam: GameInfo.Team;
-    adress: string | undefined;
-    adressDescription: string | undefined;
+    adress: string | null;
+    adressDescription: string | null;
     livetickers: (BfvLiveticker & {
         id: string;
     })[];
-    report: GameInfo.Report | undefined;
+    report: GameInfo.Report | null;
 }
 
 export namespace GameInfo {
@@ -29,12 +29,12 @@ export namespace GameInfo {
 
     export interface Report {
         title: string;
-        paragraphs: { text: string; link: string | undefined }[][];
+        paragraphs: { text: string; link: string | null }[][];
     }
 
     export function additionalProperties(gameInfo: GameInfo): { isSg2: boolean; sgHomeAway: 'away' | 'home' } {
-        const isKleinsendelbachHetzlesRegex = /Kleinsendelbach.*Hetzles|Hetzles.*Kleinsendelbach/g;
-        const isKleinsendelbachHetzles2Regex = /Kleinsendelbach.*Hetzles.*2|Kleinsendelbach.*2.*Hetzles|Hetzles.*Kleinsendelbach.*2|Hetzles.*2.*Kleinsendelbach/g;
+        const isKleinsendelbachHetzlesRegex = /Kleinsendelbach.*Hetzles|Hetzles.*Kleinsendelbach/gu;
+        const isKleinsendelbachHetzles2Regex = /Kleinsendelbach.*Hetzles.*2|Kleinsendelbach.*2.*Hetzles|Hetzles.*Kleinsendelbach.*2|Hetzles.*2.*Kleinsendelbach/gu;
         if (isKleinsendelbachHetzlesRegex.test(gameInfo.homeTeam.name)) {
             return {
                 isSg2: isKleinsendelbachHetzles2Regex.test(gameInfo.homeTeam.name),

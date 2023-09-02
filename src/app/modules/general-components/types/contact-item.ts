@@ -1,13 +1,13 @@
 export interface ContactItem {
     function: string;
     name: string;
-    mobile?: {
+    mobile: {
         number: string;
         text: string;
-    };
-    telephone?: {
+    } | null;
+    telephone: {
         number: string;
         text: string;
-    };
-    email?: string;
+    } | null;
+    email: string | null;
 }

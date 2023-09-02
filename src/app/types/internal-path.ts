@@ -64,48 +64,45 @@ export namespace InternalPath {
     ];
 
     export const title: Record<Exclude<InternalPath, 'spiel'>, string> = {
-        'home': 'Home',
-        'über-uns': 'Über uns',
-        'sportheim': 'Sportheim',
+        'anfahrt': 'Anfahrt',
+        'bearbeiten': 'Website bearbeiten',
+        'bearbeiten/anmelden': 'Anmelden',
+        'bearbeiten/berichte': 'Berichte bearbeiten',
+        'bearbeiten/berichte/bearbeiten': 'Bericht bearbeiten',
+        'bearbeiten/termine': 'Termine bearbeiten',
+        'bearbeiten/termine/bearbeiten': 'Termin bearbeiten',
+        'berichte': 'Alle Berichte',
         'chroniken': 'Chronik',
-        'satzung': 'Satzung',
         'datenschutz': 'Datenschutz',
-        'mitgliedsantrag': 'Mitgliedsantrag',
         'fussball/herren': 'Herrenfussball',
+        'fussball/herren/alte-herren': 'Alte Herren',
         'fussball/herren/erste-mannschaft': '1. Mannschaft',
         'fussball/herren/zweite-mannschaft': '2. Mannschaft',
-        'fussball/herren/alte-herren': 'Alte Herren',
         'fussball/jugend': 'Jugendfussball',
         'fussball/jugend/c-jugend': 'C-Jugend',
         'fussball/jugend/e-jugend': 'E-Jugend',
         'fussball/jugend/f-jugend': 'F-Jugend',
         'fussball/jugend/g-jugend': 'G-Jugend',
         'gymnastik': 'Gymnastik',
-        'tanzen': 'Tanzen',
-        'anfahrt': 'Anfahrt',
-        'kontakt': 'Kontakt',
+        'home': 'Home',
         'impressum': 'Impressum',
-        'berichte': 'Alle Berichte',
-        'bearbeiten': 'Website bearbeiten',
-        'bearbeiten/anmelden': 'Anmelden',
-        'bearbeiten/termine': 'Termine bearbeiten',
-        'bearbeiten/termine/bearbeiten': 'Termin bearbeiten',
-        'bearbeiten/berichte': 'Berichte bearbeiten',
-        'bearbeiten/berichte/bearbeiten': 'Bericht bearbeiten'
+        'kontakt': 'Kontakt',
+        'mitgliedsantrag': 'Mitgliedsantrag',
+        'satzung': 'Satzung',
+        'sportheim': 'Sportheim',
+        'tanzen': 'Tanzen',
+        'über-uns': 'Über uns'
     };
 }
 
 export namespace InternalLink {
     export const all: Record<Exclude<InternalPath, 'spiel'>, Link> & { 'spiel'(id: string): Link } = ((): Record<Exclude<InternalPath, 'spiel'>, Link> & { 'spiel'(id: string): Link } => {
         const allLinks = {
-            'spiel': (id: string): Link => {
-                return Link.internalParam<InternalPath>('Spiel', 'spiel', id);
-            },
+            spiel: (id: string): Link => Link.internalParam<InternalPath>('Spiel', 'spiel', id),
             ...{} as Record<Exclude<InternalPath, 'spiel'>, Link>
         };
-        for (const internalPath of InternalPath.all) {
+        for (const internalPath of InternalPath.all)
             allLinks[internalPath] = Link.internal<InternalPath>(InternalPath.title[internalPath], internalPath);
-        }
         return allLinks;
     })();
 }

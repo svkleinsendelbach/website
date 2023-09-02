@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { InternalLink } from 'src/app/types/internal-path';
+import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { InternalLink } from 'src/app/types/internal-path';
 import { StyleConfigService } from 'src/app/services/style-config.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'pages-game-detail',
-    templateUrl: './game-detail.page.html',
-    styleUrls: ['./game-detail.page.sass']
+    styleUrls: ['./game-detail.page.sass'],
+    templateUrl: './game-detail.page.html'
 })
 export class GameDetailPage {
     public gameId: string | null;

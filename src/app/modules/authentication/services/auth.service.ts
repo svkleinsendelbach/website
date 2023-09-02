@@ -1,20 +1,19 @@
-import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import firebase from 'firebase/compat/app';
-import { OAuthProvider } from '@angular/fire/auth';
-import { UserAuthenticationType } from 'src/app/modules/firebase-api/types/user-authentication';
-import { RegistrationStatus } from '../types/registration-status';
-import { LoginError } from '../types/login-error';
 import { AuthenticationStatus } from '../types/authentication-status';
 import { Crypter } from '../../firebase-api/crypter/Crypter';
+import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
+import { Injectable } from '@angular/core';
+import { LoginError } from '../types/login-error';
+import { OAuthProvider } from '@angular/fire/auth';
+import { RegistrationStatus } from '../types/registration-status';
+import { UserAuthenticationType } from 'src/app/modules/firebase-api/types/user-authentication';
 import { environment } from 'src/environments/environment';
+import firebase from 'firebase/compat/app';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-
     public constructor(
         private readonly firebaseAuth: AngularFireAuth,
         private readonly firebaseApiService: FirebaseApiService
@@ -80,11 +79,12 @@ export class AuthService {
         const user = await this.firebaseAuth.currentUser;
         if (user === null)
             throw new LoginError('unknown');
-        await this.firebaseApiService.function('userAuthentication').function('add').call({
-            authenticationTypes: authenticationTypes,
-            firstName: firstName,
-            lastName: lastName
-        });
+        await this.firebaseApiService.function('userAuthentication').function('add')
+            .call({
+                authenticationTypes: authenticationTypes,
+                firstName: firstName,
+                lastName: lastName
+            });
     }
 
     public async removeRegistration() {
@@ -136,21 +136,24 @@ export class AuthService {
             throw new LoginError('popup-closed');
         case 'auth/unauthorized-domain':
             throw new LoginError('unknown');
+        default:
+            throw new LoginError('unknown');
         }
-        throw new LoginError('unknown');
     }
 
     private async checkAuthentication(authenticationTypes: UserAuthenticationType[]): Promise<AuthenticationStatus> {
-        const status = await this.firebaseApiService.function('userAuthentication').function('check').call({
-            authenicationTypes: authenticationTypes
-        }).then(() => 'authenticated' as const)
+        const status = await this.firebaseApiService.function('userAuthentication').function('check')
+            .call({
+                authenicationTypes: authenticationTypes
+            })
+            .then(() => 'authenticated' as const)
             .catch(() => 'unauthenticated' as const);
         if (status === 'authenticated') {
             const crypter = new Crypter(environment.cryptionKeys);
             localStorage.setItem('userAuthentication', crypter.encodeEncrypt(authenticationTypes));
-        } else {
+        } else
             localStorage.removeItem('userAuthentication');
-        }
+
         return status;
     }
 

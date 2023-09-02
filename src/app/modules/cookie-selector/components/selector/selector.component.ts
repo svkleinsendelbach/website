@@ -1,20 +1,20 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CookieSelectionService } from '../../services/cookie-selection.service';
-import { DeviceTypeService } from '../../../../services/device-type.service';
-import { StyleConfigService } from '../../../../services/style-config.service';
-import { CookiesSelection } from '../../types/cookie-selection';
 import { CookieType } from '../../types/cookie-type';
+import { CookiesSelection } from '../../types/cookie-selection';
+import { DeviceTypeService } from '../../../../services/device-type.service';
 import { Link } from 'src/app/types/link';
+import { StyleConfigService } from '../../../../services/style-config.service';
 
 @Component({
     selector: 'cookie-selector',
-    templateUrl: './selector.component.html',
-    styleUrls: ['./selector.component.sass']
+    styleUrls: ['./selector.component.sass'],
+    templateUrl: './selector.component.html'
 })
 export class CookieSelectorComponent implements OnInit, OnDestroy {
     @Input() public isShown = false;
 
-    @Input() public privacyLink?: Link;
+    @Input() public privacyLink: Link | null = null;
 
     public showSelection: boolean;
 
@@ -35,7 +35,7 @@ export class CookieSelectorComponent implements OnInit, OnDestroy {
             this.cookiesSelection = newCookieSelection;
         });
         const cookieSelection = this.cookieSelectionService.cookiesSelection;
-        if (cookieSelection === null)
+        if (!cookieSelection)
             this.isShown = true;
     }
 
@@ -54,14 +54,15 @@ export class CookieSelectorComponent implements OnInit, OnDestroy {
         case 'statistics':
             this.cookiesSelection.statistics = this.cookiesSelection.statistics === 'selected' ? 'unselected' : 'selected';
             break;
+        default:
+            break;
         }
     }
 
     public handleShowSelction() {
         this.showSelection = !this.showSelection;
-        if (!this.showSelection) {
+        if (!this.showSelection)
             this.detailsShown = false;
-        }
     }
 
     public handleShowDetails() {
@@ -75,19 +76,19 @@ export class CookieSelectorComponent implements OnInit, OnDestroy {
 
     public handleConfirmAll() {
         this.cookiesSelection = {
-            necessary: 'selected',
             functionality: 'selected',
+            necessary: 'selected',
             statistics: 'selected'
         };
         this.handleConfirmSelected();
     }
 
-    public selectionButtonStyle(type: CookieType): Record<string, string | undefined> {
+    public selectionButtonStyle(type: CookieType): Record<string, string> {
         const isSelected = this.cookiesSelection[type] === 'selected';
         return {
-            color: this.styleConfig.css(isSelected ? 'backgroundColor' : 'textColor'),
             backgroundColor: this.styleConfig.css(isSelected ? 'primaryColor' : 'backgroundColor'),
-            borderColor: this.styleConfig.css(isSelected ? 'primaryColor' : 'textColor')
+            borderColor: this.styleConfig.css(isSelected ? 'primaryColor' : 'textColor'),
+            color: this.styleConfig.css(isSelected ? 'backgroundColor' : 'textColor')
         };
     }
 }

@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { StyleConfigService } from 'src/app/services/style-config.service';
 import { InputField } from '../../../types/input-field';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 import { UtcDate } from 'src/app/types/utc-date';
 
 @Component({
     selector: 'input-field-date-time',
-    templateUrl: './date-time-input.component.html',
-    styleUrls: ['./date-time-input.component.sass']
+    styleUrls: ['./date-time-input.component.sass'],
+    templateUrl: './date-time-input.component.html'
 })
 export class DateTimeInputComponent implements AfterViewInit {
     @Input() public label!: string;
@@ -45,11 +45,11 @@ export class DateTimeInputComponent implements AfterViewInit {
     }
 
     private toDate(date: string, time: string): UtcDate {
-        const dateRegex = /^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})$/g;
-        const timeRegex = /^(?<hour>\d{2}):(?<minute>\d{2})$/g;
+        const dateRegex = /^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})$/gu;
+        const timeRegex = /^(?<hour>\d{2}):(?<minute>\d{2})$/gu;
         const dateMatch = dateRegex.exec(date);
         const timeMatch = timeRegex.exec(time);
-        if (dateMatch?.groups === undefined || timeMatch?.groups === undefined)
+        if (!dateMatch || !dateMatch.groups || !timeMatch || !timeMatch.groups)
             return new UtcDate(0, 0, 0, 0, 0);
         return new UtcDate(
             Number.parseInt(dateMatch.groups['year']),

@@ -8,8 +8,8 @@ export interface CookiesSelection {
 
 export namespace CookiesSelection {
     export const defaultSelection: CookiesSelection = {
-        necessary: 'selected',
         functionality: 'unselected',
+        necessary: 'selected',
         statistics: 'unselected'
     };
 }

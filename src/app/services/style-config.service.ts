@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Style } from 'src/app/types/style';
 import { AppearanceService } from './appearance.service';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Style } from 'src/app/types/style';
 import { lastValueFrom } from 'rxjs';
 
 @Injectable({
@@ -38,13 +38,15 @@ export class StyleConfigService {
     private async parseConfig() {
         const sassContent = await lastValueFrom(this.httpClient.get('./sass/color.sass', { responseType: 'text' }));
         function getColorsMap(name: string): Record<string, string> {
-            const colorsMap = new RegExp(`^\\$${name}:\\s*\\((?<colorsMap>[\\S\\s]*?)\\)$`, 'gm').exec(sassContent)?.groups?.['colorsMap'];
-            return colorsMap?.split(/,\s*/g).reduce((styleConfig, value) => {
-                const groups = /^'(?<name>\S+?)':\s*(?<color>#[0-9A-F]{6})$/g.exec(value)?.groups;
-                if (groups !== undefined && 'name' in groups && 'color' in groups)
-                    styleConfig[`${groups['name']}Color`] = groups['color'];
+            const colorsMatch = new RegExp(`^\\$${name}:\\s*\\((?<colorsMap>[\\S\\s]*?)\\)$`, 'gmu').exec(sassContent);
+            if (!colorsMatch || !colorsMatch.groups || !('colorsMap' in colorsMatch.groups))
+                return {};
+            return colorsMatch.groups['colorsMap'].split(/,\s*/gu).reduce<Record<string, string>>((styleConfig, value) => {
+                const match = (/^'(?<name>\S+?)':\s*(?<color>#[0-9A-F]{6})$/gu).exec(value);
+                if (match && match.groups && 'name' in match.groups && 'color' in match.groups)
+                    styleConfig[`${match.groups['name']}Color`] = match.groups['color'];
                 return styleConfig;
-            }, {} as Record<string, string>) ?? {};
+            }, {});
         }
         const lightColors = getColorsMap('light-colors-map');
         const darkColors = getColorsMap('dark-colors-map');
@@ -72,16 +74,16 @@ export namespace StyleConfigService {
 
     export namespace StyleConfig {
         export const defaultConfig: StyleConfig = {
-            primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
             accentColor: new Style.AppearanceColor(Style.Color.hex('#FFD93D'), Style.Color.hex('#F2BE22')),
             backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
-            secondaryBackgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#3C4A57')),
-            hoveredBackgroundColor: new Style.AppearanceColor(Style.Color.hex('#E0E0E0'), Style.Color.hex('#44454A')),
-            textColor: new Style.AppearanceColor(Style.Color.hex('#24252A'), Style.Color.hex('#C8D6E5')),
-            secondaryTextColor: new Style.AppearanceColor(Style.Color.hex('#868E90'), Style.Color.hex('#868E90')),
-            formSuccessStatusColor: new Style.AppearanceColor(Style.Color.hex('#54B435'), Style.Color.hex('#B6E2A1')),
             formErrorStatusColor: new Style.AppearanceColor(Style.Color.hex('#CE3A0F'), Style.Color.hex('#EB4511')),
-            formInfoStatusColor: new Style.AppearanceColor(Style.Color.hex('#FFBF00'), Style.Color.hex('#FFE15D'))
+            formInfoStatusColor: new Style.AppearanceColor(Style.Color.hex('#FFBF00'), Style.Color.hex('#FFE15D')),
+            formSuccessStatusColor: new Style.AppearanceColor(Style.Color.hex('#54B435'), Style.Color.hex('#B6E2A1')),
+            hoveredBackgroundColor: new Style.AppearanceColor(Style.Color.hex('#E0E0E0'), Style.Color.hex('#44454A')),
+            primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
+            secondaryBackgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#3C4A57')),
+            secondaryTextColor: new Style.AppearanceColor(Style.Color.hex('#868E90'), Style.Color.hex('#868E90')),
+            textColor: new Style.AppearanceColor(Style.Color.hex('#24252A'), Style.Color.hex('#C8D6E5'))
         };
     }
 }

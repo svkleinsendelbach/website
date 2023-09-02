@@ -1,10 +1,10 @@
-import { AnpfiffInfoTeamParameters } from './types/anpfiff-info-team-parameters';
-import { EditType } from './types/edit-type';
 import { Event, EventGroup, EventGroupId } from './types/event';
-import { FunctionType } from './types/function-type';
-import { GameInfo } from './types/game-info';
 import { NotifactionPayload, NotificationType } from './types/notification';
 import { Report, ReportGroupId } from './types/report';
+import { AnpfiffInfoTeamParameters } from './types/anpfiff-info-team-parameters';
+import { EditType } from './types/edit-type';
+import { FunctionType } from './types/function-type';
+import { GameInfo } from './types/game-info';
 import { TeamSquad } from './types/team-squad';
 import { UserAuthenticationType } from './types/user-authentication';
 
@@ -13,9 +13,9 @@ export type DeleteAllDataFunctionType = FunctionType<Record<string, never>, void
 export type EventEditFunctionType = FunctionType<{
     editType: EditType;
     groupId: EventGroupId;
-    previousGroupId: EventGroupId | undefined;
+    previousGroupId: EventGroupId | null;
     eventId: string;
-    event: Omit<Event.Flatten, 'id'> | undefined;
+    event: Omit<Event.Flatten, 'id'> | null;
 }, void>;
 
 export type EventGetFunctionType = FunctionType<{
@@ -39,16 +39,16 @@ export type NotificationRegisterFunctionType = FunctionType<{
 export type ReportEditFunctionType = FunctionType<{
     editType: EditType;
     groupId: ReportGroupId;
-    previousGroupId: ReportGroupId | undefined;
+    previousGroupId: ReportGroupId | null;
     reportId: string;
-    report: Omit<Report.Flatten, 'id'> | undefined;
+    report: Omit<Report.Flatten, 'id'> | null;
 }, void>;
 
 export type ReportGetAllFunctionType = FunctionType<Record<string, never>, (Report.Flatten & { groupId: ReportGroupId })[]>;
 
 export type ReportGetFunctionType = FunctionType<{
     groupId: ReportGroupId;
-    numberReports: number | undefined;
+    numberReports: number | null;
 }, {
     reports: Report.Flatten[];
     hasMore: boolean;
@@ -106,5 +106,5 @@ export type VerifyRecaptchaFunctionType = FunctionType<{
     action: string;
     challenge_ts: string;
     hostname: string;
-    errorCodes?: string[];
+    errorCode: string[] | null;
 }>;

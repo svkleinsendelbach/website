@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
 import { EventListener } from '../types/event-listener';
+import { Injectable } from '@angular/core';
 
 @Injectable({
     providedIn: 'root'
 })
 export class DeviceTypeService {
-
     public listeners = new EventListener<DeviceType>();
 
     private deviceType: DeviceType;
@@ -32,13 +31,11 @@ export class DeviceTypeService {
 
     private static computeDeviceType(): DeviceType {
         const width = window.innerWidth;
-        if (width <= 480) {
+        if (width <= 480)
             return 'mobile';
-        } else if (width <= 1366) {
+        if (width <= 1366)
             return 'tablet';
-        } else {
-            return 'desktop';
-        }
+        return 'desktop';
     }
 
     public windowResized() {

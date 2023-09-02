@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { StyleConfigService } from 'src/app/services/style-config.service';
 import { SquadPerson } from '../../../types/squad-person';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 
 @Component({
     selector: 'squad-person',
-    templateUrl: './squad-person.component.html',
-    styleUrls: ['./squad-person.component.sass']
+    styleUrls: ['./squad-person.component.sass'],
+    templateUrl: './squad-person.component.html'
 })
 export class SquadPersonComponent {
     @Input() public person!: SquadPerson;

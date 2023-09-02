@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { StyleConfigService } from 'src/app/services/style-config.service';
 import { InputField } from '../../../types/input-field';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 
 @Component({
     selector: 'input-field-select',
-    templateUrl: './select.component.html',
-    styleUrls: ['./select.component.sass']
+    styleUrls: ['./select.component.sass'],
+    templateUrl: './select.component.html'
 })
 export class SelectComponent<T extends string> implements AfterViewInit {
     @Input() public label!: string;
@@ -55,15 +55,15 @@ export namespace SelectOptions {
         options: Option<T>[];
     }[]): SelectOptions.Grouped<T> {
         return {
-            type: 'grouped',
-            groups: groups
+            groups: groups,
+            type: 'grouped'
         };
     }
 
     export function ungrouped<T extends string>(options: Option<T>[]): SelectOptions.Ungrouped<T> {
         return {
-            type: 'ungrouped',
-            options: options
+            options: options,
+            type: 'ungrouped'
         };
     }
 }

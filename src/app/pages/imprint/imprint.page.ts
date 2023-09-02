@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { faPhone } from '@fortawesome/free-solid-svg-icons';
-import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { StyleConfigService } from 'src/app/services/style-config.service';
 import { InternalLink } from 'src/app/types/internal-path';
+import { StyleConfigService } from 'src/app/services/style-config.service';
+import { Title } from '@angular/platform-browser';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { faPhone } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'pages-imprint',
-    templateUrl: './imprint.page.html',
-    styleUrls: ['./imprint.page.sass']
+    styleUrls: ['./imprint.page.sass'],
+    templateUrl: './imprint.page.html'
 })
 export class ImprintPage {
     public faPhone = faPhone;

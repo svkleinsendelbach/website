@@ -1,5 +1,5 @@
-import { InputField } from './input-field';
 import { InputError } from './input-error';
+import { InputField } from './input-field';
 import { ValidationResult } from './validation-result';
 
 export class InputForm<
@@ -14,9 +14,9 @@ export class InputForm<
         private readonly statusMessages: Record<ExtraStatus | 'invalidInput', InputError>
     ) {}
 
-    public get error(): InputError | undefined {
+    public get error(): InputError | null {
         if (this.status === 'valid')
-            return undefined;
+            return null;
         return this.statusMessages[this.status];
     }
 
@@ -38,8 +38,7 @@ export class InputForm<
 
     public reset() {
         this.status = 'valid';
-        for (const inputField of Object.values(this.inputFields)) {
+        for (const inputField of Object.values(this.inputFields))
             inputField.reset();
-        }
     }
 }

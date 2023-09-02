@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { DeviceTypeService } from '../../../../services/device-type.service';
-import { StyleConfigService } from '../../../../services/style-config.service';
 import { LinkData } from '../../types/link-data';
+import { StyleConfigService } from '../../../../services/style-config.service';
 
 @Component({
     selector: 'links',
-    templateUrl: './links.component.html',
-    styleUrls: ['./links.component.sass']
+    styleUrls: ['./links.component.sass'],
+    templateUrl: './links.component.html'
 })
 export class LinksComponent {
     @Input() public links!: LinkData[];

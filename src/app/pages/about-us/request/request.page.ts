@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'pages-request',
-    templateUrl: './request.page.html',
-    styleUrls: ['./request.page.sass']
+    styleUrls: ['./request.page.sass'],
+    templateUrl: './request.page.html'
 })
 export class RequestPage {
     public constructor(

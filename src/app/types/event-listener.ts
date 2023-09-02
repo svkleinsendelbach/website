@@ -15,8 +15,7 @@ export class EventListener<T> {
     }
 
     public emitValue(value: T) {
-        for (const listener of Object.values(this.listeners)) {
+        for (const listener of Object.values(this.listeners))
             listener(value);
-        }
     }
 }

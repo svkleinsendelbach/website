@@ -1,5 +1,5 @@
-import { Link } from 'src/app/types/link';
 import { ContactData } from './contact-data';
+import { Link } from 'src/app/types/link';
 
 export interface FooterData {
     links: {
@@ -7,6 +7,6 @@ export interface FooterData {
         link: Link;
     }[];
     copyrightText: string;
-    editLink?: Link;
+    editLink: Link | null;
     contact: ContactData[];
 }

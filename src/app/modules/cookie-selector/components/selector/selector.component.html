@@ -27,7 +27,7 @@
     >Mit der Nutzung unserer Webseite stimmen Sie der Verwendung von Cookies zu. Weitere Informationen über die Verwendung von Cookies und wie Sie Ihre Einwilligung für die Zukunft widerrufen können, finden Sie in unseren Datenschutzhinweisen.</p>
     <a
         id="privacy"
-        *ngIf="privacyLink !== undefined"
+        *ngIf="privacyLink"
         href="{{ privacyLink.link }}"
         target="{{ privacyLink.target }}"
         title="{{ privacyLink.title }}"

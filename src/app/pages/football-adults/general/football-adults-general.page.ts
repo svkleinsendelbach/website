@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { StyleConfigService } from 'src/app/services/style-config.service';
-import { InternalLink, InternalPath } from 'src/app/types/internal-path';
-import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
-import { Link } from 'src/app/types/link';
 import { ContactItem } from 'src/app/modules/general-components/types/contact-item';
+import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
+import { InternalLink } from 'src/app/types/internal-path';
 import { LinkData } from 'src/app/modules/general-components/types/link-data';
 import { ReportGroupId } from 'src/app/modules/firebase-api/types/report';
+import { StyleConfigService } from 'src/app/services/style-config.service';
+import { Title } from '@angular/platform-browser';
 import { websiteConfig } from 'src/app/config/website-config';
 
 @Component({
     selector: 'pages-football-adults-general',
-    templateUrl: './football-adults-general.page.html',
-    styleUrls: ['./football-adults-general.page.sass']
+    styleUrls: ['./football-adults-general.page.sass'],
+    templateUrl: './football-adults-general.page.html'
 })
 export class FootballAdultsGeneralPage {
     public eventGroupTitle = EventGroupId.title;
@@ -24,20 +23,20 @@ export class FootballAdultsGeneralPage {
         {
             id: 'first-team',
             link: InternalLink.all['fussball/herren/erste-mannschaft'],
-            title: '1. Mannschaft',
-            subtitle: '1. Mannschaft der SG Kleinsendelbach / Hetzles'
+            subtitle: '1. Mannschaft der SG Kleinsendelbach / Hetzles',
+            title: '1. Mannschaft'
         },
         {
             id: 'second-team',
             link: InternalLink.all['fussball/herren/zweite-mannschaft'],
-            title: '2. Mannschaft',
-            subtitle: '2. Mannschaft der SG Kleinsendelbach / Hetzles'
+            subtitle: '2. Mannschaft der SG Kleinsendelbach / Hetzles',
+            title: '2. Mannschaft'
         },
         {
             id: 'ah-team',
             link: InternalLink.all['fussball/herren/alte-herren'],
-            title: 'Alte Herren',
-            subtitle: 'Alte Herren des SV Kleinsendelbach'
+            subtitle: 'Alte Herren des SV Kleinsendelbach',
+            title: 'Alte Herren'
         }
     ];
 

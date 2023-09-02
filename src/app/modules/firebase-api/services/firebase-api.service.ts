@@ -1,18 +1,18 @@
-import { Injectable } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/compat/functions';
-import { lastValueFrom } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { Crypter } from '../crypter/Crypter';
 import { CallSecret } from '../types/call-secret';
+import { Crypter } from '../crypter/Crypter';
 import { DatabaseType } from '../types/database-type';
+import { FirebaseFunctions as FFunctions } from '../firebase-functions';
 import { FirebaseFunctionsType } from '../types/firebase-functions-type';
 import { FunctionType } from '../types/function-type';
+import { Injectable } from '@angular/core';
 import { ResultType } from '../types/result-type';
-import { VerboseType } from '../types/verbose-type';
-import { FirebaseFunctions as FFunctions } from '../firebase-functions';
 import { UtcDate } from 'src/app/types/utc-date';
+import { VerboseType } from '../types/verbose-type';
+import { environment } from 'src/environments/environment';
+import { lastValueFrom } from 'rxjs';
 
-class FirebaseFunctions<FFunctions extends FirebaseFunctionsType>  {
+class FirebaseFunctions<FFunctions extends FirebaseFunctionsType> {
     public constructor(
         private readonly firebaseFunctions: AngularFireFunctions,
         private readonly functionName: string
@@ -33,13 +33,13 @@ class FirebaseFunctions<FFunctions extends FirebaseFunctionsType>  {
             parameters: string;
         }, { result: string; context: unknown }>(functionName);
         const returnValue = await lastValueFrom(callableFunction({
-            verbose: environment.verbose,
-            databaseType: environment.databaseType,
             callSecret: {
                 expiresAt: expiresAtUtcDate.encoded,
                 hashedData: Crypter.sha512(expiresAtUtcDate.encoded, environment.callSecretKey)
             },
-            parameters: crypter.encodeEncrypt(parameters)
+            databaseType: environment.databaseType,
+            parameters: crypter.encodeEncrypt(parameters),
+            verbose: environment.verbose
         }));
         const result = crypter.decryptDecode<ResultType<FFunctions extends FunctionType<unknown, unknown> ? FunctionType.ReturnType<FFunctions> : never>>(returnValue.result);
         if (result.state === 'failure')
@@ -51,7 +51,7 @@ class FirebaseFunctions<FFunctions extends FirebaseFunctionsType>  {
 @Injectable({
     providedIn: 'root'
 })
-export class FirebaseApiService  {
+export class FirebaseApiService {
     public constructor(
         private readonly firebaseFunctions: AngularFireFunctions
     ) {}

@@ -1,5 +1,5 @@
-import { UtcDate } from 'src/app/types/utc-date';
 import { Guid } from './guid';
+import { UtcDate } from 'src/app/types/utc-date';
 
 export type EventGroupId =
     'dancing' | 'football-adults/ah-team' | 'football-adults/first-team' | 'football-adults/general' | 'football-adults/second-team' | 'football-youth/c-youth' | 'football-youth/e-youth' | 'football-youth/f-youth' | 'football-youth/g-youth' | 'football-youth/general' | 'general' | 'gymnastics';
@@ -21,18 +21,18 @@ export namespace EventGroupId {
     ];
 
     export const title: Record<EventGroupId, string> = {
-        'general': 'Allgemeines',
-        'football-adults/general': 'Herrenfußball',
-        'football-adults/first-team': '1. Mannschaft',
-        'football-adults/second-team': '2. Mannschaft',
+        'dancing': 'Tanzen',
         'football-adults/ah-team': 'Alte Herren',
-        'football-youth/general': 'Jugendfußball',
+        'football-adults/first-team': '1. Mannschaft',
+        'football-adults/general': 'Herrenfußball',
+        'football-adults/second-team': '2. Mannschaft',
         'football-youth/c-youth': 'C-Jugend',
         'football-youth/e-youth': 'E-Jugend',
         'football-youth/f-youth': 'F-Jugend',
         'football-youth/g-youth': 'G-Jugend',
-        'gymnastics': 'Gymnastik',
-        'dancing': 'Tanzen'
+        'football-youth/general': 'Jugendfußball',
+        'general': 'Allgemeines',
+        'gymnastics': 'Gymnastik'
     };
 
     export interface Grouped {
@@ -42,16 +42,16 @@ export namespace EventGroupId {
 
     export const grouped: Grouped[] = [
         {
-            title: 'Allgemeines',
-            groupIds: ['general', 'gymnastics', 'dancing']
+            groupIds: ['general', 'gymnastics', 'dancing'],
+            title: 'Allgemeines'
         },
         {
-            title: 'Herrenfußball',
-            groupIds: ['football-adults/general', 'football-adults/first-team', 'football-adults/second-team', 'football-adults/ah-team']
+            groupIds: ['football-adults/general', 'football-adults/first-team', 'football-adults/second-team', 'football-adults/ah-team'],
+            title: 'Herrenfußball'
         },
         {
-            title: 'Jugendfußball',
-            groupIds: ['football-youth/general', 'football-youth/c-youth', 'football-youth/e-youth', 'football-youth/f-youth', 'football-youth/g-youth']
+            groupIds: ['football-youth/general', 'football-youth/c-youth', 'football-youth/e-youth', 'football-youth/f-youth', 'football-youth/g-youth'],
+            title: 'Jugendfußball'
         }
     ];
 }
@@ -61,8 +61,8 @@ export interface Event {
     date: UtcDate;
     title: string;
     isImportant: boolean;
-    subtitle?: string;
-    link?: string;
+    subtitle: string | null;
+    link: string | null;
 }
 
 export namespace Event {
@@ -71,8 +71,8 @@ export namespace Event {
         date: string;
         title: string;
         isImportant: boolean;
-        subtitle?: string;
-        link?: string;
+        subtitle: string | null;
+        link: string | null;
     }
 
     export function flatten(event: Event): Event.Flatten;
@@ -81,10 +81,10 @@ export namespace Event {
         return {
             ...'id' in event ? { id: event.id.guidString } : {},
             date: event.date.encoded,
-            title: event.title,
             isImportant: event.isImportant,
+            link: event.link,
             subtitle: event.subtitle,
-            link: event.link
+            title: event.title
         };
     }
 
@@ -94,10 +94,10 @@ export namespace Event {
         return {
             ...'id' in event ? { id: new Guid(event.id) } : {},
             date: UtcDate.decode(event.date),
-            title: event.title,
             isImportant: event.isImportant,
+            link: event.link,
             subtitle: event.subtitle,
-            link: event.link
+            title: event.title
         };
     }
 }

@@ -1,44 +1,45 @@
-import { HttpResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
 import { AngularEditorConfig, SelectOption, UploadResponse } from '@kolkov/angular-editor';
+import { Component, Input, OnInit } from '@angular/core';
+import { FileStorageService } from 'src/app/modules/firebase-api/services/file-storage.service';
+import { Guid } from 'src/app/modules/firebase-api/types/guid';
+import { HttpResponse } from '@angular/common/http';
+import { InputField } from '../../../types/input-field';
 import { Observable } from 'rxjs';
 import { StyleConfigService } from 'src/app/services/style-config.service';
-import { InputField } from '../../../types/input-field';
-import { FileStorageService } from 'src/app/modules/firebase-api/services/file-storage.service';
 import { environment } from 'src/environments/environment';
-import { Guid } from 'src/app/modules/firebase-api/types/guid';
 
 @Component({
     selector: 'input-field-text-editor',
-    templateUrl: './text-editor.component.html',
-    styleUrls: ['./text-editor.component.sass']
+    styleUrls: ['./text-editor.component.sass'],
+    templateUrl: './text-editor.component.html'
 })
 export class TextEditorComponent implements OnInit {
     @Input() public label!: string;
 
-    @Input() public placeholder: string | undefined = undefined;
+    @Input() public placeholder: string | null = null;
 
     @Input() public inputField!: InputField<string>;
 
     public config: AngularEditorConfig = {
         editable: true,
-        spellcheck: true,
-        minHeight: '160px',
-        width: '100%',
-        translate: 'yes',
         enableToolbar: true,
-        showToolbar: true,
+        minHeight: '160px',
         sanitize: false,
+        showToolbar: true,
+        spellcheck: true,
+        toolbarHiddenButtons: [['subscript', 'superscript', 'indent', 'outdent', 'insertUnorderedList', 'insertOrderedList', 'heading', 'fontName', 'textColor', 'backgroundColor', 'insertVideo', 'toggleEditorMode']],
         toolbarPosition: 'top',
-        toolbarHiddenButtons: [[
-            'subscript', 'superscript', 'indent', 'outdent', 'insertUnorderedList', 'insertOrderedList', 'heading', 'fontName', 'textColor', 'backgroundColor', 'insertVideo', 'toggleEditorMode'
-        ]]
+        translate: 'yes',
+        width: '100%'
     };
 
     public colorSelectOptions: (SelectOption & { value: keyof StyleConfigService.StyleConfig })[] = [
-        { label: 'Standard Farbe', value: 'textColor' },
-        { label: 'Highlight Farbe', value: 'primaryColor' },
-        { label: 'Ausgegrauter Text', value: 'secondaryTextColor' }
+        { label: 'Standard Farbe',
+            value: 'textColor' },
+        { label: 'Highlight Farbe',
+            value: 'primaryColor' },
+        { label: 'Ausgegrauter Text',
+            value: 'secondaryTextColor' }
     ];
 
     public selectedColor: keyof StyleConfigService.StyleConfig = 'textColor';
@@ -57,22 +58,21 @@ export class TextEditorComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.config.upload = (file: File) => {
-            return new Observable<HttpResponse<UploadResponse>>(subscriber => {
-                void this.uploadFile(file).then(fileUrl => {
-                    subscriber.next(new HttpResponse({
-                        body: {
-                            imageUrl: fileUrl
-                        }
-                    }));
-                    subscriber.complete();
-                });
+        this.config.upload = (file: File) => new Observable<HttpResponse<UploadResponse>>(subscriber => {
+            void this.uploadFile(file).then(fileUrl => {
+                subscriber.next(new HttpResponse({
+                    body: {
+                        imageUrl: fileUrl
+                    }
+                }));
+                subscriber.complete();
             });
-        };
+        });
     }
 
     public async uploadFile(file: File): Promise<string> {
-        const fileExtension = /.[^/.]+$/.exec(file.name)?.[0] ?? '';
+        // eslint-disable-next-line prefer-destructuring
+        const fileExtension = ((/.[^/.]+$/u).exec(file.name) ?? [''])[0];
         const filePath = `${environment.databaseType}/uploads/files/${Guid.newGuid().guidString}${fileExtension}`;
         return this.fileStorage.upload(file, filePath);
     }

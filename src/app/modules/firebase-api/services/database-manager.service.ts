@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { GetCryptedScheme, IsCryptedScheme, SchemeType } from '../types/scheme-type';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { environment } from 'src/environments/environment';
 import { Crypter } from '../crypter/Crypter';
 import { DatabaseScheme } from '../database-scheme';
-import { GetCryptedScheme, IsCryptedScheme, SchemeType } from '../types/scheme-type';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 class FirebaseDatabase<Scheme extends SchemeType> {
     public constructor(
@@ -20,7 +20,7 @@ class FirebaseDatabase<Scheme extends SchemeType> {
     public async set(value: GetCryptedScheme<Scheme> | Scheme, crypted: 'encrypt' | 'plain' = 'plain'): Promise<void> {
         if (crypted === 'encrypt') {
             const crypter = new Crypter(environment.cryptionKeys);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, no-param-reassign
             value = crypter.encodeEncrypt(value) as any;
         }
         const reference = this.firebaseDatabase.database.ref(this.path);

@@ -1,11 +1,10 @@
-import { InputError } from './input-error';
 import { ErrorLevel } from './error-level';
+import { EventListener } from 'src/app/types/event-listener';
+import { InputError } from './input-error';
 import { ValidationResult } from './validation-result';
 import { Validator } from './validator';
-import { EventListener } from 'src/app/types/event-listener';
 
 export class InputField<T> {
-
     public readonly listeners = new EventListener<T>();
 
     private fieldValue: T;
@@ -15,10 +14,10 @@ export class InputField<T> {
     private isEvalutated = false;
 
     public constructor(
-        private _initialValue: T,
-        private readonly validators?: Validator<T>[]
+        private myInitialValue: T,
+        private readonly validators: Validator<T>[] = []
     ) {
-        this.fieldValue = _initialValue;
+        this.fieldValue = myInitialValue;
         this.listeners.emitValue(this.fieldValue);
     }
 
@@ -26,23 +25,22 @@ export class InputField<T> {
         return this.fieldValue;
     }
 
-    public get error(): InputError | undefined {
-        if (this.validators === undefined)
-            return undefined;
+    public get error(): InputError | null {
         if (!this.isTouched && !this.isEvalutated)
-            return undefined;
+            return null;
         for (const validator of this.validators) {
-            if (validator.isValid(this.fieldValue) === ValidationResult.Invalid)
+            if (validator.isValid(this.fieldValue) === ValidationResult.Invalid) {
                 return {
-                    message: validator.errorMessage,
-                    level: ErrorLevel.Error
+                    level: ErrorLevel.Error,
+                    message: validator.errorMessage
                 };
+            }
         }
-        return undefined;
+        return null;
     }
 
     public set initialValue(value: T) {
-        this._initialValue = value;
+        this.myInitialValue = value;
         this.fieldValue = value;
         this.listeners.emitValue(this.fieldValue);
     }
@@ -55,8 +53,6 @@ export class InputField<T> {
 
     public evaluate(): ValidationResult {
         this.isEvalutated = true;
-        if (this.validators === undefined)
-            return ValidationResult.Valid;
         for (const validator of this.validators) {
             if (validator.isValid(this.fieldValue) === ValidationResult.Invalid)
                 return ValidationResult.Invalid;
@@ -65,7 +61,7 @@ export class InputField<T> {
     }
 
     public reset() {
-        this.fieldValue = this._initialValue;
+        this.fieldValue = this.myInitialValue;
         this.listeners.emitValue(this.fieldValue);
         this.isTouched = false;
         this.isEvalutated = false;

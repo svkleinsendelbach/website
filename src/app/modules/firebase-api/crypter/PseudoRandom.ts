@@ -14,12 +14,20 @@ export class PseudoRandom {
         let state1 = this.mashResult(n = this.mash(Uint8Array.from([32]), n));
         let state2 = this.mashResult(n = this.mash(Uint8Array.from([32]), n));
         state0 -= this.mashResult(n = this.mash(seed, n));
-        if (state0 < 0) state0 += 1;
+        if (state0 < 0)
+            state0 += 1;
         state1 -= this.mashResult(n = this.mash(seed, n));
-        if (state1 < 0) state1 += 1;
+        if (state1 < 0)
+            state1 += 1;
         state2 -= this.mashResult(n = this.mash(seed, n));
-        if (state2 < 0) state2 += 1;
-        this.state = { state0: state0, state1: state1, state2: state2, constant: 1 };
+        if (state2 < 0)
+            state2 += 1;
+        this.state = {
+            constant: 1,
+            state0: state0,
+            state1: state1,
+            state2: state2
+        };
     }
 
     public randomByte(): number {
@@ -27,18 +35,19 @@ export class PseudoRandom {
     }
 
     private mash(data: Uint8Array, n: number): number {
+        let m = n;
         // eslint-disable-next-line @typescript-eslint/prefer-for-of
         for (let i = 0; i < data.length; i++) {
-            n += data[i];
-            let h = 0.02519603282416938 * n;
-            n = Math.trunc(h);
-            h -= n;
-            h *= n;
-            n = Math.trunc(h);
-            h -= n;
-            n += h * 0x100000000;
+            m += data[i];
+            let h = 0.02519603282416938 * m;
+            m = Math.trunc(h);
+            h -= m;
+            h *= m;
+            m = Math.trunc(h);
+            h -= m;
+            m += h * 0x100000000;
         }
-        return n;
+        return m;
     }
 
     private mashResult(n: number): number {
@@ -46,7 +55,8 @@ export class PseudoRandom {
     }
 
     private random(): number {
-        const t = 2091639 * this.state.state0 + this.state.constant * 2.3283064365386963e-10;
+        // eslint-disable-next-line @typescript-eslint/no-extra-parens
+        const t = (2091639 * this.state.state0) + (this.state.constant * 2.3283064365386963e-10);
         this.state.state0 = this.state.state1;
         this.state.state1 = this.state.state2;
         this.state.constant = Math.trunc(t);

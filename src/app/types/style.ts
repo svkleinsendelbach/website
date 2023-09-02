@@ -30,13 +30,12 @@ export namespace Style {
         }
 
         export function hex(value: string): ColorComponent {
-            if (value.length === 0) {
+            if (value.length === 0)
                 return new ColorComponent(0);
-            } else if (value.length === 1) {
+            else if (value.length === 1)
                 return new ColorComponent(16 * Number.parseInt(value, 16));
-            } else if (value.length === 2) {
+            else if (value.length === 2)
                 return new ColorComponent(Number.parseInt(value, 16));
-            }
             throw new DecodingError(`Invalid hex color component: ${value}`);
         }
     }
@@ -60,18 +59,18 @@ export namespace Style {
 
     export namespace Color {
         export function hex(value: string): Color {
-            if (!value.startsWith('#')) {
+            if (!value.startsWith('#'))
                 throw new DecodingError('Hex color have to start with #');
-            }
-            if (value.length === 4) {
+
+            if (value.length === 4)
                 return new Color(ColorComponent.hex(value[1]), ColorComponent.hex(value[2]), ColorComponent.hex(value[3]), ColorComponent.hex('FF'));
-            } else if (value.length === 5) {
+            else if (value.length === 5)
                 return new Color(ColorComponent.hex(value[1]), ColorComponent.hex(value[2]), ColorComponent.hex(value[3]), ColorComponent.hex(value[4]));
-            } else if (value.length === 7) {
+            else if (value.length === 7)
                 return new Color(ColorComponent.hex(value.substring(1, 3)), ColorComponent.hex(value.substring(3, 5)), ColorComponent.hex(value.substring(5, 7)), ColorComponent.hex('FF'));
-            } else if (value.length === 9) {
+            else if (value.length === 9)
                 return new Color(ColorComponent.hex(value.substring(1, 3)), ColorComponent.hex(value.substring(3, 5)), ColorComponent.hex(value.substring(5, 7)), ColorComponent.hex(value.substring(7, 9)));
-            }
+
             throw new DecodingError(`Invalid hex color: ${value}`);
         }
     }
@@ -79,7 +78,7 @@ export namespace Style {
     export class AppearanceColor {
         public constructor(
             private readonly lightColor: Color,
-            private readonly darkColor?: Color
+            private readonly darkColor: Color | null = null
         ) {}
 
         public get light(): Color {
@@ -92,8 +91,12 @@ export namespace Style {
 
         public color(appearance: Appearance): Color {
             switch (appearance) {
-            case 'light': return this.light;
-            case 'dark': return this.dark;
+            case 'light':
+                return this.light;
+            case 'dark':
+                return this.dark;
+            default:
+                return this.light;
             }
         }
 
@@ -102,7 +105,7 @@ export namespace Style {
         }
 
         public withAlpha(alpha: number): AppearanceColor {
-            return new AppearanceColor(this.lightColor.withAlpha(alpha), this.darkColor?.withAlpha(alpha));
+            return new AppearanceColor(this.lightColor.withAlpha(alpha), this.darkColor ? this.darkColor.withAlpha(alpha) : null);
         }
     }
 }

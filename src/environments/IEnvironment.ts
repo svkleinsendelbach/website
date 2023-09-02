@@ -1,6 +1,6 @@
-import { FirebaseOptions } from '@angular/fire/app';
 import { Crypter } from 'src/app/modules/firebase-api/crypter/Crypter';
 import { DatabaseType } from 'src/app/modules/firebase-api/types/database-type';
+import { FirebaseOptions } from '@angular/fire/app';
 import { VerboseType } from 'src/app/modules/firebase-api/types/verbose-type';
 
 export interface IEnvironment {
@@ -10,10 +10,10 @@ export interface IEnvironment {
     };
     databaseType: DatabaseType;
     recaptchaApiKey: string;
-    testUser?: {
+    testUser: {
         email: string;
         password: string;
-    };
+    } | null;
     verbose: VerboseType;
     cryptionKeys: Crypter.Keys;
     callSecretKey: string;

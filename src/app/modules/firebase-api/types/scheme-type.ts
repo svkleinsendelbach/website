@@ -6,7 +6,7 @@ export interface CryptedScheme<T extends Scheme> {
     crypted: true;
 }
 
-export type SchemeType = CryptedScheme<Scheme>   | Scheme;
+export type SchemeType = CryptedScheme<Scheme> | Scheme;
 
 export type DatabaseSchemeType<T extends SchemeType> = T;
 

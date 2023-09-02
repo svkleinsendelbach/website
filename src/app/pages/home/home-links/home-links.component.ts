@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
+import { DeviceTypeService } from '../../../services/device-type.service';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Link } from 'src/app/types/link';
-import { DeviceTypeService } from '../../../services/device-type.service';
 import { StyleConfigService } from '../../../services/style-config.service';
 
 @Component({
     selector: 'app-home-links',
-    templateUrl: './home-links.component.html',
-    styleUrls: ['./home-links.component.sass']
+    styleUrls: ['./home-links.component.sass'],
+    templateUrl: './home-links.component.html'
 })
 export class HomeLinksComponent {
     @Input() public linkData!: LinkData;

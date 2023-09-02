@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { StyleConfigService } from 'src/app/services/style-config.service';
-import { SharedDataService } from 'src/app/services/shared-data.service';
-import { InternalLink } from 'src/app/types/internal-path';
-import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { Event, EventGroup, EventGroupId } from 'src/app/modules/firebase-api/types/event';
+import { Component } from '@angular/core';
+import { DeviceTypeService } from 'src/app/services/device-type.service';
+import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { Guid } from 'src/app/modules/firebase-api/types/guid';
+import { InternalLink } from 'src/app/types/internal-path';
+import { Router } from '@angular/router';
+import { SharedDataService } from 'src/app/services/shared-data.service';
+import { StyleConfigService } from 'src/app/services/style-config.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'pages-editing-events',
-    templateUrl: './editing-events.page.html',
-    styleUrls: ['./editing-events.page.sass']
+    styleUrls: ['./editing-events.page.sass'],
+    templateUrl: './editing-events.page.html'
 })
 export class EditingEventsPage {
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
@@ -23,7 +23,7 @@ export class EditingEventsPage {
 
     public eventGroupTitle = EventGroupId.title;
 
-    public eventGroups: EventGroup[] | undefined = undefined;
+    public eventGroups: EventGroup[] | null = null;
 
     public constructor(
         public readonly titleService: Title,
@@ -42,35 +42,40 @@ export class EditingEventsPage {
         void this.getEvents();
     }
 
-    public getEventGroupOf(groupId: EventGroupId): EventGroup | undefined {
-        return this.eventGroups?.find(eventGroup => eventGroup.groupId === groupId);
+    public getEventGroupOf(groupId: EventGroupId): EventGroup | null {
+        if (!this.eventGroups)
+            return null;
+        return this.eventGroups.find(eventGroup => eventGroup.groupId === groupId) ?? null;
     }
 
     public async deleteEvent(groupId: EventGroupId, eventId: Guid) {
-        this.eventGroups = this.eventGroups?.flatMap(eventGroup => {
-            if (eventGroup.groupId !== groupId)
-                return eventGroup;
-            const events = eventGroup.events.filter(event => event.id.guidString !== eventId.guidString);
-            if (events.length === 0)
-                return [];
-            return {
-                groupId: eventGroup.groupId,
-                events: events
-            };
-        });
-        await this.firebaseApiService.function('event').function('edit').call({
-            editType: 'remove',
-            groupId: groupId,
-            previousGroupId: undefined,
-            eventId: eventId.guidString,
-            event: undefined
-        });
+        if (this.eventGroups) {
+            this.eventGroups = this.eventGroups.flatMap(eventGroup => {
+                if (eventGroup.groupId !== groupId)
+                    return eventGroup;
+                const events = eventGroup.events.filter(event => event.id.guidString !== eventId.guidString);
+                if (events.length === 0)
+                    return [];
+                return {
+                    events: events,
+                    groupId: eventGroup.groupId
+                };
+            });
+        }
+        await this.firebaseApiService.function('event').function('edit')
+            .call({
+                editType: 'remove',
+                event: null,
+                eventId: eventId.guidString,
+                groupId: groupId,
+                previousGroupId: null
+            });
     }
 
     public async editEvent(groupId: EventGroupId, event: Event) {
         this.sharedData.setValue('editEvent', {
-            groupId: groupId,
-            event: Event.flatten(event)
+            event: Event.flatten(event),
+            groupId: groupId
         });
         await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine/bearbeiten'].link);
     }
@@ -81,15 +86,13 @@ export class EditingEventsPage {
     }
 
     private async getEvents() {
-        this.eventGroups = await this.firebaseApiService.function('event').function('get').call({
-            groupIds: EventGroupId.all
-        }).then(eventGroups => {
-            return eventGroups.map(eventGroup => {
-                return {
-                    groupId: eventGroup.groupId,
-                    events: eventGroup.events.map(event => Event.concrete(event))
-                };
-            });
-        });
+        this.eventGroups = await this.firebaseApiService.function('event').function('get')
+            .call({
+                groupIds: EventGroupId.all
+            })
+            .then(eventGroups => eventGroups.map(eventGroup => ({
+                events: eventGroup.events.map(event => Event.concrete(event)),
+                groupId: eventGroup.groupId
+            })));
     }
 }

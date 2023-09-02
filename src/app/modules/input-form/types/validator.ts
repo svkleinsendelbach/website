@@ -9,8 +9,8 @@ export interface Validator<T> {
 export namespace Validator {
     function validator<T>(errorMessage: string, isValid: (value: T) => ValidationResult): Validator<T> {
         return {
-            isValid: isValid,
-            errorMessage: errorMessage
+            errorMessage: errorMessage,
+            isValid: isValid
         };
     }
 
@@ -30,7 +30,7 @@ export namespace Validator {
         });
     }
 
-    export function minLength(length: number, errorMessage: string): Validator<string>  {
+    export function minLength(length: number, errorMessage: string): Validator<string> {
         return validator(errorMessage, (value: string) => {
             if (value.length < length)
                 return ValidationResult.Invalid;
@@ -38,7 +38,7 @@ export namespace Validator {
         });
     }
 
-    export function maxLength(length: number, errorMessage: string): Validator<string>  {
+    export function maxLength(length: number, errorMessage: string): Validator<string> {
         return validator(errorMessage, (value: string) => {
             if (value.length > length)
                 return ValidationResult.Invalid;
@@ -88,14 +88,14 @@ export namespace Validator {
 
     export function email(errorMessage: string): Validator<string> {
         // eslint-disable-next-line no-control-regex
-        return Validator.pattern(/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/, errorMessage);
+        return Validator.pattern(/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(?:2(?:5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(?:2(?:5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/u, errorMessage);
     }
 
     export function url(errorMessage: string): Validator<string> {
-        return Validator.pattern(/^(?:https?:\/\/)?(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}[-a-zA-Z0-9()@:%_+.~#?&/=]*$/, errorMessage);
+        return Validator.pattern(/^(?:https?:\/\/)?(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}[-a-zA-Z0-9()@:%_+.~#?&/=]*$/u, errorMessage);
     }
 
-    export function containsASubstringFromStringSet(stringSet: Set<string>, errorMessage: string): Validator<string>  {
+    export function containsASubstringFromStringSet(stringSet: Set<string>, errorMessage: string): Validator<string> {
         return validator(errorMessage, (value: string) => {
             for (const v of stringSet) {
                 if (value.includes(v))

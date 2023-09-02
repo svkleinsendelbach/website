@@ -3,22 +3,30 @@ import { StyleConfigService } from '../../../../services/style-config.service';
 
 @Component({
     selector: 'text-section',
-    templateUrl: './text-section.component.html',
-    styleUrls: ['./text-section.component.sass']
+    styleUrls: ['./text-section.component.sass'],
+    templateUrl: './text-section.component.html'
 })
 export class TextSectionComponent {
-
-    @Input() public title?: string;
+    @Input() public title: string | null = null;
 
     public constructor(
         public readonly styleConfig: StyleConfigService
     ) {}
 
     public get titleId(): string | null {
-        if (this.title === undefined)
+        if (this.title === null)
             return null;
         const validCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-#';
-        const replaceCharacters = { 'Ä': 'AE', 'Ö': 'OE', 'Ü': 'UE', 'ä': 'ae', 'ö': 'oe', 'ü': 'ue', 'ß': 'ss' };
+        /* eslint-disable id-length */
+        const replaceCharacters = {
+            Ä: 'AE',
+            Ö: 'OE',
+            Ü: 'UE',
+            ß: 'ss',
+            ä: 'ae',
+            ö: 'oe',
+            ü: 'ue'
+        };
         let titleId = '';
         function addCharacter(character: string) {
             if (character === '-' && (titleId === '' || titleId.endsWith('-')))
@@ -26,13 +34,12 @@ export class TextSectionComponent {
             titleId += character.toLowerCase();
         }
         for (const character of this.title) {
-            if (validCharacters.includes(character)) {
+            if (validCharacters.includes(character))
                 addCharacter(character);
-            } else if (character in replaceCharacters) {
+            else if (character in replaceCharacters)
                 addCharacter(replaceCharacters[character as keyof typeof replaceCharacters]);
-            } else {
+            else
                 addCharacter('-');
-            }
         }
         if (titleId.endsWith('-'))
             titleId = titleId.slice(0, titleId.length - 1);

@@ -1,41 +1,37 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
-import { lastValueFrom } from 'rxjs';
+import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { ErrorLevel } from 'src/app/modules/input-form/types/error-level';
+import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
+import { FunctionType } from 'src/app/modules/firebase-api/types/function-type';
 import { InputError } from 'src/app/modules/input-form/types/input-error';
 import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { SelectOptions } from 'src/app/modules/input-form/components/input-field/select/select.component';
+import { SendMailContactFunctionType } from 'src/app/modules/firebase-api/function-types';
+import { StyleConfigService } from 'src/app/services/style-config.service';
+import { Title } from '@angular/platform-browser';
 import { ValidationResult } from 'src/app/modules/input-form/types/validation-result';
 import { Validator } from 'src/app/modules/input-form/types/validator';
-import { SelectOptions } from 'src/app/modules/input-form/components/input-field/select/select.component';
-import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { StyleConfigService } from 'src/app/services/style-config.service';
-import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { FunctionType } from 'src/app/modules/firebase-api/types/function-type';
-import { SendMailContactFunctionType } from 'src/app/modules/firebase-api/function-types';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
     selector: 'pages-contact',
-    templateUrl: './contact.page.html',
-    styleUrls: ['./contact.page.sass']
+    styleUrls: ['./contact.page.sass'],
+    templateUrl: './contact.page.html'
 })
 export class ContactPage {
     public inputForm = new InputForm(
         {
-            name: new InputField<string>('', [
-                Validator.required('Ihr Name ist erforderlich.')
-            ]),
             email: new InputField<string>('', [
                 Validator.required('Ihre E-Mail Addresse ist erforderlich.'),
                 Validator.email('Das ist keine gültige E-Mail Addresse.')
             ]),
+            message: new InputField<string>('', [Validator.required('Eine Nachricht ist erforderlich.')]),
+            name: new InputField<string>('', [Validator.required('Ihr Name ist erforderlich.')]),
             receiver: new InputField<keyof typeof ContactPage.receivers>('managers', [
                 Validator.required('Ein Empfänger ist erforderlich.'),
                 Validator.isOneOf(Object.keys(ContactPage.receivers), 'Der Empfänger ist ungültig')
-            ]),
-            message: new InputField<string>('', [
-                Validator.required('Eine Nachricht ist erforderlich.')
             ])
         },
         {
@@ -59,12 +55,10 @@ export class ContactPage {
 
     public get receiverSelectOptions(): SelectOptions<keyof typeof ContactPage.receivers> {
         return SelectOptions.ungrouped<keyof typeof ContactPage.receivers>(
-            Object.entries(ContactPage.receivers).map(receiverEntry => {
-                return {
-                    id: receiverEntry[0] as keyof typeof ContactPage.receivers,
-                    text: receiverEntry[1].name
-                };
-            })
+            Object.entries(ContactPage.receivers).map(receiverEntry => ({
+                id: receiverEntry[0] as keyof typeof ContactPage.receivers,
+                text: receiverEntry[1].name
+            }))
         );
     }
 
@@ -90,46 +84,46 @@ export class ContactPage {
             return;
         }
         const request: FunctionType.Parameters<SendMailContactFunctionType> = {
-            senderName: this.inputForm.field('name').value,
-            senderAddress: this.inputForm.field('email').value,
-            receiverName: receiver.name,
+            message: this.inputForm.field('message').value,
             receiverAddress: receiver.address,
-            message: this.inputForm.field('message').value
+            receiverName: receiver.name,
+            senderAddress: this.inputForm.field('email').value,
+            senderName: this.inputForm.field('name').value
         };
-        const response = await this.firebaseApiService.function('sendMail').function('contact').call(request)
+        const response = await this.firebaseApiService.function('sendMail').function('contact')
+            .call(request)
             .catch(reason => {
                 this.inputForm.status = 'sendFailed';
                 throw reason;
             });
         const status: 'sendFailed' | 'sendSucceded' = response.success ? 'sendSucceded' : 'sendFailed';
         this.inputForm.status = status;
-        if (response.success) {
+        if (response.success)
             this.inputForm.reset();
-        }
     }
 }
 
 export namespace ContactPage {
     export const receivers = {
-        managers: {
-            name: 'Vorstandschaft',
-            address: 'vorstand@sv-kleinsendelbach.de'
+        dancing: {
+            address: 'tanzen@sv-kleinsendelbach.de',
+            name: 'Tanzen'
         },
         footballAdults: {
-            name: 'Herrenfußball',
-            address: 'herrenfußball@sv-kleinsendelbach.de'
+            address: 'herrenfußball@sv-kleinsendelbach.de',
+            name: 'Herrenfußball'
         },
         footballYouth: {
-            name: 'Jugendfußball',
-            address: 'jugenfußball@sv-kleinsendelbach.de'
+            address: 'jugenfußball@sv-kleinsendelbach.de',
+            name: 'Jugendfußball'
         },
         gymnastics: {
-            name: 'Gymnastik',
-            address: 'gymnastik@sv-kleinsendelbach.de'
+            address: 'gymnastik@sv-kleinsendelbach.de',
+            name: 'Gymnastik'
         },
-        dancing: {
-            name: 'Tanzen',
-            address: 'tanzen@sv-kleinsendelbach.de'
+        managers: {
+            address: 'vorstand@sv-kleinsendelbach.de',
+            name: 'Vorstandschaft'
         }
     };
 }

@@ -1,18 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserAuthenticationType } from 'src/app/modules/firebase-api/types/user-authentication';
 import { AuthService } from '../../services/auth.service';
-import { StyleConfigService } from '../../../../services/style-config.service';
-import { RegistrationStatus } from '../../types/registration-status';
 import { InternalLink } from 'src/app/types/internal-path';
+import { RegistrationStatus } from '../../types/registration-status';
+import { Router } from '@angular/router';
+import { StyleConfigService } from '../../../../services/style-config.service';
+import { UserAuthenticationType } from 'src/app/modules/firebase-api/types/user-authentication';
 
 @Component({
     selector: 'authentication-check',
-    templateUrl: './authentication-check.component.html',
-    styleUrls: ['./authentication-check.component.sass']
+    styleUrls: ['./authentication-check.component.sass'],
+    templateUrl: './authentication-check.component.html'
 })
 export class AuthenticationCheckComponent implements OnInit {
-
     @Input() public authenticationTypes!: UserAuthenticationType[];
 
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
@@ -37,9 +36,9 @@ export class AuthenticationCheckComponent implements OnInit {
                 this.state = 'internalError';
                 throw reason;
             });
-        if (isLoggedIn) {
+        if (isLoggedIn)
             this.state = 'registered';
-        } else {
+        else {
             this.state = 'unregistered';
             await this.router.navigateByUrl(InternalLink.all['bearbeiten/anmelden'].link);
         }

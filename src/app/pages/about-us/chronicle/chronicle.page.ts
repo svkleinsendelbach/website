@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'pages-chronicle',
-    templateUrl: './chronicle.page.html',
-    styleUrls: ['./chronicle.page.sass']
+    styleUrls: ['./chronicle.page.sass'],
+    templateUrl: './chronicle.page.html'
 })
 export class ChroniclePage {
     public constructor(

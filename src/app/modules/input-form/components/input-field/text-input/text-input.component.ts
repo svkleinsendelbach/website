@@ -1,18 +1,18 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { StyleConfigService } from 'src/app/services/style-config.service';
 import { InputField } from '../../../types/input-field';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 
 @Component({
     selector: 'input-field-text',
-    templateUrl: './text-input.component.html',
-    styleUrls: ['./text-input.component.sass']
+    styleUrls: ['./text-input.component.sass'],
+    templateUrl: './text-input.component.html'
 })
 export class TextInputComponent implements AfterViewInit {
     @Input() public secure = false;
 
     @Input() public label!: string;
 
-    @Input() public placeholder: string | undefined = undefined;
+    @Input() public placeholder: string | null = null;
 
     @Input() public inputField!: InputField<string>;
 

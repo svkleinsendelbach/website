@@ -1,27 +1,27 @@
-import { OnInit, Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { InternalLink } from 'src/app/types/internal-path';
+import { Component, OnInit } from '@angular/core';
+import { Event, EventGroupId } from 'src/app/modules/firebase-api/types/event';
+import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { ErrorLevel } from 'src/app/modules/input-form/types/error-level';
+import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
+import { GameInfo } from 'src/app/modules/firebase-api/types/game-info';
+import { Guid } from 'src/app/modules/firebase-api/types/guid';
 import { InputError } from 'src/app/modules/input-form/types/input-error';
 import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';
-import { ValidationResult } from 'src/app/modules/input-form/types/validation-result';
-import { Validator } from 'src/app/modules/input-form/types/validator';
+import { InternalLink } from 'src/app/types/internal-path';
+import { Router } from '@angular/router';
 import { SelectOptions } from 'src/app/modules/input-form/components/input-field/select/select.component';
-import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
-import { Event, EventGroupId } from 'src/app/modules/firebase-api/types/event';
-import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { Guid } from 'src/app/modules/firebase-api/types/guid';
+import { Title } from '@angular/platform-browser';
 import { UtcDate } from 'src/app/types/utc-date';
-import { GameInfo } from 'src/app/modules/firebase-api/types/game-info';
+import { ValidationResult } from 'src/app/modules/input-form/types/validation-result';
+import { Validator } from 'src/app/modules/input-form/types/validator';
 
 @Component({
     selector: 'pages-edit-event',
-    templateUrl: './edit-event.page.html',
-    styleUrls: ['./edit-event.page.sass']
+    styleUrls: ['./edit-event.page.sass'],
+    templateUrl: './edit-event.page.html'
 })
 export class EditEventPage implements OnInit {
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
@@ -31,7 +31,7 @@ export class EditEventPage implements OnInit {
     public previousEvent: {
         groupId: EventGroupId;
         event: Event.Flatten;
-    } | undefined;
+    } | null = null;
 
     public bfvGameInputForm = new InputForm({
         bfvGameLink: new InputField<string>('', [
@@ -39,33 +39,27 @@ export class EditEventPage implements OnInit {
             Validator.url('Das ist kein gültiger Link.')
         ])
     }, {
-        invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
+        failed: new InputError('Das Event konnte nicht gefunden werden.'),
         gameIdNotFound: new InputError('Die Spiel-Id wurde im Link nicht gefunden.'),
         gameNotFound: new InputError('Das Spiel wurde bei BFV nicht gefunden.'),
-        loading: new InputError('BFV Daten werden übernommen.', ErrorLevel.Info),
-        failed: new InputError('Das Event konnte nicht gefunden werden.')
+        invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
+        loading: new InputError('BFV Daten werden übernommen.', ErrorLevel.Info)
     });
 
     public inputForm = new InputForm({
+        date: new InputField<UtcDate>(UtcDate.now, [Validator.futureDate('Das Datum muss in der Zukunft liegen')]),
         groupId: new InputField<EventGroupId>('general', [
             Validator.required('Ein zugehöiges Thema ist erforderlich.'),
             Validator.isOneOf(EventGroupId.all, 'Das zugehörige Thema ist ungültig.')
         ]),
-        title: new InputField<string>('', [
-            Validator.required('Der Titel is erfordelich.')
-        ]),
-        subtitle: new InputField<string>(''),
         isImportant: new InputField<boolean>(false),
-        link: new InputField('', [
-            Validator.eitherOne('Das ist kein gültiger Link.', Validator.empty(''), Validator.url(''))
-        ]),
-        date: new InputField<UtcDate>(UtcDate.now, [
-            Validator.futureDate('Das Datum muss in der Zukunft liegen')
-        ])
+        link: new InputField('', [Validator.eitherOne('Das ist kein gültiger Link.', Validator.empty(''), Validator.url(''))]),
+        subtitle: new InputField<string>(''),
+        title: new InputField<string>('', [Validator.required('Der Titel is erfordelich.')])
     }, {
+        failed: new InputError('Das Event konnte nicht gespeichert werden.'),
         invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
-        loading: new InputError('Das Event wird gespeichert.', ErrorLevel.Info),
-        failed: new InputError('Das Event konnte nicht gespeichert werden.')
+        loading: new InputError('Das Event wird gespeichert.', ErrorLevel.Info)
     });
 
     public constructor(
@@ -82,27 +76,23 @@ export class EditEventPage implements OnInit {
         private readonly router: Router
     ) {
         this.previousEvent = this.sharedData.getValue('editEvent');
-        this.titleService.setTitle(this.previousEvent === undefined ? 'Termin hinzufügen' : 'Termin bearbeiten');
+        this.titleService.setTitle(this.previousEvent ? 'Termin bearbeiten' : 'Termin hinzufügen');
     }
 
     public get groupIdSelectOptions(): SelectOptions<EventGroupId> {
         return SelectOptions.grouped<EventGroupId>(
-            EventGroupId.grouped.map(group => {
-                return {
-                    title: group.title,
-                    options: group.groupIds.map(groupId => {
-                        return {
-                            id: groupId,
-                            text: EventGroupId.title[groupId]
-                        };
-                    })
-                };
-            })
+            EventGroupId.grouped.map(group => ({
+                options: group.groupIds.map(groupId => ({
+                    id: groupId,
+                    text: EventGroupId.title[groupId]
+                })),
+                title: group.title
+            }))
         );
     }
 
     public ngOnInit() {
-        if (this.previousEvent !== undefined) {
+        if (this.previousEvent) {
             this.inputForm.field('groupId').initialValue = this.previousEvent.groupId;
             this.inputForm.field('title').initialValue = this.previousEvent.event.title;
             this.inputForm.field('subtitle').initialValue = this.previousEvent.event.subtitle ?? '';
@@ -120,20 +110,21 @@ export class EditEventPage implements OnInit {
         if (validation === ValidationResult.Invalid)
             return;
         this.bfvGameInputForm.status = 'loading';
-        const gameId = /^(?:https:\/\/)?(?:www\.)?bfv\.de\/spiele\/(?:\S+?\/)?(?<id>\S+?)$/g.exec(this.bfvGameInputForm.field('bfvGameLink').value)?.groups?.['id'];
-        if (gameId === undefined) {
+        const match = (/^(?:https:\/\/)?(?:www\.)?bfv\.de\/spiele\/(?:\S+?\/)?(?<id>\S+?)$/gu).exec(this.bfvGameInputForm.field('bfvGameLink').value);
+        if (!match || !match.groups || !('id' in match.groups)) {
             this.bfvGameInputForm.status = 'gameIdNotFound';
             return;
         }
         try {
-            const gameInfo = await this.firebaseApiService.function('bfvData').function('gameInfo').call({
-                gameId: gameId
-            });
+            const gameInfo = await this.firebaseApiService.function('bfvData').function('gameInfo')
+                .call({
+                    gameId: match.groups['id']
+                });
             const { isSg2 } = GameInfo.additionalProperties(gameInfo);
             this.inputForm.field('groupId').inputValue = isSg2 ? 'football-adults/second-team' : 'football-adults/first-team';
             this.inputForm.field('title').inputValue = `${gameInfo.homeTeam.name} gegen ${gameInfo.awayTeam.name}`;
             this.inputForm.field('subtitle').inputValue = gameInfo.adressDescription ?? '';
-            this.inputForm.field('link').inputValue = `https://www.bfv.de/spiele/${gameId}`;
+            this.inputForm.field('link').inputValue = `https://www.bfv.de/spiele/${match.groups['id']}`;
             this.inputForm.field('date').inputValue = UtcDate.decode(gameInfo.date);
         } catch (error) {
             if (error === null || typeof error !== 'object' || !('code' in error) || error.code !== 'not-found') {
@@ -154,23 +145,25 @@ export class EditEventPage implements OnInit {
         if (validation === ValidationResult.Invalid)
             return;
         this.inputForm.status = 'loading';
-        const eventId = this.previousEvent?.event.id ?? Guid.newGuid().guidString;
-        await this.firebaseApiService.function('event').function('edit').call({
-            editType: this.previousEvent !== undefined ? 'change' : 'add',
-            groupId: this.inputForm.field('groupId').value,
-            previousGroupId: this.previousEvent?.groupId,
-            eventId: eventId,
-            event: {
-                date: this.inputForm.field('date').value.encoded,
-                title: this.inputForm.field('title').value,
-                subtitle: this.inputForm.field('subtitle').value || undefined,
-                isImportant: this.inputForm.field('isImportant').value,
-                link: this.inputForm.field('link').value || undefined
-            }
-        }).catch(reason => {
-            this.inputForm.status = 'failed';
-            throw reason;
-        });
+        const eventId = this.previousEvent ? this.previousEvent.event.id : Guid.newGuid().guidString;
+        await this.firebaseApiService.function('event').function('edit')
+            .call({
+                editType: this.previousEvent ? 'change' : 'add',
+                event: {
+                    date: this.inputForm.field('date').value.encoded,
+                    isImportant: this.inputForm.field('isImportant').value,
+                    link: this.inputForm.field('link').value || null,
+                    subtitle: this.inputForm.field('subtitle').value || null,
+                    title: this.inputForm.field('title').value
+                },
+                eventId: eventId,
+                groupId: this.inputForm.field('groupId').value,
+                previousGroupId: this.previousEvent ? this.previousEvent.groupId : null
+            })
+            .catch(reason => {
+                this.inputForm.status = 'failed';
+                throw reason;
+            });
         await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine'].link);
         this.inputForm.status = 'valid';
     }

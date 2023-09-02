@@ -1,14 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { StyleConfigService } from 'src/app/services/style-config.service';
 import { InputField } from '../../../types/input-field';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 
 @Component({
     selector: 'input-field-checkbox',
-    templateUrl: './checkbox.component.html',
-    styleUrls: ['./checkbox.component.sass']
+    styleUrls: ['./checkbox.component.sass'],
+    templateUrl: './checkbox.component.html'
 })
 export class CheckboxComponent {
-
     @Input() public label!: string;
 
     @Input() public inputField!: InputField<boolean>;

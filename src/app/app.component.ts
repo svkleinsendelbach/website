@@ -1,25 +1,27 @@
-import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { InternalLink, InternalPath } from './types/internal-path';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { AngularFirePerformance } from '@angular/fire/compat/performance';
-import { InternalLink, InternalPath } from './types/internal-path';
 import { CookieSelectionService } from './modules/cookie-selector/services/cookie-selection.service';
+import { DeviceTypeService } from './services/device-type.service';
 import { FooterData } from './modules/footer/types/footer-data';
 import { HeaderData } from './modules/header/types/header-data';
 import { HomeLinkData } from './modules/header/types/home-link-data';
-import { DeviceTypeService } from './services/device-type.service';
-import { StyleConfigService } from './services/style-config.service';
 import { Link } from './types/link';
+import { StyleConfigService } from './services/style-config.service';
 
+/* eslint-disable sort-keys */
 @Component({
     selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.sass']
+    styleUrls: ['./app.component.sass'],
+    templateUrl: './app.component.html'
 })
 export class AppComponent {
     public headerData: Record<'desktop' | 'mobile' | 'tablet', HeaderData> = {
         desktop: {
             home: {
-                topItem: InternalLink.all.home
+                topItem: InternalLink.all.home,
+                subItems: null
             },
             aboutUs: {
                 topItem: InternalLink.all['über-uns'],
@@ -55,16 +57,20 @@ export class AppComponent {
                 }
             },
             gymnastics: {
-                topItem: InternalLink.all.gymnastik
+                topItem: InternalLink.all.gymnastik,
+                subItems: null
             },
             dancing: {
-                topItem: InternalLink.all.tanzen
+                topItem: InternalLink.all.tanzen,
+                subItems: null
             },
             drive: {
-                topItem: InternalLink.all.anfahrt
+                topItem: InternalLink.all.anfahrt,
+                subItems: null
             },
             contact: {
-                topItem: InternalLink.all.kontakt
+                topItem: InternalLink.all.kontakt,
+                subItems: null
             }
         },
         tablet: {
@@ -226,7 +232,7 @@ export class AppComponent {
         private readonly firePerformance: AngularFirePerformance
     ) {
         this.styleConfig.setConfig();
-        const statisticsCookie = this.cookieSelectionService.cookiesSelection?.statistics;
+        const statisticsCookie = this.cookieSelectionService.cookiesSelection ? this.cookieSelectionService.cookiesSelection.statistics : null;
         void this.fireAnalytics.setAnalyticsCollectionEnabled(statisticsCookie === 'selected');
         this.firePerformance.instrumentationEnabled = (statisticsCookie === 'selected') as unknown as Promise<boolean>;
         this.firePerformance.dataCollectionEnabled = (statisticsCookie === 'selected') as unknown as Promise<boolean>;

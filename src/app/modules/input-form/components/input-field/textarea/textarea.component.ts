@@ -1,16 +1,16 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { StyleConfigService } from 'src/app/services/style-config.service';
 import { InputField } from '../../../types/input-field';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 
 @Component({
     selector: 'input-field-textarea',
-    templateUrl: './textarea.component.html',
-    styleUrls: ['./textarea.component.sass']
+    styleUrls: ['./textarea.component.sass'],
+    templateUrl: './textarea.component.html'
 })
 export class TextareaComponent implements AfterViewInit {
     @Input() public label!: string;
 
-    @Input() public placeholder: string | undefined = undefined;
+    @Input() public placeholder: string | null = null;
 
     @Input() public inputField!: InputField<string>;
 

@@ -15,7 +15,7 @@
   </div>
   <text-section
     [title]="'Wartende Website Editors'"
-    *ngIf="unauthenticatedUsers !== undefined && unauthenticatedUsers.length !== 0"
+    *ngIf="unauthenticatedUsers && unauthenticatedUsers.length !== 0"
   >
     <p
       class="text"

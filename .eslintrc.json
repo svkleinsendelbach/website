@@ -3,6 +3,9 @@
   "ignorePatterns": [
     "projects/**/*"
   ],
+  "plugins": [
+    "es"
+  ],
   "overrides": [
     {
       "files": [
@@ -21,7 +24,7 @@
         "*.ts"
       ],
       "extends": [
-        "eslint:recommended",
+        "eslint:all",
         "plugin:@typescript-eslint/all",
         "plugin:@angular-eslint/all"
       ],
@@ -91,7 +94,40 @@
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/no-extraneous-class": "off",
-        "@typescript-eslint/consistent-type-definitions": "off"
+        "@typescript-eslint/consistent-type-definitions": "off",
+        "arrow-parens": ["error", "as-needed"],
+        "padded-blocks": ["error", "never"],
+        "dot-location": ["error", "property"],
+        "quote-props": ["error", "consistent-as-needed"],
+        "max-len": "off",
+        "array-element-newline": "off",
+        "curly": ["error", "multi-or-nest"],
+        "nonblock-statement-body-position": ["error", "below"],
+        "max-params": "off",
+        "no-ternary": "off",
+        "multiline-ternary": ["error", "always-multiline"],
+        "one-var": ["error", "never"],
+        "function-call-argument-newline": ["error", "consistent"],
+        "radix": "off",
+        "max-classes-per-file": "off",
+        "function-paren-newline": ["error", "consistent"],
+        "func-style": ["error", "declaration"],
+        "no-plusplus": "off",
+        "new-cap": "off",
+        "no-void": "off",
+        "no-nested-ternary": "off",
+        "no-confusing-arrow": "off",
+        "max-statements": "off",
+        "object-shorthand": ["error", "never"],
+        "es/no-optional-chaining": "error",
+        "@typescript-eslint/prefer-optional-chain": "off",
+        "no-continue": "off",
+        "max-lines-per-function": "off",
+        "complexity": "off",
+        "id-length": "off",
+        "accessor-pairs": "off",
+        "max-lines": "off",
+        "no-bitwise": "off"
       }
     }
   ]

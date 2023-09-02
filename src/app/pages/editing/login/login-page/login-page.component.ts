@@ -1,26 +1,26 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
-import { lastValueFrom } from 'rxjs';
-import { InternalLink } from 'src/app/types/internal-path';
+import { AppearanceService } from 'src/app/services/appearance.service';
+import { AuthService } from 'src/app/modules/authentication/services/auth.service';
+import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { ErrorLevel } from 'src/app/modules/input-form/types/error-level';
+import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { InputError } from 'src/app/modules/input-form/types/input-error';
 import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';
+import { InternalLink } from 'src/app/types/internal-path';
+import { LoginError } from 'src/app/modules/authentication/types/login-error';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { RegistrationStatus } from 'src/app/modules/authentication/types/registration-status';
+import { Router } from '@angular/router';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 import { ValidationResult } from 'src/app/modules/input-form/types/validation-result';
 import { Validator } from 'src/app/modules/input-form/types/validator';
-import { AppearanceService } from 'src/app/services/appearance.service';
-import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { StyleConfigService } from 'src/app/services/style-config.service';
-import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { AuthService } from 'src/app/modules/authentication/services/auth.service';
-import { LoginError } from 'src/app/modules/authentication/types/login-error';
-import { RegistrationStatus } from 'src/app/modules/authentication/types/registration-status';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
     selector: 'app-login-page',
-    templateUrl: './login-page.component.html',
-    styleUrls: ['./login-page.component.sass']
+    styleUrls: ['./login-page.component.sass'],
+    templateUrl: './login-page.component.html'
 })
 export class LoginPageComponent {
     @Output() private readonly userUnregisteredEmitter = new EventEmitter<void>();
@@ -85,7 +85,8 @@ export class LoginPageComponent {
         const registrationStatus = await this.authService
             .loginWithEmail(['editEvents', 'editReports', 'authenticateUser'], this.inputForm.field('email').value, this.inputForm.field('password').value)
             .catch(reason => this.handleLoginError(reason, 'inputForm'));
-        if (registrationStatus === 'error') return;
+        if (registrationStatus === 'error')
+            return;
         await this.handleRegistrationStatus(registrationStatus);
     }
 
@@ -97,7 +98,8 @@ export class LoginPageComponent {
         const registrationStatus = await this.authService
             .loginWithApple(['editEvents', 'editReports', 'authenticateUser'])
             .catch(reason => this.handleLoginError(reason, 'apple'));
-        if (registrationStatus === 'error') return;
+        if (registrationStatus === 'error')
+            return;
         await this.handleRegistrationStatus(registrationStatus);
     }
 
@@ -109,7 +111,8 @@ export class LoginPageComponent {
         const registrationStatus = await this.authService
             .loginWithGoogle(['editEvents', 'editReports', 'authenticateUser'])
             .catch(reason => this.handleLoginError(reason, 'google'));
-        if (registrationStatus === 'error') return;
+        if (registrationStatus === 'error')
+            return;
         await this.handleRegistrationStatus(registrationStatus);
     }
 
@@ -138,6 +141,8 @@ export class LoginPageComponent {
         case 'google':
             this.signInWithGoogleStatus = status;
             break;
+        default:
+            break;
         }
         return 'error';
     }
@@ -147,10 +152,9 @@ export class LoginPageComponent {
         this.signInWithGoogleStatus = 'valid';
         this.inputForm.status = 'valid';
         this.inputForm.reset();
-        if (registrationStatus === 'registered') {
+        if (registrationStatus === 'registered')
             await this.router.navigateByUrl(InternalLink.all.bearbeiten.link);
-        } else {
+        else
             this.userUnregisteredEmitter.emit();
-        }
     }
 }

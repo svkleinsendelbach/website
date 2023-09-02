@@ -1,12 +1,15 @@
+/* eslint-disable no-duplicate-imports */
+/* eslint-disable sort-imports */
+
 import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { environment } from '../environments/environment';
-import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
-import { USE_DEVICE_LANGUAGE, PERSISTENCE } from '@angular/fire/compat/auth';
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
+import { PERSISTENCE, USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';
 
 // Imported Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -69,6 +72,7 @@ import { EditReportPage } from './pages/editing/reports/edit-report/edit-report.
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 @NgModule({
+    bootstrap: [AppComponent],
     declarations: [
         AhTeamPage,
         AllReportsPage,
@@ -135,18 +139,27 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
         PerformanceMonitoringService,
         ScreenTrackingService,
         UserTrackingService,
-        { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.recaptchaApiKey },
-        { provide: USE_DEVICE_LANGUAGE, useValue: true },
-        { provide: PERSISTENCE, useValue: 'local' },
-        { provide: BUCKET, useValue: 'gs://svkleinsendelbach-website-v2' },
-        { provide: CONFIG, useValue: {
-            send_page_view: false,
-            anonymize_ip: true
-        } },
-        { provide: COLLECTION_ENABLED, useValue: false },
-        { provide: INSTRUMENTATION_ENABLED, useValue: false },
-        { provide: DATA_COLLECTION_ENABLED, useValue: false }
-    ],
-    bootstrap: [AppComponent]
+        { provide: RECAPTCHA_V3_SITE_KEY,
+            useValue: environment.recaptchaApiKey },
+        { provide: USE_DEVICE_LANGUAGE,
+            useValue: true },
+        { provide: PERSISTENCE,
+            useValue: 'local' },
+        { provide: BUCKET,
+            useValue: 'gs://svkleinsendelbach-website-v2' },
+        { provide: CONFIG,
+            useValue: {
+                // eslint-disable-next-line camelcase
+                anonymize_ip: true,
+                // eslint-disable-next-line camelcase
+                send_page_view: false
+            } },
+        { provide: COLLECTION_ENABLED,
+            useValue: false },
+        { provide: INSTRUMENTATION_ENABLED,
+            useValue: false },
+        { provide: DATA_COLLECTION_ENABLED,
+            useValue: false }
+    ]
 })
 export class AppModule { }

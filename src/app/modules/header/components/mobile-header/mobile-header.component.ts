@@ -1,16 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { StyleConfigService } from 'src/app/services/style-config.service';
 import { HeaderData, HeaderItem } from '../../types/header-data';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { HomeLinkData } from '../../types/home-link-data';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 
 @Component({
     selector: 'mobile-header',
-    templateUrl: './mobile-header.component.html',
-    styleUrls: ['./mobile-header.component.sass']
+    styleUrls: ['./mobile-header.component.sass'],
+    templateUrl: './mobile-header.component.html'
 })
 export class MobileHeaderComponent {
-
     @Input() public headerData!: HeaderData;
 
     @Input() public homeLinkData!: HomeLinkData;
@@ -28,12 +27,10 @@ export class MobileHeaderComponent {
     ) {}
 
     public get headerItems(): (HeaderItem & { id: string })[] {
-        return Object.entries(this.headerData).map(entry => {
-            return {
-                ...entry[1],
-                id: entry[0]
-            };
-        });
+        return Object.entries(this.headerData).map(entry => ({
+            ...entry[1],
+            id: entry[0]
+        }));
     }
 
     public handleHamburgerMenuClick(toExpanded: boolean) {
@@ -41,10 +38,9 @@ export class MobileHeaderComponent {
     }
 
     public handleHeaderItemClick(headerItemId: string) {
-        if (this.expandedHeaderItemId === headerItemId) {
+        if (this.expandedHeaderItemId === headerItemId)
             this.expandedHeaderItemId = null;
-        } else {
+        else
             this.expandedHeaderItemId = headerItemId;
-        }
     }
 }

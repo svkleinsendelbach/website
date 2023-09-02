@@ -10,8 +10,8 @@ export class SharedDataService<T extends Record<string, unknown>> {
         this.data[key] = value;
     }
 
-    public getValue<Key extends keyof T>(key: Key): T[Key] | undefined {
-        return this.data[key];
+    public getValue<Key extends keyof T>(key: Key): T[Key] | null {
+        return this.data[key] ?? null;
     }
 
     public removeValue<Key extends keyof T>(key: Key) {

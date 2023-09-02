@@ -1,16 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { DeviceTypeService } from '../../../../services/device-type.service';
-import { faPhone, faMobile, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { StyleConfigService } from '../../../../services/style-config.service';
+import { faEnvelope, faMobile, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { ContactItem } from '../../types/contact-item';
+import { DeviceTypeService } from '../../../../services/device-type.service';
+import { StyleConfigService } from '../../../../services/style-config.service';
 
 @Component({
     selector: 'contact',
-    templateUrl: './contact.component.html',
-    styleUrls: ['./contact.component.sass']
+    styleUrls: ['./contact.component.sass'],
+    templateUrl: './contact.component.html'
 })
 export class ContactComponent {
-
     @Input() public contactData!: ContactItem[];
 
     public faPhone = faPhone;

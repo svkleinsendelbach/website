@@ -118,7 +118,7 @@
     >{{ 'Liveticker ' + (index + 1).toString() }}</option>
   </select>
   <liveticker
-    *ngIf="selectedLiveticker !== undefined"
+    *ngIf="selectedLiveticker"
     [liveticker]="selectedLiveticker"
   ></liveticker>
 </text-section>

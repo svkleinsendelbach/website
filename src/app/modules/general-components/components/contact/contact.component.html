@@ -23,7 +23,7 @@
       >{{ contact.name }}</p>
       <a
         class="telephone"
-        *ngIf="contact.telephone !== undefined"
+        *ngIf="contact.telephone"
         href="tel:{{ contact.telephone.number }}"
         title="{{ contact.telephone.text }}"
         [ngStyle]="{
@@ -38,7 +38,7 @@
       </a>
       <a
         class="mobile"
-        *ngIf="contact.mobile !== undefined"
+        *ngIf="contact.mobile"
         href="tel:{{ contact.mobile.number }}"
         title="{{ contact.mobile.text }}"
         [ngStyle]="{
@@ -53,7 +53,7 @@
       </a>
       <a
         class="email"
-        *ngIf="contact.email !== undefined"
+        *ngIf="contact.email"
         href="mailto:{{ contact.email }}"
         title="{{ contact.email }}"
         [ngStyle]="{

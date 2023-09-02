@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { StyleConfigService } from 'src/app/services/style-config.service';
 import { HeaderData, HeaderItem } from '../../types/header-data';
 import { HomeLinkData } from '../../types/home-link-data';
+import { StyleConfigService } from 'src/app/services/style-config.service';
 
 @Component({
     selector: 'desktop-header',
-    templateUrl: './desktop-header.component.html',
-    styleUrls: ['./desktop-header.component.sass']
+    styleUrls: ['./desktop-header.component.sass'],
+    templateUrl: './desktop-header.component.html'
 })
 export class DesktopHeaderComponent {
     @Input() public headerData!: HeaderData;
@@ -20,19 +20,16 @@ export class DesktopHeaderComponent {
     ) {}
 
     public get headerItems(): (HeaderItem & { id: string })[] {
-        return Object.entries(this.headerData).map(entry => {
-            return {
-                ...entry[1],
-                id: entry[0]
-            };
-        });
+        return Object.entries(this.headerData).map(entry => ({
+            ...entry[1],
+            id: entry[0]
+        }));
     }
 
     public handleHeaderItemClick(headerItemId: string) {
-        if (this.expandedHeaderItemId === headerItemId) {
+        if (this.expandedHeaderItemId === headerItemId)
             this.expandedHeaderItemId = null;
-        } else {
+        else
             this.expandedHeaderItemId = headerItemId;
-        }
     }
 }

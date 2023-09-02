@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faChevronLeft, faChevronRight, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { DeviceTypeService } from '../../../services/device-type.service';
-import { StyleConfigService } from '../../../services/style-config.service';
 import { Link } from 'src/app/types/link';
+import { StyleConfigService } from '../../../services/style-config.service';
 
 @Component({
     selector: 'app-home-banner',
-    templateUrl: './home-banner.component.html',
-    styleUrls: ['./home-banner.component.sass']
+    styleUrls: ['./home-banner.component.sass'],
+    templateUrl: './home-banner.component.html'
 })
 export class HomeBannerComponent implements OnInit {
     @Input() public bannerData!: BannerItem[];
@@ -22,7 +22,7 @@ export class HomeBannerComponent implements OnInit {
 
     private nextPageTimeout: number | null = null;
 
-    private mouseDownPosition: [number, number] | undefined;
+    private mouseDownPosition: [number, number] | null = null;
 
     public constructor(
         public readonly deviceType: DeviceTypeService,
@@ -55,41 +55,41 @@ export class HomeBannerComponent implements OnInit {
     public handleButtonClick(direction: 'left' | 'right') {
         switch (direction) {
         case 'left':
-            if (this.currentPage > 1) {
+            if (this.currentPage > 1)
                 this.setPage(this.currentPage - 1);
-            } else {
+            else
                 this.setPage(this.bannerData.length);
-            }
             break;
         case 'right':
-            if (this.currentPage < this.bannerData.length) {
+            if (this.currentPage < this.bannerData.length)
                 this.setPage(this.currentPage + 1);
-            } else {
+            else
                 this.setPage(1);
-            }
+            break;
+        default:
             break;
         }
     }
 
-    public onMouseDown(event: MouseEvent | TouchEvent): void {
+    public onMouseDown(event: MouseEvent | TouchEvent) {
         if (!this.isClickOnNavContainer(event))
             return;
         this.mouseDownPosition = this.getTapPosition(event);
     }
 
-    public onMouseUp(event: MouseEvent | TouchEvent): void {
+    public onMouseUp(event: MouseEvent | TouchEvent) {
         if (!this.isClickOnNavContainer(event))
             return;
-        if (this.mouseDownPosition === undefined)
+        if (!this.mouseDownPosition)
             return;
         const position = this.getTapPosition(event);
-        if (position === undefined)
+        if (!position)
             return;
         const absX = Math.abs(this.mouseDownPosition[0] - position[0]);
         const absY = Math.abs(this.mouseDownPosition[1] - position[1]);
         if (absX <= 10 && absY <= 10) {
             this.openCurrentLink();
-            this.mouseDownPosition = undefined;
+            this.mouseDownPosition = null;
             return;
         }
         if (absY > absX)
@@ -102,21 +102,21 @@ export class HomeBannerComponent implements OnInit {
             return;
         const direction = this.mouseDownPosition[0] >= position[0] ? 'left' : 'right';
         this.handleButtonClick(direction);
-        this.mouseDownPosition = undefined;
+        this.mouseDownPosition = null;
     }
 
-    private getTapPosition(event: MouseEvent | TouchEvent): [number, number] | undefined {
+    private getTapPosition(event: MouseEvent | TouchEvent): [number, number] | null {
         if ('pageX' in event && 'pageY' in event)
             return [event.pageX, event.pageY];
         if ('touches' in event) {
             if (event.touches.length !== 1)
-                return undefined;
+                return null;
             const touch = event.touches.item(0);
             if (touch === null)
-                return undefined;
+                return null;
             return [touch.screenX, touch.screenY];
         }
-        return undefined;
+        return null;
     }
 
     private setPage(page: number) {
@@ -124,11 +124,10 @@ export class HomeBannerComponent implements OnInit {
             clearTimeout(this.nextPageTimeout);
         this.currentPage = page;
         this.nextPageTimeout = window.setTimeout(() => {
-            if (this.currentPage < this.bannerData.length) {
+            if (this.currentPage < this.bannerData.length)
                 this.setPage(this.currentPage + 1);
-            } else {
+            else
                 this.setPage(1);
-            }
         }, 10000);
     }
 
@@ -144,7 +143,7 @@ export class HomeBannerComponent implements OnInit {
 export interface BannerItem {
     imageSource: string;
     title: string;
-    subTitle?: string;
+    subTitle: string | null;
     link: Link;
     isCurrent: boolean;
 }

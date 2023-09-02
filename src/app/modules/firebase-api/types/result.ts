@@ -2,7 +2,6 @@ export type Result<T, E extends Error> = Result.Failure<E> | Result.Success<T>;
 
 export namespace Result {
     export class Success<T> {
-
         public readonly state = 'success';
 
         public readonly error = null;
@@ -29,7 +28,6 @@ export namespace Result {
     }
 
     export class Failure<E extends Error> {
-
         public readonly state = 'failure';
 
         public readonly value = null;
@@ -58,8 +56,10 @@ export namespace Result {
 
     export function success<T>(value: T): Result<T, never>;
     export function success(): Result<void, never>;
-    export function success<T>(value?: T): Result<T | undefined, never> {
-        return new Result.Success<T | undefined>(value);
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+    export function success<T>(value?: T): Result<T | void, never> {
+        // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+        return new Result.Success<T | void>(value);
     }
 
     export function failure<E extends Error>(error: E): Result<never, E> {

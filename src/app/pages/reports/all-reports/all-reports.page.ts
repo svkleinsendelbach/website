@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { Report, ReportGroupId } from 'src/app/modules/firebase-api/types/report';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { StyleConfigService } from 'src/app/services/style-config.service';
 import { FetchState } from 'src/app/types/fetch-state';
+import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
+import { StyleConfigService } from 'src/app/services/style-config.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'pages-all-reports',
-    templateUrl: './all-reports.page.html',
-    styleUrls: ['./all-reports.page.sass']
+    styleUrls: ['./all-reports.page.sass'],
+    templateUrl: './all-reports.page.html'
 })
 export class AllReportsPage implements OnInit {
     public Report = Report;
@@ -26,10 +26,14 @@ export class AllReportsPage implements OnInit {
     }
 
     public ngOnInit() {
-        this.firebaseApiService.function('report').function('getAll').call({})
+        this.firebaseApiService
+            .function('report')
+            .function('getAll')
+            .call({})
             .then(reports => {
                 this.fetchedReports = FetchState.success(reports);
-            }).catch(reason => {
+            })
+            .catch(reason => {
                 this.fetchedReports = FetchState.failure(reason);
             });
     }

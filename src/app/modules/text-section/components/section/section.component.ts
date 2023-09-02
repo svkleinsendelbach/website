@@ -3,8 +3,8 @@ import { StyleConfigService } from 'src/app/services/style-config.service';
 
 @Component({
     selector: 'section',
-    templateUrl: './section.component.html',
-    styleUrls: ['./section.component.sass']
+    styleUrls: ['./section.component.sass'],
+    templateUrl: './section.component.html'
 })
 export class SectionComponent {
     @Input() public title!: string;
