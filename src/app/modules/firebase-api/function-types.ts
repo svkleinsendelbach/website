@@ -87,11 +87,11 @@ export type UserAuthenticationCheckFunctionType = FunctionType<{
 }, void>;
 
 export namespace UserAuthenticationGetAllUnauthenticatedFunction {
-    export type User = {
+    export interface User {
         hashedUserId: string;
         firstName: string;
         lastName: string;
-    };
+    }
 }
 
 export type UserAuthenticationGetAllUnauthenticatedFunctionType = FunctionType<{

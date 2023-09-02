@@ -13,9 +13,10 @@ import { UtcDate } from 'src/app/types/utc-date';
     styleUrls: ['./events.component.sass']
 })
 export class EventsComponent implements OnInit {
-    public EventGroupId = EventGroupId;
 
     @Input() public groupIds!: EventGroupId[];
+
+    public EventGroupId = EventGroupId;
 
     public fetchedEventGroups: FetchState<EventGroup[]> = FetchState.loading;
 

@@ -38,6 +38,10 @@ export class BfvWidgetComponent implements AfterViewInit, OnDestroy {
         this.cookieSelectionService.listeners.remove('bfv-widget-component');
     }
 
+    public acceptFunctionalityCookies() {
+        this.cookieSelectionService.changeCookieSelection('functionality', 'selected');
+    }
+
     private appendBfvWidgetChild() {
         if (this.bfvWidget !== undefined)
             this.bfvWidget.nativeElement.innerHTML = '';
@@ -48,7 +52,7 @@ export class BfvWidgetComponent implements AfterViewInit, OnDestroy {
             colorClubName: '#1e3799',
             backgroundNav: '#24252a',
             width: '100%',
-            height: '100%',
+            height: '100%'
         };
         const iFrame = document.createElement('iframe');
         iFrame.setAttribute('allowFullScreen', 'true');
@@ -59,9 +63,5 @@ export class BfvWidgetComponent implements AfterViewInit, OnDestroy {
         const appPath = `widget/widgetresource/iframe${'https:' === document.location.protocol ? '/ssl' : ''}?url=${window.location.hostname}`;
         iFrame.src = `${bfvHost}/${appPath}&widget=${encodeURIComponent(`widget/team/complete/team${this.teamId}/${options.selectedTab}?css=${encodeURIComponent(JSON.stringify(options))}&referrer=${window.location.hostname}`)}`;
         this.bfvWidget?.nativeElement.appendChild(iFrame);
-    }
-
-    public acceptFunctionalityCookies() {
-        this.cookieSelectionService.changeCookieSelection('functionality', 'selected');
     }
 }

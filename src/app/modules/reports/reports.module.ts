@@ -6,16 +6,16 @@ import { ReportComponent } from './components/report/report.component';
 
 @NgModule({
     declarations: [
-        ReportsComponent,
-        ReportComponent
+        ReportComponent,
+        ReportsComponent
     ],
     imports: [
         CommonModule,
         TextSectionModule
     ],
     exports: [
-        ReportsComponent,
-        ReportComponent
+        ReportComponent,
+        ReportsComponent
     ]
 })
 export class ReportsModule { }

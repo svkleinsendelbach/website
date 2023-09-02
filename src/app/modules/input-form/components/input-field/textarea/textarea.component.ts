@@ -14,7 +14,7 @@ export class TextareaComponent implements AfterViewInit {
 
     @Input() public inputField!: InputField<string>;
 
-    @ViewChild('textarea') private textareaElement!: ElementRef<HTMLTextAreaElement>;
+    @ViewChild('textarea') private readonly textareaElement!: ElementRef<HTMLTextAreaElement>;
 
     public constructor(
         public styleConfig: StyleConfigService

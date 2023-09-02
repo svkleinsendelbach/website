@@ -12,9 +12,10 @@ import { InternalLink } from 'src/app/types/internal-path';
     styleUrls: ['./authentication-check.component.sass']
 })
 export class AuthenticationCheckComponent implements OnInit {
-    public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
 
     @Input() public authenticationTypes!: UserAuthenticationType[];
+
+    public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
 
     public state: AuthenticationCheckComponent.State = 'loading';
 
@@ -25,7 +26,7 @@ export class AuthenticationCheckComponent implements OnInit {
     ) {}
 
     public ngOnInit() {
-        this.checkAuthentication();
+        void this.checkAuthentication();
     }
 
     private async checkAuthentication() {
@@ -46,5 +47,5 @@ export class AuthenticationCheckComponent implements OnInit {
 }
 
 export namespace AuthenticationCheckComponent {
-    export type State = 'loading' | 'internalError' | RegistrationStatus;
+    export type State = RegistrationStatus | 'internalError' | 'loading';
 }

@@ -18,7 +18,7 @@ import { LoginError } from 'src/app/modules/authentication/types/login-error';
     styleUrls: ['./login-add-user-waiting.component.sass']
 })
 export class LoginAddUserWaitingComponent {
-    @Output() private addToWaitingUserCanceled = new EventEmitter<void>();
+    @Output() private readonly addToWaitingUserCanceled = new EventEmitter<void>();
 
     public inputForm = new InputForm({
         firstName: new InputField<string>('', [
@@ -38,7 +38,7 @@ export class LoginAddUserWaitingComponent {
         public readonly deviceType: DeviceTypeService,
         public readonly styleConfig: StyleConfigService,
         private readonly authService: AuthService,
-        private router: Router
+        private readonly router: Router
     ) {}
 
     public async handleCancel() {
@@ -59,7 +59,7 @@ export class LoginAddUserWaitingComponent {
         if (result === 'error') return;
         this.inputForm.status = 'valid';
         this.inputForm.reset();
-        this.router.navigateByUrl(InternalLink.all.home.link);
+        await this.router.navigateByUrl(InternalLink.all.home.link);
     }
 
     private handleLoginError(reason: unknown): 'error' {

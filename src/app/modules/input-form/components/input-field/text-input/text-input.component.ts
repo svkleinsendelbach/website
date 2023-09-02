@@ -16,7 +16,7 @@ export class TextInputComponent implements AfterViewInit {
 
     @Input() public inputField!: InputField<string>;
 
-    @ViewChild('input') private inputElement!: ElementRef<HTMLInputElement>;
+    @ViewChild('input') private readonly inputElement!: ElementRef<HTMLInputElement>;
 
     public constructor(
         public styleConfig: StyleConfigService

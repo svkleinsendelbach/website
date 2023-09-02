@@ -5,7 +5,7 @@ export class Link {
         private readonly openInNewTab: boolean
     ) {}
 
-    public get target(): '_self' | '_blank' {
+    public get target(): '_blank' | '_self' {
         return this.openInNewTab ? '_blank' : '_self';
     }
 }

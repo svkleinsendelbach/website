@@ -2,17 +2,7 @@ import { UtcDate } from 'src/app/types/utc-date';
 import { Guid } from './guid';
 
 export type ReportGroupId =
-    'general' |
-    'football-adults/general' |
-    'football-adults/first-team/game-report' |
-    'football-adults/second-team/game-report' |
-    'football-youth/general' |
-    'football-youth/c-youth/game-report' |
-    'football-youth/e-youth/game-report' |
-    'football-youth/f-youth/game-report' |
-    'football-youth/g-youth/game-report' |
-    'gymnastics' |
-    'dancing';
+    'dancing' | 'football-adults/first-team/game-report' | 'football-adults/general' | 'football-adults/second-team/game-report' | 'football-youth/c-youth/game-report' | 'football-youth/e-youth/game-report' | 'football-youth/f-youth/game-report' | 'football-youth/g-youth/game-report' | 'football-youth/general' | 'general' | 'gymnastics';
 
 export namespace ReportGroupId {
     export const all: ReportGroupId[] = [
@@ -64,28 +54,28 @@ export namespace ReportGroupId {
     ];
 }
 
-export type Report = {
+export interface Report {
     id: Guid;
     title: string;
     message: string;
     imageUrl?: string;
     createDate: UtcDate;
-};
+}
 
 export namespace Report {
-    export type Flatten = {
+    export interface Flatten {
         id: string;
         title: string;
         message: string;
         imageUrl?: string;
         createDate: string;
-    };
+    }
 
     export function flatten(report: Report): Report.Flatten;
     export function flatten(report: Omit<Report, 'id'>): Omit<Report.Flatten, 'id'>;
-    export function flatten(report: Report | Omit<Report, 'id'>): Report.Flatten | Omit<Report.Flatten, 'id'> {
+    export function flatten(report: Omit<Report, 'id'> | Report): Omit<Report.Flatten, 'id'> | Report.Flatten {
         return {
-            ...('id' in report ? { id: report.id.guidString } : {}),
+            ...'id' in report ? { id: report.id.guidString } : {},
             title: report.title,
             message: report.message,
             imageUrl: report.imageUrl,
@@ -95,9 +85,9 @@ export namespace Report {
 
     export function concrete(report: Report.Flatten): Report;
     export function concrete(report: Omit<Report.Flatten, 'id'>): Omit<Report, 'id'>;
-    export function concrete(report: Report.Flatten | Omit<Report.Flatten, 'id'>): Report | Omit<Report, 'id'> {
+    export function concrete(report: Omit<Report.Flatten, 'id'> | Report.Flatten): Omit<Report, 'id'> | Report {
         return {
-            ...('id' in report ? { id: new Guid(report.id) } : {}),
+            ...'id' in report ? { id: new Guid(report.id) } : {},
             title: report.title,
             message: report.message,
             imageUrl: report.imageUrl,
@@ -106,14 +96,14 @@ export namespace Report {
     }
 }
 
-export type ReportGroup = {
+export interface ReportGroup {
     groupId: ReportGroupId;
     reports: Report[];
-};
+}
 
 export namespace ReportGroup {
-    export type Flatten = {
+    export interface Flatten {
         groupId: ReportGroupId;
         reports: Report.Flatten[];
-    };
+    }
 }

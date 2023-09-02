@@ -25,13 +25,13 @@ export class MapsComponent implements OnInit, OnDestroy {
     public mapOptions: google.maps.MapOptions = {};
 
     public constructor(
-        private httpClient: HttpClient,
+        private readonly httpClient: HttpClient,
         public deviceType: DeviceTypeService,
         public styleConfig: StyleConfigService,
         public cookieSelectionService: CookieSelectionService,
         public appearance: AppearanceService
     ) {
-        this.checkApiLoaded();
+        void this.checkApiLoaded();
         this.functionalityCookiesSelected = this.cookieSelectionService.cookiesSelection?.functionality === 'selected';
         this.cookieSelectionService.listeners.add('maps-component', selection => {
             this.functionalityCookiesSelected = selection.functionality === 'selected';
@@ -50,11 +50,19 @@ export class MapsComponent implements OnInit, OnDestroy {
         this.cookieSelectionService.listeners.remove('maps-component');
     }
 
+    public acceptFunctionalityCookies() {
+        this.cookieSelectionService.changeCookieSelection('functionality', 'selected');
+    }
+
     private async checkApiLoaded() {
         this.apiLoaded = await new Promise<boolean>(resolve => {
             lastValueFrom(this.httpClient.jsonp(`https://maps.googleapis.com/maps/api/js?key=${environment.googleMaps.apiKey}`, 'callback'))
-                .then(() => resolve(true))
-                .catch(() => resolve(false));
+                .then(() => {
+                    resolve(true);
+                })
+                .catch(() => {
+                    resolve(false);
+                });
         });
     }
 
@@ -63,9 +71,5 @@ export class MapsComponent implements OnInit, OnDestroy {
             ...this.options,
             styles: appearance === 'light' ? undefined : mapStyleDarkAppearence
         };
-    }
-
-    public acceptFunctionalityCookies() {
-        this.cookieSelectionService.changeCookieSelection('functionality', 'selected');
     }
 }

@@ -1,1 +1,1 @@
-export type DatabaseType = 'release' | 'debug' | 'testing';
+export type DatabaseType = 'debug' | 'release' | 'testing';

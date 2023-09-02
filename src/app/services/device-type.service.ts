@@ -6,12 +6,28 @@ import { EventListener } from '../types/event-listener';
 })
 export class DeviceTypeService {
 
-    private deviceType: DeviceType;
-
     public listeners = new EventListener<DeviceType>();
 
-    constructor() {
+    private deviceType: DeviceType;
+
+    public constructor() {
         this.deviceType = DeviceTypeService.computeDeviceType();
+    }
+
+    public get current(): DeviceType {
+        return this.deviceType;
+    }
+
+    public get isMobile(): boolean {
+        return this.deviceType === 'mobile';
+    }
+
+    public get isTable(): boolean {
+        return this.deviceType === 'tablet';
+    }
+
+    public get isDesktop(): boolean {
+        return this.deviceType === 'desktop';
     }
 
     private static computeDeviceType(): DeviceType {
@@ -32,22 +48,6 @@ export class DeviceTypeService {
             this.listeners.emitValue(newDeviceType);
         }
     }
-
-    public get current(): DeviceType {
-        return this.deviceType;
-    }
-
-    public get isMobile(): boolean {
-        return this.deviceType === 'mobile';
-    }
-
-    public get isTable(): boolean {
-        return this.deviceType === 'tablet';
-    }
-
-    public get isDesktop(): boolean {
-        return this.deviceType === 'desktop';
-    }
 }
 
-export type DeviceType = 'mobile' | 'tablet' | 'desktop';
+export type DeviceType = 'desktop' | 'mobile' | 'tablet';

@@ -12,9 +12,8 @@ import { InternalLink } from 'src/app/types/internal-path';
     styleUrls: ['./reports.component.sass']
 })
 export class ReportsComponent implements OnInit {
-    public Report = Report;
 
-    @Input() isGameReport: boolean = false;
+    @Input() public isGameReport: boolean = false;
 
     @Input() public groupId!: ReportGroupId;
 
@@ -22,7 +21,9 @@ export class ReportsComponent implements OnInit {
 
     @Input() public showAllReportsButton: boolean = false;
 
-    public readonly allReportsLink = InternalLink.all['berichte'];
+    public Report = Report;
+
+    public readonly allReportsLink = InternalLink.all.berichte;
 
     public fetchedReports: FetchState<{ reports: Report.Flatten[]; hasMore: boolean }> = FetchState.loading;
 

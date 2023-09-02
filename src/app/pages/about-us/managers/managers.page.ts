@@ -6,11 +6,11 @@ import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { InternalLink } from 'src/app/types/internal-path';
 
-export type Manager = {
+export interface Manager {
     name: string;
     function: string;
     imageSrc: string | null;
-};
+}
 
 @Component({
     selector: 'pages-managers',
@@ -24,31 +24,31 @@ export class ManagersPage {
     public readonly links: LinkData[] = [
         {
             id: 'sportshome',
-            link: InternalLink.all['sportheim'],
+            link: InternalLink.all.sportheim,
             title: 'Sportheim',
             subtitle: 'Öffungszeiten des Sportheims in Kleinsendelbach'
         },
         {
             id: 'chronicle',
-            link: InternalLink.all['chroniken'],
+            link: InternalLink.all.chroniken,
             title: 'Chronik',
             subtitle: 'Chronik des Sportverein Kleinsendelbach'
         },
         {
             id: 'statute',
-            link: InternalLink.all['satzung'],
+            link: InternalLink.all.satzung,
             title: 'Satzung',
             subtitle: 'Satzung des SV Kleinsendelbach e.V.'
         },
         {
             id: 'privacy',
-            link: InternalLink.all['datenschutz'],
+            link: InternalLink.all.datenschutz,
             title: 'Datenschutz',
             subtitle: 'Datenschutzerklärung des Sportverein Kleinsendelbach'
         },
         {
             id: 'request',
-            link: InternalLink.all['mitgliedsantrag'],
+            link: InternalLink.all.mitgliedsantrag,
             title: 'Mitgliedsantrag',
             subtitle: 'Jetzt Mitglied werden'
         }

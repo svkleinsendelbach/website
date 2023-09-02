@@ -11,7 +11,7 @@ export class LoginError implements Error {
 }
 
 export namespace LoginError {
-    export type Code = 'unknown' | 'invalid-email' | 'user-disabled' | 'wrong-password' | 'popup-blocked' | 'popup-closed';
+    export type Code = 'invalid-email' | 'popup-blocked' | 'popup-closed' | 'unknown' | 'user-disabled' | 'wrong-password';
 
     export namespace Code {
         export function typeGuard(value: string): value is LoginError.Code {

@@ -1,4 +1,4 @@
-export type GameInfo = {
+export interface GameInfo {
     id: string;
     competition: {
         name: string;
@@ -14,25 +14,25 @@ export type GameInfo = {
     awayTeam: GameInfo.Team;
     adress: string | undefined;
     adressDescription: string | undefined;
-    livetickers: Array<{
+    livetickers: (BfvLiveticker & {
         id: string;
-    } & BfvLiveticker>;
+    })[];
     report: GameInfo.Report | undefined;
-};
+}
 
 export namespace GameInfo {
-    export type Team = {
+    export interface Team {
         id: string;
         name: string;
         imageId: string;
-    };
+    }
 
-    export type Report = {
+    export interface Report {
         title: string;
         paragraphs: { text: string; link: string | undefined }[][];
-    };
+    }
 
-    export function additionalProperties(gameInfo: GameInfo): { isSg2: boolean; sgHomeAway: 'home' | 'away'} {
+    export function additionalProperties(gameInfo: GameInfo): { isSg2: boolean; sgHomeAway: 'away' | 'home' } {
         const isKleinsendelbachHetzlesRegex = /Kleinsendelbach.*Hetzles|Hetzles.*Kleinsendelbach/g;
         const isKleinsendelbachHetzles2Regex = /Kleinsendelbach.*Hetzles.*2|Kleinsendelbach.*2.*Hetzles|Hetzles.*Kleinsendelbach.*2|Hetzles.*2.*Kleinsendelbach/g;
         if (isKleinsendelbachHetzlesRegex.test(gameInfo.homeTeam.name)) {
@@ -47,17 +47,17 @@ export namespace GameInfo {
         };
     }
 }
-export type BfvLiveticker = {
+export interface BfvLiveticker {
     loadNew: boolean;
     ifModifiedSinceTimestamp: string;
     results: BfvLiveticker.Result[];
-};
+}
 
 export namespace BfvLiveticker {
-    export type Result = Result.Comment | Result.Section | Result.TitledResult | Result.Goal | Result.Substitute | Result.Card;
+    export type Result = Result.Card | Result.Comment | Result.Goal | Result.Section | Result.Substitute | Result.TitledResult;
 
     export namespace Result {
-        export type ResultProperties<Type extends string> = {
+        export interface ResultProperties<Type extends string> {
             type: Type;
             resultLikes: {
                 likes: number;
@@ -68,29 +68,29 @@ export namespace BfvLiveticker {
             text: string | null;
             time: number | null;
             reportLink: string | null;
-        };
+        }
 
-        export type Player = {
+        export interface Player {
             id: string;
             imageId: string;
             name: string;
             number: number;
-        };
+        }
 
         export type Comment = ResultProperties<'comment'>;
 
-        export type Section = {
+        export interface Section {
             type: 'section';
             text: string;
-        };
+        }
 
-        export type TitledResult = ResultProperties<'whistle' | 'corner' | 'penalty' | 'ownGoal' | 'time' | 'specialAction' | 'freeKick' | 'shotOnGoal'> & {
+        export type TitledResult = ResultProperties<'corner' | 'freeKick' | 'ownGoal' | 'penalty' | 'shotOnGoal' | 'specialAction' | 'time' | 'whistle'> & {
             headline: string | null;
         };
 
         export type Goal = ResultProperties<'goal' | 'penaltyGoal'> & {
             headline: string | null;
-            team: 'home' | 'away';
+            team: 'away' | 'home';
             player: Player;
             result: {
                 home: number;
@@ -100,95 +100,81 @@ export namespace BfvLiveticker {
 
         export type Substitute = ResultProperties<'substitute'> & {
             headline: string | null;
-            team: 'home' | 'away';
+            team: 'away' | 'home';
             playerIn: Player;
             playerOut: Player;
         };
 
-        export type Card = ResultProperties<'yellowCard' | 'secondYellowCard' | 'redCard'> & {
+        export type Card = ResultProperties<'redCard' | 'secondYellowCard' | 'yellowCard'> & {
             headline: string | null;
-            team: 'home' | 'away';
+            team: 'away' | 'home';
             player: Player;
-            entries: Record<'games' | 'goals' | 'yellowCards' | 'secondYellowCards' | 'redCards', number> | null;
+            entries: Record<'games' | 'goals' | 'redCards' | 'secondYellowCards' | 'yellowCards', number> | null;
         };
     }
 }
 
-export type BfvApiLiveticker = {
+export interface BfvApiLiveticker {
     loadNew: boolean;
     ifModifiedSinceTimestamp: string;
     results: BfvApiLiveticker.Result[];
-};
+}
 
 export namespace BfvApiLiveticker {
     export type Result =
-      | Result.Comment
-      | Result.Whistle
-      | Result.SpecialAction
-      | Result.Football
-      | Result.Substitute
-      | Result.YellowCard
-      | Result.SecondYellowCard
-      | Result.RedCard
-      | Result.Corner
-      | Result.FreeKick
-      | Result.ShotOnGoal
-      | Result.Penalty
-      | Result.PenaltyGoal
-      | Result.OwnGoal
-      | Result.Time;
+      Result.Comment | Result.Corner | Result.Football | Result.FreeKick | Result.OwnGoal | Result.Penalty | Result.PenaltyGoal | Result.RedCard | Result.SecondYellowCard | Result.ShotOnGoal | Result.SpecialAction | Result.Substitute | Result.Time | Result.Whistle | Result.YellowCard;
 
     export namespace Result {
-        export type Comment = {
-            headline: null | string;
+        export interface Comment {
+            headline: string | null;
             eventIcon: null;
             likes: number;
             liked: boolean;
-            likeApiRoute: null | string;
-            unlikeApiRoute: null | string;
+            likeApiRoute: string | null;
+            unlikeApiRoute: string | null;
             ownGoal: boolean;
-            text: null | string;
-            time: null | string;
-            section: null | string;
-            options: null | Utils.Options;
-        };
+            text: string | null;
+            time: string | null;
+            section: string | null;
+            options: Utils.Options | null;
+        }
 
         export type Whistle = Utils.DefaultProperties & {
             headline: string;
         };
 
         export type SpecialAction = Utils.DefaultProperties & {
-            headline: null | string;
+            headline: string | null;
         };
 
         export type Football = Utils.DefaultProperties & {
             headline: string;
-            goal: null | Utils.Goal;
+            goal: Utils.Goal | null;
         };
 
         export type Substitute = Utils.DefaultProperties & {
             headline: string;
-            substitution: null | Utils.Substitution;
+            substitution: Utils.Substitution | null;
         };
 
         export type YellowCard = Utils.DefaultProperties & {
             headline: string;
             card: string;
-            statistic: null | Utils.Statistic;
+            statistic: Utils.Statistic | null;
             team: Utils.Team;
         };
 
         export type SecondYellowCard = Utils.DefaultProperties & {
             headline: string;
             card: string;
-            statistic: null | Utils.Statistic;
+            statistic: Utils.Statistic | null;
             team: Utils.Team;
         };
 
         export type RedCard = Utils.DefaultProperties & {
             headline: string;
             card: string;
-            statistic: null | Utils.Statistic;
+            statistic: Utils.Statistic | null;
             team: Utils.Team;
         };
 
@@ -197,11 +183,11 @@ export namespace BfvApiLiveticker {
         };
 
         export type FreeKick = Utils.DefaultProperties & {
-            headline: null | string;
+            headline: string | null;
         };
 
         export type ShotOnGoal = Utils.DefaultProperties & {
-            headline: null | string;
+            headline: string | null;
         };
 
         export type Penalty = Utils.DefaultProperties & {
@@ -210,7 +196,7 @@ export namespace BfvApiLiveticker {
 
         export type PenaltyGoal = Utils.DefaultProperties & {
             headline: string;
-            goal: null | Utils.Goal;
+            goal: Utils.Goal | null;
         };
 
         export type OwnGoal = Utils.DefaultProperties & {
@@ -222,7 +208,7 @@ export namespace BfvApiLiveticker {
         };
 
         export namespace Utils {
-            export type Options = {
+            export interface Options {
                 reportLink: {
                     href: string;
                     text: string;
@@ -231,9 +217,9 @@ export namespace BfvApiLiveticker {
                 socialsharing: {
                     services: unknown[];
                 };
-            };
+            }
 
-            export type DefaultProperties = {
+            export interface DefaultProperties {
                 eventIcon: string;
                 likes: number;
                 liked: boolean;
@@ -243,14 +229,14 @@ export namespace BfvApiLiveticker {
                 text: string;
                 time: string;
                 options: Options;
-            };
+            }
 
-            export type TeamLogo = {
+            export interface TeamLogo {
                 teamName: string;
                 teamIcon: string;
-            };
+            }
 
-            export type Player = {
+            export interface Player {
                 id: string;
                 name: string;
                 number: string;
@@ -263,40 +249,40 @@ export namespace BfvApiLiveticker {
                 link: {
                     href: string;
                 };
-            };
+            }
 
-            export type Goal = {
+            export interface Goal {
                 teamName: string;
                 player: Player;
                 result: {
                     halftime: boolean;
-                    teams: Array<{
+                    teams: {
                         teamIcon: string;
                         actualGoals: number;
                         type: string;
-                    }>;
+                    }[];
                 };
-            };
+            }
 
-            export type Substitution = {
+            export interface Substitution {
                 headline: string;
                 player: Player;
                 player2: Player;
                 teamLogo: TeamLogo;
-            };
+            }
 
-            export type Statistic = {
-                text: null | string;
+            export interface Statistic {
+                text: string | null;
                 player: Player;
-                entries: null | Array<{
+                entries: {
                     count: number;
                     icon: string;
-                }>;
-            };
+                }[] | null;
+            }
 
-            export type Team = {
+            export interface Team {
                 name: string;
-            };
+            }
         }
     }
 }

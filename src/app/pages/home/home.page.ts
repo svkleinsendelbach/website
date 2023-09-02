@@ -14,7 +14,7 @@ import { Link } from 'src/app/types/link';
 import { ReportGroupId } from 'src/app/modules/firebase-api/types/report';
 import { websiteConfig } from 'src/app/config/website-config';
 
-type LinkType = 'about-us' | 'football-adults' | 'football-youth' | 'gymnastics' | 'dancing' | 'drive' | 'contact';
+type LinkType = 'about-us' | 'contact' | 'dancing' | 'drive' | 'football-adults' | 'football-youth' | 'gymnastics';
 
 type SocialMediaType = 'facebook' | 'instagram' | 'sgWebsite';
 
@@ -29,46 +29,6 @@ const socialMediaByDeviceType: Record<DeviceType, SocialMediaType[][]> = {
     tablet: [['facebook', 'instagram', 'sgWebsite']],
     mobile: [['facebook'], ['instagram'], ['sgWebsite']]
 };
-
-@Component({
-    selector: 'pages-home',
-    templateUrl: './home.page.html',
-    styleUrls: ['./home.page.sass']
-})
-export class HomePage {
-    public eventGroupTitle = EventGroupId.title;
-    public allInternalLinks = InternalLink.all;
-
-    public readonly bannerData: BannerItem[] = websiteConfig.homeBanner;
-
-    public readonly reportGroupId: ReportGroupId = 'general';
-
-    public readonly eventGroupIds = EventGroupId.all;
-
-    public constructor(
-        public readonly titleService: Title,
-        public readonly deviceType: DeviceTypeService,
-        public readonly styleConfig: StyleConfigService
-    ) {
-        this.titleService.setTitle('SV Kleinsendelbach');
-    }
-
-    public get linkData(): LinkData {
-        return {
-            desktop: linksByDeviceType.desktop.map(row => row.map(link => homeLinks[link])),
-            tablet: linksByDeviceType.tablet.map(row => row.map(link => homeLinks[link])),
-            mobile: linksByDeviceType.mobile.map(row => row.map(link => homeLinks[link]))
-        };
-    }
-
-    public get socialMediaData(): SocialMediaData {
-        return {
-            desktop: socialMediaByDeviceType.desktop.map(row => row.map(link => socialMediaLink[link])),
-            tablet: socialMediaByDeviceType.tablet.map(row => row.map(link => socialMediaLink[link])),
-            mobile: socialMediaByDeviceType.mobile.map(row => row.map(link => socialMediaLink[link]))
-        };
-    }
-}
 
 const homeLinks: Record<LinkType, LinkItem> = {
     'about-us': {
@@ -94,28 +54,28 @@ const homeLinks: Record<LinkType, LinkItem> = {
     },
     'gymnastics': {
         name: 'Gymnastik',
-        link: InternalLink.all['gymnastik'],
+        link: InternalLink.all.gymnastik,
         description: 'Gymnastikangebote beim SV Kleinsendelbach',
         icon: faUserFriends,
         animation: 'jump'
     },
     'dancing': {
         name: 'Tanzen',
-        link: InternalLink.all['tanzen'],
+        link: InternalLink.all.tanzen,
         description: 'Tanzgruppen der Kinder',
         icon: faChild,
         animation: 'jump'
     },
     'drive': {
         name: 'Anfahrt',
-        link: InternalLink.all['anfahrt'],
+        link: InternalLink.all.anfahrt,
         description: 'Anfahrt zum Sportheim Kleinsendelbach',
         icon: faMap,
         animation: 'shake'
     },
     'contact': {
         name: 'Kontakt',
-        link: InternalLink.all['kontakt'],
+        link: InternalLink.all.kontakt,
         description: 'Kontakt zum SV Kleinsendelbach aufnehmen',
         icon: faAddressCard,
         animation: 'shake'
@@ -148,3 +108,44 @@ const socialMediaLink: Record<SocialMediaType, SocialMediaItem> = {
         }
     }
 };
+
+@Component({
+    selector: 'pages-home',
+    templateUrl: './home.page.html',
+    styleUrls: ['./home.page.sass']
+})
+export class HomePage {
+    public eventGroupTitle = EventGroupId.title;
+
+    public allInternalLinks = InternalLink.all;
+
+    public readonly bannerData: BannerItem[] = websiteConfig.homeBanner;
+
+    public readonly reportGroupId: ReportGroupId = 'general';
+
+    public readonly eventGroupIds = EventGroupId.all;
+
+    public constructor(
+        public readonly titleService: Title,
+        public readonly deviceType: DeviceTypeService,
+        public readonly styleConfig: StyleConfigService
+    ) {
+        this.titleService.setTitle('SV Kleinsendelbach');
+    }
+
+    public get linkData(): LinkData {
+        return {
+            desktop: linksByDeviceType.desktop.map(row => row.map(link => homeLinks[link])),
+            tablet: linksByDeviceType.tablet.map(row => row.map(link => homeLinks[link])),
+            mobile: linksByDeviceType.mobile.map(row => row.map(link => homeLinks[link]))
+        };
+    }
+
+    public get socialMediaData(): SocialMediaData {
+        return {
+            desktop: socialMediaByDeviceType.desktop.map(row => row.map(link => socialMediaLink[link])),
+            tablet: socialMediaByDeviceType.tablet.map(row => row.map(link => socialMediaLink[link])),
+            mobile: socialMediaByDeviceType.mobile.map(row => row.map(link => socialMediaLink[link]))
+        };
+    }
+}

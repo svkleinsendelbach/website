@@ -16,8 +16,11 @@ import { Guid } from 'src/app/modules/firebase-api/types/guid';
 })
 export class EditingEventsPage {
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
-    public mainEditingPageLink = InternalLink.all['bearbeiten'];
+
+    public mainEditingPageLink = InternalLink.all.bearbeiten;
+
     public allEventGroupIds = EventGroupId.all;
+
     public eventGroupTitle = EventGroupId.title;
 
     public eventGroups: EventGroup[] | undefined = undefined;
@@ -33,23 +36,10 @@ export class EditingEventsPage {
                 event: Event.Flatten;
             };
         }>,
-        private router: Router
+        private readonly router: Router
     ) {
         this.titleService.setTitle('Termine bearbeiten');
-        this.getEvents();
-    }
-
-    private async getEvents() {
-        this.eventGroups = await this.firebaseApiService.function('event').function('get').call({
-            groupIds: EventGroupId.all
-        }).then(eventGroups => {
-            return eventGroups.map(eventGroup => {
-                return {
-                    groupId: eventGroup.groupId,
-                    events: eventGroup.events.map(event => Event.concrete(event))
-                };
-            });
-        });
+        void this.getEvents();
     }
 
     public getEventGroupOf(groupId: EventGroupId): EventGroup | undefined {
@@ -88,5 +78,18 @@ export class EditingEventsPage {
     public async addNewEvent() {
         this.sharedData.removeValue('editEvent');
         await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine/bearbeiten'].link);
+    }
+
+    private async getEvents() {
+        this.eventGroups = await this.firebaseApiService.function('event').function('get').call({
+            groupIds: EventGroupId.all
+        }).then(eventGroups => {
+            return eventGroups.map(eventGroup => {
+                return {
+                    groupId: eventGroup.groupId,
+                    events: eventGroup.events.map(event => Event.concrete(event))
+                };
+            });
+        });
     }
 }

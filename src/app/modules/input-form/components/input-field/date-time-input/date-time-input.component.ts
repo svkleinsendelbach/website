@@ -14,9 +14,9 @@ export class DateTimeInputComponent implements AfterViewInit {
 
     @Input() public inputField!: InputField<UtcDate>;
 
-    @ViewChild('dateInput') private dateInputElement!: ElementRef<HTMLInputElement>;
+    @ViewChild('dateInput') private readonly dateInputElement!: ElementRef<HTMLInputElement>;
 
-    @ViewChild('timeInput') private timeInputElement!: ElementRef<HTMLInputElement>;
+    @ViewChild('timeInput') private readonly timeInputElement!: ElementRef<HTMLInputElement>;
 
     public constructor(
         public styleConfig: StyleConfigService,
@@ -40,7 +40,7 @@ export class DateTimeInputComponent implements AfterViewInit {
         const minute = date.minute <= 9 ? `0${date.minute}` : `${date.minute}`;
         return {
             date: `${date.year}-${month}-${day}`,
-            time: `${hour}:${minute}`,
+            time: `${hour}:${minute}`
         };
     }
 
@@ -49,7 +49,7 @@ export class DateTimeInputComponent implements AfterViewInit {
         const timeRegex = /^(?<hour>\d{2}):(?<minute>\d{2})$/g;
         const dateMatch = dateRegex.exec(date);
         const timeMatch = timeRegex.exec(time);
-        if (dateMatch === null || dateMatch.groups === undefined || timeMatch === null || timeMatch.groups === undefined)
+        if (dateMatch?.groups === undefined || timeMatch?.groups === undefined)
             return new UtcDate(0, 0, 0, 0, 0);
         return new UtcDate(
             Number.parseInt(dateMatch.groups['year']),

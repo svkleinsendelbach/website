@@ -10,24 +10,24 @@ export type DatabaseScheme = DatabaseSchemeType<{
         [Key in AnpfiffInfoTeamParameters.Type]: AnpfiffInfoTeamParameters
     };
     events: {
-        [Key in EventGroupId]: {
+        [Id in EventGroupId]: {
             [Key in string]: CryptedScheme<Omit<Event.Flatten, 'id'>>
         }
     };
     reports: {
-        [Key in ReportGroupId]: {
+        [Id in ReportGroupId]: {
             [Key in string]: CryptedScheme<Omit<Report.Flatten, 'id'>>
         }
     };
     users: {
         authentication: {
-            [Key in UserAuthenticationType]: {
+            [Type in UserAuthenticationType]: {
                 [Key in string]: CryptedScheme<UserAuthentication>
             };
         };
     };
     notification: {
-        [Key in NotificationType]: {
+        [Type in NotificationType]: {
             [Key in string]: string
         }
     };

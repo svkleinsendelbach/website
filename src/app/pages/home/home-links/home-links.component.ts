@@ -27,7 +27,7 @@ export interface LinkItem {
     link: Link;
     description: string;
     icon: IconDefinition;
-    animation: 'rotation' | 'jump' | 'shake';
+    animation: 'jump' | 'rotation' | 'shake';
 }
 
 export interface LinkData {

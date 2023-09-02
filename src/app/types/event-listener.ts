@@ -1,17 +1,15 @@
 export class EventListener<T> {
-    private listeners: {
-        [key: string | number]: (newValue: T) => void;
-    };
+    private listeners: Record<number | string, (newValue: T) => void>;
 
     public constructor() {
         this.listeners = {};
     }
 
-    public add(key: string | number, listener: (newValue: T) => void) {
+    public add(key: number | string, listener: (newValue: T) => void) {
         this.listeners[key] = listener;
     }
 
-    public remove(key: string | number) {
+    public remove(key: number | string) {
         if (key in this.listeners)
             delete this.listeners[key];
     }

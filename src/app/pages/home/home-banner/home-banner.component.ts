@@ -10,11 +10,13 @@ import { Link } from 'src/app/types/link';
     styleUrls: ['./home-banner.component.sass']
 })
 export class HomeBannerComponent implements OnInit {
-    public faChevronLeft = faChevronLeft;
-    public faChevronRight = faChevronRight;
-    public faCircle = faCircle;
-
     @Input() public bannerData!: BannerItem[];
+
+    public faChevronLeft = faChevronLeft;
+
+    public faChevronRight = faChevronRight;
+
+    public faCircle = faCircle;
 
     public currentPage = 1;
 
@@ -27,22 +29,23 @@ export class HomeBannerComponent implements OnInit {
         public readonly styleConfig: StyleConfigService
     ) {}
 
+    public get current(): BannerItem {
+        return this.bannerData[this.currentPage - 1];
+    }
+
+    public get heightStyle(): string {
+        if (this.deviceType.isMobile)
+            return '360px';
+        return '720px';
+    }
+
     public ngOnInit() {
-        this.bannerData.sort((lhs, rhs) => lhs.isCurrent ? -1 : (rhs.isCurrent ? 1 : 0));
+        this.bannerData.sort((lhs, rhs) => lhs.isCurrent ? -1 : rhs.isCurrent ? 1 : 0);
         this.setPage(1);
     }
 
-    private setPage(page: number) {
-        if (this.nextPageTimeout !== null)
-            clearTimeout(this.nextPageTimeout);
-        this.currentPage = page;
-        this.nextPageTimeout = window.setTimeout(() => {
-            if (this.currentPage < this.bannerData.length) {
-                this.setPage(this.currentPage + 1);
-            } else {
-                this.setPage(1);
-            }
-        }, 10000);
+    public openCurrentLink() {
+        window.open(this.current.link.link, this.current.link.target);
     }
 
     public handleNavBarClick(page: number) {
@@ -68,49 +71,13 @@ export class HomeBannerComponent implements OnInit {
         }
     }
 
-    public get current(): BannerItem {
-        return this.bannerData[this.currentPage - 1];
-    }
-
-    public openCurrentLink() {
-        window.open(this.current.link.link, this.current.link.target);
-    }
-
-    public get heightStyle(): string {
-        if (this.deviceType.isMobile)
-            return '360px';
-        return '720px';
-    }
-
-    private getTapPosition(event: MouseEvent | TouchEvent): [number, number] | undefined {
-        if ('pageX' in event && 'pageY' in event)
-            return [event.pageX, event.pageY];
-        if ('touches' in event) {
-            if (event.touches.length !== 1)
-                return undefined;
-            const touch = event.touches.item(0);
-            if (touch === null)
-                return undefined;
-            return [touch.screenX, touch.screenY];
-        }
-        return undefined;
-    }
-
-    private isClickOnNavContainer(event: MouseEvent | TouchEvent): boolean {
-        if (event.target === null)
-            return false;
-        if (!('id' in event.target) || typeof event.target.id !== 'string')
-            return false;
-        return event.target.id === 'nav-bar-container' || event.target.id === 'nav-button-container';
-    }
-
-    onMouseDown(event: MouseEvent | TouchEvent): void {
+    public onMouseDown(event: MouseEvent | TouchEvent): void {
         if (!this.isClickOnNavContainer(event))
             return;
         this.mouseDownPosition = this.getTapPosition(event);
     }
 
-    onMouseUp(event: MouseEvent | TouchEvent): void {
+    public onMouseUp(event: MouseEvent | TouchEvent): void {
         if (!this.isClickOnNavContainer(event))
             return;
         if (this.mouseDownPosition === undefined)
@@ -136,6 +103,41 @@ export class HomeBannerComponent implements OnInit {
         const direction = this.mouseDownPosition[0] >= position[0] ? 'left' : 'right';
         this.handleButtonClick(direction);
         this.mouseDownPosition = undefined;
+    }
+
+    private getTapPosition(event: MouseEvent | TouchEvent): [number, number] | undefined {
+        if ('pageX' in event && 'pageY' in event)
+            return [event.pageX, event.pageY];
+        if ('touches' in event) {
+            if (event.touches.length !== 1)
+                return undefined;
+            const touch = event.touches.item(0);
+            if (touch === null)
+                return undefined;
+            return [touch.screenX, touch.screenY];
+        }
+        return undefined;
+    }
+
+    private setPage(page: number) {
+        if (this.nextPageTimeout !== null)
+            clearTimeout(this.nextPageTimeout);
+        this.currentPage = page;
+        this.nextPageTimeout = window.setTimeout(() => {
+            if (this.currentPage < this.bannerData.length) {
+                this.setPage(this.currentPage + 1);
+            } else {
+                this.setPage(1);
+            }
+        }, 10000);
+    }
+
+    private isClickOnNavContainer(event: MouseEvent | TouchEvent): boolean {
+        if (event.target === null)
+            return false;
+        if (!('id' in event.target) || typeof event.target.id !== 'string')
+            return false;
+        return event.target.id === 'nav-bar-container' || event.target.id === 'nav-button-container';
     }
 }
 

@@ -1,4 +1,4 @@
-export function bits(byte: number): Array<0 | 1> {
+export function bits(byte: number): (0 | 1)[] {
     const totalBitsCount = 8;
     const bitsArray = Array<0 | 1>(totalBitsCount).fill(0);
     for (let index = 0; index < totalBitsCount; index++) {
@@ -21,7 +21,7 @@ export function bitIteratorToBytes(iterator: Iterator<0 | 1>): Uint8Array {
     let index = 0;
     let iteratorResult = iterator.next();
     while (!(iteratorResult.done ?? false)) {
-        currentByte += iteratorResult.value * (1 << (7 - index));
+        currentByte += iteratorResult.value * (1 << 7 - index);
         iteratorResult = iterator.next();
         index += 1;
         if (index === 8) {

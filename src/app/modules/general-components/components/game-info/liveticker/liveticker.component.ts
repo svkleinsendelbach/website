@@ -9,7 +9,7 @@ import { StyleConfigService } from 'src/app/services/style-config.service';
     styleUrls: ['./liveticker.component.sass']
 })
 export class LivetickerComponent {
-    @Input() liveticker!: BfvLiveticker;
+    @Input() public liveticker!: BfvLiveticker;
 
     public constructor(
         public readonly deviceType: DeviceTypeService,

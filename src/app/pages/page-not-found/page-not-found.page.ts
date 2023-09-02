@@ -10,7 +10,7 @@ import { StyleConfigService } from 'src/app/services/style-config.service';
     styleUrls: ['./page-not-found.page.sass']
 })
 export class PageNotFoundPage {
-    public homeLink = InternalLink.all['home'];
+    public homeLink = InternalLink.all.home;
 
     public constructor(
         public readonly titleService: Title,

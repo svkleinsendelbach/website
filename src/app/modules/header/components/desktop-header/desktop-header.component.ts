@@ -19,14 +19,6 @@ export class DesktopHeaderComponent {
         public readonly styleConfig: StyleConfigService
     ) {}
 
-    public handleHeaderItemClick(headerItemId: string) {
-        if (this.expandedHeaderItemId === headerItemId) {
-            this.expandedHeaderItemId = null;
-        } else {
-            this.expandedHeaderItemId = headerItemId;
-        }
-    }
-
     public get headerItems(): (HeaderItem & { id: string })[] {
         return Object.entries(this.headerData).map(entry => {
             return {
@@ -34,5 +26,13 @@ export class DesktopHeaderComponent {
                 id: entry[0]
             };
         });
+    }
+
+    public handleHeaderItemClick(headerItemId: string) {
+        if (this.expandedHeaderItemId === headerItemId) {
+            this.expandedHeaderItemId = null;
+        } else {
+            this.expandedHeaderItemId = headerItemId;
+        }
     }
 }

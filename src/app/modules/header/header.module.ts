@@ -10,9 +10,9 @@ import { MobileHeaderItemComponent } from './components/mobile-header-item/mobil
 
 @NgModule({
     declarations: [
-        HeaderComponent,
         DesktopHeaderComponent,
         DesktopHeaderItemComponent,
+        HeaderComponent,
         MobileHeaderComponent,
         MobileHeaderItemComponent
     ],

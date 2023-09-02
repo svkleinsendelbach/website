@@ -1,7 +1,7 @@
 import { Link } from 'src/app/types/link';
 import { ContactData } from './contact-data';
 
-export interface FooterData{
+export interface FooterData {
     links: {
         id: string;
         link: Link;

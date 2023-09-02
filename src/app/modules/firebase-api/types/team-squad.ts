@@ -1,6 +1,6 @@
 import { AnpfiffInfoPersonParameters } from './anpfiff-info-person-parameters';
 
-export type TeamSquad = {
+export interface TeamSquad {
     squad: {
         goalkeeper: TeamSquad.Person[];
         defence: TeamSquad.Person[];
@@ -9,11 +9,11 @@ export type TeamSquad = {
         notSpecified: TeamSquad.Person[];
     };
     coach: TeamSquad.Coach | null;
-    stab: Array<TeamSquad.StabPerson>;
-};
+    stab: TeamSquad.StabPerson[];
+}
 
 export namespace TeamSquad {
-    export type Person = {
+    export interface Person {
         imageId: number | null;
         firstName: string | null;
         lastName: string | null;
@@ -22,19 +22,19 @@ export namespace TeamSquad {
         countInSquad: number | null;
         goals: number | null;
         assists: number | null;
-    };
+    }
 
-    export type Coach = {
+    export interface Coach {
         imageId: number | null;
         name: string | null;
         personParameters: AnpfiffInfoPersonParameters | null;
         age: number | null;
-    };
+    }
 
-    export type StabPerson = {
+    export interface StabPerson {
         imageId: number | null;
         function: string | null;
         name: string | null;
         personParameters: AnpfiffInfoPersonParameters | null;
-    };
+    }
 }

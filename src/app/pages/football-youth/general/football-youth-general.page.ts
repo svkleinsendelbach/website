@@ -68,7 +68,7 @@ export class FootballYouthGeneralPage {
         'football-youth/c-youth',
         'football-youth/e-youth',
         'football-youth/f-youth',
-        'football-youth/g-youth',
+        'football-youth/g-youth'
     ];
 
     public readonly reportGroupId: ReportGroupId = 'football-adults/general';

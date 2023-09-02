@@ -1,4 +1,4 @@
-export type UserAuthenticationType = 'editEvents' | 'editReports' | 'authenticateUser' | 'notification';
+export type UserAuthenticationType = 'authenticateUser' | 'editEvents' | 'editReports' | 'notification';
 
 export type UserAuthentication = {
     state: 'authenticated' | 'unauthenticated';

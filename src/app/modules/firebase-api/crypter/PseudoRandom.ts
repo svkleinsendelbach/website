@@ -22,7 +22,12 @@ export class PseudoRandom {
         this.state = { state0: state0, state1: state1, state2: state2, constant: 1 };
     }
 
+    public randomByte(): number {
+        return Math.floor(this.random() * 256);
+    }
+
     private mash(data: Uint8Array, n: number): number {
+        // eslint-disable-next-line @typescript-eslint/prefer-for-of
         for (let i = 0; i < data.length; i++) {
             n += data[i];
             let h = 0.02519603282416938 * n;
@@ -47,9 +52,5 @@ export class PseudoRandom {
         this.state.constant = Math.trunc(t);
         this.state.state2 = t - this.state.constant;
         return this.state.state2;
-    }
-
-    public randomByte(): number {
-        return Math.floor(this.random() * 256);
     }
 }

@@ -52,7 +52,7 @@ export class ContactPage {
         public readonly deviceType: DeviceTypeService,
         public readonly styleConfig: StyleConfigService,
         private readonly firebaseApiService: FirebaseApiService,
-        private recaptchaService: ReCaptchaV3Service
+        private readonly recaptchaService: ReCaptchaV3Service
     ) {
         this.titleService.setTitle('Kontakt');
     }
@@ -75,7 +75,7 @@ export class ContactPage {
         const validation = this.inputForm.evaluate();
         if (validation === ValidationResult.Invalid)
             return;
-        this.sendContactMail();
+        void this.sendContactMail();
     }
 
     private async sendContactMail() {
@@ -94,14 +94,14 @@ export class ContactPage {
             senderAddress: this.inputForm.field('email').value,
             receiverName: receiver.name,
             receiverAddress: receiver.address,
-            message: this.inputForm.field('message').value,
+            message: this.inputForm.field('message').value
         };
         const response = await this.firebaseApiService.function('sendMail').function('contact').call(request)
             .catch(reason => {
                 this.inputForm.status = 'sendFailed';
                 throw reason;
             });
-        const status: 'sendSucceded' | 'sendFailed' = response.success ? 'sendSucceded' : 'sendFailed';
+        const status: 'sendFailed' | 'sendSucceded' = response.success ? 'sendSucceded' : 'sendFailed';
         this.inputForm.status = status;
         if (response.success) {
             this.inputForm.reset();
@@ -130,6 +130,6 @@ export namespace ContactPage {
         dancing: {
             name: 'Tanzen',
             address: 'tanzen@sv-kleinsendelbach.de'
-        },
+        }
     };
 }

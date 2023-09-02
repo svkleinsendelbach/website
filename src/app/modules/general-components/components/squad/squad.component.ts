@@ -33,18 +33,6 @@ export class SquadComponent implements OnInit {
         });
     }
 
-    private getFullName(person: { firstName: string | null; lastName: string | null }): string {
-        if (person.firstName !== null && person.lastName !== null) {
-            return `${person.firstName} ${person.lastName}`;
-        } else if (person.firstName === null && person.lastName !== null) {
-            return person.lastName;
-        } else if (person.firstName !== null && person.lastName === null) {
-            return person.firstName;
-        } else {
-            return 'n.a.';
-        }
-    }
-
     public squadPersonInfo(person: TeamSquad.Person): SquadPerson {
         let additionalText: string | null = null;
         if (person.goals !== null)
@@ -67,7 +55,7 @@ export class SquadComponent implements OnInit {
             imageId: person.imageId,
             name: this.getFullName(person),
             personParameters: person.personParameters,
-            additionalText,
+            additionalText
         };
     }
 
@@ -85,7 +73,19 @@ export class SquadComponent implements OnInit {
             imageId: person.imageId,
             name: person.name ?? 'n.a.',
             personParameters: person.personParameters,
-            additionalText: person.function,
+            additionalText: person.function
         };
+    }
+
+    private getFullName(person: { firstName: string | null; lastName: string | null }): string {
+        if (person.firstName !== null && person.lastName !== null) {
+            return `${person.firstName} ${person.lastName}`;
+        } else if (person.firstName === null && person.lastName !== null) {
+            return person.lastName;
+        } else if (person.firstName !== null && person.lastName === null) {
+            return person.firstName;
+        } else {
+            return 'n.a.';
+        }
     }
 }

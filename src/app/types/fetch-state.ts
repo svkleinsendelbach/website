@@ -1,5 +1,5 @@
 export interface FetchState<Content, Failure extends Error = Error> {
-    readonly state: 'loading' | 'success' | 'failure';
+    readonly state: 'failure' | 'loading' | 'success';
     content: Content | undefined;
     error: Failure | undefined;
     isLoading(): this is FetchState.Loading;

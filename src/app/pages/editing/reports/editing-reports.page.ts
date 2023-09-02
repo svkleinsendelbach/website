@@ -16,7 +16,9 @@ import { InternalLink } from 'src/app/types/internal-path';
 })
 export class EditingReportsPage {
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
-    public mainEditingPageLink = InternalLink.all['bearbeiten'];
+
+    public mainEditingPageLink = InternalLink.all.bearbeiten;
+
     public reportGroupTitle = ReportGroupId.title;
 
     public reportGroups: ReportGroup[] | undefined = undefined;
@@ -32,31 +34,10 @@ export class EditingReportsPage {
                 report: Report.Flatten;
             };
         }>,
-        private router: Router
+        private readonly router: Router
     ) {
         this.titleService.setTitle('Berichte bearbeiten');
-        this.getReports();
-    }
-
-    private async getReports() {
-        const reportGroups = await Promise.all(ReportGroupId.all.map(async groupId => {
-            const result = await this.firebaseApiService.function('report').function('get').call({
-                groupId: groupId,
-                numberReports: undefined
-            });
-            return {
-                groupId: groupId,
-                reports: result.reports
-            };
-        }));
-        this.reportGroups = reportGroups.flatMap(reportGroup => {
-            if (reportGroup.reports.length === 0)
-                return [];
-            return {
-                groupId: reportGroup.groupId,
-                reports: reportGroup.reports.map(report => Report.concrete(report))
-            };
-        });
+        void this.getReports();
     }
 
     public getReportGroupOf(groupId: ReportGroupId): ReportGroup | undefined {
@@ -95,5 +76,26 @@ export class EditingReportsPage {
     public async addNewReport() {
         this.sharedData.removeValue('editReport');
         await this.router.navigateByUrl(InternalLink.all['bearbeiten/berichte/bearbeiten'].link);
+    }
+
+    private async getReports() {
+        const reportGroups = await Promise.all(ReportGroupId.all.map(async groupId => {
+            const result = await this.firebaseApiService.function('report').function('get').call({
+                groupId: groupId,
+                numberReports: undefined
+            });
+            return {
+                groupId: groupId,
+                reports: result.reports
+            };
+        }));
+        this.reportGroups = reportGroups.flatMap(reportGroup => {
+            if (reportGroup.reports.length === 0)
+                return [];
+            return {
+                groupId: reportGroup.groupId,
+                reports: reportGroup.reports.map(report => Report.concrete(report))
+            };
+        });
     }
 }

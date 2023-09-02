@@ -14,7 +14,7 @@ export class SelectComponent<T extends string> implements AfterViewInit {
 
     @Input() public inputField!: InputField<T>;
 
-    @ViewChild('select') private selectElement!: ElementRef<HTMLSelectElement>;
+    @ViewChild('select') private readonly selectElement!: ElementRef<HTMLSelectElement>;
 
     public constructor(
         public styleConfig: StyleConfigService

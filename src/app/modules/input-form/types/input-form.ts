@@ -7,12 +7,18 @@ export class InputForm<
     InputFields extends Record<string, InputField<any>>,
     ExtraStatus extends PropertyKey = never
 > {
-    public status: 'valid' | 'invalidInput' | ExtraStatus = 'valid';
+    public status: ExtraStatus | 'invalidInput' | 'valid' = 'valid';
 
     public constructor(
         private readonly inputFields: InputFields,
-        private readonly statusMessages: Record<'invalidInput' | ExtraStatus, InputError>
+        private readonly statusMessages: Record<ExtraStatus | 'invalidInput', InputError>
     ) {}
+
+    public get error(): InputError | undefined {
+        if (this.status === 'valid')
+            return undefined;
+        return this.statusMessages[this.status];
+    }
 
     public field<Key extends keyof InputFields>(key: Key): InputFields[Key] {
         return this.inputFields[key];
@@ -35,11 +41,5 @@ export class InputForm<
         for (const inputField of Object.values(this.inputFields)) {
             inputField.reset();
         }
-    }
-
-    public get error(): InputError | undefined {
-        if (this.status === 'valid')
-            return undefined;
-        return this.statusMessages[this.status];
     }
 }

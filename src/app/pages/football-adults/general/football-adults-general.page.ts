@@ -17,6 +17,7 @@ import { websiteConfig } from 'src/app/config/website-config';
 })
 export class FootballAdultsGeneralPage {
     public eventGroupTitle = EventGroupId.title;
+
     public allInternalLinks = InternalLink.all;
 
     public readonly links: LinkData[] = [
@@ -44,7 +45,7 @@ export class FootballAdultsGeneralPage {
         'football-adults/general',
         'football-adults/first-team',
         'football-adults/second-team',
-        'football-adults/ah-team',
+        'football-adults/ah-team'
     ];
 
     public readonly reportGroupId: ReportGroupId = 'football-adults/general';

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
     providedIn: 'root'
 })
-export class SharedDataService<T extends { [key: string]: unknown }> {
+export class SharedDataService<T extends Record<string, unknown>> {
     private data: Partial<T> = {};
 
     public setValue<Key extends keyof T>(key: Key, value: T[Key]) {

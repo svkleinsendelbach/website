@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { AngularFirePerformance } from '@angular/fire/compat/performance';
 import { InternalLink, InternalPath } from './types/internal-path';
@@ -16,20 +16,20 @@ import { Link } from './types/link';
     styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-    public headerData: Record<'desktop' | 'tablet' | 'mobile', HeaderData> = {
+    public headerData: Record<'desktop' | 'mobile' | 'tablet', HeaderData> = {
         desktop: {
             home: {
-                topItem: InternalLink.all['home']
+                topItem: InternalLink.all.home
             },
             aboutUs: {
                 topItem: InternalLink.all['über-uns'],
                 subItems: {
                     managers: InternalLink.all['über-uns'],
-                    sportshome: InternalLink.all['sportheim'],
-                    chronicle: InternalLink.all['chroniken'],
-                    statute: InternalLink.all['satzung'],
-                    privacy: InternalLink.all['datenschutz'],
-                    request: InternalLink.all['mitgliedsantrag']
+                    sportshome: InternalLink.all.sportheim,
+                    chronicle: InternalLink.all.chroniken,
+                    statute: InternalLink.all.satzung,
+                    privacy: InternalLink.all.datenschutz,
+                    request: InternalLink.all.mitgliedsantrag
                 }
             },
             footballAdult: {
@@ -51,40 +51,40 @@ export class AppComponent {
                     footballYouthDYouth: AppComponent.headerItemLink.footballYouthD,
                     footballYouthEYouth: InternalLink.all['fussball/jugend/e-jugend'],
                     footballYouthFYouth: InternalLink.all['fussball/jugend/f-jugend'],
-                    footballYouthGYouth: InternalLink.all['fussball/jugend/g-jugend'],
+                    footballYouthGYouth: InternalLink.all['fussball/jugend/g-jugend']
                 }
             },
             gymnastics: {
-                topItem: InternalLink.all['gymnastik']
+                topItem: InternalLink.all.gymnastik
             },
             dancing: {
-                topItem: InternalLink.all['tanzen']
+                topItem: InternalLink.all.tanzen
             },
             drive: {
-                topItem: InternalLink.all['anfahrt']
+                topItem: InternalLink.all.anfahrt
             },
             contact: {
-                topItem: InternalLink.all['kontakt']
+                topItem: InternalLink.all.kontakt
             }
         },
         tablet: {
             home: {
-                topItem: InternalLink.all['home'],
+                topItem: InternalLink.all.home,
                 subItems: {
-                    home: InternalLink.all['home'],
-                    drive: InternalLink.all['anfahrt'],
-                    contact: InternalLink.all['kontakt']
+                    home: InternalLink.all.home,
+                    drive: InternalLink.all.anfahrt,
+                    contact: InternalLink.all.kontakt
                 }
             },
             aboutUs: {
                 topItem: InternalLink.all['über-uns'],
                 subItems: {
                     managers: InternalLink.all['über-uns'],
-                    sportshome: InternalLink.all['sportheim'],
-                    chronicle: InternalLink.all['chroniken'],
-                    statute: InternalLink.all['satzung'],
-                    privacy: InternalLink.all['datenschutz'],
-                    request: InternalLink.all['mitgliedsantrag']
+                    sportshome: InternalLink.all.sportheim,
+                    chronicle: InternalLink.all.chroniken,
+                    statute: InternalLink.all.satzung,
+                    privacy: InternalLink.all.datenschutz,
+                    request: InternalLink.all.mitgliedsantrag
                 }
             },
             footballAdult: {
@@ -106,35 +106,35 @@ export class AppComponent {
                     footballYouthDYouth: AppComponent.headerItemLink.footballYouthD,
                     footballYouthEYouth: InternalLink.all['fussball/jugend/e-jugend'],
                     footballYouthFYouth: InternalLink.all['fussball/jugend/f-jugend'],
-                    footballYouthGYouth: InternalLink.all['fussball/jugend/g-jugend'],
+                    footballYouthGYouth: InternalLink.all['fussball/jugend/g-jugend']
                 }
             },
             gymnastics: {
-                topItem: InternalLink.all['gymnastik'],
+                topItem: InternalLink.all.gymnastik,
                 subItems: {
-                    gymnastics: InternalLink.all['gymnastik'],
-                    dancing: InternalLink.all['tanzen']
+                    gymnastics: InternalLink.all.gymnastik,
+                    dancing: InternalLink.all.tanzen
                 }
             }
         },
         mobile: {
             home: {
-                topItem: InternalLink.all['home'],
+                topItem: InternalLink.all.home,
                 subItems: {
-                    home: InternalLink.all['home'],
-                    drive: InternalLink.all['anfahrt'],
-                    contact: InternalLink.all['kontakt']
+                    home: InternalLink.all.home,
+                    drive: InternalLink.all.anfahrt,
+                    contact: InternalLink.all.kontakt
                 }
             },
             aboutUs: {
                 topItem: InternalLink.all['über-uns'],
                 subItems: {
                     managers: InternalLink.all['über-uns'],
-                    sportshome: InternalLink.all['sportheim'],
-                    chronicle: InternalLink.all['chroniken'],
-                    statute: InternalLink.all['satzung'],
-                    privacy: InternalLink.all['datenschutz'],
-                    request: InternalLink.all['mitgliedsantrag']
+                    sportshome: InternalLink.all.sportheim,
+                    chronicle: InternalLink.all.chroniken,
+                    statute: InternalLink.all.satzung,
+                    privacy: InternalLink.all.datenschutz,
+                    request: InternalLink.all.mitgliedsantrag
                 }
             },
             footballAdult: {
@@ -156,14 +156,14 @@ export class AppComponent {
                     footballYouthDYouth: AppComponent.headerItemLink.footballYouthD,
                     footballYouthEYouth: InternalLink.all['fussball/jugend/e-jugend'],
                     footballYouthFYouth: InternalLink.all['fussball/jugend/f-jugend'],
-                    footballYouthGYouth: InternalLink.all['fussball/jugend/g-jugend'],
+                    footballYouthGYouth: InternalLink.all['fussball/jugend/g-jugend']
                 }
             },
             gymnastics: {
-                topItem: InternalLink.all['gymnastik'],
+                topItem: InternalLink.all.gymnastik,
                 subItems: {
-                    gymnastics: InternalLink.all['gymnastik'],
-                    dancing: InternalLink.all['tanzen']
+                    gymnastics: InternalLink.all.gymnastik,
+                    dancing: InternalLink.all.tanzen
                 }
             }
         }
@@ -179,11 +179,11 @@ export class AppComponent {
         links: [
             {
                 id: 'drive',
-                link: InternalLink.all['anfahrt']
+                link: InternalLink.all.anfahrt
             },
             {
                 id: 'contact',
-                link: InternalLink.all['kontakt']
+                link: InternalLink.all.kontakt
             },
             {
                 id: 'impressum',
@@ -216,28 +216,28 @@ export class AppComponent {
         ]
     };
 
-    public privacyLink = InternalLink.all['datenschutz'];
+    public privacyLink = InternalLink.all.datenschutz;
 
     public constructor(
         public readonly deviceType: DeviceTypeService,
         private readonly styleConfig: StyleConfigService,
         private readonly cookieSelectionService: CookieSelectionService,
-        private fireAnalytics: AngularFireAnalytics,
-        private firePerformance: AngularFirePerformance
+        private readonly fireAnalytics: AngularFireAnalytics,
+        private readonly firePerformance: AngularFirePerformance
     ) {
         this.styleConfig.setConfig();
         const statisticsCookie = this.cookieSelectionService.cookiesSelection?.statistics;
-        this.fireAnalytics.setAnalyticsCollectionEnabled(statisticsCookie === 'selected');
+        void this.fireAnalytics.setAnalyticsCollectionEnabled(statisticsCookie === 'selected');
         this.firePerformance.instrumentationEnabled = (statisticsCookie === 'selected') as unknown as Promise<boolean>;
         this.firePerformance.dataCollectionEnabled = (statisticsCookie === 'selected') as unknown as Promise<boolean>;
         this.cookieSelectionService.listeners.add('fireAnalytics', selection => {
-            this.fireAnalytics.setAnalyticsCollectionEnabled(selection.functionality === 'selected');
+            void this.fireAnalytics.setAnalyticsCollectionEnabled(selection.functionality === 'selected');
             this.firePerformance.instrumentationEnabled = (selection.functionality === 'selected') as unknown as Promise<boolean>;
             this.firePerformance.dataCollectionEnabled = (selection.functionality === 'selected') as unknown as Promise<boolean>;
         });
     }
 
-    @HostListener('window:resize') onResize() {
+    @HostListener('window:resize') public onResize() {
         this.deviceType.windowResized();
     }
 }

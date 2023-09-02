@@ -13,8 +13,10 @@ import { InternalLink } from 'src/app/types/internal-path';
 })
 export class ImprintPage {
     public faPhone = faPhone;
+
     public faEnvelope = faEnvelope;
-    public imprintLink = InternalLink.all['datenschutz'];
+
+    public imprintLink = InternalLink.all.datenschutz;
 
     public constructor(
         public readonly titleService: Title,

@@ -23,7 +23,7 @@ import { RegistrationStatus } from 'src/app/modules/authentication/types/registr
     styleUrls: ['./login-page.component.sass']
 })
 export class LoginPageComponent {
-    @Output() private userUnregisteredEmitter = new EventEmitter<void>();
+    @Output() private readonly userUnregisteredEmitter = new EventEmitter<void>();
 
     public signInWithAppleStatus: LoginError.Code | 'loading' | 'valid' = 'valid';
 
@@ -33,7 +33,7 @@ export class LoginPageComponent {
         {
             email: new InputField<string>('', [
                 Validator.required('Die E-Mail Addresse ist erforderlich.'),
-                Validator.email('Das ist keine gültige E-Mail Addresse.'),
+                Validator.email('Das ist keine gültige E-Mail Addresse.')
             ]),
             password: new InputField<string>('', [
                 Validator.required('Das Passwort ist erforderlich.'),
@@ -57,8 +57,8 @@ export class LoginPageComponent {
         public readonly appearance: AppearanceService,
         private readonly authService: AuthService,
         private readonly firebaseApiService: FirebaseApiService,
-        private recaptchaService: ReCaptchaV3Service,
-        private router: Router
+        private readonly recaptchaService: ReCaptchaV3Service,
+        private readonly router: Router
     ) {}
 
     public onSubmit() {
@@ -67,7 +67,7 @@ export class LoginPageComponent {
         const validation = this.inputForm.evaluate();
         if (validation === ValidationResult.Invalid)
             return;
-        this.loginWithEmail();
+        void this.loginWithEmail();
     }
 
     public async loginWithEmail() {
@@ -113,7 +113,11 @@ export class LoginPageComponent {
         await this.handleRegistrationStatus(registrationStatus);
     }
 
-    private handleLoginError(reason: unknown, type: 'inputForm' | 'apple' | 'google'): 'error' {
+    public loginErrorMessage(code: LoginError.Code): string {
+        return LoginError.Code.statusMessages[code].message;
+    }
+
+    private handleLoginError(reason: unknown, type: 'apple' | 'google' | 'inputForm'): 'error' {
         if (typeof reason !== 'object' || reason === null)
             return this.setStatus(type, 'unknown');
         if (!('name' in reason) || (reason as Record<'name', unknown>).name !== 'WebsiteEditorAuthServiceLoginError')
@@ -123,8 +127,8 @@ export class LoginPageComponent {
         return this.setStatus(type, (reason as Record<'code', LoginError.Code>).code);
     }
 
-    private setStatus(type: 'inputForm' | 'apple' | 'google', status: LoginError.Code): 'error' {
-        switch(type) {
+    private setStatus(type: 'apple' | 'google' | 'inputForm', status: LoginError.Code): 'error' {
+        switch (type) {
         case 'inputForm':
             this.inputForm.status = status;
             break;
@@ -148,9 +152,5 @@ export class LoginPageComponent {
         } else {
             this.userUnregisteredEmitter.emit();
         }
-    }
-
-    public loginErrorMessage(code: LoginError.Code): string {
-        return LoginError.Code.statusMessages[code].message;
     }
 }

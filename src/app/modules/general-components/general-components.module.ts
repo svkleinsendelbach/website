@@ -17,30 +17,30 @@ import { LivetickerResultComponent } from './components/game-info/liveticker-res
 @NgModule({
     declarations: [
         BfvWidgetComponent,
-        MapsComponent,
         ContactComponent,
-        SquadPersonComponent,
-        SquadComponent,
+        GameInfoComponent,
         LinksComponent,
-        LivetickerResultComponent,
         LivetickerComponent,
-        GameInfoComponent
+        LivetickerResultComponent,
+        MapsComponent,
+        SquadComponent,
+        SquadPersonComponent
     ],
     imports: [
         CommonModule,
-        HttpClientModule,
-        HttpClientJsonpModule,
-        GoogleMapsModule,
         FontAwesomeModule,
+        GoogleMapsModule,
+        HttpClientJsonpModule,
+        HttpClientModule,
         TextSectionModule
     ],
     exports: [
         BfvWidgetComponent,
-        MapsComponent,
         ContactComponent,
-        SquadComponent,
+        GameInfoComponent,
         LinksComponent,
-        GameInfoComponent
+        MapsComponent,
+        SquadComponent
     ]
 })
 export class GeneralComponentsModule { }

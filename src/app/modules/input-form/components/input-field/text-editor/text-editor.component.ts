@@ -48,10 +48,18 @@ export class TextEditorComponent implements OnInit {
         public styleConfig: StyleConfigService
     ) {}
 
+    public get htmlContent(): string {
+        return this.inputField.value;
+    }
+
+    public set htmlContent(value: string) {
+        this.inputField.inputValue = value;
+    }
+
     public ngOnInit() {
         this.config.upload = (file: File) => {
             return new Observable<HttpResponse<UploadResponse>>(subscriber => {
-                this.uploadFile(file).then(fileUrl => {
+                void this.uploadFile(file).then(fileUrl => {
                     subscriber.next(new HttpResponse({
                         body: {
                             imageUrl: fileUrl
@@ -66,18 +74,10 @@ export class TextEditorComponent implements OnInit {
     public async uploadFile(file: File): Promise<string> {
         const fileExtension = /.[^/.]+$/.exec(file.name)?.[0] ?? '';
         const filePath = `${environment.databaseType}/uploads/files/${Guid.newGuid().guidString}${fileExtension}`;
-        return await this.fileStorage.upload(file, filePath);
+        return this.fileStorage.upload(file, filePath);
     }
 
     public setColor(executeCommand: (commandId: string, value?: string) => boolean) {
         executeCommand('foreColor', this.styleConfig.css(this.selectedColor));
-    }
-
-    public get htmlContent(): string {
-        return this.inputField.value;
-    }
-
-    public set htmlContent(value: string) {
-        this.inputField.inputValue = value;
     }
 }

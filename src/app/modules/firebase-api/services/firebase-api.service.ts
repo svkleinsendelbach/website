@@ -12,26 +12,13 @@ import { VerboseType } from '../types/verbose-type';
 import { FirebaseFunctions as FFunctions } from '../firebase-functions';
 import { UtcDate } from 'src/app/types/utc-date';
 
-@Injectable({
-    providedIn: 'root'
-})
-export class FirebaseApiService  {
-    public constructor(
-        private readonly firebaseFunctions: AngularFireFunctions
-    ) {}
-
-    public function<Key extends keyof FFunctions & string>(key: Key): FirebaseFunctions<FFunctions[Key]> {
-        return new FirebaseFunctions(this.firebaseFunctions, key);
-    }
-}
-
 class FirebaseFunctions<FFunctions extends FirebaseFunctionsType>  {
     public constructor(
         private readonly firebaseFunctions: AngularFireFunctions,
         private readonly functionName: string
     ) {}
 
-    public function<Key extends (FFunctions extends FunctionType<unknown, unknown> ? never : (keyof FFunctions & string))>(key: Key): FirebaseFunctions<FFunctions extends FunctionType<unknown, unknown> ? never : FFunctions[Key]> {
+    public function<Key extends (FFunctions extends FunctionType<unknown, unknown> ? never : (string & keyof FFunctions))>(key: Key): FirebaseFunctions<FFunctions extends FunctionType<unknown, unknown> ? never : FFunctions[Key]> {
         return new FirebaseFunctions(this.firebaseFunctions, `${this.functionName}-${key}`);
     }
 
@@ -44,7 +31,7 @@ class FirebaseFunctions<FFunctions extends FirebaseFunctionsType>  {
             databaseType: DatabaseType;
             callSecret: CallSecret.Flatten;
             parameters: string;
-        }, { result: string; context: unknown }>(functionName ?? '');
+        }, { result: string; context: unknown }>(functionName);
         const returnValue = await lastValueFrom(callableFunction({
             verbose: environment.verbose,
             databaseType: environment.databaseType,
@@ -58,5 +45,18 @@ class FirebaseFunctions<FFunctions extends FirebaseFunctionsType>  {
         if (result.state === 'failure')
             throw result.error;
         return result.value;
+    }
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class FirebaseApiService  {
+    public constructor(
+        private readonly firebaseFunctions: AngularFireFunctions
+    ) {}
+
+    public function<Key extends keyof FFunctions>(key: Key): FirebaseFunctions<FFunctions[Key]> {
+        return new FirebaseFunctions(this.firebaseFunctions, key);
     }
 }

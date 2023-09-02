@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class CookieSelectionService {
     public listeners = new EventListener<CookiesSelection>();
 
-    constructor(
+    public constructor(
         private readonly cookieService: CookieService
     ) {}
 
@@ -19,7 +19,7 @@ export class CookieSelectionService {
         if (!this.cookieService.check('cookies-selection'))
             return null;
         const selectionJson = this.cookieService.get('cookies-selection');
-        const selection = JSON.parse(selectionJson);
+        const selection = JSON.parse(selectionJson) as CookiesSelection;
         this.listeners.emitValue(selection);
         return selection;
     }

@@ -5,11 +5,11 @@ import { AngularFireFunctionsModule, REGION } from '@angular/fire/compat/functio
 @NgModule({
     declarations: [],
     imports: [
-        CommonModule,
-        AngularFireFunctionsModule
+        AngularFireFunctionsModule,
+        CommonModule
     ],
     providers: [
-        { provide: REGION, useValue: 'europe-west1' },
+        { provide: REGION, useValue: 'europe-west1' }
     ]
 })
 export class FirebaseApiModule { }

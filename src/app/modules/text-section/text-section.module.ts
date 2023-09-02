@@ -8,20 +8,20 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [
-        TextSectionComponent,
+        ContextMenuComponent,
         ListComponent,
         SectionComponent,
-        ContextMenuComponent
+        TextSectionComponent
     ],
     imports: [
         CommonModule,
         FontAwesomeModule
     ],
     exports: [
-        TextSectionComponent,
+        ContextMenuComponent,
         ListComponent,
         SectionComponent,
-        ContextMenuComponent
+        TextSectionComponent
     ]
 })
 export class TextSectionModule { }

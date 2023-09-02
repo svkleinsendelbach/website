@@ -1,18 +1,10 @@
 import { RegexIterable } from 'src/app/types/regex-iterable';
 
-class Elements implements Iterable<string | HTMLElement> {
+class Elements implements Iterable<HTMLElement | string> {
 
     public constructor(
-        private elements: (string | HTMLElement)[] = []
+        private readonly elements: (HTMLElement | string)[] = []
     ) {}
-
-    public static fromContent(content: string): Elements {
-        return new Elements([content]);
-    }
-
-    public [Symbol.iterator](): IterableIterator<string | HTMLElement> {
-        return this.elements[Symbol.iterator]();
-    }
 
     public get stringElements(): string[] {
         return this.elements.flatMap(element => typeof element === 'string' ? element : []);
@@ -22,11 +14,19 @@ class Elements implements Iterable<string | HTMLElement> {
         return this.elements.flatMap(element => typeof element !== 'string' ? element : []);
     }
 
-    public push(element: string | HTMLElement) {
+    public static fromContent(content: string): Elements {
+        return new Elements([content]);
+    }
+
+    public [Symbol.iterator](): IterableIterator<HTMLElement | string> {
+        return this.elements[Symbol.iterator]();
+    }
+
+    public push(element: HTMLElement | string) {
         this.elements.push(element);
     }
 
-    public copy(elements?: 'string' | 'html' | ['string', 'html'] | ['html', 'string']): Elements {
+    public copy(elements?: 'html' | 'string' | ['html', 'string'] | ['string', 'html']): Elements {
         if (elements === undefined)
             return new Elements();
         if (elements === 'string')
@@ -38,10 +38,9 @@ class Elements implements Iterable<string | HTMLElement> {
 }
 
 export class ReportMessageParser {
-    public constructor() {}
-
     public parse(message: string): Elements | null {
         const parsers = [
+            // eslint-disable-next-line @typescript-eslint/unbound-method
             this.parseImages, this.parseLinks, this.parseNewLines, this.parseHorizonalLine, this.parseFormatting
         ];
         let elements: Elements | null = Elements.fromContent(message);
@@ -67,7 +66,7 @@ export class ReportMessageParser {
                 image.title = match.groups['title'];
                 image.alt = match.groups['title'];
                 console.log(match.groups);
-                if (match.groups['width'] !== undefined)
+                if ('width' in match.groups)
                     image.style.width = match.groups['width'];
                 result.push(image);
                 lastIndex = match.endIndex + 1;
@@ -93,8 +92,8 @@ export class ReportMessageParser {
                 const content = this.parseFormatting(new Elements([match.groups['content']]));
                 if (content === null)
                     return null;
-                for (const element of content)
-                    link.append(element);
+                for (const _element of content)
+                    link.append(_element);
                 link.title = link.innerText;
                 result.push(link);
                 lastIndex = match.endIndex + 1;
@@ -138,7 +137,7 @@ export class ReportMessageParser {
 
     private parseFormatting(elements: Elements): Elements | null {
         const result = new Elements();
-        let components: ['***' | '**' | '*', (string | HTMLElement)[]][] = [];
+        let components: ['*' | '**' | '***', (HTMLElement | string)[]][] = [];
         for (const element of elements) {
             if (typeof element !== 'string') {
                 if (components.length === 0)
@@ -154,7 +153,7 @@ export class ReportMessageParser {
                 if (format === null)
                     continue;
                 const currentValue = element.slice(lastIndex, match.startIndex);
-                let formats = components.reduce((result, value) => result === '' ? value[0] : `${result}|${value[0]}`, '');
+                let formats = components.reduce((_result, value) => _result === '' ? value[0] : `${_result}|${value[0]}`, '');
                 formats += (formats === '' ? '' : '|') + format;
                 switch (formats) {
                 case '*':
@@ -232,7 +231,7 @@ export class ReportMessageParser {
         return result;
     }
 
-    private createElement(type: 'italic' | 'strong', elements: string | HTMLElement | (string | HTMLElement)[]): HTMLElement {
+    private createElement(type: 'italic' | 'strong', elements: (HTMLElement | string)[] | HTMLElement | string): HTMLElement {
         const element = document.createElement('div');
         element.classList.add(type);
         if (Array.isArray(elements)) {

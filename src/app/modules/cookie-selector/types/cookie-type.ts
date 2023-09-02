@@ -1,1 +1,1 @@
-export type CookieType = 'necessary' | 'functionality' | 'statistics';
+export type CookieType = 'functionality' | 'necessary' | 'statistics';

@@ -2,18 +2,7 @@ import { UtcDate } from 'src/app/types/utc-date';
 import { Guid } from './guid';
 
 export type EventGroupId =
-    'general' |
-    'football-adults/general' |
-    'football-adults/first-team' |
-    'football-adults/second-team' |
-    'football-adults/ah-team' |
-    'football-youth/general' |
-    'football-youth/c-youth' |
-    'football-youth/e-youth' |
-    'football-youth/f-youth' |
-    'football-youth/g-youth' |
-    'gymnastics' |
-    'dancing';
+    'dancing' | 'football-adults/ah-team' | 'football-adults/first-team' | 'football-adults/general' | 'football-adults/second-team' | 'football-youth/c-youth' | 'football-youth/e-youth' | 'football-youth/f-youth' | 'football-youth/g-youth' | 'football-youth/general' | 'general' | 'gymnastics';
 
 export namespace EventGroupId {
     export const all: EventGroupId[] = [
@@ -67,30 +56,30 @@ export namespace EventGroupId {
     ];
 }
 
-export type Event = {
+export interface Event {
     id: Guid;
     date: UtcDate;
     title: string;
     isImportant: boolean;
     subtitle?: string;
     link?: string;
-};
+}
 
 export namespace Event {
-    export type Flatten = {
+    export interface Flatten {
         id: string;
         date: string;
         title: string;
         isImportant: boolean;
         subtitle?: string;
         link?: string;
-    };
+    }
 
     export function flatten(event: Event): Event.Flatten;
     export function flatten(event: Omit<Event, 'id'>): Omit<Event.Flatten, 'id'>;
     export function flatten(event: Event | Omit<Event, 'id'>): Event.Flatten | Omit<Event.Flatten, 'id'> {
         return {
-            ...('id' in event ? { id: event.id.guidString } : {}),
+            ...'id' in event ? { id: event.id.guidString } : {},
             date: event.date.encoded,
             title: event.title,
             isImportant: event.isImportant,
@@ -103,7 +92,7 @@ export namespace Event {
     export function concrete(event: Omit<Event.Flatten, 'id'>): Omit<Event, 'id'>;
     export function concrete(event: Event.Flatten | Omit<Event.Flatten, 'id'>): Event | Omit<Event, 'id'> {
         return {
-            ...('id' in event ? { id: new Guid(event.id) } : {}),
+            ...'id' in event ? { id: new Guid(event.id) } : {},
             date: UtcDate.decode(event.date),
             title: event.title,
             isImportant: event.isImportant,
@@ -113,14 +102,14 @@ export namespace Event {
     }
 }
 
-export type EventGroup = {
+export interface EventGroup {
     groupId: EventGroupId;
     events: Event[];
-};
+}
 
 export namespace EventGroup {
-    export type Flatten = {
+    export interface Flatten {
         groupId: EventGroupId;
         events: Event.Flatten[];
-    };
+    }
 }

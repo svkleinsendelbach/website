@@ -1,35 +1,35 @@
 import { Link } from './link';
 
 export type InternalPath =
-  | 'home'
-  | 'über-uns'
-  | 'sportheim'
-  | 'chroniken'
-  | 'satzung'
-  | 'datenschutz'
-  | 'mitgliedsantrag'
-  | 'fussball/herren'
-  | 'fussball/herren/erste-mannschaft'
-  | 'fussball/herren/zweite-mannschaft'
-  | 'fussball/herren/alte-herren'
-  | 'fussball/jugend'
-  | 'fussball/jugend/c-jugend'
-  | 'fussball/jugend/e-jugend'
-  | 'fussball/jugend/f-jugend'
-  | 'fussball/jugend/g-jugend'
-  | 'gymnastik'
-  | 'tanzen'
-  | 'anfahrt'
-  | 'kontakt'
-  | 'impressum'
-  | 'berichte'
-  | 'spiel'
-  | 'bearbeiten'
-  | 'bearbeiten/anmelden'
-  | 'bearbeiten/termine'
-  | 'bearbeiten/termine/bearbeiten'
-  | 'bearbeiten/berichte'
-  | 'bearbeiten/berichte/bearbeiten';
+    | 'anfahrt'
+    | 'bearbeiten'
+    | 'bearbeiten/anmelden'
+    | 'bearbeiten/berichte'
+    | 'bearbeiten/berichte/bearbeiten'
+    | 'bearbeiten/termine'
+    | 'bearbeiten/termine/bearbeiten'
+    | 'berichte'
+    | 'chroniken'
+    | 'datenschutz'
+    | 'fussball/herren'
+    | 'fussball/herren/alte-herren'
+    | 'fussball/herren/erste-mannschaft'
+    | 'fussball/herren/zweite-mannschaft'
+    | 'fussball/jugend'
+    | 'fussball/jugend/c-jugend'
+    | 'fussball/jugend/e-jugend'
+    | 'fussball/jugend/f-jugend'
+    | 'fussball/jugend/g-jugend'
+    | 'gymnastik'
+    | 'home'
+    | 'impressum'
+    | 'kontakt'
+    | 'mitgliedsantrag'
+    | 'satzung'
+    | 'spiel'
+    | 'sportheim'
+    | 'tanzen'
+    | 'über-uns';
 
 export namespace InternalPath {
     export const all: Exclude<InternalPath, 'spiel'>[] = [
@@ -94,10 +94,11 @@ export namespace InternalPath {
         'bearbeiten/berichte/bearbeiten': 'Bericht bearbeiten'
     };
 }
+
 export namespace InternalLink {
-    export const all: Record<Exclude<InternalPath, 'spiel'>, Link> & { 'spiel'(id: string): Link } = (() => {
+    export const all: Record<Exclude<InternalPath, 'spiel'>, Link> & { 'spiel'(id: string): Link } = ((): Record<Exclude<InternalPath, 'spiel'>, Link> & { 'spiel'(id: string): Link } => {
         const allLinks = {
-            'spiel': (id: string) => {
+            'spiel': (id: string): Link => {
                 return Link.internalParam<InternalPath>('Spiel', 'spiel', id);
             },
             ...{} as Record<Exclude<InternalPath, 'spiel'>, Link>

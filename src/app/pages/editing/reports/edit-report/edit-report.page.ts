@@ -29,7 +29,11 @@ import { environment } from 'src/environments/environment';
     styleUrls: ['./edit-report.page.sass']
 })
 export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
+
+    @ViewChild('messagePreview') public messagePreviewElement?: ElementRef<HTMLElement>;
+
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
+
     public editReportsLink = InternalLink.all['bearbeiten/berichte'];
 
     public previousReport: {
@@ -61,7 +65,7 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
         ]),
         message: new InputField<string>('', [
             Validator.required('Die Nachricht ist erfordelich.')
-        ]),
+        ])
     }, {
         invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
         loading: new InputError('Der Bericht wird gespeichert.', ErrorLevel.Info),
@@ -69,8 +73,6 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
     });
 
     public imageUrl?: string;
-
-    @ViewChild('messagePreview') public messagePreviewElement?: ElementRef<HTMLElement>;
 
     public constructor(
         public readonly titleService: Title,
@@ -84,7 +86,7 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
                 report: Report.Flatten;
             };
         }>,
-        private router: Router
+        private readonly router: Router
     ) {
         const previousReport = this.sharedData.getValue('editReport');
         if (previousReport !== undefined) {
@@ -156,11 +158,11 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
             const { isSg2, sgHomeAway } = GameInfo.additionalProperties(gameInfo);
             this.inputForm.field('groupId').initialValue = isSg2 ? 'football-adults/second-team/game-report' : 'football-adults/first-team/game-report';
             this.inputForm.field('title').initialValue = UtcDate.decode(gameInfo.date).description + ' | ' + gameInfo.report.title;
-            this.inputForm.field('message').initialValue = gameInfo.report.paragraphs.reduce((result, paragraph) => {
-                return result + paragraph.reduce((result, value) => {
+            this.inputForm.field('message').initialValue = gameInfo.report.paragraphs.reduce((result1, paragraph) => {
+                return result1 + paragraph.reduce((result2, value) => {
                     if (value.link === undefined)
-                        return result + value.text;
-                    return result + `[${value.text}](${value.link})`;
+                        return result2 + value.text;
+                    return result2 + `[${value.text}](${value.link})`;
                 }, '') + '\n\n';
             }, '').trim();
             this.imageUrl = `https://service-prod.bfv.de/export.media?action=getLogo&format=16&id=${sgHomeAway === 'home' ? gameInfo.awayTeam.imageId : gameInfo.homeTeam.imageId }`;
@@ -173,23 +175,6 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
             return;
         }
         this.bfvGameInputForm.status = 'valid';
-    }
-
-    private updateMessagePreview(message: string) {
-        if (this.messagePreviewElement === undefined)
-            return;
-        while (this.messagePreviewElement.nativeElement.firstChild !== null)
-            this.messagePreviewElement.nativeElement.removeChild(this.messagePreviewElement.nativeElement.firstChild);
-        this.messagePreviewElement.nativeElement.style.color = this.styleConfig.css('textColor');
-        const parser = new ReportMessageParser();
-        const elements = parser.parse(message);
-        if (elements === null) {
-            this.messagePreviewElement.nativeElement.style.color = this.styleConfig.css('primaryColor');
-            this.messagePreviewElement.nativeElement.append('Es gab ein Fehler bei der Nachricht.');
-        } else {
-            for (const element of elements)
-                this.messagePreviewElement.nativeElement.append(element);
-        }
     }
 
     public async uploadImage(event: Event) {
@@ -228,5 +213,22 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
         });
         await this.router.navigateByUrl(InternalLink.all['bearbeiten/berichte'].link);
         this.inputForm.status = 'valid';
+    }
+
+    private updateMessagePreview(message: string) {
+        if (this.messagePreviewElement === undefined)
+            return;
+        while (this.messagePreviewElement.nativeElement.firstChild !== null)
+            this.messagePreviewElement.nativeElement.removeChild(this.messagePreviewElement.nativeElement.firstChild);
+        this.messagePreviewElement.nativeElement.style.color = this.styleConfig.css('textColor');
+        const parser = new ReportMessageParser();
+        const elements = parser.parse(message);
+        if (elements === null) {
+            this.messagePreviewElement.nativeElement.style.color = this.styleConfig.css('primaryColor');
+            this.messagePreviewElement.nativeElement.append('Es gab ein Fehler bei der Nachricht.');
+        } else {
+            for (const element of elements)
+                this.messagePreviewElement.nativeElement.append(element);
+        }
     }
 }

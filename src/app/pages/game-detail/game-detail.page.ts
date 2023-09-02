@@ -17,13 +17,13 @@ export class GameDetailPage {
         public readonly titleService: Title,
         public readonly deviceType: DeviceTypeService,
         public readonly styleConfig: StyleConfigService,
-        private route: ActivatedRoute,
-        private router: Router
+        private readonly route: ActivatedRoute,
+        private readonly router: Router
     ) {
         this.titleService.setTitle('Spiel wird geladen');
         this.gameId = this.route.snapshot.paramMap.get('id');
         if (this.gameId === null)
-            this.router.navigateByUrl(InternalLink.all['home'].link);
+            void this.router.navigateByUrl(InternalLink.all.home.link);
     }
 
     public titleChanged(title: string) {

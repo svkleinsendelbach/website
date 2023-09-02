@@ -20,29 +20,29 @@ import { TextEditorComponent } from './components/input-field/text-editor/text-e
 
 @NgModule({
     declarations: [
-        ErrorMessageComponent,
-        LabelComponent,
-        InputFormComponent,
-        TextInputComponent,
-        TextareaComponent,
-        DateTimeInputComponent,
-        SelectComponent,
         CheckboxComponent,
-        TextEditorComponent
+        DateTimeInputComponent,
+        ErrorMessageComponent,
+        InputFormComponent,
+        LabelComponent,
+        SelectComponent,
+        TextareaComponent,
+        TextEditorComponent,
+        TextInputComponent
     ],
     imports: [
+        AngularEditorModule,
         CommonModule,
-        FormsModule,
-        AngularEditorModule
+        FormsModule
     ],
     exports: [
-        InputFormComponent,
-        TextInputComponent,
-        TextareaComponent,
-        DateTimeInputComponent,
-        SelectComponent,
         CheckboxComponent,
-        TextEditorComponent
+        DateTimeInputComponent,
+        InputFormComponent,
+        SelectComponent,
+        TextareaComponent,
+        TextEditorComponent,
+        TextInputComponent
     ]
 })
 export class InputFormModule { }

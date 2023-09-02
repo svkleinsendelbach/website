@@ -2,8 +2,8 @@ import { UtcDate } from 'src/app/types/utc-date';
 import { ValidationResult } from './validation-result';
 
 export interface Validator<T> {
-    isValid(value: T): ValidationResult;
     errorMessage: string;
+    isValid(value: T): ValidationResult;
 }
 
 export namespace Validator {
@@ -127,6 +127,7 @@ export namespace Validator {
 
     export function compose<T>(errorMessage: string, ...validators: [Validator<T>, ...Validator<T>[]]): Validator<T> {
         return validator(errorMessage, (value: T) => {
+            // eslint-disable-next-line @typescript-eslint/no-shadow
             for (const validator of validators) {
                 const validation = validator.isValid(value);
                 if (validation === ValidationResult.Invalid)
@@ -138,6 +139,7 @@ export namespace Validator {
 
     export function eitherOne<T>(errorMessage: string, ...validators: [Validator<T>, ...Validator<T>[]]): Validator<T> {
         return validator(errorMessage, (value: T) => {
+            // eslint-disable-next-line @typescript-eslint/no-shadow
             for (const validator of validators) {
                 const validation = validator.isValid(value);
                 if (validation === ValidationResult.Valid)
@@ -147,8 +149,6 @@ export namespace Validator {
         });
     }
 
-    export function custom<T>(evaluater: (value: T) => boolean, errorMessage: string): Validator<T>;
-    export function custom<T>(evaluater: (value: T) => ValidationResult, errorMessage: string): Validator<T>;
     export function custom<T>(evaluater: (value: T) => ValidationResult | boolean, errorMessage: string): Validator<T> {
         return validator(errorMessage, (value: T) => {
             const result = evaluater(value);

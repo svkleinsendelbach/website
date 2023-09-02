@@ -5,12 +5,12 @@ import { websiteConfig } from 'src/app/config/website-config';
 import { DeviceType, DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 
-export type OpeningHour = {
+export interface OpeningHour {
     title: string;
     time: string;
-};
+}
 
-export type Weekdays = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
+export type Weekdays = 'friday' | 'monday' | 'saturday' | 'sunday' | 'thursday' | 'tuesday' | 'wednesday';
 
 const weekdaysByDeviceType: Record<DeviceType, Weekdays[][]> = {
     desktop: [['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']],

@@ -47,7 +47,7 @@ export class Crypter {
     }
 
     public encodeEncrypt(data: unknown): string {
-        const decodedData = JSON.stringify(data);
+        const decodedData = JSON.stringify(data) as string | null;
         const dataBytes = unishortBytes(decodedData ?? '');
         const encryptedData = this.encryptVernamAndAes(dataBytes);
         return Base64.fromUint8Array(encryptedData, true);
@@ -61,7 +61,7 @@ export class Crypter {
         const dataBytes = Base64.toUint8Array(data);
         const decryptedData = this.decryptAesAndVernam(dataBytes);
         const decodedData = unishortString(decryptedData);
-        return JSON.parse(decodedData);
+        return JSON.parse(decodedData) as T;
     }
 }
 

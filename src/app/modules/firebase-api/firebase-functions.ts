@@ -17,7 +17,7 @@ import {
     NotificationPushFunctionType
 } from './function-types';
 
-export type FirebaseFunctions = {
+export interface FirebaseFunctions {
     verifyRecaptcha: VerifyRecaptchaFunctionType;
     deleteAllData: DeleteAllDataFunctionType;
     event: {
@@ -46,4 +46,4 @@ export type FirebaseFunctions = {
         register: NotificationRegisterFunctionType;
         push: NotificationPushFunctionType;
     };
-};
+}

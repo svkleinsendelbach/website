@@ -11,13 +11,14 @@ import { UtcDate } from 'src/app/types/utc-date';
     styleUrls: ['./report.component.sass']
 })
 export class ReportComponent implements AfterViewInit {
-    public ReportGroupId = ReportGroupId;
 
-    @Input() report!: Report;
+    @Input() public report!: Report;
 
-    @Input() groupId?: ReportGroupId;
+    @Input() public groupId?: ReportGroupId;
 
     @ViewChild('message') public messageElement?: ElementRef<HTMLElement>;
+
+    public ReportGroupId = ReportGroupId;
 
     public isMessageClipped = false;
 
@@ -27,6 +28,11 @@ export class ReportComponent implements AfterViewInit {
         public readonly styleConfig: StyleConfigService,
         public readonly deviceType: DeviceTypeService
     ) {}
+
+    public get isRecent(): boolean {
+        const referenceDate = UtcDate.now.advanced({ day: -3 });
+        return this.report.createDate.compare(referenceDate) !== 'less';
+    }
 
     public ngAfterViewInit() {
         if (this.messageElement === undefined)
@@ -41,11 +47,6 @@ export class ReportComponent implements AfterViewInit {
                 this.messageElement.nativeElement.append(element);
         }
         this.isMessageClipped = this.messageElement.nativeElement.clientHeight >= 150;
-    }
-
-    public get isRecent(): boolean {
-        const referenceDate = UtcDate.now.advanced({ day: -3 });
-        return this.report.createDate.compare(referenceDate) !== 'less';
     }
 
     public toggleShowMore() {

@@ -62,7 +62,7 @@ const associatedRoute: Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, Type
     'bearbeiten/berichte/bearbeiten': EditReportPage
 };
 
-export const internalRoutes: Route[] = (() => {
+export const internalRoutes: Route[] = ((): Route[] => {
     const routes: Route[] = [];
     for (const entry of Object.entries(associatedRoute))
         routes.push({ path: entry[0], component: entry[1] });

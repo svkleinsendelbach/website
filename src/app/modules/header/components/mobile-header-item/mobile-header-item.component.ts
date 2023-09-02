@@ -10,14 +10,16 @@ import { HeaderItem } from '../../types/header-data';
     styleUrls: ['./mobile-header-item.component.sass']
 })
 export class MobileHeaderItemComponent {
-    public faCaretDown = faCaretDown;
-    public faCaretUp = faCaretUp;
 
     @Input() public headerItem!: HeaderItem & { id: string };
 
     @Input() public expandedHeaderItemId!: string | null;
 
     @Output() public clickHeaderItemIdEmitter = new EventEmitter<string>();
+
+    public faCaretDown = faCaretDown;
+
+    public faCaretUp = faCaretUp;
 
     public constructor(
         public readonly styleConfig: StyleConfigService

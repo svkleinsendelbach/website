@@ -1,1 +1,1 @@
-export type VerboseType = 'none' | 'verbose' | 'colored' | 'coloredVerbose';
+export type VerboseType = 'colored' | 'coloredVerbose' | 'none' | 'verbose';

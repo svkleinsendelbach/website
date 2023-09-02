@@ -5,13 +5,14 @@ import { Validator } from './validator';
 import { EventListener } from 'src/app/types/event-listener';
 
 export class InputField<T> {
+
+    public readonly listeners = new EventListener<T>();
+
     private fieldValue: T;
 
     private isTouched = false;
 
     private isEvalutated = false;
-
-    public readonly listeners = new EventListener<T>();
 
     public constructor(
         private _initialValue: T,
@@ -21,19 +22,7 @@ export class InputField<T> {
         this.listeners.emitValue(this.fieldValue);
     }
 
-    public set initialValue(value: T) {
-        this._initialValue = value;
-        this.fieldValue = value;
-        this.listeners.emitValue(this.fieldValue);
-    }
-
-    public set inputValue(value: T) {
-        this.isTouched = true;
-        this.fieldValue = value;
-        this.listeners.emitValue(this.fieldValue);
-    }
-
-    public get value() : T {
+    public get value(): T {
         return this.fieldValue;
     }
 
@@ -50,6 +39,18 @@ export class InputField<T> {
                 };
         }
         return undefined;
+    }
+
+    public set initialValue(value: T) {
+        this._initialValue = value;
+        this.fieldValue = value;
+        this.listeners.emitValue(this.fieldValue);
+    }
+
+    public set inputValue(value: T) {
+        this.isTouched = true;
+        this.fieldValue = value;
+        this.listeners.emitValue(this.fieldValue);
     }
 
     public evaluate(): ValidationResult {

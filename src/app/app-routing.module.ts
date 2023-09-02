@@ -5,9 +5,9 @@ import { PageNotFoundPage } from './pages/page-not-found/page-not-found.page';
 import { GameDetailPage } from './pages/game-detail/game-detail.page';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full'},
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     ...internalRoutes,
-    { path: 'spiel/:id', component: GameDetailPage},
+    { path: 'spiel/:id', component: GameDetailPage },
     { path: '**', component: PageNotFoundPage }
 ];
 

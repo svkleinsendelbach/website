@@ -16,7 +16,23 @@ export class StyleConfigService {
     ) {}
 
     public setConfig() {
-        this.parseConfig();
+        void this.parseConfig();
+    }
+
+    public setStyle<Key extends keyof StyleConfigService.StyleConfig>(key: Key, style: StyleConfigService.StyleConfig[Key]) {
+        this.styleConfig[key] = style;
+    }
+
+    public style<Key extends keyof StyleConfigService.StyleConfig>(key: Key): StyleConfigService.StyleConfig[Key] {
+        return this.styleConfig[key];
+    }
+
+    public color<Key extends keyof StyleConfigService.StyleConfig>(key: Key): Style.Color {
+        return this.style(key).color(this.appearance.current);
+    }
+
+    public css<Key extends keyof StyleConfigService.StyleConfig>(key: Key): string {
+        return this.color(key).css;
     }
 
     private async parseConfig() {
@@ -37,22 +53,6 @@ export class StyleConfigService {
                 throw new Error(`Couldn't get ${key} for style color.`);
             this.styleConfig[key] = new Style.AppearanceColor(Style.Color.hex(lightColors[key]), Style.Color.hex(darkColors[key]));
         }
-    }
-
-    public setStyle<Key extends keyof StyleConfigService.StyleConfig>(key: Key, style: StyleConfigService.StyleConfig[Key]) {
-        this.styleConfig[key] = style;
-    }
-
-    public style<Key extends keyof StyleConfigService.StyleConfig>(key: Key): StyleConfigService.StyleConfig[Key] {
-        return this.styleConfig[key];
-    }
-
-    public color<Key extends keyof StyleConfigService.StyleConfig>(key: Key): Style.Color {
-        return this.style(key).color(this.appearance.current);
-    }
-
-    public css<Key extends keyof StyleConfigService.StyleConfig>(key: Key): string {
-        return this.color(key).css;
     }
 }
 

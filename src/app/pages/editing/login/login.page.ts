@@ -14,20 +14,28 @@ import { AuthService } from 'src/app/modules/authentication/services/auth.servic
 export class LoginPage implements OnInit {
     public editPageLink = InternalLink.all.bearbeiten;
 
-    public state: 'loading' | 'alreadyLoggedIn' | 'loginPage' | 'addToWaitingUserPage' = 'loading';
+    public state: 'addToWaitingUserPage' | 'alreadyLoggedIn' | 'loading' | 'loginPage' = 'loading';
 
     public constructor(
         public readonly titleService: Title,
         public readonly deviceType: DeviceTypeService,
         public readonly styleConfig: StyleConfigService,
         private readonly authService: AuthService,
-        private readonly router: Router,
+        private readonly router: Router
     ) {
         this.titleService.setTitle('Anmelden');
     }
 
     public ngOnInit() {
-        this.checkAuthentication();
+        void this.checkAuthentication();
+    }
+
+    public handleUserUnregistered() {
+        this.state = 'addToWaitingUserPage';
+    }
+
+    public handleAddToWaitingUserCanceled() {
+        this.state = 'loginPage';
     }
 
     private async checkAuthentication() {
@@ -39,13 +47,5 @@ export class LoginPage implements OnInit {
         } else {
             this.state = 'loginPage';
         }
-    }
-
-    public handleUserUnregistered() {
-        this.state = 'addToWaitingUserPage';
-    }
-
-    public handleAddToWaitingUserCanceled() {
-        this.state = 'loginPage';
     }
 }

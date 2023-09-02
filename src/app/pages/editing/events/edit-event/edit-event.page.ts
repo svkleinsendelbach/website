@@ -25,6 +25,7 @@ import { GameInfo } from 'src/app/modules/firebase-api/types/game-info';
 })
 export class EditEventPage implements OnInit {
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
+
     public editEventsLink = InternalLink.all['bearbeiten/termine'];
 
     public previousEvent: {
@@ -78,7 +79,7 @@ export class EditEventPage implements OnInit {
                 event: Event.Flatten;
             };
         }>,
-        private router: Router
+        private readonly router: Router
     ) {
         this.previousEvent = this.sharedData.getValue('editEvent');
         this.titleService.setTitle(this.previousEvent === undefined ? 'Termin hinzufügen' : 'Termin bearbeiten');

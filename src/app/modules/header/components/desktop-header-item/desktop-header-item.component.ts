@@ -10,14 +10,16 @@ import { HeaderItem } from '../../types/header-data';
     styleUrls: ['./desktop-header-item.component.sass']
 })
 export class DesktopHeaderItemComponent {
-    public faCaretDown = faCaretDown;
-    public faCaretUp = faCaretUp;
 
     @Input() public headerItem!: HeaderItem & { id: string };
 
     @Input() public expandedHeaderItemId!: string | null;
 
     @Output() public clickHeaderItemIdEmitter = new EventEmitter<string>();
+
+    public faCaretDown = faCaretDown;
+
+    public faCaretUp = faCaretUp;
 
     public constructor(
         public readonly styleConfig: StyleConfigService

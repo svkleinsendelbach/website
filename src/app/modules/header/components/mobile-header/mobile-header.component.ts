@@ -10,12 +10,14 @@ import { HomeLinkData } from '../../types/home-link-data';
     styleUrls: ['./mobile-header.component.sass']
 })
 export class MobileHeaderComponent {
-    public faBars = faBars;
-    public faTimes = faTimes;
 
     @Input() public headerData!: HeaderData;
 
     @Input() public homeLinkData!: HomeLinkData;
+
+    public faBars = faBars;
+
+    public faTimes = faTimes;
 
     public isExpanded = false;
 
@@ -24,6 +26,15 @@ export class MobileHeaderComponent {
     public constructor(
         public readonly styleConfig: StyleConfigService
     ) {}
+
+    public get headerItems(): (HeaderItem & { id: string })[] {
+        return Object.entries(this.headerData).map(entry => {
+            return {
+                ...entry[1],
+                id: entry[0]
+            };
+        });
+    }
 
     public handleHamburgerMenuClick(toExpanded: boolean) {
         this.isExpanded = toExpanded;
@@ -35,14 +46,5 @@ export class MobileHeaderComponent {
         } else {
             this.expandedHeaderItemId = headerItemId;
         }
-    }
-
-    public get headerItems(): (HeaderItem & { id: string })[] {
-        return Object.entries(this.headerData).map(entry => {
-            return {
-                ...entry[1],
-                id: entry[0]
-            };
-        });
     }
 }

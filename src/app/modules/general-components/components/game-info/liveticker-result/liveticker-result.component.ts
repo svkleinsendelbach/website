@@ -13,38 +13,24 @@ import { BfvLiveticker } from 'src/app/modules/firebase-api/types/game-info';
     styleUrls: ['./liveticker-result.component.sass']
 })
 export class LivetickerResultComponent {
-    public thumbsUpSolid = faThumbsUpSolid;
-    public thumbsUpOutline = faThumbsUpOutline;
-    public thumbsDownOutline = faThumbsDownOutline;
-    public reportFlag = faFlag;
-    public heart = faHeart;
 
-    @Input() result!: BfvLiveticker.Result;
+    @Input() public result!: BfvLiveticker.Result;
+
+    public thumbsUpSolid = faThumbsUpSolid;
+
+    public thumbsUpOutline = faThumbsUpOutline;
+
+    public thumbsDownOutline = faThumbsDownOutline;
+
+    public reportFlag = faFlag;
+
+    public heart = faHeart;
 
     public constructor(
         public readonly deviceType: DeviceTypeService,
         public readonly styleConfig: StyleConfigService,
-        private httpClient: HttpClient
+        private readonly httpClient: HttpClient
     ) {}
-
-    public async likeResult() {
-        if (this.result.type === 'section' || this.result.resultLikes.liked)
-            return;
-        await lastValueFrom(this.httpClient.get(this.result.resultLikes.likeApiRoute));
-        this.result.resultLikes.likes += 1;
-    }
-
-    public unlikeResult() {
-        if (this.result.type === 'section')
-            return;
-        this.httpClient.get(this.result.resultLikes.unlikeApiRoute);
-    }
-
-    public reportResult() {
-        if (this.result.type === 'section' || this.result.reportLink === null)
-            return;
-        this.httpClient.get(this.result.reportLink);
-    }
 
     public get iconSource(): string {
         switch (this.result.type) {
@@ -86,5 +72,24 @@ export class LivetickerResultComponent {
         case 'secondYellowCard': return 'Gelb-rote Karte';
         case 'redCard': return 'Rote Karte';
         }
+    }
+
+    public async likeResult() {
+        if (this.result.type === 'section' || this.result.resultLikes.liked)
+            return;
+        await lastValueFrom(this.httpClient.get(this.result.resultLikes.likeApiRoute));
+        this.result.resultLikes.likes += 1;
+    }
+
+    public unlikeResult() {
+        if (this.result.type === 'section')
+            return;
+        this.httpClient.get(this.result.resultLikes.unlikeApiRoute);
+    }
+
+    public reportResult() {
+        if (this.result.type === 'section' || this.result.reportLink === null)
+            return;
+        this.httpClient.get(this.result.reportLink);
     }
 }

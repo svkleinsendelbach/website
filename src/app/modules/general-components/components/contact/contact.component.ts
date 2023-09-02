@@ -10,11 +10,14 @@ import { ContactItem } from '../../types/contact-item';
     styleUrls: ['./contact.component.sass']
 })
 export class ContactComponent {
-    public faPhone = faPhone;
-    public faMobile = faMobile;
-    public faEnvelope = faEnvelope;
 
     @Input() public contactData!: ContactItem[];
+
+    public faPhone = faPhone;
+
+    public faMobile = faMobile;
+
+    public faEnvelope = faEnvelope;
 
     public constructor(
         public readonly styleConfig: StyleConfigService,

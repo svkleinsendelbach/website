@@ -10,9 +10,10 @@ import { FooterData } from '../../types/footer-data';
     styleUrls: ['./footer.component.sass']
 })
 export class FooterComponent {
-    public faPhone = faPhone;
 
     @Input() public footerData!: FooterData;
+
+    public faPhone = faPhone;
 
     public hoveredLinkId: string | null = null;
 

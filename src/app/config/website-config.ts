@@ -52,15 +52,15 @@ export const websiteConfig: WebsiteConfig = {
     coordinates: {
         sportshome: {
             lat: 49.59228025815224,
-            lng: 11.157803435569505,
+            lng: 11.157803435569505
         },
         'a-field': {
             lat: 49.59270166222209,
-            lng: 11.158047221011378,
+            lng: 11.158047221011378
         },
         'b-field': {
             lat: 49.589930544472566,
-            lng: 11.162866292827417,
+            lng: 11.162866292827417
         }
     },
     contact: {

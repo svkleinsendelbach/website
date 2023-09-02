@@ -9,9 +9,7 @@ export class AppearanceService {
 
     public listeners = new EventListener<Appearance>();
 
-    constructor() {
-        if (!window.matchMedia)
-            this.appearance = 'light';
+    public constructor() {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         this.appearance = prefersDark ? 'dark' : 'light';
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
@@ -28,4 +26,4 @@ export class AppearanceService {
     }
 }
 
-export type Appearance = 'light' | 'dark';
+export type Appearance = 'dark' | 'light';

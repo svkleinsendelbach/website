@@ -16,6 +16,7 @@ import { AuthService } from 'src/app/modules/authentication/services/auth.servic
 })
 export class EditingMainPage {
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
+
     public allInternalLinks = InternalLink.all;
 
     public unauthenticatedUsers: FunctionType.ReturnType<UserAuthenticationGetAllUnauthenticatedFunctionType> | undefined = undefined;
@@ -26,16 +27,10 @@ export class EditingMainPage {
         public readonly styleConfig: StyleConfigService,
         private readonly firebaseApiService: FirebaseApiService,
         private readonly authService: AuthService,
-        private router: Router
+        private readonly router: Router
     ) {
         this.titleService.setTitle('Bearbeiten');
-        this.getUnauthenticatedUsers();
-    }
-
-    private async getUnauthenticatedUsers() {
-        this.unauthenticatedUsers = await this.firebaseApiService.function('userAuthentication').function('getAllUnauthenticated').call({
-            authenticationTypes: ['authenticateUser', 'editEvents', 'editReports']
-        });
+        void this.getUnauthenticatedUsers();
     }
 
     public async logOut() {
@@ -49,6 +44,12 @@ export class EditingMainPage {
             authenticationTypes: ['authenticateUser', 'editEvents', 'editReports'],
             action: action,
             hashedUserId: hashedUserId
+        });
+    }
+
+    private async getUnauthenticatedUsers() {
+        this.unauthenticatedUsers = await this.firebaseApiService.function('userAuthentication').function('getAllUnauthenticated').call({
+            authenticationTypes: ['authenticateUser', 'editEvents', 'editReports']
         });
     }
 }

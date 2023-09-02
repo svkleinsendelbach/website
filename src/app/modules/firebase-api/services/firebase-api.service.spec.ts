@@ -12,6 +12,8 @@ import { Guid } from '../types/guid';
 import { UserAuthenticationGetAllUnauthenticatedFunction } from '../function-types';
 import { UtcDate } from 'src/app/types/utc-date';
 
+/* eslint-disable @typescript-eslint/init-declarations */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 describe('ApiService', () => {
     let firebaseApi: FirebaseApiService;
     let firebaseAuth: AngularFireAuth;
@@ -27,7 +29,7 @@ describe('ApiService', () => {
                 AngularFireFunctions,
                 AngularFireDatabase,
                 AngularFireAuth,
-                { provide: REGION, useValue: 'europe-west1' },
+                { provide: REGION, useValue: 'europe-west1' }
             ]
         });
         firebaseApi = TestBed.inject(FirebaseApiService);

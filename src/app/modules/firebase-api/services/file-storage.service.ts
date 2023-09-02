@@ -1,34 +1,34 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { lastValueFrom } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class FileStorageService {
-    constructor(
+    public constructor(
         private readonly storage: AngularFireStorage
     ) {}
 
     public async upload(file: Blob | string, filename: string, onUpload?: (percentage: number | undefined) => void): Promise<string> {
         const ref = this.storage.ref(filename);
         const task = typeof file === 'string' ? ref.putString(file) : ref.put(file);
-        task.percentageChanges().forEach(percentage => onUpload?.(percentage));
+        void task.percentageChanges().forEach(percentage => onUpload?.(percentage));
         await task.then();
-        return await lastValueFrom(ref.getDownloadURL());
-    }
-
-    private async getDownloadUrl(filename: string): Promise<string> {
-        const ref = this.storage.ref(filename);
-        return await lastValueFrom(ref.getDownloadURL());
+        return lastValueFrom(ref.getDownloadURL() as Observable<string>);
     }
 
     public async downloadFile(filename: string): Promise<string> {
         const url = await this.getDownloadUrl(filename);
-        return await this.download(url);
+        return this.download(url);
     }
 
     public async download(url: string): Promise<string> {
-        return await (await fetch(url)).text();
+        return (await fetch(url)).text();
+    }
+
+    private async getDownloadUrl(filename: string): Promise<string> {
+        const ref = this.storage.ref(filename);
+        return lastValueFrom(ref.getDownloadURL() as Observable<string>);
     }
 }
