@@ -9,7 +9,7 @@
   @include flex-column(flex-start, center)
   width: 25vw
   padding: 32px
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25)
+  box-shadow: 0 0 10px color('shadow')
   position: fixed
   bottom: 0
   right: 32px
@@ -139,7 +139,7 @@
 
 @media screen and (prefers-color-scheme: dark)
     #message-box
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.25)
+        box-shadow: 0 0 10px darkColor('shadow')
         background-color: darkColor('background')
 
     #header, #privacy, #extra-text

@@ -8,7 +8,7 @@
 
 #container
   @include flex-row(center, space-around)
-  box-shadow: #80808080 0 4px 16px
+  box-shadow: color('shadow') 0 4px 16px
   width: 100vw
   position: fixed
   top: 0
@@ -48,6 +48,7 @@
 @media screen and (prefers-color-scheme: dark)
     #container
         background-color: darkColor('background')
+        box-shadow: darkColor('shadow') 0 4px 16px
 
         #logo-container #logo-text
             color: darkColor('text')

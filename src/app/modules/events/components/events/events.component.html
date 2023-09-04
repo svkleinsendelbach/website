@@ -76,7 +76,8 @@
         </div>
     <p
         *ngIf="fetchedEventGroups.isSuccess() && fetchedEventGroups.content.length !== 0"
-        id="download-calendar textColor"
+        id="download-calendar"
+        class="textColor"
         role="none"
         (click)="downloadCalendar()"
     >ics-Kalender herunterladen</p>

@@ -21,7 +21,7 @@
     background-color: color('background')
 
     &:hover
-      background-color: #E0E0E0 !important
+      background-color: color('hoveredBackground')
 
     #top-item-text
       @include font-metrophobic
@@ -50,7 +50,7 @@
       cursor: pointer
 
       &:hover
-        background-color: #E0E0E0 !important
+        background-color: color('hoveredBackground')
 
       .sub-item-text
         @include font-metrophobic
@@ -75,8 +75,11 @@
             #top-item-text .drop-down-arrow
                 color: darkColor('text')
 
-        #top-item:hover, #sub-items .sub-item:hover
-            background-color: #44454A !important
+        #top-item:hover
+            background-color: darkColor('hoveredBackground')
+
+        #sub-items .sub-item:hover
+            background-color: darkColor('hoveredBackground')
 
         #sub-items
             background-color: darkColor('background')

@@ -13,7 +13,7 @@
   top: 0
   height: 48px
   z-index: 1001
-  box-shadow: #80808080 0 4px 16px
+  box-shadow: color('shadow') 0 4px 16px
   background-color: color('background')
 
   #top-row
@@ -62,6 +62,7 @@
 @media screen and (prefers-color-scheme: dark)
     #container
         background-color: darkColor('background')
+        box-shadow: darkColor('shadow') 0 4px 16px
 
         #top-row
             #logo-container #logo-text

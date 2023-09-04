@@ -10,7 +10,7 @@
 #footer
   @include flex-row(center, center)
   width: 100%
-  box-shadow: #80808080 0 -4px 16px
+  box-shadow: color('shadow') 0 -4px 16px
   padding: 32px 0
   background-color: color('background')
 
@@ -170,6 +170,7 @@
 @media screen and (prefers-color-scheme: dark)
     #footer
         background-color: darkColor('background')
+        box-shadow: darkColor('shadow') 0 -4px 16px
 
     #links-copyright
         #links .link

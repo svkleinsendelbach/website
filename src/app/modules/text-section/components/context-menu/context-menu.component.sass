@@ -13,7 +13,7 @@
 
 #elements
     width: 120px
-    box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2)
+    box-shadow: 0 4px 5px 3px color('shadow')
     position: absolute
     z-index: 912
     background-color: color("background")
@@ -38,3 +38,6 @@
 @media screen and (prefers-color-scheme: dark)
     #dots
         color: darkColor('text')
+
+    #elements
+        box-shadow: 0 4px 5px 3px darkColor('shadow')
