@@ -1,115 +1,99 @@
 <authentication-check
   [authenticationTypes]="['editEvents']"
 >
-  <div
-    id="back-btn-container"
-  >
-    <a
-      id="back-button"
-      title="Zurück"
-      href="{{ editReportsLink.link }}"
-      [ngStyle]="{
-        color: styleConfig.css('textColor'),
-        backgroundColor: styleConfig.css('backgroundColor')
-      }"
-    >Zurück</a>
-  </div>
-  <text-section
-    *ngIf="previousReport === undefined"
-    [title]="'Spiel von BFV übernehmen'"
-  >
-    <p
-        class="text margin-bottom-large"
-        [ngStyle]="{
-            color: styleConfig.css('textColor')
-        }"
-    >Um ein Spiel der 1. oder 2. Mannschaft von BFV zu übernehmen, fügen Sie den Link zum BFV Spiel hier ein, bsp: www.bfv.de/spiele/.</p>
-    <input-form
-        [inputForm]="bfvGameInputForm"
-        [submitButtonText]="'Übernehmen'"
-        (submitButtonClicked)="takeBfvGame()"
+    <div
+        id="back-btn-container"
     >
-        <input-field-text
-            [label]="'BFV Spiele Link'"
-            [placeholder]="'BFV Spiele Link'"
-            [inputField]="bfvGameInputForm.field('bfvGameLink')"
-        ></input-field-text>
+        <a
+            id="back-button"
+            title="Zurück"
+            [href]="editReportsLink.link"
+        >Zurück</a>
+    </div>
+    <text-section
+        *ngIf="!previousReport"
+        [title]="'Spiel von BFV übernehmen'"
+    >
         <p
-            class="hint"
-            [ngStyle]="{
-              color: styleConfig.css('textColor')
-            }"
-        >Achtung! Die Anzeige hat einen Fehler. Die Felder werden nicht ausgefüllt, werden aber trotzdem übernommen. Um das Spiel as Termin zu speichern, klicke auf erst auf 'Übernehmen' und dann auf 'Hinzufüen' unten auf der Seite.</p>
-      </input-form>
-  </text-section>
-  <text-section
-    [title]="previousReport === undefined ? 'Bericht hinzufügen' : 'Bericht bearbeiten'"
-  >
-    <input-form
-      [inputForm]="inputForm"
-      [submitButtonText]="previousReport === undefined ? 'Hinzufügen' : 'Speichern'"
-      (submitButtonClicked)="saveReport()"
-    >
-      <input-field-select
-        [label]="'Zugehöriges Thema'"
-        [selectOptions]="groupIdSelectOptions"
-        [inputField]="inputForm.field('groupId')"
-      ></input-field-select>
-      <input-field-text
-        [label]="'Titel'"
-        [inputField]="inputForm.field('title')"
-      ></input-field-text>
-      <p
-      id="input-field-label"
-        [ngStyle]="{
-          color: styleConfig.css('textColor')
-        }"
-      >Bild (optional):</p>
-      <img
-        *ngIf="imageUrl !== undefined"
-        src="{{ imageUrl }}"
-        title="Bild"
-        id="image"
-        [ngStyle]="{
-          borderColor: styleConfig.css('textColor')
-        }"
-      >
-      <input
-        type="file"
-        accept="image/*"
-        (change)="$event.preventDefault(); $event.stopPropagation(); uploadImage($event)"
-        id="image-selector"
-        #imageSelector
-      >
-      <div
-        id="custom-image-selector"
-        (click)="$event.preventDefault(); $event.stopPropagation(); imageSelector.click()"
-        [ngStyle]="{
-          color: styleConfig.css('textColor'),
-          backgroundColor: styleConfig.css('backgroundColor'),
-          borderColor: styleConfig.css(inputForm.status === 'invalidInput' && imageUrl === undefined ? 'formErrorStatusColor' : 'textColor')
-        }"
-      >{{ imageUrl === undefined ? 'Bild auswählen' : 'Neues Bild auswählen' }}</div>
-      <div id="spacer"></div>
-      <input-field-textarea
-        [label]="'Nachricht'"
-        [inputField]="inputForm.field('message')"
-      ></input-field-textarea>
-        <div
-            id="preview-message"
+            class="text margin-bottom-large"
+        >Um ein Spiel der 1. oder 2. Mannschaft von BFV zu übernehmen, fügen Sie den Link zum BFV Spiel hier ein, bsp: www.bfv.de/spiele/.</p>
+        <input-form
+            [inputForm]="bfvGameInputForm"
+            [submitButtonText]="'Übernehmen'"
+            (submitButtonClicked)="takeBfvGame()"
         >
+            <input-field-text
+                [label]="'BFV Spiele Link'"
+                [placeholder]="'BFV Spiele Link'"
+                [inputField]="bfvGameInputForm.field('bfvGameLink')"
+            />
             <p
-                id="preview-text"
-                *ngIf="inputForm.field('message').value !== ''"
-            >Vorschau:</p>
+                class="hint textColor"
+            >Achtung! Die Anzeige hat einen Fehler. Die Felder werden nicht ausgefüllt, werden aber trotzdem übernommen. Um das Spiel as Termin zu speichern, klicke auf erst auf 'Übernehmen' und dann auf 'Hinzufüen' unten auf der Seite.</p>
+        </input-form>
+    </text-section>
+    <text-section
+        [title]="previousReport ? 'Bericht bearbeiten' : 'Bericht hinzufügen'"
+    >
+        <input-form
+            [inputForm]="inputForm"
+            [submitButtonText]="previousReport ? 'Speichern' : 'Hinzufügen'"
+            (submitButtonClicked)="saveReport()"
+        >
+        <input-field-select
+            [label]="'Zugehöriges Thema'"
+            [selectOptions]="groupIdSelectOptions"
+            [inputField]="inputForm.field('groupId')"
+        />
+        <input-field-text
+            [label]="'Titel'"
+            [inputField]="inputForm.field('title')"
+        />
+        <p
+            id="input-field-label"
+            class="textColor"
+        >Bild (optional):</p>
+        <img
+            *ngIf="imageUrl !== null"
+            [src]="imageUrl"
+            title="Bild"
+            alt="Bild"
+            id="image"
+        >
+        <input
+            type="file"
+            accept="image/*"
+            (change)="$event.preventDefault(); $event.stopPropagation(); uploadImage($event)"
+            id="image-selector"
+            #imageSelector
+        >
+        <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
+        <div
+            id="custom-image-selector"
+            role="none"
+            (click)="$event.preventDefault(); $event.stopPropagation(); imageSelector.click()"
+            [ngStyle]="{
+                borderColor: styleConfig.css(inputForm.status === 'invalidInput' && imageUrl === null ? 'formErrorStatusColor' : 'textColor')
+            }"
+        >{{ imageUrl === null ? 'Bild auswählen' : 'Neues Bild auswählen' }}</div>
+        <div id="spacer"></div>
+        <input-field-textarea
+            [label]="'Nachricht'"
+            [inputField]="inputForm.field('message')"
+        />
             <div
-                #messagePreview
-                id="message-preview"
-                [ngStyle]="{
-                    color: styleConfig.css('textColor')
-                }"
-            ></div>
-        </div>
-    </input-form>
-  </text-section>
+                id="preview-message"
+            >
+                <p
+                    id="preview-text"
+                    *ngIf="inputForm.field('message').value !== ''"
+                >Vorschau:</p>
+                <div
+                    #messagePreview
+                    id="message-preview"
+                    class="textColor"
+                ></div>
+            </div>
+        </input-form>
+    </text-section>
 </authentication-check>

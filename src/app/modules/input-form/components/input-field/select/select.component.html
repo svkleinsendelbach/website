@@ -1,37 +1,30 @@
 <label
-  [text]="label"
+    [text]="label"
 ></label>
 <select
-  #select
-  id="select"
-  (change)="onBlur()"
-  [ngStyle]="{
-    color: styleConfig.css('textColor'),
-    backgroundColor: styleConfig.css('backgroundColor'),
-    borderColor: styleConfig.css(inputField.error === undefined ? 'textColor' : 'formErrorStatusColor')
-  }"
+    #select
+    id="select"
+    [ngClass]="{ error: inputField.error }"
+    (change)="onBlur()"
 >
-  <optgroup
-    *ngFor="let group of selectOptions.type === 'grouped' ? selectOptions.groups : []"
-    label="{{ group.title }}"
-  >
+    <optgroup
+        *ngFor="let group of selectOptions.type === 'grouped' ? selectOptions.groups : []; trackBy: SelectGroup.trackByTitle"
+        [label]="group.title"
+    >
+        <option
+        *ngFor="let option of group.options; trackBy: SelectOption.trackById"
+        [value]="option.id"
+        >{{ option.text }}</option>
+    </optgroup>
     <option
-      *ngFor="let option of group.options"
-      value="{{ option.id }}"
+        *ngFor="let option of selectOptions.type === 'ungrouped' ? selectOptions.options : []; trackBy: SelectOption.trackById"
+        [value]="option.id"
     >{{ option.text }}</option>
-  </optgroup>
-  <option
-    *ngFor="let option of selectOptions.type === 'ungrouped' ? selectOptions.options : []"
-    value="{{ option.id }}"
-  >{{ option.text }}</option>
 </select>
 <p
     id="hint"
-    [ngStyle]="{
-      color: styleConfig.css('textColor')
-    }"
 >Achtung! Die Anzeige hat einen Fehler. Obwohl die ausgewählte Option nicht richtig angezeigt wird, wurde die Auswahl aber trotzdem übernommen.</p>
 <error-message
-  [error]="inputField.error"
-></error-message>
+    [error]="inputField.error"
+ />
 

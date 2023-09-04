@@ -1,5 +1,6 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
   @include flex-column(flex-start, center)
@@ -30,15 +31,18 @@
       .icon
         font-size: 48px
         margin-bottom: 20px
+        color: color('text')
 
       .title
         @include font-size('large')
         @include font-weight('medium')
         margin-bottom: 8px
+        color: color('primary')
 
       .description
         @include font-size('normal')
         @include font-weight('small')
+        color: color('secondaryText')
 
       &:hover
         .icon.jump
@@ -73,3 +77,14 @@
         transform: rotate(-10deg)
     100%
         transform: rotate(0)
+
+@media screen and (prefers-color-scheme: dark)
+    #link-rows .link-row .link-item
+        .icon
+            color: darkColor('text')
+
+        .title
+            color: darkColor('primary')
+
+        .description
+            color: darkColor('secondaryText')

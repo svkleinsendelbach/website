@@ -1,18 +1,14 @@
 <label
-  [text]="label"
+    [text]="label"
 ></label>
 <input
-  #input
-  id="input"
-  type="{{ secure ? 'password' : 'text' }}"
-  placeholder="{{ placeholder ?? label }}"
-  (blur)="onBlur()"
-  [ngStyle]="{
-    color: styleConfig.css('textColor'),
-    backgroundColor: styleConfig.css('backgroundColor'),
-    borderColor: styleConfig.css(inputField.error === undefined ? 'textColor' : 'formErrorStatusColor')
-  }"
+    #input
+    id="input"
+    [ngClass]="{ error: inputField.error }"
+    [type]="secure ? 'password' : 'text'"
+    [placeholder]="placeholder ?? label"
+    (blur)="onBlur()"
 >
 <error-message
-  [error]="inputField.error"
-></error-message>
+    [error]="inputField.error"
+ />

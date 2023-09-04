@@ -1,5 +1,6 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
   @include flex-column(center, center)
@@ -11,6 +12,7 @@
   margin: 48px 0
   padding-top: 48px
   border-top: solid 1px
+  border-color: color('text')
 
   .title
     @include font-montserrat
@@ -20,6 +22,7 @@
     margin-bottom: 40px
     width: 100%
     overflow-wrap: break-word
+    color: color('text')
 
   ::ng-deep .text
     @include font-montserrat
@@ -28,6 +31,7 @@
     padding-bottom: 8px
     text-align: center
     width: 100%
+    color: color('text')
 
     &.left-align
       text-align: left
@@ -73,13 +77,25 @@
       padding-bottom: 0
 
     &:is(a)
-      text-decoration: none
-      cursor: pointer
-      overflow-wrap: break-word
+        text-decoration: none
+        cursor: pointer
+        overflow-wrap: break-word
+        color: color('primary')
+
+  ::ng-deep .textColor
+        color: color('text')
+
+  ::ng-deep .primaryColor
+        color: color('primary')
+
+  ::ng-deep .secondaryColor
+        color: color('secondaryText')
+
+  ::ng-deep a.text
 
   ::ng-deep .text-image
     width: 100%
-    border: solid 1px
+    border: solid 1px color('text')
 
   ::ng-deep .text-images-2
     @include flex-row(center, space-between)
@@ -97,3 +113,28 @@
 
         &:last-child
           margin-bottom: 0
+
+@media screen and (prefers-color-scheme: dark)
+    #text-section
+        border-color: darkColor('text')
+
+        .title
+            color: darkColor('text')
+
+        ::ng-deep .text
+            color: darkColor('text')
+
+            &:is(a)
+                color: darkColor('primary')
+
+        ::ng-deep .textColor
+            color: darkColor('text')
+
+        ::ng-deep .primaryColor
+            color: darkColor('primary')
+
+        ::ng-deep .secondaryColor
+            color: darkColor('secondaryText')
+
+        ::ng-deep .text-image
+            border: solid 1px darkColor('text')

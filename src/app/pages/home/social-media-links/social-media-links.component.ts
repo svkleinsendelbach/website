@@ -5,6 +5,29 @@ import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'src/app/types/link';
 import { StyleConfigService } from '../../../services/style-config.service';
 
+export interface SocialMediaItem {
+    id: string;
+    title: string;
+    name: string;
+    link: Link;
+    image: IconDefinition | {
+        lightModeSource: string;
+        darkModeSource: string;
+    };
+}
+
+export namespace SocialMediaItem {
+    export function trackById(_index: number, item: SocialMediaItem): string {
+        return item.id;
+    }
+}
+
+export interface SocialMediaData {
+    desktop: SocialMediaItem[][];
+    tablet: SocialMediaItem[][];
+    mobile: SocialMediaItem[][];
+}
+
 @Component({
     selector: 'app-social-media-links',
     styleUrls: ['./social-media-links.component.sass'],
@@ -13,7 +36,7 @@ import { StyleConfigService } from '../../../services/style-config.service';
 export class SocialMediaLinksComponent {
     @Input() public socialMediaData!: SocialMediaData;
 
-    public hoveredItemId: string | null = null;
+    public SocialMediaItem = SocialMediaItem;
 
     public constructor(
         public readonly deviceType: DeviceTypeService,
@@ -32,29 +55,7 @@ export class SocialMediaLinksComponent {
         return !('lightModeSource' in image);
     }
 
-    public handleHoverStart(socialMediaLink: SocialMediaItem) {
-        this.hoveredItemId = socialMediaLink.id;
+    public trackByIdentity<T>(_index: number, value: T): T {
+        return value;
     }
-
-    public handleHoverStop(socialMediaLink: SocialMediaItem) {
-        if (this.hoveredItemId === socialMediaLink.id)
-            this.hoveredItemId = null;
-    }
-}
-
-export interface SocialMediaItem {
-    id: string;
-    title: string;
-    name: string;
-    link: Link;
-    image: IconDefinition | {
-        lightModeSource: string;
-        darkModeSource: string;
-    };
-}
-
-export interface SocialMediaData {
-    desktop: SocialMediaItem[][];
-    tablet: SocialMediaItem[][];
-    mobile: SocialMediaItem[][];
 }

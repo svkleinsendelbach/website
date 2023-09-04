@@ -1,5 +1,6 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
   @include flex-column(flex-start, center)
@@ -21,6 +22,8 @@
     margin-top: 20px
     margin-left: 20px
     text-decoration: none
+    background-color: color('background')
+    border-color: color('text')
 
 .hint
   @include font-montserrat
@@ -29,3 +32,8 @@
   width: 97.5%
   text-align: start
   padding: 5px 0
+
+@media screen and (prefers-color-scheme: dark)
+    #back-btn-container #back-button
+        color: darkColor('text')
+        background-color: darkColor('background')

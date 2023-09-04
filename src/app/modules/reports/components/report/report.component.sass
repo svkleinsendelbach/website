@@ -1,6 +1,7 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
 @import '/src/sass/markdown'
+@import '/src/sass/color'
 
 :host
     @include flex-column(flex-start, center)
@@ -12,16 +13,19 @@
     margin-bottom: 25px
     padding-bottom: 25px
     border-bottom: solid 1px
+    border-color: color('text')
 
     #date
         @include font-montserrat
         @include font-size('medium')
         @include font-weight('small')
         margin-bottom: 10px
+        color: color('secondaryText')
 
         #group-title
             display: inline-block
             margin-right: 5px
+            color: color('text')
 
     #message-container
         @include flex-row(flex-start, flex-start)
@@ -41,6 +45,7 @@
             width: 200px
             object-fit: cover
             margin-left: 15px
+            border-color: color('text')
 
         #title-message
             @include flex-column(flex-start, flex-start)
@@ -50,6 +55,7 @@
                 @include font-montserrat
                 @include font-size('large')
                 @include font-weight('medium')
+                color: color('text')
 
             #message
                 @include markdown-container
@@ -63,6 +69,29 @@
                 @include font-weight('normal')
                 width: 100%
                 text-align: end
+                color: color('primary')
 
 :host:nth-last-child(1) #report
     border-bottom: none
+
+@media screen and (prefers-color-scheme: dark)
+    #report
+        border-color: darkColor('text')
+
+        #date
+            color: darkColor('secondaryText')
+
+            #group-title
+                color: darkColor('text')
+
+        #message-container
+            #image
+                border-color: darkColor('text')
+
+            #title-message
+
+                #title
+                    color: darkColor('text')
+
+                #show-more-button
+                    color: darkColor('primary')

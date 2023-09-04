@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { HeaderData, HeaderItem } from '../../types/header-data';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { HeaderItem } from '../../types/header-item';
 import { HomeLinkData } from '../../types/home-link-data';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 
@@ -10,9 +10,11 @@ import { StyleConfigService } from 'src/app/services/style-config.service';
     templateUrl: './mobile-header.component.html'
 })
 export class MobileHeaderComponent {
-    @Input() public headerData!: HeaderData;
+    @Input() public headerItems!: HeaderItem[];
 
     @Input() public homeLinkData!: HomeLinkData;
+
+    public HeaderItem = HeaderItem;
 
     public faBars = faBars;
 
@@ -25,13 +27,6 @@ export class MobileHeaderComponent {
     public constructor(
         public readonly styleConfig: StyleConfigService
     ) {}
-
-    public get headerItems(): (HeaderItem & { id: string })[] {
-        return Object.entries(this.headerData).map(entry => ({
-            ...entry[1],
-            id: entry[0]
-        }));
-    }
 
     public handleHamburgerMenuClick(toExpanded: boolean) {
         this.isExpanded = toExpanded;

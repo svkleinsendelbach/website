@@ -1,6 +1,7 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
 @import '/src/sass/markdown'
+@import '/src/sass/color'
 
 :host
   @include flex-column(flex-start, center)
@@ -22,6 +23,8 @@
     margin-top: 20px
     margin-left: 20px
     text-decoration: none
+    background-color: color('background')
+    border-color: color('text')
 
 .hint
   @include font-montserrat
@@ -46,6 +49,7 @@
     width: 25vw
     height: 25vw
     object-fit: cover
+    border-color: color('text')
 
 #image-selector
   display: none
@@ -62,6 +66,8 @@
   border: solid 1px
   border-radius: 8px
   height: 48px
+  color: color('text')
+  background-color: color('background')
 
 #error-message
   @include font-montserrat
@@ -89,3 +95,15 @@
 
     #message-preview
         @include markdown-container
+
+@media screen and (prefers-color-scheme: dark)
+    #back-btn-container #back-button
+        color: darkColor('text')
+        background-color: darkColor('background')
+
+    #image
+        border-color: darkColor('text')
+
+    #custom-image-selector
+        color: darkColor('text')
+        background-color: darkColor('background')

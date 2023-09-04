@@ -1,16 +1,10 @@
 <div
-  id="text-section"
-  [ngStyle]="{
-    borderColor: styleConfig.css('textColor')
-  }"
+    id="text-section"
 >
-  <h1
-    id="{{ titleId }}"
-    class="title"
-    *ngIf="title !== undefined"
-    [ngStyle]="{
-      color: styleConfig.css('textColor')
-    }"
-  >{{ title }}</h1>
-  <ng-content></ng-content>
+    <h1
+        [id]="titleId"
+        class="title"
+        *ngIf="title !== null"
+    >{{ title }}</h1>
+    <ng-content></ng-content>
 </div>

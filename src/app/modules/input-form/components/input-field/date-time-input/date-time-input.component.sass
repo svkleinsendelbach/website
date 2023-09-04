@@ -1,5 +1,6 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
   @include flex-column(flex-start, center)
@@ -22,6 +23,12 @@
     border: solid 1px
     border-radius: 8px
     height: 48px
+    color: color('text')
+    background-color: color('background')
+    border-color: color('text')
+
+    &.error
+        border-color: color('formErrorStatus')
 
   &.mobile
     @include flex-column(flex-start, center)
@@ -30,3 +37,13 @@
     #dateInput, #timeInput
       width: 100%
       padding: 5px 0
+
+@media screen and (prefers-color-scheme: dark)
+    #container
+        #dateInput, #timeInput
+            color: darkColor('text')
+            background-color: darkColor('background')
+            border-color: darkColor('text')
+
+            &.error
+                border-color: darkColor('formErrorStatus')

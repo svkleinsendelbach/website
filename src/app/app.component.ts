@@ -5,7 +5,7 @@ import { AngularFirePerformance } from '@angular/fire/compat/performance';
 import { CookieSelectionService } from './modules/cookie-selector/services/cookie-selection.service';
 import { DeviceTypeService } from './services/device-type.service';
 import { FooterData } from './modules/footer/types/footer-data';
-import { HeaderData } from './modules/header/types/header-data';
+import { HeaderItem } from './modules/header/types/header-item';
 import { HomeLinkData } from './modules/header/types/home-link-data';
 import { Link } from './types/link';
 import { StyleConfigService } from './services/style-config.service';
@@ -17,162 +17,244 @@ import { StyleConfigService } from './services/style-config.service';
     templateUrl: './app.component.html'
 })
 export class AppComponent {
-    public headerData: Record<'desktop' | 'mobile' | 'tablet', HeaderData> = {
-        desktop: {
-            home: {
+    public headerData: Record<'desktop' | 'mobile' | 'tablet', HeaderItem[]> = {
+        desktop: [
+            {
+                id: 'home',
                 topItem: InternalLink.all.home,
                 subItems: null
             },
-            aboutUs: {
+            {
+                id: 'aboutUs',
                 topItem: InternalLink.all['über-uns'],
-                subItems: {
-                    managers: InternalLink.all['über-uns'],
-                    sportshome: InternalLink.all.sportheim,
-                    chronicle: InternalLink.all.chroniken,
-                    statute: InternalLink.all.satzung,
-                    privacy: InternalLink.all.datenschutz,
-                    request: InternalLink.all.mitgliedsantrag
-                }
+                subItems: [
+                    { id: 'managers',
+                        link: InternalLink.all['über-uns'] },
+                    { id: 'sportshome',
+                        link: InternalLink.all.sportheim },
+                    { id: 'chronicle',
+                        link: InternalLink.all.chroniken },
+                    { id: 'statute',
+                        link: InternalLink.all.satzung },
+                    { id: 'privacy',
+                        link: InternalLink.all.datenschutz },
+                    { id: 'request',
+                        link: InternalLink.all.mitgliedsantrag }
+                ]
             },
-            footballAdult: {
+            {
+                id: 'footballAdult',
                 topItem: InternalLink.all['fussball/herren'],
-                subItems: {
-                    footballAdultGeneral: InternalLink.all['fussball/herren'],
-                    footballAdultFirstTeam: InternalLink.all['fussball/herren/erste-mannschaft'],
-                    footballAdultSecondTeam: InternalLink.all['fussball/herren/zweite-mannschaft'],
-                    footballAdultAhTeam: InternalLink.all['fussball/herren/alte-herren']
-                }
+                subItems: [
+                    { id: 'footballAdultGeneral',
+                        link: InternalLink.all['fussball/herren'] },
+                    { id: 'footballAdultFirstTeam',
+                        link: InternalLink.all['fussball/herren/erste-mannschaft'] },
+                    { id: 'footballAdultSecondTeam',
+                        link: InternalLink.all['fussball/herren/zweite-mannschaft'] },
+                    { id: 'footballAdultAhTeam',
+                        link: InternalLink.all['fussball/herren/alte-herren'] }
+                ]
             },
-            footballYouth: {
+            {
+                id: 'footballYouth',
                 topItem: InternalLink.all['fussball/jugend'],
-                subItems: {
-                    footballYouthGeneral: InternalLink.all['fussball/jugend'],
-                    footballYouthAYouth: AppComponent.headerItemLink.footballYouthA,
-                    footballYouthBYouth: AppComponent.headerItemLink.footballYouthB,
-                    footballYouthCYouth: InternalLink.all['fussball/jugend/c-jugend'],
-                    footballYouthDYouth: AppComponent.headerItemLink.footballYouthD,
-                    footballYouthEYouth: InternalLink.all['fussball/jugend/e-jugend'],
-                    footballYouthFYouth: InternalLink.all['fussball/jugend/f-jugend'],
-                    footballYouthGYouth: InternalLink.all['fussball/jugend/g-jugend']
-                }
+                subItems: [
+                    { id: 'footballYouthGeneral',
+                        link: InternalLink.all['fussball/jugend'] },
+                    { id: 'footballYouthAYouth',
+                        link: AppComponent.headerItemLink.footballYouthA },
+                    { id: 'footballYouthBYouth',
+                        link: AppComponent.headerItemLink.footballYouthB },
+                    { id: 'footballYouthCYouth',
+                        link: InternalLink.all['fussball/jugend/c-jugend'] },
+                    { id: 'footballYouthDYouth',
+                        link: AppComponent.headerItemLink.footballYouthD },
+                    { id: 'footballYouthEYouth',
+                        link: InternalLink.all['fussball/jugend/e-jugend'] },
+                    { id: 'footballYouthFYouth',
+                        link: InternalLink.all['fussball/jugend/f-jugend'] },
+                    { id: 'footballYouthGYouth',
+                        link: InternalLink.all['fussball/jugend/g-jugend'] }
+                ]
             },
-            gymnastics: {
+            {
+                id: 'gymnastics',
                 topItem: InternalLink.all.gymnastik,
                 subItems: null
             },
-            dancing: {
+            {
+                id: 'dancing',
                 topItem: InternalLink.all.tanzen,
                 subItems: null
             },
-            drive: {
+            {
+                id: 'drive',
                 topItem: InternalLink.all.anfahrt,
                 subItems: null
             },
-            contact: {
+            {
+                id: 'contact',
                 topItem: InternalLink.all.kontakt,
                 subItems: null
             }
-        },
-        tablet: {
-            home: {
+        ],
+        tablet: [
+            {
+                id: 'home',
                 topItem: InternalLink.all.home,
-                subItems: {
-                    home: InternalLink.all.home,
-                    drive: InternalLink.all.anfahrt,
-                    contact: InternalLink.all.kontakt
-                }
+                subItems: [
+                    { id: 'home',
+                        link: InternalLink.all.home },
+                    { id: 'drive',
+                        link: InternalLink.all.anfahrt },
+                    { id: 'contact',
+                        link: InternalLink.all.kontakt }
+                ]
             },
-            aboutUs: {
+            {
+                id: 'aboutUs',
                 topItem: InternalLink.all['über-uns'],
-                subItems: {
-                    managers: InternalLink.all['über-uns'],
-                    sportshome: InternalLink.all.sportheim,
-                    chronicle: InternalLink.all.chroniken,
-                    statute: InternalLink.all.satzung,
-                    privacy: InternalLink.all.datenschutz,
-                    request: InternalLink.all.mitgliedsantrag
-                }
+                subItems: [
+                    { id: 'managers',
+                        link: InternalLink.all['über-uns'] },
+                    { id: 'sportshome',
+                        link: InternalLink.all.sportheim },
+                    { id: 'chronicle',
+                        link: InternalLink.all.chroniken },
+                    { id: 'statute',
+                        link: InternalLink.all.satzung },
+                    { id: 'privacy',
+                        link: InternalLink.all.datenschutz },
+                    { id: 'request',
+                        link: InternalLink.all.mitgliedsantrag }
+                ]
             },
-            footballAdult: {
+            {
+                id: 'footballAdult',
                 topItem: InternalLink.all['fussball/herren'],
-                subItems: {
-                    footballAdultGeneral: InternalLink.all['fussball/herren'],
-                    footballAdultFirstTeam: InternalLink.all['fussball/herren/erste-mannschaft'],
-                    footballAdultSecondTeam: InternalLink.all['fussball/herren/zweite-mannschaft'],
-                    footballAdultAhTeam: InternalLink.all['fussball/herren/alte-herren']
-                }
+                subItems: [
+                    { id: 'footballAdultGeneral',
+                        link: InternalLink.all['fussball/herren'] },
+                    { id: 'footballAdultFirstTeam',
+                        link: InternalLink.all['fussball/herren/erste-mannschaft'] },
+                    { id: 'footballAdultSecondTeam',
+                        link: InternalLink.all['fussball/herren/zweite-mannschaft'] },
+                    { id: 'footballAdultAhTeam',
+                        link: InternalLink.all['fussball/herren/alte-herren'] }
+                ]
             },
-            footballYouth: {
+            {
+                id: 'footballYouth',
                 topItem: InternalLink.all['fussball/jugend'],
-                subItems: {
-                    footballYouthGeneral: InternalLink.all['fussball/jugend'],
-                    footballYouthAYouth: AppComponent.headerItemLink.footballYouthA,
-                    footballYouthBYouth: AppComponent.headerItemLink.footballYouthB,
-                    footballYouthCYouth: InternalLink.all['fussball/jugend/c-jugend'],
-                    footballYouthDYouth: AppComponent.headerItemLink.footballYouthD,
-                    footballYouthEYouth: InternalLink.all['fussball/jugend/e-jugend'],
-                    footballYouthFYouth: InternalLink.all['fussball/jugend/f-jugend'],
-                    footballYouthGYouth: InternalLink.all['fussball/jugend/g-jugend']
-                }
+                subItems: [
+                    { id: 'footballYouthGeneral',
+                        link: InternalLink.all['fussball/jugend'] },
+                    { id: 'footballYouthAYouth',
+                        link: AppComponent.headerItemLink.footballYouthA },
+                    { id: 'footballYouthBYouth',
+                        link: AppComponent.headerItemLink.footballYouthB },
+                    { id: 'footballYouthCYouth',
+                        link: InternalLink.all['fussball/jugend/c-jugend'] },
+                    { id: 'footballYouthDYouth',
+                        link: AppComponent.headerItemLink.footballYouthD },
+                    { id: 'footballYouthEYouth',
+                        link: InternalLink.all['fussball/jugend/e-jugend'] },
+                    { id: 'footballYouthFYouth',
+                        link: InternalLink.all['fussball/jugend/f-jugend'] },
+                    { id: 'footballYouthGYouth',
+                        link: InternalLink.all['fussball/jugend/g-jugend'] }
+                ]
             },
-            gymnastics: {
+            {
+                id: 'gymnastics',
                 topItem: InternalLink.all.gymnastik,
-                subItems: {
-                    gymnastics: InternalLink.all.gymnastik,
-                    dancing: InternalLink.all.tanzen
-                }
+                subItems: [
+                    { id: 'gymnastics',
+                        link: InternalLink.all.gymnastik },
+                    { id: 'dancing',
+                        link: InternalLink.all.tanzen }
+                ]
             }
-        },
-        mobile: {
-            home: {
+        ],
+        mobile: [
+            {
+                id: 'home',
                 topItem: InternalLink.all.home,
-                subItems: {
-                    home: InternalLink.all.home,
-                    drive: InternalLink.all.anfahrt,
-                    contact: InternalLink.all.kontakt
-                }
+                subItems: [
+                    { id: 'home',
+                        link: InternalLink.all.home },
+                    { id: 'drive',
+                        link: InternalLink.all.anfahrt },
+                    { id: 'contact',
+                        link: InternalLink.all.kontakt }
+                ]
             },
-            aboutUs: {
+            {
+                id: 'aboutUs',
                 topItem: InternalLink.all['über-uns'],
-                subItems: {
-                    managers: InternalLink.all['über-uns'],
-                    sportshome: InternalLink.all.sportheim,
-                    chronicle: InternalLink.all.chroniken,
-                    statute: InternalLink.all.satzung,
-                    privacy: InternalLink.all.datenschutz,
-                    request: InternalLink.all.mitgliedsantrag
-                }
+                subItems: [
+                    { id: 'managers',
+                        link: InternalLink.all['über-uns'] },
+                    { id: 'sportshome',
+                        link: InternalLink.all.sportheim },
+                    { id: 'chronicle',
+                        link: InternalLink.all.chroniken },
+                    { id: 'statute',
+                        link: InternalLink.all.satzung },
+                    { id: 'privacy',
+                        link: InternalLink.all.datenschutz },
+                    { id: 'request',
+                        link: InternalLink.all.mitgliedsantrag }
+                ]
             },
-            footballAdult: {
+            {
+                id: 'footballAdult',
                 topItem: InternalLink.all['fussball/herren'],
-                subItems: {
-                    footballAdultGeneral: InternalLink.all['fussball/herren'],
-                    footballAdultFirstTeam: InternalLink.all['fussball/herren/erste-mannschaft'],
-                    footballAdultSecondTeam: InternalLink.all['fussball/herren/zweite-mannschaft'],
-                    footballAdultAhTeam: InternalLink.all['fussball/herren/alte-herren']
-                }
+                subItems: [
+                    { id: 'footballAdultGeneral',
+                        link: InternalLink.all['fussball/herren'] },
+                    { id: 'footballAdultFirstTeam',
+                        link: InternalLink.all['fussball/herren/erste-mannschaft'] },
+                    { id: 'footballAdultSecondTeam',
+                        link: InternalLink.all['fussball/herren/zweite-mannschaft'] },
+                    { id: 'footballAdultAhTeam',
+                        link: InternalLink.all['fussball/herren/alte-herren'] }
+                ]
             },
-            footballYouth: {
+            {
+                id: 'footballYouth',
                 topItem: InternalLink.all['fussball/jugend'],
-                subItems: {
-                    footballYouthGeneral: InternalLink.all['fussball/jugend'],
-                    footballYouthAYouth: AppComponent.headerItemLink.footballYouthA,
-                    footballYouthBYouth: AppComponent.headerItemLink.footballYouthB,
-                    footballYouthCYouth: InternalLink.all['fussball/jugend/c-jugend'],
-                    footballYouthDYouth: AppComponent.headerItemLink.footballYouthD,
-                    footballYouthEYouth: InternalLink.all['fussball/jugend/e-jugend'],
-                    footballYouthFYouth: InternalLink.all['fussball/jugend/f-jugend'],
-                    footballYouthGYouth: InternalLink.all['fussball/jugend/g-jugend']
-                }
+                subItems: [
+                    { id: 'footballYouthGeneral',
+                        link: InternalLink.all['fussball/jugend'] },
+                    { id: 'footballYouthAYouth',
+                        link: AppComponent.headerItemLink.footballYouthA },
+                    { id: 'footballYouthBYouth',
+                        link: AppComponent.headerItemLink.footballYouthB },
+                    { id: 'footballYouthCYouth',
+                        link: InternalLink.all['fussball/jugend/c-jugend'] },
+                    { id: 'footballYouthDYouth',
+                        link: AppComponent.headerItemLink.footballYouthD },
+                    { id: 'footballYouthEYouth',
+                        link: InternalLink.all['fussball/jugend/e-jugend'] },
+                    { id: 'footballYouthFYouth',
+                        link: InternalLink.all['fussball/jugend/f-jugend'] },
+                    { id: 'footballYouthGYouth',
+                        link: InternalLink.all['fussball/jugend/g-jugend'] }
+                ]
             },
-            gymnastics: {
+            {
+                id: 'gymnastics',
                 topItem: InternalLink.all.gymnastik,
-                subItems: {
-                    gymnastics: InternalLink.all.gymnastik,
-                    dancing: InternalLink.all.tanzen
-                }
+                subItems: [
+                    { id: 'gymnastics',
+                        link: InternalLink.all.gymnastik },
+                    { id: 'dancing',
+                        link: InternalLink.all.tanzen }
+                ]
             }
-        }
+        ]
     };
 
     public homeLinkData: HomeLinkData = {

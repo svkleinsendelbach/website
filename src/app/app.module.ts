@@ -62,7 +62,6 @@ import { DrivePage } from './pages/drive/drive.page';
 import { ContactPage } from './pages/contact/contact.page';
 import { ImprintPage } from './pages/imprint/imprint.page';
 import { AllReportsPage } from './pages/reports/all-reports/all-reports.page';
-import { GameDetailPage } from './pages/game-detail/game-detail.page';
 import { EditingMainPage } from './pages/editing/main/editing-main.page';
 import { LoginPage } from './pages/editing/login/login.page';
 import { EditingEventsPage } from './pages/editing/events/editing-events.page';
@@ -92,7 +91,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
         FootballAdultsGeneralPage,
         FootballYouthGeneralPage,
         FYouthPage,
-        GameDetailPage,
         GymnasticsPage,
         GYouthPage,
         HomeBannerComponent,

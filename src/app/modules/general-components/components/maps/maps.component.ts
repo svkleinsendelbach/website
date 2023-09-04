@@ -54,6 +54,10 @@ export class MapsComponent implements OnInit, OnDestroy {
         this.cookieSelectionService.changeCookieSelection('functionality', 'selected');
     }
 
+    public trackByIdentity<T>(_index: number, value: T): T {
+        return value;
+    }
+
     private async checkApiLoaded() {
         this.apiLoaded = await new Promise<boolean>(resolve => {
             lastValueFrom(this.httpClient.jsonp(`https://maps.googleapis.com/maps/api/js?key=${environment.googleMaps.apiKey}`, 'callback'))

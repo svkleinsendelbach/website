@@ -3,8 +3,8 @@
 ></div>
 
 <app-home-banner
-  [bannerData]="bannerData"
-></app-home-banner>
+    [bannerData]="bannerData"
+ />
 
 <text-section
     *ngIf="!deviceType.isMobile"
@@ -15,14 +15,17 @@
         <img
             src="assets/images/svk-logo.svg"
             title="SV Kleinsendelbach"
+            alt="SV Kleinsendelbach"
             class="logo"
         >
         <p
             id="title"
+            class="text"
         >SV Kleinsendelbach e.V.</p>
         <img
             src="assets/images/svk-logo.svg"
             title="SV Kleinsendelbach"
+            alt="SV Kleinsendelbach"
             class="logo"
         >
     </div>
@@ -30,78 +33,45 @@
 
 <app-home-links
   [linkData]="linkData"
-></app-home-links>
+ />
 
 <text-section
   [title]="'Schön, dass Sie unsere Website besuchen!'"
 >
   <p
-    class="text block"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
+    class="text block secondaryColor"
   >Der SV Kleinsendelbach ist ein Sportverein, der im Herzen von Kleinsendelbach, einem kleinem Dorf im Süden Oberfrankens, ansässig ist. Der Verein hat eine lange Geschichte, die bis in die frühen 1950er Jahre zurückreicht und ist ein fester Bestandteil der lokalen Gemeinschaft.
   <p
-    class="text block margin-top-normal"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
+    class="text block margin-top-normal secondaryColor"
   >Wir bieten eine breite Palette an Fußballmannschaften für Spieler jeden Alters und jeder Fähigkeitsstufe. Von der Jugendmannschaft bis zur Seniorenmannschaft ist für jeden etwas dabei. Der Verein legt großen Wert auf die Förderung des Talents und die Entwicklung seiner Spieler, sowohl auf als auch neben dem Platz.
   <p
-    class="text block margin-top-normal"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
+    class="text block margin-top-normal secondaryColor"
   >Unser Verein ist bekannt für seine engagierte Gemeinschaft und seine leidenschaftlichen Spieler. Die Mannschaften spielen regelmäßig in lokalen Ligen und nehmen an Turnieren teil. Die Mannschaftstrainings finden wöchentlich statt und das Vereinsleben wird durch zahlreiche gemeinschaftliche Aktivitäten und Veranstaltungen bereichert.</p>
   <p
-    class="text block margin-top-normal"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
+    class="text block margin-top-normal secondaryColor"
   >Wir sind stolz auf eine lange Geschichte und seine engagierte Gemeinschaft und arbeiten hart daran, die Zukunft des Vereins zu sichern. Der Verein verfolgt eine Philosophie, die auf Fairness, Respekt und Integrität basiert und fördert eine positive und inklusive Umgebung für alle Mitglieder.</p>
   <p
-    class="text block margin-top-normal"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
+    class="text block margin-top-normal secondaryColor"
   >Wenn Sie Teil einer aktiven und leidenschaftlichen Fußballgemeinschaft sein möchten, dann ist der SV Kleinsendelbach der perfekte Ort für Sie. Hier können Sie neue Freundschaften schließen, Ihre Fähigkeiten verbessern und gleichzeitig Spaß haben. Egal, ob Sie ein erfahrener Spieler sind oder gerade erst anfangen, beim SV Kleinsendelbach werden Sie herzlich willkommen geheißen.</p>
   <p
-    class="text block margin-top-normal"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
+    class="text block margin-top-normal secondaryColor"
   >Haben Sie Lust auf Fußball, Gymnastik oder Kindertanz? Dann informieren Sie sich unter der entsprechenden Abteilung auf unserer Homepage oder senden Sie uns eine Nachricht.</p>
   <p
-    class="text margin-top-large"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
+    class="text margin-top-large secondaryColor"
   >Wir freuen uns auf Sie! </p>
   <p
-    class="text"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
+    class="text secondaryColor"
   >Ihre Vorstandschaft des SV Kleinsendelbach</p>
   <p
-    class="text margin-top-normal"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
+    class="text margin-top-normal primaryColor"
   >Der SVK bedankt sich herzlich bei allen Sponsoren und Gönnern.</p>
   <p
     class="text block margin-top-large"
-    [ngStyle]="{
-      color: styleConfig.css('textColor')
-    }"
   >Diese Website ist noch in Entwicklung, d.h. es können noch Fehler auftreten. Bitte melden Sie diese Fehler im <a
-    class="text"
+    class="text primaryColor"
     href="https://github.com/svkleinsendelbach/website#bug-report-and-feature-request"
     title="SV Kleinsendelbach e.V. Website Repository"
     target="_blank"
-    [ngStyle]="{
-        color: styleConfig.css('primaryColor')
-    }"
   >SV Kleinsendelbach e.V. Website Repository</a>. Sollten Sie neue Ideen für diese Website haben, können Sie auch diese dort einreichen.</p>
 </text-section>
 
@@ -110,11 +80,11 @@
     [groupId]="reportGroupId"
     [maxListCount]="5"
     [showAllReportsButton]="true"
-></reports>
+ />
 
 <app-social-media-links
   [socialMediaData]="socialMediaData"
-></app-social-media-links>
+ />
 
 <events
   [groupIds]="eventGroupIds"

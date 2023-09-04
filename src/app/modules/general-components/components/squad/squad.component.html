@@ -1,137 +1,132 @@
+<!-- eslint-disable @angular-eslint/template/no-call-expression -->
 <text-section
-  [title]="'Kader'"
+    [title]="'Kader'"
 >
-  <p
-    *ngIf="fetchedSquad.isLoading()"
-    class="text center large"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >Kader wird geladen</p>
-  <p
-    *ngIf="fetchedSquad.isFailure()"
-    class="text center large"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >Kader konnten nicht geladen werden</p>
+    <p
+        *ngIf="fetchedSquad.isLoading()"
+        class="text center large primaryColor"
+    >Kader wird geladen</p>
+    <p
+        *ngIf="fetchedSquad.isFailure()"
+        class="text center large primaryColor"
+    >Kader konnten nicht geladen werden</p>
 
-  <!-- Coach -->
-  <p
-    class="text left-align x-large margin-top-normal"
-    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.coach !== null"
-  >Trainer</p>
-  <div
-    class="container"
-    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.coach !== null"
-  >
-    <squad-person
-      class="person"
-      [person]="coachPersonInfo(fetchedSquad.content.coach!)"
-      [ngClass]="deviceType.current"
-    ></squad-person>
-  </div>
+    <!-- Coach -->
+    <p
+        class="text left-align x-large margin-top-normal"
+        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.coach"
+    >Trainer</p>
+    <div
+        class="container"
+        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.coach"
+    >
+        <squad-person
+            class="person"
+            [person]="coachPersonInfo(fetchedSquad.content.coach)"
+            [ngClass]="deviceType.current"
+        />
+    </div>
 
-  <!-- Goal keeper -->
-  <p
-    class="text left-align x-large margin-top-normal"
-    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.goalkeeper !== null && fetchedSquad.content.squad!.goalkeeper!.length !== 0"
-  >Torwart</p>
-  <div
-    class="container"
-    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.goalkeeper !== null && fetchedSquad.content.squad!.goalkeeper!.length !== 0"
-  >
-    <squad-person
-      class="person"
-      *ngFor="let person of fetchedSquad.content.squad!.goalkeeper!"
-      [person]="squadPersonInfo(person)"
-      [ngClass]="deviceType.current"
-    ></squad-person>
-  </div>
+    <!-- Goal keeper -->
+    <p
+        class="text left-align x-large margin-top-normal"
+        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.goalkeeper && fetchedSquad.content.squad.goalkeeper.length !== 0"
+    >Torwart</p>
+    <div
+        class="container"
+        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.goalkeeper && fetchedSquad.content.squad.goalkeeper.length !== 0"
+    >
+        <squad-person
+            class="person"
+            *ngFor="let person of fetchedSquad.content.squad.goalkeeper; trackBy: SquadPerson.trackByName"
+            [person]="squadPersonInfo(person)"
+            [ngClass]="deviceType.current"
+        />
+    </div>
 
-  <!-- Defence -->
-  <p
-    class="text left-align x-large margin-top-normal"
-    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.defence !== null && fetchedSquad.content.squad!.defence!.length !== 0"
-  >Abwehr</p>
-  <div
-    class="container"
-    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.defence !== null && fetchedSquad.content.squad!.defence!.length !== 0"
-  >
-    <squad-person
-      class="person"
-      *ngFor="let person of fetchedSquad.content.squad!.defence!"
-      [person]="squadPersonInfo(person)"
-      [ngClass]="deviceType.current"
-    ></squad-person>
-  </div>
+    <!-- Defence -->
+    <p
+        class="text left-align x-large margin-top-normal"
+        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.defence && fetchedSquad.content.squad.defence.length !== 0"
+    >Abwehr</p>
+    <div
+        class="container"
+        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.defence && fetchedSquad.content.squad.defence.length !== 0"
+    >
+        <squad-person
+            class="person"
+            *ngFor="let person of fetchedSquad.content.squad.defence; trackBy: SquadPerson.trackByName"
+            [person]="squadPersonInfo(person)"
+            [ngClass]="deviceType.current"
+        />
+    </div>
 
-  <!-- Midfield -->
-  <p
-    class="text left-align x-large margin-top-normal"
-    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.midfield !== null && fetchedSquad.content.squad!.midfield!.length !== 0"
-  >Mittelfeld</p>
-  <div
-    class="container"
-    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.midfield !== null && fetchedSquad.content.squad!.midfield!.length !== 0"
-  >
-    <squad-person
-      class="person"
-      *ngFor="let person of fetchedSquad.content.squad!.midfield!"
-      [person]="squadPersonInfo(person)"
-      [ngClass]="deviceType.current"
-    ></squad-person>
-  </div>
+    <!-- Midfield -->
+    <p
+        class="text left-align x-large margin-top-normal"
+        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.midfield && fetchedSquad.content.squad.midfield.length !== 0"
+    >Mittelfeld</p>
+    <div
+        class="container"
+        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.midfield && fetchedSquad.content.squad.midfield.length !== 0"
+    >
+        <squad-person
+            class="person"
+            *ngFor="let person of fetchedSquad.content.squad.midfield; trackBy: SquadPerson.trackByName"
+            [person]="squadPersonInfo(person)"
+            [ngClass]="deviceType.current"
+        />
+    </div>
 
-  <!-- Offence -->
-  <p
-    class="text left-align x-large margin-top-normal"
-    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.offence !== null && fetchedSquad.content.squad!.offence!.length !== 0"
-  >Sturm</p>
-  <div
-    class="container"
-    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.offence !== null && fetchedSquad.content.squad!.offence!.length !== 0"
-  >
-    <squad-person
-      class="person"
-      *ngFor="let person of fetchedSquad.content.squad!.offence!"
-      [person]="squadPersonInfo(person)"
-      [ngClass]="deviceType.current"
-    ></squad-person>
-  </div>
+    <!-- Offence -->
+    <p
+        class="text left-align x-large margin-top-normal"
+        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.offence && fetchedSquad.content.squad.offence.length !== 0"
+    >Sturm</p>
+    <div
+        class="container"
+        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.offence && fetchedSquad.content.squad.offence.length !== 0"
+    >
+        <squad-person
+            class="person"
+            *ngFor="let person of fetchedSquad.content.squad.offence; trackBy: SquadPerson.trackByName"
+            [person]="squadPersonInfo(person)"
+            [ngClass]="deviceType.current"
+        />
+    </div>
 
-  <!-- Without disclosures -->
-  <p
-    class="text left-align x-large margin-top-normal"
-    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.notSpecified !== null && fetchedSquad.content.squad!.notSpecified!.length !== 0"
-  >Ohne Angaben</p>
-  <div
-    class="container"
-    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad !== null && fetchedSquad.content.squad!.notSpecified !== null && fetchedSquad.content.squad!.notSpecified!.length !== 0"
-  >
-    <squad-person
-      class="person"
-      *ngFor="let person of fetchedSquad.content.squad!.notSpecified!"
-      [person]="squadPersonInfo(person)"
-      [ngClass]="deviceType.current"
-    ></squad-person>
-  </div>
+    <!-- Without disclosures -->
+    <p
+        class="text left-align x-large margin-top-normal"
+        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.notSpecified && fetchedSquad.content.squad.notSpecified.length !== 0"
+    >Ohne Angaben</p>
+    <div
+        class="container"
+        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.notSpecified && fetchedSquad.content.squad.notSpecified.length !== 0"
+    >
+        <squad-person
+            class="person"
+            *ngFor="let person of fetchedSquad.content.squad.notSpecified; trackBy: SquadPerson.trackByName"
+            [person]="squadPersonInfo(person)"
+            [ngClass]="deviceType.current"
+        />
+    </div>
 
-  <!-- Staff -->
-  <p
-    class="text left-align x-large margin-top-normal"
-    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.stab !== null && fetchedSquad.content.stab!.length !== 0"
-  >Stab</p>
-  <div
-    class="container"
-    *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.stab !== null && fetchedSquad.content.stab!.length !== 0"
-  >
-    <squad-person
-      class="person"
-      *ngFor="let person of fetchedSquad.content.stab!"
-      [person]="staffPersonInfo(person)"
-      [ngClass]="deviceType.current"
-    ></squad-person>
-  </div>
+    <!-- Staff -->
+    <p
+        class="text left-align x-large margin-top-normal"
+        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.stab && fetchedSquad.content.stab.length !== 0"
+    >Stab</p>
+    <div
+        class="container"
+        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.stab && fetchedSquad.content.stab.length !== 0"
+    >
+        <squad-person
+            class="person"
+            *ngFor="let person of fetchedSquad.content.stab; trackBy: SquadPerson.trackByName"
+            [person]="staffPersonInfo(person)"
+            [ngClass]="deviceType.current"
+        />
+    </div>
 
 </text-section>

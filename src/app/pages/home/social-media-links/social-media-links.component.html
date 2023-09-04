@@ -1,58 +1,48 @@
 <text-section
-  [title]="'Schauen Sie auch mal bei unseren Social-Media Kanälen vorbei!'"
+    [title]="'Schauen Sie auch mal bei unseren Social-Media Kanälen vorbei!'"
 >
-  <div
-    id="link-rows"
-  >
     <div
-      class="link-row"
-      *ngFor="let linkRow of socialMediaItems"
+        id="link-rows"
     >
-      <a
-        class="social-media-link"
-        *ngFor="let socialMediaLink of linkRow"
-        href="{{ socialMediaLink.link.link }}"
-        target="{{ socialMediaLink.link.target }}"
-        title="{{ socialMediaLink.link.title }}"
-        (mouseenter)="handleHoverStart(socialMediaLink)"
-        (mouseleave)="handleHoverStop(socialMediaLink)"
-        [ngStyle]="{
-          backgroundColor: hoveredItemId === socialMediaLink.id ? styleConfig.css('hoveredBackgroundColor') : undefined
-        }"
-      >
-        <fa-icon
-          *ngIf="isIcon(socialMediaLink.image)"
-          class="icon"
-          [icon]="socialMediaLink.image"
-          [ngStyle]="{
-            color: styleConfig.css('textColor')
-          }"
-        ></fa-icon>
-        <img
-          *ngIf="!isIcon(socialMediaLink.image) && appearance.current === 'light'"
-          class="icon"
-          src="{{ socialMediaLink.image.lightModeSource }}"
-          title="{{ socialMediaLink.title }}"
+        <div
+            class="link-row"
+            *ngFor="let linkRow of socialMediaItems; trackBy: trackByIdentity"
         >
-        <img
-        *ngIf="!isIcon(socialMediaLink.image) && appearance.current === 'dark'"
-          class="icon"
-          src="{{ socialMediaLink.image.darkModeSource }}"
-          title="{{ socialMediaLink.title }}"
-        >
-        <p
-          class="title"
-          [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-          }"
-        >{{ socialMediaLink.title }}</p>
-        <p
-          class="name"
-          [ngStyle]="{
-            color: styleConfig.css('secondaryTextColor')
-          }"
-        >{{ socialMediaLink.name }}</p>
-    </a>
+            <a
+                class="social-media-link"
+                *ngFor="let socialMediaLink of linkRow; trackBy: SocialMediaItem.trackById"
+                [href]="socialMediaLink.link.link"
+                [target]="socialMediaLink.link.target"
+                [title]="socialMediaLink.link.title"
+            >
+                <!-- eslint-disable @angular-eslint/template/no-call-expression -->
+                <fa-icon
+                    *ngIf="isIcon(socialMediaLink.image)"
+                    class="icon textColor"
+                    [icon]="socialMediaLink.image"
+                />
+                <img
+                    *ngIf="!isIcon(socialMediaLink.image) && appearance.current === 'light'"
+                    class="icon"
+                    [src]="socialMediaLink.image.lightModeSource"
+                    [title]="socialMediaLink.title"
+                    [alt]="socialMediaLink.title"
+                >
+                <img
+                    *ngIf="!isIcon(socialMediaLink.image) && appearance.current === 'dark'"
+                    class="icon"
+                    [src]="socialMediaLink.image.darkModeSource"
+                    [title]="socialMediaLink.title"
+                    [alt]="socialMediaLink.title"
+                >
+                <!-- eslint-enable @angular-eslint/template/no-call-expression -->
+                <p
+                    class="title primaryColor"
+                >{{ socialMediaLink.title }}</p>
+                <p
+                    class="name secondaryColor"
+                >{{ socialMediaLink.name }}</p>
+            </a>
+        </div>
     </div>
-  </div>
 </text-section>

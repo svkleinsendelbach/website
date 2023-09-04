@@ -1,5 +1,6 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
   @include flex-column(flex-start, center)
@@ -11,6 +12,7 @@
   width: 100%
   box-shadow: #80808080 0 -4px 16px
   padding: 32px 0
+  background-color: color('background')
 
   #links-copyright
     @include flex-column(center, center)
@@ -32,12 +34,18 @@
         width: 100%
         border-radius: 4px
         text-align: center
+        color: color('text')
+
+        &:hover
+            color: color('primary')
+            background-color: color('hoveredBackground')
 
     #copyright
       @include font-montserrat
       @include font-size('xx-small')
       @include font-weight('light')
       margin-top: 8px
+      color: color('text')
 
     #edit-link
       @include font-montserrat
@@ -50,6 +58,13 @@
       border: 1px solid
       border-radius: 4px
       text-decoration: none
+      color: color('text')
+      border-color: color('text')
+
+      &:hover
+        color: color('primary')
+        border-color: color('primary')
+        background-color: color('hoveredBackground')
 
   .address-card
     $cover-height: 96px
@@ -68,6 +83,9 @@
       border-radius: 8px
       border: 1px solid
       cursor: pointer
+      color: color('text')
+      border-color: color('text')
+      background-color: color('background')
 
       .function, .name
         @include font-montserrat
@@ -75,6 +93,7 @@
         @include font-weight('small')
         white-space: nowrap
         margin: 1px
+        color: color('text')
 
     .bottom
       @include flex-column(center, center)
@@ -87,6 +106,9 @@
       opacity: 0
       border: 1px solid
       border-top: 0
+      color: color('text')
+      border-color: color('text')
+      background-color: color('background')
 
       .street, .city
         @include font-montserrat
@@ -94,11 +116,13 @@
         @include font-weight('small')
         white-space: nowrap
         margin: 1px
+        color: color('text')
 
       .telephone
         @include flex-row(center, center)
         text-decoration: none
         cursor: pointer
+        color: color('primary')
 
         .icon, .number
           @include font-size('normal')
@@ -142,3 +166,48 @@
         width: 90%
         margin-bottom: 16px
 
+
+@media screen and (prefers-color-scheme: dark)
+    #footer
+        background-color: darkColor('background')
+
+    #links-copyright
+        #links .link
+            color: darkColor('text')
+
+            &:hover
+                color: darkColor('primary')
+                background-color: darkColor('hoveredBackground')
+
+        #copyright
+            color: darkColor('text')
+
+        #edit-link
+            color: color('text')
+            border-color: color('text')
+
+            &:hover
+                color: color('primary')
+                border-color: color('primary')
+                background-color: color('hoveredBackground')
+
+    .address-card
+
+        .top
+            color: darkColor('text')
+            border-color: darkColor('text')
+            background-color: darkColor('background')
+
+            .function, .name
+                color: darkColor('text')
+
+        .bottom
+            color: darkColor('text')
+            border-color: darkColor('text')
+            background-color: darkColor('background')
+
+            .street, .city
+                color: darkColor('text')
+
+            .telephone
+                color: darkColor('primary')

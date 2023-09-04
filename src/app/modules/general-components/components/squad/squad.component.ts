@@ -15,6 +15,8 @@ import { TeamSquad } from 'src/app/modules/firebase-api/types/team-squad';
 export class SquadComponent implements OnInit {
     @Input() public parametersType!: AnpfiffInfoTeamParameters.Type;
 
+    public SquadPerson = SquadPerson;
+
     public fetchedSquad: FetchState<TeamSquad> = FetchState.loading;
 
     public constructor(

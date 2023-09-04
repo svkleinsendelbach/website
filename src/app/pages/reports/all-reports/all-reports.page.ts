@@ -14,7 +14,7 @@ import { Title } from '@angular/platform-browser';
 export class AllReportsPage implements OnInit {
     public Report = Report;
 
-    public fetchedReports: FetchState<(Report.Flatten & { groupId: ReportGroupId })[]> = FetchState.loading;
+    public fetchedReports: FetchState<(Report & { groupId: ReportGroupId })[]> = FetchState.loading;
 
     public constructor(
         public readonly titleService: Title,
@@ -31,7 +31,10 @@ export class AllReportsPage implements OnInit {
             .function('getAll')
             .call({})
             .then(reports => {
-                this.fetchedReports = FetchState.success(reports);
+                this.fetchedReports = FetchState.success(reports.map(report => ({
+                    ...Report.concrete(report),
+                    groupId: report.groupId
+                })));
             })
             .catch(reason => {
                 this.fetchedReports = FetchState.failure(reason);

@@ -10,6 +10,12 @@ export interface OpeningHour {
     time: string;
 }
 
+export namespace OpeningHour {
+    export function trackByTitle(_index: number, openingHour: OpeningHour): string {
+        return openingHour.title;
+    }
+}
+
 export type Weekdays = 'friday' | 'monday' | 'saturday' | 'sunday' | 'thursday' | 'tuesday' | 'wednesday';
 
 const weekdaysByDeviceType: Record<DeviceType, Weekdays[][]> = {
@@ -24,6 +30,8 @@ const weekdaysByDeviceType: Record<DeviceType, Weekdays[][]> = {
     templateUrl: './sportshome.page.html'
 })
 export class SportshomePage {
+    public OpeningHour = OpeningHour;
+
     public faPhone = faPhone;
 
     public constructor(
@@ -36,5 +44,9 @@ export class SportshomePage {
 
     public get openingHours(): OpeningHour[][] {
         return weekdaysByDeviceType[this.deviceType.current].map(row => row.map(weekday => websiteConfig.openingHours[weekday]));
+    }
+
+    public trackByIdentity<T>(_index: number, value: T): T {
+        return value;
     }
 }

@@ -1,24 +1,16 @@
 <div
     id="report"
-    [ngStyle]="{
-        borderColor: styleConfig.css('textColor')
-    }"
 >
     <div
         id="date"
-        [ngStyle]="{
-            color: styleConfig.css('secondaryTextColor')
-        }"
     ><p
         id="group-title"
         *ngIf="groupId"
-        [ngStyle]="{
-            color: styleConfig.css('textColor')
-        }"
     >{{ ReportGroupId.title[groupId] }} | </p>Hinzugefügt am {{ report.createDate.description }}</div>
     <div
         id="message-container"
     >
+        <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
         <div
             id="bar"
             [ngStyle]="{
@@ -30,19 +22,15 @@
         >
             <img
                 id="image"
-                *ngIf="report.imageUrl !== undefined && deviceType.isMobile"
-                src="{{ report.imageUrl }}"
-                title="{{ report.title }}"
-                [ngStyle]="{
-                    borderColor: styleConfig.css('textColor')
-                }"
+                *ngIf="report.imageUrl !== null && deviceType.isMobile"
+                [src]="report.imageUrl"
+                [title]="report.title"
+                [alt]="report.title"
             >
             <p
                 id="title"
-                [ngStyle]="{
-                    color: styleConfig.css('textColor')
-                }"
             >{{ report.title }}</p>
+            <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
             <p
                 #message
                 id="message"
@@ -53,20 +41,16 @@
             <p
                 id="show-more-button"
                 *ngIf="isMessageClipped"
+                role="none"
                 (click)="toggleShowMore()"
-                [ngStyle]="{
-                    color: styleConfig.css('primaryColor')
-                }"
             >{{ isShownMore ? 'Weniger anzeigen ' : 'Mehr anzeigen' }}</p>
         </div>
         <img
             id="image"
-            *ngIf="report.imageUrl !== undefined && !deviceType.isMobile"
-            src="{{ report.imageUrl }}"
-            title="{{ report.title }}"
-            [ngStyle]="{
-                borderColor: styleConfig.css('textColor')
-            }"
+            *ngIf="report.imageUrl !== null && !deviceType.isMobile"
+            [src]="report.imageUrl"
+            [title]="report.title"
+            [alt]="report.title"
         >
     </div>
 </div>

@@ -1,104 +1,67 @@
 <text-section
-  [title]="'Abteilung Herrenfußball'"
+    [title]="'Abteilung Herrenfußball'"
 >
-
-  <p
-    class="text left-align"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >Die <a
-    class="text"
-    href="{{ allInternalLinks['fussball/herren/erste-mannschaft'].link }}"
-    title="{{ allInternalLinks['fussball/herren/erste-mannschaft'].title }}"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >1. Mannschaft</a> spielt als Spielgemeinschaft SG Kleinsendelbach / Hetzles in der Kreisklasse Kreis Erlangen / Pegnitzgrund Gruppe 3.</p>
-  <p
-    class="text left-align"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >Hier geht es zur <a
-    class="text"
-    href="http://sg-kh.de/sgkh-1-herren/"
-    target="_blank"
-    title="1. Mannschaft"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >Homepage</a> der 1. Mannschaft SG Kleinsendelbach / Hetzles.</p>
-
-  <p
-    class="text left-align margin-top-large"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >Die <a
-    class="text"
-    href="{{ allInternalLinks['fussball/herren/zweite-mannschaft'].link }}"
-    title="{{ allInternalLinks['fussball/herren/zweite-mannschaft'].title }}"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >2. Mannschaft</a> spielt als Spielgemeinschaft SG Kleinsendelbach / Hetzles 2 in der B-Klasse Kreis Erlangen / Pegnitzgrund Gruppe 3.</p>
-  <p
-    class="text left-align"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >Hier geht es zur <a
-    class="text"
-    href="http://sg-kh.de/sgkh-2-herren/"
-    target="_blank"
-    title="2. Mannschaft"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >Homepage</a> der 2. Mannschaft SG Kleinsendelbach / Hetzles.</p>
-
+    <p
+        class="text left-align secondaryColor"
+    >Die <a
+        class="text"
+        [href]="allInternalLinks['fussball/herren/erste-mannschaft'].link"
+        [title]="allInternalLinks['fussball/herren/erste-mannschaft'].title"
+    >1. Mannschaft</a> spielt als Spielgemeinschaft SG Kleinsendelbach / Hetzles in der Kreisklasse Kreis Erlangen / Pegnitzgrund Gruppe 3.</p>
+    <p
+        class="text left-align secondaryColor"
+    >Hier geht es zur <a
+        class="text"
+        href="http://sg-kh.de/sgkh-1-herren/"
+        target="_blank"
+        title="1. Mannschaft"
+    >Homepage</a> der 1. Mannschaft SG Kleinsendelbach / Hetzles.</p>
+    <p
+        class="text left-align margin-top-large secondaryColor"
+    >Die <a
+        class="text"
+        [href]="allInternalLinks['fussball/herren/zweite-mannschaft'].link"
+        [title]="allInternalLinks['fussball/herren/zweite-mannschaft'].title"
+    >2. Mannschaft</a> spielt als Spielgemeinschaft SG Kleinsendelbach / Hetzles 2 in der B-Klasse Kreis Erlangen / Pegnitzgrund Gruppe 3.</p>
+    <p
+        class="text left-align secondaryColor"
+    >Hier geht es zur <a
+        class="text"
+        href="http://sg-kh.de/sgkh-2-herren/"
+        target="_blank"
+        title="2. Mannschaft"
+    >Homepage</a> der 2. Mannschaft SG Kleinsendelbach / Hetzles.</p>
 </text-section>
 
 <links
-  [links]="links"
-></links>
+    [links]="links"
+ />
 
 <events
-  [groupIds]="eventGroupIds"
-></events>
+    [groupIds]="eventGroupIds"
+ />
 
 <reports
     [isGameReport]="false"
     [groupId]="reportGroupId"
     [maxListCount]="5"
-></reports>
+ />
 
 <contact
-  [contactData]="contactData"
-></contact>
+    [contactData]="contactData"
+ />
 
 <text-section>
-
-  <img
-    class="text-image"
-    src="assets/images/mannschaft.png"
-    title="Herrenabteilung"
-    [ngStyle]="{
-      borderColor: styleConfig.css('textColor')
-    }"
-  >
-  <p
-    class="text margin-top-large"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >Viel Spaß beim Sport wünscht</p>
-  <p
-    class="text"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >die Herrenabteilung</p>
-
+    <img
+        class="text-image"
+        src="assets/images/mannschaft.png"
+        title="Herrenabteilung"
+        alt="Herrenabteilung"
+    >
+    <p
+        class="text margin-top-large secondaryColor"
+    >Viel Spaß beim Sport wünscht</p>
+    <p
+        class="text primaryColor"
+    >die Herrenabteilung</p>
 </text-section>

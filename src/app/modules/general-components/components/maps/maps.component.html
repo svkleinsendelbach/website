@@ -1,47 +1,32 @@
 <div
-  *ngIf="!functionalityCookiesSelected"
-  id="cookie-container"
-  [ngStyle]="{
-    borderColor: styleConfig.css('textColor'),
-    backgroundColor: styleConfig.css('backgroundColor')
-  }"
+    *ngIf="!functionalityCookiesSelected"
+    id="cookie-container"
 >
-  <p
-    id="text1"
-    [ngStyle]="{
-      color: styleConfig.css('textColor')
-    }"
-  >Google Maps konnte nicht geladen werden, da Sie nicht den erforderlichen Cookies zugestimmt haben.</p>
-  <p
-    id="button"
-    (click)="acceptFunctionalityCookies()"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >Funktionelle Cookies jetzt akzeptieren</p>
-</div>
+    <p
+        id="text1"
+    >Google Maps konnte nicht geladen werden, da Sie nicht den erforderlichen Cookies zugestimmt haben.</p>
+    <p
+        id="button"
+        role="none"
+        (click)="acceptFunctionalityCookies()"
+    >Funktionelle Cookies jetzt akzeptieren</p>
+    </div>
 <p
-  *ngIf="!apiLoaded && functionalityCookiesSelected"
-  class="text center large"
-  [ngStyle]="{
-    color: styleConfig.css('primaryColor')
-  }"
+    *ngIf="!apiLoaded && functionalityCookiesSelected"
+    class="text center large primaryColor"
 >Google Maps wird geladen</p>
 <div
-  id="maps-container"
-  *ngIf="apiLoaded && functionalityCookiesSelected"
+    id="maps-container"
+    *ngIf="apiLoaded && functionalityCookiesSelected"
 >
-  <google-map
-    [options]="mapOptions"
-    [width]="'100%'"
-    [height]="'65vh'"
-    [ngStyle]="{
-      borderColor: styleConfig.css('textColor')
-    }"
-  >
-    <map-marker
-      *ngFor="let marker of markers"
-      [position]="marker"
-    ></map-marker>
-  </google-map>
+    <google-map
+        [options]="mapOptions"
+        [width]="'100%'"
+        [height]="'65vh'"
+    >
+        <map-marker
+            *ngFor="let marker of markers; trackBy: trackByIdentity"
+            [position]="marker"
+        />
+    </google-map>
 </div>

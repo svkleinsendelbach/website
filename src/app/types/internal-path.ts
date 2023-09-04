@@ -26,13 +26,12 @@ export type InternalPath =
     | 'kontakt'
     | 'mitgliedsantrag'
     | 'satzung'
-    | 'spiel'
     | 'sportheim'
     | 'tanzen'
     | 'über-uns';
 
 export namespace InternalPath {
-    export const all: Exclude<InternalPath, 'spiel'>[] = [
+    export const all: InternalPath[] = [
         'home',
         'über-uns',
         'sportheim',
@@ -63,7 +62,7 @@ export namespace InternalPath {
         'bearbeiten/berichte/bearbeiten'
     ];
 
-    export const title: Record<Exclude<InternalPath, 'spiel'>, string> = {
+    export const title: Record<InternalPath, string> = {
         'anfahrt': 'Anfahrt',
         'bearbeiten': 'Website bearbeiten',
         'bearbeiten/anmelden': 'Anmelden',
@@ -96,11 +95,8 @@ export namespace InternalPath {
 }
 
 export namespace InternalLink {
-    export const all: Record<Exclude<InternalPath, 'spiel'>, Link> & { 'spiel'(id: string): Link } = ((): Record<Exclude<InternalPath, 'spiel'>, Link> & { 'spiel'(id: string): Link } => {
-        const allLinks = {
-            spiel: (id: string): Link => Link.internalParam<InternalPath>('Spiel', 'spiel', id),
-            ...{} as Record<Exclude<InternalPath, 'spiel'>, Link>
-        };
+    export const all: Record<InternalPath, Link> = ((): Record<InternalPath, Link> => {
+        const allLinks = {} as Record<InternalPath, Link>;
         for (const internalPath of InternalPath.all)
             allLinks[internalPath] = Link.internal<InternalPath>(InternalPath.title[internalPath], internalPath);
         return allLinks;

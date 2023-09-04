@@ -1,47 +1,38 @@
 <text-section
-  [title]="'Authentifizierung wird überprüft'"
-  *ngIf="state === 'loading'"
+    [title]="'Authentifizierung wird überprüft'"
+    *ngIf="state === 'loading'"
 >
-  <p
-    class="text large margin-top-large"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >Es wird überprüft, ob Sie berechtigt sind diese Seite zu besuchen.</p>
+    <p
+        class="text large margin-top-large primaryColor"
+    >Es wird überprüft, ob Sie berechtigt sind diese Seite zu besuchen.</p>
 </text-section>
 <text-section
-  [title]="'Authentifizierung bestätigt'"
-  *ngIf="state === 'alreadyLoggedIn'"
+    [title]="'Authentifizierung bestätigt'"
+    *ngIf="state === 'alreadyLoggedIn'"
 >
-  <p
-    class="text large margin-top-large"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >Sie konnten nicht automatisch weitergeleitet werden. Bitte nutzen Sie den Link:</p>
-  <a
-    class="text large"
-    href="{{ editPageLink.link }}"
-    target="{{ editPageLink.target }}"
-    title="{{ editPageLink.title }}"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >Website bearbeiten</a>
+    <p
+        class="text large margin-top-large secondaryColor"
+    >Sie konnten nicht automatisch weitergeleitet werden. Bitte nutzen Sie den Link:</p>
+    <a
+        class="text large"
+        [href]="editPageLink.link"
+        [target]="editPageLink.target"
+        [title]="editPageLink.title"
+    >Website bearbeiten</a>
 </text-section>
 <div
-  class="container"
-  *ngIf="state === 'loginPage'"
+    class="container"
+    *ngIf="state === 'loginPage'"
 >
-  <app-login-page
-    (userUnregisteredEmitter)="handleUserUnregistered()"
-  ></app-login-page>
+    <app-login-page
+        (userUnregisteredEmitter)="handleUserUnregistered()"
+    />
 </div>
 <div
-  class="container"
-  *ngIf="state === 'addToWaitingUserPage'"
+    class="container"
+    *ngIf="state === 'addToWaitingUserPage'"
 >
-  <app-login-add-user-waiting
-    (addToWaitingUserCanceled)="handleAddToWaitingUserCanceled()"
-  ></app-login-add-user-waiting>
+    <app-login-add-user-waiting
+        (addToWaitingUserCanceled)="handleAddToWaitingUserCanceled()"
+    />
 </div>

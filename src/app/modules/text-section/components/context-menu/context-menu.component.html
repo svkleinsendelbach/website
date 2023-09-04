@@ -3,14 +3,12 @@
     id="dots"
     #dots
     (click)="$event.preventDefault(); $event.stopPropagation(); toggleMenu()"
-    [ngStyle]="{
-        color: styleConfig.css('textColor'),
-        zIndex: isShown ? 911 : undefined
-    }"
-></fa-icon>
+    [ngClass]="{ isShown: isShown }"
+ />
 <div
     id="elements"
     *ngIf="isShown"
+    role="none"
     (click)="$event.preventDefault(); $event.stopPropagation(); dismissMenu()"
 >
     <ng-content></ng-content>
@@ -18,5 +16,6 @@
 <div
     id="background"
     *ngIf="isShown"
+    role="none"
     (click)="$event.preventDefault(); $event.stopPropagation(); dismissMenu()"
 ></div>

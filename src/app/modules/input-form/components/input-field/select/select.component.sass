@@ -1,27 +1,47 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
-  @include flex-column(flex-start, center)
-  width: 100%
-  margin-bottom: 20px
+    @include flex-column(flex-start, center)
+    width: 100%
+    margin-bottom: 20px
 
 #select
-  @include font-montserrat
-  @include font-size('large')
-  @include font-weight('normal')
-  cursor: pointer
-  text-align: center
-  width: 100%
-  vertical-align: middle
-  border: solid 1px
-  border-radius: 8px
-  height: 48px
+    @include font-montserrat
+    @include font-size('large')
+    @include font-weight('normal')
+    cursor: pointer
+    text-align: center
+    width: 100%
+    vertical-align: middle
+    border: solid 1px
+    border-radius: 8px
+    height: 48px
+    color: color('text')
+    background-color: color('background')
+    border-color: color('text')
+
+    &.error
+        border-color: color('formErrorStatus')
 
 #hint
-  @include font-montserrat
-  @include font-size('normal')
-  @include font-weight('normal')
-  width: 97.5%
-  text-align: start
-  padding: 5px 0
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('normal')
+    width: 97.5%
+    text-align: start
+    padding: 5px 0
+    color: color('text')
+
+@media screen and (prefers-color-scheme: dark)
+    #select
+        color: darkColor('text')
+        background-color: darkColor('background')
+        border-color: darkColor('text')
+
+        &.error
+            border-color: darkColor('formErrorStatus')
+
+    #hint
+        color: darkColor('text')

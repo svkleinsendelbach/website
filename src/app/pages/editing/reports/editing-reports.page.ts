@@ -15,6 +15,10 @@ import { Title } from '@angular/platform-browser';
     templateUrl: './editing-reports.page.html'
 })
 export class EditingReportsPage {
+    public Report = Report;
+
+    public ReportGroup = ReportGroup;
+
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
 
     public mainEditingPageLink = InternalLink.all.bearbeiten;

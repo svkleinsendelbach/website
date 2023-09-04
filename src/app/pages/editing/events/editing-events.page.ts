@@ -15,6 +15,10 @@ import { Title } from '@angular/platform-browser';
     templateUrl: './editing-events.page.html'
 })
 export class EditingEventsPage {
+    public Event = Event;
+
+    public EventGroup = EventGroup;
+
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
 
     public mainEditingPageLink = InternalLink.all.bearbeiten;

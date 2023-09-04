@@ -12,12 +12,20 @@ export interface Manager {
     imageSrc: string | null;
 }
 
+export namespace Manager {
+    export function trackByName(_index: number, manager: Manager): string {
+        return manager.name;
+    }
+}
+
 @Component({
     selector: 'pages-managers',
     styleUrls: ['./managers.page.sass'],
     templateUrl: './managers.page.html'
 })
 export class ManagersPage {
+    public Manager = Manager;
+
     public readonly managers = websiteConfig.managers;
 
     public readonly links: LinkData[] = [

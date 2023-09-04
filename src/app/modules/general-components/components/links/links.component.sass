@@ -1,5 +1,6 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 #links
   @include flex-row(flex-start, center)
@@ -11,6 +12,9 @@
     margin: 0 8px
     border-radius: 8px
     text-decoration: none
+
+    &:hover
+        background-color: color('hoveredBackground')
 
     .title, .subtitle
       @include font-montserrat
@@ -33,3 +37,7 @@
 
   &.mobile .container
     width: calc(100% - 48px)
+
+@media screen and (prefers-color-scheme: dark)
+    #links .container:hover
+        background-color: color('hoveredBackground')

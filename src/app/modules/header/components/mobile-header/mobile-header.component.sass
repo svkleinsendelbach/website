@@ -1,5 +1,6 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
   @include flex-column(flex-start, center)
@@ -13,6 +14,7 @@
   height: 48px
   z-index: 1001
   box-shadow: #80808080 0 4px 16px
+  background-color: color('background')
 
   #top-row
     @include flex-row(center, center)
@@ -35,12 +37,14 @@
         @include font-weight('medium')
         margin-left: 16px
         white-space: nowrap
+        color: color('text')
 
     .hamburger-menu
       cursor: pointer
       font-size: 24px
       width: 24px
       margin-right: 16px
+      color: color('text')
 
   #header-items
     @include flex-column(flex-start, center)
@@ -54,3 +58,14 @@
   width: 100vw
   height: 100vh
   z-index: 1000
+
+@media screen and (prefers-color-scheme: dark)
+    #container
+        background-color: darkColor('background')
+
+        #top-row
+            #logo-container #logo-text
+                color: darkColor('text')
+
+            .hamburger-menu
+                color: darkColor('text')

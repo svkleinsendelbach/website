@@ -1,89 +1,61 @@
 <authentication-check
   [authenticationTypes]="['editEvents']"
 >
-  <div
-    id="back-btn-container"
-  >
-    <a
-      id="back-button"
-      title="Zurück"
-      href="{{ mainEditingPageLink.link }}"
-      [ngStyle]="{
-        color: styleConfig.css('textColor'),
-        backgroundColor: styleConfig.css('backgroundColor')
-      }"
-    >Zurück</a>
-  </div>
-  <text-section
-    [title]="'Termine bearbeiten'"
-  >
-    <p
-      id="add-event"
-      (click)="$event.preventDefault(); $event.stopPropagation(); addNewEvent()"
-      [ngStyle]="{
-        color: styleConfig.css('primaryColor'),
-        backgroundColor: styleConfig.css('backgroundColor'),
-        borderColor: styleConfig.css('textColor')
-      }"
-    >Neuen Termin hinzufügen</p>
-    <p
-      *ngIf="eventGroups === undefined"
-      class="text margin-top-large"
-      [ngStyle]="{
-        color: styleConfig.css('secondaryTextColor')
-      }"
-    >Termine werden geladen</p>
     <div
-      *ngFor="let eventGroup of eventGroups"
-      class="event-group"
-      [ngClass]="deviceType.current"
+        id="back-btn-container"
     >
-      <p
-        class="group-name"
-        [ngStyle]="{
-          color: styleConfig.css('textColor')
-        }"
-      >{{ eventGroupTitle[eventGroup.groupId] }}</p>
-      <div
-        *ngFor="let event of eventGroup.events"
-        class="event"
-        [ngStyle]="{
-          backgroundColor: styleConfig.css('backgroundColor'),
-          borderColor: styleConfig.css('textColor')
-        }"
-      >
-        <div
-          class="title-container"
-        >
-          <p
-            class="title"
-            [ngStyle]="{
-              color: styleConfig.css('textColor')
-            }"
-          >{{ event.title + ' | ' + event.date.description }}</p>
-          <p
-            *ngIf="event.subtitle !== undefined"
-            class="subtitle"
-            [ngStyle]="{
-              color: styleConfig.css('secondaryTextColor')
-            }"
-          >{{ event.subtitle }}</p>
-        </div>
-        <p
-          class="edit-button"
-          (click)="$event.preventDefault(); $event.stopPropagation(); editEvent(eventGroup.groupId, event)"
-          [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-          }"
-        >Bearbeiten</p>
-        <p
-          class="delete-button"
-          (click)="$event.preventDefault(); $event.stopPropagation(); deleteEvent(eventGroup.groupId, event.id)"
-          [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-          }"
-        >Löschen</p>
-      </div>
+        <a
+            id="back-button"
+            title="Zurück"
+            [href]="mainEditingPageLink.link"
+        >Zurück</a>
     </div>
-  </text-section>
+    <text-section
+            [title]="'Termine bearbeiten'"
+    >
+        <p
+            id="add-event"
+            role="none"
+            (click)="$event.preventDefault(); $event.stopPropagation(); addNewEvent()"
+        >Neuen Termin hinzufügen</p>
+        <p
+            *ngIf="!eventGroups"
+            class="text margin-top-large secondaryColor"
+        >Termine werden geladen</p>
+        <div
+            *ngFor="let eventGroup of eventGroups; trackBy: EventGroup.trackById"
+            class="event-group"
+            [ngClass]="deviceType.current"
+        >
+        <p
+            class="group-name textColor"
+        >{{ eventGroupTitle[eventGroup.groupId] }}</p>
+        <div
+            *ngFor="let event of eventGroup.events; trackBy: Event.trackById"
+            class="event"
+        >
+            <div
+            class="title-container"
+            >
+            <p
+                class="title textColor"
+            >{{ event.title + ' | ' + event.date.description }}</p>
+            <p
+                *ngIf="event.subtitle"
+                class="subtitle secondaryColor"
+            >{{ event.subtitle }}</p>
+            </div>
+            <p
+                class="edit-button primaryColor"
+                role="none"
+                (click)="$event.preventDefault(); $event.stopPropagation(); editEvent(eventGroup.groupId, event)"
+            >Bearbeiten</p>
+            <p
+                class="delete-button primaryColor"
+                role="none"
+                (click)="$event.preventDefault(); $event.stopPropagation(); deleteEvent(eventGroup.groupId, event.id)"
+            >Löschen</p>
+        </div>
+        </div>
+    </text-section>
 </authentication-check>

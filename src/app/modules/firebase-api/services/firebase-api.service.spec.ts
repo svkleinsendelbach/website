@@ -67,6 +67,8 @@ describe('ApiService', () => {
             .set({
                 date: UtcDate.now.encoded,
                 isImportant: false,
+                link: null,
+                subtitle: null,
                 title: 'title'
             }, 'encrypt');
         expect(await database.child('events').child('general')
@@ -94,6 +96,8 @@ describe('ApiService', () => {
                 event: {
                     date: date.encoded,
                     isImportant: false,
+                    link: null,
+                    subtitle: null,
                     title: 'title'
                 },
                 eventId: eventId.guidString,
@@ -106,6 +110,8 @@ describe('ApiService', () => {
         expect(databaseValue).toEqual({
             date: date.encoded,
             isImportant: false,
+            link: null,
+            subtitle: null,
             title: 'title'
         });
     });
@@ -117,6 +123,8 @@ describe('ApiService', () => {
             .set({
                 date: UtcDate.now.encoded,
                 isImportant: false,
+                link: null,
+                subtitle: null,
                 title: 'title'
             }, 'encrypt');
         const date = UtcDate.now;
@@ -126,6 +134,8 @@ describe('ApiService', () => {
                 event: {
                     date: date.encoded,
                     isImportant: false,
+                    link: null,
+                    subtitle: null,
                     title: 'title2'
                 },
                 eventId: eventId.guidString,
@@ -138,6 +148,8 @@ describe('ApiService', () => {
         expect(databaseValue).toEqual({
             date: date.encoded,
             isImportant: false,
+            link: null,
+            subtitle: null,
             title: 'title2'
         });
     });
@@ -150,6 +162,8 @@ describe('ApiService', () => {
             .set({
                 date: date1.encoded,
                 isImportant: false,
+                link: null,
+                subtitle: null,
                 title: 'event1'
             }, 'encrypt');
         const date2 = UtcDate.now.advanced({ minute: 30 });
@@ -159,6 +173,8 @@ describe('ApiService', () => {
             .set({
                 date: date2.encoded,
                 isImportant: false,
+                link: null,
+                subtitle: null,
                 title: 'event2'
             }, 'encrypt');
         const date3 = UtcDate.now.advanced({ minute: 20 });
@@ -168,6 +184,8 @@ describe('ApiService', () => {
             .set({
                 date: date3.encoded,
                 isImportant: false,
+                link: null,
+                subtitle: null,
                 title: 'event3'
             }, 'encrypt');
         const date4 = UtcDate.now.advanced({ minute: -30 });
@@ -177,6 +195,8 @@ describe('ApiService', () => {
             .set({
                 date: date4.encoded,
                 isImportant: false,
+                link: null,
+                subtitle: null,
                 title: 'event4'
             }, 'encrypt');
         const result = await firebaseApi.function('event').function('get')
@@ -190,12 +210,16 @@ describe('ApiService', () => {
                         date: date2.encoded,
                         id: eventId2.guidString,
                         isImportant: false,
+                        link: null,
+                        subtitle: null,
                         title: 'event2'
                     },
                     {
                         date: date1.encoded,
                         id: eventId1.guidString,
                         isImportant: false,
+                        link: null,
+                        subtitle: null,
                         title: 'event1'
                     }
                 ],
@@ -207,6 +231,8 @@ describe('ApiService', () => {
                         date: date3.encoded,
                         id: eventId3.guidString,
                         isImportant: false,
+                        link: null,
+                        subtitle: null,
                         title: 'event3'
                     }
                 ],

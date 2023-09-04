@@ -1,112 +1,68 @@
+<!-- eslint-disable @angular-eslint/template/no-interpolation-in-attributes -->
 <div
-  id="footer"
-  [ngClass]="deviceType.current"
-  [ngStyle]="{
-    backgroundColor: styleConfig.css('backgroundColor')
-  }"
+    id="footer"
+    [ngClass]="deviceType.current"
 >
-
-  <div
-    id="links-copyright"
-  >
     <div
-      id="links"
+        id="links-copyright"
     >
-      <a
-        *ngFor="let link of footerData.links"
-        class="link"
-        href="{{ link.link.link }}"
-        title="{{ link.link.title }}"
-        (mouseenter)="handleLinkHoverStart(link)"
-        (mouseleave)="handleLinkHoverStop(link)"
-        [ngStyle]="{
-          color: styleConfig.css(hoveredLinkId === link.id ? 'primaryColor' : 'textColor'),
-          backgroundColor: hoveredLinkId === link.id ? styleConfig.css('hoveredBackgroundColor') : undefined
-        }"
-      >{{ link.link.title }}</a>
-    </div>
-    <p
-      id="copyright"
-      [ngStyle]="{
-        color: styleConfig.css('textColor')
-      }"
-    >© Copyright {{ footerData.copyrightText }}</p>
-    <a
-      *ngIf="footerData.editLink"
-      id="edit-link"
-      href="{{ footerData.editLink.link }}"
-      title="{{ footerData.editLink.title }}"
-      (mouseenter)="editButtonHovered = true"
-      (mouseleave)="editButtonHovered = false"
-      [ngStyle]="{
-        color: styleConfig.css(editButtonHovered ? 'primaryColor' : 'textColor'),
-        borderColor: styleConfig.css(editButtonHovered ? 'primaryColor' : 'textColor'),
-        backgroundColor: editButtonHovered ? styleConfig.css('hoveredBackgroundColor') : undefined
-      }"
-    >Bearbeiten</a>
-  </div>
-
-  <div
-    class="address-card"
-    *ngFor="let contact of footerData.contact"
-  >
-    <div
-      class="top"
-      [ngStyle]="{
-        color: styleConfig.css('textColor'),
-        boderColor: styleConfig.css('textColor'),
-        backgroundColor: styleConfig.css('backgroundColor')
-      }"
-    >
-      <p
-        class="function"
-        [ngStyle]="{
-          color: styleConfig.css('textColor')
-        }"
-      >{{ contact.function }}</p>
-      <p
-        class="name"
-        [ngStyle]="{
-          color: styleConfig.css('textColor')
-        }"
-      >{{ contact.name }}</p>
-    </div>
-    <div
-      class="bottom"
-      [ngStyle]="{
-        color: styleConfig.css('textColor'),
-        boderColor: styleConfig.css('textColor'),
-        backgroundColor: styleConfig.css('backgroundColor')
-      }"
-    >
-      <p
-        class="street"
-        [ngStyle]="{
-          color: styleConfig.css('textColor')
-        }"
-      >{{ contact.street }}</p>
-      <p
-        class="city"
-        [ngStyle]="{
-          color: styleConfig.css('textColor')
-        }"
-      >{{ contact.city }}</p>
-      <a
-        class="telephone"
-        href="tel:{{ contact.telephone.number }}"
-        title="{{ contact.name }}"
-        [ngStyle]="{
-          color: styleConfig.css('primaryColor')
-        }"
-      >
-        <fa-icon
-          class="icon"
-          [icon]="faPhone"
-        ></fa-icon>
+        <div
+            id="links"
+        >
+        <a
+            *ngFor="let link of footerData.links; trackBy: FooterLink.trackById"
+            class="link"
+            [href]="link.link.link"
+            [title]="link.link.title"
+        >{{ link.link.title }}</a>
+        </div>
         <p
-          class="number"
-        >{{ contact.telephone.text }}</p>
-      </a>
+            id="copyright"
+        >© Copyright {{ footerData.copyrightText }}</p>
+        <a
+            *ngIf="footerData.editLink"
+            id="edit-link"
+            [href]="footerData.editLink.link"
+            [title]="footerData.editLink.title"
+        >Bearbeiten</a>
     </div>
-  </div>
+
+    <div
+        class="address-card"
+        *ngFor="let contact of footerData.contact; trackBy: ContactData.trackByName"
+    >
+        <div
+            class="top"
+        >
+            <p
+                class="function"
+            >{{ contact.function }}</p>
+            <p
+                class="name"
+            >{{ contact.name }}</p>
+        </div>
+        <div
+            class="bottom"
+        >
+            <p
+                class="street"
+            >{{ contact.street }}</p>
+            <p
+                class="city"
+            >{{ contact.city }}</p>
+            <a
+                class="telephone"
+                href="tel:{{ contact.telephone.number }}"
+                [title]="contact.name"
+            >
+                <fa-icon
+                    class="icon"
+                    [icon]="faPhone"
+                />
+                <p
+                    class="number"
+                >{{ contact.telephone.text }}</p>
+            </a>
+        </div>
+    </div>
 </div>

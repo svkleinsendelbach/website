@@ -1,5 +1,6 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
   @include flex-column(flex-start, center)
@@ -13,6 +14,7 @@
   top: 0
   height: 80px
   z-index: 1001
+  background-color: color('background')
 
   #logo-container
     @include flex-row(center, center)
@@ -29,6 +31,7 @@
       @include font-weight('medium')
       margin-left: 16px
       white-space: nowrap
+      color: color('text')
 
   #header-items
     @include flex-row(center, center)
@@ -41,3 +44,10 @@
   width: 100vw
   height: 100vh
   z-index: 1000
+
+@media screen and (prefers-color-scheme: dark)
+    #container
+        background-color: darkColor('background')
+
+        #logo-container #logo-text
+            color: darkColor('text')

@@ -1,42 +1,31 @@
 <text-section
-  [title]="isGameReport ? 'Aktuelle Spielberichte' : 'Aktuelle Berichte'"
+    [title]="isGameReport ? 'Aktuelle Spielberichte' : 'Aktuelle Berichte'"
 >
     <p
         *ngIf="fetchedReports.isLoading()"
-        class="text center large"
-        [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-        }"
+        class="text center large primaryColor"
     >{{ isGameReport ? 'Spielberichte' : 'Berichte' }} werden geladen</p>
     <p
         *ngIf="fetchedReports.isFailure()"
-        class="text center large"
-        [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-        }"
+        class="text center large primaryColor"
     >{{ isGameReport ? 'Spielberichte' : 'Berichte' }} konnten nicht geladen werden</p>
     <p
         *ngIf="fetchedReports.isSuccess() && fetchedReports.content.reports.length === 0"
-        class="text center large"
-        [ngStyle]="{
-        color: styleConfig.css('primaryColor')
-        }"
+        class="text center large primaryColor"
     >Keine {{ isGameReport ? 'Spielberichte' : 'Berichte' }}</p>
     <div
         id="report-container"
     >
         <report
-            *ngFor="let report of fetchedReports.content?.reports"
-            [report]="Report.concrete(report)"
-        ></report>
+            *ngFor="let report of fetchedReports.content?.reports; trackBy: Report.trackById"
+            [report]="report"
+         />
     </div>
     <a
         id="view-all-reports"
-        href="{{ allReportsLink.link }}"
-        title="{{ allReportsLink.title }}"
+        class="primaryColor"
+        [href]="allReportsLink.link"
+        [title]="allReportsLink.title"
         *ngIf="showAllReportsButton || (fetchedReports.isSuccess() && fetchedReports.content.hasMore)"
-        [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-        }"
     >{{ showAllReportsButton ? 'Alle Berichte der anderen Abteilungen anzeigen' : isGameReport ? 'Alle Spielberichte' : 'Alle Berichte' }}</a>
 </text-section>

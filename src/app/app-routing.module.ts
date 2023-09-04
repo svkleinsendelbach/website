@@ -1,5 +1,4 @@
 import { RouterModule, Routes } from '@angular/router';
-import { GameDetailPage } from './pages/game-detail/game-detail.page';
 import { NgModule } from '@angular/core';
 import { PageNotFoundPage } from './pages/page-not-found/page-not-found.page';
 import { internalRoutes } from './types/internal-routes';
@@ -12,10 +11,10 @@ const routes: Routes = [
         redirectTo: 'home'
     },
     ...internalRoutes,
-    { path: 'spiel/:id',
-        component: GameDetailPage },
-    { path: '**',
-        component: PageNotFoundPage }
+    {
+        path: '**',
+        component: PageNotFoundPage
+    }
 ];
 
 @NgModule({

@@ -1,29 +1,27 @@
 <label
-  [text]="label"
+    [text]="label"
 ></label>
 <angular-editor
-  [placeholder]="placeholder ?? label"
-  [(ngModel)]="htmlContent"
-  [config]="config"
-  [ngStyle]="{
-    border: inputField.error === undefined ? undefined : '1px solid ' + styleConfig.css('formErrorStatusColor')
-  }"
+    [ngClass]="{ error: inputField.error}"
+    [placeholder]="placeholder ?? label"
+    [(ngModel)]="htmlContent"
+    [config]="config"
 >
-  <ng-template
-    #customButtons
-    let-executeCommandFn="executeCommandFn"
-  >
-    <ae-toolbar-set>
-      <ae-select
-        class="select-color"
-        [options]="colorSelectOptions"
-        [(ngModel)]="selectedColor"
-        (change)="setColor(executeCommandFn)"
-        tabindex="-1"
-      ></ae-select>
-    </ae-toolbar-set>
-  </ng-template>
+    <ng-template
+        #customButtons
+        let-executeCommandFn="executeCommandFn"
+    >
+        <ae-toolbar-set>
+        <ae-select
+            class="select-color"
+            [options]="colorSelectOptions"
+            [(ngModel)]="selectedColor"
+            (change)="setColor(executeCommandFn)"
+            tabindex="-1"
+        />
+        </ae-toolbar-set>
+    </ng-template>
 </angular-editor>
 <error-message
-  [error]="inputField.error"
-></error-message>
+    [error]="inputField.error"
+ />

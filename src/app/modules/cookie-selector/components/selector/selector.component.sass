@@ -1,5 +1,6 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
   @include flex-column(flex-start, center)
@@ -13,12 +14,14 @@
   bottom: 0
   right: 32px
   z-index: 1100
+  background-color: color('background')
 
   #header
     @include font-roboto
     @include font-weight('medium')
     @include font-size('medium')
     padding-bottom: 12px
+    color: color('primary')
 
   .text
     @include font-roboto
@@ -27,6 +30,7 @@
     padding-bottom: 12px
     text-align: justify
     line-height: 1.2
+    color: color('text')
 
   #privacy
     @include font-roboto
@@ -35,12 +39,14 @@
     padding-bottom: 16px
     text-decoration: none
     cursor: pointer
+    color: color('primary')
 
   #extra-text
     @include font-roboto
     @include font-weight('medium')
     @include font-size('small')
     padding-bottom: 12px
+    color: color('primary')
 
   #selection-buttons
     @include flex-row(center, space-between)
@@ -67,12 +73,14 @@
     padding-bottom: 12px
     text-decoration: none
     cursor: pointer
+    color: color('primary')
 
   .details-topic
     @include font-roboto
     @include font-weight('medium')
     @include font-size('normal')
     padding-bottom: 4px
+    color: color('primary')
 
   .details-description
     @include font-roboto
@@ -81,6 +89,7 @@
     padding-bottom: 12px
     text-align: justify
     line-height: 1.2
+    color: color('text')
 
   #confirm-buttons
     @include flex-row(center, space-between)
@@ -96,6 +105,16 @@
       width: 45%
       text-align: center
       cursor: pointer
+
+    #confirm-selected
+      color: color('text')
+      background-color: color('background')
+      border-color: color('text')
+
+    #confirm-all
+      color: color('background')
+      background-color: color('primary')
+      border-color: color('primary')
 
   &.tablet
     width: 40vw
@@ -119,5 +138,29 @@
             margin-bottom: 12px
 
 @media screen and (prefers-color-scheme: dark)
-  #message-box
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.25)
+    #message-box
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.25)
+        background-color: darkColor('background')
+
+    #header, #privacy, #extra-text
+        color: darkColor('primary')
+
+    .text
+        color: darkColor('text')
+
+    #details-button, #show-selection-button, .details-topic
+        color: darkColor('primary')
+
+    .details-description
+        color: darkColor('text')
+
+    #confirm-buttons
+        #confirm-selected
+            color: darkColor('text')
+            background-color: darkColor('background')
+            border-color: darkColor('text')
+
+        #confirm-all
+            color: darkColor('background')
+            background-color: darkColor('primary')
+            border-color: darkColor('primary')

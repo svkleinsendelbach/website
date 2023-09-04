@@ -24,7 +24,7 @@ export class ReportsComponent implements OnInit {
 
     public readonly allReportsLink = InternalLink.all.berichte;
 
-    public fetchedReports: FetchState<{ reports: Report.Flatten[]; hasMore: boolean }> = FetchState.loading;
+    public fetchedReports: FetchState<{ reports: Report[]; hasMore: boolean }> = FetchState.loading;
 
     public constructor(
         private readonly firebaseApiService: FirebaseApiService,
@@ -39,7 +39,10 @@ export class ReportsComponent implements OnInit {
                 numberReports: this.maxListCount
             })
             .then(result => {
-                this.fetchedReports = FetchState.success(result);
+                this.fetchedReports = FetchState.success({
+                    hasMore: result.hasMore,
+                    reports: result.reports.map(report => Report.concrete(report))
+                });
             })
             .catch(reason => {
                 this.fetchedReports = FetchState.failure(reason);

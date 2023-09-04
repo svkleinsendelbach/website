@@ -1,25 +1,27 @@
+<!-- eslint-disable @angular-eslint/template/no-inline-styles -->
 <div
     [ngStyle]="{
         height: heightStyle
     }"
 ></div>
 <div
-  id="image-container"
-  [ngClass]="deviceType.current"
-  [ngStyle]="{
-    height: heightStyle
-  }"
->
-  <img
-    *ngFor="let bannerItem of bannerData; index as index"
-    class="image"
-    src="{{ bannerItem.imageSource }}"
-    title="{{ bannerItem.title }}"
+    id="image-container"
+    [ngClass]="deviceType.current"
     [ngStyle]="{
-        height: heightStyle,
-        transform: 'translateX(' + (index - currentPage + 1) + '00%)'
+        height: heightStyle
     }"
-  >
+>
+    <img
+        *ngFor="let bannerItem of bannerData; index as index; trackBy: BannerItem.trackByTitle"
+        class="image"
+        [src]="bannerItem.imageSource"
+        [title]="bannerItem.title"
+        [alt]="bannerItem.title"
+        [ngStyle]="{
+            height: heightStyle,
+            transform: 'translateX(' + (index - currentPage + 1) + '00%)'
+        }"
+    >
 </div>
 <div
     id="text-container"
@@ -37,54 +39,48 @@
     >{{ current.title }}</p>
     <p
         id="subtitle"
-        *ngIf="current.subTitle !== undefined"
+        *ngIf="current.subTitle !== null"
     >{{ current.subTitle }}</p>
 </div>
 <div
-  id="nav-bar-container"
-  [ngClass]="deviceType.current"
-  (mousedown)="onMouseDown($event)"
-  (mouseup)="onMouseUp($event)"
-  (touchstart)="onMouseDown($event)"
-  (touchend)="onMouseUp($event)"
-  [ngStyle]="{
-    height: heightStyle
-  }"
+    id="nav-bar-container"
+    [ngClass]="deviceType.current"
+    (mousedown)="onMouseDown($event)"
+    (mouseup)="onMouseUp($event)"
+    (touchstart)="onMouseDown($event)"
+    (touchend)="onMouseUp($event)"
+    [ngStyle]="{
+        height: heightStyle
+    }"
 >
-  <div
-    id="nav-button-container"
-  >
-    <fa-icon
-      id="left-button"
-      [icon]="faChevronLeft"
-      (click)="$event.preventDefault(); $event.stopPropagation(); handleButtonClick('left')"
-      [ngStyle]="{
-        color: styleConfig.css('textColor')
-      }"
-    ></fa-icon>
-    <fa-icon
-      id="right-button"
-      [icon]="faChevronRight"
-      (click)="$event.preventDefault(); $event.stopPropagation(); handleButtonClick('right')"
-      [ngStyle]="{
-        color: styleConfig.css('textColor')
-      }"
-    ></fa-icon>
-  </div>
-  <div
-    id="nav-bar"
-  >
-    <fa-icon
-      *ngFor="let _ of bannerData; index as index"
-      [icon]="faCircle"
-      class="circle"
-      (click)="$event.preventDefault(); $event.stopPropagation(); handleNavBarClick(index + 1)"
-      [ngStyle]="{
-        color: currentPage === index + 1 ? styleConfig.css('primaryColor') : styleConfig.css('textColor')
-      }"
-      [ngClass]="{
-        filled: currentPage === index + 1
-      }"
-    ></fa-icon>
-  </div>
+    <div
+        id="nav-button-container"
+    >
+        <fa-icon
+            id="left-button"
+            [icon]="faChevronLeft"
+            (click)="$event.preventDefault(); $event.stopPropagation(); handleButtonClick('left')"
+        />
+        <fa-icon
+            id="right-button"
+            [icon]="faChevronRight"
+            (click)="$event.preventDefault(); $event.stopPropagation(); handleButtonClick('right')"
+        />
+    </div>
+    <div
+        id="nav-bar"
+    >
+        <fa-icon
+            *ngFor="let _ of bannerData; index as index; trackBy: BannerItem.trackByTitle"
+            [icon]="faCircle"
+            class="circle"
+            (click)="$event.preventDefault(); $event.stopPropagation(); handleNavBarClick(index + 1)"
+            [ngStyle]="{
+                color: currentPage === index + 1 ? styleConfig.css('primaryColor') : styleConfig.css('textColor')
+            }"
+            [ngClass]="{
+                filled: currentPage === index + 1
+            }"
+        />
+    </div>
 </div>

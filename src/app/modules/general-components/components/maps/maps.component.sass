@@ -1,29 +1,51 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
   width: 100%
 
 #cookie-container
-  @include flex-column(flex-start, center)
-  width: 100%
-  padding: 80px 0
-  border: solid 1px
+    @include flex-column(flex-start, center)
+    width: 100%
+    padding: 80px 0
+    border: solid 1px
+    border-color: color('text')
+    background-color: color('background')
 
-  #text1
-    @include font-montserrat
-    @include font-size('medium')
-    @include font-weight('small')
-    margin-bottom: 32px
-    text-align: center
+    #text1
+        @include font-montserrat
+        @include font-size('medium')
+        @include font-weight('small')
+        margin-bottom: 32px
+        text-align: center
+        color: color('text')
 
-  #button
-    @include font-montserrat
-    @include font-size('medium')
-    @include font-weight('small')
-    text-align: center
-    cursor: pointer
+    #button
+        @include font-montserrat
+        @include font-size('medium')
+        @include font-weight('small')
+        text-align: center
+        cursor: pointer
+        color: color('primary')
 
 #maps-container
-  width: 100%
-  border: solid 1px
+    width: 100%
+    border: solid 1px
+
+    google-map
+        border-color: color('text')
+
+@media screen and (prefers-color-scheme: dark)
+    #cookies-container
+        border-color: darkColor('text')
+        background-color: darkColor('background')
+
+        #text1
+            color: darkColor('text')
+
+        #button
+            color: darkColor('primary')
+
+    #maps-container google-map
+        border-color: darkColor('text')

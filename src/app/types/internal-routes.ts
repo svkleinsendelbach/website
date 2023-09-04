@@ -30,7 +30,7 @@ import { SportshomePage } from '../pages/about-us/sportshome/sportshome.page';
 import { StatutePage } from '../pages/about-us/statute/statute.page';
 import { Type } from '@angular/core';
 
-const associatedRoute: Record<Exclude<InternalPath, 'nachricht' | 'spiel'>, Type<unknown>> = {
+const associatedRoute: Record<InternalPath, Type<unknown>> = {
     'anfahrt': DrivePage,
     'bearbeiten': EditingMainPage,
     'bearbeiten/anmelden': LoginPage,

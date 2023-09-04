@@ -1,81 +1,56 @@
 <text-section
   [title]="'Sportheim in Kleinsendelbach'"
 >
-
-  <p
-    class="text block margin-top-normal"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >Der SV Kleinsendelbach überträgt in seinem Sportheim die Spiele der Bundesliga auf Sky. Sie können live dabei sein, wenn Ihre Lieblingsmannschaft aufläuft. Frei nach dem Motto von Sky „Unsere Gäste haben das Beste verdient“, zeigen wir auch die Champions League Spiele mit deutscher Beteiligung, die nicht im freien Fernsehen ausgestrahlt werden.</p>
-  <p
-    class="text block margin-top-normal"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >Der Sportverein freut sich zusammen mit Ihnen auf spannende Spiele!</p>
-
+    <p
+        class="text block margin-top-normal secondaryColor"
+    >Der SV Kleinsendelbach überträgt in seinem Sportheim die Spiele der Bundesliga auf Sky. Sie können live dabei sein, wenn Ihre Lieblingsmannschaft aufläuft. Frei nach dem Motto von Sky „Unsere Gäste haben das Beste verdient“, zeigen wir auch die Champions League Spiele mit deutscher Beteiligung, die nicht im freien Fernsehen ausgestrahlt werden.</p>
+    <p
+        class="text block margin-top-normal secondaryColor"
+    >Der Sportverein freut sich zusammen mit Ihnen auf spannende Spiele!</p>
 </text-section>
 
 <text-section
-  [title]="'Unsere Öffnungszeiten'"
+    [title]="'Unsere Öffnungszeiten'"
 >
-  <div
-    id="opening-hours"
-    [ngClass]="deviceType.current"
-  >
     <div
-      class="row"
-      *ngFor="let row of openingHours"
+        id="opening-hours"
+        [ngClass]="deviceType.current"
     >
-      <div
-        class="opening-hour"
-        *ngFor="let openingHour of row"
-      >
-        <p
-          class="title"
-          [ngStyle]="{
-            color: styleConfig.css('textColor')
-          }"
-        >{{ openingHour.title }}</p>
-        <p
-          class="time"
-          [ngStyle]="{
-            color: styleConfig.css('secondaryTextColor')
-          }"
-        >{{ openingHour.time }}</p>
-      </div>
+        <div
+            class="row"
+            *ngFor="let row of openingHours; trackBy: trackByIdentity"
+        >
+        <div
+            class="opening-hour"
+            *ngFor="let openingHour of row; trackBy: OpeningHour.trackByTitle"
+        >
+            <p
+                class="title textColor"
+            >{{ openingHour.title }}</p>
+            <p
+                class="time secondaryColor"
+            >{{ openingHour.time }}</p>
+        </div>
+        </div>
     </div>
-  </div>
 </text-section>
 
 <text-section
-  [title]="' Sportheim des SV Kleinsendelbach e.V.'"
+    [title]="' Sportheim des SV Kleinsendelbach e.V.'"
 >
-
-  <p
-    class="text"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >Hauptstraße 21</p>
-  <p
-    class="text"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >91077 Kleinsendelbach</p>
-  <a
-    class="text"
-    href="tel:091268304"
-    title="Sportverein Kleinsendelbach e.V."
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >
-    <fa-icon
-      [icon]="faPhone"
-    ></fa-icon> 09126 / 8304
-  </a>
-
+    <p
+        class="text secondaryColor"
+    >Hauptstraße 21</p>
+    <p
+        class="text secondaryColor"
+    >91077 Kleinsendelbach</p>
+    <a
+        class="text"
+        href="tel:091268304"
+        title="Sportverein Kleinsendelbach e.V."
+    >
+        <fa-icon
+            [icon]="faPhone"
+        /> 09126 / 8304
+    </a>
 </text-section>

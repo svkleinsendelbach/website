@@ -4,6 +4,26 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Link } from 'src/app/types/link';
 import { StyleConfigService } from '../../../services/style-config.service';
 
+export interface LinkItem {
+    name: string;
+    link: Link;
+    description: string;
+    icon: IconDefinition;
+    animation: 'jump' | 'rotation' | 'shake';
+}
+
+export namespace LinkItem {
+    export function trackByName(_index: number, item: LinkItem): string {
+        return item.name;
+    }
+}
+
+export interface LinkData {
+    desktop: LinkItem[][];
+    tablet: LinkItem[][];
+    mobile: LinkItem[][];
+}
+
 @Component({
     selector: 'app-home-links',
     styleUrls: ['./home-links.component.sass'],
@@ -11,6 +31,8 @@ import { StyleConfigService } from '../../../services/style-config.service';
 })
 export class HomeLinksComponent {
     @Input() public linkData!: LinkData;
+
+    public LinkItem = LinkItem;
 
     public constructor(
         public readonly deviceType: DeviceTypeService,
@@ -20,18 +42,8 @@ export class HomeLinksComponent {
     public get links(): LinkItem[][] {
         return this.linkData[this.deviceType.current];
     }
-}
 
-export interface LinkItem {
-    name: string;
-    link: Link;
-    description: string;
-    icon: IconDefinition;
-    animation: 'jump' | 'rotation' | 'shake';
-}
-
-export interface LinkData {
-    desktop: LinkItem[][];
-    tablet: LinkItem[][];
-    mobile: LinkItem[][];
+    public trackByIdentity<T>(_index: number, value: T): T {
+        return value;
+    }
 }

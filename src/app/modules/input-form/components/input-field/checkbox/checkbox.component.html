@@ -1,31 +1,22 @@
 <div
-  id="container"
+    id="container"
 >
-  <p
-    id="label"
-    [ngStyle]="{
-      color: styleConfig.css('textColor')
-    }"
-  >{{ label + ':' }}</p>
-  <div
-    id="checkbox"
-    (click)="onClick()"
-    [ngClass]="{
-      checked: checked
-    }"
-    [ngStyle]="{
-      backgroundColor: styleConfig.css(checked ? 'primaryColor' : 'textColor'),
-      borderColor: styleConfig.css('textColor')
-    }"
-  >
+    <p
+        id="label"
+    >{{ label + ':' }}</p>
     <div
-      id="slider"
-      [ngStyle]="{
-        backgroundColor: styleConfig.css('backgroundColor')
-      }"
-    ></div>
-  </div>
+        id="checkbox"
+        role="none"
+        (click)="onClick()"
+        [ngClass]="{
+            checked: checked
+        }"
+    >
+        <div
+            id="slider"
+        ></div>
+    </div>
 </div>
 <error-message
-  [error]="inputField.error"
-></error-message>
+    [error]="inputField.error"
+ />

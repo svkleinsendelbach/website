@@ -1,5 +1,6 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
   @include flex-column(flex-start, center)
@@ -17,6 +18,7 @@
     text-decoration: none
     width: max-content
     padding: 0 24px
+    background-color: color('background')
 
     &:hover
       background-color: #E0E0E0 !important
@@ -26,9 +28,11 @@
       @include font-size('normal')
       @include font-weight('medium')
       line-height: 80px
+      color: color('text')
 
     .drop-down-arrow
       margin-left: 8px
+      color: color('text')
 
   #sub-items
     @include flex-column(flex-start, center)
@@ -37,6 +41,7 @@
     z-index: 1002
     width: max-content
     display: none
+    background-color: color('background')
 
     .sub-item
       @include flex-row(center, center)
@@ -52,6 +57,7 @@
         @include font-size('normal')
         @include font-weight('medium')
         text-decoration: none
+        color: color('text')
 
       &:nth-last-child(1)
         padding-bottom: 16px
@@ -63,5 +69,18 @@
 
 @media screen and (prefers-color-scheme: dark)
   #header-item
-    #top-item:hover, #sub-items .sub-item:hover
-      background-color: #44454A !important
+        #top-item
+            background-color: darkColor('background')
+
+            #top-item-text .drop-down-arrow
+                color: darkColor('text')
+
+        #top-item:hover, #sub-items .sub-item:hover
+            background-color: #44454A !important
+
+        #sub-items
+            background-color: darkColor('background')
+
+            .sub-item .sub-item-text
+                color: darkColor('text')
+

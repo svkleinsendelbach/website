@@ -1,116 +1,111 @@
+<!-- eslint-disable @angular-eslint/template/no-call-expression -->
 <text-section
-  [title]="'Anmeldung um die Website zu bearbeiten'"
+    [title]="'Anmeldung um die Website zu bearbeiten'"
 >
-  <input-form
-    [inputForm]="inputForm"
-    [submitButtonText]="'Anmelden'"
-    (submitButtonClicked)="onSubmit()"
-  >
-    <input-field-text
-      [label]="'E-Mail Adresse'"
-      [inputField]="inputForm.field('email')"
-    ></input-field-text>
-    <input-field-text
-      [label]="'Passwort'"
-      [secure]="true"
-      [inputField]="inputForm.field('password')"
-    ></input-field-text>
-  </input-form>
-
-  <p
-    class="text margin-top-large large"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >oder</p>
-
-  <div
-   class="sign-in-container"
-   [ngClass]="deviceType.current"
-  >
-    <div
-      class="sign-in-button apple"
-      (click)="$event.preventDefault(); $event.stopPropagation(); loginWithApple()"
-      [ngStyle]="{
-        backgroundColor: appearance.current === 'light' ? '#000000' : '#FFFFFF'
-      }"
+    <input-form
+        [inputForm]="inputForm"
+        [submitButtonText]="'Anmelden'"
+        (submitButtonClicked)="onSubmit()"
     >
-      <img
-        *ngIf="appearance.current === 'light'"
-        src="assets/images/apple_logo_white.png"
-        title="Apple"
-        class="logo"
-      >
-      <img
-        *ngIf="appearance.current === 'dark'"
-        src="assets/images/apple_logo_black.png"
-        title="Apple"
-        class="logo"
-      >
-      <p
-        class="button-text"
-        [ngStyle]="{
-          color: appearance.current === 'light' ? '#FFFFFF' : '#000000'
-        }"
-      >Mit Apple Anmelden</p>
-    </div>
-    <p
-      *ngIf="signInWithAppleStatus === 'loading'"
-      class="status"
-      [ngStyle]="{
-        color: styleConfig.css('formInfoStatusColor')
-      }"
-    >Bitte melden Sie sich im seperaten Anmeldefenster an.</p>
-    <p
-      *ngIf="signInWithAppleStatus !== 'valid' && signInWithAppleStatus !== 'loading'"
-      class="status"
-      [ngStyle]="{
-        color: styleConfig.css('formErrorStatusColor')
-      }"
-    >{{ loginErrorMessage(signInWithAppleStatus) }}</p>
-  </div>
+        <input-field-text
+        [label]="'E-Mail Adresse'"
+        [inputField]="inputForm.field('email')"
+        />
+        <input-field-text
+        [label]="'Passwort'"
+        [secure]="true"
+        [inputField]="inputForm.field('password')"
+        />
+    </input-form>
 
-  <div
-   class="sign-in-container"
-   [ngClass]="deviceType.current"
-  >
+    <p
+        class="text margin-top-large large secondaryColor"
+    >oder</p>
+
     <div
-      class="sign-in-button google"
-      (click)="$event.preventDefault(); $event.stopPropagation(); loginWithGoogle()"
-      [ngStyle]="{
-        backgroundColor: appearance.current === 'light' ? '#FFFFFF' : '#4285F4',
-        boxShadow: '0 0 4px ' + (appearance.current === 'light' ? '#A0A0A0' : '#202020')
-      }"
+        class="sign-in-container"
+        [ngClass]="deviceType.current"
     >
-      <img
-        src="assets/images/google_logo.png"
-        title="Google"
-        class="logo"
-        [ngStyle]="{
-          backgroundColor: appearance.current === 'light' ? undefined : '#FFFFFF'
-        }"
-      >
-      <p
-        class="button-text"
-        [ngStyle]="{
-          color: appearance.current === 'light' ? '#6A6A6A' : '#FFFFFF'
-        }"
-      >Mit Google Anmelden</p>
+        <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
+        <div
+            class="sign-in-button apple"
+            role="none"
+            (click)="$event.preventDefault(); $event.stopPropagation(); loginWithApple()"
+            [ngStyle]="{
+                backgroundColor: appearance.current === 'light' ? '#000000' : '#FFFFFF'
+            }"
+        >
+        <img
+            *ngIf="appearance.current === 'light'"
+            src="assets/images/apple_logo_white.png"
+            title="Apple"
+            alt="Apple"
+            class="logo"
+        >
+        <img
+            *ngIf="appearance.current === 'dark'"
+            src="assets/images/apple_logo_black.png"
+            title="Apple"
+            alt="Apple"
+            class="logo"
+        >
+        <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
+        <p
+            class="button-text"
+            [ngStyle]="{
+                color: appearance.current === 'light' ? '#FFFFFF' : '#000000'
+            }"
+        >Mit Apple Anmelden</p>
+        </div>
+        <p
+            *ngIf="signInWithAppleStatus === 'loading'"
+            class="status info"
+        >Bitte melden Sie sich im seperaten Anmeldefenster an.</p>
+        <p
+            *ngIf="signInWithAppleStatus !== 'valid' && signInWithAppleStatus !== 'loading'"
+            class="status error"
+        >{{ loginErrorMessage(signInWithAppleStatus) }}</p>
     </div>
-    <p
-      *ngIf="signInWithGoogleStatus === 'loading'"
-      class="status"
-      [ngStyle]="{
-        color: styleConfig.css('formInfoStatusColor')
-      }"
-    >Bitte melden Sie sich im seperaten Anmeldefenster an.</p>
-    <p
-      *ngIf="signInWithGoogleStatus !== 'valid' && signInWithGoogleStatus !== 'loading'"
-      class="status"
-      [ngStyle]="{
-        color: styleConfig.css('formErrorStatusColor')
-      }"
-    >{{ loginErrorMessage(signInWithGoogleStatus) }}</p>
-  </div>
 
+    <div
+        class="sign-in-container"
+        [ngClass]="deviceType.current"
+    >
+        <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
+        <div
+            class="sign-in-button google"
+            role="none"
+            (click)="$event.preventDefault(); $event.stopPropagation(); loginWithGoogle()"
+            [ngStyle]="{
+                backgroundColor: appearance.current === 'light' ? '#FFFFFF' : '#4285F4',
+                boxShadow: '0 0 4px ' + (appearance.current === 'light' ? '#A0A0A0' : '#202020')
+            }"
+        >
+        <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
+        <img
+            src="assets/images/google_logo.png"
+            title="Google"
+            alt="Google"
+            class="logo"
+            [ngStyle]="{
+                backgroundColor: appearance.current === 'light' ? undefined : '#FFFFFF'
+            }"
+        >
+        <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
+        <p
+            class="button-text"
+            [ngStyle]="{
+            color: appearance.current === 'light' ? '#6A6A6A' : '#FFFFFF'
+            }"
+        >Mit Google Anmelden</p>
+        </div>
+        <p
+            *ngIf="signInWithGoogleStatus === 'loading'"
+            class="status info"
+        >Bitte melden Sie sich im seperaten Anmeldefenster an.</p>
+        <p
+            *ngIf="signInWithGoogleStatus !== 'valid' && signInWithGoogleStatus !== 'loading'"
+            class="status error"
+        >{{ loginErrorMessage(signInWithGoogleStatus) }}</p>
+    </div>
 </text-section>

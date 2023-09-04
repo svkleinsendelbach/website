@@ -1,5 +1,6 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
   @include flex-column(flex-start, center)
@@ -20,6 +21,8 @@
     padding: 5px 15px
     margin-top: 20px
     margin-right: 20px
+    color: color('text')
+    background-color: color('background')
 
 #unauthenticated-user-container
   @include flex-column(flex-start, center)
@@ -31,6 +34,8 @@
     width: 95%
     border:  1px solid
     border-bottom: none
+    background-color: color('background')
+    border-color: color('text')
 
     &:first-child
       border-radius: 5px 5px 0 0
@@ -74,6 +79,8 @@
     border-radius: 5px
     padding: 5px 35px
     text-decoration: none
+    background-color: color('background')
+    border-color: color('text')
 
   .title
     @include font-montserrat
@@ -88,3 +95,16 @@
     .title
       margin-left: 0
       margin-top: 10px
+
+@media screen and (prefers-color-scheme: dark)
+    #log-out-container #log-out-button
+        color: darkColor('text')
+        background-color: darkColor('background')
+
+    #unauthenticated-user-container .unauthenticated-user
+        background-color: darkColor('background')
+        border-color: darkColor('text')
+
+    .edit-container .button
+        background-color: color('background')
+        border-color: darkColor('text')

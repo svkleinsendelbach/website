@@ -1,40 +1,36 @@
 <div
-  id="container"
-  [ngStyle]="{
-    backgroundColor: styleConfig.css('backgroundColor')
-  }"
+    id="container"
 >
-  <a
-    href="{{ homeLinkData.homeLink.link }}"
-    target="{{ homeLinkData.homeLink.target }}"
-    title="Startseite"
-    id="logo-container"
-  >
-    <img
-      src="{{ homeLinkData.logoSrc }}"
-      alt="{{ homeLinkData.title }}"
-      id="logo"
+    <a
+        [href]="homeLinkData.homeLink.link"
+        [target]="homeLinkData.homeLink.target"
+        title="Startseite"
+        id="logo-container"
     >
-    <p
-      id="logo-text"
-      [ngStyle]="{
-        color:  styleConfig.css('textColor')
-      }"
-    >{{ homeLinkData.title }}</p>
-  </a>
-  <div
-    id="header-items"
-  >
-    <desktop-header-item
-      *ngFor="let headerItem of headerItems"
-      [headerItem]="headerItem"
-      [expandedHeaderItemId]="expandedHeaderItemId"
-      (clickHeaderItemIdEmitter)="handleHeaderItemClick($event)"
-    ></desktop-header-item>
-  </div>
+        <img
+            [src]="homeLinkData.logoSrc"
+            [title]="homeLinkData.title"
+            [alt]="homeLinkData.title"
+            id="logo"
+        >
+        <p
+            id="logo-text"
+        >{{ homeLinkData.title }}</p>
+    </a>
+    <div
+        id="header-items"
+    >
+        <desktop-header-item
+            *ngFor="let headerItem of headerItems; trackBy: HeaderItem.trackById"
+            [headerItem]="headerItem"
+            [expandedHeaderItemId]="expandedHeaderItemId"
+            (clickHeaderItemIdEmitter)="handleHeaderItemClick($event)"
+        />
+    </div>
 </div>
+<!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
 <div
-  id="background"
-  *ngIf="expandedHeaderItemId !== null"
-  (click)="$event.preventDefault(); $event.stopPropagation(); expandedHeaderItemId = null"
+    id="background"
+    *ngIf="expandedHeaderItemId !== null"
+    (click)="$event.preventDefault(); $event.stopPropagation(); expandedHeaderItemId = null"
 ></div>

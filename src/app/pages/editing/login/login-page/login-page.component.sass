@@ -41,6 +41,12 @@
     text-align: left
     width: 100%
 
+    &.info
+        color: color('formInfoStatus')
+
+    &.error
+        color: color('formErrorStatus')
+
   &.tablet
     width: 85%
 
@@ -49,3 +55,11 @@
 
     .sign-in-button .button-text
       @include font-size('medium')
+
+@media screen and (prefers-color-scheme: dark)
+    .sign-in-container .status
+        &.info
+            color: darkColor('formInfoStatus')
+
+        &.error
+            color: darkColor('formErrorStatus')

@@ -4,6 +4,20 @@ import { DeviceTypeService } from '../../../services/device-type.service';
 import { Link } from 'src/app/types/link';
 import { StyleConfigService } from '../../../services/style-config.service';
 
+export interface BannerItem {
+    imageSource: string;
+    title: string;
+    subTitle: string | null;
+    link: Link;
+    isCurrent: boolean;
+}
+
+export namespace BannerItem {
+    export function trackByTitle(_index: number, item: BannerItem): string {
+        return item.title;
+    }
+}
+
 @Component({
     selector: 'app-home-banner',
     styleUrls: ['./home-banner.component.sass'],
@@ -11,6 +25,8 @@ import { StyleConfigService } from '../../../services/style-config.service';
 })
 export class HomeBannerComponent implements OnInit {
     @Input() public bannerData!: BannerItem[];
+
+    public BannerItem = BannerItem;
 
     public faChevronLeft = faChevronLeft;
 
@@ -138,12 +154,4 @@ export class HomeBannerComponent implements OnInit {
             return false;
         return event.target.id === 'nav-bar-container' || event.target.id === 'nav-button-container';
     }
-}
-
-export interface BannerItem {
-    imageSource: string;
-    title: string;
-    subTitle: string | null;
-    link: Link;
-    isCurrent: boolean;
 }

@@ -1,52 +1,44 @@
 <text-section
-  [title]="'G-Jugend des SV Kleinsendelbach'"
+    [title]="'G-Jugend des SV Kleinsendelbach'"
 >
-  <p
-    class="text"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+    <p
+        class="text secondaryColor"
+    >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
 </text-section>
 
 <events
-  [groupIds]="eventGroupIds"
-></events>
+    [groupIds]="eventGroupIds"
+ />
 
 <reports
     [isGameReport]="true"
     [groupId]="reportGroupId"
     [maxListCount]="5"
-></reports>
+ />
 
 <contact
-  [contactData]="contactData"
-></contact>
+    [contactData]="contactData"
+ />
 
 <text-section
-  [title]="'Trainingszeiten'"
+    [title]="'Trainingszeiten'"
 >
-  <p
-    class="text margin-bottom-normal"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >Das Training findet jeden Mittwoch von 17:30Uhr - 19:00Uhr am A-Platz an der Hauptstraße statt.</p>
-  <maps
-    [options]="mapOptions"
-    [markers]="[mapOptions.center]"
-  ></maps>
+    <p
+        class="text margin-bottom-normal secondaryColor"
+    >Das Training findet jeden Mittwoch von 17:30Uhr - 19:00Uhr am A-Platz an der Hauptstraße statt.</p>
+    <maps
+        [options]="mapOptions"
+        [markers]="[mapOptions.center]"
+    />
 </text-section>
 
 <text-section
-  [title]="'Kader'"
+    [title]="'Kader'"
 >
-  <img
-    class="text-image"
-    src="assets/images/g-jugend.jpg"
-    title="G-Jugend"
-    [ngStyle]="{
-      borderColor: styleConfig.css('textColor')
-    }"
-  >
+    <img
+        class="text-image"
+        src="assets/images/g-jugend.jpg"
+        title="G-Jugend"
+        alt="G-Jugend"
+    >
 </text-section>

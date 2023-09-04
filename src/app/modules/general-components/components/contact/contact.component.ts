@@ -12,6 +12,8 @@ import { StyleConfigService } from '../../../../services/style-config.service';
 export class ContactComponent {
     @Input() public contactData!: ContactItem[];
 
+    public ContactItem = ContactItem;
+
     public faPhone = faPhone;
 
     public faMobile = faMobile;

@@ -1,115 +1,83 @@
+<!-- eslint-disable @angular-eslint/template/no-call-expression -->
 <text-section
-  [title]="'Kommende Termine'"
+    [title]="'Kommende Termine'"
 >
-  <p
-    *ngIf="fetchedEventGroups.isLoading()"
-    class="text center large"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >Termine werden geladen</p>
-  <p
-    *ngIf="fetchedEventGroups.isFailure()"
-    class="text center large"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >Termine konnten nicht geladen werden</p>
-  <p
-    *ngIf="fetchedEventGroups.isSuccess() && fetchedEventGroups.content.length === 0"
-    class="text center large"
-    [ngStyle]="{
-      color: styleConfig.css('primaryColor')
-    }"
-  >Keine Termine</p>
-  <div
-    id="event-groups"
-    *ngFor="let eventGroup of fetchedEventGroups.content"
-    [ngClass]="deviceType.current"
-  >
     <p
-      class="event-group"
-      [ngStyle]="{
-        color: styleConfig.css('textColor')
-      }"
-    >{{ EventGroupId.title[eventGroup.groupId] }}</p>
+      *ngIf="fetchedEventGroups.isLoading()"
+      class="text center large primaryColor"
+    >Termine werden geladen</p>
+    <p
+      *ngIf="fetchedEventGroups.isFailure()"
+      class="text center large primaryColor"
+    >Termine konnten nicht geladen werden</p>
+    <p
+      *ngIf="fetchedEventGroups.isSuccess() && fetchedEventGroups.content.length === 0"
+      class="text center large primaryColor"
+    >Keine Termine</p>
     <div
-      class="event"
-      *ngFor="let event of events(eventGroup)"
-      [ngStyle]="{
-        borderColor: styleConfig.css('textColor')
-      }"
+        id="event-groups"
+        *ngFor="let eventGroup of fetchedEventGroups.content; trackBy: EventGroup.trackById"
+        [ngClass]="deviceType.current"
     >
-      <div
-        class="inner-container"
-      >
+        <p
+        class="event-group textColor"
+        >{{ EventGroupId.title[eventGroup.groupId] }}</p>
         <div
-            class="bar"
-            [ngStyle]="{
-                backgroundColor: styleConfig.css(event.isImportant ? 'accentColor' : (isRecent(event) ? 'primaryColor' : 'secondaryTextColor'))
-            }"
-        ></div>
+            class="event"
+            *ngFor="let event of events(eventGroup); trackBy: Event.trackById"
+        >
+        <div
+            class="inner-container"
+        >
+            <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
+            <div
+                class="bar"
+                [ngStyle]="{
+                    backgroundColor: styleConfig.css(event.isImportant ? 'accentColor' : (isRecent(event) ? 'primaryColor' : 'secondaryTextColor'))
+                }"
+            ></div>
+            <p
+                class="date secondaryColor"
+            >{{ event.date.description }}</p>
+            <p
+                class="title textColor"
+            >{{ event.title }}</p>
+            <p
+                class="subtitle secondaryColor"
+            >{{ event.subtitle ?? '' }}</p>
+            <a
+                class="link primaryColor"
+                *ngIf="event.link !== null"
+                [href]="event.link"
+                target="_blank"
+                [title]="event.title"
+            >Weitere Informationen</a>
+            <p
+                class="link"
+                *ngIf="event.link === null"
+            ></p>
+            </div>
+        </div>
         <p
-            class="date"
-            [ngStyle]="{
-            color: styleConfig.css('secondaryTextColor')
-            }"
-        >{{ event.date.description }}</p>
+            class="show-more-button primaryColor"
+            *ngIf="eventGroup.events.length > 5 && expandedGroupId !== eventGroup.groupId"
+            role="none"
+            (click)="expandGroup(eventGroup.groupId)"
+            >Alle anzeigen</p>
+            <p
+            class="show-more-button primaryColor"
+            *ngIf="eventGroup.events.length > 5 && expandedGroupId === eventGroup.groupId"
+            role="none"
+            (click)="collapseGroups()"
+        >Weniger anzeigen</p>
         <p
-            class="title"
-            [ngStyle]="{
-            color: styleConfig.css('textColor')
-            }"
-        >{{ event.title }}</p>
-        <p
-            class="subtitle"
-            [ngStyle]="{
-            color: styleConfig.css('secondaryTextColor')
-            }"
-        >{{ event.subtitle ?? '' }}</p>
-        <a
-            class="link"
-            *ngIf="event.link !== undefined"
-            href="{{ event.link }}"
-            target="_blank"
-            title="{{ event.title }}"
-            [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-            }"
-        >Weitere Informationen</a>
-        <p
-            class="link"
-            *ngIf="event.link === undefined"
+            *ngIf="eventGroup.events.length <= 5"
         ></p>
         </div>
-      </div>
-      <p
-        class="show-more-button"
-        *ngIf="eventGroup.events.length > 5 && expandedGroupId !== eventGroup.groupId"
-        (click)="expandGroup(eventGroup.groupId)"
-        [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-        }"
-      >Alle anzeigen</p>
-      <p
-        class="show-more-button"
-        *ngIf="eventGroup.events.length > 5 && expandedGroupId === eventGroup.groupId"
-        (click)="collapseGroups()"
-        [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-        }"
-      >Weniger anzeigen</p>
-      <p
-        *ngIf="eventGroup.events.length <= 5"
-      ></p>
-    </div>
-  <p
-    *ngIf="fetchedEventGroups.isSuccess() && fetchedEventGroups.content.length !== 0"
-    id="download-calendar"
-    (click)="downloadCalendar()"
-    [ngStyle]="{
-      color: styleConfig.css('textColor'),
-      borderColor: styleConfig.css('textColor')
-    }"
-  >ics-Kalender herunterladen</p>
+    <p
+        *ngIf="fetchedEventGroups.isSuccess() && fetchedEventGroups.content.length !== 0"
+        id="download-calendar textColor"
+        role="none"
+        (click)="downloadCalendar()"
+    >ics-Kalender herunterladen</p>
 </text-section>

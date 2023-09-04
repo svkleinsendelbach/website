@@ -1,33 +1,27 @@
 <text-section
-  [title]="'Alte Herren des SV Kleinsendelbach'"
+    [title]="'Alte Herren des SV Kleinsendelbach'"
 >
-  <p
-    class="text"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+    <p
+        class="text secondaryColor"
+    >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
 </text-section>
 
 <events
-  [groupIds]="eventGroupIds"
-></events>
+    [groupIds]="eventGroupIds"
+ />
 
 <contact
-  [contactData]="contactData"
-></contact>
+    [contactData]="contactData"
+ />
 
 <text-section
-  [title]="'Trainingszeiten'"
+    [title]="'Trainingszeiten'"
 >
-  <p
-    class="text margin-bottom-normal"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >Das Training findet jeden Mittwoch um 19:00Uhr in Kleinsendelbach am B-Platz an der Sendelmühlstraße statt.</p>
-  <maps
-    [options]="mapOptions"
-    [markers]="[mapOptions.center]"
-  ></maps>
+    <p
+        class="text margin-bottom-normal secondaryColor"
+    >Das Training findet jeden Mittwoch um 19:00Uhr in Kleinsendelbach am B-Platz an der Sendelmühlstraße statt.</p>
+    <maps
+        [options]="mapOptions"
+        [markers]="[mapOptions.center]"
+    />
 </text-section>

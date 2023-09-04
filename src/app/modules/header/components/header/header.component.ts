@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DeviceType, DeviceTypeService } from 'src/app/services/device-type.service';
-import { HeaderData } from '../../types/header-data';
+import { HeaderItem } from '../../types/header-item';
 import { HomeLinkData } from '../../types/home-link-data';
 
 @Component({
@@ -9,7 +9,7 @@ import { HomeLinkData } from '../../types/home-link-data';
     templateUrl: './header.component.html'
 })
 export class HeaderComponent {
-    @Input() public headerData!: Record<DeviceType, HeaderData>;
+    @Input() public headerData!: Record<DeviceType, HeaderItem[]>;
 
     @Input() public homeLinkData!: HomeLinkData;
 

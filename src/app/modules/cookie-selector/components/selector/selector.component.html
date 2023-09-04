@@ -1,143 +1,101 @@
+<!-- eslint-disable @angular-eslint/template/no-call-expression -->
 <div
     id="message-box"
     *ngIf="isShown"
     [ngClass]="deviceType.current"
-    [ngStyle]="{
-        backgroundColor: styleConfig.css('backgroundColor')
-    }"
 >
     <p
         id="header"
-        [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-        }"
     >Cookie-Einstellungen</p>
     <p
         class="text"
-        [ngStyle]="{
-            color: styleConfig.css('textColor')
-        }"
     >Wir verwenden Cookies, um Ihnen ein optimales Webseiten-Erlebnis zu bieten.</p>
     <p
         class="text"
         *ngIf="showSelection"
-        [ngStyle]="{
-            color: styleConfig.css('textColor')
-         }"
     >Mit der Nutzung unserer Webseite stimmen Sie der Verwendung von Cookies zu. Weitere Informationen über die Verwendung von Cookies und wie Sie Ihre Einwilligung für die Zukunft widerrufen können, finden Sie in unseren Datenschutzhinweisen.</p>
     <a
         id="privacy"
         *ngIf="privacyLink"
-        href="{{ privacyLink.link }}"
-        target="{{ privacyLink.target }}"
-        title="{{ privacyLink.title }}"
-        [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-        }"
+        [href]="privacyLink.link"
+        [target]="privacyLink.target"
+        [title]="privacyLink.title"
     >{{ privacyLink.title }}</a>
     <p
         id="extra-text"
         *ngIf="showSelection"
-        [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-        }"
     >Welchen Cookies stimmen Sie zu?</p>
     <div
         id="selection-buttons"
         *ngIf="showSelection"
     >
+        <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
         <p
             class="button unchangable"
             [ngStyle]="selectionButtonStyle('necessary')"
         >Notwendig</p>
+        <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
         <p
             class="button"
             [ngStyle]="selectionButtonStyle('functionality')"
+            role="none"
             (click)="handleCookieSelection('functionality')"
-        >Funktionalität</p>
-        <p
+            >Funktionalität</p>
+            <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
+            <p
             class="button"
             [ngStyle]="selectionButtonStyle('statistics')"
+            role="none"
             (click)="handleCookieSelection('statistics')"
         >Statistik</p>
     </div>
     <p
         id="details-button"
-        [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-        }"
         *ngIf="showSelection"
+        role="none"
         (click)="handleShowDetails()"
     >{{ detailsShown ? "Details ausblenden" : "Details zeigen" }}</p>
     <p
         id="show-selection-button"
-        [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-        }"
         *ngIf="deviceType.current === 'mobile'"
+        role="none"
         (click)="handleShowSelction()"
     >{{ showSelection ? "Auswahl ausblenden" : "Auswahl zeigen" }}</p>
     <p
         class="details-topic"
         *ngIf="detailsShown && showSelection"
-        [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-        }"
     >Notwendig</p>
     <p
         class="details-description"
         *ngIf="detailsShown && showSelection"
-        [ngStyle]="{
-            color: styleConfig.css('textColor')
-        }"
     >Diese Cookies sind für den Betrieb unserer Seite unbedingt notwendig. Sie ermöglichen beispielsweise sicherheitsrelevante Funktionalitäten, die Sprachumschaltung oder die Speicherung der von Ihnen festgelegten Cookie-Einstellungen.</p>
     <p
         class="details-topic"
         *ngIf="detailsShown && showSelection"
-        [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-        }"
     >Funktionalität</p>
     <p
         class="details-description"
         *ngIf="detailsShown && showSelection"
-        [ngStyle]="{
-            color: styleConfig.css('textColor')
-        }"
     >Funktionale Cookies ermöglichen es, Inhalte von Dritten, wie BFV oder Google Maps, anzuzeigen.</p>
     <p
         class="details-topic"
         *ngIf="detailsShown && showSelection"
-        [ngStyle]="{
-            color: styleConfig.css('primaryColor')
-        }"
     >Statistik</p>
     <p
         class="details-description"
         *ngIf="detailsShown && showSelection"
-        [ngStyle]="{
-            color: styleConfig.css('textColor')
-        }"
     >Um unsere Webseite weiter zu verbessern, erfassen wir anonymisiert Daten für Statistiken und Analysen. Mit Hilfe dieser Cookies können wir beispielsweise die Anzahl der Website-Besucher und Zugriffe auf bestimmte Seiten ermitteln, um auf dieser Grundlage unsere Inhalte zu verbessern.</p>
     <div
         id="confirm-buttons"
     >
         <p
             id="confirm-selected"
-            [ngStyle]="{
-                color: styleConfig.css('textColor'),
-                'background-color': styleConfig.css('backgroundColor'),
-                'border-color': styleConfig.css('textColor')
-            }"
+            role="none"
             (click)="handleConfirmSelected()"
         >Auswahl akzeptieren</p>
         <p
             id="confirm-all"
-            [ngStyle]="{
-                color: styleConfig.css('backgroundColor'),
-                'background-color': styleConfig.css('primaryColor'),
-                'border-color': styleConfig.css('primaryColor')
-            }"
+            role="none"
             (click)="handleConfirmAll()"
         >Alle akzeptieren</p>
     </div>

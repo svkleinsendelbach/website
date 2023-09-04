@@ -15,6 +15,10 @@ import ical from 'ical-generator';
 export class EventsComponent implements OnInit {
     @Input() public groupIds!: EventGroupId[];
 
+    public Event = Event;
+
+    public EventGroup = EventGroup;
+
     public EventGroupId = EventGroupId;
 
     public fetchedEventGroups: FetchState<EventGroup[]> = FetchState.loading;

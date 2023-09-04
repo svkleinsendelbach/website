@@ -6,6 +6,10 @@
     position: relative
     cursor: pointer
     padding: 5px
+    color: color('text')
+
+    &.isShown
+        z-index: 911
 
 #elements
     width: 120px
@@ -30,3 +34,7 @@
     height: 100vh
     top: 0
     left: 0
+
+@media screen and (prefers-color-scheme: dark)
+    #dots
+        color: darkColor('text')

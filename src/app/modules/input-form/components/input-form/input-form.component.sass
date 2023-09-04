@@ -1,5 +1,6 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
   @include flex-column(flex-start, center)
@@ -26,6 +27,9 @@
       vertical-align: middle
       border: solid 1px
       border-radius: 8px
+      color: color('text')
+      background-color: color('background')
+      border-color: color('text')
 
   &.tablet
     width: 85%
@@ -40,3 +44,10 @@
       #submit-button, #cancel-button
         width: 100%
         padding: 7.5px 0
+
+@media screen and (prefers-color-scheme: dark)
+    #form #cancel-submit-container
+        #submit-button, #cancel-button
+            color: dakrColor('text')
+            background-color: dakrColor('background')
+            border-color: dakrColor('text')

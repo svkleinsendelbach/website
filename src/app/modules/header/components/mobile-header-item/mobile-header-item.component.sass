@@ -1,5 +1,6 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
   @include flex-column(flex-start, center)
@@ -25,21 +26,25 @@
     text-decoration: none
     width: 100%
     padding: 0 4px
+    background-color: color('background')
 
     #top-item-text
       @include font-metrophobic
       @include font-size('normal')
       @include font-weight('medium')
       line-height: 48px
+      color: color('text')
 
     .drop-down-arrow
       margin-left: 8px
+      color: color('text')
 
   #sub-items
     @include flex-column(flex-start, center)
     width: 100%
     display: none
     margin-bottom: 16px
+    background-color: color('background')
 
     .sub-item
       @include flex-row(center, center)
@@ -52,6 +57,7 @@
         @include font-size('small')
         @include font-weight('medium')
         text-decoration: none
+        color: color('text')
 
       &:nth-last-child(1)
         padding-bottom: 16px
@@ -63,3 +69,17 @@
 
     #sub-items
       display: flex
+
+@media screen and (prefers-color-scheme: dark)
+    #header-item
+        #top-item
+            background-color: darkColor('background')
+
+            #top-item-text .drop-down-arrow
+                color: darkColor('text')
+
+        #sub-items
+            background-color: darkColor('background')
+
+            .sub-item .sub-item-text
+                color: darkColor('text')

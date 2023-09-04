@@ -1,42 +1,36 @@
 <text-section
   [title]="'Kontakt zum SV Kleinsendelbach'"
 >
-  <p
-    class="text"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >Bitte nehmen Sie Kontakt mit uns auf.</p>
-  <p
-    class="text"
-    [ngStyle]="{
-      color: styleConfig.css('secondaryTextColor')
-    }"
-  >Wir werden Ihnen gerne antworten.</p>
+    <p
+        class="text secondaryColor"
+    >Bitte nehmen Sie Kontakt mit uns auf.</p>
+    <p
+        class="text secondaryColor"
+    >Wir werden Ihnen gerne antworten.</p>
 </text-section>
 
 <text-section>
-  <input-form
-  [inputForm]="inputForm"
-  [submitButtonText]="'Abschicken'"
-  (submitButtonClicked)="onSubmit()"
-  >
-    <input-field-text
-      [label]="'Ihr Name'"
-      [inputField]="inputForm.field('name')"
-    ></input-field-text>
-    <input-field-text
-      [label]="'Ihre E-Mail Adresse'"
-      [inputField]="inputForm.field('email')"
-    ></input-field-text>
-    <input-field-select
-      [label]="'Anfrage an'"
-      [selectOptions]="receiverSelectOptions"
-      [inputField]="inputForm.field('receiver')"
-    ></input-field-select>
-    <input-field-textarea
-      [label]="'Ihre Nachricht'"
-      [inputField]="inputForm.field('message')"
-    ></input-field-textarea>
-  </input-form>
+    <input-form
+        [inputForm]="inputForm"
+        [submitButtonText]="'Abschicken'"
+        (submitButtonClicked)="onSubmit()"
+    >
+        <input-field-text
+            [label]="'Ihr Name'"
+            [inputField]="inputForm.field('name')"
+        />
+        <input-field-text
+            [label]="'Ihre E-Mail Adresse'"
+            [inputField]="inputForm.field('email')"
+        />
+        <input-field-select
+            [label]="'Anfrage an'"
+            [selectOptions]="receiverSelectOptions"
+            [inputField]="inputForm.field('receiver')"
+        />
+        <input-field-textarea
+            [label]="'Ihre Nachricht'"
+            [inputField]="inputForm.field('message')"
+        />
+    </input-form>
 </text-section>

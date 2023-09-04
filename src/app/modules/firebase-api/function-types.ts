@@ -92,6 +92,12 @@ export namespace UserAuthenticationGetAllUnauthenticatedFunction {
         firstName: string;
         lastName: string;
     }
+
+    export namespace User {
+        export function trackByHashedUserId(_index: number, user: User): string {
+            return user.hashedUserId;
+        }
+    }
 }
 
 export type UserAuthenticationGetAllUnauthenticatedFunctionType = FunctionType<{

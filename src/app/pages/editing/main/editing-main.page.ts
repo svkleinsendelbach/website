@@ -1,3 +1,4 @@
+import { UserAuthenticationGetAllUnauthenticatedFunction, UserAuthenticationGetAllUnauthenticatedFunctionType } from 'src/app/modules/firebase-api/function-types';
 import { AuthService } from 'src/app/modules/authentication/services/auth.service';
 import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
@@ -7,7 +8,6 @@ import { InternalLink } from 'src/app/types/internal-path';
 import { Router } from '@angular/router';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
-import { UserAuthenticationGetAllUnauthenticatedFunctionType } from 'src/app/modules/firebase-api/function-types';
 
 @Component({
     selector: 'pages-editing-main',
@@ -15,6 +15,8 @@ import { UserAuthenticationGetAllUnauthenticatedFunctionType } from 'src/app/mod
     templateUrl: './editing-main.page.html'
 })
 export class EditingMainPage {
+    public UnauthenticatedUser = UserAuthenticationGetAllUnauthenticatedFunction.User;
+
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
 
     public allInternalLinks = InternalLink.all;

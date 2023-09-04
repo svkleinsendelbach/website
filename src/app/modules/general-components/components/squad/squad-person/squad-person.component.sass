@@ -1,36 +1,46 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
-  @include flex-column(flex-start, center)
-  margin: 16px
+    @include flex-column(flex-start, center)
+    margin: 16px
 
-  &.desktop
-    width: calc(14% - 32px)
+    &.desktop
+        width: calc(14% - 32px)
 
-  &.tablet
-    width: calc(20% - 32px)
+    &.tablet
+        width: calc(20% - 32px)
 
-  &.mobile
-    width: calc(100% - 32px)
+    &.mobile
+        width: calc(100% - 32px)
 
 #image
-  height: 176px
-  padding-bottom: 16px
+    height: 176px
+    padding-bottom: 16px
 
 #name
-  @include font-montserrat
-  @include font-weight('small')
-  @include font-size('normal')
-  text-align: center
+    @include font-montserrat
+    @include font-weight('small')
+    @include font-size('normal')
+    text-align: center
+    color: color('primary')
 
 a#name
-  text-decoration: none
-  cursor: pointer
+    text-decoration: none
+    cursor: pointer
 
 #additionalText
-  @include font-montserrat
-  @include font-weight('small')
-  @include font-size('normal')
-  text-align: center
-  padding-top: 16px
+    @include font-montserrat
+    @include font-weight('small')
+    @include font-size('normal')
+    text-align: center
+    padding-top: 16px
+    color: color('secondaryText')
+
+@media screen and (prefers-color-scheme: dark)
+    #name
+      color: darkColor('primary')
+
+    #additionalText
+        color: darkColor('secondaryText')

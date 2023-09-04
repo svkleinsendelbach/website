@@ -1,5 +1,6 @@
 @import '/src/sass/flex'
 @import '/src/sass/text'
+@import '/src/sass/color'
 
 :host
   @include flex-column(flex-start, center)
@@ -40,3 +41,10 @@
       .name
         @include font-size('normal')
         @include font-weight('small')
+
+      &:hover
+        background-color: color('hoveredBackground')
+
+@media screen and (prefers-color-scheme: dark)
+    #link-rows .link-row .social-media-link:hover
+        background-color: darkColor('hoveredBackground')

@@ -1,32 +1,21 @@
 <text-section>
-  <div
-    id="links"
-    [ngClass]="deviceType.current"
-  >
-    <a
-      *ngFor="let link of links"
-      href="{{ link.link.link }}"
-      target="{{ link.link.target }}"
-      title="{{ link.link.title }}"
-      class="container"
-      (mouseenter)="hoverLinkStart(link.id)"
-      (mouseleave)="hoverLinkStop(link.id)"
-      [ngStyle]="{
-        backgroundColor: hoveredLink === link.id ? styleConfig.css('hoveredBackgroundColor') : undefined
-      }"
+    <div
+        id="links"
+        [ngClass]="deviceType.current"
     >
-      <p
-        class="title"
-        [ngStyle]="{
-          color: styleConfig.css('primaryColor')
-        }"
-      >{{ link.title }}</p>
-      <p
-        class="subtitle"
-        [ngStyle]="{
-          color: styleConfig.css('secondaryTextColor')
-        }"
-      >{{ link.subtitle }}</p>
-    </a>
-  </div>
+        <a
+            *ngFor="let link of links; trackBy: LinkData.trackById"
+            [href]="link.link.link"
+            [target]="link.link.target"
+            [title]="link.link.title"
+            class="container"
+        >
+        <p
+            class="title primaryColor"
+        >{{ link.title }}</p>
+        <p
+            class="subtitle secondaryColor"
+        >{{ link.subtitle }}</p>
+        </a>
+    </div>
 </text-section>
