@@ -67,18 +67,18 @@ export namespace StyleConfigService {
         hoveredBackgroundColor: Style.AppearanceColor;
         textColor: Style.AppearanceColor;
         secondaryTextColor: Style.AppearanceColor;
-        formSuccessStatusColor: Style.AppearanceColor;
-        formErrorStatusColor: Style.AppearanceColor;
-        formInfoStatusColor: Style.AppearanceColor;
+        formStatusSuccessColor: Style.AppearanceColor;
+        formStatusErrorColor: Style.AppearanceColor;
+        formStatusInfoColor: Style.AppearanceColor;
     }
 
     export namespace StyleConfig {
         export const defaultConfig: StyleConfig = {
             accentColor: new Style.AppearanceColor(Style.Color.hex('#FFD93D'), Style.Color.hex('#F2BE22')),
             backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
-            formErrorStatusColor: new Style.AppearanceColor(Style.Color.hex('#CE3A0F'), Style.Color.hex('#EB4511')),
-            formInfoStatusColor: new Style.AppearanceColor(Style.Color.hex('#FFBF00'), Style.Color.hex('#FFE15D')),
-            formSuccessStatusColor: new Style.AppearanceColor(Style.Color.hex('#54B435'), Style.Color.hex('#B6E2A1')),
+            formStatusErrorColor: new Style.AppearanceColor(Style.Color.hex('#CE3A0F'), Style.Color.hex('#EB4511')),
+            formStatusInfoColor: new Style.AppearanceColor(Style.Color.hex('#FFBF00'), Style.Color.hex('#FFE15D')),
+            formStatusSuccessColor: new Style.AppearanceColor(Style.Color.hex('#54B435'), Style.Color.hex('#B6E2A1')),
             hoveredBackgroundColor: new Style.AppearanceColor(Style.Color.hex('#E0E0E0'), Style.Color.hex('#44454A')),
             primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
             secondaryBackgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#3C4A57')),

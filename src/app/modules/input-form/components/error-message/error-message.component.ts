@@ -20,11 +20,11 @@ export class ErrorMessageComponent {
             return '';
         switch (this.error.level) {
         case ErrorLevel.Error:
-            return this.styleConfig.css('formErrorStatusColor');
+            return this.styleConfig.css('formStatusErrorColor');
         case ErrorLevel.Info:
-            return this.styleConfig.css('formInfoStatusColor');
+            return this.styleConfig.css('formStatusInfoColor');
         case ErrorLevel.Success:
-            return this.styleConfig.css('formSuccessStatusColor');
+            return this.styleConfig.css('formStatusSuccessColor');
         default:
             return '';
         }

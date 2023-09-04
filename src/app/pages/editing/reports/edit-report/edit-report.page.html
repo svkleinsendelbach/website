@@ -73,7 +73,7 @@
             role="none"
             (click)="$event.preventDefault(); $event.stopPropagation(); imageSelector.click()"
             [ngStyle]="{
-                borderColor: styleConfig.css(inputForm.status === 'invalidInput' && imageUrl === null ? 'formErrorStatusColor' : 'textColor')
+                borderColor: styleConfig.css(inputForm.status === 'invalidInput' && imageUrl === null ? 'formStatusErrorColor' : 'textColor')
             }"
         >{{ imageUrl === null ? 'Bild auswählen' : 'Neues Bild auswählen' }}</div>
         <div id="spacer"></div>
