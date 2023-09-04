@@ -43,8 +43,4 @@
         @include font-weight('small')
 
       &:hover
-        background-color: color('hoveredBackground')
-
-@media screen and (prefers-color-scheme: dark)
-    #link-rows .link-row .social-media-link:hover
-        background-color: darkColor('hoveredBackground')
+        @include dynamic-color(background-color, 'hoveredBackground')

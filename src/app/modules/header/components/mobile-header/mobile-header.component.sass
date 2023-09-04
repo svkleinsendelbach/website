@@ -13,8 +13,9 @@
   top: 0
   height: 48px
   z-index: 1001
-  box-shadow: color('shadow') 0 4px 16px
-  background-color: color('background')
+  box-shadow: 0 4px 16px
+  @include dynamic-color(color, 'shadow')
+  @include dynamic-color(background-color, 'background')
 
   #top-row
     @include flex-row(center, center)
@@ -37,14 +38,14 @@
         @include font-weight('medium')
         margin-left: 16px
         white-space: nowrap
-        color: color('text')
+        @include dynamic-color(color, 'text')
 
     .hamburger-menu
       cursor: pointer
       font-size: 24px
       width: 24px
       margin-right: 16px
-      color: color('text')
+      @include dynamic-color(color, 'text')
 
   #header-items
     @include flex-column(flex-start, center)
@@ -58,15 +59,3 @@
   width: 100vw
   height: 100vh
   z-index: 1000
-
-@media screen and (prefers-color-scheme: dark)
-    #container
-        background-color: darkColor('background')
-        box-shadow: darkColor('shadow') 0 4px 16px
-
-        #top-row
-            #logo-container #logo-text
-                color: darkColor('text')
-
-            .hamburger-menu
-                color: darkColor('text')

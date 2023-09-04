@@ -42,10 +42,10 @@
     width: 100%
 
     &.info
-        color: color('formStatusInfo')
+        @include dynamic-color(color, 'formStatusInfo')
 
     &.error
-        color: color('formStatusError')
+        @include dynamic-color(color, 'formStatusError')
 
   &.tablet
     width: 85%
@@ -55,11 +55,3 @@
 
     .sign-in-button .button-text
       @include font-size('medium')
-
-@media screen and (prefers-color-scheme: dark)
-    .sign-in-container .status
-        &.info
-            color: darkColor('formStatusInfo')
-
-        &.error
-            color: darkColor('formStatusError')

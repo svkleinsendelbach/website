@@ -37,12 +37,12 @@
         @include font-roboto
         padding: 5px 10px
         padding-left: 25px
-        color: color('text')
-        background-color: color('background')
+        @include dynamic-color(color, 'text')
+        @include dynamic-color(background-color, 'background')
         box-shadow: 0 0 16px color('shadow')
 
     #actual
-        color: color('primary')
+        @include dynamic-color(color, 'primary')
         font-weight: 300
         font-size: 20px
 
@@ -84,7 +84,7 @@
             width: 45px
             padding: 5px
             height: 100%
-            color: color('text')
+            @include dynamic-color(color, 'text')
 
             &:hover
                 opacity: 1
@@ -117,19 +117,3 @@
             #left-button, #right-button
                 width: auto
                 height: auto
-
-@media screen and (prefers-color-scheme: dark)
-    #text-container
-        #actual, #title, #subtitle
-            color: darkColor('text')
-            background-color: darkColor('secondaryBackground')
-            box-shadow: 0 0 16px darkColor('shadow')
-
-        #actual
-            font-weight: 500
-            color: darkColor('primary')
-
-
-    #nav-bar-container #nav-button-container
-        #left-button, #right-button
-            color: darkColor('text')

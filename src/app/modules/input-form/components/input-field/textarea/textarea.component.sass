@@ -20,18 +20,9 @@
     border-radius: 8px
     height: 320px
     resize: none
-    color: color('text')
-    background-color: color('background')
-    border-color: color('text')
+    @include dynamic-color(color, 'text')
+    @include dynamic-color(background-color, 'background')
+    @include dynamic-color(border-color, 'text')
 
     &.error
-        border-color: color('formStatusError')
-
-@media screen and (prefers-color-scheme: dark)
-    #textarea
-        color: darkColor('text')
-        background-color: darkColor('background')
-        border-color: darkColor('text')
-
-        &.error
-            border-color: darkColor('formStatusError')
+        @include dynamic-color(border-color, 'formStatusError')

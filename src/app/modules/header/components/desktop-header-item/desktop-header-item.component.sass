@@ -18,21 +18,21 @@
         text-decoration: none
         width: max-content
         padding: 0 24px
-        background-color: color('background')
+        @include dynamic-color(background-color, 'background')
 
         &:hover
-            background-color: color('hoveredBackground')
+            @include dynamic-color(background-color, 'hoveredBackground')
 
         #top-item-text
             @include font-metrophobic
             @include font-size('normal')
             @include font-weight('medium')
             line-height: 80px
-            color: color('text')
+            @include dynamic-color(color, 'text')
 
         .drop-down-arrow
             margin-left: 8px
-            color: color('text')
+            @include dynamic-color(color, 'text')
 
     #sub-items
         @include flex-column(flex-start, center)
@@ -47,44 +47,22 @@
             width: 100%
             padding: 8px 16px
             cursor: pointer
-            background-color: color('background')
+            @include dynamic-color(background-color, 'background')
 
             &:last-child
                 padding-bottom: 16px
                 border-radius: 0 0 8px 8px
 
             &:hover
-                background-color: color('hoveredBackground')
+                @include dynamic-color(background-color, 'hoveredBackground')
 
             .sub-item-text
                 @include font-metrophobic
                 @include font-size('normal')
                 @include font-weight('medium')
                 text-decoration: none
-                color: color('text')
+                @include dynamic-color(color, 'text')
 
     &.expanded #sub-items
         display: flex
         z-index: 1003
-
-@media screen and (prefers-color-scheme: dark)
-    #header-item
-        #top-item
-            background-color: darkColor('background')
-
-            #top-item-text .drop-down-arrow
-                color: darkColor('text')
-
-        #top-item:hover
-            background-color: darkColor('hoveredBackground')
-
-        #sub-items
-            .sub-item
-                background-color: darkColor('background')
-
-                &:hover
-                    background-color: darkColor('hoveredBackground')
-
-                .sub-item-text
-                    color: darkColor('text')
-

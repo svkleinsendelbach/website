@@ -21,7 +21,7 @@
         @include font-weight('normal')
         height: $height
         vertical-align: middle
-        color: color('text')
+        @include dynamic-color(color, 'text')
 
     #checkbox
         $slider-margin: calc(($height - $slider-size) / 2)
@@ -31,8 +31,8 @@
         border-radius: calc(min($width, $height) / 2)
         z-index: 300
         margin-left: 20px
-        border-color: color('text')
-        background-color: color('text')
+        @include dynamic-color(border-color, 'text')
+        @include dynamic-color(background-color, 'text')
 
         #slider
             position: relative
@@ -46,25 +46,11 @@
             transition: .4s
             border-radius: calc($slider-size / 2)
             z-index: 301
-            background-color: color('background')
+            @include dynamic-color(background-color, 'background')
 
         &.checked
-            background-color: color('primary')
+            @include dynamic-color(background-color, 'primary')
 
             #slider
                 left: calc($width - $slider-size - $slider-margin)
                 right: $slider-margin
-
-@media screen and (prefers-color-scheme: dark)
-    #container
-        #label
-            color: darkColor('text')
-
-        #checkbox
-            background-color: darkColor('text')
-
-            #slider
-                background-color: darkColor('background')
-
-            &.checked
-                background-color: darkColor('primary')

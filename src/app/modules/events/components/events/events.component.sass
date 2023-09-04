@@ -23,7 +23,7 @@
     margin-bottom: 8px
     padding-bottom: 8px
     border-bottom: solid 1px
-    border-color: color('text')
+    @include dynamic-color(border-color, 'text')
 
     .inner-container
         @include flex-row(flex-start, flex-start)
@@ -76,8 +76,4 @@
   padding: 2.5px 15px
   border-radius: 5px
   margin-top: 25px
-  border-color: color('text')
-
-@media screen and (prefers-color-scheme: dark)
-    #event-groups .event-group .event, #download-calendar
-        border-color: darkColor('text')
+  @include dynamic-color(border-color, 'text')

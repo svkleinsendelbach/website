@@ -14,12 +14,8 @@
     width: 100%
     text-align: left
     margin-bottom: 15px
-    color: color('text')
+    @include dynamic-color(color, 'text')
 
 #elements
     @include flex-column(flex-start, center)
     width: 95%
-
-@media screen and (prefers-color-scheme: dark)
-    #title
-        color: darkColor('text')

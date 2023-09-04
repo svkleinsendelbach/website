@@ -8,13 +8,14 @@
 
 #container
   @include flex-row(center, space-around)
-  box-shadow: color('shadow') 0 4px 16px
+  box-shadow: 0 4px 16px
   width: 100vw
   position: fixed
   top: 0
   height: 80px
   z-index: 1001
-  background-color: color('background')
+  @include dynamic-color(color, 'shadow')
+  @include dynamic-color(background-color, 'background')
 
   #logo-container
     @include flex-row(center, center)
@@ -31,7 +32,7 @@
       @include font-weight('medium')
       margin-left: 16px
       white-space: nowrap
-      color: color('text')
+      @include dynamic-color(color, 'text')
 
   #header-items
     @include flex-row(center, center)
@@ -44,11 +45,3 @@
   width: 100vw
   height: 100vh
   z-index: 1000
-
-@media screen and (prefers-color-scheme: dark)
-    #container
-        background-color: darkColor('background')
-        box-shadow: darkColor('shadow') 0 4px 16px
-
-        #logo-container #logo-text
-            color: darkColor('text')

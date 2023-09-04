@@ -22,8 +22,8 @@
     margin-top: 20px
     margin-left: 20px
     text-decoration: none
-    color: color('text')
-    background-color: color('background')
+    @include dynamic-color(color, 'text')
+    @include dynamic-color(background-color, 'background')
 
 #add-event
     @include font-montserrat
@@ -35,9 +35,9 @@
     border-radius: 5px
     padding: 5px 15px
     margin-bottom: 25px
-    color: color('primary')
-    background-color: color('background')
-    border-color: color('text')
+    @include dynamic-color(color, 'primary')
+    @include dynamic-color(background-color, 'background')
+    @include dynamic-color(border-color, 'text')
 
 .event-group
   @include flex-column(flex-start, center)
@@ -61,8 +61,8 @@
     border: 1px solid
     border-bottom: none
     padding: 5px
-    background-color: color('background')
-    border-color: color('text')
+    @include dynamic-color(background-color, 'background')
+    @include dynamic-color(border-color, 'text')
 
     &:nth-child(2)
       border-radius: 5px 5px 0 0
@@ -98,17 +98,3 @@
       cursor: pointer
       flex: 1
       margin: 10px
-
-@media screen and (prefers-color-scheme: dark)
-    #back-btn-container #back-button
-        color: darkColor('text')
-        background-color: darkColor('background')
-
-    #add-event
-        color: darkColor('primary')
-        background-color: darkColor('background')
-        border-color: darkColor('text')
-
-    .event-group .event
-        background-color: darkColor('background')
-        border-color: darkColor('text')

@@ -11,7 +11,8 @@ angular-editor
     width: 100%
 
     &.error
-        border: 1px solid color('formStatusError')
+        border: 1px solid
+        @include dynamic-color(border-color, 'formStatusError')
 
 
 ::ng-deep .angular-editor-toolbar .select-color
@@ -34,7 +35,3 @@ angular-editor
 
     a
         text-decoration: none
-
-@media screen and (prefers-color-scheme: dark)
-    angular-editor.error
-        border-color: darkColor('formStatusError')

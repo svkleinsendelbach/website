@@ -26,18 +26,18 @@
     text-decoration: none
     width: 100%
     padding: 0 4px
-    background-color: color('background')
+    @include dynamic-color(background-color, 'background')
 
     #top-item-text
       @include font-metrophobic
       @include font-size('normal')
       @include font-weight('medium')
       line-height: 48px
-      color: color('text')
+      @include dynamic-color(color, 'text')
 
     .drop-down-arrow
       margin-left: 8px
-      color: color('text')
+      @include dynamic-color(color, 'text')
 
   #sub-items
     @include flex-column(flex-start, center)
@@ -50,14 +50,14 @@
       width: 90%
       padding: 8px 0
       cursor: pointer
-      background-color: color('background')
+      @include dynamic-color(background-color, 'background')
 
       .sub-item-text
         @include font-metrophobic
         @include font-size('small')
         @include font-weight('medium')
         text-decoration: none
-        color: color('text')
+        @include dynamic-color(color, 'text')
 
       &:nth-last-child(1)
         padding-bottom: 16px
@@ -69,17 +69,3 @@
 
     #sub-items
       display: flex
-
-@media screen and (prefers-color-scheme: dark)
-    #header-item
-        #top-item
-            background-color: darkColor('background')
-
-            #top-item-text .drop-down-arrow
-                color: darkColor('text')
-
-        #sub-items.sub-item
-            background-color: darkColor('background')
-
-            .sub-item-text
-                color: darkColor('text')

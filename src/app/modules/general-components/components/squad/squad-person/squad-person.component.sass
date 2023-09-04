@@ -24,7 +24,7 @@
     @include font-weight('small')
     @include font-size('normal')
     text-align: center
-    color: color('primary')
+    @include dynamic-color(color, 'primary')
 
 a#name
     text-decoration: none
@@ -36,11 +36,4 @@ a#name
     @include font-size('normal')
     text-align: center
     padding-top: 16px
-    color: color('secondaryText')
-
-@media screen and (prefers-color-scheme: dark)
-    #name
-      color: darkColor('primary')
-
-    #additionalText
-        color: darkColor('secondaryText')
+    @include dynamic-color(color, 'secondaryText')

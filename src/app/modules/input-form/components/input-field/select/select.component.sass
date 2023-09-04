@@ -18,12 +18,12 @@
     border: solid 1px
     border-radius: 8px
     height: 48px
-    color: color('text')
-    background-color: color('background')
-    border-color: color('text')
+    @include dynamic-color(color, 'text')
+    @include dynamic-color(background-color, 'background')
+    @include dynamic-color(border-color, 'text')
 
     &.error
-        border-color: color('formStatusError')
+        @include dynamic-color(border-color, 'formStatusError')
 
 #hint
     @include font-montserrat
@@ -32,16 +32,4 @@
     width: 97.5%
     text-align: start
     padding: 5px 0
-    color: color('text')
-
-@media screen and (prefers-color-scheme: dark)
-    #select
-        color: darkColor('text')
-        background-color: darkColor('background')
-        border-color: darkColor('text')
-
-        &.error
-            border-color: darkColor('formStatusError')
-
-    #hint
-        color: darkColor('text')
+    @include dynamic-color(color, 'text')

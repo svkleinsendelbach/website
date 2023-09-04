@@ -14,7 +14,7 @@
     text-decoration: none
 
     &:hover
-        background-color: color('hoveredBackground')
+        @include dynamic-color(background-color, 'hoveredBackground')
 
     .title, .subtitle
       @include font-montserrat
@@ -37,7 +37,3 @@
 
   &.mobile .container
     width: calc(100% - 48px)
-
-@media screen and (prefers-color-scheme: dark)
-    #links .container:hover
-        background-color: color('hoveredBackground')
