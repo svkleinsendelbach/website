@@ -3,44 +3,44 @@
 @import '/src/sass/color'
 
 :host
-  @include flex-column(flex-start, center)
-  width: 100%
-
-#link-rows
-  @include flex-column(center, center)
-  width: 85%
-
-  .link-row
-    @include flex-row(flex-start, center)
+    @include flex-column(flex-start, center)
     width: 100%
 
-    .social-media-link
-      @include flex-column(flex-start, center)
-      text-decoration: none
-      cursor: pointer
-      flex: 1
-      padding: 16px
-      margin: 16px
-      border-radius: 8px
+#link-rows
+    @include flex-column(center, center)
+    width: 85%
 
-      .title, .name
-        @include font-montserrat
-        text-align: center
+    .link-row
+        @include flex-row(flex-start, center)
+        width: 100%
 
-      .icon
-        height: 80px
-        font-size: 80px
-        text-align: center
-        margin-bottom: 12px
+        .social-media-link
+            @include flex-column(flex-start, center)
+            border-radius: 8px
+            cursor: pointer
+            flex: 1
+            margin: 16px
+            padding: 16px
+            text-decoration: none
 
-      .title
-        @include font-size('medium')
-        @include font-weight('small')
-        margin-bottom: 8px
+            .title, .name
+                @include font-montserrat
+                text-align: center
 
-      .name
-        @include font-size('normal')
-        @include font-weight('small')
+            .icon
+                font-size: 80px
+                height: 80px
+                margin-bottom: 12px
+                text-align: center
 
-      &:hover
-        @include dynamic-color(background-color, 'hoveredBackground')
+            .title
+                @include font-size('medium')
+                @include font-weight('small')
+                margin-bottom: 8px
+
+            .name
+                @include font-size('normal')
+                @include font-weight('small')
+
+            &:hover
+                @include dynamic-color(background-color, 'hoveredBackground')

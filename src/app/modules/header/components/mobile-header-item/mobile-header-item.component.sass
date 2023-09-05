@@ -3,69 +3,69 @@
 @import '/src/sass/color'
 
 :host
-  @include flex-column(flex-start, center)
-
-  &:nth-last-child(1) #header-item #top-item
-    border-radius: 0 0 8px 8px
-
-  .expanded + &
-    #header-item #top-item
-      border-radius: 8px 8px 0 0
+    @include flex-column(flex-start, center)
 
     &:nth-last-child(1) #header-item #top-item
-      border-radius: 8px
-
-#header-item
-  @include flex-column(flex-start, center)
-  width: 90vw
-
-  #top-item
-    @include flex-row(center, center)
-    height: 48px
-    cursor: pointer
-    text-decoration: none
-    width: 100%
-    padding: 0 4px
-    @include dynamic-color(background-color, 'background')
-
-    #top-item-text
-      @include font-metrophobic
-      @include font-size('normal')
-      @include font-weight('medium')
-      line-height: 48px
-      @include dynamic-color(color, 'text')
-
-    .drop-down-arrow
-      margin-left: 8px
-      @include dynamic-color(color, 'text')
-
-  #sub-items
-    @include flex-column(flex-start, center)
-    width: 100%
-    display: none
-    margin-bottom: 16px
-
-    .sub-item
-      @include flex-row(center, center)
-      width: 90%
-      padding: 8px 0
-      cursor: pointer
-      @include dynamic-color(background-color, 'background')
-
-      .sub-item-text
-        @include font-metrophobic
-        @include font-size('small')
-        @include font-weight('medium')
-        text-decoration: none
-        @include dynamic-color(color, 'text')
-
-      &:nth-last-child(1)
-        padding-bottom: 16px
         border-radius: 0 0 8px 8px
 
-  &.expanded
+    .expanded + &
+        #header-item #top-item
+            border-radius: 8px 8px 0 0
+
+        &:nth-last-child(1) #header-item #top-item
+            border-radius: 8px
+
+#header-item
+    @include flex-column(flex-start, center)
+    width: 90vw
+
     #top-item
-      border-radius: 0 0 8px 8px
+        @include dynamic-color(background-color, 'background')
+        @include flex-row(center, center)
+        cursor: pointer
+        height: 48px
+        padding: 0 4px
+        text-decoration: none
+        width: 100%
+
+        #top-item-text
+            @include dynamic-color(color, 'text')
+            @include font-metrophobic
+            @include font-size('normal')
+            @include font-weight('medium')
+            line-height: 48px
+
+        .drop-down-arrow
+            @include dynamic-color(color, 'text')
+            margin-left: 8px
 
     #sub-items
-      display: flex
+        @include flex-column(flex-start, center)
+        display: none
+        margin-bottom: 16px
+        width: 100%
+
+        .sub-item
+            @include dynamic-color(background-color, 'background')
+            @include flex-row(center, center)
+            cursor: pointer
+            padding: 8px 0
+            width: 90%
+
+            .sub-item-text
+                @include dynamic-color(color, 'text')
+                @include font-metrophobic
+                @include font-size('small')
+                @include font-weight('medium')
+                text-decoration: none
+
+        &:last-child
+            border-radius: 0 0 8px 8px
+            padding-bottom: 16px
+
+    &.expanded
+        #top-item
+            border-radius: 0 0 8px 8px
+
+        #sub-items
+            display: flex

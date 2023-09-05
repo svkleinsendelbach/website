@@ -3,44 +3,44 @@
 @import '/src/sass/color'
 
 :host
-  @include flex-column(flex-start, center)
-  width: 100%
+    @include flex-column(flex-start, center)
+    width: 100%
 
 #form
-  @include flex-column(flex-start, center)
-  width: 65%
-
-  #cancel-submit-container
-    @include flex-row(flex-start, center)
-    width: 100%
-    gap: 32px
-
-    #submit-button, #cancel-button
-      @include flex-row(center, center)
-      @include font-montserrat
-      @include font-size('large')
-      @include font-weight('normal')
-      cursor: pointer
-      text-align: center
-      flex: 1
-      height: 48px
-      vertical-align: middle
-      border: solid 1px
-      border-radius: 8px
-      @include dynamic-color(color, 'text')
-      @include dynamic-color(background-color, 'background')
-      @include dynamic-color(border-color, 'text')
-
-  &.tablet
-    width: 85%
-
-  &.mobile
-    width: 100%
+    @include flex-column(flex-start, center)
+    width: 65%
 
     #cancel-submit-container
-      @include flex-column(flex-start, center)
-      gap: 16px
-
-      #submit-button, #cancel-button
+        @include flex-row(flex-start, center)
+        gap: 32px // sass-lint:disable-line no-misspelled-properties
         width: 100%
-        padding: 7.5px 0
+
+        #submit-button, #cancel-button
+            @include flex-row(center, center)
+            @include dynamic-color(color, 'text')
+            @include dynamic-color(background-color, 'background')
+            @include dynamic-color(border-color, 'text')
+            @include font-montserrat
+            @include font-size('large')
+            @include font-weight('normal')
+            border: solid 1px
+            border-radius: 8px
+            cursor: pointer
+            flex: 1
+            height: 48px
+            text-align: center
+            vertical-align: middle
+
+    &.tablet
+        width: 85%
+
+    &.mobile
+        width: 100%
+
+        #cancel-submit-container
+            @include flex-column(flex-start, center)
+            gap: 16px // sass-lint:disable-line no-misspelled-properties
+
+            #submit-button, #cancel-button
+                padding: 7.5px 0
+                width: 100%

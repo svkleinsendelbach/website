@@ -3,37 +3,37 @@
 @import '/src/sass/color'
 
 :host
-  @include flex-column(flex-start, center)
-  width: 100%
-  margin-bottom: 20px
+    @include flex-column(flex-start, center)
+    margin-bottom: 20px
+    width: 100%
 
 #container
-  @include flex-row(flex-start, center)
-  width: 100%
-  gap: 32px
+    @include flex-row(flex-start, center)
+    gap: 32px // sass-lint:disable-line no-misspelled-properties
+    width: 100%
 
-  #dateInput, #timeInput
-    @include font-montserrat
-    @include font-size('large')
-    @include font-weight('normal')
-    cursor: pointer
-    text-align: center
-    flex: 1
-    vertical-align: middle
-    border: solid 1px
-    border-radius: 8px
-    height: 48px
-    @include dynamic-color(color, 'text')
-    @include dynamic-color(background-color, 'background')
-    @include dynamic-color(border-color, 'text')
+    #date-input, #time-input
+        @include dynamic-color(color, 'text')
+        @include dynamic-color(background-color, 'background')
+        @include dynamic-color(border-color, 'text')
+        @include font-montserrat
+        @include font-size('large')
+        @include font-weight('normal')
+        border: solid 1px
+        border-radius: 8px
+        cursor: pointer
+        flex: 1
+        height: 48px
+        text-align: center
+        vertical-align: middle
 
-    &.error
-        @include dynamic-color(border-color, 'formStatusError')
+        &.error
+            @include dynamic-color(border-color, 'formStatusError')
 
-  &.mobile
-    @include flex-column(flex-start, center)
-    gap: 16px
+    &.mobile
+        @include flex-column(flex-start, center)
+        gap: 16px // sass-lint:disable-line no-misspelled-properties
 
-    #dateInput, #timeInput
-      width: 100%
-      padding: 5px 0
+        #date-input, #time-input
+            padding: 5px 0
+            width: 100%

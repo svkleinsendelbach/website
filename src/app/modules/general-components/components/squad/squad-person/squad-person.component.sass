@@ -20,20 +20,20 @@
     padding-bottom: 16px
 
 #name
+    @include dynamic-color(color, 'primary')
     @include font-montserrat
     @include font-weight('small')
     @include font-size('normal')
     text-align: center
-    @include dynamic-color(color, 'primary')
 
 a#name
-    text-decoration: none
     cursor: pointer
+    text-decoration: none
 
-#additionalText
+#additional-text
+    @include dynamic-color(color, 'secondaryText')
     @include font-montserrat
     @include font-weight('small')
     @include font-size('normal')
-    text-align: center
     padding-top: 16px
-    @include dynamic-color(color, 'secondaryText')
+    text-align: center

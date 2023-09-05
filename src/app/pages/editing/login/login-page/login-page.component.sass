@@ -3,56 +3,56 @@
 @import '/src/sass/color'
 
 .sign-in-container
-  @include flex-column(flex-start, center)
-  width: 65%
-  margin-bottom: 32px
+    @include flex-column(flex-start, center)
+    margin-bottom: 32px
+    width: 65%
 
-  .sign-in-button
-    @include flex-row(center, center)
-    width: 100%
-    cursor: pointer
-    height: 50px
-    border-radius: 8px
-    vertical-align: middle
+    .sign-in-button
+        @include flex-row(center, center)
+        border-radius: 8px
+        cursor: pointer
+        height: 50px
+        vertical-align: middle
+        width: 100%
 
-    .logo
-      height: 24px
-      width: 24px
-      border-radius: 8px
-      padding: 13px
+        .logo
+            border-radius: 8px
+            height: 24px
+            padding: 13px
+            width: 24px
 
-    .button-text
-      @include font-size('large')
-      @include font-weight('normal')
-      text-align: center
-      flex: 5
-      margin-right: 50px
+        .button-text
+            @include font-size('large')
+            @include font-weight('normal')
+            flex: 5
+            margin-right: 50px
+            text-align: center
 
-    &.apple .button-text
-      font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif
+        &.apple .button-text
+            font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif
 
-    &.google .button-text
-      @include font-roboto
+        &.google .button-text
+            @include font-roboto
 
-  .status
-    @include font-montserrat
-    @include font-size('large')
-    @include font-weight('normal')
-    margin-top: 8px
-    text-align: left
-    width: 100%
+    .status
+        @include font-montserrat
+        @include font-size('large')
+        @include font-weight('normal')
+        margin-top: 8px
+        text-align: left
+        width: 100%
 
-    &.info
-        @include dynamic-color(color, 'formStatusInfo')
+        &.info
+            @include dynamic-color(color, 'formStatusInfo')
 
-    &.error
-        @include dynamic-color(color, 'formStatusError')
+        &.error
+            @include dynamic-color(color, 'formStatusError')
 
-  &.tablet
-    width: 85%
+    &.tablet
+        width: 85%
 
-  &.mobile
-    width: 100%
+    &.mobile
+        width: 100%
 
-    .sign-in-button .button-text
-      @include font-size('medium')
+        .sign-in-button .button-text
+            @include font-size('medium')

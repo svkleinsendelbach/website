@@ -3,136 +3,136 @@
 @import '/src/sass/color'
 
 :host
-  @include flex-column(flex-start, center)
+    @include flex-column(flex-start, center)
 
 #message-box
-  @include flex-column(flex-start, center)
-  width: 25vw
-  padding: 32px
-  position: fixed
-  bottom: 0
-  right: 32px
-  z-index: 1100
-  @include dynamic-color(color, 'shadow')
-  @include dynamic-color(background-color, 'background')
+    @include flex-column(flex-start, center)
+    @include dynamic-color(color, 'shadow')
+    @include dynamic-color(background-color, 'background')
+    bottom: 0
+    padding: 32px
+    position: fixed
+    right: 32px
+    width: 25vw
+    z-index: 1100
 
-  #header
-    @include font-roboto
-    @include font-weight('medium')
-    @include font-size('medium')
-    padding-bottom: 12px
-    @include dynamic-color(color, 'primary')
+    #header
+        @include dynamic-color(color, 'primary')
+        @include font-roboto
+        @include font-weight('medium')
+        @include font-size('medium')
+        padding-bottom: 12px
 
-  .text
-    @include font-roboto
-    @include font-weight('light')
-    @include font-size('small')
-    padding-bottom: 12px
-    text-align: justify
-    line-height: 1.2
-    @include dynamic-color(color, 'text')
+    .text
+        @include dynamic-color(color, 'text')
+        @include font-roboto
+        @include font-weight('light')
+        @include font-size('small')
+        line-height: 1.2
+        padding-bottom: 12px
+        text-align: justify
 
-  #privacy
-    @include font-roboto
-    @include font-weight('light')
-    @include font-size('small')
-    padding-bottom: 16px
-    text-decoration: none
-    cursor: pointer
-    @include dynamic-color(color, 'primary')
+    #privacy
+        @include dynamic-color(color, 'primary')
+        @include font-roboto
+        @include font-weight('light')
+        @include font-size('small')
+        cursor: pointer
+        padding-bottom: 16px
+        text-decoration: none
 
-  #extra-text
-    @include font-roboto
-    @include font-weight('medium')
-    @include font-size('small')
-    padding-bottom: 12px
-    @include dynamic-color(color, 'primary')
-
-  #selection-buttons
-    @include flex-row(center, space-between)
-    width: 100%
-    padding-bottom: 16px
-
-    .button
-      @include font-roboto
-      @include font-weight('light')
-      @include font-size('small')
-      padding: 6px 0
-      border: 1px solid
-      width: 30%
-      text-align: center
-      cursor: pointer
-
-      &.unchangable
-        cursor: not-allowed
-
-  #details-button, #show-selection-button
-    @include font-roboto
-    @include font-weight('light')
-    @include font-size('small')
-    padding-bottom: 12px
-    text-decoration: none
-    cursor: pointer
-    @include dynamic-color(color, 'primary')
-
-  .details-topic
-    @include font-roboto
-    @include font-weight('medium')
-    @include font-size('normal')
-    padding-bottom: 4px
-    @include dynamic-color(color, 'primary')
-
-  .details-description
-    @include font-roboto
-    @include font-weight('light')
-    @include font-size('small')
-    padding-bottom: 12px
-    text-align: justify
-    line-height: 1.2
-    @include dynamic-color(color, 'text')
-
-  #confirm-buttons
-    @include flex-row(center, space-between)
-    width: 100%
-    padding-top: 12px
-
-    #confirm-selected, #confirm-all
-      @include font-roboto
-      @include font-weight('light')
-      @include font-size('small')
-      padding: 6px 0
-      border: 1px solid
-      width: 45%
-      text-align: center
-      cursor: pointer
-
-    #confirm-selected
-      @include dynamic-color(color, 'text')
-      @include dynamic-color(background-color, 'background')
-      @include dynamic-color(border-color, 'text')
-
-    #confirm-all
-      @include dynamic-color(color, 'background')
-      @include dynamic-color(background-color, 'primary')
-      @include dynamic-color(border-color, 'primary')
-
-  &.tablet
-    width: 40vw
-
-  &.mobile
-    width: calc(100vw - 64px)
-    right: 0
+    #extra-text
+        @include dynamic-color(color, 'primary')
+        @include font-roboto
+        @include font-weight('medium')
+        @include font-size('small')
+        padding-bottom: 12px
 
     #selection-buttons
-      @include flex-column(flex-start, center)
-
-      .button
+        @include flex-row(center, space-between)
+        padding-bottom: 16px
         width: 100%
-        margin-bottom: 12px
+
+        .button
+            @include font-roboto
+            @include font-weight('light')
+            @include font-size('small')
+            border: 1px solid
+            cursor: pointer
+            padding: 6px 0
+            text-align: center
+            width: 30%
+
+            &.unchangable
+                cursor: not-allowed
+
+    #details-button, #show-selection-button
+        @include dynamic-color(color, 'primary')
+        @include font-roboto
+        @include font-weight('light')
+        @include font-size('small')
+        cursor: pointer
+        padding-bottom: 12px
+        text-decoration: none
+
+    .details-topic
+        @include dynamic-color(color, 'primary')
+        @include font-roboto
+        @include font-weight('medium')
+        @include font-size('normal')
+        padding-bottom: 4px
+
+    .details-description
+        @include dynamic-color(color, 'text')
+        @include font-roboto
+        @include font-weight('light')
+        @include font-size('small')
+        line-height: 1.2
+        padding-bottom: 12px
+        text-align: justify
 
     #confirm-buttons
-        @include flex-column(flex-start, center)
+        @include flex-row(center, space-between)
+        padding-top: 12px
+        width: 100%
 
         #confirm-selected, #confirm-all
-            width: 100%
-            margin-bottom: 12px
+            @include font-roboto
+            @include font-weight('light')
+            @include font-size('small')
+            border: 1px solid
+            cursor: pointer
+            padding: 6px 0
+            text-align: center
+            width: 45%
+
+        #confirm-selected
+            @include dynamic-color(color, 'text')
+            @include dynamic-color(background-color, 'background')
+            @include dynamic-color(border-color, 'text')
+
+        #confirm-all
+            @include dynamic-color(color, 'background')
+            @include dynamic-color(background-color, 'primary')
+            @include dynamic-color(border-color, 'primary')
+
+    &.tablet
+        width: 40vw
+
+    &.mobile
+        right: 0
+        width: calc(100vw - 64px)
+
+        #selection-buttons
+            @include flex-column(flex-start, center)
+
+            .button
+                margin-bottom: 12px
+                width: 100%
+
+        #confirm-buttons
+            @include flex-column(flex-start, center)
+
+            #confirm-selected, #confirm-all
+                margin-bottom: 12px
+                width: 100%

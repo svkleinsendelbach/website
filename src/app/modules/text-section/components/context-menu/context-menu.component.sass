@@ -3,35 +3,35 @@
 @import '/src/sass/color'
 
 #dots
-    position: relative
+    @include dynamic-color(color, 'text')
     cursor: pointer
     padding: 5px
-    @include dynamic-color(color, 'text')
+    position: relative
 
-    &.isShown
+    &.is-shown
         z-index: 911
 
 #elements
-    width: 120px
-    box-shadow: 0 4px 5px 3px
-    position: absolute
-    z-index: 912
     @include dynamic-color(color, 'shadow')
     @include dynamic-color(background-color, 'background')
+    box-shadow: 0 4px 5px 3px
+    position: absolute
+    width: 120px
+    z-index: 912
 
     &::ng-deep > *
-        font-weight: 500
-        font-size: 14px
-        padding: 10px 40px 10px 20px
         cursor: pointer
+        font-size: 14px
+        font-weight: 500
+        padding: 10px 40px 10px 20px
 
         &:hover
             @include dynamic-color(background, 'hoveredBackground')
 
 #background
-    position: absolute
-    z-index: 910
-    width: 100vw
     height: 100vh
-    top: 0
     left: 0
+    position: absolute
+    top: 0
+    width: 100vw
+    z-index: 910

@@ -4,17 +4,17 @@
 
 :host
     @include flex-column(flex-start, center)
-    width: 100%
     margin-bottom: 40px
+    width: 100%
 
 #title
+    @include dynamic-color(color, 'text')
     @include font-montserrat
     @include font-size('large')
     @include font-weight('small')
-    width: 100%
-    text-align: left
     margin-bottom: 15px
-    @include dynamic-color(color, 'text')
+    text-align: left
+    width: 100%
 
 #elements
     @include flex-column(flex-start, center)

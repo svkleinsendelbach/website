@@ -3,11 +3,11 @@
 @import '/src/sass/flex'
 
 @mixin markdown-container
+    @include dynamic-color(color, 'secondaryText')
     @include font-montserrat
     @include font-size('medium')
     @include font-weight('small')
     text-align: justify
-    @include dynamic-color(color, 'secondaryText')
     width: 100%
 
     &::ng-deep
@@ -20,24 +20,24 @@
             margin-right: auto
 
         a
-            text-decoration: none
-            cursor: pointer
             @include dynamic-color(color, 'primary')
+            cursor: pointer
+            text-decoration: none
 
         .italic
             font-style: italic
 
         .strong
-            @include font-weight('medium')
             @include dynamic-color(color, 'text')
+            @include font-weight('medium')
 
         .horizontal-line
             @include flex-row(center, center)
-            width: 100%
             height: 2px
+            width: 100%
 
             > *
-                width: 90%
-                height: 1px
                 @include dynamic-color(background-color, 'text')
+                height: 1px
+                width: 90%
 

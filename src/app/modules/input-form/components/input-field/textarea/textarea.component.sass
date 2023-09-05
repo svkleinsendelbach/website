@@ -4,25 +4,25 @@
 
 :host
     @include flex-column(flex-start, center)
-    width: 100%
     margin-bottom: 20px
+    width: 100%
 
 #textarea
-    @include font-montserrat
-    @include font-size('large')
-    @include font-weight('normal')
-    cursor: pointer
-    text-align: start
-    padding: 0 10px
-    width: calc(100% - 20px)
-    vertical-align: middle
-    border: solid 1px
-    border-radius: 8px
-    height: 320px
-    resize: none
     @include dynamic-color(color, 'text')
     @include dynamic-color(background-color, 'background')
     @include dynamic-color(border-color, 'text')
+    @include font-montserrat
+    @include font-size('large')
+    @include font-weight('normal')
+    border: solid 1px
+    border-radius: 8px
+    cursor: pointer
+    height: 320px
+    padding: 0 10px
+    resize: none
+    text-align: start
+    vertical-align: middle
+    width: calc(100% - 20px)
 
     &.error
         @include dynamic-color(border-color, 'formStatusError')

@@ -4,88 +4,89 @@
 @import '/src/sass/color'
 
 :host
-  @include flex-column(flex-start, center)
-  width: 100%
+    @include flex-column(flex-start, center)
+    width: 100%
 
 #back-btn-container
-  @include flex-row(center, flex-start)
-  width: 100%
+    @include flex-row(center, flex-start)
+    width: 100%
 
-  #back-button
-    @include font-montserrat
-    @include font-size('normal')
-    @include font-weight('small')
-    cursor: pointer
-    text-align: center
-    border: 1px solid
-    border-radius: 5px
-    padding: 5px 15px
-    margin-top: 20px
-    margin-left: 20px
-    text-decoration: none
-    @include dynamic-color(background-color, 'background')
-    @include dynamic-color(border-color, 'text')
+    #back-button
+        @include dynamic-color(background-color, 'background')
+        @include dynamic-color(border-color, 'text')
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('small')
+        border: 1px solid
+        border-radius: 5px
+        cursor: pointer
+        margin-left: 20px
+        margin-top: 20px
+        padding: 5px 15px
+        text-align: center
+        text-decoration: none
 
 .hint
-  @include font-montserrat
-  @include font-size('normal')
-  @include font-weight('normal')
-  width: 97.5%
-  text-align: start
-  padding: 5px 0
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('normal')
+    padding: 5px 0
+    text-align: start
+    width: 97.5%
 
 #input-field-label
-  @include font-montserrat
-  @include font-size('large')
-  @include font-weight('normal')
-  margin-bottom: 8px
-  text-align: left
-  width: 100%
+    @include font-montserrat
+    @include font-size('large')
+    @include font-weight('normal')
+    margin-bottom: 8px
+    text-align: left
+    width: 100%
 
 #image
+    @include dynamic-color(border-color, 'text')
     border: 1px solid
     border-radius: 5px
-    margin-bottom: 20px
-    width: 25vw
     height: 25vw
+    margin-bottom: 20px
     object-fit: cover
-    @include dynamic-color(border-color, 'text')
+    width: 25vw
 
 #image-selector
-  display: none
+    display: none
 
 #custom-image-selector
-  @include flex-row(center, center)
-  @include font-montserrat
-  @include font-size('large')
-  @include font-weight('normal')
-  cursor: pointer
-  text-align: center
-  width: 100%
-  vertical-align: middle
-  border: solid 1px
-  border-radius: 8px
-  height: 48px
-  @include dynamic-color(color, 'text')
-  @include dynamic-color(background-color, 'background')
+    @include flex-row(center, center)
+    @include dynamic-color(color, 'text')
+    @include dynamic-color(background-color, 'background')
+    @include font-montserrat
+    @include font-size('large')
+    @include font-weight('normal')
+    border: solid 1px
+    border-radius: 8px
+    cursor: pointer
+    height: 48px
+    text-align: center
+    vertical-align: middle
+    width: 100%
 
 #error-message
-  @include font-montserrat
-  @include font-size('large')
-  @include font-weight('normal')
-  margin-top: 8px
-  text-align: left
-  width: 100%
+    @include font-montserrat
+    @include font-size('large')
+    @include font-weight('normal')
+    margin-top: 8px
+    text-align: left
+    width: 100%
 
 #spacer
-  height: 20px
+    height: 20px
 
 #preview-message
     @include flex-column(center, flex-start)
-    width: 100%
+    bottom: 20px
     margin:
-        top: 10px
         bottom: 20px
+        top: 10px
+    width: 100%
 
     #preview-text
         @include font-montserrat

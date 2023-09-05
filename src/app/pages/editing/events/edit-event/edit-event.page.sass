@@ -3,32 +3,32 @@
 @import '/src/sass/color'
 
 :host
-  @include flex-column(flex-start, center)
-  width: 100%
+    @include flex-column(flex-start, center)
+    width: 100%
 
 #back-btn-container
-  @include flex-row(center, flex-start)
-  width: 100%
+    @include flex-row(center, flex-start)
+    width: 100%
 
-  #back-button
-    @include font-montserrat
-    @include font-size('normal')
-    @include font-weight('small')
-    cursor: pointer
-    text-align: center
-    border: 1px solid
-    border-radius: 5px
-    padding: 5px 15px
-    margin-top: 20px
-    margin-left: 20px
-    text-decoration: none
-    @include dynamic-color(background-color, 'background')
-    @include dynamic-color(border-color, 'text')
+    #back-button
+        @include dynamic-color(background-color, 'background')
+        @include dynamic-color(border-color, 'text')
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('small')
+        border: 1px solid
+        border-radius: 5px
+        cursor: pointer
+        margin-left: 20px
+        margin-top: 20px
+        padding: 5px 15px
+        text-align: center
+        text-decoration: none
 
 .hint
-  @include font-montserrat
-  @include font-size('normal')
-  @include font-weight('normal')
-  width: 97.5%
-  text-align: start
-  padding: 5px 0
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('normal')
+    padding: 5px 0
+    text-align: start
+    width: 97.5%

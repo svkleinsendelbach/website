@@ -4,29 +4,29 @@
 
 :host
     @include flex-column(flex-start, center)
-    width: 100%
     margin-bottom: 20px
+    width: 100%
 
 angular-editor
     width: 100%
 
     &.error
-        border: 1px solid
         @include dynamic-color(border-color, 'formStatusError')
+        border: 1px solid
 
 
 ::ng-deep .angular-editor-toolbar .select-color
     width: 125px
 
 ::ng-deep .angular-editor-toolbar .select-custom-style
-    width: 150px !important
+    width: 150px
 
 ::ng-deep .angular-editor-placeholder
     @include font-montserrat
     @include font-size('large')
     @include font-weight('medium')
-    width: 100%
     text-align: center
+    width: 100%
 
 ::ng-deep .angular-editor-textarea
     @include font-montserrat

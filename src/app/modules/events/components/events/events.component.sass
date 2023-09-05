@@ -3,77 +3,77 @@
 @import '/src/sass/color'
 
 :host
-  @include flex-column(flex-start, center)
-  width: 100%
+    @include flex-column(flex-start, center)
+    width: 100%
 
 #event-groups
-  @include flex-column(flex-start, center)
-  width: 100%
-
-  .event-group
-    @include font-montserrat
-    @include font-size('x-large')
-    @include font-weight('medium')
-    margin: 16px 0
+    @include flex-column(flex-start, center)
     width: 100%
-    text-align: left
 
-  .event
-    width: 100%
-    margin-bottom: 8px
-    padding-bottom: 8px
-    border-bottom: solid 1px
-    @include dynamic-color(border-color, 'text')
+    .event-group
+        @include font-montserrat
+        @include font-size('x-large')
+        @include font-weight('medium')
+        margin: 16px 0
+        text-align: left
+        width: 100%
 
-    .inner-container
-        @include flex-row(flex-start, flex-start)
-        overflow: hidden
-        padding: 8px 0
+    .event
+        @include dynamic-color(border-color, 'text')
+        border-bottom: solid 1px
+        margin-bottom: 8px
+        padding-bottom: 8px
+        width: 100%
 
-        .bar
-            width: 5px
-            padding: 99999px 0
-            margin: -99999px 0
+        .inner-container
+            @include flex-row(flex-start, flex-start)
+            overflow: hidden
+            padding: 8px 0
+
+            .bar
+                margin: -99999px 0
+                padding: 99999px 0
+                width: 5px
+
+            .date, .title, .subtitle, .link
+                @include font-montserrat
+                @include font-size('medium')
+                @include font-weight('small')
+                flex: 3
+                margin-left: 10px
+
+            .date
+                flex: 4
+
+            .link
+                cursor: pointer
+                padding-bottom: 0
+                text-decoration: none
+                width: auto
+
+        &:nth-last-child(2)
+            border-bottom: 0
+
+    .show-more-button
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('normal')
+        cursor: pointer
+
+    &.mobile .event
+        @include flex-column(flex-start, center)
 
         .date, .title, .subtitle, .link
-            @include font-montserrat
-            @include font-size('medium')
-            @include font-weight('small')
-            flex: 3
-            margin-left: 10px
+            margin-bottom: 4px
+            width: 100%
 
-        .date
-            flex: 4
-
-        .link
-            width: auto
-            padding-bottom: 0
-            text-decoration: none
-            cursor: pointer
-
-    &:nth-last-child(2)
-      border-bottom: none
-
-  .show-more-button
-    cursor: pointer
+#download-calendar
+    @include dynamic-color(border-color, 'text')
     @include font-montserrat
     @include font-size('normal')
     @include font-weight('normal')
-
-  &.mobile .event
-    @include flex-column(flex-start, center)
-
-    .date, .title, .subtitle, .link
-      width: 100%
-      margin-bottom: 4px
-
-#download-calendar
-  @include font-montserrat
-  @include font-size('normal')
-  @include font-weight('normal')
-  cursor: pointer
-  border: 1px solid
-  padding: 2.5px 15px
-  border-radius: 5px
-  margin-top: 25px
-  @include dynamic-color(border-color, 'text')
+    border: 1px solid
+    border-radius: 5px
+    cursor: pointer
+    margin-top: 25px
+    padding: 2.5px 15px

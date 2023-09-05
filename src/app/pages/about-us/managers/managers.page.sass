@@ -2,29 +2,29 @@
 @import '/src/sass/text'
 
 #managers-container
-  @include flex-row(flex-start, space-around)
-  width: 100%
-  margin-top: 25px
-
-  .container
-    @include flex-column(flex-end, center)
-
-    .image
-      height: 200px
-      margin-bottom: 25px
-
-    .name, .function
-      @include font-montserrat
-      @include font-size('normal')
-      @include font-weight('small')
-      white-space: nowrap
-      text-align: center
-
-    .name
-      margin-bottom: 10px
-
-  &.mobile
-    @include flex-column(flex-start, center)
+    @include flex-row(flex-start, space-around)
+    margin-top: 25px
+    width: 100%
 
     .container
-        margin-bottom: 25px
+        @include flex-column(flex-end, center)
+
+        .image
+            height: 200px
+            margin-bottom: 25px
+
+        .name, .function
+            @include font-montserrat
+            @include font-size('normal')
+            @include font-weight('small')
+            text-align: center
+            white-space: nowrap
+
+        .name
+            margin-bottom: 10px
+
+    &.mobile
+        @include flex-column(flex-start, center)
+
+        .container
+            margin-bottom: 25px

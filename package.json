@@ -1,13 +1,14 @@
 {
   "name": "svkleinsendelbach-website",
   "version": "0.0.0",
+  "sasslintConfig": "./.sasslintrc",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "ng lint && sass-lint -c .sasslintrc '**/*.sass' -v -q",
     "secrets": "ts-node ../secrets/src/manageSecrets.ts"
   },
   "private": true,
@@ -43,6 +44,7 @@
     "ng-recaptcha": "^12.0.1",
     "ngx-cookie-service": "^16.0.0",
     "rxjs": "~7.8.1",
+    "sass-lint": "^1.13.1",
     "sha512-crypt-ts": "^0.1.27",
     "tslib": "^2.6.1",
     "utf8": "^3.0.0",

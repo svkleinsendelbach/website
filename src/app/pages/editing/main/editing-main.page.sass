@@ -3,95 +3,95 @@
 @import '/src/sass/color'
 
 :host
-  @include flex-column(flex-start, center)
-  width: 100%
+    @include flex-column(flex-start, center)
+    width: 100%
 
 #log-out-container
-  @include flex-row(center, flex-end)
-  width: 100%
+    @include flex-row(center, flex-end)
+    width: 100%
 
-  #log-out-button
-    @include font-montserrat
-    @include font-size('normal')
-    @include font-weight('small')
-    cursor: pointer
-    text-align: center
-    border: 1px solid
-    border-radius: 5px
-    padding: 5px 15px
-    margin-top: 20px
-    margin-right: 20px
-    @include dynamic-color(color, 'text')
-    @include dynamic-color(background-color, 'background')
+    #log-out-button
+        @include dynamic-color(color, 'text')
+        @include dynamic-color(background-color, 'background')
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('small')
+        border: 1px solid
+        border-radius: 5px
+        cursor: pointer
+        margin-right: 20px
+        margin-top: 20px
+        padding: 5px 15px
+        text-align: center
 
 #unauthenticated-user-container
-  @include flex-column(flex-start, center)
-  width: 100%
-  margin-top: 25px
+    @include flex-column(flex-start, center)
+    margin-top: 25px
+    width: 100%
 
-  .unauthenticated-user
-    @include flex-row(center, center)
-    width: 95%
-    border:  1px solid
-    border-bottom: none
-    @include dynamic-color(background-color, 'background')
-    @include dynamic-color(border-color, 'text')
+    .unauthenticated-user
+        @include flex-row(center, center)
+        @include dynamic-color(background-color, 'background')
+        @include dynamic-color(border-color, 'text')
+        border:  1px solid
+        border-bottom: 0
+        width: 95%
 
-    &:first-child
-      border-radius: 5px 5px 0 0
+        &:first-child
+            border-radius: 5px 5px 0 0
 
-    &:last-child
-      border-bottom: 1px solid
-      border-radius: 0 0 5px 5px
+        &:last-child
+            border-bottom: 1px solid
+            border-radius: 0 0 5px 5px
 
-    &:first-child:last-child
-      border-radius: 5px
+        &:first-child:last-child
+            border-radius: 5px
 
-    .name, .button
-      @include font-montserrat
-      @include font-size('normal')
-      @include font-weight('small')
-      text-align: center
-      padding: 5px 10px
+        .name, .button
+            @include font-montserrat
+            @include font-size('normal')
+            @include font-weight('small')
+            padding: 5px 10px
+            text-align: center
 
-    .name
-      flex: 5
+        .name
+            flex: 5
 
-    .button
-      flex: 2
-      cursor: pointer
+        .button
+            cursor: pointer
+            flex: 2
 
-  &.mobile .unauthenticated-user
-    @include flex-column(center, center)
+    &.mobile .unauthenticated-user
+        @include flex-column(center, center)
 
 .edit-container
-  @include flex-row(center, flex-start)
-  width: 100%
-  margin-bottom: 15px
+    @include flex-row(center, flex-start)
+    margin-bottom: 15px
+    width: 100%
 
-  .button
-    @include font-montserrat
-    @include font-size('normal')
-    @include font-weight('small')
-    cursor: pointer
-    text-align: center
-    border: 1px solid
-    border-radius: 5px
-    padding: 5px 35px
-    text-decoration: none
-    @include dynamic-color(background-color, 'background')
-    @include dynamic-color(border-color, 'text')
-
-  .title
-    @include font-montserrat
-    @include font-size('normal')
-    @include font-weight('small')
-    margin-left: 25px
-
-  &.mobile
-    @include flex-column(center, center)
-    margin-bottom: 25px
+    .button
+        @include dynamic-color(background-color, 'background')
+        @include dynamic-color(border-color, 'text')
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('small')
+        border: 1px solid
+        border-radius: 5px
+        cursor: pointer
+        padding: 5px 35px
+        text-align: center
+        text-decoration: none
 
     .title
-      margin-left: 0
-      margin-top: 10px
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('small')
+        margin-left: 25px
+
+    &.mobile
+        @include flex-column(center, center)
+        margin-bottom: 25px
+
+        .title
+            margin-left: 0
+            margin-top: 10px

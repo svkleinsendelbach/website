@@ -4,24 +4,24 @@
 
 :host
     @include flex-column(flex-start, center)
-    width: 100vw
     position: relative
+    width: 100vw
 
 #image-container
     @include flex-row(flex-start, center)
+    overflow: hidden
     position: absolute
     top: 0
-    z-index: 100
     width: 85vw
-    overflow: hidden
+    z-index: 100
 
     .image
+        object-fit: cover
+        overflow: hidden
         position: absolute
         top: 0
-        object-fit: cover
+        transition: .5s
         width: 100%
-        overflow: hidden
-        transition: 0.5s
 
     &.mobile
         width: 100vw
@@ -30,29 +30,29 @@
     @include flex-column(flex-end, flex-start)
     position: absolute
     top: 0
-    z-index: 101
     width: 85vw
+    z-index: 101
 
     #actual, #title, #subtitle
+        @include dynamic-color(background-color, 'background')
+        @include dynamic-color(color, 'text')
         @include font-roboto
+        box-shadow: 0 0 16px color('shadow')
         padding: 5px 10px
         padding-left: 25px
-        @include dynamic-color(color, 'text')
-        @include dynamic-color(background-color, 'background')
-        box-shadow: 0 0 16px color('shadow')
 
     #actual
         @include dynamic-color(color, 'primary')
-        font-weight: 300
         font-size: 20px
+        font-weight: 300
 
     #title
-        font-weight: 500
         font-size: 40px
+        font-weight: 500
 
     #subtitle
-        font-weight: 300
         font-size: 35px
+        font-weight: 300
 
     &.mobile
         width: 100vw
@@ -65,26 +65,26 @@
 
 #nav-bar-container
     @include flex-column(center, center)
+    cursor: pointer
     position: absolute
     top: 0
-    z-index: 102
     width: calc(85vw + 110px)
-    cursor: pointer
+    z-index: 102
 
     #nav-button-container
         @include flex-row(center, space-between)
-        width: 100%
         height: calc(100% - 48px)
+        width: 100%
 
         #left-button, #right-button
+            @include dynamic-color(color, 'text')
             @include flex-row(center, center)
             cursor: pointer
             font-size: 64px
-            opacity: 0.5
-            width: 45px
-            padding: 5px
             height: 100%
-            @include dynamic-color(color, 'text')
+            opacity: .5
+            padding: 5px
+            width: 45px
 
             &:hover
                 opacity: 1
@@ -92,17 +92,17 @@
     #nav-bar
         @include flex-row(flex-start, center)
         border-radius: 8px
-        padding: 4px 8px
         margin-bottom: 16px
+        padding: 4px 8px
 
         .circle
             @include flex-row(center, center)
-            height: 16px
-            width: 16px
-            padding: 4px
             cursor: pointer
             font-size: 16px
-            opacity: 0.5
+            height: 16px
+            opacity: .5
+            padding: 4px
+            width: 16px
 
             &.filled
                 opacity: 1
@@ -115,5 +115,10 @@
 
         #nav-button-container
             #left-button, #right-button
-                width: auto
                 height: auto
+                width: auto
+
+@media screen and (prefers-color-scheme: dark)
+    #text-container
+        #actual, #title, #subtitle
+            box-shadow: 0 0 16px dark-color('shadow')
