@@ -4,6 +4,7 @@ export type InternalPath =
     | 'anfahrt'
     | 'bearbeiten'
     | 'bearbeiten/anmelden'
+    | 'bearbeiten/benutzer-rollen'
     | 'bearbeiten/berichte'
     | 'bearbeiten/berichte/bearbeiten'
     | 'bearbeiten/termine'
@@ -56,6 +57,7 @@ export namespace InternalPath {
         'berichte',
         'bearbeiten',
         'bearbeiten/anmelden',
+        'bearbeiten/benutzer-rollen',
         'bearbeiten/termine',
         'bearbeiten/termine/bearbeiten',
         'bearbeiten/berichte',
@@ -66,6 +68,7 @@ export namespace InternalPath {
         'anfahrt': 'Anfahrt',
         'bearbeiten': 'Website bearbeiten',
         'bearbeiten/anmelden': 'Anmelden',
+        'bearbeiten/benutzer-rollen': 'Benutzer Rollen',
         'bearbeiten/berichte': 'Berichte bearbeiten',
         'bearbeiten/berichte/bearbeiten': 'Bericht bearbeiten',
         'bearbeiten/termine': 'Termine bearbeiten',

@@ -24,7 +24,7 @@
 <!-- Authentication failed, user is not allowed to view this page -->
 <text-section
     [title]="'Authentifizierung fehlgeschlagen'"
-    *ngIf="state === 'unregistered'"
+    *ngIf="state === 'unauthenticated'"
 >
     <p
         class="text large margin-top-large secondaryColor"
@@ -39,5 +39,5 @@
 
 <!-- Authenication successful -->
 <ng-content
-    *ngIf="state === 'registered'"
+    *ngIf="state === 'authenticated'"
 ></ng-content>

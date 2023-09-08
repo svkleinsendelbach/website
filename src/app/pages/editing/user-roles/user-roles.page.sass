@@ -6,12 +6,12 @@
     @include flex-column(flex-start, center)
     width: 100%
 
-#unauthenticated-user-container
+#container
     @include flex-column(flex-start, center)
     margin-top: 25px
     width: 100%
 
-    .unauthenticated-user
+    .user
         @include flex-row(center, center)
         @include dynamic-color(background-color, 'background')
         @include dynamic-color(border-color, 'text')
@@ -29,6 +29,7 @@
         &:first-child:last-child
             border-radius: 5px
 
+
         .name, .button
             @include font-montserrat
             @include font-size('normal')
@@ -43,38 +44,5 @@
             cursor: pointer
             flex: 2
 
-    &.mobile .unauthenticated-user
+    &.mobile .user
         @include flex-column(center, center)
-
-.edit-container
-    @include flex-row(center, flex-start)
-    margin-bottom: 15px
-    width: 100%
-
-    .button
-        @include dynamic-color(background-color, 'background')
-        @include dynamic-color(color, 'primary')
-        @include font-montserrat
-        @include font-size('normal')
-        @include font-weight('small')
-        border: 1px solid
-        @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
-        border-radius: 5px
-        cursor: pointer
-        padding: 5px 35px
-        text-align: center
-        text-decoration: none
-
-    .title
-        @include font-montserrat
-        @include font-size('normal')
-        @include font-weight('small')
-        margin-left: 25px
-
-    &.mobile
-        @include flex-column(center, center)
-        margin-bottom: 25px
-
-        .title
-            margin-left: 0
-            margin-top: 10px

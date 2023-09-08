@@ -1,15 +1,10 @@
+<app-editing-navigation-bar/>
 <authentication-check
-    [authenticationTypes]="['editEvents', 'editReports', 'authenticateUser']"
+    [roles]="['admin']"
+    [states]="authenticationStates"
+    [index]="0"
+    (onAuthentication)="getUnauthenticatedUsers()"
 >
-    <div
-        id="log-out-container"
-    >
-        <p
-            id="log-out-button"
-            role="none"
-            (click)="$event.preventDefault(); $event.stopPropagation(); logOut()"
-        >Abmelden</p>
-    </div>
     <text-section
         [title]="'Wartende Website Editors'"
         *ngIf="unauthenticatedUsers && unauthenticatedUsers.length !== 0"
@@ -23,7 +18,7 @@
         >
             <div
                 class="unauthenticated-user"
-                *ngFor="let user of unauthenticatedUsers; trackBy: UnauthenticatedUser.trackByHashedUserId"
+                *ngFor="let user of unauthenticatedUsers; trackBy: User.trackByHashedUserId"
             >
                 <p
                     class="name textColor"
@@ -31,32 +26,54 @@
                 <p
                     class="button primaryColor"
                     role="none"
-                    (click)="acceptDeclineUser('accept', user.hashedUserId)"
+                    (click)="handleAccessRequest('accept', user.hashedUserId)"
                 >Bestätigen</p>
                 <p
                     class="button primaryColor"
                     role="none"
-                    (click)="acceptDeclineUser('decline', user.hashedUserId)"
+                    (click)="handleAccessRequest('decline', user.hashedUserId)"
                 >Ablehnen</p>
             </div>
         </div>
     </text-section>
-
+    <text-section
+        [title]="'Benutzer'"
+    >
+        <div
+            class="edit-container"
+            [ngClass]="deviceType.current"
+        >
+            <a
+                [href]="allInternalLinks['bearbeiten/benutzer-rollen'].link"
+                [title]="allInternalLinks['bearbeiten/benutzer-rollen'].title"
+                class="button"
+            >Bearbeiten</a>
+            <p
+                class="title secondaryColor"
+            >Benutzer Rollen bearbeiten</p>
+        </div>
+    </text-section>
+</authentication-check>
+<authentication-check
+    [roles]="['websiteManager']"
+    [states]="authenticationStates"
+    [index]="1"
+>
     <text-section
         [title]="'Website bearbeiten'"
     >
         <div
-        class="edit-container"
-        [ngClass]="deviceType.current"
+            class="edit-container"
+            [ngClass]="deviceType.current"
         >
-        <a
-            [href]="allInternalLinks['bearbeiten/termine'].link"
-            [title]="allInternalLinks['bearbeiten/termine'].title"
-            class="button primaryColor"
-        >Bearbeiten</a>
-        <p
-            class="title secondaryColor"
-        >Kommende Termine bearbeiten</p>
+            <a
+                [href]="allInternalLinks['bearbeiten/termine'].link"
+                [title]="allInternalLinks['bearbeiten/termine'].title"
+                class="button"
+            >Bearbeiten</a>
+            <p
+                class="title secondaryColor"
+            >Kommende Termine bearbeiten</p>
         </div>
         <div
             class="edit-container"
@@ -65,7 +82,7 @@
             <a
                 [href]="allInternalLinks['bearbeiten/berichte'].link"
                 [title]="allInternalLinks['bearbeiten/berichte'].title"
-                class="button primaryColor"
+                class="button"
             >Bearbeiten</a>
             <p
                 class="title secondaryColor"

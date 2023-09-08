@@ -1,13 +1,13 @@
-import { UserAuthenticationGetAllUnauthenticatedFunction, UserAuthenticationGetAllUnauthenticatedFunctionType } from 'src/app/modules/firebase-api/function-types';
 import { AuthService } from 'src/app/modules/authentication/services/auth.service';
+import { AuthenticationStates } from 'src/app/modules/authentication/components/authentication-check/authentication-check.component';
 import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { FunctionType } from 'src/app/modules/firebase-api/types/function-type';
 import { InternalLink } from 'src/app/types/internal-path';
 import { Router } from '@angular/router';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
+import { User } from 'src/app/modules/firebase-api/types/user';
 
 @Component({
     selector: 'pages-editing-main',
@@ -15,50 +15,43 @@ import { Title } from '@angular/platform-browser';
     templateUrl: './editing-main.page.html'
 })
 export class EditingMainPage {
-    public UnauthenticatedUser = UserAuthenticationGetAllUnauthenticatedFunction.User;
+    public User = User;
 
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
 
     public allInternalLinks = InternalLink.all;
 
-    public unauthenticatedUsers: FunctionType.ReturnType<UserAuthenticationGetAllUnauthenticatedFunctionType> | null = null;
+    public authenticationStates = new AuthenticationStates(2);
+
+    public unauthenticatedUsers: User[] | null = null;
 
     public constructor(
         public readonly titleService: Title,
         public readonly deviceType: DeviceTypeService,
         public readonly styleConfig: StyleConfigService,
-        private readonly firebaseApiService: FirebaseApiService,
-        private readonly authService: AuthService,
-        private readonly router: Router
+        private readonly firebaseApiService: FirebaseApiService
     ) {
         this.titleService.setTitle('Bearbeiten');
-        void this.getUnauthenticatedUsers();
     }
 
-    public async logOut() {
-        await this.authService.logOut();
-        await this.router.navigateByUrl(InternalLink.all['bearbeiten/anmelden'].link);
-    }
-
-    public async acceptDeclineUser(action: 'accept' | 'decline', hashedUserId: string) {
+    public async handleAccessRequest(handleRequest: 'accept' | 'decline', hashedUserId: string) {
         if (this.unauthenticatedUsers)
             this.unauthenticatedUsers = this.unauthenticatedUsers.filter(user => user.hashedUserId !== hashedUserId);
         await this.firebaseApiService
-            .function('userAuthentication')
-            .function('acceptDecline')
+            .function('user')
+            .function('handleAccessRequest')
             .call({
-                action: action,
-                authenticationTypes: ['authenticateUser', 'editEvents', 'editReports'],
+                handleRequest: handleRequest,
                 hashedUserId: hashedUserId
             });
     }
 
-    private async getUnauthenticatedUsers() {
+    public async getUnauthenticatedUsers() {
         this.unauthenticatedUsers = await this.firebaseApiService
-            .function('userAuthentication')
-            .function('getAllUnauthenticated')
+            .function('user')
+            .function('getAll')
             .call({
-                authenticationTypes: ['authenticateUser', 'editEvents', 'editReports']
+                type: 'unauthenticated'
             });
     }
 }

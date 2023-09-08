@@ -1,12 +1,11 @@
 import { Event, EventGroup, EventGroupId } from './types/event';
-import { NotifactionPayload, NotificationType } from './types/notification';
 import { Report, ReportGroupId } from './types/report';
 import { AnpfiffInfoTeamParameters } from './types/anpfiff-info-team-parameters';
 import { EditType } from './types/edit-type';
 import { FunctionType } from './types/function-type';
 import { GameInfo } from './types/game-info';
 import { TeamSquad } from './types/team-squad';
-import { UserAuthenticationType } from './types/user-authentication';
+import { User } from './types/user';
 
 export type DeleteAllDataFunctionType = FunctionType<Record<string, never>, void>;
 
@@ -25,16 +24,6 @@ export type EventGetFunctionType = FunctionType<{
 export type GameInfoGetFunctionType = FunctionType<{
     gameId: string;
 }, GameInfo>;
-
-export type NotificationPushFunctionType = FunctionType<{
-    notificationType: NotificationType;
-    payload: NotifactionPayload;
-}, void>;
-
-export type NotificationRegisterFunctionType = FunctionType<{
-    notificationType: NotificationType;
-    token: string;
-}, void>;
 
 export type ReportEditFunctionType = FunctionType<{
     editType: EditType;
@@ -70,40 +59,6 @@ export type TeamSquadGetFunctionType = FunctionType<{
 }, TeamSquad>;
 
 
-export type UserAuthenticationAcceptDeclineFunctionType = FunctionType<{
-    authenticationTypes: UserAuthenticationType[];
-    hashedUserId: string;
-    action: 'accept' | 'decline';
-}, void>;
-
-export type UserAuthenticationAddFunctionType = FunctionType<{
-    authenticationTypes: UserAuthenticationType[];
-    firstName: string;
-    lastName: string;
-}, void>;
-
-export type UserAuthenticationCheckFunctionType = FunctionType<{
-    authenicationTypes: UserAuthenticationType[];
-}, void>;
-
-export namespace UserAuthenticationGetAllUnauthenticatedFunction {
-    export interface User {
-        hashedUserId: string;
-        firstName: string;
-        lastName: string;
-    }
-
-    export namespace User {
-        export function trackByHashedUserId(_index: number, user: User): string {
-            return user.hashedUserId;
-        }
-    }
-}
-
-export type UserAuthenticationGetAllUnauthenticatedFunctionType = FunctionType<{
-    authenticationTypes: UserAuthenticationType[];
-}, UserAuthenticationGetAllUnauthenticatedFunction.User[]>;
-
 export type VerifyRecaptchaFunctionType = FunctionType<{
     token: string;
 }, {
@@ -114,3 +69,26 @@ export type VerifyRecaptchaFunctionType = FunctionType<{
     hostname: string;
     errorCode: string[] | null;
 }>;
+
+export type UserCheckRolesFunctionType = FunctionType<{
+    roles: User.Role[];
+}, void>;
+
+export type UserEditRolesFunctionType = FunctionType<{
+    hashedUserId: string;
+    roles: User.Role[];
+}, void>;
+
+export type UserGetAllFunctionType = FunctionType<{
+    type: 'authenticated' | 'unauthenticated' | null;
+}, User[]>;
+
+export type UserHandleAccessRequestFunctionType = FunctionType<{
+    hashedUserId: string;
+    handleRequest: 'accept' | 'decline';
+}, void>;
+
+export type UserRequestAccessFunctionType = FunctionType<{
+    firstName: string;
+    lastName: string;
+}, void>;

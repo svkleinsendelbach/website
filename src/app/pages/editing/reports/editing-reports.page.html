@@ -1,15 +1,10 @@
+<app-editing-navigation-bar
+    [backButtonLink]="mainEditingPageLink"
+/>
 <authentication-check
-  [authenticationTypes]="['editReports']"
+    [roles]="['websiteManager']"
+    (onAuthentication)="getReports()"
 >
-    <div
-        id="back-btn-container"
-    >
-        <a
-        id="back-button"
-        title="Zurück"
-        [href]="mainEditingPageLink.link"
-        >Zurück</a>
-    </div>
     <text-section
         [title]="'Berichte bearbeiten'"
     >

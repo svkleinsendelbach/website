@@ -3,17 +3,16 @@ import {
     EventEditFunctionType,
     EventGetFunctionType,
     GameInfoGetFunctionType,
-    NotificationPushFunctionType,
-    NotificationRegisterFunctionType,
     ReportEditFunctionType,
     ReportGetAllFunctionType,
     ReportGetFunctionType,
     SendMailContactFunctionType,
     TeamSquadGetFunctionType,
-    UserAuthenticationAcceptDeclineFunctionType,
-    UserAuthenticationAddFunctionType,
-    UserAuthenticationCheckFunctionType,
-    UserAuthenticationGetAllUnauthenticatedFunctionType,
+    UserCheckRolesFunctionType,
+    UserEditRolesFunctionType,
+    UserGetAllFunctionType,
+    UserHandleAccessRequestFunctionType,
+    UserRequestAccessFunctionType,
     VerifyRecaptchaFunctionType
 } from './function-types';
 
@@ -36,14 +35,11 @@ export interface FirebaseFunctions {
     sendMail: {
         contact: SendMailContactFunctionType;
     };
-    userAuthentication: {
-        add: UserAuthenticationAddFunctionType;
-        check: UserAuthenticationCheckFunctionType;
-        acceptDecline: UserAuthenticationAcceptDeclineFunctionType;
-        getAllUnauthenticated: UserAuthenticationGetAllUnauthenticatedFunctionType;
-    };
-    notification: {
-        register: NotificationRegisterFunctionType;
-        push: NotificationPushFunctionType;
+    user: {
+        requestAccess: UserRequestAccessFunctionType;
+        getAll: UserGetAllFunctionType;
+        checkRoles: UserCheckRolesFunctionType;
+        handleAccessRequest: UserHandleAccessRequestFunctionType;
+        editRoles: UserEditRolesFunctionType;
     };
 }

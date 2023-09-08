@@ -1,0 +1,14 @@
+<a
+    id="back-button"
+    *ngIf="backButtonLink"
+    title="Zurück"
+    [href]="backButtonLink.link"
+>Zurück</a>
+<p
+    *ngIf="!backButtonLink"
+></p>
+<p
+    id="log-out-button"
+    role="none"
+    (click)="$event.preventDefault(); $event.stopPropagation(); logOut()"
+>Abmelden</p>

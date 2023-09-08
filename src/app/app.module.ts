@@ -69,6 +69,8 @@ import { EditEventPage } from './pages/editing/events/edit-event/edit-event.page
 import { EditingReportsPage } from './pages/editing/reports/editing-reports.page';
 import { EditReportPage } from './pages/editing/reports/edit-report/edit-report.page';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { NavigationBarComponent as EditingNavigationBarComponent } from './pages/editing/main/navigation-bar/navigation-bar.component';
+import { UserRolesPage } from './pages/editing/user-roles/user-roles.page';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -84,6 +86,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
         EditEventPage,
         EditingEventsPage,
         EditingMainPage,
+        EditingNavigationBarComponent,
         EditingReportsPage,
         EditReportPage,
         EYouthPage,
@@ -107,7 +110,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
         SecondTeamPage,
         SocialMediaLinksComponent,
         SportshomePage,
-        StatutePage
+        StatutePage,
+        UserRolesPage
     ],
     imports: [
         AngularFireAnalyticsModule,

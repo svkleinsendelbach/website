@@ -29,11 +29,13 @@ import { SecondTeamPage } from '../pages/football-adults/second-team/second-team
 import { SportshomePage } from '../pages/about-us/sportshome/sportshome.page';
 import { StatutePage } from '../pages/about-us/statute/statute.page';
 import { Type } from '@angular/core';
+import { UserRolesPage } from '../pages/editing/user-roles/user-roles.page';
 
 const associatedRoute: Record<InternalPath, Type<unknown>> = {
     'anfahrt': DrivePage,
     'bearbeiten': EditingMainPage,
     'bearbeiten/anmelden': LoginPage,
+    'bearbeiten/benutzer-rollen': UserRolesPage,
     'bearbeiten/berichte': EditingReportsPage,
     'bearbeiten/berichte/bearbeiten': EditReportPage,
     'bearbeiten/termine': EditingEventsPage,

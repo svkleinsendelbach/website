@@ -1,0 +1,27 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+@import '/src/sass/color'
+
+:host
+    @include flex-row(center, space-between)
+    width: 100%
+
+#back-button, #log-out-button
+    @include dynamic-color(background-color, 'background')
+    @include dynamic-color(color, 'text')
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    border: 1px solid
+    border-radius: 5px
+    cursor: pointer
+    margin-top: 20px
+    padding: 5px 15px
+    text-align: center
+    text-decoration: none
+
+#back-button
+    margin-left: 20px
+
+#log-out-button
+    margin-right: 20px

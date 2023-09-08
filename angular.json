@@ -33,7 +33,8 @@
                 "input": "./node_modules/@kolkov/angular-editor/assets/",
                 "output": "./assets/fonts/"
               },
-              "src/sass/color.sass"
+              "src/sass/color.sass",
+              "src/ads.txt"
             ],
             "styles": [
               "src/styles.sass"

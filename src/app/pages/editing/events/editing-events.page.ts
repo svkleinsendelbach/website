@@ -43,7 +43,6 @@ export class EditingEventsPage {
         private readonly router: Router
     ) {
         this.titleService.setTitle('Termine bearbeiten');
-        void this.getEvents();
     }
 
     public getEventGroupOf(groupId: EventGroupId): EventGroup | null {
@@ -89,7 +88,7 @@ export class EditingEventsPage {
         await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine/bearbeiten'].link);
     }
 
-    private async getEvents() {
+    public async getEvents() {
         this.eventGroups = await this.firebaseApiService.function('event').function('get')
             .call({
                 groupIds: EventGroupId.all

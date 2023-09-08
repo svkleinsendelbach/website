@@ -50,7 +50,7 @@ export class LoginAddUserWaitingComponent {
         if (validation === ValidationResult.Invalid)
             return;
         const result = await this.authService
-            .addUserForWaiting(['editEvents', 'editReports', 'authenticateUser', 'notification'], this.inputForm.field('firstName').value, this.inputForm.field('lastName').value)
+            .requestAccess(this.inputForm.field('firstName').value, this.inputForm.field('lastName').value)
             .catch(reason => this.handleLoginError(reason));
         if (result === 'error')
             return;

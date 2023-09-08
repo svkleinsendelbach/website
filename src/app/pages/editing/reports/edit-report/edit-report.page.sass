@@ -7,25 +7,6 @@
     @include flex-column(flex-start, center)
     width: 100%
 
-#back-btn-container
-    @include flex-row(center, flex-start)
-    width: 100%
-
-    #back-button
-        @include dynamic-color(background-color, 'background')
-        @include dynamic-color(border-color, 'text')
-        @include font-montserrat
-        @include font-size('normal')
-        @include font-weight('small')
-        border: 1px solid
-        border-radius: 5px
-        cursor: pointer
-        margin-left: 20px
-        margin-top: 20px
-        padding: 5px 15px
-        text-align: center
-        text-decoration: none
-
 .hint
     @include font-montserrat
     @include font-size('normal')

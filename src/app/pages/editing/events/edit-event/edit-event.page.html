@@ -1,15 +1,9 @@
+<app-editing-navigation-bar
+    [backButtonLink]="editEventsLink"
+/>
 <authentication-check
-    [authenticationTypes]="['editEvents']"
+    [roles]="['websiteManager']"
 >
-    <div
-        id="back-btn-container"
-    >
-        <a
-            id="back-button"
-            title="Zurück"
-            [href]="editEventsLink.link"
-        >Zurück</a>
-    </div>
     <text-section
         *ngIf="!previousEvent"
         [title]="'Spiel von BFV übernehmen'"

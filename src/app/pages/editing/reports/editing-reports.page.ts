@@ -41,7 +41,6 @@ export class EditingReportsPage {
         private readonly router: Router
     ) {
         this.titleService.setTitle('Berichte bearbeiten');
-        void this.getReports();
     }
 
     public getReportGroupOf(groupId: ReportGroupId): ReportGroup | null {
@@ -89,7 +88,7 @@ export class EditingReportsPage {
         await this.router.navigateByUrl(InternalLink.all['bearbeiten/berichte/bearbeiten'].link);
     }
 
-    private async getReports() {
+    public async getReports() {
         const reportGroups = await Promise.all(ReportGroupId.all.map(async groupId => {
             const result = await this.firebaseApiService
                 .function('report')

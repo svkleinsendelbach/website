@@ -83,7 +83,7 @@ export class LoginPageComponent {
             return;
         }
         const registrationStatus = await this.authService
-            .loginWithEmail(['editEvents', 'editReports', 'authenticateUser'], this.inputForm.field('email').value, this.inputForm.field('password').value)
+            .loginWithEmail(this.inputForm.field('email').value, this.inputForm.field('password').value)
             .catch(reason => this.handleLoginError(reason, 'inputForm'));
         if (registrationStatus === 'error')
             return;
@@ -96,7 +96,7 @@ export class LoginPageComponent {
         this.inputForm.status = 'valid';
         this.inputForm.reset();
         const registrationStatus = await this.authService
-            .loginWithApple(['editEvents', 'editReports', 'authenticateUser'])
+            .loginWithApple()
             .catch(reason => this.handleLoginError(reason, 'apple'));
         if (registrationStatus === 'error')
             return;
@@ -109,7 +109,7 @@ export class LoginPageComponent {
         this.inputForm.status = 'valid';
         this.inputForm.reset();
         const registrationStatus = await this.authService
-            .loginWithGoogle(['editEvents', 'editReports', 'authenticateUser'])
+            .loginWithGoogle()
             .catch(reason => this.handleLoginError(reason, 'google'));
         if (registrationStatus === 'error')
             return;
