@@ -37,6 +37,7 @@
               "src/ads.txt"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "src/styles.sass"
             ],
             "scripts": [],
@@ -113,6 +114,7 @@
               "src/ads.txt"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "src/styles.sass"
             ],
             "scripts": []

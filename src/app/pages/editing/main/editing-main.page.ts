@@ -21,7 +21,7 @@ export class EditingMainPage {
 
     public allInternalLinks = InternalLink.all;
 
-    public authenticationStates = new AuthenticationStates(2);
+    public authenticationStates = new AuthenticationStates(['admin', 'occupancyManager', 'websiteManager']);
 
     public unauthenticatedUsers: User[] | null = null;
 

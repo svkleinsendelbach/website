@@ -1,0 +1,97 @@
+<!-- eslint-disable @angular-eslint/template/no-call-expression -->
+<authentication-check
+    [roles]="['occupancyManager']"
+    (onAuthentication)="getOccupancy()"
+>
+    <text-section
+        [title]="'Belegungsplan'"
+        *ngIf="occupancies.isSuccess()"
+        [ngClass]="appearance.current + ' ' + deviceType.current"
+    >
+        <div
+            id="header"
+        >
+            <div
+                id="navigator"
+            >
+                <div
+                    class="item"
+                    mwlCalendarPreviousView
+                    [view]="currentView"
+                    [(viewDate)]="activeDate"
+                    (viewDateChange)="closeActiveDate()"
+                >Vorher</div>
+                <div
+                    class="item"
+                    mwlCalendarToday
+                    [(viewDate)]="activeDate"
+                >Heute</div>
+                <div
+                    class="item"
+                    mwlCalendarNextView
+                    [view]="currentView"
+                    [(viewDate)]="activeDate"
+                    (viewDateChange)="closeActiveDate()"
+                >Nachher</div>
+            </div>
+            <div
+                id="view-changer"
+            >
+                <div
+                    class="item"
+                    [ngClass]="{ active: currentView === CalendarView.Month }"
+                    role="none"
+                    (click)="setCurrentView(CalendarView.Month)"
+                >Monat</div>
+                <div
+                    *ngIf="!deviceType.isMobile"
+                    class="item"
+                    [ngClass]="{ active: currentView === CalendarView.Week }"
+                    role="none"
+                    (click)="setCurrentView(CalendarView.Week)"
+                >Woche</div>
+                <div
+                    class="item"
+                    [ngClass]="{ active: currentView === CalendarView.Day }"
+                    role="none"
+                    (click)="setCurrentView(CalendarView.Day)"
+                >Tag</div>
+            </div>
+            <div
+                id="current-date"
+            >{{ activeDate | calendarDate:(currentView + 'ViewTitle'):'de' }}</div>
+        </div>
+        <div
+            id="container"
+            [ngSwitch]="currentView"
+        >
+            <mwl-calendar-month-view
+                *ngSwitchCase="CalendarView.Month"
+                [viewDate]="activeDate"
+                [events]="events(occupancies.content)"
+                [activeDayIsOpen]="activeDateIsOpen"
+                (dayClicked)="dateClicked($event.day)"
+                [locale]="locale"
+                [weekStartsOn]="weekStartsOn"
+            />
+            <mwl-calendar-week-view
+                *ngSwitchCase="CalendarView.Week"
+                [viewDate]="activeDate"
+                [events]="events(occupancies.content)"
+                (dayHeaderClicked)="viewDate($event.day.date)"
+                [locale]="locale"
+                [weekStartsOn]="weekStartsOn"
+                [dayStartHour]="8"
+                [dayEndHour]="24"
+            />
+            <app-location-calendar-day-view
+                *ngSwitchCase="CalendarView.Day"
+                [viewDate]="activeDate"
+                [events]="events(occupancies.content)"
+                [locale]="locale"
+                [dayStartHour]="8"
+                [dayEndHour]="24"
+            />
+        </div>
+    </text-section>
+</authentication-check>

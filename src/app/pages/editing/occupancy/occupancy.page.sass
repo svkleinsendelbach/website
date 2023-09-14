@@ -1,0 +1,97 @@
+@import '/node_modules/angular-calendar/scss/angular-calendar'
+@import '/src/sass/flex'
+@import '/src/sass/text'
+@import '/src/sass/color'
+
+// sass-lint:disable no-color-hex
+
+:host
+    @include flex-column(flex-start, center)
+    width: 100%
+
+#header
+    @include flex-row(flex-start, center)
+    margin-bottom: 25px
+    width: 100%
+
+    #navigator, #view-changer
+        @include flex-row(flex-start, center)
+        flex: 1
+        margin: 0 50px
+
+        .item
+            @include dynamic-color(color, 'primary')
+            @include dynamic-color(background-color, 'background')
+            @include font-montserrat
+            @include font-size('normal')
+            @include font-weight('small')
+            border-bottom: 1px solid
+            border-top: 1px solid
+            @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+            cursor: pointer
+            flex: 1
+            padding: 5px 0
+            text-align: center
+
+            &:first-child
+                border-left: 1px solid
+                @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+                border-radius: 5px 0 0 5px
+
+            &:last-child
+                border-radius: 0 5px 5px 0
+                border-right: 1px solid
+                @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+
+            &:first-child:last-child
+                border-left: 1px solid
+                border-radius: 5px
+                border-right: 1px solid
+                @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+
+            &.active, &:hover
+                @include dynamic-color(background-color, 'hoveredBackground')
+
+    #current-date
+        @include dynamic-color(color, 'text')
+        @include font-montserrat
+        @include font-size('medium')
+        @include font-weight('medium')
+        flex: 1
+        margin: 0 50px
+        text-align: center
+
+.mobile
+    #header
+        @include flex-column(flex-start, center)
+        margin: 0
+
+        #navigator, #view-changer, #current-date
+            margin: 0
+            margin-bottom: 25px
+            width: 100%
+
+#container
+    @include flex-column(flex-start, center)
+    border: 1px solid
+    @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+    border-radius: 5px
+    overflow: hidden
+    width: 100%
+
+    mwl-calendar-month-view, mwl-calendar-week-view, app-location-calendar-day-view
+        @include flex-column(flex-start, center)
+        width: 100%
+
+        ::ng-deep.cal-month-view, ::ng-deep.cal-week-view
+            @include font-montserrat
+            width: 100%
+
+.dark ::ng-deep
+    $bg-dark-primary: #1F262D
+    $bg-dark-secondary: #394046
+    $bg-active: #2C343A
+    $text-color: #D5D6D7
+    $border-color: rgb(0 0 0 / 60%)
+
+    @include cal-theme((bg-primary: $bg-dark-primary, bg-secondary: $bg-dark-secondary, weekend-color: indianred, bg-active: $bg-active, border-color: $border-color, gray: $bg-dark-secondary, today-bg: $bg-dark-secondary, event-color-primary: $bg-dark-secondary))

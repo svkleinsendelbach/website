@@ -22,6 +22,7 @@ import { ImprintPage } from '../pages/imprint/imprint.page';
 import { InternalPath } from './internal-path';
 import { LoginPage } from '../pages/editing/login/login.page';
 import { ManagersPage } from '../pages/about-us/managers/managers.page';
+import { OccupancyPage } from '../pages/editing/occupancy/occupancy.page';
 import { PrivacyPage } from '../pages/about-us/privacy/privacy.page';
 import { RequestPage } from '../pages/about-us/request/request.page';
 import { Route } from '@angular/router';
@@ -35,6 +36,7 @@ const associatedRoute: Record<InternalPath, Type<unknown>> = {
     'anfahrt': DrivePage,
     'bearbeiten': EditingMainPage,
     'bearbeiten/anmelden': LoginPage,
+    'bearbeiten/belegungsplan': OccupancyPage,
     'bearbeiten/benutzer-rollen': UserRolesPage,
     'bearbeiten/berichte': EditingReportsPage,
     'bearbeiten/berichte/bearbeiten': EditReportPage,

@@ -21,7 +21,7 @@ export class UtcDate {
     }
 
     public get localized(): Date {
-        return new Date(Date.UTC(this.year, this.month, this.day, this.hour, this.minute));
+        return new Date(Date.UTC(this.year, this.month - 1, this.day, this.hour, this.minute));
     }
 
     public get dateShortDescription(): string {

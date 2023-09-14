@@ -11,10 +11,10 @@ export namespace User {
         return user.hashedUserId;
     }
 
-    export type Role = 'admin' | 'websiteManager';
+    export type Role = 'admin' | 'occupancyManager' | 'websiteManager';
 
     export namespace Role {
-        export const all: Role[] = ['admin', 'websiteManager'];
+        export const all: Role[] = ['admin', 'websiteManager', 'occupancyManager'];
 
         export function description(role: Role): string {
             switch (role) {
@@ -22,6 +22,8 @@ export namespace User {
                 return 'Admin';
             case 'websiteManager':
                 return 'Website Manager';
+            case 'occupancyManager':
+                return 'Belegungsplan';
             default:
                 return '';
             }
