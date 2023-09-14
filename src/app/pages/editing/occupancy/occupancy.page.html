@@ -5,11 +5,24 @@
 >
     <text-section
         [title]="'Belegungsplan'"
-        *ngIf="occupancies.isSuccess()"
         [ngClass]="appearance.current + ' ' + deviceType.current"
     >
+        <p
+            *ngIf="occupancies.isLoading()"
+            class="text margin-top-large secondaryColor"
+        >Belegungsplan wird geladen</p>
+        <p
+            *ngIf="occupancies.isFailure()"
+            class="text margin-top-large primaryColor"
+        >Belegungsplan konnte nicht geladen werden</p>
+        <p
+            id="add-occupancy"
+            role="none"
+            (click)="$event.preventDefault(); $event.stopPropagation(); addNewOccupancy()"
+        >Neues Event hinzufügen</p>
         <div
             id="header"
+            *ngIf="occupancies.isSuccess()"
         >
             <div
                 id="navigator"
@@ -20,7 +33,7 @@
                     [view]="currentView"
                     [(viewDate)]="activeDate"
                     (viewDateChange)="closeActiveDate()"
-                >Vorher</div>
+                >Letzter</div>
                 <div
                     class="item"
                     mwlCalendarToday
@@ -32,7 +45,7 @@
                     [view]="currentView"
                     [(viewDate)]="activeDate"
                     (viewDateChange)="closeActiveDate()"
-                >Nachher</div>
+                >Nächster</div>
             </div>
             <div
                 id="view-changer"
@@ -62,6 +75,7 @@
             >{{ activeDate | calendarDate:(currentView + 'ViewTitle'):'de' }}</div>
         </div>
         <div
+            *ngIf="occupancies.isSuccess()"
             id="container"
             [ngSwitch]="currentView"
         >
@@ -92,6 +106,26 @@
                 [dayStartHour]="8"
                 [dayEndHour]="24"
             />
+        </div>
+        <div
+            *ngIf="occupancies.isSuccess()"
+            id="description-container"
+        >
+            <div
+                *ngFor="let location of Location.all; trackBy: trackByIdentity"
+                class="description"
+            >
+                <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
+                <p
+                    class="color"
+                    [ngStyle]="{
+                        backgroundColor: Location.color(location).primary
+                    }"
+                ></p>
+                <p
+                    class="text-descrption"
+                >{{ Location.description(location) }}</p>
+            </div>
         </div>
     </text-section>
 </authentication-check>

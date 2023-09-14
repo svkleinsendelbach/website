@@ -30,7 +30,7 @@ export namespace Occupancy {
             }
         }
 
-        export function color(location: Location): CalendarEvent['color'] {
+        export function color(location: Location): Exclude<CalendarEvent['color'], undefined> {
             switch (location) {
             case 'a-field':
                 return {

@@ -4,6 +4,7 @@ import { AnpfiffInfoTeamParameters } from './types/anpfiff-info-team-parameters'
 import { EditType } from './types/edit-type';
 import { FunctionType } from './types/function-type';
 import { GameInfo } from './types/game-info';
+import { Occupancy } from './types/occupancy';
 import { TeamSquad } from './types/team-squad';
 import { User } from './types/user';
 
@@ -42,6 +43,14 @@ export type ReportGetFunctionType = FunctionType<{
     reports: Report.Flatten[];
     hasMore: boolean;
 }>;
+
+export type OccupancyEditFunctionType = FunctionType<{
+    editType: EditType;
+    occupancyId: string;
+    occupancy: Omit<Occupancy.Flatten, 'id'> | null;
+}, void>;
+
+export type OccupancyGetAllFunctionType = FunctionType<Record<string, never>, Occupancy.Flatten[]>;
 
 export type SendMailContactFunctionType = FunctionType<{
     senderName: string;

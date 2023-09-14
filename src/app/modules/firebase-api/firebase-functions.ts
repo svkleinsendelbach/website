@@ -3,6 +3,8 @@ import {
     EventEditFunctionType,
     EventGetFunctionType,
     GameInfoGetFunctionType,
+    OccupancyEditFunctionType,
+    OccupancyGetAllFunctionType,
     ReportEditFunctionType,
     ReportGetAllFunctionType,
     ReportGetFunctionType,
@@ -27,6 +29,10 @@ export interface FirebaseFunctions {
         get: ReportGetFunctionType;
         getAll: ReportGetAllFunctionType;
         edit: ReportEditFunctionType;
+    };
+    occupancy: {
+        getAll: OccupancyGetAllFunctionType;
+        edit: OccupancyEditFunctionType;
     };
     bfvData: {
         gameInfo: GameInfoGetFunctionType;
