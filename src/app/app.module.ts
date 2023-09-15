@@ -78,6 +78,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { OccupancyPage } from './pages/editing/occupancy/occupancy.page';
 import { LocationCalendarDayViewComponent } from './pages/editing/occupancy/location-calendar-day-view/location-calendar-day-view.component';
+import { EditOccupancyPage } from './pages/editing/occupancy/edit-occupancy/edit-occupancy.page';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -95,6 +96,7 @@ import { LocationCalendarDayViewComponent } from './pages/editing/occupancy/loca
         EditingMainPage,
         EditingNavigationBarComponent,
         EditingReportsPage,
+        EditOccupancyPage,
         EditReportPage,
         EYouthPage,
         FirstTeamPage,
@@ -107,6 +109,7 @@ import { LocationCalendarDayViewComponent } from './pages/editing/occupancy/loca
         HomeLinksComponent,
         HomePage,
         ImprintPage,
+        LocationCalendarDayViewComponent,
         LoginAddUserWaitingComponent,
         LoginPage,
         LoginPageComponent,
@@ -119,8 +122,7 @@ import { LocationCalendarDayViewComponent } from './pages/editing/occupancy/loca
         SocialMediaLinksComponent,
         SportshomePage,
         StatutePage,
-        UserRolesPage,
-        LocationCalendarDayViewComponent
+        UserRolesPage
     ],
     imports: [
         AngularFireAnalyticsModule,

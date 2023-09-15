@@ -1,4 +1,7 @@
 <!-- eslint-disable @angular-eslint/template/no-call-expression -->
+<app-editing-navigation-bar
+    [backButtonLink]="editMainPageLink"
+/>
 <authentication-check
     [roles]="['occupancyManager']"
     (onAuthentication)="getOccupancy()"
@@ -8,6 +11,11 @@
         [ngClass]="appearance.current + ' ' + deviceType.current"
     >
         <p
+            id="add-occupancy"
+            role="none"
+            (click)="$event.preventDefault(); $event.stopPropagation(); addNewOccupancy()"
+        >Neues Event hinzufügen</p>
+        <p
             *ngIf="occupancies.isLoading()"
             class="text margin-top-large secondaryColor"
         >Belegungsplan wird geladen</p>
@@ -15,11 +23,6 @@
             *ngIf="occupancies.isFailure()"
             class="text margin-top-large primaryColor"
         >Belegungsplan konnte nicht geladen werden</p>
-        <p
-            id="add-occupancy"
-            role="none"
-            (click)="$event.preventDefault(); $event.stopPropagation(); addNewOccupancy()"
-        >Neues Event hinzufügen</p>
         <div
             id="header"
             *ngIf="occupancies.isSuccess()"
@@ -38,6 +41,7 @@
                     class="item"
                     mwlCalendarToday
                     [(viewDate)]="activeDate"
+                    (viewDateChange)="closeActiveDate()"
                 >Heute</div>
                 <div
                     class="item"
@@ -85,6 +89,7 @@
                 [events]="events(occupancies.content)"
                 [activeDayIsOpen]="activeDateIsOpen"
                 (dayClicked)="dateClicked($event.day)"
+                (eventClicked)="eventClicked($event.event)"
                 [locale]="locale"
                 [weekStartsOn]="weekStartsOn"
             />
@@ -93,6 +98,7 @@
                 [viewDate]="activeDate"
                 [events]="events(occupancies.content)"
                 (dayHeaderClicked)="viewDate($event.day.date)"
+                (eventClicked)="eventClicked($event.event)"
                 [locale]="locale"
                 [weekStartsOn]="weekStartsOn"
                 [dayStartHour]="8"

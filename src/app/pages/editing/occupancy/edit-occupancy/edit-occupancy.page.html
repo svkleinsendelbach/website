@@ -1,0 +1,52 @@
+<app-editing-navigation-bar
+    [backButtonLink]="editOccupancyLink"
+/>
+<authentication-check
+    [roles]="['websiteManager']"
+>
+    <text-section
+        [title]="previousOccupancy ? 'Belegungsplan Event bearbeiten' : 'Belegungsplan Event hinzufügen'"
+    >
+        <input-form
+            [inputForm]="inputForm"
+            [submitButtonText]="previousOccupancy ? (previousOccupancy.recurring && !inputForm.field('isRecurring').value ? 'Alle Speichern' : 'Speichern') : 'Hinzufügen'"
+            [cancelButtonText]="previousOccupancy && previousOccupancy.recurring && !inputForm.field('isRecurring').value ? 'Einzelnen Speichern' : null"
+            (submitButtonClicked)="saveOccupancy()"
+            (cancelButtonClicked)="saveOccupancy(true)"
+        >
+            <input-field-select
+                [label]="'Ort'"
+                [selectOptions]="selectLocationOptions"
+                [inputField]="inputForm.field('location')"
+            />
+            <input-field-text
+                [label]="'Titel'"
+                [inputField]="inputForm.field('title')"
+            />
+            <input-field-date-time
+                [label]="'Beginn'"
+                [inputField]="inputForm.field('start')"
+            />
+            <input-field-date-time
+                [label]="'Ende'"
+                [inputField]="inputForm.field('end')"
+            />
+            <input-field-checkbox
+                [label]="'Wiederholen'"
+                [inputField]="inputForm.field('isRecurring')"
+            />
+            <input-field-select
+                *ngIf="inputForm.field('isRecurring').value"
+                [label]="'Wiederholen pro'"
+                [selectOptions]="selectRecurringTypeOptions"
+                [inputField]="inputForm.field('recurringRepeatEvery')"
+            />
+            <input-field-date-time
+                *ngIf="inputForm.field('isRecurring').value"
+                [label]="'Endet am'"
+                [components]="'date'"
+                [inputField]="inputForm.field('recurringUntilIncluding')"
+            />
+        </input-form>
+    </text-section>
+</authentication-check>

@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
+import { UtcDate } from 'src/app/types/utc-date';
 
 @Component({
     providers: [
@@ -36,6 +37,8 @@ export class OccupancyPage {
     public FetchState = FetchState;
 
     public Location = Occupancy.Location;
+
+    public editMainPageLink = InternalLink.all.bearbeiten;
 
     public occupancies: FetchState<Occupancy[]> = FetchState.loading;
 
@@ -128,7 +131,7 @@ export class OccupancyPage {
 
     public activeDate = new Date();
 
-    public activeDateIsOpen = true;
+    public activeDateIsOpen = false;
 
     public currentView = CalendarView.Month;
 
@@ -144,14 +147,60 @@ export class OccupancyPage {
         private readonly firebaseApiService: FirebaseApiService,
         private readonly router: Router,
         private readonly sharedData: SharedDataService<{
-            editOccupancy: Occupancy.Flatten;
+            editOccupancy: {
+                occupancy: Occupancy.Flatten;
+                editDate: string;
+            };
         }>
     ) {
         this.titleService.setTitle('Belegungsplan');
     }
 
-    public events(occupancies: Occupancy[]): CalendarEvent<{ location: Occupancy.Location }>[] {
-        return occupancies.flatMap(occupancy => Occupancy.calendarEvents(occupancy));
+    public events(occupancies: Occupancy[]): CalendarEvent<{ occupancy: Occupancy; date: UtcDate }>[] {
+        return occupancies.flatMap(occupancy => Occupancy.calendarEvents(occupancy).map(event => ({
+            ...event,
+            actions: [
+                {
+                    label: '<i class="fa fa-pencil"></i> |',
+                    // eslint-disable-next-line @typescript-eslint/no-shadow
+                    onClick: ({ event }: {
+                        event: CalendarEvent<{ occupancy: Occupancy; date: UtcDate }>;
+                        sourceEvent: KeyboardEvent | MouseEvent;
+                    }) => {
+                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                        void this.editOccupancy(event.meta!.occupancy, event.meta!.date);
+                    }
+                },
+                {
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                    label: event.meta!.occupancy.recurring ? ' <i class="fa fa-trash"></i> Alle |' : ' <i class="fa fa-trash"></i>',
+                    // eslint-disable-next-line @typescript-eslint/no-shadow
+                    onClick: ({ event }: {
+                        event: CalendarEvent<{ occupancy: Occupancy; date: UtcDate }>;
+                        sourceEvent: KeyboardEvent | MouseEvent;
+                    }) => {
+                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                        void this.deleteOccupancy(event.meta!.occupancy, event.meta!.date);
+                    }
+                },
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                ...event.meta!.occupancy.recurring
+                    ? [
+                        {
+                            label: ' <i class="fa fa-trash"></i> Einzeln',
+                            // eslint-disable-next-line @typescript-eslint/no-shadow
+                            onClick: ({ event }: {
+                                event: CalendarEvent<{ occupancy: Occupancy; date: UtcDate }>;
+                                sourceEvent: KeyboardEvent | MouseEvent;
+                            }) => {
+                                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                                void this.deleteOccupancy(event.meta!.occupancy, event.meta!.date, true);
+                            }
+                        }
+                    ]
+                    : []
+            ]
+        })));
     }
 
     public getOccupancy() {
@@ -167,28 +216,56 @@ export class OccupancyPage {
             });
     }
 
-    public async deleteOccupancy(occupancyId: Guid) {
+    public async deleteOccupancy(occupancy: Occupancy, editDate: UtcDate, deleteNotRecurring: boolean = false) {
         if (!this.occupancies.isSuccess())
             return;
-        this.occupancies = FetchState.success(this.occupancies.content.filter(occupancy => occupancy.id.guidString !== occupancyId.guidString));
-        await this.firebaseApiService
-            .function('occupancy')
-            .function('edit')
-            .call({
-                editType: 'remove',
-                occupancy: null,
-                occupancyId: occupancyId.guidString
-            });
+        if (occupancy.recurring && deleteNotRecurring) {
+            // eslint-disable-next-line no-underscore-dangle, object-property-newline
+            const _editDate = editDate.setted({ hour: 0, minute: 0 });
+            let { excludingDates } = occupancy.recurring;
+            if (!occupancy.recurring.excludingDates.some(date => _editDate.compare(date) === 'equal'))
+                // eslint-disable-next-line object-property-newline
+                excludingDates = [...occupancy.recurring.excludingDates, _editDate];
+            const newOccupancy: Occupancy = {
+                ...occupancy,
+                recurring: {
+                    ...occupancy.recurring,
+                    excludingDates: excludingDates
+                }
+            };
+            this.occupancies = FetchState.success(this.occupancies.content.map(_occupancy => _occupancy.id.guidString === occupancy.id.guidString ? newOccupancy : _occupancy));
+            await this.firebaseApiService
+                .function('occupancy')
+                .function('edit')
+                .call({
+                    editType: 'change',
+                    occupancy: Occupancy.flatten(newOccupancy),
+                    occupancyId: occupancy.id.guidString
+                });
+        } else {
+            this.occupancies = FetchState.success(this.occupancies.content.filter(_occupancy => _occupancy.id.guidString !== occupancy.id.guidString));
+            await this.firebaseApiService
+                .function('occupancy')
+                .function('edit')
+                .call({
+                    editType: 'remove',
+                    occupancy: null,
+                    occupancyId: occupancy.id.guidString
+                });
+        }
     }
 
-    public async editOccupancy(occupancy: Occupancy) {
-        this.sharedData.setValue('editOccupancy', Occupancy.flatten(occupancy));
-        await this.router.navigateByUrl(InternalLink.all['bearbeiten/belegunsplan/bearbeiten'].link);
+    public async editOccupancy(occupancy: Occupancy, editDate: UtcDate) {
+        this.sharedData.setValue('editOccupancy', {
+            editDate: editDate.encoded,
+            occupancy: Occupancy.flatten(occupancy)
+        });
+        await this.router.navigateByUrl(InternalLink.all['bearbeiten/belegungsplan/bearbeiten'].link);
     }
 
     public async addNewOccupancy() {
         this.sharedData.removeValue('editOccupancy');
-        await this.router.navigateByUrl(InternalLink.all['bearbeiten/belegunsplan/bearbeiten'].link);
+        await this.router.navigateByUrl(InternalLink.all['bearbeiten/belegungsplan/bearbeiten'].link);
     }
 
     public dateClicked(day: CalendarMonthViewDay) {
@@ -203,6 +280,10 @@ export class OccupancyPage {
         if (day.events.length === 0)
             this.viewDate(day.date);
         this.activeDate = day.date;
+    }
+
+    public eventClicked(event: CalendarEvent<{ occupancy: Occupancy; date: UtcDate }>) {
+        this.viewDate(event.start);
     }
 
     public viewDate(date: Date) {

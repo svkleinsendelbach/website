@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, ElementRef, Inject, LOCALE_ID } from '@an
 import { LocationDayCalendarUtils, LocationDayView } from './LocationDayCalendarUtils';
 import { WeekViewAllDayEventRow, WeekViewHourColumn } from 'calendar-utils';
 import { Occupancy } from 'src/app/modules/firebase-api/types/occupancy';
+import { UtcDate } from 'src/app/types/utc-date';
 
 @Component({
     selector: 'app-location-calendar-day-view',
@@ -40,7 +41,7 @@ export class LocationCalendarDayViewComponent extends CalendarWeekViewComponent 
         return Math.floor(eventRowContainer.offsetWidth / Occupancy.Location.all.length);
     }
 
-    protected override getWeekView(events: CalendarEvent<{ location: Occupancy.Location }>[]): LocationDayView {
+    protected override getWeekView(events: CalendarEvent<{ occupancy: Occupancy; date: UtcDate }>[]): LocationDayView {
         return this.utils.getWeekView({
             absolutePositionedEvents: true,
             dayEnd: {

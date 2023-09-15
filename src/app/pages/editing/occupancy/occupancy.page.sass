@@ -100,6 +100,10 @@
             @include font-montserrat
             width: 100%
 
+        ::ng-deep.cal-event-action
+            @include dynamic-color(color, 'primary')
+            text-decoration: none
+
 .dark ::ng-deep
     $bg-dark-primary: #1F262D
     $bg-dark-secondary: #394046

@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/no-call-expression -->
 <label
     [text]="label"
 ></label>
@@ -7,6 +8,7 @@
 >
     <input
         #dateInput
+        *ngIf="isComponentShown('date')"
         id="date-input"
         [ngClass]="{ error: inputField.error }"
         type="date"
@@ -14,6 +16,7 @@
     >
     <input
         #timeInput
+        *ngIf="isComponentShown('time')"
         id="time-input"
         [ngClass]="{ error: inputField.error }"
         type="time"

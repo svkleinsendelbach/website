@@ -69,6 +69,24 @@ export namespace Occupancy {
     export namespace Recurring {
         export type Type = 'day' | 'month' | 'week' | 'year';
 
+        export namespace Type {
+            export const all: Type[] = ['day', 'month', 'week', 'year'];
+
+            export function description(type: Type): string {
+                switch (type) {
+                case 'day':
+                    return 'Tag';
+                case 'month':
+                    return 'Monat';
+                case 'week':
+                    return 'Woche';
+                case 'year':
+                    return 'Jahr';
+                default:
+                    return '';
+                }
+            }
+        }
 
         export interface Flatten {
             repeatEvery: Recurring.Type;
@@ -140,23 +158,24 @@ export namespace Occupancy {
         };
     }
 
-    export function toCalendarEvent(occupancy: Occupancy): CalendarEvent<{ location: Occupancy.Location }> {
+    export function toCalendarEvent(occupancy: Occupancy): CalendarEvent<{ occupancy: Occupancy; date: UtcDate }> {
         return {
             color: Location.color(occupancy.location),
             end: occupancy.end.localized,
             id: occupancy.id.guidString,
             meta: {
-                location: occupancy.location
+                date: occupancy.start,
+                occupancy: occupancy
             },
             start: occupancy.start.localized,
             title: `${occupancy.title} | ${Location.description(occupancy.location)}`
         };
     }
 
-    export function calendarEvents(occupancy: Occupancy): CalendarEvent<{ location: Occupancy.Location }>[] {
+    export function calendarEvents(occupancy: Occupancy): CalendarEvent<{ occupancy: Occupancy; date: UtcDate }>[] {
         if (!occupancy.recurring)
             return [toCalendarEvent(occupancy)];
-        const events: CalendarEvent<{ location: Occupancy.Location }>[] = [];
+        const events: CalendarEvent<{ occupancy: Occupancy; date: UtcDate }>[] = [];
         let i = 0;
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, no-constant-condition
         while (true) {

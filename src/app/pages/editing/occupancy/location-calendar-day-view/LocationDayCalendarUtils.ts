@@ -2,9 +2,10 @@ import { CalendarEvent, GetWeekViewArgs, WeekView } from 'calendar-utils';
 import { CalendarUtils } from 'angular-calendar';
 import { Injectable } from '@angular/core';
 import { Occupancy } from 'src/app/modules/firebase-api/types/occupancy';
+import { UtcDate } from 'src/app/types/utc-date';
 
 export type GetLocationDayViewArgs = GetWeekViewArgs & {
-    events?: CalendarEvent<{ location: Occupancy.Location }>[];
+    events?: CalendarEvent<{ occupancy: Occupancy; date: UtcDate }>[];
 };
 
 export type LocationDayView = WeekView & {
@@ -25,7 +26,7 @@ export class LocationDayCalendarUtils extends CalendarUtils {
         };
         view.locations.forEach((location, columnIndex) => {
             const events = args.events
-                ? args.events.filter((event: CalendarEvent<{ location: Occupancy.Location }>) => event.meta ? event.meta.location === location : false)
+                ? args.events.filter((event: CalendarEvent<{ occupancy: Occupancy; date: UtcDate }>) => event.meta ? event.meta.occupancy.location === location : false)
                 : [];
             const columnView = super.getWeekView({
                 ...args,

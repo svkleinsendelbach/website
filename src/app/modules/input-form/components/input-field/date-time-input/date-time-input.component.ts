@@ -12,11 +12,13 @@ import { UtcDate } from 'src/app/types/utc-date';
 export class DateTimeInputComponent implements AfterViewInit {
     @Input() public label!: string;
 
+    @Input() public components: 'date' | 'time' | ['date', 'time'] = ['date', 'time'];
+
     @Input() public inputField!: InputField<UtcDate>;
 
-    @ViewChild('dateInput') private readonly dateInputElement!: ElementRef<HTMLInputElement>;
+    @ViewChild('dateInput') private readonly dateInputElement: ElementRef<HTMLInputElement> | null = null;
 
-    @ViewChild('timeInput') private readonly timeInputElement!: ElementRef<HTMLInputElement>;
+    @ViewChild('timeInput') private readonly timeInputElement: ElementRef<HTMLInputElement> | null = null;
 
     public constructor(
         public styleConfig: StyleConfigService,
@@ -25,12 +27,23 @@ export class DateTimeInputComponent implements AfterViewInit {
 
     public ngAfterViewInit() {
         const dateTime = this.toDateTime(this.inputField.value);
-        this.dateInputElement.nativeElement.value = dateTime.date;
-        this.timeInputElement.nativeElement.value = dateTime.time;
+        if (this.dateInputElement)
+            this.dateInputElement.nativeElement.value = dateTime.date;
+        if (this.timeInputElement)
+            this.timeInputElement.nativeElement.value = dateTime.time;
+    }
+
+    public isComponentShown(component: 'date' | 'time'): boolean {
+        if (typeof this.components === 'string')
+            return this.components === component;
+        return this.components.includes(component);
     }
 
     public onBlur() {
-        this.inputField.inputValue = this.toDate(this.dateInputElement.nativeElement.value, this.timeInputElement.nativeElement.value);
+        this.inputField.inputValue = this.toDate(
+            this.dateInputElement ? this.dateInputElement.nativeElement.value : null,
+            this.timeInputElement ? this.timeInputElement.nativeElement.value : null
+        );
     }
 
     private toDateTime(date: UtcDate): { date: string; time: string } {
@@ -44,19 +57,43 @@ export class DateTimeInputComponent implements AfterViewInit {
         };
     }
 
-    private toDate(date: string, time: string): UtcDate {
-        const dateRegex = /^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})$/gu;
-        const timeRegex = /^(?<hour>\d{2}):(?<minute>\d{2})$/gu;
-        const dateMatch = dateRegex.exec(date);
-        const timeMatch = timeRegex.exec(time);
-        if (!dateMatch || !dateMatch.groups || !timeMatch || !timeMatch.groups)
-            return new UtcDate(0, 0, 0, 0, 0);
+    private toDate(date: string | null, time: string | null): UtcDate {
+        let dateComponents = {
+            day: this.inputField.value.day,
+            month: this.inputField.value.month,
+            year: this.inputField.value.year
+        };
+        if (date !== null) {
+            const dateRegex = /^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})$/gu;
+            const dateMatch = dateRegex.exec(date);
+            if (dateMatch && dateMatch.groups) {
+                dateComponents = {
+                    day: Number.parseInt(dateMatch.groups['day']),
+                    month: Number.parseInt(dateMatch.groups['month']),
+                    year: Number.parseInt(dateMatch.groups['year'])
+                };
+            }
+        }
+        let timeComponents = {
+            hour: this.inputField.value.hour,
+            minute: this.inputField.value.minute
+        };
+        if (time !== null) {
+            const timeRegex = /^(?<hour>\d{2}):(?<minute>\d{2})$/gu;
+            const timeMatch = timeRegex.exec(time);
+            if (timeMatch && timeMatch.groups) {
+                timeComponents = {
+                    hour: Number.parseInt(timeMatch.groups['hour']),
+                    minute: Number.parseInt(timeMatch.groups['minute'])
+                };
+            }
+        }
         return new UtcDate(
-            Number.parseInt(dateMatch.groups['year']),
-            Number.parseInt(dateMatch.groups['month']),
-            Number.parseInt(dateMatch.groups['day']),
-            Number.parseInt(timeMatch.groups['hour']),
-            Number.parseInt(timeMatch.groups['minute'])
+            dateComponents.year,
+            dateComponents.month,
+            dateComponents.day,
+            timeComponents.hour,
+            timeComponents.minute
         );
     }
 }
