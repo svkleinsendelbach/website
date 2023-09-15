@@ -149,6 +149,14 @@ export namespace Validator {
         });
     }
 
+    export function validateIf<T>(condition: () => boolean, _validator: Validator<T>): Validator<T> {
+        return validator(_validator.errorMessage, (value: T) => {
+            if (condition())
+                return _validator.isValid(value);
+            return ValidationResult.Valid;
+        });
+    }
+
     export function custom<T>(evaluater: (value: T) => ValidationResult | boolean, errorMessage: string): Validator<T> {
         return validator(errorMessage, (value: T) => {
             const result = evaluater(value);

@@ -7,6 +7,7 @@ import { DancingPage } from '../pages/dancing/dancing.page';
 import { DrivePage } from '../pages/drive/drive.page';
 import { EYouthPage } from '../pages/football-youth/e-youth/e-youth.page';
 import { EditEventPage } from '../pages/editing/events/edit-event/edit-event.page';
+import { EditOccupancyPage } from '../pages/editing/occupancy/edit-occupancy/edit-occupancy.page';
 import { EditReportPage } from '../pages/editing/reports/edit-report/edit-report.page';
 import { EditingEventsPage } from '../pages/editing/events/editing-events.page';
 import { EditingMainPage } from '../pages/editing/main/editing-main.page';
@@ -22,6 +23,7 @@ import { ImprintPage } from '../pages/imprint/imprint.page';
 import { InternalPath } from './internal-path';
 import { LoginPage } from '../pages/editing/login/login.page';
 import { ManagersPage } from '../pages/about-us/managers/managers.page';
+import { OccupancyPage } from '../pages/editing/occupancy/occupancy.page';
 import { PrivacyPage } from '../pages/about-us/privacy/privacy.page';
 import { RequestPage } from '../pages/about-us/request/request.page';
 import { Route } from '@angular/router';
@@ -35,6 +37,8 @@ const associatedRoute: Record<InternalPath, Type<unknown>> = {
     'anfahrt': DrivePage,
     'bearbeiten': EditingMainPage,
     'bearbeiten/anmelden': LoginPage,
+    'bearbeiten/belegungsplan': OccupancyPage,
+    'bearbeiten/belegungsplan/bearbeiten': EditOccupancyPage,
     'bearbeiten/benutzer-rollen': UserRolesPage,
     'bearbeiten/berichte': EditingReportsPage,
     'bearbeiten/berichte/bearbeiten': EditReportPage,

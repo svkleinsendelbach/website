@@ -34,47 +34,47 @@
             [submitButtonText]="previousReport ? 'Speichern' : 'Hinzufügen'"
             (submitButtonClicked)="saveReport()"
         >
-        <input-field-select
-            [label]="'Zugehöriges Thema'"
-            [selectOptions]="groupIdSelectOptions"
-            [inputField]="inputForm.field('groupId')"
-        />
-        <input-field-text
-            [label]="'Titel'"
-            [inputField]="inputForm.field('title')"
-        />
-        <p
-            id="input-field-label"
-            class="textColor"
-        >Bild (optional):</p>
-        <img
-            *ngIf="imageUrl !== null"
-            [src]="imageUrl"
-            title="Bild"
-            alt="Bild"
-            id="image"
-        >
-        <input
-            type="file"
-            accept="image/*"
-            (change)="$event.preventDefault(); $event.stopPropagation(); uploadImage($event)"
-            id="image-selector"
-            #imageSelector
-        >
-        <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
-        <div
-            id="custom-image-selector"
-            role="none"
-            (click)="$event.preventDefault(); $event.stopPropagation(); imageSelector.click()"
-            [ngStyle]="{
-                borderColor: styleConfig.css(inputForm.status === 'invalidInput' && imageUrl === null ? 'formStatusErrorColor' : 'textColor')
-            }"
-        >{{ imageUrl === null ? 'Bild auswählen' : 'Neues Bild auswählen' }}</div>
-        <div id="spacer"></div>
-        <input-field-textarea
-            [label]="'Nachricht'"
-            [inputField]="inputForm.field('message')"
-        />
+            <input-field-select
+                [label]="'Zugehöriges Thema'"
+                [selectOptions]="groupIdSelectOptions"
+                [inputField]="inputForm.field('groupId')"
+            />
+            <input-field-text
+                [label]="'Titel'"
+                [inputField]="inputForm.field('title')"
+            />
+            <p
+                id="input-field-label"
+                class="textColor"
+            >Bild (optional):</p>
+            <img
+                *ngIf="imageUrl !== null"
+                [src]="imageUrl"
+                title="Bild"
+                alt="Bild"
+                id="image"
+            >
+            <input
+                type="file"
+                accept="image/*"
+                (change)="$event.preventDefault(); $event.stopPropagation(); uploadImage($event)"
+                id="image-selector"
+                #imageSelector
+            >
+            <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
+            <div
+                id="custom-image-selector"
+                role="none"
+                (click)="$event.preventDefault(); $event.stopPropagation(); imageSelector.click()"
+                [ngStyle]="{
+                    borderColor: styleConfig.css(inputForm.status === 'invalidInput' && imageUrl === null ? 'formStatusErrorColor' : 'textColor')
+                }"
+            >{{ imageUrl === null ? 'Bild auswählen' : 'Neues Bild auswählen' }}</div>
+            <div id="spacer"></div>
+            <input-field-textarea
+                [label]="'Nachricht'"
+                [inputField]="inputForm.field('message')"
+            />
             <div
                 id="preview-message"
             >

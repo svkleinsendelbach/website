@@ -8,25 +8,40 @@ import { User } from 'src/app/modules/firebase-api/types/user';
 export type AuthenticationState = 'authenticated' | 'internalError' | 'loading' | 'unauthenticated';
 
 export class AuthenticationStates {
-    private readonly states: AuthenticationState[] = [];
+    private readonly states: Record<string, AuthenticationState> = {};
 
-    public constructor(count: number) {
-        for (let i = 0; i < count; i++)
-            this.states.push('loading');
+    public constructor(ids: string[]) {
+        for (const id of ids)
+            this.states[id] = 'loading';
     }
 
-    public state(index: number): AuthenticationState {
-        return this.states[index];
+    public state(id: string): AuthenticationState {
+        return this.states[id];
     }
 
-    public setState(index: number, state: AuthenticationState) {
-        this.states[index] = state;
+    public setState(id: string, state: AuthenticationState) {
+        this.states[id] = state;
     }
 
-    public isShown(index: number): boolean {
-        if (this.state(index) === 'authenticated')
+    public isShown(id: string): boolean {
+        if (this.state(id) === 'authenticated')
             return true;
-        return index === 0 && (this.states.every(state => state === 'internalError') || this.states.every(state => state === 'loading') || this.states.every(state => state === 'unauthenticated'));
+        return this.isFirstStateNotAuthenticated(id) && (this.allStates('internalError') || this.allStates('loading') || this.allStates('unauthenticated'));
+    }
+
+    private isFirstStateNotAuthenticated(id: string): boolean {
+        const notAuthenticated = Object.entries(this.states).filter(value => value[1] !== 'authenticated');
+        if (notAuthenticated.length === 0)
+            return false;
+        return notAuthenticated[0][0] === id;
+    }
+
+    private allStates(expectedState: AuthenticationState): boolean {
+        for (const state of Object.values(this.states)) {
+            if (state !== expectedState)
+                return false;
+        }
+        return true;
     }
 }
 
@@ -38,9 +53,9 @@ export class AuthenticationStates {
 export class AuthenticationCheckComponent implements OnInit {
     @Input() public roles!: User.Role[];
 
-    @Input() public states: AuthenticationStates = new AuthenticationStates(1);
+    @Input() public states: AuthenticationStates = new AuthenticationStates(['default']);
 
-    @Input() public index: number = 0;
+    @Input() public id: string = 'default';
 
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() public onAuthentication = new EventEmitter<void>();
@@ -53,9 +68,9 @@ export class AuthenticationCheckComponent implements OnInit {
     ) {}
 
     public get state(): AuthenticationState | null {
-        if (!this.states.isShown(this.index))
+        if (!this.states.isShown(this.id))
             return null;
-        return this.states.state(this.index);
+        return this.states.state(this.id);
     }
 
     public ngOnInit() {
@@ -63,17 +78,17 @@ export class AuthenticationCheckComponent implements OnInit {
     }
 
     private async checkAuthentication() {
-        this.states.setState(this.index, 'loading');
+        this.states.setState(this.id, 'loading');
         const hasRoles = await this.authService
             .hasRoles(this.roles)
             .catch(reason => {
-                this.states.setState(this.index, 'internalError');
+                this.states.setState(this.id, 'internalError');
                 throw reason;
             });
         if (hasRoles) {
-            this.states.setState(this.index, 'authenticated');
+            this.states.setState(this.id, 'authenticated');
             this.onAuthentication.emit();
         } else
-            this.states.setState(this.index, 'unauthenticated');
+            this.states.setState(this.id, 'unauthenticated');
     }
 }

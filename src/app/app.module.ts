@@ -5,9 +5,12 @@ import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analyt
 import { environment } from '../environments/environment';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 import { PERSISTENCE, USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';
+import { registerLocaleData } from '@angular/common';
+import * as de from '@angular/common/locales/de';
 
 // Imported Modules
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -71,6 +74,11 @@ import { EditReportPage } from './pages/editing/reports/edit-report/edit-report.
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { NavigationBarComponent as EditingNavigationBarComponent } from './pages/editing/main/navigation-bar/navigation-bar.component';
 import { UserRolesPage } from './pages/editing/user-roles/user-roles.page';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { OccupancyPage } from './pages/editing/occupancy/occupancy.page';
+import { LocationCalendarDayViewComponent } from './pages/editing/occupancy/location-calendar-day-view/location-calendar-day-view.component';
+import { EditOccupancyPage } from './pages/editing/occupancy/edit-occupancy/edit-occupancy.page';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -88,6 +96,7 @@ import { UserRolesPage } from './pages/editing/user-roles/user-roles.page';
         EditingMainPage,
         EditingNavigationBarComponent,
         EditingReportsPage,
+        EditOccupancyPage,
         EditReportPage,
         EYouthPage,
         FirstTeamPage,
@@ -100,10 +109,12 @@ import { UserRolesPage } from './pages/editing/user-roles/user-roles.page';
         HomeLinksComponent,
         HomePage,
         ImprintPage,
+        LocationCalendarDayViewComponent,
         LoginAddUserWaitingComponent,
         LoginPage,
         LoginPageComponent,
         ManagersPage,
+        OccupancyPage,
         PageNotFoundPage,
         PrivacyPage,
         RequestPage,
@@ -122,6 +133,7 @@ import { UserRolesPage } from './pages/editing/user-roles/user-roles.page';
         AngularFireStorageModule,
         AppRoutingModule,
         AuthenticationModule,
+        BrowserAnimationsModule,
         BrowserModule,
         CookieSelectorModule,
         EventsModule,
@@ -135,7 +147,11 @@ import { UserRolesPage } from './pages/editing/user-roles/user-roles.page';
         InputFormModule,
         RecaptchaV3Module,
         ReportsModule,
-        TextSectionModule
+        TextSectionModule,
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory
+        })
     ],
     providers: [
         PerformanceMonitoringService,
@@ -164,4 +180,8 @@ import { UserRolesPage } from './pages/editing/user-roles/user-roles.page';
             useValue: false }
     ]
 })
-export class AppModule { }
+export class AppModule {
+    public constructor() {
+        registerLocaleData(de.default);
+    }
+}

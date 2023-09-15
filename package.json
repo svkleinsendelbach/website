@@ -38,7 +38,10 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@kolkov/angular-editor": "^3.0.0-beta.0",
     "aes-ts": "^0.0.0-alpha.0",
+    "angular-calendar": "^0.31.0",
+    "date-fns": "^2.29.3",
     "file-system": "^2.2.2",
+    "font-awesome": "^4.7.0",
     "ical-generator": "^5.0.0",
     "js-base64": "^3.7.5",
     "ng-recaptcha": "^12.0.1",
@@ -86,5 +89,8 @@
   },
   "browser": {
     "fs": false
+  },
+  "scarfSettings": {
+    "enabled": false
   }
 }

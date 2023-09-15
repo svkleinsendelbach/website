@@ -2,7 +2,7 @@
 <authentication-check
     [roles]="['admin']"
     [states]="authenticationStates"
-    [index]="0"
+    [id]="'admin'"
     (onAuthentication)="getUnauthenticatedUsers()"
 >
     <text-section
@@ -54,10 +54,35 @@
         </div>
     </text-section>
 </authentication-check>
+
+<authentication-check
+    [roles]="['occupancyManager']"
+    [states]="authenticationStates"
+    [id]="'occupancyManager'"
+>
+    <text-section
+        [title]="'Belegungsplan'"
+    >
+        <div
+            class="edit-container"
+            [ngClass]="deviceType.current"
+        >
+            <a
+                [href]="allInternalLinks['bearbeiten/belegungsplan'].link"
+                [title]="allInternalLinks['bearbeiten/belegungsplan'].title"
+                class="button"
+            >Bearbeiten</a>
+            <p
+                class="title secondaryColor"
+            >Belegunsplan bearbeiten</p>
+        </div>
+    </text-section>
+</authentication-check>
+
 <authentication-check
     [roles]="['websiteManager']"
     [states]="authenticationStates"
-    [index]="1"
+    [id]="'websiteManager'"
 >
     <text-section
         [title]="'Website bearbeiten'"
