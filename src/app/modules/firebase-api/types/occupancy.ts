@@ -15,7 +15,7 @@ export namespace Occupancy {
     export type Location = 'a-field' | 'b-field' | 'sportshome';
 
     export namespace Location {
-        export const all: Location[] = ['a-field', 'b-field', 'sportshome'];
+        export const all: Location[] = ['sportshome', 'a-field', 'b-field'];
 
         export function description(location: Location): string {
             switch (location) {
@@ -70,7 +70,7 @@ export namespace Occupancy {
         export type Type = 'day' | 'month' | 'week' | 'year';
 
         export namespace Type {
-            export const all: Type[] = ['day', 'month', 'week', 'year'];
+            export const all: Type[] = ['day', 'week', 'month', 'year'];
 
             export function description(type: Type): string {
                 switch (type) {
@@ -158,14 +158,14 @@ export namespace Occupancy {
         };
     }
 
-    export function toCalendarEvent(occupancy: Occupancy): CalendarEvent<{ occupancy: Occupancy; date: UtcDate }> {
+    export function toCalendarEvent(occupancy: Occupancy, originalOccupancy: Occupancy): CalendarEvent<{ occupancy: Occupancy; date: UtcDate }> {
         return {
             color: Location.color(occupancy.location),
             end: occupancy.end.localized,
             id: occupancy.id.guidString,
             meta: {
                 date: occupancy.start,
-                occupancy: occupancy
+                occupancy: originalOccupancy
             },
             start: occupancy.start.localized,
             title: `${occupancy.title} | ${Location.description(occupancy.location)}`
@@ -174,7 +174,7 @@ export namespace Occupancy {
 
     export function calendarEvents(occupancy: Occupancy): CalendarEvent<{ occupancy: Occupancy; date: UtcDate }>[] {
         if (!occupancy.recurring)
-            return [toCalendarEvent(occupancy)];
+            return [toCalendarEvent(occupancy, occupancy)];
         const events: CalendarEvent<{ occupancy: Occupancy; date: UtcDate }>[] = [];
         let i = 0;
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, no-constant-condition
@@ -183,7 +183,7 @@ export namespace Occupancy {
                 ...occupancy,
                 end: occupancy.end.advanced(Recurring.advancement(occupancy.recurring.repeatEvery, i)),
                 start: occupancy.start.advanced(Recurring.advancement(occupancy.recurring.repeatEvery, i))
-            });
+            }, occupancy);
             // eslint-disable-next-line object-property-newline, newline-per-chained-call
             const startDay = occupancy.start.advanced(Recurring.advancement(occupancy.recurring.repeatEvery, i)).setted({ hour: 0, minute: 0 });
             if (occupancy.recurring.untilIncluding.compare(startDay) === 'less')
