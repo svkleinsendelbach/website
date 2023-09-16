@@ -35,6 +35,15 @@ export namespace EventGroupId {
         'gymnastics': 'Gymnastik'
     };
 
+    export function encodeSelectedGroupIds(selection: EventGroupId[]): string {
+        let selectionNumber = 0;
+        for (const [index, groupId] of EventGroupId.all.map((v, i) => [i, v] as const)) {
+            if (selection.includes(groupId))
+                selectionNumber |= 0b1 << index;
+        }
+        return selectionNumber.toString(16).toUpperCase();
+    }
+
     export interface Grouped {
         title: string;
         groupIds: EventGroupId[];

@@ -73,12 +73,50 @@
         <p
             *ngIf="eventGroup.events.length <= 5"
         ></p>
-        </div>
+    </div>
     <p
-        *ngIf="fetchedEventGroups.isSuccess() && fetchedEventGroups.content.length !== 0"
-        id="download-calendar"
+        *ngIf="fetchedEventGroups.isSuccess() && fetchedEventGroups.content.length !== 0 && !isCalendarSubscriptionSeletionShown"
+        id="subscribe-calendar"
         class="textColor"
         role="none"
-        (click)="downloadCalendar()"
-    >ics-Kalender herunterladen</p>
+        (click)="showCalendarSubscriptionSeletion()"
+    >ics-Kalender abonnieren</p>
+    <div
+        *ngIf="fetchedEventGroups.isSuccess() && fetchedEventGroups.content.length !== 0 && isCalendarSubscriptionSeletionShown"
+        id="calendar-subscription-container"
+    >
+        <p
+            class="text"
+        >Wähle die Kategorien aus, die du abonnieren möchtest.</p>
+        <div
+            id="selection-container"
+        >
+            <p
+                *ngFor="let groupId of EventGroupId.all; trackBy: trackByIdentity"
+                class="group-id"
+                [ngClass]="{
+                    selected: calendarSubscriptionSelection[groupId]
+                }"
+                role="none"
+                (click)="selectEventGroupId(groupId)"
+            >{{ EventGroupId.title[groupId] }}</p>
+        </div>
+        <a
+            *ngIf="anyCalendarSubscriptionSelected"
+            id="subscribe-calendar-link"
+            class="textColor"
+            [href]="calendarSubscriptionLink"
+            target="_blank"
+            title="ics-Kalender abonnieren"
+            role="none"
+            (click)="hideCalendarSubscriptionSeletion()"
+        >Ausgewähltes abonnieren</a>
+        <p
+            *ngIf="!anyCalendarSubscriptionSelected"
+            id="subscribe-calendar-cancel"
+            class="textColor"
+            role="none"
+            (click)="hideCalendarSubscriptionSeletion()"
+        >Abbrechen</p>
+    </div>
 </text-section>

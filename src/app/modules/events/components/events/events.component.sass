@@ -67,13 +67,48 @@
             margin-bottom: 4px
             width: 100%
 
-#download-calendar
-    @include dynamic-color(border-color, 'text')
+#subscribe-calendar, #calendar-subscription-container #subscribe-calendar-link, #calendar-subscription-container #subscribe-calendar-cancel
+    @include dynamic-color(color, 'text')
     @include font-montserrat
     @include font-size('normal')
     @include font-weight('normal')
     border: 1px solid
+    @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
     border-radius: 5px
     cursor: pointer
     margin-top: 25px
     padding: 2.5px 15px
+    text-decoration: none
+
+#calendar-subscription-container
+    @include flex-column(flex-start, center)
+    border: 1px solid
+    @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+    border-radius: 5px
+    margin-top: 25px
+    padding: 10px 0
+    width: 100%
+
+    #selection-container
+        @include flex-row(flex-start, center)
+        flex-wrap: wrap
+        width: 100%
+
+        .group-id
+            @include dynamic-color(color, 'text')
+            @include font-montserrat
+            @include font-size('normal')
+            @include font-weight('small')
+            border: 1px solid
+            @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+            border-radius: 5px
+            cursor: pointer
+            margin: 5px 7.5px
+            padding: 2.5px 15px
+            text-align: center
+
+            &.selected
+                @include dynamic-color(color, 'primary')
+
+            &:hover
+                @include dynamic-color(background-color, 'hoveredBackground')
