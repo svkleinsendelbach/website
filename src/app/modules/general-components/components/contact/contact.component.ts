@@ -15,8 +15,6 @@ export class ContactComponent {
 
     public TrackBy = TrackBy;
 
-    public ContactItem = ContactItem;
-
     public faPhone = faPhone;
 
     public faMobile = faMobile;

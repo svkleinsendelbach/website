@@ -12,6 +12,30 @@ export type CriticismSuggestion = {
 export namespace CriticismSuggestion {
     export type Type = 'criticism' | 'suggestion';
 
+    export namespace Type {
+        export function description(type: Type): string {
+            switch (type) {
+            case 'criticism':
+                return 'Kritik';
+            case 'suggestion':
+                return 'Vorschlag';
+            default:
+                return '';
+            }
+        }
+
+        export function color(type: Type): string {
+            switch (type) {
+            case 'criticism':
+                return '#FAE3E3';
+            case 'suggestion':
+                return '#D1E8FF';
+            default:
+                return '';
+            }
+        }
+    }
+
     export type Flatten = {
         id: string;
         type: CriticismSuggestion.Type;

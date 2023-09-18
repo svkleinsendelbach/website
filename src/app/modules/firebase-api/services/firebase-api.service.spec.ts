@@ -7,8 +7,6 @@ import { DatabaseManagerTestService } from './database-manager.service';
 import { FirebaseApiService } from './firebase-api.service';
 import { Guid } from '../types/guid';
 import { TestBed } from '@angular/core/testing';
-import { UserAuthenticationGetAllUnauthenticatedFunction } from '../function-types';
-import { UserAuthenticationType } from '../types/user';
 import { UtcDate } from 'src/app/types/utc-date';
 import { environment } from 'src/environments/environment';
 

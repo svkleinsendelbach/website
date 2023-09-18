@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/no-inline-styles -->
 <authentication-check
     [roles]="['admin']"
     (onAuthentication)="getCriticismSuggestions()"
@@ -25,7 +26,32 @@
             <div
                 *ngFor="let criticismSuggestion of criticismSuggestions.content.notWorkedOff; trackBy: TrackBy.id"
                 class="container"
-            ></div>
+            >
+                <div
+                    class="header"
+                    role="none"
+                    (click)="expand(criticismSuggestion)"
+                >
+                    <p
+                        class="type"
+                        [ngStyle]="{
+                            backgroundColor: CriticismSuggestion.Type.color(criticismSuggestion.type)
+                        }"
+                    >{{ CriticismSuggestion.Type.description(criticismSuggestion.type) }}</p>
+                    <p
+                        class="title"
+                    >{{ criticismSuggestion.title }}</p>
+                    <p
+                        class="worked-off"
+                        role="none"
+                        (click)="$event.stopPropagation(); workOff(criticismSuggestion)"
+                    >Abgearbeitet</p>
+                </div>
+                <p
+                    *ngIf="expandedCriticismSuggestionId === criticismSuggestion.id.guidString"
+                    class="description"
+                >Kontakt: {{ criticismSuggestion.contactEmail }}<br>{{ criticismSuggestion.description }}</p>
+            </div>
         </div>
         <p
             *ngIf="criticismSuggestions.isSuccess() && !criticismSuggestions.content.workedOff"
@@ -45,7 +71,27 @@
             <div
                 *ngFor="let criticismSuggestion of criticismSuggestions.content.workedOff; trackBy: TrackBy.id"
                 class="container"
-            ></div>
+            >
+                <div
+                    class="header"
+                    role="none"
+                    (click)="expand(criticismSuggestion)"
+                >
+                    <p
+                        class="type"
+                        [ngStyle]="{
+                            backgroundColor: CriticismSuggestion.Type.color(criticismSuggestion.type)
+                        }"
+                    >{{ CriticismSuggestion.Type.description(criticismSuggestion.type) }}</p>
+                    <p
+                        class="title large"
+                    >{{ criticismSuggestion.title }}</p>
+                </div>
+                <p
+                    *ngIf="expandedCriticismSuggestionId === criticismSuggestion.id.guidString"
+                    class="description"
+                >Kontakt: {{ criticismSuggestion.contactEmail }}<br>{{ criticismSuggestion.description }}</p>
+            </div>
         </div>
         <p
             *ngIf="criticismSuggestions.content.workedOff.length === 0"

@@ -18,3 +18,81 @@
 
     &:hover
         @include dynamic-color(background-color, 'hoveredBackground')
+
+.list-container
+    @include flex-column(flex-start, center)
+    margin-bottom: 25px
+    width: 100%
+
+    .container
+        @include flex-column(flex-start, center)
+        @include dynamic-color(background-color, 'background')
+        border: 1px solid
+        border-bottom: 0
+        @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+        overflow: hidden
+        width: 100%
+
+        &:first-child
+            border-radius: 5px 5px 0 0
+
+        &:last-child
+            border-bottom: 1px solid
+            @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+            border-radius: 0 0 5px 5px
+
+        &:first-child:last-child
+            border-radius: 5px
+
+        .header
+            @include flex-row(center, center)
+            cursor: pointer
+            width: 100%
+
+            .type
+                @include dynamic-color(color, 'text')
+                @include font-montserrat
+                @include font-size('normal')
+                @include font-weight('small')
+                border-right: 1px solid
+                @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+                padding: 5px 0
+                text-align: center
+                width: 10%
+
+            .title
+                @include dynamic-color(color, 'text')
+                @include font-montserrat
+                @include font-size('normal')
+                @include font-weight('small')
+                padding: 5px 20px
+                width: 70%
+
+                &.large
+                    width: 90%
+
+            .worked-off
+                @include dynamic-color(color, 'primary')
+                @include font-montserrat
+                @include font-size('normal')
+                @include font-weight('small')
+                border-left: 1px solid
+                @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+                border-radius: 5px 0 0 5px
+                cursor: pointer
+                padding: 5px 0
+                text-align: center
+                width: 20%
+
+                &:hover
+                    @include dynamic-color(background-color, 'hoveredBackground')
+
+        .description
+            @include dynamic-color(color, 'text')
+            @include font-montserrat
+            @include font-size('normal')
+            @include font-weight('small')
+            border-top: 1px dashed
+            @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+            padding: 10px 20px
+            width: calc(100% - 40px)

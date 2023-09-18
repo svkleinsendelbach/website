@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ContactData } from '../../types/contact-data';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { FooterData } from '../../types/footer-data';
 import { StyleConfigService } from 'src/app/services/style-config.service';
@@ -15,10 +14,6 @@ export class FooterComponent {
     @Input() public footerData!: FooterData;
 
     public TrackBy = TrackBy;
-
-    public FooterLink = FooterData.Link;
-
-    public ContactData = ContactData;
 
     public faPhone = faPhone;
 

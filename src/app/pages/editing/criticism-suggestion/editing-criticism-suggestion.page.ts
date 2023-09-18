@@ -23,6 +23,8 @@ export class EditingCriticismSuggestionPage {
         workedOff: CriticismSuggestion[] | null;
     }> = FetchState.loading;
 
+    public expandedCriticismSuggestionId: string | null = null;
+
     public constructor(
         public readonly titleService: Title,
         public readonly deviceType: DeviceTypeService,
@@ -53,5 +55,32 @@ export class EditingCriticismSuggestionPage {
                 if (!workedOff)
                     this.criticismSuggestions = FetchState.failure(reason);
             });
+    }
+
+    public async workOff(criticismSuggestion: CriticismSuggestion) {
+        if (!this.criticismSuggestions.isSuccess())
+            return;
+        this.criticismSuggestions = FetchState.success({
+            notWorkedOff: this.criticismSuggestions.content.notWorkedOff.filter(_criticismSuggestion => _criticismSuggestion.id !== criticismSuggestion.id),
+            workedOff: this.criticismSuggestions.content.workedOff
+        });
+        await this.firebaseApiService
+            .function('criticismSuggestion')
+            .function('edit')
+            .call({
+                criticismSuggestion: {
+                    ...CriticismSuggestion.flatten(criticismSuggestion),
+                    workedOff: true
+                },
+                criticismSuggestionId: criticismSuggestion.id.guidString,
+                editType: 'change'
+            });
+    }
+
+    public expand(criticismSuggestion: CriticismSuggestion) {
+        if (this.expandedCriticismSuggestionId === criticismSuggestion.id.guidString)
+            this.expandedCriticismSuggestionId = null;
+        else
+            this.expandedCriticismSuggestionId = criticismSuggestion.id.guidString;
     }
 }

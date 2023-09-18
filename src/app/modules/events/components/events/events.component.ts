@@ -19,8 +19,6 @@ export class EventsComponent implements OnInit {
 
     public Event = Event;
 
-    public EventGroup = EventGroup;
-
     public EventGroupId = EventGroupId;
 
     public fetchedEventGroups: FetchState<EventGroup[]> = FetchState.loading;

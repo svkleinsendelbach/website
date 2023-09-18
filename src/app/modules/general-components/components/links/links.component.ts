@@ -14,8 +14,6 @@ export class LinksComponent {
 
     public TrackBy = TrackBy;
 
-    public LinkData = LinkData;
-
     public constructor(
         public readonly deviceType: DeviceTypeService,
         public readonly styleConfig: StyleConfigService
