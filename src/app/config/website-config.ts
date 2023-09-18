@@ -275,7 +275,7 @@ export const websiteConfig: WebsiteConfig = {
     homeBanner: [
         {
             imageSource: 'assets/images/mannschaft.png',
-            isCurrent: true,
+            isCurrent: false,
             link: InternalLink.all['fussball/herren'],
             subTitle: '1. und 2. Mannschaft 2019 / 2020',
             title: 'Herren Mannschaft'

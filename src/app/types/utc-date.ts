@@ -26,7 +26,7 @@ export class UtcDate {
 
     public get dateShortDescription(): string {
         const monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
-        return `${this.localized.getDate()}. ${monthNames[this.localized.getMonth() - 1]}`;
+        return `${this.localized.getDate()}. ${monthNames[this.localized.getMonth()]}`;
     }
 
     public get dateDescription(): string {
