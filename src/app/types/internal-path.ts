@@ -28,6 +28,7 @@ export type InternalPath =
     | 'home'
     | 'impressum'
     | 'kontakt'
+    | 'kritik-vorschläge'
     | 'mitgliedsantrag'
     | 'satzung'
     | 'sportheim'
@@ -57,6 +58,7 @@ export namespace InternalPath {
         'anfahrt',
         'kontakt',
         'impressum',
+        'kritik-vorschläge',
         'berichte',
         'bearbeiten',
         'bearbeiten/anmelden',
@@ -98,6 +100,7 @@ export namespace InternalPath {
         'home': 'Home',
         'impressum': 'Impressum',
         'kontakt': 'Kontakt',
+        'kritik-vorschläge': 'Kritik und Vorschläge',
         'mitgliedsantrag': 'Mitgliedsantrag',
         'satzung': 'Satzung',
         'sportheim': 'Sportheim',

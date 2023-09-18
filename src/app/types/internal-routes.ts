@@ -3,6 +3,7 @@ import { AllReportsPage } from '../pages/reports/all-reports/all-reports.page';
 import { CYouthPage } from '../pages/football-youth/c-youth/c-youth.page';
 import { ChroniclePage } from '../pages/about-us/chronicle/chronicle.page';
 import { ContactPage } from '../pages/contact/contact.page';
+import { CriticismSuggestionPage } from '../pages/criticism-suggestion/criticism-suggestion.page';
 import { DancingPage } from '../pages/dancing/dancing.page';
 import { DrivePage } from '../pages/drive/drive.page';
 import { EYouthPage } from '../pages/football-youth/e-youth/e-youth.page';
@@ -62,6 +63,7 @@ const associatedRoute: Record<InternalPath, Type<unknown>> = {
     'home': HomePage,
     'impressum': ImprintPage,
     'kontakt': ContactPage,
+    'kritik-vorschläge': CriticismSuggestionPage,
     'mitgliedsantrag': RequestPage,
     'satzung': StatutePage,
     'sportheim': SportshomePage,

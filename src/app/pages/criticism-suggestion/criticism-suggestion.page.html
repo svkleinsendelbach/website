@@ -1,0 +1,26 @@
+<text-section
+    [title]="'Kritik und Vorschläge'"
+>
+    <input-form
+        [inputForm]="inputForm"
+        [submitButtonText]="'Speichern'"
+        (submitButtonClicked)="onSubmit()"
+    >
+        <input-field-inline-select
+            [selectOptions]="typeSelectOptions"
+            [inputField]="inputForm.field('type')"
+        />
+        <input-field-text
+            [label]="'Ihr E-Mail Adresse'"
+            [inputField]="inputForm.field('email')"
+        />
+        <input-field-text
+            [label]="'Title'"
+            [inputField]="inputForm.field('title')"
+        />
+        <input-field-textarea
+            [label]="'Beschreibung'"
+            [inputField]="inputForm.field('description')"
+        />
+    </input-form>
+</text-section>

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DateTimeInputComponent } from './components/input-field/date-time-input/date-time-input.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { FormsModule } from '@angular/forms';
+import { InlineSelectComponent } from './components/input-field/inline-select/inline-select.component';
 import { InputFormComponent } from './components/input-form/input-form.component';
 import { LabelComponent } from './components/label/label.component';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,7 @@ import { TextareaComponent } from './components/input-field/textarea/textarea.co
         CheckboxComponent,
         DateTimeInputComponent,
         ErrorMessageComponent,
+        InlineSelectComponent,
         InputFormComponent,
         LabelComponent,
         SelectComponent,
@@ -27,6 +29,7 @@ import { TextareaComponent } from './components/input-field/textarea/textarea.co
     exports: [
         CheckboxComponent,
         DateTimeInputComponent,
+        InlineSelectComponent,
         InputFormComponent,
         SelectComponent,
         TextareaComponent,

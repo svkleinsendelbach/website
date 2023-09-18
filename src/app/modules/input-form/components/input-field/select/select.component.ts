@@ -48,7 +48,7 @@ export namespace SelectOptions {
     templateUrl: './select.component.html'
 })
 export class SelectComponent<T extends string> implements AfterViewInit {
-    @Input() public label!: string;
+    @Input() public label: string | null = null;
 
     @Input() public selectOptions!: SelectOptions<T>;
 

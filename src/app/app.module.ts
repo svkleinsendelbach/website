@@ -73,6 +73,7 @@ import { EditingReportsPage } from './pages/editing/reports/editing-reports.page
 import { EditReportPage } from './pages/editing/reports/edit-report/edit-report.page';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { NavigationBarComponent as EditingNavigationBarComponent } from './pages/editing/main/navigation-bar/navigation-bar.component';
+import { CriticismSuggestionPage } from './pages/criticism-suggestion/criticism-suggestion.page';
 import { EditingUserRolesPage } from './pages/editing/user-roles/editing-user-roles.page';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -89,6 +90,7 @@ import { EditingCriticismSuggestionPage } from './pages/editing/criticism-sugges
         AppComponent,
         ChroniclePage,
         ContactPage,
+        CriticismSuggestionPage,
         CYouthPage,
         DancingPage,
         DrivePage,

@@ -13,6 +13,8 @@ export namespace CriticismSuggestion {
     export type Type = 'criticism' | 'suggestion';
 
     export namespace Type {
+        export const all: Type[] = ['criticism', 'suggestion'];
+
         export function description(type: Type): string {
             switch (type) {
             case 'criticism':
