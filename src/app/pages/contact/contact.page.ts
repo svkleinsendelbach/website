@@ -6,6 +6,7 @@ import { FunctionType } from 'src/app/modules/firebase-api/types/function-type';
 import { InputError } from 'src/app/modules/input-form/types/input-error';
 import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';
+import { InternalLink } from 'src/app/types/internal-path';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { SelectOptions } from 'src/app/modules/input-form/components/input-field/select/select.component';
 import { SendMailContactFunctionType } from 'src/app/modules/firebase-api/function-types';
@@ -21,6 +22,8 @@ import { lastValueFrom } from 'rxjs';
     templateUrl: './contact.page.html'
 })
 export class ContactPage {
+    public criticismSuggestionPageLink = InternalLink.all['kritik-vorschläge'];
+
     public inputForm = new InputForm(
         {
             email: new InputField<string>('', [

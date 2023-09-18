@@ -274,6 +274,10 @@ export class AppComponent {
                 link: InternalLink.all.kontakt
             },
             {
+                id: 'criticismSuggestion',
+                link: InternalLink.all['kritik-vorschläge']
+            },
+            {
                 id: 'impressum',
                 link: Link.internal<InternalPath>('Impressum und Datenschutz', 'impressum')
             }
