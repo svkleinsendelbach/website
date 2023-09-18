@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { DeviceTypeService } from '../../../../services/device-type.service';
 import { LinkData } from '../../types/link-data';
 import { StyleConfigService } from '../../../../services/style-config.service';
+import { TrackBy } from 'src/app/types/track-by';
 
 @Component({
     selector: 'links',
@@ -10,6 +11,8 @@ import { StyleConfigService } from '../../../../services/style-config.service';
 })
 export class LinksComponent {
     @Input() public links!: LinkData[];
+
+    public TrackBy = TrackBy;
 
     public LinkData = LinkData;
 

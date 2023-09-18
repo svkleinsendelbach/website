@@ -6,7 +6,7 @@
         id="managers-container"
     >
         <div
-            *ngFor="let manager of managers; trackBy: Manager.trackByName"
+            *ngFor="let manager of managers; trackBy: TrackBy.property('name')"
             class="container"
         >
             <img

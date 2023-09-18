@@ -6,6 +6,7 @@ import { FirebaseApiService } from 'src/app/modules/firebase-api/services/fireba
 import { SquadPerson } from '../../types/squad-person';
 import { StyleConfigService } from '../../../../services/style-config.service';
 import { TeamSquad } from 'src/app/modules/firebase-api/types/team-squad';
+import { TrackBy } from 'src/app/types/track-by';
 
 @Component({
     selector: 'squad',
@@ -15,7 +16,7 @@ import { TeamSquad } from 'src/app/modules/firebase-api/types/team-squad';
 export class SquadComponent implements OnInit {
     @Input() public parametersType!: AnpfiffInfoTeamParameters.Type;
 
-    public SquadPerson = SquadPerson;
+    public TrackBy = TrackBy;
 
     public fetchedSquad: FetchState<TeamSquad> = FetchState.loading;
 

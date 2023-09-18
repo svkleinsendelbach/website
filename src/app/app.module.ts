@@ -73,12 +73,13 @@ import { EditingReportsPage } from './pages/editing/reports/editing-reports.page
 import { EditReportPage } from './pages/editing/reports/edit-report/edit-report.page';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { NavigationBarComponent as EditingNavigationBarComponent } from './pages/editing/main/navigation-bar/navigation-bar.component';
-import { UserRolesPage } from './pages/editing/user-roles/user-roles.page';
+import { EditingUserRolesPage } from './pages/editing/user-roles/editing-user-roles.page';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { OccupancyPage } from './pages/editing/occupancy/occupancy.page';
+import { EditingOccupancyPage } from './pages/editing/occupancy/editing-occupancy.page';
 import { LocationCalendarDayViewComponent } from './pages/editing/occupancy/location-calendar-day-view/location-calendar-day-view.component';
 import { EditOccupancyPage } from './pages/editing/occupancy/edit-occupancy/edit-occupancy.page';
+import { EditingCriticismSuggestionPage } from './pages/editing/criticism-suggestion/editing-criticism-suggestion.page';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -92,10 +93,13 @@ import { EditOccupancyPage } from './pages/editing/occupancy/edit-occupancy/edit
         DancingPage,
         DrivePage,
         EditEventPage,
+        EditingCriticismSuggestionPage,
         EditingEventsPage,
         EditingMainPage,
         EditingNavigationBarComponent,
+        EditingOccupancyPage,
         EditingReportsPage,
+        EditingUserRolesPage,
         EditOccupancyPage,
         EditReportPage,
         EYouthPage,
@@ -114,15 +118,13 @@ import { EditOccupancyPage } from './pages/editing/occupancy/edit-occupancy/edit
         LoginPage,
         LoginPageComponent,
         ManagersPage,
-        OccupancyPage,
         PageNotFoundPage,
         PrivacyPage,
         RequestPage,
         SecondTeamPage,
         SocialMediaLinksComponent,
         SportshomePage,
-        StatutePage,
-        UserRolesPage
+        StatutePage
     ],
     imports: [
         AngularFireAnalyticsModule,

@@ -1,4 +1,3 @@
-<!-- eslint-disable @angular-eslint/template/no-call-expression -->
 <text-section
     [title]="'Kommende Termine'"
 >
@@ -16,7 +15,7 @@
     >Keine Termine</p>
     <div
         id="event-groups"
-        *ngFor="let eventGroup of fetchedEventGroups.content; trackBy: EventGroup.trackById"
+        *ngFor="let eventGroup of fetchedEventGroups.content; trackBy: TrackBy.property('groupId')"
         [ngClass]="deviceType.current"
     >
         <p
@@ -24,7 +23,7 @@
         >{{ EventGroupId.title[eventGroup.groupId] }}</p>
         <div
             class="event"
-            *ngFor="let event of events(eventGroup); trackBy: Event.trackById"
+            *ngFor="let event of events(eventGroup); trackBy: TrackBy.id"
         >
         <div
             class="inner-container"
@@ -92,7 +91,7 @@
             id="selection-container"
         >
             <p
-                *ngFor="let groupId of EventGroupId.all; trackBy: trackByIdentity"
+                *ngFor="let groupId of EventGroupId.all; trackBy: TrackBy.identity"
                 class="group-id"
                 [ngClass]="{
                     selected: calendarSubscriptionSelection[groupId]

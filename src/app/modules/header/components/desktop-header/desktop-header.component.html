@@ -21,7 +21,7 @@
         id="header-items"
     >
         <desktop-header-item
-            *ngFor="let headerItem of headerItems; trackBy: HeaderItem.trackById"
+            *ngFor="let headerItem of headerItems; trackBy: TrackBy.id"
             [headerItem]="headerItem"
             [expandedHeaderItemId]="expandedHeaderItemId"
             (clickHeaderItemIdEmitter)="handleHeaderItemClick($event)"

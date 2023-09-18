@@ -94,12 +94,6 @@ export namespace Report {
             title: report.title
         };
     }
-
-    export function trackById(_index: number, report: Report | Report.Flatten): string {
-        if (typeof report.id === 'string')
-            return report.id;
-        return report.id.guidString;
-    }
 }
 
 export interface ReportGroup {
@@ -111,9 +105,5 @@ export namespace ReportGroup {
     export interface Flatten {
         groupId: ReportGroupId;
         reports: Report.Flatten[];
-    }
-
-    export function trackById(_index: number, group: ReportGroup | ReportGroup.Flatten): string {
-        return group.groupId;
     }
 }

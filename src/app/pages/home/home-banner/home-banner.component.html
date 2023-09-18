@@ -12,7 +12,7 @@
     }"
 >
     <img
-        *ngFor="let bannerItem of bannerData; index as index; trackBy: BannerItem.trackByTitle"
+        *ngFor="let bannerItem of bannerData; index as index; trackBy: TrackBy.property('title')"
         class="image"
         [src]="bannerItem.imageSource"
         [title]="bannerItem.title"
@@ -71,7 +71,7 @@
         id="nav-bar"
     >
         <fa-icon
-            *ngFor="let _ of bannerData; index as index; trackBy: BannerItem.trackByTitle"
+            *ngFor="let _ of bannerData; index as index; trackBy: TrackBy.property('title')"
             [icon]="faCircle"
             class="circle"
             (click)="$event.preventDefault(); $event.stopPropagation(); handleNavBarClick(index + 1)"

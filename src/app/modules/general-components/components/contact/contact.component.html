@@ -8,7 +8,7 @@
     >
         <div
             class="contact"
-            *ngFor="let contact of contactData; trackBy: ContactItem.trackByName"
+            *ngFor="let contact of contactData; trackBy: TrackBy.property('name')"
         >
             <p
                 class="function textColor"

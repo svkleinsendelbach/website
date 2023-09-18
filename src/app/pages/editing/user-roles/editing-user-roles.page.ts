@@ -5,14 +5,17 @@ import { FirebaseApiService } from 'src/app/modules/firebase-api/services/fireba
 import { InternalLink } from 'src/app/types/internal-path';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
+import { TrackBy } from 'src/app/types/track-by';
 import { User } from 'src/app/modules/firebase-api/types/user';
 
 @Component({
     selector: 'user-roles-page',
-    styleUrls: ['./user-roles.page.sass'],
-    templateUrl: './user-roles.page.html'
+    styleUrls: ['./editing-user-roles.page.sass'],
+    templateUrl: './editing-user-roles.page.html'
 })
-export class UserRolesPage {
+export class EditingUserRolesPage {
+    public TrackBy = TrackBy;
+
     public User = User;
 
     public mainEditingPageLink = InternalLink.all.bearbeiten;
@@ -60,9 +63,5 @@ export class UserRolesPage {
                 else
                     user.roles.push(role);
             });
-    }
-
-    public trackByIdentity<T>(_index: number, value: T): T {
-        return value;
     }
 }

@@ -18,7 +18,7 @@
             class="text margin-top-large secondaryColor"
         >Termine werden geladen</p>
         <div
-            *ngFor="let eventGroup of eventGroups; trackBy: EventGroup.trackById"
+            *ngFor="let eventGroup of eventGroups; trackBy: TrackBy.property('groupId')"
             class="event-group"
             [ngClass]="deviceType.current"
         >
@@ -26,7 +26,7 @@
             class="group-name textColor"
         >{{ eventGroupTitle[eventGroup.groupId] }}</p>
         <div
-            *ngFor="let event of eventGroup.events; trackBy: Event.trackById"
+            *ngFor="let event of eventGroup.events; trackBy: TrackBy.id"
             class="event"
         >
             <div

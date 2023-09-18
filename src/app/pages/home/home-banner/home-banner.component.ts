@@ -3,6 +3,7 @@ import { faChevronLeft, faChevronRight, faCircle } from '@fortawesome/free-solid
 import { DeviceTypeService } from '../../../services/device-type.service';
 import { Link } from 'src/app/types/link';
 import { StyleConfigService } from '../../../services/style-config.service';
+import { TrackBy } from 'src/app/types/track-by';
 
 export interface BannerItem {
     imageSource: string;
@@ -10,12 +11,6 @@ export interface BannerItem {
     subTitle: string | null;
     link: Link;
     isCurrent: boolean;
-}
-
-export namespace BannerItem {
-    export function trackByTitle(_index: number, item: BannerItem): string {
-        return item.title;
-    }
 }
 
 @Component({
@@ -26,7 +21,7 @@ export namespace BannerItem {
 export class HomeBannerComponent implements OnInit {
     @Input() public bannerData!: BannerItem[];
 
-    public BannerItem = BannerItem;
+    public TrackBy = TrackBy;
 
     public faChevronLeft = faChevronLeft;
 

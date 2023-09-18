@@ -4,6 +4,7 @@ import { DeviceTypeService } from '../../../services/device-type.service';
 import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'src/app/types/link';
 import { StyleConfigService } from '../../../services/style-config.service';
+import { TrackBy } from 'src/app/types/track-by';
 
 export interface SocialMediaItem {
     id: string;
@@ -14,12 +15,6 @@ export interface SocialMediaItem {
         lightModeSource: string;
         darkModeSource: string;
     };
-}
-
-export namespace SocialMediaItem {
-    export function trackById(_index: number, item: SocialMediaItem): string {
-        return item.id;
-    }
 }
 
 export interface SocialMediaData {
@@ -36,7 +31,7 @@ export interface SocialMediaData {
 export class SocialMediaLinksComponent {
     @Input() public socialMediaData!: SocialMediaData;
 
-    public SocialMediaItem = SocialMediaItem;
+    public TrackBy = TrackBy;
 
     public constructor(
         public readonly deviceType: DeviceTypeService,
@@ -53,9 +48,5 @@ export class SocialMediaLinksComponent {
         darkModeSource: string;
     }): image is IconDefinition {
         return !('lightModeSource' in image);
-    }
-
-    public trackByIdentity<T>(_index: number, value: T): T {
-        return value;
     }
 }

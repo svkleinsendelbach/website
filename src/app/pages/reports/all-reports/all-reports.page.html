@@ -14,7 +14,7 @@
         class="text center large primaryColor"
     >Keine Berichte</p>
     <report
-        *ngFor="let report of fetchedReports.content; trackBy: Report.trackById"
+        *ngFor="let report of fetchedReports.content; trackBy: TrackBy.id"
         [report]="report"
         [groupId]="report.groupId"
      />

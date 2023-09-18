@@ -6,16 +6,15 @@
     >
         <div
             class="link-row"
-            *ngFor="let linkRow of socialMediaItems; trackBy: trackByIdentity"
+            *ngFor="let linkRow of socialMediaItems; trackBy: TrackBy.identity"
         >
             <a
                 class="social-media-link"
-                *ngFor="let socialMediaLink of linkRow; trackBy: SocialMediaItem.trackById"
+                *ngFor="let socialMediaLink of linkRow; trackBy: TrackBy.id"
                 [href]="socialMediaLink.link.link"
                 [target]="socialMediaLink.link.target"
                 [title]="socialMediaLink.link.title"
             >
-                <!-- eslint-disable @angular-eslint/template/no-call-expression -->
                 <fa-icon
                     *ngIf="isIcon(socialMediaLink.image)"
                     class="icon textColor"
@@ -35,7 +34,6 @@
                     [title]="socialMediaLink.title"
                     [alt]="socialMediaLink.title"
                 >
-                <!-- eslint-enable @angular-eslint/template/no-call-expression -->
                 <p
                     class="title primaryColor"
                 >{{ socialMediaLink.title }}</p>

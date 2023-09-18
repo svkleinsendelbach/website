@@ -8,16 +8,16 @@
     (change)="onBlur()"
 >
     <optgroup
-        *ngFor="let group of selectOptions.type === 'grouped' ? selectOptions.groups : []; trackBy: SelectGroup.trackByTitle"
+        *ngFor="let group of selectOptions.type === 'grouped' ? selectOptions.groups : []; trackBy: TrackBy.property('title')"
         [label]="group.title"
     >
         <option
-        *ngFor="let option of group.options; trackBy: SelectOption.trackById"
+        *ngFor="let option of group.options; trackBy: TrackBy.id"
         [value]="option.id"
         >{{ option.text }}</option>
     </optgroup>
     <option
-        *ngFor="let option of selectOptions.type === 'ungrouped' ? selectOptions.options : []; trackBy: SelectOption.trackById"
+        *ngFor="let option of selectOptions.type === 'ungrouped' ? selectOptions.options : []; trackBy: TrackBy.id"
         [value]="option.id"
     >{{ option.text }}</option>
 </select>

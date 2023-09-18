@@ -4,6 +4,7 @@ import { CookieSelectionService } from 'src/app/modules/cookie-selector/services
 import { DeviceTypeService } from '../../../../services/device-type.service';
 import { HttpClient } from '@angular/common/http';
 import { StyleConfigService } from '../../../../services/style-config.service';
+import { TrackBy } from 'src/app/types/track-by';
 import { environment } from '../../../../../environments/environment';
 import { lastValueFrom } from 'rxjs';
 import { mapStyleDarkAppearence } from '../../../../utils/mapStyleDarkAppearence';
@@ -17,6 +18,8 @@ export class MapsComponent implements OnInit, OnDestroy {
     @Input() public options!: google.maps.MapOptions;
 
     @Input() public markers: google.maps.LatLngLiteral[] = [];
+
+    public TrackBy = TrackBy;
 
     public apiLoaded = false;
 
@@ -52,10 +55,6 @@ export class MapsComponent implements OnInit, OnDestroy {
 
     public acceptFunctionalityCookies() {
         this.cookieSelectionService.changeCookieSelection('functionality', 'selected');
-    }
-
-    public trackByIdentity<T>(_index: number, value: T): T {
-        return value;
     }
 
     private async checkApiLoaded() {

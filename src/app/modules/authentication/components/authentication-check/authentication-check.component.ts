@@ -38,7 +38,7 @@ export class AuthenticationStates {
 
     private allStates(expectedState: AuthenticationState): boolean {
         for (const state of Object.values(this.states)) {
-            if (state !== expectedState)
+            if (state !== expectedState && state !== 'authenticated')
                 return false;
         }
         return true;

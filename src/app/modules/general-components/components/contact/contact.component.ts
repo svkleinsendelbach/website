@@ -3,6 +3,7 @@ import { faEnvelope, faMobile, faPhone } from '@fortawesome/free-solid-svg-icons
 import { ContactItem } from '../../types/contact-item';
 import { DeviceTypeService } from '../../../../services/device-type.service';
 import { StyleConfigService } from '../../../../services/style-config.service';
+import { TrackBy } from 'src/app/types/track-by';
 
 @Component({
     selector: 'contact',
@@ -11,6 +12,8 @@ import { StyleConfigService } from '../../../../services/style-config.service';
 })
 export class ContactComponent {
     @Input() public contactData!: ContactItem[];
+
+    public TrackBy = TrackBy;
 
     public ContactItem = ContactItem;
 

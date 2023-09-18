@@ -1,4 +1,3 @@
-<!-- eslint-disable @angular-eslint/template/no-call-expression -->
 <app-editing-navigation-bar
     [backButtonLink]="editMainPageLink"
 />
@@ -118,7 +117,7 @@
             id="description-container"
         >
             <div
-                *ngFor="let location of Location.all; trackBy: trackByIdentity"
+                *ngFor="let location of Location.all; trackBy: TrackBy.identity"
                 class="description"
             >
                 <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->

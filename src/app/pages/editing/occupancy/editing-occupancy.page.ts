@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
+import { TrackBy } from 'src/app/types/track-by';
 import { UtcDate } from 'src/app/types/utc-date';
 
 @Component({
@@ -28,10 +29,12 @@ import { UtcDate } from 'src/app/types/utc-date';
         }
     ],
     selector: 'app-occupancy',
-    styleUrls: ['./occupancy.page.sass'],
-    templateUrl: './occupancy.page.html'
+    styleUrls: ['./editing-occupancy.page.sass'],
+    templateUrl: './editing-occupancy.page.html'
 })
-export class OccupancyPage {
+export class EditingOccupancyPage {
+    public TrackBy = TrackBy;
+
     public CalendarView = CalendarView;
 
     public FetchState = FetchState;
@@ -297,9 +300,5 @@ export class OccupancyPage {
 
     public closeActiveDate() {
         this.activeDateIsOpen = false;
-    }
-
-    public trackByIdentity<T>(_index: number, value: T): T {
-        return value;
     }
 }

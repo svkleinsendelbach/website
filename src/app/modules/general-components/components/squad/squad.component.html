@@ -1,4 +1,3 @@
-<!-- eslint-disable @angular-eslint/template/no-call-expression -->
 <text-section
     [title]="'Kader'"
 >
@@ -38,7 +37,7 @@
     >
         <squad-person
             class="person"
-            *ngFor="let person of fetchedSquad.content.squad.goalkeeper; trackBy: SquadPerson.trackByName"
+            *ngFor="let person of fetchedSquad.content.squad.goalkeeper; trackBy: TrackBy.squadPersonName"
             [person]="squadPersonInfo(person)"
             [ngClass]="deviceType.current"
         />
@@ -55,7 +54,7 @@
     >
         <squad-person
             class="person"
-            *ngFor="let person of fetchedSquad.content.squad.defence; trackBy: SquadPerson.trackByName"
+            *ngFor="let person of fetchedSquad.content.squad.defence; trackBy: TrackBy.squadPersonName"
             [person]="squadPersonInfo(person)"
             [ngClass]="deviceType.current"
         />
@@ -72,7 +71,7 @@
     >
         <squad-person
             class="person"
-            *ngFor="let person of fetchedSquad.content.squad.midfield; trackBy: SquadPerson.trackByName"
+            *ngFor="let person of fetchedSquad.content.squad.midfield; trackBy: TrackBy.squadPersonName"
             [person]="squadPersonInfo(person)"
             [ngClass]="deviceType.current"
         />
@@ -89,7 +88,7 @@
     >
         <squad-person
             class="person"
-            *ngFor="let person of fetchedSquad.content.squad.offence; trackBy: SquadPerson.trackByName"
+            *ngFor="let person of fetchedSquad.content.squad.offence; trackBy: TrackBy.squadPersonName"
             [person]="squadPersonInfo(person)"
             [ngClass]="deviceType.current"
         />
@@ -106,7 +105,7 @@
     >
         <squad-person
             class="person"
-            *ngFor="let person of fetchedSquad.content.squad.notSpecified; trackBy: SquadPerson.trackByName"
+            *ngFor="let person of fetchedSquad.content.squad.notSpecified; trackBy: TrackBy.squadPersonName"
             [person]="squadPersonInfo(person)"
             [ngClass]="deviceType.current"
         />
@@ -123,7 +122,7 @@
     >
         <squad-person
             class="person"
-            *ngFor="let person of fetchedSquad.content.stab; trackBy: SquadPerson.trackByName"
+            *ngFor="let person of fetchedSquad.content.stab; trackBy: TrackBy.squadPersonName"
             [person]="staffPersonInfo(person)"
             [ngClass]="deviceType.current"
         />

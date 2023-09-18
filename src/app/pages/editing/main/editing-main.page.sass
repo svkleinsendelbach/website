@@ -8,6 +8,7 @@
 
 #unauthenticated-user-container
     @include flex-column(flex-start, center)
+    margin-bottom: 50px
     margin-top: 25px
     width: 100%
 
@@ -64,6 +65,9 @@
         padding: 5px 35px
         text-align: center
         text-decoration: none
+
+        &:hover
+            @include dynamic-color(background-color, 'hoveredBackground')
 
     .title
         @include font-montserrat

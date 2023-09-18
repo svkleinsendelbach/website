@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
+import { TrackBy } from 'src/app/types/track-by';
 
 @Component({
     selector: 'pages-editing-events',
@@ -15,9 +16,9 @@ import { Title } from '@angular/platform-browser';
     templateUrl: './editing-events.page.html'
 })
 export class EditingEventsPage {
-    public Event = Event;
+    public TrackBy = TrackBy;
 
-    public EventGroup = EventGroup;
+    public Event = Event;
 
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
 

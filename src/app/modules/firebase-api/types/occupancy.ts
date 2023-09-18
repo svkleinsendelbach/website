@@ -194,10 +194,4 @@ export namespace Occupancy {
         }
         return events;
     }
-
-    export function trackById(_index: number, occupancy: Occupancy | Occupancy.Flatten): string {
-        if (typeof occupancy.id === 'string')
-            return occupancy.id;
-        return occupancy.id.guidString;
-    }
 }

@@ -10,12 +10,3 @@ export interface FooterData {
     editLink: Link | null;
     contact: ContactData[];
 }
-
-export namespace FooterData {
-    // eslint-disable-next-line @typescript-eslint/no-shadow
-    export namespace Link {
-        export function trackById(_index: number, link: { id: string; link: Link }): string {
-            return link.id;
-        }
-    }
-}

@@ -1,0 +1,55 @@
+<authentication-check
+    [roles]="['admin']"
+    (onAuthentication)="getCriticismSuggestions()"
+>
+    <text-section
+        [title]="'Kritik und Vorschläge'"
+        [ngClass]="deviceType.current"
+    >
+        <p
+            *ngIf="criticismSuggestions.isLoading()"
+            class="text margin-top-large secondaryColor"
+        >Kritik und Vorschläge werden geladen</p>
+        <p
+            *ngIf="criticismSuggestions.isFailure()"
+            class="text margin-top-large primaryColor"
+        >Kritik und Vorschläge konnten nicht geladen werden</p>
+        <p
+            *ngIf="criticismSuggestions.isSuccess() && criticismSuggestions.content.notWorkedOff.length === 0"
+            class="text margin-top-large primaryColor"
+        >Keine Kritik und Vorschläge</p>
+        <div
+            *ngIf="criticismSuggestions.isSuccess()"
+            class="list-container"
+        >
+            <div
+                *ngFor="let criticismSuggestion of criticismSuggestions.content.notWorkedOff; trackBy: TrackBy.id"
+                class="container"
+            ></div>
+        </div>
+        <p
+            *ngIf="criticismSuggestions.isSuccess() && !criticismSuggestions.content.workedOff"
+            id="show-worked-off-button"
+            role="none"
+            (click)="getCriticismSuggestions(true)"
+        >Abgearbeitete anzeigen</p>
+    </text-section>
+    <text-section
+        *ngIf="criticismSuggestions.isSuccess() && criticismSuggestions.content.workedOff"
+        [title]="'Abgearbeitete Kritik und Vorschläge'"
+        [ngClass]="deviceType.current"
+    >
+        <div
+            class="list-container"
+        >
+            <div
+                *ngFor="let criticismSuggestion of criticismSuggestions.content.workedOff; trackBy: TrackBy.id"
+                class="container"
+            ></div>
+        </div>
+        <p
+            *ngIf="criticismSuggestions.content.workedOff.length === 0"
+            class="text margin-top-large primaryColor"
+        >Keine abgearbeitete Kritik und Vorschläge</p>
+    </text-section>
+</authentication-check>

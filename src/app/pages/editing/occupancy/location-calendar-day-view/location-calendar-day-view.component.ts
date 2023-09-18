@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, ElementRef, Inject, LOCALE_ID } from '@an
 import { LocationDayCalendarUtils, LocationDayView } from './LocationDayCalendarUtils';
 import { WeekViewAllDayEventRow, WeekViewHourColumn } from 'calendar-utils';
 import { Occupancy } from 'src/app/modules/firebase-api/types/occupancy';
+import { TrackBy } from 'src/app/types/track-by';
 import { UtcDate } from 'src/app/types/utc-date';
 
 @Component({
@@ -11,6 +12,8 @@ import { UtcDate } from 'src/app/types/utc-date';
     templateUrl: './location-calendar-day-view.component.html'
 })
 export class LocationCalendarDayViewComponent extends CalendarWeekViewComponent {
+    public TrackBy = TrackBy;
+
     public Location = Occupancy.Location;
 
     public override view: LocationDayView;
@@ -31,10 +34,6 @@ export class LocationCalendarDayViewComponent extends CalendarWeekViewComponent 
         };
         (this.view.allDayEventRows as WeekViewAllDayEventRow[] | undefined) ??= [];
         (this.view.hourColumns as WeekViewHourColumn[] | undefined) ??= [];
-    }
-
-    public trackByIdentity<T>(_index: number, value: T): T {
-        return value;
     }
 
     public override getDayColumnWidth(eventRowContainer: HTMLElement): number {

@@ -4,6 +4,7 @@ import { DeviceTypeService } from '../../../../services/device-type.service';
 import { FetchState } from 'src/app/types/fetch-state';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { StyleConfigService } from '../../../../services/style-config.service';
+import { TrackBy } from 'src/app/types/track-by';
 import { UtcDate } from 'src/app/types/utc-date';
 
 @Component({
@@ -13,6 +14,8 @@ import { UtcDate } from 'src/app/types/utc-date';
 })
 export class EventsComponent implements OnInit {
     @Input() public groupIds!: EventGroupId[];
+
+    public TrackBy = TrackBy;
 
     public Event = Event;
 
@@ -63,10 +66,6 @@ export class EventsComponent implements OnInit {
             .catch(reason => {
                 this.fetchedEventGroups = FetchState.failure(reason);
             });
-    }
-
-    public trackByIdentity<T>(_index: number, value: T): T {
-        return value;
     }
 
     public isRecent(event: Event): boolean {

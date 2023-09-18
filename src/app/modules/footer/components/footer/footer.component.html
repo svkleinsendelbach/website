@@ -10,7 +10,7 @@
             id="links"
         >
         <a
-            *ngFor="let link of footerData.links; trackBy: FooterLink.trackById"
+            *ngFor="let link of footerData.links; trackBy: TrackBy.id"
             class="link"
             [href]="link.link.link"
             [title]="link.link.title"
@@ -29,7 +29,7 @@
 
     <div
         class="address-card"
-        *ngFor="let contact of footerData.contact; trackBy: ContactData.trackByName"
+        *ngFor="let contact of footerData.contact; trackBy: TrackBy.property('name')"
     >
         <div
             class="top"

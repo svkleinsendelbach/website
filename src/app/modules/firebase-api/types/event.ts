@@ -109,12 +109,6 @@ export namespace Event {
             title: event.title
         };
     }
-
-    export function trackById(_index: number, event: Event | Event.Flatten): string {
-        if (typeof event.id === 'string')
-            return event.id;
-        return event.id.guidString;
-    }
 }
 
 export interface EventGroup {
@@ -126,9 +120,5 @@ export namespace EventGroup {
     export interface Flatten {
         groupId: EventGroupId;
         events: Event.Flatten[];
-    }
-
-    export function trackById(_index: number, group: EventGroup | EventGroup.Flatten): string {
-        return group.groupId;
     }
 }

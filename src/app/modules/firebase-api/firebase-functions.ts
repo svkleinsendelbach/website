@@ -1,4 +1,6 @@
 import {
+    CriticismSuggestionEditFunctionType,
+    CriticismSuggestionGetAllFunctionType,
     DeleteAllDataFunctionType,
     EventEditFunctionType,
     EventGetFunctionType,
@@ -33,6 +35,10 @@ export interface FirebaseFunctions {
     occupancy: {
         getAll: OccupancyGetAllFunctionType;
         edit: OccupancyEditFunctionType;
+    };
+    criticismSuggestion: {
+        getAll: CriticismSuggestionGetAllFunctionType;
+        edit: CriticismSuggestionEditFunctionType;
     };
     bfvData: {
         gameInfo: GameInfoGetFunctionType;

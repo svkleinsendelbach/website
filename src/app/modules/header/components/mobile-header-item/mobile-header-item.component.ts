@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import { HeaderItem } from '../../types/header-item';
 import { StyleConfigService } from 'src/app/services/style-config.service';
+import { TrackBy } from 'src/app/types/track-by';
 
 @Component({
     selector: 'mobile-header-item',
@@ -15,7 +16,7 @@ export class MobileHeaderItemComponent {
 
     @Output() public clickHeaderItemIdEmitter = new EventEmitter<string>();
 
-    public SubItem = HeaderItem.SubItem;
+    public TrackBy = TrackBy;
 
     public faCaretDown = faCaretDown;
 

@@ -1,12 +1,11 @@
-import { AuthService } from 'src/app/modules/authentication/services/auth.service';
 import { AuthenticationStates } from 'src/app/modules/authentication/components/authentication-check/authentication-check.component';
 import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { InternalLink } from 'src/app/types/internal-path';
-import { Router } from '@angular/router';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
+import { TrackBy } from 'src/app/types/track-by';
 import { User } from 'src/app/modules/firebase-api/types/user';
 
 @Component({
@@ -15,6 +14,8 @@ import { User } from 'src/app/modules/firebase-api/types/user';
     templateUrl: './editing-main.page.html'
 })
 export class EditingMainPage {
+    public TrackBy = TrackBy;
+
     public User = User;
 
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];

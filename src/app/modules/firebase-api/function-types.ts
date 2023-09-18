@@ -1,6 +1,7 @@
 import { Event, EventGroup, EventGroupId } from './types/event';
 import { Report, ReportGroupId } from './types/report';
 import { AnpfiffInfoTeamParameters } from './types/anpfiff-info-team-parameters';
+import { CriticismSuggestion } from './types/criticism-sugggestion';
 import { EditType } from './types/edit-type';
 import { FunctionType } from './types/function-type';
 import { GameInfo } from './types/game-info';
@@ -51,6 +52,16 @@ export type OccupancyEditFunctionType = FunctionType<{
 }, void>;
 
 export type OccupancyGetAllFunctionType = FunctionType<Record<string, never>, Occupancy.Flatten[]>;
+
+export type CriticismSuggestionEditFunctionType = FunctionType<{
+    editType: EditType;
+    criticismSuggestionId: string;
+    criticismSuggestion: Omit<CriticismSuggestion.Flatten, 'id'> | null;
+}, void>;
+
+export type CriticismSuggestionGetAllFunctionType = FunctionType<{
+    workedOff: boolean | null;
+}, CriticismSuggestion.Flatten[]>;
 
 export type SendMailContactFunctionType = FunctionType<{
     senderName: string;

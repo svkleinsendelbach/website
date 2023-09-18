@@ -5,6 +5,7 @@ import { FetchState } from 'src/app/types/fetch-state';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
+import { TrackBy } from 'src/app/types/track-by';
 
 @Component({
     selector: 'pages-all-reports',
@@ -12,6 +13,8 @@ import { Title } from '@angular/platform-browser';
     templateUrl: './all-reports.page.html'
 })
 export class AllReportsPage implements OnInit {
+    public TrackBy = TrackBy;
+
     public Report = Report;
 
     public fetchedReports: FetchState<(Report & { groupId: ReportGroupId })[]> = FetchState.loading;

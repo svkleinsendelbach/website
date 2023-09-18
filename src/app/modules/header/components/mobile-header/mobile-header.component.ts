@@ -3,6 +3,7 @@ import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { HeaderItem } from '../../types/header-item';
 import { HomeLinkData } from '../../types/home-link-data';
 import { StyleConfigService } from 'src/app/services/style-config.service';
+import { TrackBy } from 'src/app/types/track-by';
 
 @Component({
     selector: 'mobile-header',
@@ -14,7 +15,7 @@ export class MobileHeaderComponent {
 
     @Input() public homeLinkData!: HomeLinkData;
 
-    public HeaderItem = HeaderItem;
+    public TrackBy = TrackBy;
 
     public faBars = faBars;
 

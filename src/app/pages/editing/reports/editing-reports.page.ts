@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
+import { TrackBy } from 'src/app/types/track-by';
 
 @Component({
     selector: 'pages-editing-reports.page',
@@ -15,9 +16,9 @@ import { Title } from '@angular/platform-browser';
     templateUrl: './editing-reports.page.html'
 })
 export class EditingReportsPage {
-    public Report = Report;
+    public TrackBy = TrackBy;
 
-    public ReportGroup = ReportGroup;
+    public Report = Report;
 
     public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
 

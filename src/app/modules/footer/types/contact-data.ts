@@ -8,9 +8,3 @@ export interface ContactData {
         text: string;
     };
 }
-
-export namespace ContactData {
-    export function trackByName(_index: number, contact: ContactData): string {
-        return contact.name;
-    }
-}

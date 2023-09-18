@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { InputField } from '../../../types/input-field';
 import { StyleConfigService } from 'src/app/services/style-config.service';
+import { TrackBy } from 'src/app/types/track-by';
 
 export type SelectOptions<T extends string> = SelectOptions.Grouped<T> | SelectOptions.Ungrouped<T>;
 
@@ -13,15 +14,6 @@ export namespace SelectOptions {
         }[];
     }
 
-    export namespace Grouped {
-        export function trackByTitle<T extends string>(_index: number, group: {
-            title: string;
-            options: Option<T>[];
-        }): string {
-            return group.title;
-        }
-    }
-
     export interface Ungrouped<T extends string> {
         type: 'ungrouped';
         options: Option<T>[];
@@ -30,12 +22,6 @@ export namespace SelectOptions {
     export interface Option<T extends string> {
         id: T;
         text: string;
-    }
-
-    export namespace Option {
-        export function trackById<T extends string>(_index: number, option: Option<T>): T {
-            return option.id;
-        }
     }
 
     export function grouped<T extends string>(groups: {
@@ -70,9 +56,7 @@ export class SelectComponent<T extends string> implements AfterViewInit {
 
     @ViewChild('select') private readonly selectElement!: ElementRef<HTMLSelectElement>;
 
-    public SelectGroup = SelectOptions.Grouped;
-
-    public SelectOption = SelectOptions.Option;
+    public TrackBy = TrackBy;
 
     public constructor(
         public styleConfig: StyleConfigService

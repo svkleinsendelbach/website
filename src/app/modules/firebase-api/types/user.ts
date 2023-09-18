@@ -6,11 +6,6 @@ export type User = {
 };
 
 export namespace User {
-
-    export function trackByHashedUserId(_index: number, user: User): string {
-        return user.hashedUserId;
-    }
-
     export type Role = 'admin' | 'occupancyManager' | 'websiteManager';
 
     export namespace Role {

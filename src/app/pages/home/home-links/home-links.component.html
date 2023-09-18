@@ -3,10 +3,10 @@
 >
   <div
     class="link-row"
-    *ngFor="let linkRow of links; trackBy: trackByIdentity"
+    *ngFor="let linkRow of links; trackBy: TrackBy.identity"
   >
     <a
-      *ngFor="let linkItem of linkRow; trackBy: LinkItem.trackByName"
+      *ngFor="let linkItem of linkRow; trackBy: TrackBy.property('name')"
       class="link-item"
       [href]="linkItem.link.link"
       [target]="linkItem.link.target"

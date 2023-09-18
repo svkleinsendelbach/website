@@ -4,7 +4,7 @@
         [ngClass]="deviceType.current"
     >
         <a
-            *ngFor="let link of links; trackBy: LinkData.trackById"
+            *ngFor="let link of links; trackBy: TrackBy.id"
             [href]="link.link.link"
             [target]="link.link.target"
             [title]="link.link.title"

@@ -5,6 +5,7 @@ import { FetchState } from 'src/app/types/fetch-state';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { InternalLink } from 'src/app/types/internal-path';
 import { StyleConfigService } from 'src/app/services/style-config.service';
+import { TrackBy } from 'src/app/types/track-by';
 
 @Component({
     selector: 'reports',
@@ -19,6 +20,8 @@ export class ReportsComponent implements OnInit {
     @Input() public maxListCount: number | null = null;
 
     @Input() public showAllReportsButton: boolean = false;
+
+    public TrackBy = TrackBy;
 
     public Report = Report;
 

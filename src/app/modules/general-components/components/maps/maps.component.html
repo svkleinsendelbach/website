@@ -25,7 +25,7 @@
         [height]="'65vh'"
     >
         <map-marker
-            *ngFor="let marker of markers; trackBy: trackByIdentity"
+            *ngFor="let marker of markers; trackBy: TrackBy.identity"
             [position]="marker"
         />
     </google-map>

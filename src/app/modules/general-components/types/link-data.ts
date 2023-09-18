@@ -6,9 +6,3 @@ export interface LinkData {
     title: string;
     subtitle: string;
 }
-
-export namespace LinkData {
-    export function trackById(_index: number, link: LinkData): string {
-        return link.id;
-    }
-}

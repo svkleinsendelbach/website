@@ -4,6 +4,7 @@ import { InternalLink } from 'src/app/types/internal-path';
 import { LinkData } from 'src/app/modules/general-components/types/link-data';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
+import { TrackBy } from 'src/app/types/track-by';
 import { websiteConfig } from 'src/app/config/website-config';
 
 export interface Manager {
@@ -12,19 +13,13 @@ export interface Manager {
     imageSrc: string | null;
 }
 
-export namespace Manager {
-    export function trackByName(_index: number, manager: Manager): string {
-        return manager.name;
-    }
-}
-
 @Component({
     selector: 'pages-managers',
     styleUrls: ['./managers.page.sass'],
     templateUrl: './managers.page.html'
 })
 export class ManagersPage {
-    public Manager = Manager;
+    public TrackBy = TrackBy;
 
     public readonly managers = websiteConfig.managers;
 

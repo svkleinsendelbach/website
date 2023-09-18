@@ -3,6 +3,7 @@ import { DeviceTypeService } from '../../../services/device-type.service';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Link } from 'src/app/types/link';
 import { StyleConfigService } from '../../../services/style-config.service';
+import { TrackBy } from 'src/app/types/track-by';
 
 export interface LinkItem {
     name: string;
@@ -10,12 +11,6 @@ export interface LinkItem {
     description: string;
     icon: IconDefinition;
     animation: 'jump' | 'rotation' | 'shake';
-}
-
-export namespace LinkItem {
-    export function trackByName(_index: number, item: LinkItem): string {
-        return item.name;
-    }
 }
 
 export interface LinkData {
@@ -32,7 +27,7 @@ export interface LinkData {
 export class HomeLinksComponent {
     @Input() public linkData!: LinkData;
 
-    public LinkItem = LinkItem;
+    public TrackBy = TrackBy;
 
     public constructor(
         public readonly deviceType: DeviceTypeService,
@@ -41,9 +36,5 @@ export class HomeLinksComponent {
 
     public get links(): LinkItem[][] {
         return this.linkData[this.deviceType.current];
-    }
-
-    public trackByIdentity<T>(_index: number, value: T): T {
-        return value;
     }
 }

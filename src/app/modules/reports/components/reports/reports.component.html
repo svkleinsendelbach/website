@@ -17,7 +17,7 @@
         id="report-container"
     >
         <report
-            *ngFor="let report of fetchedReports.content?.reports; trackBy: Report.trackById"
+            *ngFor="let report of fetchedReports.content?.reports; trackBy: TrackBy.id"
             [report]="report"
          />
     </div>

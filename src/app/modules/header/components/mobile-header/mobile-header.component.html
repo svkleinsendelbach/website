@@ -37,7 +37,7 @@
         *ngIf="isExpanded"
     >
         <mobile-header-item
-            *ngFor="let headerItem of headerItems; trackBy: HeaderItem.trackById"
+            *ngFor="let headerItem of headerItems; trackBy: TrackBy.id"
             [ngClass]="{
                 expanded: expandedHeaderItemId === headerItem.id
             }"

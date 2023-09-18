@@ -1,4 +1,3 @@
-<!-- eslint-disable @angular-eslint/template/no-call-expression -->
 <app-editing-navigation-bar
     [backButtonLink]="mainEditingPageLink"
 />
@@ -19,13 +18,13 @@
         >
             <div
                 class="user"
-                *ngFor="let user of users; trackBy: User.trackByHashedUserId"
+                *ngFor="let user of users; trackBy: TrackBy.property('hashedUserId')"
             >
                 <p
                     class="name textColor"
                 >{{ user.firstName }} {{ user.lastName }}</p>
                 <p
-                    *ngFor="let role of User.Role.all; trackBy: trackByIdentity"
+                    *ngFor="let role of User.Role.all; trackBy: TrackBy.identity"
                     class="button"
                     [ngClass]="user.roles.includes(role) ? 'primaryColor' : 'secondaryColor'"
                     role="none"

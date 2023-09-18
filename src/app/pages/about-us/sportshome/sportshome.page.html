@@ -18,11 +18,11 @@
     >
         <div
             class="row"
-            *ngFor="let row of openingHours; trackBy: trackByIdentity"
+            *ngFor="let row of openingHours; trackBy: TrackBy.identity"
         >
         <div
             class="opening-hour"
-            *ngFor="let openingHour of row; trackBy: OpeningHour.trackByTitle"
+            *ngFor="let openingHour of row; trackBy: TrackBy.property('title')"
         >
             <p
                 class="title textColor"

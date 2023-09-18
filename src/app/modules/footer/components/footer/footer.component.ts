@@ -3,6 +3,7 @@ import { ContactData } from '../../types/contact-data';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { FooterData } from '../../types/footer-data';
 import { StyleConfigService } from 'src/app/services/style-config.service';
+import { TrackBy } from 'src/app/types/track-by';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -12,6 +13,8 @@ import { faPhone } from '@fortawesome/free-solid-svg-icons';
 })
 export class FooterComponent {
     @Input() public footerData!: FooterData;
+
+    public TrackBy = TrackBy;
 
     public FooterLink = FooterData.Link;
 
