@@ -3,6 +3,7 @@ import { InternalLink, InternalPath } from './types/internal-path';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { AngularFirePerformance } from '@angular/fire/compat/performance';
 import { CookieSelectionService } from './modules/cookie-selector/services/cookie-selection.service';
+import Crate from '@widgetbot/crate';
 import { DeviceTypeService } from './services/device-type.service';
 import { FooterData } from './modules/footer/types/footer-data';
 import { HeaderItem } from './modules/header/types/header-item';
@@ -318,6 +319,18 @@ export class AppComponent {
         private readonly firePerformance: AngularFirePerformance
     ) {
         this.styleConfig.setConfig();
+        const crate = new Crate({
+            server: '1083387091423072419',
+            channel: '1083387096179421239',
+            location: ['bottom', 'left']
+        });
+        // eslint-disable-next-line @typescript-eslint/no-shadow
+        this.deviceType.listeners.add('discordCrate', deviceType => {
+            if (deviceType === 'desktop')
+                crate.show();
+            else
+                crate.hide();
+        });
         const statisticsCookie = this.cookieSelectionService.cookiesSelection ? this.cookieSelectionService.cookiesSelection.statistics : null;
         void this.fireAnalytics.setAnalyticsCollectionEnabled(statisticsCookie === 'selected');
         this.firePerformance.instrumentationEnabled = (statisticsCookie === 'selected') as unknown as Promise<boolean>;

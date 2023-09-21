@@ -2,7 +2,7 @@ import { DeviceType, DeviceTypeService } from 'src/app/services/device-type.serv
 import { LinkData, LinkItem } from './home-links/home-links.component';
 import { SocialMediaData, SocialMediaItem } from './social-media-links/social-media-links.component';
 import { faAddressCard, faChild, faInfo, faUserFriends } from '@fortawesome/free-solid-svg-icons';
-import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faDiscord, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faFutbol, faMap } from '@fortawesome/free-regular-svg-icons';
 import { BannerItem } from 'src/app/pages/home/home-banner/home-banner.component';
 import { Component } from '@angular/core';
@@ -16,7 +16,7 @@ import { websiteConfig } from 'src/app/config/website-config';
 
 type LinkType = 'about-us' | 'contact' | 'dancing' | 'drive' | 'football-adults' | 'football-youth' | 'gymnastics';
 
-type SocialMediaType = 'facebook' | 'instagram' | 'sgWebsite';
+type SocialMediaType = 'discord' | 'facebook' | 'instagram' | 'sgWebsite';
 
 const linksByDeviceType: Record<DeviceType, LinkType[][]> = {
     desktop: [['about-us', 'football-adults', 'football-youth', 'gymnastics'], ['dancing', 'drive', 'contact']],
@@ -25,9 +25,9 @@ const linksByDeviceType: Record<DeviceType, LinkType[][]> = {
 };
 
 const socialMediaByDeviceType: Record<DeviceType, SocialMediaType[][]> = {
-    desktop: [['facebook', 'instagram', 'sgWebsite']],
-    mobile: [['facebook'], ['instagram'], ['sgWebsite']],
-    tablet: [['facebook', 'instagram', 'sgWebsite']]
+    desktop: [['facebook', 'discord', 'instagram', 'sgWebsite']],
+    mobile: [['facebook'], ['discord'], ['instagram'], ['sgWebsite']],
+    tablet: [['facebook', 'discord'], ['instagram', 'sgWebsite']]
 };
 
 const homeLinks: Record<LinkType, LinkItem> = {
@@ -88,7 +88,14 @@ const socialMediaLink: Record<SocialMediaType, SocialMediaItem> = {
         image: faFacebookF,
         link: Link.external('Facebook', 'https://www.facebook.com/svkleinsendelbach/', true),
         name: 'Facebook',
-        title: 'SV Kleinsendelbach'
+        title: 'SV Kleinsendelbach e.V.'
+    },
+    discord: {
+        id: 'discord',
+        image: faDiscord,
+        link: Link.external('Discord', 'https://discord.gg/Wakb9XeW', true),
+        name: 'Discord',
+        title: 'SV Kleinsendelbach e.V.'
     },
     instagram: {
         id: 'instagram',
