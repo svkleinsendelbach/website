@@ -44,7 +44,7 @@
                     <p
                         class="worked-off"
                         role="none"
-                        (click)="$event.stopPropagation(); workOff(criticismSuggestion)"
+                        (click)="$event.stopPropagation(); toggleworkedOff(criticismSuggestion)"
                     >Abgearbeitet</p>
                 </div>
                 <p
@@ -84,8 +84,13 @@
                         }"
                     >{{ CriticismSuggestion.Type.description(criticismSuggestion.type) }}</p>
                     <p
-                        class="title large"
+                        class="title"
                     >{{ criticismSuggestion.title }}</p>
+                    <p
+                        class="worked-off"
+                        role="none"
+                        (click)="$event.stopPropagation(); toggleworkedOff(criticismSuggestion)"
+                    >Rückgänging</p>
                 </div>
                 <p
                     *ngIf="expandedCriticismSuggestionId === criticismSuggestion.id.guidString"

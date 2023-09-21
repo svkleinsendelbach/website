@@ -57,20 +57,41 @@ export class EditingCriticismSuggestionPage {
             });
     }
 
-    public async workOff(criticismSuggestion: CriticismSuggestion) {
+    public async toggleworkedOff(criticismSuggestion: CriticismSuggestion) {
         if (!this.criticismSuggestions.isSuccess())
             return;
-        this.criticismSuggestions = FetchState.success({
-            notWorkedOff: this.criticismSuggestions.content.notWorkedOff.filter(_criticismSuggestion => _criticismSuggestion.id !== criticismSuggestion.id),
-            workedOff: this.criticismSuggestions.content.workedOff
-        });
+        if (criticismSuggestion.workedOff) {
+            this.criticismSuggestions = FetchState.success({
+                notWorkedOff: [
+                    ...this.criticismSuggestions.content.notWorkedOff, {
+                        ...criticismSuggestion,
+                        workedOff: false
+                    }
+                ],
+                workedOff: this.criticismSuggestions.content.workedOff
+                    ? this.criticismSuggestions.content.workedOff.filter(_criticismSuggestion => _criticismSuggestion.id !== criticismSuggestion.id)
+                    : null
+            });
+        } else {
+            this.criticismSuggestions = FetchState.success({
+                notWorkedOff: this.criticismSuggestions.content.notWorkedOff.filter(_criticismSuggestion => _criticismSuggestion.id !== criticismSuggestion.id),
+                workedOff: this.criticismSuggestions.content.workedOff
+                    ? [
+                        ...this.criticismSuggestions.content.workedOff, {
+                            ...criticismSuggestion,
+                            workedOff: true
+                        }
+                    ]
+                    : null
+            });
+        }
         await this.firebaseApiService
             .function('criticismSuggestion')
             .function('edit')
             .call({
                 criticismSuggestion: {
                     ...CriticismSuggestion.flatten(criticismSuggestion),
-                    workedOff: true
+                    workedOff: !criticismSuggestion.workedOff
                 },
                 criticismSuggestionId: criticismSuggestion.id.guidString,
                 editType: 'change'

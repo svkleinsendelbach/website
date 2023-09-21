@@ -37,21 +37,7 @@ class Elements implements Iterable<HTMLElement | string> {
 }
 
 export class ReportMessageParser {
-    public parse(message: string): Elements | null {
-        const parsers = [
-            // eslint-disable-next-line @typescript-eslint/unbound-method
-            this.parseImages, this.parseLinks, this.parseNewLines, this.parseHorizonalLine, this.parseFormatting
-        ];
-        let elements: Elements | null = Elements.fromContent(message);
-        for (const parser of parsers) {
-            if (elements === null)
-                return null;
-            elements = parser(elements);
-        }
-        return elements;
-    }
-
-    private parseImages(elements: Elements): Elements | null {
+    private static parseImages(elements: Elements): Elements | null {
         const result = elements.copy('html');
         for (const element of elements.stringElements) {
             let lastIndex = 0;
@@ -74,7 +60,7 @@ export class ReportMessageParser {
         return result;
     }
 
-    private parseLinks(elements: Elements): Elements | null {
+    private static parseLinks(elements: Elements): Elements | null {
         const result = elements.copy('html');
         for (const element1 of elements.stringElements) {
             let lastIndex = 0;
@@ -86,7 +72,7 @@ export class ReportMessageParser {
                 const link = document.createElement('a');
                 link.href = match.groups['link'];
                 link.target = '_blank';
-                const content = this.parseFormatting(new Elements([match.groups['content']]));
+                const content = ReportMessageParser.parseFormatting(new Elements([match.groups['content']]));
                 if (content === null)
                     return null;
                 for (const element2 of content)
@@ -100,7 +86,7 @@ export class ReportMessageParser {
         return result;
     }
 
-    private parseNewLines(elements: Elements): Elements | null {
+    private static parseNewLines(elements: Elements): Elements | null {
         const result = elements.copy('html');
         for (const element of elements.stringElements) {
             const regexIt = new RegexIterable(/\n/gu, element);
@@ -115,7 +101,7 @@ export class ReportMessageParser {
         return result;
     }
 
-    private parseHorizonalLine(elements: Elements): Elements | null {
+    private static parseHorizonalLine(elements: Elements): Elements | null {
         const result = elements.copy('html');
         for (const element of elements.stringElements) {
             const match = (/^\s*---\s*$/gu).exec(element);
@@ -130,7 +116,7 @@ export class ReportMessageParser {
         return result;
     }
 
-    private parseFormatting(elements: Elements): Elements | null {
+    private static parseFormatting(elements: Elements): Elements | null {
         const result = new Elements();
         let components: ['*' | '**' | '***', (HTMLElement | string)[]][] = [];
         for (const element of elements) {
@@ -166,7 +152,7 @@ export class ReportMessageParser {
                     components = [['***', []]];
                     break;
                 case '*|*':
-                    result.push(this.createElement('italic', [...components[0][1], currentValue]));
+                    result.push(ReportMessageParser.createElement('italic', [...components[0][1], currentValue]));
                     components = [];
                     break;
                 case '*|**':
@@ -174,7 +160,7 @@ export class ReportMessageParser {
                     components.push(['**', []]);
                     break;
                 case '*|***':
-                    result.push(this.createElement('italic', [...components[0][1], currentValue]));
+                    result.push(ReportMessageParser.createElement('italic', [...components[0][1], currentValue]));
                     components = [['**', []]];
                     break;
                 case '**|*':
@@ -182,35 +168,35 @@ export class ReportMessageParser {
                     components.push(['*', []]);
                     break;
                 case '**|**':
-                    result.push(this.createElement('strong', [...components[0][1], currentValue]));
+                    result.push(ReportMessageParser.createElement('strong', [...components[0][1], currentValue]));
                     components = [];
                     break;
                 case '**|***':
-                    result.push(this.createElement('strong', [...components[0][1], currentValue]));
+                    result.push(ReportMessageParser.createElement('strong', [...components[0][1], currentValue]));
                     components = [['*', []]];
                     break;
                 case '***|*':
-                    components = [['**', [this.createElement('italic', [...components[0][1], currentValue])]]];
+                    components = [['**', [ReportMessageParser.createElement('italic', [...components[0][1], currentValue])]]];
                     break;
                 case '***|**':
-                    components = [['*', [this.createElement('strong', [...components[0][1], currentValue])]]];
+                    components = [['*', [ReportMessageParser.createElement('strong', [...components[0][1], currentValue])]]];
                     break;
                 case '***|***':
-                    result.push(this.createElement('italic', this.createElement('strong', [...components[0][1], currentValue])));
+                    result.push(ReportMessageParser.createElement('italic', ReportMessageParser.createElement('strong', [...components[0][1], currentValue])));
                     components = [];
                     break;
                 case '*|**|**':
-                    components = [['*', [...components[0][1], this.createElement('strong', [...components[1][1], currentValue])]]];
+                    components = [['*', [...components[0][1], ReportMessageParser.createElement('strong', [...components[1][1], currentValue])]]];
                     break;
                 case '*|**|***':
-                    result.push(this.createElement('italic', [...components[0][1], this.createElement('strong', [...components[1][1], currentValue])]));
+                    result.push(ReportMessageParser.createElement('italic', [...components[0][1], ReportMessageParser.createElement('strong', [...components[1][1], currentValue])]));
                     components = [];
                     break;
                 case '**|*|*':
-                    components = [['**', [...components[0][1], this.createElement('italic', [...components[1][1], currentValue])]]];
+                    components = [['**', [...components[0][1], ReportMessageParser.createElement('italic', [...components[1][1], currentValue])]]];
                     break;
                 case '**|*|***':
-                    result.push(this.createElement('strong', [...components[0][1], this.createElement('italic', [...components[1][1], currentValue])]));
+                    result.push(ReportMessageParser.createElement('strong', [...components[0][1], ReportMessageParser.createElement('italic', [...components[1][1], currentValue])]));
                     components = [];
                     break;
                 default:
@@ -228,7 +214,7 @@ export class ReportMessageParser {
         return result;
     }
 
-    private createElement(type: 'italic' | 'strong', elements: (HTMLElement | string)[] | HTMLElement | string): HTMLElement {
+    private static createElement(type: 'italic' | 'strong', elements: (HTMLElement | string)[] | HTMLElement | string): HTMLElement {
         const element = document.createElement('div');
         element.classList.add(type);
         if (Array.isArray(elements)) {
@@ -238,5 +224,19 @@ export class ReportMessageParser {
             element.append(elements);
 
         return element;
+    }
+
+    public parse(message: string): Elements | null {
+        const parsers = [
+            // eslint-disable-next-line @typescript-eslint/unbound-method
+            ReportMessageParser.parseImages, ReportMessageParser.parseLinks, ReportMessageParser.parseNewLines, ReportMessageParser.parseHorizonalLine, ReportMessageParser.parseFormatting
+        ];
+        let elements: Elements | null = Elements.fromContent(message);
+        for (const parser of parsers) {
+            if (elements === null)
+                return null;
+            elements = parser(elements);
+        }
+        return elements;
     }
 }
