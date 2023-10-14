@@ -319,18 +319,14 @@ export class AppComponent {
         private readonly firePerformance: AngularFirePerformance
     ) {
         this.styleConfig.setConfig();
-        const crate = new Crate({
-            server: '1083387091423072419',
-            channel: '1083387096179421239',
-            location: ['bottom', 'left']
-        });
-        // eslint-disable-next-line @typescript-eslint/no-shadow
-        this.deviceType.listeners.add('discordCrate', deviceType => {
-            if (deviceType === 'desktop')
-                crate.show();
-            else
-                crate.hide();
-        });
+        if (this.deviceType.current === 'desktop') {
+            // eslint-disable-next-line no-new
+            new Crate({
+                server: '1083387091423072419',
+                channel: '1083387096179421239',
+                location: ['bottom', 'left']
+            });
+        }
         const statisticsCookie = this.cookieSelectionService.cookiesSelection ? this.cookieSelectionService.cookiesSelection.statistics : null;
         void this.fireAnalytics.setAnalyticsCollectionEnabled(statisticsCookie === 'selected');
         this.firePerformance.instrumentationEnabled = (statisticsCookie === 'selected') as unknown as Promise<boolean>;

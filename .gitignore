@@ -7,27 +7,9 @@
 /bazel-out
 
 # Node
-/node_modules/*
+/node_modules
 npm-debug.log
 yarn-error.log
-
-!/node_modules/@kolkov
-/node_modules/@kolkov/*
-!/node_modules/@kolkov/angular-editor
-/node_modules/@kolkov/angular-editor/*
-!/node_modules/@kolkov/angular-editor/lib
-/node_modules/@kolkov/angular-editor/lib/*
-!/node_modules/@kolkov/angular-editor/lib/angular-editor.module.d.ts
-
-!/node_modules/@widgetbot
-/node_modules/@widgetbot/*
-!/node_modules/@widgetbot/crate
-/node_modules/@widgetbot/crate/*
-!/node_modules/@widgetbot/crate/dist
-/node_modules/@widgetbot/crate/dist/*
-!/node_modules/@widgetbot/crate/dist/api
-/node_modules/@widgetbot/crate/dist/api/*
-!/node_modules/@widgetbot/crate/dist/api/types.d.ts
 
 # IDEs and editors
 .idea/
