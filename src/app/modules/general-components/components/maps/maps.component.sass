@@ -6,15 +6,15 @@
     width: 100%
 
 #cookie-container
-    @include dynamic-color(border-color, 'text')
-    @include dynamic-color(background-color, 'background')
     @include flex-column(flex-start, center)
+    background-color: color('background')
     border: solid 1px
+    border-color: color('text')
     padding: 80px 0
     width: 100%
 
     #text1
-        @include dynamic-color(color, 'text')
+        color: color('text')
         @include font-montserrat
         @include font-size('medium')
         @include font-weight('small')
@@ -22,7 +22,7 @@
         text-align: center
 
     #button
-        @include dynamic-color(color, 'primary')
+        color: color('primary')
         @include font-montserrat
         @include font-size('medium')
         @include font-weight('small')
@@ -34,4 +34,4 @@
     width: 100%
 
     google-map
-        @include dynamic-color(border-color, 'text')
+        border-color: color('text')

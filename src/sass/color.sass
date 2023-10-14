@@ -1,19 +1,4 @@
 @use 'sass:map'
 
-// sass-lint:disable no-color-hex, hex-length, no-invalid-hex
-
-$light-colors-map: ('primary': #C90024, 'accent': #FFD93D, 'background': #FFFFFF, 'secondaryBackground': #FFFFFF, 'hoveredBackground': #E0E0E0, 'shadow': #80808080, 'text': #24252A, 'secondaryText': #868E90, 'formStatusSuccess': #54B435, 'formStatusError': #CE3A0F, 'formStatusInfo': #868E90)
-$dark-colors-map: ('primary': #C4354F, 'accent': #F2BE22, 'background': #24252A, 'secondaryBackground': #3C4A57, 'hoveredBackground': #44454A, 'shadow': #80808080, 'text': #C8D6E5, 'secondaryText': #868E90, 'formStatusSuccess': #B6E2A1, 'formStatusError': #EB4511, 'formStatusInfo': #868E90)
-
-@function color($name, $light: true)
-    @if $light
-        @return map.get($light-colors-map, $name)
-    @return map.get($dark-colors-map, $name)
-
-@function dark-color($name)
-    @return color($name, false)
-
-@mixin dynamic-color($property, $name)
-    #{$property}: color($name)
-    @media screen and (prefers-color-scheme: dark)
-        #{$property}: dark-color($name)
+@function color($name)
+    @return var(--#{$name})

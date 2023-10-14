@@ -25,8 +25,8 @@ export class ListComponent implements AfterViewInit, AfterViewChecked {
         let child: Element | null = children.item(0);
         let index = 0;
         while (child !== null) {
-            (child as HTMLElement).style.backgroundColor = this.styleConfig.css('backgroundColor');
-            (child as HTMLElement).style.borderColor = this.styleConfig.css('textColor');
+            (child as HTMLElement).style.backgroundColor = this.styleConfig.css('background');
+            (child as HTMLElement).style.borderColor = this.styleConfig.css('text');
             index += 1;
             child = children.item(index);
         }

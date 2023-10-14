@@ -17,14 +17,14 @@
 
         #submit-button, #cancel-button
             @include flex-row(center, center)
-            @include dynamic-color(color, 'text')
-            @include dynamic-color(background-color, 'background')
-            @include dynamic-color(border-color, 'text')
             @include font-montserrat
             @include font-size('large')
             @include font-weight('normal')
+            background-color: color('background')
             border: solid 1px
+            border-color: color('text')
             border-radius: 8px
+            color: color('text')
             cursor: pointer
             flex: 1
             height: 48px

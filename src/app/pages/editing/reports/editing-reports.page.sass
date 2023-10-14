@@ -7,14 +7,14 @@
     width: 100%
 
 #add-report
-    @include dynamic-color(color, 'primary')
-    @include dynamic-color(background-color, 'background')
     @include font-montserrat
     @include font-size('normal')
     @include font-weight('small')
+    background-color: color('background')
     border: 1px solid
-    @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+    border-color: color('text')
     border-radius: 5px
+    color: color('primary')
     cursor: pointer
     margin-bottom: 25px
     padding: 5px 15px
@@ -37,11 +37,11 @@
         width: 100%
 
     .report
-        @include dynamic-color(background-color, 'background')
-        @include dynamic-color(border-color, 'text')
         @include flex-row(center, center)
+        background-color: color('background')
         border: 1px solid
         border-bottom: 0
+        border-color: color('text')
         padding: 5px
         width: 95%
 

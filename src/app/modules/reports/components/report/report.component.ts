@@ -39,7 +39,7 @@ export class ReportComponent implements AfterViewInit {
         const parser = new ReportMessageParser();
         const elements = parser.parse(this.report.message);
         if (elements === null) {
-            this.messageElement.nativeElement.style.color = this.styleConfig.css('primaryColor');
+            this.messageElement.nativeElement.style.color = this.styleConfig.css('primary');
             this.messageElement.nativeElement.append('Es gab ein Fehler bei der Nachricht.');
         } else {
             for (const element of elements)

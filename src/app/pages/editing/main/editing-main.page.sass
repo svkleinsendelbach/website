@@ -14,10 +14,10 @@
 
     .unauthenticated-user
         @include flex-row(center, center)
-        @include dynamic-color(background-color, 'background')
-        @include dynamic-color(border-color, 'text')
+        background-color: color('background')
         border:  1px solid
         border-bottom: 0
+        border-color: color('text')
         width: 95%
 
         &:first-child
@@ -53,21 +53,21 @@
     width: 100%
 
     .button
-        @include dynamic-color(background-color, 'background')
-        @include dynamic-color(color, 'primary')
         @include font-montserrat
         @include font-size('normal')
         @include font-weight('small')
+        background-color: color('background')
         border: 1px solid
-        @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+        border-color: color('text')
         border-radius: 5px
+        color: color('primary')
         cursor: pointer
         padding: 5px 35px
         text-align: center
         text-decoration: none
 
         &:hover
-            @include dynamic-color(background-color, 'hoveredBackground')
+            background-color: color('hoveredBackground')
 
     .title
         @include font-montserrat

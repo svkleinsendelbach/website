@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { AppearanceService } from 'src/app/services/appearance.service';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { FooterData } from '../../types/footer-data';
 import { StyleConfigService } from 'src/app/services/style-config.service';
@@ -19,6 +20,7 @@ export class FooterComponent {
 
     public constructor(
         public readonly styleConfig: StyleConfigService,
+        public readonly appearanceService: AppearanceService,
         public readonly deviceType: DeviceTypeService
     ) {}
 }

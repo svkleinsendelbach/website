@@ -1,89 +1,49 @@
-import { AppearanceService } from './appearance.service';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Appearance, AppearanceService } from './appearance.service';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Style } from 'src/app/types/style';
-import { lastValueFrom } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
-export class StyleConfigService {
-    private styleConfig = StyleConfigService.StyleConfig.defaultConfig;
+export class StyleConfigService implements OnDestroy {
+    public static readonly config = {
+        primary: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
+        accent: new Style.AppearanceColor(Style.Color.hex('#FFD93D'), Style.Color.hex('#F2BE22')),
+        background: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
+        secondaryBackground: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#3C4A57')),
+        hoveredBackground: new Style.AppearanceColor(Style.Color.hex('#E0E0E0'), Style.Color.hex('#44454A')),
+        shadow: new Style.AppearanceColor(Style.Color.hex('#80808080'), Style.Color.hex('#80808080')),
+        text: new Style.AppearanceColor(Style.Color.hex('#24252A'), Style.Color.hex('#C8D6E5')),
+        secondaryText: new Style.AppearanceColor(Style.Color.hex('#868E90'), Style.Color.hex('#868E90')),
+        formStatusSuccess: new Style.AppearanceColor(Style.Color.hex('#54B435'), Style.Color.hex('#B6E2A1')),
+        formStatusError: new Style.AppearanceColor(Style.Color.hex('#CE3A0F'), Style.Color.hex('#EB4511')),
+        formStatusInfo: new Style.AppearanceColor(Style.Color.hex('#868E90'), Style.Color.hex('#868E90')),
+        pageBackground: new Style.AppearanceColor(Style.Color.hex('#F0F0F0'), Style.Color.hex('#2C3A47'))
+    } satisfies Record<string, Style.AppearanceColor>;
 
     public constructor(
-        private readonly appearance: AppearanceService,
-        private readonly httpClient: HttpClient
-    ) {}
-
-    public setConfig() {
-        void this.parseConfig();
+        private readonly appearance: AppearanceService
+    ) {
+        this.setConfig(this.appearance.current);
+        this.appearance.listeners.add('style-config', newAppearance => {
+            this.setConfig(newAppearance);
+        });
     }
 
-    public setStyle<Key extends keyof StyleConfigService.StyleConfig>(key: Key, style: StyleConfigService.StyleConfig[Key]) {
-        this.styleConfig[key] = style;
+    public ngOnDestroy(): void {
+        this.appearance.listeners.remove('style-config');
     }
 
-    public style<Key extends keyof StyleConfigService.StyleConfig>(key: Key): StyleConfigService.StyleConfig[Key] {
-        return this.styleConfig[key];
+    public css<Key extends keyof typeof StyleConfigService.config>(key: Key): string {
+        return StyleConfigService.config[key].color(this.appearance.current).css;
     }
 
-    public color<Key extends keyof StyleConfigService.StyleConfig>(key: Key): Style.Color {
-        return this.style(key).color(this.appearance.current);
-    }
-
-    public css<Key extends keyof StyleConfigService.StyleConfig>(key: Key): string {
-        return this.color(key).css;
-    }
-
-    private async parseConfig() {
-        const sassContent = await lastValueFrom(this.httpClient.get('./sass/color.sass', { responseType: 'text' }));
-        function getColorsMap(name: string): Record<string, string> {
-            const colorsMatch = new RegExp(`^\\$${name}:\\s*\\((?<colorsMap>[\\S\\s]*?)\\)$`, 'gmu').exec(sassContent);
-            if (!colorsMatch || !colorsMatch.groups || !('colorsMap' in colorsMatch.groups))
-                return {};
-            return colorsMatch.groups['colorsMap'].split(/,\s*/gu).reduce<Record<string, string>>((styleConfig, value) => {
-                const match = (/^'(?<name>\S+?)':\s*(?<color>#[0-9A-F]{6})$/gu).exec(value);
-                if (match && match.groups && 'name' in match.groups && 'color' in match.groups)
-                    styleConfig[`${match.groups['name']}Color`] = match.groups['color'];
-                return styleConfig;
-            }, {});
-        }
-        const lightColors = getColorsMap('light-colors-map');
-        const darkColors = getColorsMap('dark-colors-map');
-        for (const key of Object.keys(this.styleConfig) as (keyof typeof this.styleConfig)[]) {
-            if (!(key in lightColors) || !(key in darkColors))
-                throw new Error(`Couldn't get ${key} for style color.`);
-            this.styleConfig[key] = new Style.AppearanceColor(Style.Color.hex(lightColors[key]), Style.Color.hex(darkColors[key]));
-        }
-    }
-}
-
-export namespace StyleConfigService {
-    export interface StyleConfig {
-        primaryColor: Style.AppearanceColor;
-        accentColor: Style.AppearanceColor;
-        backgroundColor: Style.AppearanceColor;
-        secondaryBackgroundColor: Style.AppearanceColor;
-        hoveredBackgroundColor: Style.AppearanceColor;
-        textColor: Style.AppearanceColor;
-        secondaryTextColor: Style.AppearanceColor;
-        formStatusSuccessColor: Style.AppearanceColor;
-        formStatusErrorColor: Style.AppearanceColor;
-        formStatusInfoColor: Style.AppearanceColor;
-    }
-
-    export namespace StyleConfig {
-        export const defaultConfig: StyleConfig = {
-            accentColor: new Style.AppearanceColor(Style.Color.hex('#FFD93D'), Style.Color.hex('#F2BE22')),
-            backgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
-            formStatusErrorColor: new Style.AppearanceColor(Style.Color.hex('#CE3A0F'), Style.Color.hex('#EB4511')),
-            formStatusInfoColor: new Style.AppearanceColor(Style.Color.hex('#FFBF00'), Style.Color.hex('#FFE15D')),
-            formStatusSuccessColor: new Style.AppearanceColor(Style.Color.hex('#54B435'), Style.Color.hex('#B6E2A1')),
-            hoveredBackgroundColor: new Style.AppearanceColor(Style.Color.hex('#E0E0E0'), Style.Color.hex('#44454A')),
-            primaryColor: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
-            secondaryBackgroundColor: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#3C4A57')),
-            secondaryTextColor: new Style.AppearanceColor(Style.Color.hex('#868E90'), Style.Color.hex('#868E90')),
-            textColor: new Style.AppearanceColor(Style.Color.hex('#24252A'), Style.Color.hex('#C8D6E5'))
-        };
+    private setConfig(appearance: Appearance) {
+        document.body.style.backgroundColor = StyleConfigService.config.pageBackground.css(appearance);
+        const styleElement = document.getElementById('dynamic-color-style');
+        if (!styleElement)
+            return;
+        const cssConfigVariables = Object.entries(StyleConfigService.config).map(([key, color]) => `\t--${key}: ${color.color(appearance).css};`);
+        styleElement.innerHTML = `:root {\n${cssConfigVariables.join('\n')}\n}`;
     }
 }

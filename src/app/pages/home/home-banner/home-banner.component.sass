@@ -34,15 +34,15 @@
     z-index: 101
 
     #actual, #title, #subtitle
-        @include dynamic-color(background-color, 'background')
-        @include dynamic-color(color, 'text')
         @include font-roboto
+        background-color: color('background')
         box-shadow: 0 0 16px color('shadow')
+        color: color('text')
         padding: 5px 10px
         padding-left: 25px
 
     #actual
-        @include dynamic-color(color, 'primary')
+        color: color('primary')
         font-size: 20px
         font-weight: 300
 
@@ -77,7 +77,7 @@
         width: 100%
 
         #left-button, #right-button
-            @include dynamic-color(color, 'text')
+            color: color('text')
             @include flex-row(center, center)
             cursor: pointer
             font-size: 64px
@@ -117,8 +117,3 @@
             #left-button, #right-button
                 height: auto
                 width: auto
-
-@media screen and (prefers-color-scheme: dark)
-    #text-container
-        #actual, #title, #subtitle
-            box-shadow: 0 0 16px dark-color('shadow')

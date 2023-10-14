@@ -13,10 +13,10 @@
 
     .user
         @include flex-row(center, center)
-        @include dynamic-color(background-color, 'background')
-        @include dynamic-color(border-color, 'text')
+        background-color: color('background')
         border:  1px solid
         border-bottom: 0
+        border-color: color('text')
         width: 95%
 
         &:first-child

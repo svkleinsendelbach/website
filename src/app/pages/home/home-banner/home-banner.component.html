@@ -76,7 +76,7 @@
             class="circle"
             (click)="$event.preventDefault(); $event.stopPropagation(); handleNavBarClick(index + 1)"
             [ngStyle]="{
-                color: currentPage === index + 1 ? styleConfig.css('primaryColor') : styleConfig.css('textColor')
+                color: currentPage === index + 1 ? styleConfig.css('primary') : styleConfig.css('text')
             }"
             [ngClass]="{
                 filled: currentPage === index + 1

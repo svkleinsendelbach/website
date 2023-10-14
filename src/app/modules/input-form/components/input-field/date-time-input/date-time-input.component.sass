@@ -13,14 +13,14 @@
     width: 100%
 
     #date-input, #time-input
-        @include dynamic-color(color, 'text')
-        @include dynamic-color(background-color, 'background')
-        @include dynamic-color(border-color, 'text')
         @include font-montserrat
         @include font-size('large')
         @include font-weight('normal')
+        background-color: color('background')
         border: solid 1px
+        border-color: color('text')
         border-radius: 8px
+        color: color('text')
         cursor: pointer
         flex: 1
         height: 48px
@@ -28,7 +28,7 @@
         vertical-align: middle
 
         &.error
-            @include dynamic-color(border-color, 'formStatusError')
+            border-color: color('formStatusError')
 
     &.mobile
         @include flex-column(flex-start, center)

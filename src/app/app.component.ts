@@ -1,3 +1,4 @@
+import { Appearance, AppearanceService } from './services/appearance.service';
 import { Component, HostListener } from '@angular/core';
 import { InternalLink, InternalPath } from './types/internal-path';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
@@ -318,7 +319,6 @@ export class AppComponent {
         private readonly fireAnalytics: AngularFireAnalytics,
         private readonly firePerformance: AngularFirePerformance
     ) {
-        this.styleConfig.setConfig();
         if (this.deviceType.current === 'desktop') {
             // eslint-disable-next-line no-new
             new Crate({

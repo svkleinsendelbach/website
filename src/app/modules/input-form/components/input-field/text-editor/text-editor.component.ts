@@ -33,16 +33,16 @@ export class TextEditorComponent implements OnInit {
         width: '100%'
     };
 
-    public colorSelectOptions: (SelectOption & { value: keyof StyleConfigService.StyleConfig })[] = [
+    public colorSelectOptions: (SelectOption & { value: keyof typeof StyleConfigService.config })[] = [
         { label: 'Standard Farbe',
-            value: 'textColor' },
+            value: 'text' },
         { label: 'Highlight Farbe',
-            value: 'primaryColor' },
+            value: 'primary' },
         { label: 'Ausgegrauter Text',
-            value: 'secondaryTextColor' }
+            value: 'secondaryText' }
     ];
 
-    public selectedColor: keyof StyleConfigService.StyleConfig = 'textColor';
+    public selectedColor: keyof typeof StyleConfigService.config = 'text';
 
     public constructor(
         private readonly fileStorage: FileStorageService,

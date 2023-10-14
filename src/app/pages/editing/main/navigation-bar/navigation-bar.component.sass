@@ -7,13 +7,13 @@
     width: 100%
 
 #back-button, #log-out-button
-    @include dynamic-color(background-color, 'background')
-    @include dynamic-color(color, 'text')
     @include font-montserrat
     @include font-size('normal')
     @include font-weight('small')
+    background-color: color('background')
     border: 1px solid
     border-radius: 5px
+    color: color('text')
     cursor: pointer
     margin-top: 20px
     padding: 5px 15px

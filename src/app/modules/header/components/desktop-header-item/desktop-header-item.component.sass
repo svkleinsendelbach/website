@@ -12,7 +12,7 @@
     width: 100%
 
     #top-item
-        @include dynamic-color(background-color, 'background')
+        background-color: color('background')
         @include flex-row(center, center)
         cursor: pointer
         height: 80px
@@ -21,17 +21,17 @@
         width: max-content
 
         &:hover
-            @include dynamic-color(background-color, 'hoveredBackground')
+            background-color: color('hoveredBackground')
 
         #top-item-text
-            @include dynamic-color(color, 'text')
+            color: color('text')
             @include font-metrophobic
             @include font-size('normal')
             @include font-weight('medium')
             line-height: 80px
 
         .drop-down-arrow
-            @include dynamic-color(color, 'text')
+            color: color('text')
             margin-left: 8px
 
     #sub-items
@@ -43,7 +43,7 @@
         z-index: 1002
 
         .sub-item
-            @include dynamic-color(background-color, 'background')
+            background-color: color('background')
             @include flex-row(center, center)
             cursor: pointer
             padding: 8px 16px
@@ -54,10 +54,10 @@
                 padding-bottom: 16px
 
             &:hover
-                @include dynamic-color(background-color, 'hoveredBackground')
+                background-color: color('hoveredBackground')
 
             .sub-item-text
-                @include dynamic-color(color, 'text')
+                color: color('text')
                 @include font-metrophobic
                 @include font-size('normal')
                 @include font-weight('medium')

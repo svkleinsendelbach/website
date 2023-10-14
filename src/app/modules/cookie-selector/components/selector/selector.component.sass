@@ -7,9 +7,9 @@
 
 #message-box
     @include flex-column(flex-start, center)
-    @include dynamic-color(color, 'shadow')
-    @include dynamic-color(background-color, 'background')
+    background-color: color('background')
     bottom: 0
+    color: color('shadow')
     padding: 32px
     position: fixed
     right: 32px
@@ -17,14 +17,14 @@
     z-index: 1100
 
     #header
-        @include dynamic-color(color, 'primary')
+        color: color('primary')
         @include font-roboto
         @include font-weight('medium')
         @include font-size('medium')
         padding-bottom: 12px
 
     .text
-        @include dynamic-color(color, 'text')
+        color: color('text')
         @include font-roboto
         @include font-weight('light')
         @include font-size('small')
@@ -33,7 +33,7 @@
         text-align: justify
 
     #privacy
-        @include dynamic-color(color, 'primary')
+        color: color('primary')
         @include font-roboto
         @include font-weight('light')
         @include font-size('small')
@@ -42,7 +42,7 @@
         text-decoration: none
 
     #extra-text
-        @include dynamic-color(color, 'primary')
+        color: color('primary')
         @include font-roboto
         @include font-weight('medium')
         @include font-size('small')
@@ -67,7 +67,7 @@
                 cursor: not-allowed
 
     #details-button, #show-selection-button
-        @include dynamic-color(color, 'primary')
+        color: color('primary')
         @include font-roboto
         @include font-weight('light')
         @include font-size('small')
@@ -76,14 +76,14 @@
         text-decoration: none
 
     .details-topic
-        @include dynamic-color(color, 'primary')
+        color: color('primary')
         @include font-roboto
         @include font-weight('medium')
         @include font-size('normal')
         padding-bottom: 4px
 
     .details-description
-        @include dynamic-color(color, 'text')
+        color: color('text')
         @include font-roboto
         @include font-weight('light')
         @include font-size('small')
@@ -107,14 +107,14 @@
             width: 45%
 
         #confirm-selected
-            @include dynamic-color(color, 'text')
-            @include dynamic-color(background-color, 'background')
-            @include dynamic-color(border-color, 'text')
+            background-color: color('background')
+            border-color: color('text')
+            color: color('text')
 
         #confirm-all
-            @include dynamic-color(color, 'background')
-            @include dynamic-color(background-color, 'primary')
-            @include dynamic-color(border-color, 'primary')
+            background-color: color('primary')
+            border-color: color('primary')
+            color: color('background')
 
     &.tablet
         width: 40vw

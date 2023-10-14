@@ -10,14 +10,14 @@
     width: 100%
 
 #add-occupancy
-    @include dynamic-color(color, 'primary')
-    @include dynamic-color(background-color, 'background')
     @include font-montserrat
     @include font-size('normal')
     @include font-weight('small')
+    background-color: color('background')
     border: 1px solid
-    @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+    border-color: color('text')
     border-radius: 5px
+    color: color('primary')
     cursor: pointer
     margin-bottom: 25px
     padding: 5px 15px
@@ -34,40 +34,40 @@
         margin: 0 50px
 
         .item
-            @include dynamic-color(color, 'primary')
-            @include dynamic-color(background-color, 'background')
             @include font-montserrat
             @include font-size('normal')
             @include font-weight('small')
+            background-color: color('background')
             border-bottom: 1px solid
+            border-color: color('text')
             border-top: 1px solid
-            @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+            color: color('primary')
             cursor: pointer
             flex: 1
             padding: 5px 0
             text-align: center
 
             &:first-child
+                border-color: color('text')
                 border-left: 1px solid
-                @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
                 border-radius: 5px 0 0 5px
 
             &:last-child
+                border-color: color('text')
                 border-radius: 0 5px 5px 0
                 border-right: 1px solid
-                @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
 
             &:first-child:last-child
+                border-color: color('text')
                 border-left: 1px solid
                 border-radius: 5px
                 border-right: 1px solid
-                @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
 
             &.active, &:hover
-                @include dynamic-color(background-color, 'hoveredBackground')
+                background-color: color('hoveredBackground')
 
     #current-date
-        @include dynamic-color(color, 'text')
+        color: color('text')
         @include font-montserrat
         @include font-size('medium')
         @include font-weight('medium')
@@ -87,7 +87,7 @@
 #container
     @include flex-column(flex-start, center)
     border: 1px solid
-    @include dynamic-color(border-color, 'text') // sass-lint:disable-line mixins-before-declarations
+    border-color: color('text')
     border-radius: 5px
     overflow: hidden
     width: 100%
@@ -101,7 +101,7 @@
             width: 100%
 
         ::ng-deep.cal-event-action
-            @include dynamic-color(color, 'primary')
+            color: color('primary')
             text-decoration: none
 
 .dark ::ng-deep
@@ -133,7 +133,7 @@
             width: 20px
 
         .text-descrption
-            @include dynamic-color(color, 'text')
+            color: color('text')
             @include font-montserrat
             @include font-size('normal')
             @include font-weight('small')

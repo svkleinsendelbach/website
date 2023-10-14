@@ -8,10 +8,10 @@
     width: 100vw
 
 #footer
-    @include dynamic-color(color, 'shadow')
-    @include dynamic-color(background-color, 'background')
     @include flex-row(center, center)
+    background-color: color('background')
     box-shadow: 0 -4px 16px
+    color: color('shadow')
     padding: 32px 0
     width: 100%
 
@@ -25,11 +25,11 @@
             width: 100%
 
             .link
-                @include dynamic-color(color, 'text')
                 @include font-montserrat
                 @include font-size('normal')
                 @include font-weight('normal')
                 border-radius: 4px
+                color: color('text')
                 margin: 1px 0
                 padding: 8px
                 text-align: center
@@ -38,24 +38,38 @@
                 width: 100%
 
                 &:hover
-                    @include dynamic-color(color, 'primary')
-                    @include dynamic-color(background-color, 'hoveredBackground')
+                    background-color: color('hoveredBackground')
+                    color: color('primary')
+
+        #appearance-container
+            @include flex-row(center, center)
+            padding: 8px 0
+
+            .selector
+                margin: 0 10px
+
+            .text
+                @include font-montserrat
+                @include font-size('normal')
+                @include font-weight('normal')
+                color: color('secondaryText')
+                width: 50px
 
         #copyright
-            @include dynamic-color(color, 'text')
+            color: color('text')
             @include font-montserrat
             @include font-size('xx-small')
             @include font-weight('light')
             margin-top: 8px
 
         #edit-link
-            @include dynamic-color(color, 'text')
-            @include dynamic-color(border-color, 'text')
             @include font-montserrat
             @include font-size('normal')
             @include font-weight('small')
             border: 1px solid
+            border-color: color('text')
             border-radius: 4px
+            color: color('text')
             cursor: pointer
             margin-top: 8px
             padding: 3px 8px
@@ -63,9 +77,9 @@
             text-decoration: none
 
             &:hover
-                @include dynamic-color(color, 'primary')
-                @include dynamic-color(border-color, 'primary')
-                @include dynamic-color(background-color, 'hoveredBackground')
+                background-color: color('hoveredBackground')
+                border-color: color('primary')
+                color: color('primary')
 
     .address-card
         $cover-height: 96px
@@ -76,11 +90,11 @@
 
         .top
             @include flex-column(center, center)
-            @include dynamic-color(color, 'text')
-            @include dynamic-color(border-color, 'text')
-            @include dynamic-color(background-color, 'background')
+            background-color: color('background')
             border: 1px solid
+            border-color: color('text')
             border-radius: 8px
+            color: color('text')
             cursor: pointer
             height: $cover-height
             transform: translateY(.25 * ($cover-height + $under-sheet-height))
@@ -89,7 +103,7 @@
             z-index: 902
 
             .function, .name
-                @include dynamic-color(color, 'text')
+                color: color('text')
                 @include font-montserrat
                 @include font-size('normal')
                 @include font-weight('small')
@@ -97,13 +111,13 @@
                 white-space: nowrap
 
         .bottom
-            @include dynamic-color(color, 'text')
-            @include dynamic-color(border-color, 'text')
-            @include dynamic-color(background-color, 'background')
             @include flex-column(center, center)
+            background-color: color('background')
             border: 1px solid
+            border-color: color('text')
             border-radius: 8px
             border-top: 0
+            color: color('text')
             height: $under-sheet-height
             opacity: 0
             transform: translateY(-.25 * ($cover-height + $under-sheet-height))
@@ -112,7 +126,7 @@
             z-index: 901
 
             .street, .city
-                @include dynamic-color(color, 'text')
+                color: color('text')
                 @include font-montserrat
                 @include font-size('normal')
                 @include font-weight('small')
@@ -121,7 +135,7 @@
 
             .telephone
                 @include flex-row(center, center)
-                @include dynamic-color(color, 'primary')
+                color: color('primary')
                 cursor: pointer
                 text-decoration: none
 

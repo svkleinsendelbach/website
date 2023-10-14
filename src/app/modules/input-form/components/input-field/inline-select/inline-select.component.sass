@@ -9,20 +9,20 @@
 
 #container
     @include flex-row(center, center)
-    @include dynamic-color(background-color, 'background')
-    @include dynamic-color(border-color, 'text')
+    background-color: color('background')
     border: solid 1px
+    border-color: color('text')
     border-radius: 8px
     height: 48px
     overflow: hidden
     width: 100%
 
     &.error
-        @include dynamic-color(border-color, 'formStatusError')
+        border-color: color('formStatusError')
 
     .option
         @include flex-row(center, center)
-        @include dynamic-color(color, 'text')
+        color: color('text')
         @include font-montserrat
         @include font-size('large')
         @include font-weight('normal')
@@ -32,12 +32,12 @@
         text-align: center
 
         &.selected
-            @include dynamic-color(color, 'primary')
-            @include dynamic-color(background-color, 'hoveredBackground')
+            background-color: color('hoveredBackground')
+            border-color: color('text')
             border-left: 1px solid
             border-radius: 5px
             border-right: 1px solid
-            @include dynamic-color(border-color, 'text')
+            color: color('primary')
 
             &:first-child
                 border-left: 0
@@ -46,7 +46,7 @@
                 border-right: 0
 
         &:hover
-            @include dynamic-color(background-color, 'hoveredBackground')
+            background-color: color('hoveredBackground')
 
     &.mobile
         @include flex-column(center, center)
@@ -58,8 +58,8 @@
             &.selected
                 border: 0
                 border-bottom: 1px solid
+                border-color: color('text')
                 border-top: 1px solid
-                @include dynamic-color(border-color, 'text')
 
                 &:first-child
                     border-top: 0

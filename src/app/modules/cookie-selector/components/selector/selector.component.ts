@@ -86,9 +86,9 @@ export class CookieSelectorComponent implements OnInit, OnDestroy {
     public selectionButtonStyle(type: CookieType): Record<string, string> {
         const isSelected = this.cookiesSelection[type] === 'selected';
         return {
-            backgroundColor: this.styleConfig.css(isSelected ? 'primaryColor' : 'backgroundColor'),
-            borderColor: this.styleConfig.css(isSelected ? 'primaryColor' : 'textColor'),
-            color: this.styleConfig.css(isSelected ? 'backgroundColor' : 'textColor')
+            backgroundColor: this.styleConfig.css(isSelected ? 'primary' : 'background'),
+            borderColor: this.styleConfig.css(isSelected ? 'primary' : 'text'),
+            color: this.styleConfig.css(isSelected ? 'background' : 'text')
         };
     }
 }

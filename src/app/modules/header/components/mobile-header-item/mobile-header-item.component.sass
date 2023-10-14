@@ -20,7 +20,7 @@
     width: 90vw
 
     #top-item
-        @include dynamic-color(background-color, 'background')
+        background-color: color('background')
         @include flex-row(center, center)
         cursor: pointer
         height: 48px
@@ -29,14 +29,14 @@
         width: 100%
 
         #top-item-text
-            @include dynamic-color(color, 'text')
+            color: color('text')
             @include font-metrophobic
             @include font-size('normal')
             @include font-weight('medium')
             line-height: 48px
 
         .drop-down-arrow
-            @include dynamic-color(color, 'text')
+            color: color('text')
             margin-left: 8px
 
     #sub-items
@@ -46,14 +46,14 @@
         width: 100%
 
         .sub-item
-            @include dynamic-color(background-color, 'background')
+            background-color: color('background')
             @include flex-row(center, center)
             cursor: pointer
             padding: 8px 0
             width: 90%
 
             .sub-item-text
-                @include dynamic-color(color, 'text')
+                color: color('text')
                 @include font-metrophobic
                 @include font-size('small')
                 @include font-weight('medium')

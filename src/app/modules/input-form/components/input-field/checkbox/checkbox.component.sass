@@ -15,7 +15,7 @@
     width: 100%
 
     #label
-        @include dynamic-color(color, 'text')
+        color: color('text')
         @include flex-row(center, center)
         @include font-montserrat
         @include font-size('large')
@@ -25,8 +25,8 @@
 
     #checkbox
         $slider-margin: calc(($height - $slider-size) / 2)
-        @include dynamic-color(border-color, 'text')
-        @include dynamic-color(background-color, 'text')
+        background-color: color('text')
+        border-color: color('text')
         border-radius: calc(min($width, $height) / 2)
         cursor: pointer
         height: $height
@@ -35,8 +35,8 @@
         z-index: 300
 
         #slider
-            @include dynamic-color(background-color, 'background')
             -webkit-transition: .4s
+            background-color: color('background')
             border-radius: calc($slider-size / 2)
             bottom: $slider-margin
             height: $slider-size
@@ -49,7 +49,7 @@
             z-index: 301
 
         &.checked
-            @include dynamic-color(background-color, 'primary')
+            background-color: color('primary')
 
             #slider
                 left: calc($width - $slider-size - $slider-margin)

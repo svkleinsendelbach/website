@@ -20,7 +20,7 @@
     padding-bottom: 16px
 
 #name
-    @include dynamic-color(color, 'primary')
+    color: color('primary')
     @include font-montserrat
     @include font-weight('small')
     @include font-size('normal')
@@ -31,7 +31,7 @@ a#name
     text-decoration: none
 
 #additional-text
-    @include dynamic-color(color, 'secondaryText')
+    color: color('secondaryText')
     @include font-montserrat
     @include font-weight('small')
     @include font-size('normal')

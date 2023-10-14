@@ -1,4 +1,5 @@
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { AppearanceSelectorComponent } from './components/appearance-selector/appearance-selector.component';
 import { BfvWidgetComponent } from './components/bfv-widget/bfv-widget.component';
 import { CommonModule } from '@angular/common';
 import { ContactComponent } from './components/contact/contact.component';
@@ -13,6 +14,7 @@ import { TextSectionModule } from '../text-section/text-section.module';
 
 @NgModule({
     declarations: [
+        AppearanceSelectorComponent,
         BfvWidgetComponent,
         ContactComponent,
         LinksComponent,
@@ -21,6 +23,7 @@ import { TextSectionModule } from '../text-section/text-section.module';
         SquadPersonComponent
     ],
     exports: [
+        AppearanceSelectorComponent,
         BfvWidgetComponent,
         ContactComponent,
         LinksComponent,

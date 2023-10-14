@@ -24,8 +24,8 @@
     width: 100%
 
 #image
-    @include dynamic-color(border-color, 'text')
     border: 1px solid
+    border-color: color('text')
     border-radius: 5px
     height: 25vw
     margin-bottom: 20px
@@ -37,13 +37,13 @@
 
 #custom-image-selector
     @include flex-row(center, center)
-    @include dynamic-color(color, 'text')
-    @include dynamic-color(background-color, 'background')
     @include font-montserrat
     @include font-size('large')
     @include font-weight('normal')
+    background-color: color('background')
     border: solid 1px
     border-radius: 8px
+    color: color('text')
     cursor: pointer
     height: 48px
     text-align: center

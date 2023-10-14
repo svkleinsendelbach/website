@@ -3,7 +3,7 @@
 @import '/src/sass/flex'
 
 @mixin markdown-container
-    @include dynamic-color(color, 'secondaryText')
+    color: color('secondaryText')
     @include font-montserrat
     @include font-size('medium')
     @include font-weight('small')
@@ -20,7 +20,7 @@
             margin-right: auto
 
         a
-            @include dynamic-color(color, 'primary')
+            color: color('primary')
             cursor: pointer
             text-decoration: none
 
@@ -28,7 +28,7 @@
             font-style: italic
 
         .strong
-            @include dynamic-color(color, 'text')
+            color: color('text')
             @include font-weight('medium')
 
         .horizontal-line
@@ -37,7 +37,7 @@
             width: 100%
 
             > *
-                @include dynamic-color(background-color, 'text')
+                background-color: color('text')
                 height: 1px
                 width: 90%
 

@@ -7,10 +7,10 @@
     width: 100vw
 
 #container
-    @include dynamic-color(color, 'shadow')
-    @include dynamic-color(background-color, 'background')
     @include flex-row(center, space-around)
+    background-color: color('background')
     box-shadow: 0 4px 16px
+    color: color('shadow')
     height: 80px
     position: fixed
     top: 0
@@ -27,7 +27,7 @@
             height: 48px
 
         #logo-text
-            @include dynamic-color(color, 'text')
+            color: color('text')
             @include font-metrophobic
             @include font-size('normal')
             @include font-weight('medium')

@@ -10,14 +10,14 @@
 
 #text-section
     @include flex-column(center, center)
-    @include dynamic-color(border-color, 'text')
+    border-color: color('text')
     border-top: solid 1px
     margin: 48px 0
     padding-top: 48px
     width: 85%
 
     .title
-        @include dynamic-color(color, 'text')
+        color: color('text')
         @include font-montserrat
         @include font-size('header')
         @include font-weight('medium')
@@ -27,7 +27,7 @@
         width: 100%
 
     ::ng-deep .text
-        @include dynamic-color(color, 'text')
+        color: color('text')
         @include font-montserrat
         @include font-size('medium')
         @include font-weight('normal')
@@ -79,23 +79,23 @@
             padding-bottom: 0
 
         &:is(a)
-            @include dynamic-color(color, 'primary')
+            color: color('primary')
             cursor: pointer
             overflow-wrap: break-word
             text-decoration: none
 
     ::ng-deep .textColor
-        @include dynamic-color(color, 'text')
+        color: color('text')
 
     ::ng-deep .primaryColor
-        @include dynamic-color(color, 'primary')
+        color: color('primary')
 
     ::ng-deep .secondaryColor
-        @include dynamic-color(color, 'secondaryText')
+        color: color('secondaryText')
 
     ::ng-deep .text-image
-        @include dynamic-color(border-color, 'text')
         border: solid 1px
+        border-color: color('text')
         width: 100%
 
     ::ng-deep .text-images-2

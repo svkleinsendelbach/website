@@ -5,24 +5,41 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 export class AppearanceService {
-    public appearance: Appearance;
-
     public listeners = new EventListener<Appearance>();
 
+    private appearance: Appearance | 'system' = 'system';
+
     public constructor() {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        this.appearance = prefersDark ? 'dark' : 'light';
+        const savedAppearance = localStorage.getItem('appearance') as Appearance | null;
+        this.setAppearance(savedAppearance ?? 'system');
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-            const newAppearance = event.matches ? 'dark' : 'light';
-            if (this.appearance !== newAppearance) {
-                this.appearance = newAppearance;
-                this.listeners.emitValue(newAppearance);
-            }
+            this.listeners.emitValue(event.matches ? 'dark' : 'light');
         });
     }
 
     public get current(): Appearance {
+        if (this.appearance !== 'system')
+            return this.appearance;
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        return prefersDark ? 'dark' : 'light';
+    }
+
+    public get currentConfig(): Appearance | 'system' {
         return this.appearance;
+    }
+
+    public get configDescription(): string {
+        if (this.appearance === 'light')
+            return 'Hell';
+        if (this.appearance === 'dark')
+            return 'Dunkel';
+        return 'System';
+    }
+
+    public setAppearance(appearance: Appearance | 'system') {
+        this.appearance = appearance;
+        localStorage.setItem('appearance', appearance);
+        this.listeners.emitValue(this.current);
     }
 }
 

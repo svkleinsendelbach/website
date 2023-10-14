@@ -8,14 +8,14 @@
     width: 100%
 
 #input
-    @include dynamic-color(color, 'text')
-    @include dynamic-color(background-color, 'background')
-    @include dynamic-color(border-color, 'text')
     @include font-montserrat
     @include font-size('large')
     @include font-weight('normal')
+    background-color: color('background')
     border: solid 1px
+    border-color: color('text')
     border-radius: 8px
+    color: color('text')
     cursor: pointer
     height: 48px
     text-align: center
@@ -23,4 +23,4 @@
     width: 100%
 
     &.error
-        @include dynamic-color(border-color, 'formStatusError')
+        border-color: color('formStatusError')
