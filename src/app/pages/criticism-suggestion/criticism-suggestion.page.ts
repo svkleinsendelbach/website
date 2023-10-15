@@ -23,22 +23,18 @@ import { lastValueFrom } from 'rxjs';
 export class CriticismSuggestionPage {
     public inputForm = new InputForm(
         {
-            description: new InputField<string>('', [Validator.required('Eine Beschreibung ist erforderlich.')]),
-            email: new InputField<string>('', [
-                Validator.required('Ihre E-Mail Addresse ist erforderlich.'),
-                Validator.email('Das ist keine gültige E-Mail Addresse.')
-            ]),
-            title: new InputField<string>('', [Validator.required('Ein Titel ist erforderlich.')]),
             type: new InputField<CriticismSuggestion.Type>('suggestion', [
                 Validator.required('Der Typ ist erforderlich.'),
                 Validator.isOneOf(CriticismSuggestion.Type.all, 'Der Typ ist ungültig')
-            ])
+            ]),
+            title: new InputField<string>('', [Validator.required('Ein Titel ist erforderlich.')]),
+            description: new InputField<string>('', [Validator.required('Eine Beschreibung ist erforderlich.')])
         },
         {
-            failed: new InputError('Rückmeldung konnte nicht gespeichert werden.'),
             invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
+            recaptchaFailed: new InputError('reCAPTCHA ungültig.'),
             loading: new InputError('Rückmeldung wird gespeichert.', ErrorLevel.Info),
-            recaptchaFailed: new InputError('reCAPTCHA ungültig.')
+            failed: new InputError('Rückmeldung konnte nicht gespeichert werden.')
         }
     );
 
@@ -84,7 +80,6 @@ export class CriticismSuggestionPage {
             .function('edit')
             .call({
                 criticismSuggestion: {
-                    contactEmail: this.inputForm.field('email').value,
                     description: this.inputForm.field('description').value,
                     title: this.inputForm.field('title').value,
                     type: this.inputForm.field('type').value,

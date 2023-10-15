@@ -21,7 +21,7 @@ namespace AnswerOptions {
 
     export const description: Record<AnswerOptions, string> = {
         'email': 'E-Mail',
-        'whats-app-sms': 'Whats-App oder SMS',
+        'whats-app-sms': 'WhatsApp oder SMS',
         'discord': 'Discord'
     };
 }

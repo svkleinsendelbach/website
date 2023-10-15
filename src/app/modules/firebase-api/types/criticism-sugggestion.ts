@@ -5,7 +5,6 @@ export type CriticismSuggestion = {
     type: CriticismSuggestion.Type;
     title: string;
     description: string;
-    contactEmail: string;
     workedOff: boolean;
 };
 
@@ -43,7 +42,6 @@ export namespace CriticismSuggestion {
         type: CriticismSuggestion.Type;
         title: string;
         description: string;
-        contactEmail: string;
         workedOff: boolean;
     };
 
@@ -52,7 +50,6 @@ export namespace CriticismSuggestion {
     export function flatten(criticismSuggestion: CriticismSuggestion | Omit<CriticismSuggestion, 'id'>): CriticismSuggestion.Flatten | Omit<CriticismSuggestion.Flatten, 'id'> {
         return {
             ...'id' in criticismSuggestion ? { id: criticismSuggestion.id.guidString } : {},
-            contactEmail: criticismSuggestion.contactEmail,
             description: criticismSuggestion.description,
             title: criticismSuggestion.title,
             type: criticismSuggestion.type,
@@ -65,7 +62,6 @@ export namespace CriticismSuggestion {
     export function concrete(criticismSuggestion: CriticismSuggestion.Flatten | Omit<CriticismSuggestion.Flatten, 'id'>): CriticismSuggestion | Omit<CriticismSuggestion, 'id'> {
         return {
             ...'id' in criticismSuggestion ? { id: new Guid(criticismSuggestion.id) } : {},
-            contactEmail: criticismSuggestion.contactEmail,
             description: criticismSuggestion.description,
             title: criticismSuggestion.title,
             type: criticismSuggestion.type,
