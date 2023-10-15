@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { InputField } from '../../../types/input-field';
 import { StyleConfigService } from 'src/app/services/style-config.service';
@@ -9,7 +9,7 @@ import { UtcDate } from 'src/app/types/utc-date';
     styleUrls: ['./date-time-input.component.sass'],
     templateUrl: './date-time-input.component.html'
 })
-export class DateTimeInputComponent implements AfterViewInit {
+export class DateTimeInputComponent implements AfterViewInit, OnDestroy {
     @Input() public label!: string;
 
     @Input() public components: 'date' | 'time' | ['date', 'time'] = ['date', 'time'];
@@ -31,6 +31,17 @@ export class DateTimeInputComponent implements AfterViewInit {
             this.dateInputElement.nativeElement.value = dateTime.date;
         if (this.timeInputElement)
             this.timeInputElement.nativeElement.value = dateTime.time;
+        this.inputField.listeners.add('input-field', value => {
+            const dateTime2 = this.toDateTime(value);
+            if (this.dateInputElement)
+                this.dateInputElement.nativeElement.value = dateTime2.date;
+            if (this.timeInputElement)
+                this.timeInputElement.nativeElement.value = dateTime2.time;
+        });
+    }
+
+    public ngOnDestroy() {
+        this.inputField.listeners.remove('input-field');
     }
 
     public isComponentShown(component: 'date' | 'time'): boolean {

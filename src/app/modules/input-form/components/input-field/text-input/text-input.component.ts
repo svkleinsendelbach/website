@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import { InputField } from '../../../types/input-field';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 
@@ -7,7 +7,7 @@ import { StyleConfigService } from 'src/app/services/style-config.service';
     styleUrls: ['./text-input.component.sass'],
     templateUrl: './text-input.component.html'
 })
-export class TextInputComponent implements AfterViewInit {
+export class TextInputComponent implements AfterViewInit, OnDestroy {
     @Input() public secure = false;
 
     @Input() public label!: string;
@@ -24,6 +24,13 @@ export class TextInputComponent implements AfterViewInit {
 
     public ngAfterViewInit() {
         this.inputElement.nativeElement.value = this.inputField.value;
+        this.inputField.listeners.add('input-field', value => {
+            this.inputElement.nativeElement.value = value;
+        });
+    }
+
+    public ngOnDestroy() {
+        this.inputField.listeners.remove('input-field');
     }
 
     public onBlur() {

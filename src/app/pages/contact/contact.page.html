@@ -2,10 +2,10 @@
   [title]="'Kontakt zum SV Kleinsendelbach'"
 >
     <p
-        class="text primaryColor"
+        class="text"
     >Bitte nehmen Sie Kontakt mit uns auf.</p>
     <p
-        class="text primaryColor"
+        class="text"
     >Wir werden Ihnen gerne antworten.</p>
     <p
         class="text secondaryColor margin-top-large"
@@ -28,9 +28,38 @@
             [label]="'Ihr Name'"
             [inputField]="inputForm.field('name')"
         />
+        <input-field-inline-select
+            [label]="'Antwortoption'"
+            [selectOptions]="answerOptionSelectOptions"
+            [inputField]="inputForm.field('answerOption')"
+        />
         <input-field-text
+            *ngIf="inputForm.field('answerOption').value === 'email'"
             [label]="'Ihre E-Mail Adresse'"
             [inputField]="inputForm.field('email')"
+        />
+        <input-field-text
+            *ngIf="inputForm.field('answerOption').value === 'whats-app-sms'"
+            [label]="'Ihre Mobilfunknummer'"
+            [inputField]="inputForm.field('phoneNumber')"
+        />
+        <p
+            *ngIf="inputForm.field('answerOption').value === 'discord'"
+            class="text secondaryColor left-align margin-top-large"
+        >Trete dem SV Kleinselbach Discord bei: <a
+            class="text"
+            href="https://discord.gg/gpJMrajz7q"
+            target="_blank"
+            title="Discord beitreten"
+        >Jetzt beitreten</a></p>
+        <p
+            *ngIf="inputForm.field('answerOption').value === 'discord'"
+            class="text secondaryColor left-align margin-bottom-small"
+        >Gebe in einen Text-Channel (z.B. 'general') den Befehl '/user' ein und kopiere deine Nutzer-ID.</p>
+        <input-field-text
+            *ngIf="inputForm.field('answerOption').value === 'discord'"
+            [label]="'Ihre Discord Nutzer-ID'"
+            [inputField]="inputForm.field('discordUserId')"
         />
         <input-field-select
             [label]="'Anfrage an'"

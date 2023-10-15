@@ -6,6 +6,7 @@ import { EditType } from './types/edit-type';
 import { FunctionType } from './types/function-type';
 import { GameInfo } from './types/game-info';
 import { Occupancy } from './types/occupancy';
+import { Receiver } from 'src/app/pages/contact/contact.page';
 import { TeamSquad } from './types/team-squad';
 import { User } from './types/user';
 
@@ -63,21 +64,9 @@ export type CriticismSuggestionGetAllFunctionType = FunctionType<{
     workedOff: boolean | null;
 }, CriticismSuggestion.Flatten[]>;
 
-export type SendMailContactFunctionType = FunctionType<{
-    senderName: string;
-    senderAddress: string;
-    receiverName: string;
-    receiverAddress: string;
-    message: string;
-}, {
-    success: boolean;
-    message: string;
-}>;
-
 export type TeamSquadGetFunctionType = FunctionType<{
     type: AnpfiffInfoTeamParameters.Type;
 }, TeamSquad>;
-
 
 export type VerifyRecaptchaFunctionType = FunctionType<{
     token: string;
@@ -111,4 +100,11 @@ export type UserHandleAccessRequestFunctionType = FunctionType<{
 export type UserRequestAccessFunctionType = FunctionType<{
     firstName: string;
     lastName: string;
+}, void>;
+
+export type ContactFunctionType = FunctionType<{
+    name: string;
+    answer: { email: string } | { phoneNumber: string } | { discordUserId: string };
+    receiver: Receiver;
+    message: string;
 }, void>;

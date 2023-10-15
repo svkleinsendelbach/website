@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import { InputField } from '../../../types/input-field';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { TrackBy } from 'src/app/types/track-by';
@@ -47,7 +47,7 @@ export namespace SelectOptions {
     styleUrls: ['./select.component.sass'],
     templateUrl: './select.component.html'
 })
-export class SelectComponent<T extends string> implements AfterViewInit {
+export class SelectComponent<T extends string> implements AfterViewInit, OnDestroy {
     @Input() public label: string | null = null;
 
     @Input() public selectOptions!: SelectOptions<T>;
@@ -64,6 +64,13 @@ export class SelectComponent<T extends string> implements AfterViewInit {
 
     public ngAfterViewInit() {
         this.selectElement.nativeElement.value = this.inputField.value;
+        this.inputField.listeners.add('input-field', value => {
+            this.selectElement.nativeElement.value = value;
+        });
+    }
+
+    public ngOnDestroy() {
+        this.inputField.listeners.remove('input-field');
     }
 
     public onBlur() {

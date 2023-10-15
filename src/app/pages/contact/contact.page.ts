@@ -2,19 +2,43 @@ import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { ErrorLevel } from 'src/app/modules/input-form/types/error-level';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { FunctionType } from 'src/app/modules/firebase-api/types/function-type';
 import { InputError } from 'src/app/modules/input-form/types/input-error';
 import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';
 import { InternalLink } from 'src/app/types/internal-path';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { SelectOptions } from 'src/app/modules/input-form/components/input-field/select/select.component';
-import { SendMailContactFunctionType } from 'src/app/modules/firebase-api/function-types';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 import { ValidationResult } from 'src/app/modules/input-form/types/validation-result';
 import { Validator } from 'src/app/modules/input-form/types/validator';
 import { lastValueFrom } from 'rxjs';
+
+type AnswerOptions = 'email' | 'whats-app-sms' | 'discord';
+
+namespace AnswerOptions {
+    export const all: AnswerOptions[] = ['email', 'whats-app-sms', 'discord'];
+
+    export const description: Record<AnswerOptions, string> = {
+        'email': 'E-Mail',
+        'whats-app-sms': 'Whats-App oder SMS',
+        'discord': 'Discord'
+    };
+}
+
+export type Receiver = 'managers' | 'football-adults' | 'football-youth' | 'dancing' | 'gymnastics';
+
+namespace Receiver {
+    export const all: Receiver[] = ['managers', 'football-adults', 'football-youth', 'dancing', 'gymnastics'];
+
+    export const description: Record<Receiver, string> = {
+        'managers': 'Vorstandschaft',
+        'football-adults': 'Herrenfußball',
+        'football-youth': 'Jugendfußball',
+        'dancing': 'Tanzen',
+        'gymnastics': 'Gymnastik'
+    };
+}
 
 @Component({
     selector: 'pages-contact',
@@ -24,27 +48,46 @@ import { lastValueFrom } from 'rxjs';
 export class ContactPage {
     public criticismSuggestionPageLink = InternalLink.all['kritik-vorschläge'];
 
-    public inputForm = new InputForm(
-        {
-            email: new InputField<string>('', [
-                Validator.required('Ihre E-Mail Addresse ist erforderlich.'),
-                Validator.email('Das ist keine gültige E-Mail Addresse.')
-            ]),
-            message: new InputField<string>('', [Validator.required('Eine Nachricht ist erforderlich.')]),
+    // eslint-disable-next-line @typescript-eslint/consistent-generic-constructors
+    public inputForm: InputForm<{
+        name: InputField<string>;
+        answerOption: InputField<AnswerOptions>;
+        email: InputField<string>;
+        phoneNumber: InputField<string>;
+        discordUserId: InputField<string>;
+        receiver: InputField<Receiver>;
+        message: InputField<string>;
+    }, 'invalidInput' | 'loading' | 'recaptchaFailed' | 'failed' | 'success'> = new InputForm({
             name: new InputField<string>('', [Validator.required('Ihr Name ist erforderlich.')]),
-            receiver: new InputField<keyof typeof ContactPage.receivers>('managers', [
-                Validator.required('Ein Empfänger ist erforderlich.'),
-                Validator.isOneOf(Object.keys(ContactPage.receivers), 'Der Empfänger ist ungültig')
-            ])
+            answerOption: new InputField<AnswerOptions>('email', [
+                Validator.required('Eine Antwortoption ist erforderlich.'),
+                Validator.isOneOf(AnswerOptions.all, 'Die Antwortoption ist ungültig.')
+            ]),
+            email: new InputField<string>('', [
+                Validator.validateIf(() => this.inputForm.field('answerOption').value === 'email', Validator.required('Ihre E-Mail Addresse ist erforderlich.')),
+                Validator.validateIf(() => this.inputForm.field('answerOption').value === 'email', Validator.email('Das ist keine gültige E-Mail Addresse.'))
+            ]),
+            phoneNumber: new InputField<string>('', [
+                Validator.validateIf(() => this.inputForm.field('answerOption').value === 'whats-app-sms', Validator.required('Ihre Mobilfunknummer ist erforderlich.')),
+                Validator.validateIf(() => this.inputForm.field('answerOption').value === 'whats-app-sms', Validator.phoneNumber('Das ist keine gültige Telefonnummer.'))
+            ]),
+            discordUserId: new InputField<string>('', [
+                Validator.validateIf(() => this.inputForm.field('answerOption').value === 'discord', Validator.required('Ihre Discord Nutzer-ID ist erforderlich.')),
+                Validator.validateIf(() => this.inputForm.field('answerOption').value === 'discord', Validator.pattern(/^\d{18}$/u, 'Das ist keine gültige Discord Nutzer-ID.'))
+            ]),
+            receiver: new InputField<Receiver>('managers', [
+                Validator.required('Eine Empfänger ist erforderlich.'),
+                Validator.isOneOf(Receiver.all, 'Die Empfänger ist ungültig.')
+            ]),
+            message: new InputField<string>('', [Validator.required('Eine Nachricht ist erforderlich.')])
         },
         {
             invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
-            loading: new InputError('Email wird versandt.', ErrorLevel.Info),
+            loading: new InputError('Die Nachricht wird versandt.', ErrorLevel.Info),
             recaptchaFailed: new InputError('reCAPTCHA ungültig.'),
-            sendFailed: new InputError('Es gab einen Fehler beim Senden.'),
-            sendSucceded: new InputError('Email wurde versendet.', ErrorLevel.Success)
-        }
-    );
+            failed: new InputError('Die Nachricht konnte nicht versandt werden.'),
+            success: new InputError('Die Nachricht wurde versandt', ErrorLevel.Success)
+        });
 
     public constructor(
         public readonly titleService: Title,
@@ -56,27 +99,27 @@ export class ContactPage {
         this.titleService.setTitle('Kontakt');
     }
 
-    public get receiverSelectOptions(): SelectOptions<keyof typeof ContactPage.receivers> {
-        return SelectOptions.ungrouped<keyof typeof ContactPage.receivers>(
-            Object.entries(ContactPage.receivers).map(receiverEntry => ({
-                id: receiverEntry[0] as keyof typeof ContactPage.receivers,
-                text: receiverEntry[1].name
-            }))
-        );
+    public get answerOptionSelectOptions(): SelectOptions.Ungrouped<AnswerOptions> {
+        return SelectOptions.ungrouped<AnswerOptions>(AnswerOptions.all.map(answerOption => ({
+            id: answerOption,
+            text: AnswerOptions.description[answerOption]
+        })));
     }
 
-    public onSubmit() {
+    public get receiverSelectOptions(): SelectOptions<Receiver> {
+        return SelectOptions.ungrouped<Receiver>(Receiver.all.map(receiver => ({
+            id: receiver,
+            text: Receiver.description[receiver]
+        })));
+    }
+
+    public async onSubmit() {
         if (this.inputForm.status === 'loading')
             return;
         this.inputForm.status = 'valid';
         const validation = this.inputForm.evaluate();
         if (validation === ValidationResult.Invalid)
             return;
-        void this.sendContactMail();
-    }
-
-    private async sendContactMail() {
-        const receiver = ContactPage.receivers[this.inputForm.field('receiver').value];
         this.inputForm.status = 'loading';
         const token = await lastValueFrom(this.recaptchaService.execute('contactForm'));
         const verifyResponse = await this.firebaseApiService.function('verifyRecaptcha').call({
@@ -86,47 +129,22 @@ export class ContactPage {
             this.inputForm.status = 'recaptchaFailed';
             return;
         }
-        const request: FunctionType.Parameters<SendMailContactFunctionType> = {
-            message: this.inputForm.field('message').value,
-            receiverAddress: receiver.address,
-            receiverName: receiver.name,
-            senderAddress: this.inputForm.field('email').value,
-            senderName: this.inputForm.field('name').value
-        };
-        const response = await this.firebaseApiService.function('sendMail').function('contact')
-            .call(request)
-            .catch(reason => {
-                this.inputForm.status = 'sendFailed';
-                throw reason;
+        const answer = this.inputForm.field('answerOption').value === 'email'
+            ? { email: this.inputForm.field('email').value }
+            : this.inputForm.field('answerOption').value === 'whats-app-sms'
+                ? { phoneNumber: this.inputForm.field('phoneNumber').value }
+                : { discordUserId: this.inputForm.field('discordUserId').value };
+        try {
+            await this.firebaseApiService.function('contact').call({
+                name: this.inputForm.field('name').value,
+                answer: answer,
+                receiver: this.inputForm.field('receiver').value,
+                message: this.inputForm.field('message').value
             });
-        const status: 'sendFailed' | 'sendSucceded' = response.success ? 'sendSucceded' : 'sendFailed';
-        this.inputForm.status = status;
-        if (response.success)
+            this.inputForm.status = 'success';
             this.inputForm.reset();
-    }
-}
-
-export namespace ContactPage {
-    export const receivers = {
-        dancing: {
-            address: 'tanzen@sv-kleinsendelbach.de',
-            name: 'Tanzen'
-        },
-        footballAdults: {
-            address: 'herrenfußball@sv-kleinsendelbach.de',
-            name: 'Herrenfußball'
-        },
-        footballYouth: {
-            address: 'jugenfußball@sv-kleinsendelbach.de',
-            name: 'Jugendfußball'
-        },
-        gymnastics: {
-            address: 'gymnastik@sv-kleinsendelbach.de',
-            name: 'Gymnastik'
-        },
-        managers: {
-            address: 'vorstand@sv-kleinsendelbach.de',
-            name: 'Vorstandschaft'
+        } catch {
+            this.inputForm.status = 'failed';
         }
-    };
+    }
 }

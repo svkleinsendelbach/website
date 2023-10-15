@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import { InputField } from '../../../types/input-field';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 
@@ -7,7 +7,7 @@ import { StyleConfigService } from 'src/app/services/style-config.service';
     styleUrls: ['./textarea.component.sass'],
     templateUrl: './textarea.component.html'
 })
-export class TextareaComponent implements AfterViewInit {
+export class TextareaComponent implements AfterViewInit, OnDestroy {
     @Input() public label!: string;
 
     @Input() public placeholder: string | null = null;
@@ -22,6 +22,13 @@ export class TextareaComponent implements AfterViewInit {
 
     public ngAfterViewInit() {
         this.textareaElement.nativeElement.value = this.inputField.value;
+        this.inputField.listeners.add('input-field', value => {
+            this.textareaElement.nativeElement.value = value;
+        });
+    }
+
+    public ngOnDestroy() {
+        this.inputField.listeners.remove('input-field');
     }
 
     public onBlur() {

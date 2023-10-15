@@ -1,4 +1,5 @@
 import {
+    ContactFunctionType,
     CriticismSuggestionEditFunctionType,
     CriticismSuggestionGetAllFunctionType,
     DeleteAllDataFunctionType,
@@ -10,7 +11,6 @@ import {
     ReportEditFunctionType,
     ReportGetAllFunctionType,
     ReportGetFunctionType,
-    SendMailContactFunctionType,
     TeamSquadGetFunctionType,
     UserCheckRolesFunctionType,
     UserEditRolesFunctionType,
@@ -23,6 +23,7 @@ import {
 export interface FirebaseFunctions {
     verifyRecaptcha: VerifyRecaptchaFunctionType;
     deleteAllData: DeleteAllDataFunctionType;
+    contact: ContactFunctionType;
     event: {
         get: EventGetFunctionType;
         edit: EventEditFunctionType;
@@ -43,9 +44,6 @@ export interface FirebaseFunctions {
     bfvData: {
         gameInfo: GameInfoGetFunctionType;
         teamSquad: TeamSquadGetFunctionType;
-    };
-    sendMail: {
-        contact: SendMailContactFunctionType;
     };
     user: {
         requestAccess: UserRequestAccessFunctionType;

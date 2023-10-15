@@ -93,7 +93,7 @@ const socialMediaLink: Record<SocialMediaType, SocialMediaItem> = {
     discord: {
         id: 'discord',
         image: faDiscord,
-        link: Link.external('Discord', 'https://discord.gg/Wakb9XeW', true),
+        link: Link.external('Discord', 'https://discord.gg/gpJMrajz7q', true),
         name: 'Discord',
         title: 'SV Kleinsendelbach e.V.'
     },

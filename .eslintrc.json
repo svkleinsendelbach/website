@@ -159,7 +159,10 @@
                 "max-lines": "off",
                 "no-bitwise": "off",
                 "capitalized-comments": "off",
-                "sort-keys": "off"
+                "sort-keys": "off",
+                "@typescript-eslint/sort-type-constituents": "off",
+                "@typescript-eslint/lines-around-comment": "off",
+                "multiline-comment-style": "off"
             }
         }
     ]
