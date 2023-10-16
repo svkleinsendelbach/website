@@ -29,7 +29,7 @@ export const websiteConfig: WebsiteConfig = {
             title: 'Samstag'
         },
         sunday: {
-            time: '9:30 – 12 Uhr und 17 – 20 Uhr, bei Heimspielen: 13:30 – 20 Uhr',
+            time: '9:30 - 12 Uhr und 17 - 20 Uhr, bei Heimspielen: 13:30 - 20 Uhr',
             title: 'Sonntag'
         }
     },
@@ -295,5 +295,27 @@ export const websiteConfig: WebsiteConfig = {
         minZoom: 5,
         scrollwheel: false,
         zoom: 14
-    }
+    },
+    footerContacts: [
+        {
+            function: 'Sportheim',
+            name: 'Sportverein Kleinsendelbach',
+            street: 'Hauptstraße 21',
+            city: '91077 Kleinsendelbach',
+            telephone: {
+                number: '091268304',
+                text: '09126 / 8304'
+            }
+        },
+        {
+            function: 'Vertretungsberechtigter Vorstand',
+            name: 'Sebastian Schuldes',
+            street: 'Mühlenstraße 2',
+            city: '91077 Kleinsendelbach',
+            telephone: {
+                number: '015150405030',
+                text: '01515 / 0405030'
+            }
+        }
+    ]
 };

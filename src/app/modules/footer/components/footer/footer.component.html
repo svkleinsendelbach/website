@@ -10,11 +10,11 @@
             id="links"
         >
         <a
-            *ngFor="let link of footerData.links; trackBy: TrackBy.id"
+            *ngFor="let link of links; trackBy: TrackBy.property('link')"
             class="link"
-            [href]="link.link.link"
-            [title]="link.link.title"
-        >{{ link.link.title }}</a>
+            [href]="link.link"
+            [title]="link.title"
+        >{{ link.title }}</a>
         <div
             id="appearance-container"
         >
@@ -31,18 +31,17 @@
         </div>
         <p
             id="copyright"
-        >© Copyright {{ footerData.copyrightText }}</p>
+        >© Copyright 2023 SV Kleinsendelbach e.V.</p>
         <a
-            *ngIf="footerData.editLink"
             id="edit-link"
-            [href]="footerData.editLink.link"
-            [title]="footerData.editLink.title"
+            [href]="editLink.link"
+            [title]="editLink.title"
         >Bearbeiten</a>
     </div>
 
     <div
         class="address-card"
-        *ngFor="let contact of footerData.contact; trackBy: TrackBy.property('name')"
+        *ngFor="let contact of contactItems; trackBy: TrackBy.property('name')"
     >
         <div
             class="top"

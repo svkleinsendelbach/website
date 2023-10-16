@@ -162,7 +162,8 @@
                 "sort-keys": "off",
                 "@typescript-eslint/sort-type-constituents": "off",
                 "@typescript-eslint/lines-around-comment": "off",
-                "multiline-comment-style": "off"
+                "multiline-comment-style": "off",
+                "sort-imports": "off"
             }
         }
     ]

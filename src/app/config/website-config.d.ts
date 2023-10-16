@@ -2,6 +2,7 @@ import { OpeningHour, Weekdays } from '../pages/about-us/sportshome/sportshome.p
 import { BannerItem } from '../pages/home/home-banner/home-banner.component';
 import { ContactItem } from '../modules/general-components/types/contact-item';
 import { Manager } from '../pages/about-us/managers/managers.page';
+import { ContactData } from '../modules/footer/types/contact-data';
 
 export interface WebsiteConfig {
 
@@ -25,4 +26,7 @@ export interface WebsiteConfig {
 
     // Map options for google maps
     mapOptions: google.maps.MapOptions;
+
+    // Contact items for footer
+    footerContacts: ContactData[];
 }
