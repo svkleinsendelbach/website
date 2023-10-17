@@ -100,7 +100,6 @@
             @include font-roboto
             @include font-weight('light')
             @include font-size('small')
-            border: 1px solid
             cursor: pointer
             padding: 6px 0
             text-align: center
@@ -108,12 +107,12 @@
 
         #confirm-selected
             background-color: color('background')
-            border-color: color('text')
+            border: 1px solid color('text')
             color: color('text')
 
         #confirm-all
             background-color: color('primary')
-            border-color: color('primary')
+            border: 1px solid color('primary')
             color: color('background')
 
     &.tablet

@@ -12,8 +12,7 @@
     @include font-size('large')
     @include font-weight('normal')
     background-color: color('background')
-    border: solid 1px
-    border-color: color('text')
+    border: 1px solid color('text')
     border-radius: 8px
     color: color('text')
     cursor: pointer
@@ -23,7 +22,7 @@
     width: 100%
 
     &.error
-        border-color: color('formStatusError')
+        border: 1px solid color('formStatusError')
 
 #hint
     color: color('text')

@@ -12,6 +12,8 @@ import { Title } from '@angular/platform-browser';
 export class PageNotFoundPage {
     public homeLink = InternalLink.all.home;
 
+    public criticismSuggestionPageLink = InternalLink.all['kritik-vorschläge'];
+
     public constructor(
         public readonly titleService: Title,
         public readonly deviceType: DeviceTypeService,

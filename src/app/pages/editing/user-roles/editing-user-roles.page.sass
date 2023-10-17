@@ -14,16 +14,15 @@
     .user
         @include flex-row(center, center)
         background-color: color('background')
-        border:  1px solid
+        border:  1px solid color('text')
         border-bottom: 0
-        border-color: color('text')
         width: 95%
 
         &:first-child
             border-radius: 5px 5px 0 0
 
         &:last-child
-            border-bottom: 1px solid
+            border-bottom: 1px solid color('text')
             border-radius: 0 0 5px 5px
 
         &:first-child:last-child

@@ -14,8 +14,7 @@
     @include font-size('normal')
     @include font-weight('small')
     background-color: color('background')
-    border: 1px solid
-    border-color: color('text')
+    border: 1px solid color('text')
     border-radius: 5px
     color: color('primary')
     cursor: pointer
@@ -38,9 +37,8 @@
             @include font-size('normal')
             @include font-weight('small')
             background-color: color('background')
-            border-bottom: 1px solid
-            border-color: color('text')
-            border-top: 1px solid
+            border-bottom: 1px solid color('text')
+            border-top: 1px solid color('text')
             color: color('primary')
             cursor: pointer
             flex: 1
@@ -48,20 +46,17 @@
             text-align: center
 
             &:first-child
-                border-color: color('text')
-                border-left: 1px solid
+                border-left: 1px solid color('text')
                 border-radius: 5px 0 0 5px
 
             &:last-child
-                border-color: color('text')
                 border-radius: 0 5px 5px 0
-                border-right: 1px solid
+                border-right: 1px solid color('text')
 
             &:first-child:last-child
-                border-color: color('text')
-                border-left: 1px solid
+                border-left: 1px solid color('text')
                 border-radius: 5px
-                border-right: 1px solid
+                border-right: 1px solid color('text')
 
             &.active, &:hover
                 background-color: color('hoveredBackground')
@@ -86,8 +81,7 @@
 
 #container
     @include flex-column(flex-start, center)
-    border: 1px solid
-    border-color: color('text')
+    border: 1px solid color('text')
     border-radius: 5px
     overflow: hidden
     width: 100%

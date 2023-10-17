@@ -11,8 +11,7 @@
     @include font-size('normal')
     @include font-weight('small')
     background-color: color('background')
-    border: 1px solid
-    border-color: color('text')
+    border: 1px solid color('text')
     border-radius: 5px
     color: color('primary')
     cursor: pointer
@@ -39,9 +38,8 @@
     .report
         @include flex-row(center, center)
         background-color: color('background')
-        border: 1px solid
+        border: 1px solid color('text')
         border-bottom: 0
-        border-color: color('text')
         padding: 5px
         width: 95%
 
@@ -49,7 +47,7 @@
             border-radius: 5px 5px 0 0
 
         &:last-child
-            border-bottom: 1px solid
+            border-bottom: 1px solid color('text')
             border-radius: 0 0 5px 5px
 
         &:nth-child(2):last-child

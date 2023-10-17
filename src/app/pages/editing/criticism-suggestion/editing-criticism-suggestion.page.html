@@ -1,4 +1,6 @@
-<!-- eslint-disable @angular-eslint/template/no-inline-styles -->
+<app-editing-navigation-bar
+    [backButtonLink]="mainEditingPageLink"
+/>
 <authentication-check
     [roles]="['admin']"
     (onAuthentication)="getCriticismSuggestions()"

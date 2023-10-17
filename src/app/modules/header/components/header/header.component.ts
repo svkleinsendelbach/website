@@ -36,7 +36,7 @@ export class HeaderComponent {
                 },
                 {
                     topItem: 'fussball/jugend',
-                    subItems: ['fussball/jugend/a-jugend', 'fussball/jugend/b-jugend', 'fussball/jugend/c-jugend', 'fussball/jugend/d-jugend', 'fussball/jugend/e-jugend', 'fussball/jugend/f-jugend', 'fussball/jugend/g-jugend']
+                    subItems: ['fussball/jugend', 'fussball/jugend/a-jugend', 'fussball/jugend/b-jugend', 'fussball/jugend/c-jugend', 'fussball/jugend/d-jugend', 'fussball/jugend/e-jugend', 'fussball/jugend/f-jugend', 'fussball/jugend/g-jugend']
                 },
                 { topItem: 'gymnastik' },
                 { topItem: 'tanzen' },
@@ -58,7 +58,7 @@ export class HeaderComponent {
                 },
                 {
                     topItem: 'fussball/jugend',
-                    subItems: ['fussball/jugend/a-jugend', 'fussball/jugend/b-jugend', 'fussball/jugend/c-jugend', 'fussball/jugend/d-jugend', 'fussball/jugend/e-jugend', 'fussball/jugend/f-jugend', 'fussball/jugend/g-jugend']
+                    subItems: ['fussball/jugend', 'fussball/jugend/a-jugend', 'fussball/jugend/b-jugend', 'fussball/jugend/c-jugend', 'fussball/jugend/d-jugend', 'fussball/jugend/e-jugend', 'fussball/jugend/f-jugend', 'fussball/jugend/g-jugend']
                 },
                 {
                     topItem: 'gymnastik',
@@ -80,7 +80,7 @@ export class HeaderComponent {
                 },
                 {
                     topItem: 'fussball/jugend',
-                    subItems: ['fussball/jugend/a-jugend', 'fussball/jugend/b-jugend', 'fussball/jugend/c-jugend', 'fussball/jugend/d-jugend', 'fussball/jugend/e-jugend', 'fussball/jugend/f-jugend', 'fussball/jugend/g-jugend']
+                    subItems: ['fussball/jugend', 'fussball/jugend/a-jugend', 'fussball/jugend/b-jugend', 'fussball/jugend/c-jugend', 'fussball/jugend/d-jugend', 'fussball/jugend/e-jugend', 'fussball/jugend/f-jugend', 'fussball/jugend/g-jugend']
                 },
                 {
                     topItem: 'gymnastik',

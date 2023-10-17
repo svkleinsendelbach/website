@@ -10,15 +10,14 @@
 #container
     @include flex-row(center, center)
     background-color: color('background')
-    border: solid 1px
-    border-color: color('text')
+    border: 1px solid color('text')
     border-radius: 8px
     height: 48px
     overflow: hidden
     width: 100%
 
     &.error
-        border-color: color('formStatusError')
+        border: 1px solid color('formStatusError')
 
     .option
         @include flex-row(center, center)
@@ -33,11 +32,10 @@
 
         &.selected
             background-color: color('hoveredBackground')
-            border-left: 1px solid
+            border-left: 1px solid color('text')
             border-radius: 5px
-            border-right: 1px solid
+            border-right: 1px solid color('text')
             color: color('primary')
-            border-color: color('text')
 
             &:first-child
                 border-left: 0
@@ -57,8 +55,7 @@
 
             &.selected
                 border: 0
-                border-bottom: 1px solid
-                border-color: color('text')
+                border-bottom: 1px solid color('text')
                 border-top: 1px solid
 
                 &:first-child

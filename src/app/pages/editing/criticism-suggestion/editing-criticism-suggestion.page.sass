@@ -7,10 +7,9 @@
     @include font-size('normal')
     @include font-weight('small')
     background-color: color('background')
-    border: 1px solid
-    border-color: color('text')
-    border-radius: 5px
+    border: 1px solid color('text')
     color: color('primary')
+    border-radius: 5px
     cursor: pointer
     padding: 5px 35px
     text-align: center
@@ -27,9 +26,8 @@
     .container
         @include flex-column(flex-start, center)
         background-color: color('background')
-        border: 1px solid
+        border: 1px solid color('text')
         border-bottom: 0
-        border-color: color('text')
         overflow: hidden
         width: 100%
 
@@ -37,8 +35,7 @@
             border-radius: 5px 5px 0 0
 
         &:last-child
-            border-bottom: 1px solid
-            border-color: color('text')
+            border-bottom: 1px solid color('text')
             border-radius: 0 0 5px 5px
 
         &:first-child:last-child
@@ -53,8 +50,7 @@
                 @include font-montserrat
                 @include font-size('normal')
                 @include font-weight('small')
-                border-color: color('text')
-                border-right: 1px solid
+                border-right: 1px solid color('text')
                 color: color('text')
                 padding: 5px 0
                 text-align: center
@@ -72,8 +68,7 @@
                 @include font-montserrat
                 @include font-size('normal')
                 @include font-weight('small')
-                border-color: color('text')
-                border-left: 1px solid
+                border-left: 1px solid color('text')
                 border-radius: 5px 0 0 5px
                 color: color('primary')
                 cursor: pointer
@@ -88,8 +83,7 @@
             @include font-montserrat
             @include font-size('normal')
             @include font-weight('small')
-            border-color: color('text')
-            border-top: 1px dashed
+            border-top: 1px dashed color('text')
             color: color('text')
             padding: 10px 20px
             width: calc(100% - 40px)

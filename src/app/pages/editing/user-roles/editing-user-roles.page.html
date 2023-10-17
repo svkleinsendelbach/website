@@ -26,7 +26,7 @@
                 <p
                     *ngFor="let role of User.Role.all; trackBy: TrackBy.identity"
                     class="button"
-                    [ngClass]="user.roles.includes(role) ? 'primary' : 'secondary'"
+                    [ngClass]="user.roles.includes(role) ? 'primaryColor' : 'secondarycolor'"
                     role="none"
                     (click)="editRole(user, role)"
                 >{{ User.Role.description(role) }}<p>
