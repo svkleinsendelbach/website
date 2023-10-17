@@ -1,0 +1,56 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+@import '/src/sass/color'
+
+:host
+    @include flex-column(flex-start, center)
+    width: 100%
+
+#container
+    margin: 50px 0
+
+    #text-container
+        .name, .address-street, .address-city, .contact, .contact .link
+            @include font-size('normal')
+
+        .name
+            @include font-weight('semi-bold')
+
+        .address-city
+            margin-bottom: 10px
+
+    &.row
+        @include flex-row(center, center)
+        width: 100%
+
+        #spacer
+            width: 20%
+
+        #logo
+            width: 30%
+
+        #text-container
+            @include flex-column(flex-start, flex-start)
+            width: 50%
+            margin-left: 20px
+
+            .name, .address-street, .address-city, .contact
+                text-align: left
+
+    &.column
+        @include flex-column(flex-start, center)
+        width: 80%
+
+        #spacer
+            width: 0
+
+        #logo
+            width: 100%
+
+        #text-container
+            @include flex-column(flex-start, center)
+            width: 100%
+            margin-top: 10px
+
+        .name, .address-street, .address-city, .contact
+            text-align: left

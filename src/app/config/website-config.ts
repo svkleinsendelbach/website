@@ -1,7 +1,7 @@
 import { InternalLink } from '../types/internal-path';
+import { sponsorsConfig } from './sponsors-config';
 import { WebsiteConfig } from './website-config.d';
 
-/* eslint-disable sort-keys */
 export const websiteConfig: WebsiteConfig = {
     openingHours: {
         monday: {
@@ -317,5 +317,6 @@ export const websiteConfig: WebsiteConfig = {
                 text: '01515 / 0405030'
             }
         }
-    ]
+    ],
+    sponsors: sponsorsConfig
 };

@@ -1,0 +1,19 @@
+<text-section
+    *ngIf="sponsors.mainSponsors|| sponsors.premiumSponsors || sponsors.partners"
+    [title]="'Unsere Sponsoren'"
+>
+    <div
+        *ngFor="let sponsorsEntry of sponsorsEntries; trackBy: TrackBy.property('0')"
+        class="sponsors-container"
+    >
+        <app-sponsors
+            *ngFor="let _ of counts(sponsorsEntry[0]); trackBy: TrackBy.identity"
+            class="sponsors"
+            [sponsors]="sponsorsEntry[1]"
+            [type]="sponsorsEntry[0]"
+            [ngStyle]="{
+                animationDuration: animationDuration(sponsorsEntry[0])
+            }"
+        />
+    </div>
+</text-section>

@@ -1,0 +1,78 @@
+<div
+    *ngIf="type === 'mainSponsors'"
+    id="main-sponsors"
+>
+    <div
+        *ngFor="let sponsor of sponsors; trackBy: TrackBy.property('name')"
+        class="sponsor"
+    >
+        <a
+            class="logo-link"
+            [href]="sponsorsPageLink.link"
+            [title]="sponsor.name"
+        >
+            <img
+                class="logo"
+                [src]="sponsor.logoSrc"
+                [title]="sponsor.name"
+                [alt]="sponsor.name"
+            >
+        </a>
+        <div
+            class="text-container"
+        >
+            <a
+                class="text name"
+                [href]="sponsorsPageLink.link"
+                [title]="sponsor.name"
+            >{{ sponsor.name }}</a>
+            <p
+                class="text address-street"
+            >{{ sponsor.address.streetName }}</p>
+            <p
+                class="text address-city"
+            >{{ sponsor.address.cityName }}</p>
+        </div>
+    </div>
+</div>
+
+<div
+    *ngIf="type === 'premiumSponsors'"
+    id="premium-sponsors"
+>
+    <a
+        *ngFor="let sponsor of sponsors; trackBy: TrackBy.property('name')"
+        class="sponsor"
+        [href]="sponsorsPageLink.link"
+        [title]="sponsor.name"
+    >
+        <img
+            class="logo"
+            [src]="sponsor.logoSrc"
+            [title]="sponsor.name"
+            [alt]="sponsor.name"
+        >
+        <p
+            class="text name"
+        >{{ sponsor.name }}</p>
+    </a>
+</div>
+
+<div
+    *ngIf="type === 'partners'"
+    id="partners"
+>
+    <a
+        *ngFor="let sponsor of sponsors; trackBy: TrackBy.property('name')"
+        class="sponsor"
+        [href]="sponsorsPageLink.link"
+        [title]="sponsor.name"
+    >
+        <img
+            class="logo"
+            [src]="sponsor.logoSrc"
+            [title]="sponsor.name"
+            [alt]="sponsor.name"
+        >
+    </a>
+</div>

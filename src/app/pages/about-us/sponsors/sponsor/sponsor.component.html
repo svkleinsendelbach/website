@@ -1,0 +1,61 @@
+<div
+    id="container"
+    [ngClass]="orientation + ' ' + deviceType.current"
+>
+    <div
+        id="spacer"
+    ></div>
+    <img
+        id="logo"
+        [src]="sponsor.logoSrc"
+        [title]="sponsor.name"
+        [alt]="sponsor.name"
+    >
+    <div
+        id="text-container"
+    >
+        <p
+            class="text name"
+        >{{ sponsor.name }}</p>
+        <p
+            class="text address-street"
+        >{{ sponsor.address.streetName }}</p>
+        <p
+            class="text address-city"
+        >{{ sponsor.address.cityName }}</p>
+        <p
+            *ngIf="sponsor.contact.telephone"
+            class="text contact"
+        >Telefon: <a
+            class="text link"
+            [href]="'tel:' + sponsor.contact.telephone"
+            [title]="sponsor.contact.telephone"
+        >{{ sponsor.contact.telephone }}</a></p>
+        <p
+            *ngIf="sponsor.contact.email"
+            class="text contact"
+        >E-Mail: <a
+            class="text link"
+            [href]="'mailto:' + sponsor.contact.email"
+            [title]="sponsor.contact.email"
+        >{{ sponsor.contact.email }}</a></p>
+        <p
+            *ngIf="sponsor.contact.website"
+            class="text contact"
+        >Website: <a
+            class="text link"
+            [href]="'https://www.' + sponsor.contact.website"
+            [title]="sponsor.name"
+            target="_blank"
+        >{{ sponsor.contact.website }}</a></p>
+        <p
+            *ngFor="let socialMedia of sponsor.contact.socialMedia; trackBy: TrackBy.property('name')"
+            class="text contact"
+        >{{ socialMedia.name }}: <a
+            class="text link"
+            [href]="socialMedia.link"
+            [title]="socialMedia.name"
+            target="_blank"
+        >{{ sponsor.name }}</a></p>
+    </div>
+</div>

@@ -34,6 +34,7 @@ import { SecondTeamPage } from '../pages/football-adults/second-team/second-team
 import { SportshomePage } from '../pages/about-us/sportshome/sportshome.page';
 import { StatutePage } from '../pages/about-us/statute/statute.page';
 import { Type } from '@angular/core';
+import { SponsorsPage } from '../pages/about-us/sponsors/sponsors.page';
 
 const associatedRoute: Record<InternalPath, Type<unknown>> = {
     'anfahrt': DrivePage,
@@ -66,6 +67,7 @@ const associatedRoute: Record<InternalPath, Type<unknown>> = {
     'kritik-vorschläge': CriticismSuggestionPage,
     'mitgliedsantrag': RequestPage,
     'satzung': StatutePage,
+    'sponsoren': SponsorsPage,
     'sportheim': SportshomePage,
     'tanzen': DancingPage,
     'über-uns': ManagersPage

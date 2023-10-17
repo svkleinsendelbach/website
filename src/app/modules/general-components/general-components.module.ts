@@ -11,6 +11,8 @@ import { NgModule } from '@angular/core';
 import { SquadComponent } from './components/squad/squad.component';
 import { SquadPersonComponent } from './components/squad/squad-person/squad-person.component';
 import { TextSectionModule } from '../text-section/text-section.module';
+import { SponsorsRowComponent } from './components/sponsors-row/sponsors-row.component';
+import { SponsorsComponent } from './components/sponsors-row/sponsor/sponsors.component';
 
 @NgModule({
     declarations: [
@@ -19,6 +21,8 @@ import { TextSectionModule } from '../text-section/text-section.module';
         ContactComponent,
         LinksComponent,
         MapsComponent,
+        SponsorsComponent,
+        SponsorsRowComponent,
         SquadComponent,
         SquadPersonComponent
     ],
@@ -28,6 +32,7 @@ import { TextSectionModule } from '../text-section/text-section.module';
         ContactComponent,
         LinksComponent,
         MapsComponent,
+        SponsorsRowComponent,
         SquadComponent
     ],
     imports: [

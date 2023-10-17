@@ -3,6 +3,7 @@ import { BannerItem } from '../pages/home/home-banner/home-banner.component';
 import { ContactItem } from '../modules/general-components/types/contact-item';
 import { Manager } from '../pages/about-us/managers/managers.page';
 import { ContactData } from '../modules/footer/types/contact-data';
+import { Sponsors } from '../types/sponsors';
 
 export interface WebsiteConfig {
 
@@ -29,4 +30,7 @@ export interface WebsiteConfig {
 
     // Contact items for footer
     footerContacts: ContactData[];
+
+    // Sponsors displayed on different pages
+    sponsors: Sponsors;
 }

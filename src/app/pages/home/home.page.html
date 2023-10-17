@@ -69,7 +69,7 @@
         class="text block margin-top-large"
     >Diese Website ist noch in Entwicklung, d.h. es können noch Fehler auftreten. Bitte melden Sie diese Fehler im <a
         class="text primaryColor"
-        href="https://github.com/svkleinsendelbach/website#bug-report-and-feature-request"
+        href="https://github.com/svkleinsendelbach/website"
         title="SV Kleinsendelbach e.V. Website Repository"
         target="_blank"
     >SV Kleinsendelbach e.V. Website Repository</a>. Sollten Sie neue Ideen für diese Website haben, können Sie auch diese dort einreichen.</p>
@@ -80,12 +80,14 @@
     [groupId]="reportGroupId"
     [maxListCount]="5"
     [showAllReportsButton]="true"
- />
+/>
 
 <app-social-media-links
-  [socialMediaData]="socialMediaData"
- />
+    [socialMediaData]="socialMediaData"
+/>
 
 <events
-  [groupIds]="eventGroupIds"
-><events>
+    [groupIds]="eventGroupIds"
+/>
+
+<sponsors-row/>

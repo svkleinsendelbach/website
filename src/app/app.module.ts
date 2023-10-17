@@ -81,6 +81,8 @@ import { EditingOccupancyPage } from './pages/editing/occupancy/editing-occupanc
 import { LocationCalendarDayViewComponent } from './pages/editing/occupancy/location-calendar-day-view/location-calendar-day-view.component';
 import { EditOccupancyPage } from './pages/editing/occupancy/edit-occupancy/edit-occupancy.page';
 import { EditingCriticismSuggestionPage } from './pages/editing/criticism-suggestion/editing-criticism-suggestion.page';
+import { SponsorsPage } from './pages/about-us/sponsors/sponsors.page';
+import { SponsorComponent } from './pages/about-us/sponsors/sponsor/sponsor.component';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -125,6 +127,8 @@ import { EditingCriticismSuggestionPage } from './pages/editing/criticism-sugges
         RequestPage,
         SecondTeamPage,
         SocialMediaLinksComponent,
+        SponsorComponent,
+        SponsorsPage,
         SportshomePage,
         StatutePage
     ],

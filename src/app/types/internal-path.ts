@@ -31,6 +31,7 @@ export type InternalPath =
     | 'kritik-vorschläge'
     | 'mitgliedsantrag'
     | 'satzung'
+    | 'sponsoren'
     | 'sportheim'
     | 'tanzen'
     | 'über-uns';
@@ -42,6 +43,7 @@ export namespace InternalPath {
         'sportheim',
         'chroniken',
         'satzung',
+        'sponsoren',
         'datenschutz',
         'mitgliedsantrag',
         'fussball/herren',
@@ -103,6 +105,7 @@ export namespace InternalPath {
         'kritik-vorschläge': 'Kritik und Vorschläge',
         'mitgliedsantrag': 'Mitgliedsantrag',
         'satzung': 'Satzung',
+        'sponsoren': 'Unsere Sponsoren',
         'sportheim': 'Sportheim',
         'tanzen': 'Tanzen',
         'über-uns': 'Über uns'

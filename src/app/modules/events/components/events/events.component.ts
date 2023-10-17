@@ -49,6 +49,8 @@ export class EventsComponent implements OnInit {
     }
 
     public ngOnInit() {
+        if (!(this.groupIds as EventGroupId[] | undefined))
+            return;
         for (const groupId of this.groupIds)
             this.calendarSubscriptionSelection[groupId] = true;
         this.firebaseApiService.function('event').function('get')

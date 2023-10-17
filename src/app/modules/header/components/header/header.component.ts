@@ -4,28 +4,31 @@ import { InternalPath, InternalLink } from 'src/app/types/internal-path';
 import { Link } from 'src/app/types/link';
 import { HeaderItem } from '../../types/header-item';
 
+type AllPathes = InternalPath | 'fussball/jugend/a-jugend' | 'fussball/jugend/b-jugend' | 'fussball/jugend/d-jugend' | 'onlineshop';
+
 @Component({
     selector: 'header',
     styleUrls: ['./header.component.sass'],
     templateUrl: './header.component.html'
 })
 export class HeaderComponent {
-    private readonly headerItemLink: Record<InternalPath | 'fussball/jugend/a-jugend' | 'fussball/jugend/b-jugend' | 'fussball/jugend/d-jugend', Link> = {
+    private readonly headerItemLink: Record<AllPathes, Link> = {
         ...InternalLink.all,
         'fussball/jugend/a-jugend': Link.external('A-Jugend (SV Hetzles)', 'http://sv-hetzles.de/index.php/a-junioren'),
         'fussball/jugend/b-jugend': Link.external('B-Jugend (SV Hetzles)', 'http://sv-hetzles.de/index.php/b-junioren-u17'),
-        'fussball/jugend/d-jugend': Link.external('D-Jugend (TSV Neunk. a. B.)', 'http://www.tsv-neunkirchen-am-brand.de/fu/junioren')
+        'fussball/jugend/d-jugend': Link.external('D-Jugend (TSV Neunk. a. B.)', 'http://www.tsv-neunkirchen-am-brand.de/fu/junioren'),
+        'onlineshop': Link.external('Onlineshop', 'https://sv-kleinsendelbach.fan12.de')
     };
 
     private readonly headerDataConfig: Record<DeviceType, {
-        topItem: InternalPath | 'fussball/jugend/a-jugend' | 'fussball/jugend/b-jugend' | 'fussball/jugend/d-jugend';
-        subItems?: (InternalPath | 'fussball/jugend/a-jugend' | 'fussball/jugend/b-jugend' | 'fussball/jugend/d-jugend')[];
+        topItem: AllPathes;
+        subItems?: (AllPathes)[];
     }[]> = {
             desktop: [
                 { topItem: 'home' },
                 {
                     topItem: 'über-uns',
-                    subItems: ['über-uns', 'sportheim', 'chroniken', 'satzung', 'datenschutz', 'mitgliedsantrag']
+                    subItems: ['über-uns', 'sportheim', 'onlineshop', 'chroniken', 'satzung', 'sponsoren', 'datenschutz', 'mitgliedsantrag']
                 },
                 {
                     topItem: 'fussball/herren',
@@ -47,7 +50,7 @@ export class HeaderComponent {
                 },
                 {
                     topItem: 'über-uns',
-                    subItems: ['über-uns', 'sportheim', 'chroniken', 'satzung', 'datenschutz', 'mitgliedsantrag']
+                    subItems: ['über-uns', 'sportheim', 'onlineshop', 'chroniken', 'satzung', 'sponsoren', 'datenschutz', 'mitgliedsantrag']
                 },
                 {
                     topItem: 'fussball/herren',
@@ -69,7 +72,7 @@ export class HeaderComponent {
                 },
                 {
                     topItem: 'über-uns',
-                    subItems: ['über-uns', 'sportheim', 'chroniken', 'satzung', 'datenschutz', 'mitgliedsantrag']
+                    subItems: ['über-uns', 'sportheim', 'onlineshop', 'chroniken', 'satzung', 'sponsoren', 'datenschutz', 'mitgliedsantrag']
                 },
                 {
                     topItem: 'fussball/herren',

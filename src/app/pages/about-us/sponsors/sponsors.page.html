@@ -1,0 +1,158 @@
+<text-section
+    *ngIf="mainSponsors"
+    [title]="'Unsere Hauptsponsoren'"
+    id="main-sponsors"
+>
+    <div
+        class="container"
+        [ngClass]="deviceType.current"
+    >
+        <app-sponsor
+            *ngFor="let sponsor of mainSponsors; trackBy: TrackBy.property('name')"
+            [sponsor]="sponsor"
+            [orientation]="deviceType.current !== 'mobile' ? 'row' : 'column'"
+            class="sponsor"
+        />
+    </div>
+</text-section>
+
+<text-section
+    *ngIf="premiumSponsors"
+    [title]="'Unsere Premiumsponsoren'"
+    id="premium-sponsors"
+>
+    <div
+        class="container"
+        [ngClass]="deviceType.current"
+    >
+        <app-sponsor
+            *ngFor="let sponsor of premiumSponsors; trackBy: TrackBy.property('name')"
+            [sponsor]="sponsor"
+            [orientation]="deviceType.current !== 'mobile' ? 'row' : 'column'"
+            class="sponsor"
+        />
+    </div>
+</text-section>
+
+<text-section
+    *ngIf="partners"
+    [title]="'Weitere Partner'"
+    id="partners"
+>
+    <div
+        class="container"
+        [ngClass]="deviceType.current"
+    >
+        <app-sponsor
+            *ngFor="let sponsor of partners; trackBy: TrackBy.property('name')"
+            [sponsor]="sponsor"
+            [orientation]="'column'"
+            class="sponsor"
+        />
+    </div>
+</text-section>
+
+<text-section
+    [title]="'Sponsor werden'"
+>
+    <p
+        class="text"
+    >Möchten Sie auch Sponsor werden, schreiben Sie der Vorstandschaft unter <a
+        class="text"
+        [href]="contactPageLink.link"
+        title="Kontakt"
+    >Kontakt</a>.</p>
+    <p
+        class="text"
+    >Es ist auch ein Trikot- / Traininganzug-Sponsoring der Jugend Mannschaften möglich.</p>
+    <div
+        class="sponsoring"
+        [ngClass]="deviceType.current"
+    >
+        <p
+            class="left"
+        >Hauptsponsor</p>
+        <div
+            class="right"
+        >
+            <p
+                class="benefits"
+            >- 4 Meter Bandenwerbung (ohne Herstellkosten)</p>
+            <p
+                class="benefits"
+            >- Anzeige auf Homepage als Hauptsponsor</p>
+            <p
+                class="benefits"
+            >- Werbung auf unseren Social-Media-Kanälen</p>
+            <p
+                class="price"
+            >300,00 Euro pro Jahr</p>
+        </div>
+    </div>
+    <div
+        class="sponsoring"
+        [ngClass]="deviceType.current"
+    >
+        <p
+            class="left"
+        >Premiumsponsor</p>
+        <div
+            class="right"
+        >
+            <p
+                class="benefits"
+            >- 2 Meter Bandenwerbung (ohne Herstellkosten)</p>
+            <p
+                class="benefits"
+            >- Anzeige auf Homepage als Premiumsponsor</p>
+            <p
+                class="benefits"
+            >- Werbung auf unseren Social-Media-Kanälen</p>
+            <p
+                class="price"
+            >200,00 Euro pro Jahr</p>
+        </div>
+    </div>
+    <div
+        class="sponsoring"
+        [ngClass]="deviceType.current"
+    >
+        <p
+            class="left"
+        >Partner</p>
+        <div
+            class="right"
+        >
+            <p
+                class="benefits"
+            >- Anzeige auf Homepage als Partner</p>
+            <p
+                class="benefits"
+            >- Werbung auf unseren Social-Media-Kanälen</p>
+            <p
+                class="price"
+            >100,00 Euro pro Jahr</p>
+        </div>
+    </div>
+    <div
+        class="sponsoring"
+        [ngClass]="deviceType.current"
+    >
+        <p
+            class="left"
+        >Trikotsponsor</p>
+        <div
+            class="right"
+        >
+            <p
+                class="benefits"
+            >- Anzeige auf Homepage als Premiumsponsor</p>
+            <p
+                class="benefits"
+            >- Werbung auf unseren Social-Media-Kanälen</p>
+            <p
+                class="price"
+            >Preis nach Absprache</p>
+        </div>
+    </div>
+</text-section>

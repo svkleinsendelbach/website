@@ -6,6 +6,7 @@ import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 import { TrackBy } from 'src/app/types/track-by';
 import { websiteConfig } from 'src/app/config/website-config';
+import { Link } from 'src/app/types/link';
 
 export interface Manager {
     name: string;
@@ -31,6 +32,12 @@ export class ManagersPage {
             title: 'Sportheim'
         },
         {
+            id: 'onlineshop',
+            link: Link.external('Onlineshop', 'https://sv-kleinsendelbach.fan12.de'),
+            subtitle: 'Besuchen Sie unseren Onlineshop',
+            title: 'Onlineshop'
+        },
+        {
             id: 'chronicle',
             link: InternalLink.all.chroniken,
             subtitle: 'Chronik des Sportverein Kleinsendelbach',
@@ -41,6 +48,12 @@ export class ManagersPage {
             link: InternalLink.all.satzung,
             subtitle: 'Satzung des SV Kleinsendelbach e.V.',
             title: 'Satzung'
+        },
+        {
+            id: 'sponsors',
+            link: InternalLink.all.sponsoren,
+            subtitle: 'Die Sponsoren des SV Kleinsendelbach',
+            title: 'Unsere Sponsoren'
         },
         {
             id: 'privacy',

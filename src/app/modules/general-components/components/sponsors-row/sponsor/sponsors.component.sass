@@ -1,0 +1,58 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+@import '/src/sass/color'
+
+#main-sponsors
+    @include flex-row(flex-start, flex-start)
+
+    .sponsor
+        @include flex-row(center, center)
+        padding: 0 50px
+        border-right: 1px solid color('text')
+        height: 150px
+
+        .logo-link
+            .logo
+                height: 150px
+
+        .text-container
+            margin-left: 20px
+
+            .name, .address-street, .address-city
+                @include font-size('normal')
+                text-align: left
+                white-space: nowrap
+
+            .name
+                @include font-weight('semi-bold')
+                color: color(text)
+
+#premium-sponsors
+    @include flex-row(flex-start, flex-start)
+
+    .sponsor
+        @include flex-column(center, center)
+        padding: 0 50px
+        border-right: 1px solid color('text')
+        text-decoration: none
+
+        .logo
+            height: 100px
+
+        .name
+            @include font-size('normal')
+            text-align: center
+            white-space: nowrap
+            margin-top: 10px
+            color: color(text)
+
+#partners
+    @include flex-row(flex-start, flex-start)
+
+    .sponsor
+        @include flex-column(center, center)
+        padding: 0 25px
+        text-decoration: none
+
+        .logo
+            height: 75px
