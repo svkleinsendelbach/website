@@ -33,8 +33,7 @@
                 "input": "./node_modules/@kolkov/angular-editor/assets/",
                 "output": "./assets/fonts/"
               },
-              "src/sass/color.sass",
-              "src/ads.txt"
+              "src/sass/color.sass"
             ],
             "styles": [
               "node_modules/angular-calendar/css/angular-calendar.css",
@@ -111,8 +110,7 @@
             "inlineStyleLanguage": "sass",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "src/ads.txt"
+              "src/assets"
             ],
             "styles": [
               "node_modules/angular-calendar/css/angular-calendar.css",

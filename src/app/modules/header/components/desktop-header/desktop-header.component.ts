@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { HeaderItem } from '../../types/header-item';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { TrackBy } from 'src/app/types/track-by';
-import { InternalLink } from 'src/app/types/internal-path';
 
 @Component({
     selector: 'desktop-header',
@@ -11,8 +10,6 @@ import { InternalLink } from 'src/app/types/internal-path';
 })
 export class DesktopHeaderComponent {
     @Input() public headerItems!: HeaderItem[];
-
-    public homeLink = InternalLink.all.home;
 
     public TrackBy = TrackBy;
 

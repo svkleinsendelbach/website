@@ -8,7 +8,7 @@ import { Guid } from 'src/app/modules/firebase-api/types/guid';
 import { InputError } from 'src/app/modules/input-form/types/input-error';
 import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';
-import { InternalLink } from 'src/app/types/internal-path';
+import { internalLinks } from 'src/app/types/internal-link-path';
 import { Router } from '@angular/router';
 import { SelectOptions } from 'src/app/modules/input-form/components/input-field/select/select.component';
 import { SharedDataService } from 'src/app/services/shared-data.service';
@@ -24,10 +24,6 @@ import { Validator } from 'src/app/modules/input-form/types/validator';
     templateUrl: './edit-event.page.html'
 })
 export class EditEventPage implements OnInit {
-    public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
-
-    public editEventsLink = InternalLink.all['bearbeiten/termine'];
-
     public previousEvent: {
         groupId: EventGroupId;
         event: Event.Flatten;
@@ -164,7 +160,7 @@ export class EditEventPage implements OnInit {
                 this.inputForm.status = 'failed';
                 throw reason;
             });
-        await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine'].link);
+        await this.router.navigateByUrl(internalLinks['bearbeiten/termine'].link);
         this.inputForm.status = 'valid';
     }
 }

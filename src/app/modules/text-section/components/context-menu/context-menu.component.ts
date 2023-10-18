@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
-import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'context-menu',
@@ -9,8 +8,6 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
     templateUrl: './context-menu.component.html'
 })
 export class ContextMenuComponent {
-    public ellipsisVertical = faEllipsisVertical;
-
     public isShown = false;
 
     public constructor(

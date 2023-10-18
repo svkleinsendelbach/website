@@ -1,5 +1,5 @@
 <app-editing-navigation-bar
-    [backButtonLink]="editOccupancyLink"
+    backButtonLink="bearbeiten/belegungsplan"
 />
 <authentication-check
     [roles]="['websiteManager']"
@@ -15,36 +15,36 @@
             (cancelButtonClicked)="saveOccupancy(true)"
         >
             <input-field-select
-                [label]="'Ort'"
+                label="Ort"
                 [selectOptions]="selectLocationOptions"
                 [inputField]="inputForm.field('location')"
             />
             <input-field-text
-                [label]="'Titel'"
+                label="Titel"
                 [inputField]="inputForm.field('title')"
             />
             <input-field-date-time
-                [label]="'Beginn'"
+                label="Beginn"
                 [inputField]="inputForm.field('start')"
             />
             <input-field-date-time
-                [label]="'Ende'"
+                label="Ende"
                 [inputField]="inputForm.field('end')"
             />
             <input-field-checkbox
-                [label]="'Wiederholen'"
+                label="Wiederholen"
                 [inputField]="inputForm.field('isRecurring')"
             />
             <input-field-select
                 *ngIf="inputForm.field('isRecurring').value"
-                [label]="'Wiederholen pro'"
+                label="Wiederholen pro"
                 [selectOptions]="selectRecurringTypeOptions"
                 [inputField]="inputForm.field('recurringRepeatEvery')"
             />
             <input-field-date-time
                 *ngIf="inputForm.field('isRecurring').value"
-                [label]="'Endet am'"
-                [components]="'date'"
+                label="Endet am"
+                components="date"
                 [inputField]="inputForm.field('recurringUntilIncluding')"
             />
         </input-form>

@@ -1,6 +1,6 @@
 <!-- eslint-disable @angular-eslint/template/no-interpolation-in-attributes -->
 <text-section
-    [title]="'Kontakt'"
+    title="Kontakt"
 >
     <div
         id="contacts"
@@ -24,7 +24,7 @@
             >
                 <fa-icon
                     class="icon"
-                    [icon]="faPhone"
+                    icon="phone"
                 />
                 {{ contact.telephone.text }}
             </a>
@@ -36,7 +36,7 @@
             >
                 <fa-icon
                     class="icon"
-                    [icon]="faMobile"
+                    icon="mobile"
                 />
                 {{ contact.mobile.text }}
             </a>
@@ -48,7 +48,7 @@
             >
                 <fa-icon
                     class="icon"
-                    [icon]="faEnvelope"
+                    icon="envelope"
                 />
                 {{ contact.email }}
             </a>

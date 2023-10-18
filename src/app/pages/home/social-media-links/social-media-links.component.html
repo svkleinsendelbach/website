@@ -1,5 +1,5 @@
 <text-section
-    [title]="'Schauen Sie auch mal bei unseren Social-Media Kanälen vorbei!'"
+    title="Schauen Sie auch mal bei unseren Social-Media Kanälen vorbei!"
 >
     <div
         id="link-rows"
@@ -9,11 +9,9 @@
             *ngFor="let linkRow of socialMediaItems; trackBy: TrackBy.identity"
         >
             <a
-                class="social-media-link"
                 *ngFor="let socialMediaLink of linkRow; trackBy: TrackBy.id"
-                [href]="socialMediaLink.link.link"
-                [target]="socialMediaLink.link.target"
-                [title]="socialMediaLink.link.title"
+                [link]="socialMediaLink.link"
+                class="social-media-link"
             >
                 <fa-icon
                     *ngIf="isIcon(socialMediaLink.image)"

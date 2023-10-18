@@ -11,9 +11,8 @@
         >
         <a
             *ngFor="let link of links; trackBy: TrackBy.property('link')"
+            [link]="link"
             class="link"
-            [href]="link.link"
-            [title]="link.title"
         >{{ link.title }}</a>
         <div
             id="appearance-container"
@@ -33,9 +32,8 @@
             id="copyright"
         >© Copyright 2023 SV Kleinsendelbach e.V.</p>
         <a
+            link="bearbeiten"
             id="edit-link"
-            [href]="editLink.link"
-            [title]="editLink.title"
         >Bearbeiten</a>
     </div>
 
@@ -69,7 +67,7 @@
             >
                 <fa-icon
                     class="icon"
-                    [icon]="faPhone"
+                    icon="phone"
                 />
                 <p
                     class="number"

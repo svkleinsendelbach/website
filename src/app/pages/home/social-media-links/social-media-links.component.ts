@@ -1,17 +1,17 @@
 import { Component, Input } from '@angular/core';
 import { AppearanceService } from '../../../services/appearance.service';
 import { DeviceTypeService } from '../../../services/device-type.service';
-import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'src/app/types/link';
 import { StyleConfigService } from '../../../services/style-config.service';
 import { TrackBy } from 'src/app/types/track-by';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export interface SocialMediaItem {
     id: string;
     title: string;
     name: string;
     link: Link;
-    image: IconDefinition | {
+    image: IconProp | {
         lightModeSource: string;
         darkModeSource: string;
     };
@@ -43,10 +43,10 @@ export class SocialMediaLinksComponent {
         return this.socialMediaData[this.deviceType.current];
     }
 
-    public isIcon(image: IconDefinition | {
+    public isIcon(image: IconProp | {
         lightModeSource: string;
         darkModeSource: string;
-    }): image is IconDefinition {
-        return !('lightModeSource' in image);
+    }): image is IconProp {
+        return !(typeof image === 'object' && 'lightModeSource' in image);
     }
 }

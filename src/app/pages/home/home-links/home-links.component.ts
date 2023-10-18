@@ -1,15 +1,16 @@
 import { Component, Input } from '@angular/core';
 import { DeviceTypeService } from '../../../services/device-type.service';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { Link } from 'src/app/types/link';
 import { StyleConfigService } from '../../../services/style-config.service';
 import { TrackBy } from 'src/app/types/track-by';
+import { InternalLinkPath } from 'src/app/types/internal-link-path';
 
 export interface LinkItem {
     name: string;
-    link: Link;
+    link: Link | InternalLinkPath;
     description: string;
-    icon: IconDefinition;
+    icon: IconProp;
     animation: 'jump' | 'rotation' | 'shake';
 }
 

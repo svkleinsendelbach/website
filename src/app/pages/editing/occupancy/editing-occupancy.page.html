@@ -1,12 +1,12 @@
 <app-editing-navigation-bar
-    [backButtonLink]="editMainPageLink"
+    backButtonLink="bearbeiten"
 />
 <authentication-check
     [roles]="['occupancyManager']"
     (onAuthentication)="getOccupancy()"
 >
     <text-section
-        [title]="'Belegungsplan'"
+        title="Belegungsplan"
         [ngClass]="appearance.current + ' ' + deviceType.current"
     >
         <p

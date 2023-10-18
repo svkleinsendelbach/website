@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { InternalLink } from 'src/app/types/internal-path';
 import { LinkData } from 'src/app/modules/general-components/types/link-data';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
@@ -27,7 +26,7 @@ export class ManagersPage {
     public readonly links: LinkData[] = [
         {
             id: 'sportshome',
-            link: InternalLink.all.sportheim,
+            link: 'sportheim',
             subtitle: 'Öffungszeiten des Sportheims in Kleinsendelbach',
             title: 'Sportheim'
         },
@@ -39,31 +38,31 @@ export class ManagersPage {
         },
         {
             id: 'chronicle',
-            link: InternalLink.all.chroniken,
+            link: 'chroniken',
             subtitle: 'Chronik des Sportverein Kleinsendelbach',
             title: 'Chronik'
         },
         {
             id: 'statute',
-            link: InternalLink.all.satzung,
+            link: 'satzung',
             subtitle: 'Satzung des SV Kleinsendelbach e.V.',
             title: 'Satzung'
         },
         {
             id: 'sponsors',
-            link: InternalLink.all.sponsoren,
+            link: 'sponsoren',
             subtitle: 'Die Sponsoren des SV Kleinsendelbach',
             title: 'Unsere Sponsoren'
         },
         {
             id: 'privacy',
-            link: InternalLink.all.datenschutz,
+            link: 'datenschutz',
             subtitle: 'Datenschutzerklärung des Sportverein Kleinsendelbach',
             title: 'Datenschutz'
         },
         {
             id: 'request',
-            link: InternalLink.all.mitgliedsantrag,
+            link: 'mitgliedsantrag',
             subtitle: 'Jetzt Mitglied werden',
             title: 'Mitgliedsantrag'
         }

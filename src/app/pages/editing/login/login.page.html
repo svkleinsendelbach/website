@@ -1,5 +1,5 @@
 <text-section
-    [title]="'Authentifizierung wird überprüft'"
+    title="Authentifizierung wird überprüft"
     *ngIf="state === 'loading'"
 >
     <p
@@ -7,17 +7,15 @@
     >Es wird überprüft, ob Sie berechtigt sind diese Seite zu besuchen.</p>
 </text-section>
 <text-section
-    [title]="'Authentifizierung bestätigt'"
+    title="Authentifizierung bestätigt"
     *ngIf="state === 'alreadyLoggedIn'"
 >
     <p
         class="text large margin-top-large secondaryColor"
     >Sie konnten nicht automatisch weitergeleitet werden. Bitte nutzen Sie den Link:</p>
     <a
+        link="bearbeiten"
         class="text large"
-        [href]="editPageLink.link"
-        [target]="editPageLink.target"
-        [title]="editPageLink.title"
     >Website bearbeiten</a>
 </text-section>
 <div

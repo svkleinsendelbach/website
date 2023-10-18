@@ -1,8 +1,8 @@
 <a
-    id="back-button"
     *ngIf="backButtonLink"
+    [link]="backButtonLink"
     title="Zurück"
-    [href]="backButtonLink.link"
+    id="back-button"
 >Zurück</a>
 <p
     *ngIf="!backButtonLink"

@@ -3,9 +3,7 @@ import { CookieSelectionService } from '../../services/cookie-selection.service'
 import { CookieType } from '../../types/cookie-type';
 import { CookiesSelection } from '../../types/cookie-selection';
 import { DeviceTypeService } from '../../../../services/device-type.service';
-import { Link } from 'src/app/types/link';
 import { StyleConfigService } from '../../../../services/style-config.service';
-import { InternalLink } from 'src/app/types/internal-path';
 
 @Component({
     selector: 'cookie-selector',
@@ -14,8 +12,6 @@ import { InternalLink } from 'src/app/types/internal-path';
 })
 export class CookieSelectorComponent implements OnInit, OnDestroy {
     @Input() public isShown = false;
-
-    public privacyLink = InternalLink.all.datenschutz;
 
     public showSelection: boolean;
 

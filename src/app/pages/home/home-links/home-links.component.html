@@ -7,10 +7,9 @@
   >
     <a
       *ngFor="let linkItem of linkRow; trackBy: TrackBy.property('name')"
-      class="link-item"
-      [href]="linkItem.link.link"
-      [target]="linkItem.link.target"
+      [link]="linkItem.link"
       [title]="linkItem.name"
+      class="link-item"
     >
       <fa-icon
         [class]="['icon', linkItem.animation]"

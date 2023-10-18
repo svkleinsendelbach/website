@@ -1,11 +1,14 @@
 <div
   id="container"
+  [ngClass]="{
+      expanded: isExpanded
+  }"
 >
     <div
         id="top-row"
     >
         <a
-            [href]="homeLink.link"
+            link="home"
             title="Startseite"
             id="logo-container"
         >
@@ -22,13 +25,13 @@
         <fa-icon
             class="hamburger-menu"
             *ngIf="!isExpanded"
-            [icon]="faBars"
+            icon="bars"
             (click)="handleHamburgerMenuClick(true)"
         />
         <fa-icon
             class="hamburger-menu"
             *ngIf="isExpanded"
-            [icon]="faTimes"
+            icon="times"
             (click)="handleHamburgerMenuClick(false)"
         />
     </div>
@@ -50,6 +53,6 @@
 <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
 <div
     id="background"
-    *ngIf="isExpanded || expandedHeaderItemId !== null"
+    *ngIf="isExpanded"
     (click)="$event.preventDefault(); $event.stopPropagation(); isExpanded = false; expandedHeaderItemId = null"
 ></div>

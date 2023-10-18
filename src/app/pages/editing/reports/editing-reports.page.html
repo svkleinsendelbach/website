@@ -1,12 +1,12 @@
 <app-editing-navigation-bar
-    [backButtonLink]="mainEditingPageLink"
+    backButtonLink="bearbeiten"
 />
 <authentication-check
     [roles]="['websiteManager']"
     (onAuthentication)="getReports()"
 >
     <text-section
-        [title]="'Berichte bearbeiten'"
+        title="Berichte bearbeiten"
     >
         <p
             id="add-report"

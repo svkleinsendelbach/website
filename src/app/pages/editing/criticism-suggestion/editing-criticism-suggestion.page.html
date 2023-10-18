@@ -1,12 +1,12 @@
 <app-editing-navigation-bar
-    [backButtonLink]="mainEditingPageLink"
+    backButtonLink="bearbeiten"
 />
 <authentication-check
     [roles]="['admin']"
     (onAuthentication)="getCriticismSuggestions()"
 >
     <text-section
-        [title]="'Kritik und Vorschläge'"
+        title="Kritik und Vorschläge"
         [ngClass]="deviceType.current"
     >
         <p
@@ -64,7 +64,7 @@
     </text-section>
     <text-section
         *ngIf="criticismSuggestions.isSuccess() && criticismSuggestions.content.workedOff"
-        [title]="'Abgearbeitete Kritik und Vorschläge'"
+        title="Abgearbeitete Kritik und Vorschläge"
         [ngClass]="deviceType.current"
     >
         <div

@@ -52,6 +52,10 @@
         height: 100%
         width: 100vw
 
+    &.expanded #top-row
+        border-bottom: 1px solid color('text')
+
+
 #background
     height: 100vh
     left: 0
@@ -59,3 +63,4 @@
     top: 0
     width: 100vw
     z-index: 1000
+    backdrop-filter: blur(3px)

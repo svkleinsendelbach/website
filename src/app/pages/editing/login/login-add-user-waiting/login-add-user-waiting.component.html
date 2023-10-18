@@ -1,22 +1,22 @@
 <text-section
-    [title]="'Beantragen die Website zu bearbeiten'"
+    title="Beantragen die Website zu bearbeiten"
 >
     <p
         class="text margin-bottom-large secondaryColor"
     >Du bist nicht registriert um die Webseite zu bearbeiten. Um die Rechte dafür zu beantragen, gebe deinen Namen an und klicke auf 'Beantragen'. Dies kann einige Tage dauern. Ansonsten klicke auf 'Abbrechen'.</p>
     <input-form
         [inputForm]="inputForm"
-        [submitButtonText]="'Beantragen'"
+        submitButtonText="Beantragen"
         (submitButtonClicked)="handleApply()"
-        [cancelButtonText]="'Abbrechen'"
+        cancelButtonText="Abbrechen"
         (cancelButtonClicked)="handleCancel()"
     >
         <input-field-text
-            [label]="'Ihr Vorname'"
+            label="Ihr Vorname"
             [inputField]="inputForm.field('firstName')"
         />
         <input-field-text
-            [label]="'Ihr Nachname'"
+            label="Ihr Nachname"
             [inputField]="inputForm.field('lastName')"
         />
     </input-form>

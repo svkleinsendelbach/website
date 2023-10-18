@@ -1,12 +1,12 @@
 <app-editing-navigation-bar
-    [backButtonLink]="mainEditingPageLink"
+    backButtonLink="bearbeiten"
 />
 <authentication-check
     [roles]="['admin']"
     (onAuthentication)="getUsers()"
 >
     <text-section
-        [title]="'Benutzer'"
+        title="Benutzer"
     >
         <p
             *ngIf="!users"

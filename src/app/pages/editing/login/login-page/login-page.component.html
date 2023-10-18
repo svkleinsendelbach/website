@@ -1,17 +1,17 @@
 <text-section
-    [title]="'Anmeldung um die Website zu bearbeiten'"
+    title="Anmeldung um die Website zu bearbeiten"
 >
     <input-form
         [inputForm]="inputForm"
-        [submitButtonText]="'Anmelden'"
+        submitButtonText="Anmelden"
         (submitButtonClicked)="onSubmit()"
     >
         <input-field-text
-        [label]="'E-Mail Adresse'"
+        label="E-Mail Adresse"
         [inputField]="inputForm.field('email')"
         />
         <input-field-text
-        [label]="'Passwort'"
+        label="Passwort"
         [secure]="true"
         [inputField]="inputForm.field('password')"
         />

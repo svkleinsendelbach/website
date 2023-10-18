@@ -5,7 +5,6 @@ import { FirebaseApiService } from 'src/app/modules/firebase-api/services/fireba
 import { InputError } from 'src/app/modules/input-form/types/input-error';
 import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';
-import { InternalLink } from 'src/app/types/internal-path';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { SelectOptions } from 'src/app/modules/input-form/components/input-field/select/select.component';
 import { StyleConfigService } from 'src/app/services/style-config.service';
@@ -46,8 +45,6 @@ namespace Receiver {
     templateUrl: './contact.page.html'
 })
 export class ContactPage {
-    public criticismSuggestionPageLink = InternalLink.all['kritik-vorschläge'];
-
     // eslint-disable-next-line @typescript-eslint/consistent-generic-constructors
     public inputForm: InputForm<{
         name: InputField<string>;

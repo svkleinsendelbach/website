@@ -1,4 +1,4 @@
-export const mapStyleDarkAppearence: google.maps.MapTypeStyle[] = [
+export const mapDarkAppearanceConfig: google.maps.MapTypeStyle[] = [
     {
         elementType: 'geometry',
         stylers: [{ color: '#242f3e' }]

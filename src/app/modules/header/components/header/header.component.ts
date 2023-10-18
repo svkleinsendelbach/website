@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { DeviceType, DeviceTypeService } from 'src/app/services/device-type.service';
-import { InternalPath, InternalLink } from 'src/app/types/internal-path';
+import { InternalLinkPath, internalLinks } from 'src/app/types/internal-link-path';
 import { Link } from 'src/app/types/link';
 import { HeaderItem } from '../../types/header-item';
 
-type AllPathes = InternalPath | 'fussball/jugend/a-jugend' | 'fussball/jugend/b-jugend' | 'fussball/jugend/d-jugend' | 'onlineshop';
+type AllPathes = InternalLinkPath | 'fussball/jugend/a-jugend' | 'fussball/jugend/b-jugend' | 'fussball/jugend/d-jugend' | 'onlineshop';
 
 @Component({
     selector: 'header',
@@ -13,7 +13,7 @@ type AllPathes = InternalPath | 'fussball/jugend/a-jugend' | 'fussball/jugend/b-
 })
 export class HeaderComponent {
     private readonly headerItemLink: Record<AllPathes, Link> = {
-        ...InternalLink.all,
+        ...internalLinks,
         'fussball/jugend/a-jugend': Link.external('A-Jugend (SV Hetzles)', 'http://sv-hetzles.de/index.php/a-junioren'),
         'fussball/jugend/b-jugend': Link.external('B-Jugend (SV Hetzles)', 'http://sv-hetzles.de/index.php/b-junioren-u17'),
         'fussball/jugend/d-jugend': Link.external('D-Jugend (TSV Neunk. a. B.)', 'http://www.tsv-neunkirchen-am-brand.de/fu/junioren'),

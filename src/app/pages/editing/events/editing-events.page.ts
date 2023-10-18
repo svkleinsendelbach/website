@@ -3,12 +3,12 @@ import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { Guid } from 'src/app/modules/firebase-api/types/guid';
-import { InternalLink } from 'src/app/types/internal-path';
 import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 import { TrackBy } from 'src/app/types/track-by';
+import { internalLinks } from 'src/app/types/internal-link-path';
 
 @Component({
     selector: 'pages-editing-events',
@@ -19,10 +19,6 @@ export class EditingEventsPage {
     public TrackBy = TrackBy;
 
     public Event = Event;
-
-    public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
-
-    public mainEditingPageLink = InternalLink.all.bearbeiten;
 
     public allEventGroupIds = EventGroupId.all;
 
@@ -81,12 +77,12 @@ export class EditingEventsPage {
             event: Event.flatten(event),
             groupId: groupId
         });
-        await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine/bearbeiten'].link);
+        await this.router.navigateByUrl(internalLinks['bearbeiten/termine/bearbeiten'].link);
     }
 
     public async addNewEvent() {
         this.sharedData.removeValue('editEvent');
-        await this.router.navigateByUrl(InternalLink.all['bearbeiten/termine/bearbeiten'].link);
+        await this.router.navigateByUrl(internalLinks['bearbeiten/termine/bearbeiten'].link);
     }
 
     public async getEvents() {

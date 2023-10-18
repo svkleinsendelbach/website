@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { InternalLink } from 'src/app/types/internal-path';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 
@@ -10,10 +9,6 @@ import { Title } from '@angular/platform-browser';
     templateUrl: './page-not-found.page.html'
 })
 export class PageNotFoundPage {
-    public homeLink = InternalLink.all.home;
-
-    public criticismSuggestionPageLink = InternalLink.all['kritik-vorschläge'];
-
     public constructor(
         public readonly titleService: Title,
         public readonly deviceType: DeviceTypeService,

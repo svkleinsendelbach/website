@@ -6,6 +6,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { MobileHeaderComponent } from './components/mobile-header/mobile-header.component';
 import { MobileHeaderItemComponent } from './components/mobile-header-item/mobile-header-item.component';
 import { NgModule } from '@angular/core';
+import { TextSectionModule } from '../text-section/text-section.module';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { NgModule } from '@angular/core';
     exports: [HeaderComponent],
     imports: [
         CommonModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        TextSectionModule
     ]
 })
 export class HeaderModule { }

@@ -5,7 +5,6 @@ import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Sponsor } from 'src/app/types/sponsors';
 import { websiteConfig } from 'src/app/config/website-config';
-import { InternalLink } from 'src/app/types/internal-path';
 
 @Component({
     selector: 'pages-sponsors',
@@ -14,8 +13,6 @@ import { InternalLink } from 'src/app/types/internal-path';
 })
 export class SponsorsPage {
     public TrackBy = TrackBy;
-
-    public contactPageLink = InternalLink.all.kontakt;
 
     public constructor(
         public readonly titleService: Title,

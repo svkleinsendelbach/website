@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/modules/authentication/services/auth.service';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { InternalLink } from 'src/app/types/internal-path';
 import { Router } from '@angular/router';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
+import { internalLinks } from 'src/app/types/internal-link-path';
 
 @Component({
     selector: 'pages-login',
@@ -12,8 +12,6 @@ import { Title } from '@angular/platform-browser';
     templateUrl: './login.page.html'
 })
 export class LoginPage implements OnInit {
-    public editPageLink = InternalLink.all.bearbeiten;
-
     public state: 'addToWaitingUserPage' | 'alreadyLoggedIn' | 'loading' | 'loginPage' = 'loading';
 
     public constructor(
@@ -43,7 +41,7 @@ export class LoginPage implements OnInit {
         const isLoggedIn = await this.authService.isLoggedIn();
         if (isLoggedIn) {
             this.state = 'alreadyLoggedIn';
-            await this.router.navigateByUrl(this.editPageLink.link);
+            await this.router.navigateByUrl(internalLinks.bearbeiten.link);
         } else
             this.state = 'loginPage';
     }

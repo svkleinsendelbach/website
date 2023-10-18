@@ -7,7 +7,7 @@ import { StyleConfigService } from '../../../../services/style-config.service';
 import { TrackBy } from 'src/app/types/track-by';
 import { environment } from '../../../../../environments/environment';
 import { lastValueFrom } from 'rxjs';
-import { mapStyleDarkAppearence } from '../../../../utils/mapStyleDarkAppearence';
+import { mapDarkAppearanceConfig } from '../../../../config/maps-dark-appearance-config';
 
 @Component({
     selector: 'maps',
@@ -72,7 +72,7 @@ export class MapsComponent implements OnInit, OnDestroy {
     private setMapOptions(appearance: Appearance) {
         this.mapOptions = {
             ...this.options,
-            styles: appearance === 'light' ? [] : mapStyleDarkAppearence
+            styles: appearance === 'light' ? [] : mapDarkAppearanceConfig
         };
     }
 }

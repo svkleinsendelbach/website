@@ -5,14 +5,16 @@
 :host
     @include flex-column(flex-start, center)
 
-    &:nth-last-child(1) #header-item #top-item
+    &:last-child #header-item #top-item
         border-radius: 0 0 8px 8px
+        border-bottom: 1px solid color('text')
 
     .expanded + &
         #header-item #top-item
             border-radius: 8px 8px 0 0
+            border-top: 1px solid color('text')
 
-        &:nth-last-child(1) #header-item #top-item
+        &:last-child #header-item #top-item
             border-radius: 8px
 
 #header-item
@@ -27,6 +29,8 @@
         padding: 0 4px
         text-decoration: none
         width: 100%
+        border-left: 1px solid color('text')
+        border-right: 1px solid color('text')
 
         #top-item-text
             color: color('text')
@@ -48,6 +52,8 @@
         .sub-item
             background-color: color('background')
             @include flex-row(center, center)
+            border-left: 1px solid color('text')
+            border-right: 1px solid color('text')
             cursor: pointer
             padding: 8px 0
             width: 90%
@@ -55,17 +61,19 @@
             .sub-item-text
                 color: color('text')
                 @include font-metrophobic
-                @include font-size('small')
+                @include font-size('normal')
                 @include font-weight('medium')
                 text-decoration: none
 
-        &:last-child
-            border-radius: 0 0 8px 8px
-            padding-bottom: 16px
+            &:last-child
+                border-radius: 0 0 8px 8px
+                border-bottom: 1px solid color('text')
+                padding-bottom: 16px
 
     &.expanded
         #top-item
             border-radius: 0 0 8px 8px
+            border-bottom: 1px solid color('text')
 
         #sub-items
             display: flex

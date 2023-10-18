@@ -7,11 +7,9 @@
 
     <!-- Top item without sub items -->
     <a
-        id="top-item"
         *ngIf="!headerItem.subItems"
-        [href]="headerItem.topItem.link"
-        [target]="headerItem.topItem.target"
-        [title]="headerItem.topItem.title"
+        [link]="headerItem.topItem"
+        id="top-item"
     >
         <div
             id="top-item-text"
@@ -30,12 +28,12 @@
         >{{ headerItem.topItem.title }}</div>
         <fa-icon
             *ngIf="expandedHeaderItemId !== headerItem.id"
-            [icon]="faCaretDown"
+            icon="caret-down"
             class="drop-down-arrow"
         />
         <fa-icon
             *ngIf="expandedHeaderItemId === headerItem.id"
-            [icon]="faCaretUp"
+            icon="caret-up"
             class="drop-down-arrow"
         />
     </div>
@@ -50,10 +48,8 @@
             *ngFor="let subItem of headerItem.subItems; trackBy: TrackBy.id"
         >
         <a
+            [link]="subItem.link"
             class="sub-item-text"
-            [href]="subItem.link.link"
-            [target]="subItem.link.target"
-            [title]="subItem.link.title"
         >{{ subItem.link.title }}</a>
         </div>
     </div>

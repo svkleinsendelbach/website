@@ -163,7 +163,8 @@
                 "@typescript-eslint/sort-type-constituents": "off",
                 "@typescript-eslint/lines-around-comment": "off",
                 "multiline-comment-style": "off",
-                "sort-imports": "off"
+                "sort-imports": "off",
+                "@angular-eslint/no-output-on-prefix": "off"
             }
         }
     ]

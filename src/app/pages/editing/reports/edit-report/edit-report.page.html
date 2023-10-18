@@ -1,24 +1,24 @@
 <app-editing-navigation-bar
-    [backButtonLink]="editReportsLink"
+    backButtonLink="bearbeiten/berichte"
 />
 <authentication-check
     [roles]="['websiteManager']"
 >
     <text-section
         *ngIf="!previousReport"
-        [title]="'Spiel von BFV übernehmen'"
+        title="Spiel von BFV übernehmen"
     >
         <p
             class="text margin-bottom-large"
         >Um ein Spiel der 1. oder 2. Mannschaft von BFV zu übernehmen, fügen Sie den Link zum BFV Spiel hier ein, bsp: www.bfv.de/spiele/.</p>
         <input-form
             [inputForm]="bfvGameInputForm"
-            [submitButtonText]="'Übernehmen'"
+            submitButtonText="Übernehmen"
             (submitButtonClicked)="takeBfvGame()"
         >
             <input-field-text
-                [label]="'BFV Spiele Link'"
-                [placeholder]="'BFV Spiele Link'"
+                label="BFV Spiele Link"
+                placeholder="BFV Spiele Link"
                 [inputField]="bfvGameInputForm.field('bfvGameLink')"
             />
             <p
@@ -35,12 +35,12 @@
             (submitButtonClicked)="saveReport()"
         >
             <input-field-select
-                [label]="'Zugehöriges Thema'"
+                label="Zugehöriges Thema"
                 [selectOptions]="groupIdSelectOptions"
                 [inputField]="inputForm.field('groupId')"
             />
             <input-field-text
-                [label]="'Titel'"
+                label="Titel"
                 [inputField]="inputForm.field('title')"
             />
             <p
@@ -72,7 +72,7 @@
             >{{ imageUrl === null ? 'Bild auswählen' : 'Neues Bild auswählen' }}</div>
             <div id="spacer"></div>
             <input-field-textarea
-                [label]="'Nachricht'"
+                label="Nachricht"
                 [inputField]="inputForm.field('message')"
             />
             <div

@@ -5,7 +5,7 @@ import { ErrorLevel } from 'src/app/modules/input-form/types/error-level';
 import { InputError } from 'src/app/modules/input-form/types/input-error';
 import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';
-import { InternalLink } from 'src/app/types/internal-path';
+import { internalLinks } from 'src/app/types/internal-link-path';
 import { LoginError } from 'src/app/modules/authentication/types/login-error';
 import { Router } from '@angular/router';
 import { StyleConfigService } from 'src/app/services/style-config.service';
@@ -56,7 +56,7 @@ export class LoginAddUserWaitingComponent {
             return;
         this.inputForm.status = 'valid';
         this.inputForm.reset();
-        await this.router.navigateByUrl(InternalLink.all.home.link);
+        await this.router.navigateByUrl(internalLinks.home.link);
     }
 
     private handleLoginError(reason: unknown): 'error' {

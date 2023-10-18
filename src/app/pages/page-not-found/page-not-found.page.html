@@ -1,30 +1,29 @@
 <text-section
-  [title]="'Diese Seite ist leider nicht verfügbar'"
+    title="Diese Seite ist leider nicht verfügbar"
 >
-  <p
-    class="text center secondaryColor"
-  >Entweder funktioniert der von Ihnen angeklickte Link nicht oder die Seite wurde entfernt.</p>
-  <p
-    class="text center margin-top-normal secondaryColor"
-  >Ist dies der Fall, nehmen Sie bitte Kontakt mit der Vorstandschaft auf: <a
-    class="text"
-    [href]="criticismSuggestionPageLink.link"
-    title="Kontakt"
-  >Kritik und Vorschläge</a></p>
-  <div
-    id="image-link"
-  >
-    <img
-      id="image"
-      src="assets/images/svk-logo.svg"
-      title="SV Kleinsendelbach"
-      alt="SV Kleinsendelbach"
+    <p
+        class="text center secondaryColor"
+    >Entweder funktioniert der von Ihnen angeklickte Link nicht oder die Seite wurde entfernt.</p>
+    <p
+        class="text center margin-top-normal secondaryColor"
+    >Ist dies der Fall, nehmen Sie bitte Kontakt mit der Vorstandschaft auf: <a
+        link="kritik-vorschläge"
+        class="text"
+        title="Kontakt"
+    >Kritik und Vorschläge</a></p>
+    <div
+        id="image-link"
     >
-    <a
-      id="link"
-      class="text"
-      [href]="homeLink.link"
-      [title]="homeLink.title"
-    >Zur Startseite</a>
-  </div>
+        <img
+            id="image"
+            src="assets/images/svk-logo.svg"
+            title="SV Kleinsendelbach"
+            alt="SV Kleinsendelbach"
+        >
+        <a
+            link="home"
+            id="link"
+            class="text"
+        >Zur Startseite</a>
+    </div>
 </text-section>

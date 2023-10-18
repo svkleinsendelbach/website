@@ -1,15 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { faChevronLeft, faChevronRight, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { DeviceTypeService } from '../../../services/device-type.service';
 import { Link } from 'src/app/types/link';
 import { StyleConfigService } from '../../../services/style-config.service';
 import { TrackBy } from 'src/app/types/track-by';
+import { InternalLinkPath, internalLinks } from 'src/app/types/internal-link-path';
 
 export interface BannerItem {
     imageSource: string;
     title: string;
     subTitle: string | null;
-    link: Link;
+    link: Link | InternalLinkPath;
     isCurrent: boolean;
 }
 
@@ -22,12 +22,6 @@ export class HomeBannerComponent implements OnInit {
     @Input() public bannerData!: BannerItem[];
 
     public TrackBy = TrackBy;
-
-    public faChevronLeft = faChevronLeft;
-
-    public faChevronRight = faChevronRight;
-
-    public faCircle = faCircle;
 
     public currentPage = 1;
 
@@ -56,7 +50,8 @@ export class HomeBannerComponent implements OnInit {
     }
 
     public openCurrentLink() {
-        window.open(this.current.link.link, this.current.link.target);
+        const link = typeof this.current.link === 'string' ? internalLinks[this.current.link] : this.current.link;
+        window.open(link.link, link.target);
     }
 
     public handleNavBarClick(page: number) {

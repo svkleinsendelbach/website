@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { Guid } from 'src/app/modules/firebase-api/types/guid';
-import { InternalLink } from 'src/app/types/internal-path';
+import { internalLinks } from 'src/app/types/internal-link-path';
 import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
@@ -19,10 +19,6 @@ export class EditingReportsPage {
     public TrackBy = TrackBy;
 
     public Report = Report;
-
-    public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
-
-    public mainEditingPageLink = InternalLink.all.bearbeiten;
 
     public reportGroupTitle = ReportGroupId.title;
 
@@ -81,12 +77,12 @@ export class EditingReportsPage {
             groupId: groupId,
             report: Report.flatten(report)
         });
-        await this.router.navigateByUrl(InternalLink.all['bearbeiten/berichte/bearbeiten'].link);
+        await this.router.navigateByUrl(internalLinks['bearbeiten/berichte/bearbeiten'].link);
     }
 
     public async addNewReport() {
         this.sharedData.removeValue('editReport');
-        await this.router.navigateByUrl(InternalLink.all['bearbeiten/berichte/bearbeiten'].link);
+        await this.router.navigateByUrl(internalLinks['bearbeiten/berichte/bearbeiten'].link);
     }
 
     public async getReports() {

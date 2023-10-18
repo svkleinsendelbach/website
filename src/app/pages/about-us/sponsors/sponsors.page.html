@@ -1,6 +1,6 @@
 <text-section
     *ngIf="mainSponsors"
-    [title]="'Unsere Hauptsponsoren'"
+    title="Unsere Hauptsponsoren"
     id="main-sponsors"
 >
     <div
@@ -18,7 +18,7 @@
 
 <text-section
     *ngIf="premiumSponsors"
-    [title]="'Unsere Premiumsponsoren'"
+    title="Unsere Premiumsponsoren"
     id="premium-sponsors"
 >
     <div
@@ -36,7 +36,7 @@
 
 <text-section
     *ngIf="partners"
-    [title]="'Weitere Partner'"
+    title="Weitere Partner"
     id="partners"
 >
     <div
@@ -46,21 +46,20 @@
         <app-sponsor
             *ngFor="let sponsor of partners; trackBy: TrackBy.property('name')"
             [sponsor]="sponsor"
-            [orientation]="'column'"
+            orientation="column"
             class="sponsor"
         />
     </div>
 </text-section>
 
 <text-section
-    [title]="'Sponsor werden'"
+    title="Sponsor werden"
 >
     <p
         class="text"
     >Möchten Sie auch Sponsor werden, schreiben Sie der Vorstandschaft unter <a
+        link="kontakt"
         class="text"
-        [href]="contactPageLink.link"
-        title="Kontakt"
     >Kontakt</a>.</p>
     <p
         class="text"

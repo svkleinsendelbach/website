@@ -1,12 +1,12 @@
 <text-section
-    [title]="'Kritik und Vorschläge'"
+    title="Kritik und Vorschläge"
 >
     <p
         class="text secondaryColor margin-bottom-large"
     >Bitte teilen Sie uns Ihre Kritik oder Vorschläge für den SV Kleinsendelbach oder diese Webseite mit.</p>
     <input-form
         [inputForm]="inputForm"
-        [submitButtonText]="'Speichern'"
+        submitButtonText="Speichern"
         (submitButtonClicked)="onSubmit()"
     >
         <input-field-inline-select
@@ -14,11 +14,11 @@
             [inputField]="inputForm.field('type')"
         />
         <input-field-text
-            [label]="'Titel'"
+            label="Titel"
             [inputField]="inputForm.field('title')"
         />
         <input-field-textarea
-            [label]="'Beschreibung'"
+            label="Beschreibung"
             [inputField]="inputForm.field('description')"
         />
     </input-form>

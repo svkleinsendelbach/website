@@ -7,8 +7,8 @@
         class="sponsor"
     >
         <a
+            link="sponsoren"
             class="logo-link"
-            [href]="sponsorsPageLink.link"
             [title]="sponsor.name"
         >
             <img
@@ -22,8 +22,8 @@
             class="text-container"
         >
             <a
+                link="sponsoren"
                 class="text name"
-                [href]="sponsorsPageLink.link"
                 [title]="sponsor.name"
             >{{ sponsor.name }}</a>
             <p
@@ -42,8 +42,8 @@
 >
     <a
         *ngFor="let sponsor of sponsors; trackBy: TrackBy.property('name')"
+        link="sponsoren"
         class="sponsor"
-        [href]="sponsorsPageLink.link"
         [title]="sponsor.name"
     >
         <img
@@ -64,8 +64,8 @@
 >
     <a
         *ngFor="let sponsor of sponsors; trackBy: TrackBy.property('name')"
+        link="sponsoren"
         class="sponsor"
-        [href]="sponsorsPageLink.link"
         [title]="sponsor.name"
     >
         <img

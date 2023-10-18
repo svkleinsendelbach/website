@@ -14,12 +14,9 @@
         *ngIf="showSelection"
     >Mit der Nutzung unserer Webseite stimmen Sie der Verwendung von Cookies zu. Weitere Informationen über die Verwendung von Cookies und wie Sie Ihre Einwilligung für die Zukunft widerrufen können, finden Sie in unseren Datenschutzhinweisen.</p>
     <a
+        link="datenschutz"
         id="privacy"
-        *ngIf="privacyLink"
-        [href]="privacyLink.link"
-        [target]="privacyLink.target"
-        [title]="privacyLink.title"
-    >{{ privacyLink.title }}</a>
+    >Datenschutz</a>
     <p
         id="extra-text"
         *ngIf="showSelection"

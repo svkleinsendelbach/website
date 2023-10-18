@@ -1,5 +1,5 @@
 <text-section
-    [title]="'Kommende Termine'"
+    title="Kommende Termine"
 >
     <p
       *ngIf="fetchedEventGroups.isLoading()"
@@ -45,8 +45,8 @@
                 class="subtitle secondaryColor"
             >{{ event.subtitle ?? '' }}</p>
             <a
-                class="link primaryColor"
                 *ngIf="event.link !== null"
+                class="link primaryColor"
                 [href]="event.link"
                 target="_blank"
                 [title]="event.title"

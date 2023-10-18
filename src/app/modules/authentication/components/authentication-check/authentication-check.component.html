@@ -1,7 +1,7 @@
 
 <!-- Authentication is currently checked -->
 <text-section
-    [title]="'Authentifizierung wird überprüft'"
+    title="Authentifizierung wird überprüft"
     *ngIf="state === 'loading'"
 >
     <p
@@ -12,7 +12,7 @@
 
 <!-- Authentication failed with an error -->
 <text-section
-    [title]="'Authentifizierung fehlgeschlagen'"
+    title="Authentifizierung fehlgeschlagen"
     *ngIf="state === 'internalError'"
 >
     <p
@@ -23,17 +23,15 @@
 
 <!-- Authentication failed, user is not allowed to view this page -->
 <text-section
-    [title]="'Authentifizierung fehlgeschlagen'"
+    title="Authentifizierung fehlgeschlagen"
     *ngIf="state === 'unauthenticated'"
 >
     <p
         class="text large margin-top-large secondaryColor"
     >Sie sind nicht berechtigt, diese Seite zu besuchen.</p>
     <a
+        link="bearbeiten/anmelden"
         class="text large primaryColor"
-        [href]="logInPageLink.link"
-        [target]="logInPageLink.target"
-        [title]="logInPageLink.title"
     >Zur Anmeldung</a>
 </text-section>
 

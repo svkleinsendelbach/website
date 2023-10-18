@@ -9,7 +9,7 @@ import { Guid } from 'src/app/modules/firebase-api/types/guid';
 import { InputError } from 'src/app/modules/input-form/types/input-error';
 import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';
-import { InternalLink } from 'src/app/types/internal-path';
+import { internalLinks } from 'src/app/types/internal-link-path';
 import { ReportMessageParser } from 'src/app/modules/reports/types/ReportMessageParser';
 import { Router } from '@angular/router';
 import { SelectOptions } from 'src/app/modules/input-form/components/input-field/select/select.component';
@@ -28,10 +28,6 @@ import { environment } from 'src/environments/environment';
 })
 export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild('messagePreview') public messagePreviewElement: ElementRef<HTMLElement> | null = null;
-
-    public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
-
-    public editReportsLink = InternalLink.all['bearbeiten/berichte'];
 
     public previousReport: {
         groupId: ReportGroupId;
@@ -203,7 +199,7 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
                 this.inputForm.status = 'failed';
                 throw reason;
             });
-        await this.router.navigateByUrl(InternalLink.all['bearbeiten/berichte'].link);
+        await this.router.navigateByUrl(internalLinks['bearbeiten/berichte'].link);
         this.inputForm.status = 'valid';
     }
 

@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 import { TrackBy } from 'src/app/types/track-by';
-import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { websiteConfig } from 'src/app/config/website-config';
 
 export interface OpeningHour {
@@ -26,8 +25,6 @@ const weekdaysByDeviceType: Record<DeviceType, Weekdays[][]> = {
 })
 export class SportshomePage {
     public TrackBy = TrackBy;
-
-    public faPhone = faPhone;
 
     public constructor(
         public readonly titleService: Title,

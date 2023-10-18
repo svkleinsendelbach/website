@@ -22,10 +22,9 @@
          />
     </div>
     <a
+        *ngIf="showAllReportsButton || (fetchedReports.isSuccess() && fetchedReports.content.hasMore)"
+        link="berichte"
         id="view-all-reports"
         class="primaryColor"
-        [href]="allReportsLink.link"
-        [title]="allReportsLink.title"
-        *ngIf="showAllReportsButton || (fetchedReports.isSuccess() && fetchedReports.content.hasMore)"
     >{{ showAllReportsButton ? 'Alle Berichte der anderen Abteilungen anzeigen' : isGameReport ? 'Alle Spielberichte' : 'Alle Berichte' }}</a>
 </text-section>

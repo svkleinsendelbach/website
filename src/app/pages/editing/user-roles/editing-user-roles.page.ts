@@ -2,7 +2,6 @@ import { AuthService } from 'src/app/modules/authentication/services/auth.servic
 import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { InternalLink } from 'src/app/types/internal-path';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 import { TrackBy } from 'src/app/types/track-by';
@@ -17,8 +16,6 @@ export class EditingUserRolesPage {
     public TrackBy = TrackBy;
 
     public User = User;
-
-    public mainEditingPageLink = InternalLink.all.bearbeiten;
 
     public users: User[] | null = null;
 

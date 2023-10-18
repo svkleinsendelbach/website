@@ -1,13 +1,9 @@
 import { DeviceType, DeviceTypeService } from 'src/app/services/device-type.service';
 import { LinkData, LinkItem } from './home-links/home-links.component';
 import { SocialMediaData, SocialMediaItem } from './social-media-links/social-media-links.component';
-import { faAddressCard, faChild, faInfo, faUserFriends } from '@fortawesome/free-solid-svg-icons';
-import { faDiscord, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { faFutbol, faMap } from '@fortawesome/free-regular-svg-icons';
 import { BannerItem } from 'src/app/pages/home/home-banner/home-banner.component';
 import { Component } from '@angular/core';
 import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
-import { InternalLink } from 'src/app/types/internal-path';
 import { Link } from 'src/app/types/link';
 import { ReportGroupId } from 'src/app/modules/firebase-api/types/report';
 import { StyleConfigService } from 'src/app/services/style-config.service';
@@ -34,50 +30,50 @@ const homeLinks: Record<LinkType, LinkItem> = {
     'about-us': {
         animation: 'jump',
         description: 'Informationen über unseren Vorstand, Sportheim, etc.',
-        icon: faInfo,
-        link: InternalLink.all['über-uns'],
+        icon: 'info',
+        link: 'über-uns',
         name: 'Über uns'
     },
     'contact': {
         animation: 'shake',
         description: 'Kontakt zum SV Kleinsendelbach aufnehmen',
-        icon: faAddressCard,
-        link: InternalLink.all.kontakt,
+        icon: 'address-card',
+        link: 'kontakt',
         name: 'Kontakt'
     },
     'dancing': {
         animation: 'jump',
         description: 'Tanzgruppen der Kinder',
-        icon: faChild,
-        link: InternalLink.all.tanzen,
+        icon: 'child',
+        link: 'tanzen',
         name: 'Tanzen'
     },
     'drive': {
         animation: 'shake',
         description: 'Anfahrt zum Sportheim Kleinsendelbach',
-        icon: faMap,
-        link: InternalLink.all.anfahrt,
+        icon: 'map',
+        link: 'anfahrt',
         name: 'Anfahrt'
     },
     'football-adults': {
         animation: 'rotation',
         description: 'Ergebnisse und Tabellen der Herrenmannschaften des SV Kleinsendelbach',
-        icon: faFutbol,
-        link: InternalLink.all['fussball/herren'],
+        icon: 'futbol',
+        link: 'fussball/herren',
         name: 'Herrenfussball'
     },
     'football-youth': {
         animation: 'rotation',
         description: 'Ergebnisse und Tabellen der Jugendmannschaften',
-        icon: faFutbol,
-        link: InternalLink.all['fussball/jugend'],
+        icon: 'futbol',
+        link: 'fussball/jugend',
         name: 'Jugendfussball'
     },
     'gymnastics': {
         animation: 'jump',
         description: 'Gymnastikangebote beim SV Kleinsendelbach',
-        icon: faUserFriends,
-        link: InternalLink.all.gymnastik,
+        icon: 'user-friends',
+        link: 'gymnastik',
         name: 'Gymnastik'
     }
 };
@@ -85,21 +81,21 @@ const homeLinks: Record<LinkType, LinkItem> = {
 const socialMediaLink: Record<SocialMediaType, SocialMediaItem> = {
     facebook: {
         id: 'facebook',
-        image: faFacebookF,
+        image: ['fab', 'facebook-f'],
         link: Link.external('Facebook', 'https://www.facebook.com/svkleinsendelbach/', true),
         name: 'Facebook',
         title: 'SV Kleinsendelbach e.V.'
     },
     discord: {
         id: 'discord',
-        image: faDiscord,
+        image: ['fab', 'discord'],
         link: Link.external('Discord', 'https://discord.gg/gpJMrajz7q', true),
         name: 'Discord',
         title: 'SV Kleinsendelbach e.V.'
     },
     instagram: {
         id: 'instagram',
-        image: faInstagram,
+        image: ['fab', 'instagram'],
         link: Link.external('Instagram', 'https://www.instagram.com/sgkleinsendelbachhetzles/', true),
         name: 'Instagram',
         title: 'SG Kleinsendelbach / Hetzles'
@@ -123,8 +119,6 @@ const socialMediaLink: Record<SocialMediaType, SocialMediaItem> = {
 })
 export class HomePage {
     public eventGroupTitle = EventGroupId.title;
-
-    public allInternalLinks = InternalLink.all;
 
     public readonly bannerData: BannerItem[] = websiteConfig.homeBanner;
 

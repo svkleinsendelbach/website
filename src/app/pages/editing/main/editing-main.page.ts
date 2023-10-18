@@ -2,7 +2,6 @@ import { AuthenticationStates } from 'src/app/modules/authentication/components/
 import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { InternalLink } from 'src/app/types/internal-path';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 import { TrackBy } from 'src/app/types/track-by';
@@ -17,10 +16,6 @@ export class EditingMainPage {
     public TrackBy = TrackBy;
 
     public User = User;
-
-    public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
-
-    public allInternalLinks = InternalLink.all;
 
     public authenticationStates = new AuthenticationStates(['admin', 'occupancyManager', 'websiteManager']);
 

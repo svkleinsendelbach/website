@@ -7,7 +7,6 @@ import { FirebaseApiService } from 'src/app/modules/firebase-api/services/fireba
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 import { TrackBy } from 'src/app/types/track-by';
-import { InternalLink } from 'src/app/types/internal-path';
 
 @Component({
     selector: 'app-editing-criticism-suggestion',
@@ -18,8 +17,6 @@ export class EditingCriticismSuggestionPage {
     public TrackBy = TrackBy;
 
     public CriticismSuggestion = CriticismSuggestion;
-
-    public mainEditingPageLink = InternalLink.all.bearbeiten;
 
     public criticismSuggestions: FetchState<{
         notWorkedOff: CriticismSuggestion[];

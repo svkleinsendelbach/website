@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ContactItem } from 'src/app/modules/general-components/types/contact-item';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
-import { InternalLink } from 'src/app/types/internal-path';
 import { LinkData } from 'src/app/modules/general-components/types/link-data';
 import { ReportGroupId } from 'src/app/modules/firebase-api/types/report';
 import { StyleConfigService } from 'src/app/services/style-config.service';
@@ -17,24 +16,22 @@ import { websiteConfig } from 'src/app/config/website-config';
 export class FootballAdultsGeneralPage {
     public eventGroupTitle = EventGroupId.title;
 
-    public allInternalLinks = InternalLink.all;
-
     public readonly links: LinkData[] = [
         {
             id: 'first-team',
-            link: InternalLink.all['fussball/herren/erste-mannschaft'],
+            link: 'fussball/herren/erste-mannschaft',
             subtitle: '1. Mannschaft der SG Kleinsendelbach / Hetzles',
             title: '1. Mannschaft'
         },
         {
             id: 'second-team',
-            link: InternalLink.all['fussball/herren/zweite-mannschaft'],
+            link: 'fussball/herren/zweite-mannschaft',
             subtitle: '2. Mannschaft der SG Kleinsendelbach / Hetzles',
             title: '2. Mannschaft'
         },
         {
             id: 'ah-team',
-            link: InternalLink.all['fussball/herren/alte-herren'],
+            link: 'fussball/herren/alte-herren',
             subtitle: 'Alte Herren des SV Kleinsendelbach',
             title: 'Alte Herren'
         }

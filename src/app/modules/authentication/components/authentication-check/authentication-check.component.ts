@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { InternalLink } from 'src/app/types/internal-path';
-import { Router } from '@angular/router';
 import { StyleConfigService } from '../../../../services/style-config.service';
 import { User } from 'src/app/modules/firebase-api/types/user';
 
@@ -57,10 +55,7 @@ export class AuthenticationCheckComponent implements OnInit {
 
     @Input() public id: string = 'default';
 
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() public onAuthentication = new EventEmitter<void>();
-
-    public logInPageLink = InternalLink.all['bearbeiten/anmelden'];
 
     public constructor(
         private readonly authService: AuthService,

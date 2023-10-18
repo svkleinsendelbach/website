@@ -58,12 +58,12 @@
     >
         <fa-icon
             id="left-button"
-            [icon]="faChevronLeft"
+            icon="chevron-left"
             (click)="$event.preventDefault(); $event.stopPropagation(); handleButtonClick('left')"
         />
         <fa-icon
             id="right-button"
-            [icon]="faChevronRight"
+            icon="chevron-right"
             (click)="$event.preventDefault(); $event.stopPropagation(); handleButtonClick('right')"
         />
     </div>
@@ -72,7 +72,7 @@
     >
         <fa-icon
             *ngFor="let _ of bannerData; index as index; trackBy: TrackBy.property('title')"
-            [icon]="faCircle"
+            icon="circle"
             class="circle"
             (click)="$event.preventDefault(); $event.stopPropagation(); handleNavBarClick(index + 1)"
             [ngStyle]="{

@@ -1,4 +1,3 @@
-import { InternalLink } from '../types/internal-path';
 import { sponsorsConfig } from './sponsors-config';
 import { WebsiteConfig } from './website-config.d';
 
@@ -276,14 +275,14 @@ export const websiteConfig: WebsiteConfig = {
         {
             imageSource: 'assets/images/mannschaft.png',
             isCurrent: false,
-            link: InternalLink.all['fussball/herren'],
+            link: 'fussball/herren',
             subTitle: '1. und 2. Mannschaft 2019 / 2020',
             title: 'Herren Mannschaft'
         },
         {
             imageSource: 'assets/images/kleinfeldmannschaften.jpg',
             isCurrent: false,
-            link: InternalLink.all['fussball/jugend'],
+            link: 'fussball/jugend',
             subTitle: null,
             title: 'Kleinfeld Mannschaften'
         }

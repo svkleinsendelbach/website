@@ -1,12 +1,12 @@
 <app-editing-navigation-bar
-    [backButtonLink]="mainEditingPageLink"
+    backButtonLink="bearbeiten"
 />
 <authentication-check
     [roles]="['websiteManager']"
     (onAuthentication)="getEvents()"
 >
     <text-section
-            [title]="'Termine bearbeiten'"
+            title="Termine bearbeiten"
     >
         <p
             id="add-event"

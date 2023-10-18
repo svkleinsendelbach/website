@@ -7,7 +7,7 @@ import { FirebaseApiService } from 'src/app/modules/firebase-api/services/fireba
 import { InputError } from 'src/app/modules/input-form/types/input-error';
 import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';
-import { InternalLink } from 'src/app/types/internal-path';
+import { internalLinks } from 'src/app/types/internal-link-path';
 import { LoginError } from 'src/app/modules/authentication/types/login-error';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { RegistrationStatus } from 'src/app/modules/authentication/types/registration-status';
@@ -153,7 +153,7 @@ export class LoginPageComponent {
         this.inputForm.status = 'valid';
         this.inputForm.reset();
         if (registrationStatus === 'registered')
-            await this.router.navigateByUrl(InternalLink.all.bearbeiten.link);
+            await this.router.navigateByUrl(internalLinks.bearbeiten.link);
         else
             this.userUnregisteredEmitter.emit();
     }

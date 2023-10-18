@@ -1,24 +1,23 @@
 <app-editing-navigation-bar
-    [backButtonLink]="editEventsLink"
+    backButtonLink="bearbeiten/termine"
 />
 <authentication-check
     [roles]="['websiteManager']"
 >
     <text-section
         *ngIf="!previousEvent"
-        [title]="'Spiel von BFV übernehmen'"
+        title="Spiel von BFV übernehmen"
     >
         <p
             class="text margin-bottom-large"
         >Um ein Spiel der 1. oder 2. Mannschaft von BFV zu übernehmen, fügen Sie den Link zum BFV Spiel hier ein, bsp: www.bfv.de/spiele/.</p>
         <input-form
             [inputForm]="bfvGameInputForm"
-            [submitButtonText]="'Übernehmen'"
+            submitButtonText="Übernehmen"
             (submitButtonClicked)="takeBfvGame()"
         >
         <input-field-text
-            [label]="'BFV Spiele Link'"
-            [placeholder]="'BFV Spiele Link'"
+            label="BFV Spiele Link"
             [inputField]="bfvGameInputForm.field('bfvGameLink')"
         />
         <p
@@ -35,30 +34,30 @@
             (submitButtonClicked)="saveEvent()"
         >
         <input-field-select
-            [label]="'Zugehöriges Thema'"
+            label="Zugehöriges Thema"
             [selectOptions]="groupIdSelectOptions"
             [inputField]="inputForm.field('groupId')"
         />
         <input-field-text
-            [label]="'Titel'"
+            label="Titel"
             [inputField]="inputForm.field('title')"
         />
         <input-field-text
-            [label]="'Untertitel'"
-            [placeholder]="'Untertitel (optional)'"
+            label="Untertitel"
+            placeholder="Untertitel (optional)"
             [inputField]="inputForm.field('subtitle')"
         />
         <input-field-checkbox
-            [label]="'Wichtiger Termin'"
+            label="Wichtiger Termin"
             [inputField]="inputForm.field('isImportant')"
         />
         <input-field-text
-            [label]="'Link'"
-            [placeholder]="'Link (optional)'"
+            label="Link"
+            placeholder="Link (optional)"
             [inputField]="inputForm.field('link')"
         />
         <input-field-date-time
-            [label]="'Datum / Uhrzeit'"
+            label="Datum / Uhrzeit"
             [inputField]="inputForm.field('date')"
         />
         </input-form>

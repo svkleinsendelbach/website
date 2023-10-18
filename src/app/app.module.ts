@@ -14,7 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
@@ -83,6 +83,9 @@ import { EditOccupancyPage } from './pages/editing/occupancy/edit-occupancy/edit
 import { EditingCriticismSuggestionPage } from './pages/editing/criticism-suggestion/editing-criticism-suggestion.page';
 import { SponsorsPage } from './pages/about-us/sponsors/sponsors.page';
 import { SponsorComponent } from './pages/about-us/sponsors/sponsor/sponsor.component';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -189,7 +192,10 @@ import { SponsorComponent } from './pages/about-us/sponsors/sponsor/sponsor.comp
     ]
 })
 export class AppModule {
-    public constructor() {
+    public constructor(
+        faIconLibrary: FaIconLibrary
+    ) {
         registerLocaleData(de.default);
+        faIconLibrary.addIconPacks(fas, far, fab);
     }
 }

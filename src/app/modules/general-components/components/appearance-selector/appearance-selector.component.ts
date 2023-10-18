@@ -1,7 +1,6 @@
 import { Appearance, AppearanceService } from 'src/app/services/appearance.service';
-import { IconDefinition, faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons';
-import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import { Component } from '@angular/core';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
     selector: 'app-appearance-selector',
@@ -17,12 +16,12 @@ export class AppearanceSelectorComponent {
         return this.appearanceService.currentConfig;
     }
 
-    public get icon(): IconDefinition {
+    public get icon(): IconProp {
         if (this.appearanceService.currentConfig === 'light')
-            return faSun;
+            return 'sun';
         if (this.appearanceService.currentConfig === 'dark')
-            return faMoon;
-        return faCircleHalfStroke;
+            return 'moon';
+        return 'circle-half-stroke';
     }
 
     public setAppearance(appearance: Appearance | 'system') {

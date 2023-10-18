@@ -1,25 +1,25 @@
 import { Appearance, AppearanceService } from './appearance.service';
 import { Injectable, OnDestroy } from '@angular/core';
-import { Style } from 'src/app/types/style';
+import { Color, AppearanceColor } from 'src/app/types/color';
 
 @Injectable({
     providedIn: 'root'
 })
 export class StyleConfigService implements OnDestroy {
     public static readonly config = {
-        primary: new Style.AppearanceColor(Style.Color.hex('#C90024'), Style.Color.hex('#C4354F')),
-        accent: new Style.AppearanceColor(Style.Color.hex('#FFD93D'), Style.Color.hex('#F2BE22')),
-        background: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#24252A')),
-        secondaryBackground: new Style.AppearanceColor(Style.Color.hex('#FFFFFF'), Style.Color.hex('#3C4A57')),
-        hoveredBackground: new Style.AppearanceColor(Style.Color.hex('#E0E0E0'), Style.Color.hex('#44454A')),
-        shadow: new Style.AppearanceColor(Style.Color.hex('#80808080'), Style.Color.hex('#80808080')),
-        text: new Style.AppearanceColor(Style.Color.hex('#24252A'), Style.Color.hex('#C8D6E5')),
-        secondaryText: new Style.AppearanceColor(Style.Color.hex('#868E90'), Style.Color.hex('#868E90')),
-        formStatusSuccess: new Style.AppearanceColor(Style.Color.hex('#54B435'), Style.Color.hex('#B6E2A1')),
-        formStatusError: new Style.AppearanceColor(Style.Color.hex('#CE3A0F'), Style.Color.hex('#EB4511')),
-        formStatusInfo: new Style.AppearanceColor(Style.Color.hex('#868E90'), Style.Color.hex('#868E90')),
-        pageBackground: new Style.AppearanceColor(Style.Color.hex('#F0F0F0'), Style.Color.hex('#2C3A47'))
-    } satisfies Record<string, Style.AppearanceColor>;
+        primary: new AppearanceColor(Color.hex('#C90024'), Color.hex('#C4354F')),
+        accent: new AppearanceColor(Color.hex('#FFD93D'), Color.hex('#F2BE22')),
+        background: new AppearanceColor(Color.hex('#FFFFFF'), Color.hex('#24252A')),
+        secondaryBackground: new AppearanceColor(Color.hex('#FFFFFF'), Color.hex('#3C4A57')),
+        hoveredBackground: new AppearanceColor(Color.hex('#E0E0E0'), Color.hex('#44454A')),
+        shadow: new AppearanceColor(Color.hex('#80808080'), Color.hex('#80808080')),
+        text: new AppearanceColor(Color.hex('#24252A'), Color.hex('#C8D6E5')),
+        secondaryText: new AppearanceColor(Color.hex('#868E90'), Color.hex('#868E90')),
+        formStatusSuccess: new AppearanceColor(Color.hex('#54B435'), Color.hex('#B6E2A1')),
+        formStatusError: new AppearanceColor(Color.hex('#CE3A0F'), Color.hex('#EB4511')),
+        formStatusInfo: new AppearanceColor(Color.hex('#868E90'), Color.hex('#868E90')),
+        pageBackground: new AppearanceColor(Color.hex('#F0F0F0'), Color.hex('#2C3A47'))
+    } satisfies Record<string, AppearanceColor>;
 
     public constructor(
         private readonly appearance: AppearanceService

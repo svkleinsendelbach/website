@@ -1,6 +1,6 @@
 <text-section
     *ngIf="sponsors.mainSponsors|| sponsors.premiumSponsors || sponsors.partners"
-    [title]="'Unsere Sponsoren'"
+    title="Unsere Sponsoren"
 >
     <div
         *ngFor="let sponsorsEntry of sponsorsEntries; trackBy: TrackBy.property('0')"

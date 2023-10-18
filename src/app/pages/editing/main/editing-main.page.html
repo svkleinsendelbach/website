@@ -2,11 +2,11 @@
 <authentication-check
     [roles]="['admin']"
     [states]="authenticationStates"
-    [id]="'admin'"
+    id="admin"
     (onAuthentication)="getUnauthenticatedUsers()"
 >
     <text-section
-        [title]="'Benutzer'"
+        title="Benutzer"
     >
         <p
             *ngIf="unauthenticatedUsers && unauthenticatedUsers.length !== 0"
@@ -41,8 +41,7 @@
             [ngClass]="deviceType.current"
         >
             <a
-                [href]="allInternalLinks['bearbeiten/benutzer-rollen'].link"
-                [title]="allInternalLinks['bearbeiten/benutzer-rollen'].title"
+                link="bearbeiten/benutzer-rollen"
                 class="button"
             >Bearbeiten</a>
             <p
@@ -51,15 +50,14 @@
         </div>
     </text-section>
     <text-section
-        [title]="'Kritik und Vorschläge'"
+        title="Kritik und Vorschläge"
     >
         <div
             class="edit-container"
             [ngClass]="deviceType.current"
         >
             <a
-                [href]="allInternalLinks['bearbeiten/kritik-vorschläge'].link"
-                [title]="allInternalLinks['bearbeiten/kritik-vorschläge'].title"
+                link="bearbeiten/kritik-vorschläge"
                 class="button"
             >Ansehen</a>
             <p
@@ -72,18 +70,17 @@
 <authentication-check
     [roles]="['occupancyManager']"
     [states]="authenticationStates"
-    [id]="'occupancyManager'"
+    id="occupancyManager"
 >
     <text-section
-        [title]="'Belegungsplan'"
+        title="Belegungsplan"
     >
         <div
             class="edit-container"
             [ngClass]="deviceType.current"
         >
             <a
-                [href]="allInternalLinks['bearbeiten/belegungsplan'].link"
-                [title]="allInternalLinks['bearbeiten/belegungsplan'].title"
+                link="bearbeiten/belegungsplan"
                 class="button"
             >Bearbeiten</a>
             <p
@@ -96,18 +93,17 @@
 <authentication-check
     [roles]="['websiteManager']"
     [states]="authenticationStates"
-    [id]="'websiteManager'"
+    id="websiteManager"
 >
     <text-section
-        [title]="'Website bearbeiten'"
+        title="Website bearbeiten"
     >
         <div
             class="edit-container"
             [ngClass]="deviceType.current"
         >
             <a
-                [href]="allInternalLinks['bearbeiten/termine'].link"
-                [title]="allInternalLinks['bearbeiten/termine'].title"
+                link="bearbeiten/termine"
                 class="button"
             >Bearbeiten</a>
             <p
@@ -119,8 +115,7 @@
             [ngClass]="deviceType.current"
         >
             <a
-                [href]="allInternalLinks['bearbeiten/berichte'].link"
-                [title]="allInternalLinks['bearbeiten/berichte'].title"
+                link="bearbeiten/berichte"
                 class="button"
             >Bearbeiten</a>
             <p

@@ -3,7 +3,6 @@ import { Report, ReportGroupId } from 'src/app/modules/firebase-api/types/report
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { FetchState } from 'src/app/types/fetch-state';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { InternalLink } from 'src/app/types/internal-path';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { TrackBy } from 'src/app/types/track-by';
 
@@ -24,8 +23,6 @@ export class ReportsComponent implements OnInit {
     public TrackBy = TrackBy;
 
     public Report = Report;
-
-    public readonly allReportsLink = InternalLink.all.berichte;
 
     public fetchedReports: FetchState<{ reports: Report[]; hasMore: boolean }> = FetchState.loading;
 
