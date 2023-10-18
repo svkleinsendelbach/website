@@ -111,26 +111,23 @@ export class EditEventPage implements OnInit {
             this.bfvGameInputForm.status = 'gameIdNotFound';
             return;
         }
-        try {
-            const gameInfo = await this.firebaseApiService.function('bfvData').function('gameInfo')
-                .call({
-                    gameId: match.groups['id']
-                });
-            const { isSg2 } = GameInfo.additionalProperties(gameInfo);
-            this.inputForm.field('groupId').inputValue = isSg2 ? 'football-adults/second-team' : 'football-adults/first-team';
-            this.inputForm.field('title').inputValue = `${gameInfo.homeTeam.name} gegen ${gameInfo.awayTeam.name}`;
-            this.inputForm.field('subtitle').inputValue = gameInfo.adressDescription ?? '';
-            this.inputForm.field('link').inputValue = `https://www.bfv.de/spiele/${match.groups['id']}`;
-            this.inputForm.field('date').inputValue = UtcDate.decode(gameInfo.date);
-        } catch (error) {
-            if (error === null || typeof error !== 'object' || !('code' in error) || error.code !== 'not-found') {
+        const gameInfo = await this.firebaseApiService.function('bfvData-gameInfo').call({
+            gameId: match.groups['id']
+        });
+        if (gameInfo.isFailure()) {
+            if (gameInfo.error.code === 'not-found')
+                this.bfvGameInputForm.status = 'gameNotFound';
+            else
                 this.bfvGameInputForm.status = 'failed';
-                throw error;
-            }
-            this.bfvGameInputForm.status = 'gameNotFound';
-            return;
+        } else {
+            const { isSg2 } = GameInfo.additionalProperties(gameInfo.value);
+            this.inputForm.field('groupId').inputValue = isSg2 ? 'football-adults/second-team' : 'football-adults/first-team';
+            this.inputForm.field('title').inputValue = `${gameInfo.value.homeTeam.name} gegen ${gameInfo.value.awayTeam.name}`;
+            this.inputForm.field('subtitle').inputValue = gameInfo.value.adressDescription ?? '';
+            this.inputForm.field('link').inputValue = `https://www.bfv.de/spiele/${match.groups['id']}`;
+            this.inputForm.field('date').inputValue = UtcDate.decode(gameInfo.value.date);
+            this.bfvGameInputForm.status = 'valid';
         }
-        this.bfvGameInputForm.status = 'valid';
     }
 
     public async saveEvent() {
@@ -142,25 +139,24 @@ export class EditEventPage implements OnInit {
             return;
         this.inputForm.status = 'loading';
         const eventId = this.previousEvent ? this.previousEvent.event.id : Guid.newGuid().guidString;
-        await this.firebaseApiService.function('event').function('edit')
-            .call({
-                editType: this.previousEvent ? 'change' : 'add',
-                event: {
-                    date: this.inputForm.field('date').value.encoded,
-                    isImportant: this.inputForm.field('isImportant').value,
-                    link: this.inputForm.field('link').value || null,
-                    subtitle: this.inputForm.field('subtitle').value || null,
-                    title: this.inputForm.field('title').value
-                },
-                eventId: eventId,
-                groupId: this.inputForm.field('groupId').value,
-                previousGroupId: this.previousEvent ? this.previousEvent.groupId : null
-            })
-            .catch(reason => {
-                this.inputForm.status = 'failed';
-                throw reason;
-            });
-        await this.router.navigateByUrl(internalLinks['bearbeiten/termine'].link);
-        this.inputForm.status = 'valid';
+        const result = await this.firebaseApiService.function('event-edit').call({
+            editType: this.previousEvent ? 'change' : 'add',
+            event: {
+                date: this.inputForm.field('date').value.encoded,
+                isImportant: this.inputForm.field('isImportant').value,
+                link: this.inputForm.field('link').value || null,
+                subtitle: this.inputForm.field('subtitle').value || null,
+                title: this.inputForm.field('title').value
+            },
+            eventId: eventId,
+            groupId: this.inputForm.field('groupId').value,
+            previousGroupId: this.previousEvent ? this.previousEvent.groupId : null
+        });
+        if (result.isFailure())
+            this.inputForm.status = 'failed';
+        else {
+            await this.router.navigateByUrl(internalLinks['bearbeiten/termine'].link);
+            this.inputForm.status = 'valid';
+        }
     }
 }

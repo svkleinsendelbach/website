@@ -2,26 +2,26 @@
     title="Kader"
 >
     <p
-        *ngIf="fetchedSquad.isLoading()"
+        *ngIf="!fetchedSquad"
         class="text center large primaryColor"
     >Kader wird geladen</p>
     <p
-        *ngIf="fetchedSquad.isFailure()"
+        *ngIf="fetchedSquad && fetchedSquad.isFailure()"
         class="text center large primaryColor"
     >Kader konnten nicht geladen werden</p>
 
     <!-- Coach -->
     <p
         class="text left-align x-large margin-top-normal"
-        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.coach"
+        *ngIf="fetchedSquad && fetchedSquad.isSuccess() && fetchedSquad.value.coach"
     >Trainer</p>
     <div
         class="container"
-        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.coach"
+        *ngIf="fetchedSquad && fetchedSquad.isSuccess() && fetchedSquad.value.coach"
     >
         <squad-person
             class="person"
-            [person]="coachPersonInfo(fetchedSquad.content.coach)"
+            [person]="coachPersonInfo(fetchedSquad.value.coach)"
             [ngClass]="deviceType.current"
         />
     </div>
@@ -29,15 +29,15 @@
     <!-- Goal keeper -->
     <p
         class="text left-align x-large margin-top-normal"
-        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.goalkeeper && fetchedSquad.content.squad.goalkeeper.length !== 0"
+        *ngIf="fetchedSquad && fetchedSquad.isSuccess() && fetchedSquad.value.squad && fetchedSquad.value.squad.goalkeeper && fetchedSquad.value.squad.goalkeeper.length !== 0"
     >Torwart</p>
     <div
         class="container"
-        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.goalkeeper && fetchedSquad.content.squad.goalkeeper.length !== 0"
+        *ngIf="fetchedSquad && fetchedSquad.isSuccess() && fetchedSquad.value.squad && fetchedSquad.value.squad.goalkeeper && fetchedSquad.value.squad.goalkeeper.length !== 0"
     >
         <squad-person
             class="person"
-            *ngFor="let person of fetchedSquad.content.squad.goalkeeper; trackBy: TrackBy.squadPersonName"
+            *ngFor="let person of fetchedSquad.value.squad.goalkeeper; trackBy: TrackBy.squadPersonName"
             [person]="squadPersonInfo(person)"
             [ngClass]="deviceType.current"
         />
@@ -46,15 +46,15 @@
     <!-- Defence -->
     <p
         class="text left-align x-large margin-top-normal"
-        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.defence && fetchedSquad.content.squad.defence.length !== 0"
+        *ngIf="fetchedSquad && fetchedSquad.isSuccess() && fetchedSquad.value.squad && fetchedSquad.value.squad.defence && fetchedSquad.value.squad.defence.length !== 0"
     >Abwehr</p>
     <div
         class="container"
-        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.defence && fetchedSquad.content.squad.defence.length !== 0"
+        *ngIf="fetchedSquad && fetchedSquad.isSuccess() && fetchedSquad.value.squad && fetchedSquad.value.squad.defence && fetchedSquad.value.squad.defence.length !== 0"
     >
         <squad-person
             class="person"
-            *ngFor="let person of fetchedSquad.content.squad.defence; trackBy: TrackBy.squadPersonName"
+            *ngFor="let person of fetchedSquad.value.squad.defence; trackBy: TrackBy.squadPersonName"
             [person]="squadPersonInfo(person)"
             [ngClass]="deviceType.current"
         />
@@ -63,15 +63,15 @@
     <!-- Midfield -->
     <p
         class="text left-align x-large margin-top-normal"
-        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.midfield && fetchedSquad.content.squad.midfield.length !== 0"
+        *ngIf="fetchedSquad && fetchedSquad.isSuccess() && fetchedSquad.value.squad && fetchedSquad.value.squad.midfield && fetchedSquad.value.squad.midfield.length !== 0"
     >Mittelfeld</p>
     <div
         class="container"
-        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.midfield && fetchedSquad.content.squad.midfield.length !== 0"
+        *ngIf="fetchedSquad && fetchedSquad.isSuccess() && fetchedSquad.value.squad && fetchedSquad.value.squad.midfield && fetchedSquad.value.squad.midfield.length !== 0"
     >
         <squad-person
             class="person"
-            *ngFor="let person of fetchedSquad.content.squad.midfield; trackBy: TrackBy.squadPersonName"
+            *ngFor="let person of fetchedSquad.value.squad.midfield; trackBy: TrackBy.squadPersonName"
             [person]="squadPersonInfo(person)"
             [ngClass]="deviceType.current"
         />
@@ -80,15 +80,15 @@
     <!-- Offence -->
     <p
         class="text left-align x-large margin-top-normal"
-        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.offence && fetchedSquad.content.squad.offence.length !== 0"
+        *ngIf="fetchedSquad && fetchedSquad.isSuccess() && fetchedSquad.value.squad && fetchedSquad.value.squad.offence && fetchedSquad.value.squad.offence.length !== 0"
     >Sturm</p>
     <div
         class="container"
-        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.offence && fetchedSquad.content.squad.offence.length !== 0"
+        *ngIf="fetchedSquad && fetchedSquad.isSuccess() && fetchedSquad.value.squad && fetchedSquad.value.squad.offence && fetchedSquad.value.squad.offence.length !== 0"
     >
         <squad-person
             class="person"
-            *ngFor="let person of fetchedSquad.content.squad.offence; trackBy: TrackBy.squadPersonName"
+            *ngFor="let person of fetchedSquad.value.squad.offence; trackBy: TrackBy.squadPersonName"
             [person]="squadPersonInfo(person)"
             [ngClass]="deviceType.current"
         />
@@ -97,15 +97,15 @@
     <!-- Without disclosures -->
     <p
         class="text left-align x-large margin-top-normal"
-        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.notSpecified && fetchedSquad.content.squad.notSpecified.length !== 0"
+        *ngIf="fetchedSquad && fetchedSquad.isSuccess() && fetchedSquad.value.squad && fetchedSquad.value.squad.notSpecified && fetchedSquad.value.squad.notSpecified.length !== 0"
     >Ohne Angaben</p>
     <div
         class="container"
-        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.squad && fetchedSquad.content.squad.notSpecified && fetchedSquad.content.squad.notSpecified.length !== 0"
+        *ngIf="fetchedSquad && fetchedSquad.isSuccess() && fetchedSquad.value.squad && fetchedSquad.value.squad.notSpecified && fetchedSquad.value.squad.notSpecified.length !== 0"
     >
         <squad-person
             class="person"
-            *ngFor="let person of fetchedSquad.content.squad.notSpecified; trackBy: TrackBy.squadPersonName"
+            *ngFor="let person of fetchedSquad.value.squad.notSpecified; trackBy: TrackBy.squadPersonName"
             [person]="squadPersonInfo(person)"
             [ngClass]="deviceType.current"
         />
@@ -114,15 +114,15 @@
     <!-- Staff -->
     <p
         class="text left-align x-large margin-top-normal"
-        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.stab && fetchedSquad.content.stab.length !== 0"
+        *ngIf="fetchedSquad && fetchedSquad.isSuccess() && fetchedSquad.value.stab && fetchedSquad.value.stab.length !== 0"
     >Stab</p>
     <div
         class="container"
-        *ngIf="fetchedSquad.isSuccess() && fetchedSquad.content.stab && fetchedSquad.content.stab.length !== 0"
+        *ngIf="fetchedSquad && fetchedSquad.isSuccess() && fetchedSquad.value.stab && fetchedSquad.value.stab.length !== 0"
     >
         <squad-person
             class="person"
-            *ngFor="let person of fetchedSquad.content.stab; trackBy: TrackBy.squadPersonName"
+            *ngFor="let person of fetchedSquad.value.stab; trackBy: TrackBy.squadPersonName"
             [person]="staffPersonInfo(person)"
             [ngClass]="deviceType.current"
         />

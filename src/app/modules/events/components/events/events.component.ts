@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Event, EventGroup, EventGroupId } from 'src/app/modules/firebase-api/types/event';
 import { DeviceTypeService } from '../../../../services/device-type.service';
-import { FetchState } from 'src/app/types/fetch-state';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { StyleConfigService } from '../../../../services/style-config.service';
 import { TrackBy } from 'src/app/types/track-by';
 import { UtcDate } from 'src/app/types/utc-date';
+import { Result } from 'src/app/modules/firebase-api/types/result';
 
 @Component({
     selector: 'events',
@@ -17,11 +17,9 @@ export class EventsComponent implements OnInit {
 
     public TrackBy = TrackBy;
 
-    public Event = Event;
-
     public EventGroupId = EventGroupId;
 
-    public fetchedEventGroups: FetchState<EventGroup[]> = FetchState.loading;
+    public fetchedEventGroups: Result<EventGroup[]> | null = null;
 
     public expandedGroupId: EventGroupId | null = null;
 
@@ -48,24 +46,14 @@ export class EventsComponent implements OnInit {
         return `webcal://europe-west1-svkleinsendelbach-website.cloudfunctions.net/debug-icsEvents?selection=${EventGroupId.encodeSelectedGroupIds(selectedEventGroupIds)}`;
     }
 
-    public ngOnInit() {
+    public async ngOnInit() {
         if (!(this.groupIds as EventGroupId[] | undefined))
             return;
         for (const groupId of this.groupIds)
             this.calendarSubscriptionSelection[groupId] = true;
-        this.firebaseApiService.function('event').function('get')
-            .call({
-                groupIds: this.groupIds
-            })
-            .then(eventGroups => {
-                this.fetchedEventGroups = FetchState.success(eventGroups.map(eventGroup => ({
-                    events: eventGroup.events.map(event => Event.concrete(event)),
-                    groupId: eventGroup.groupId
-                })));
-            })
-            .catch(reason => {
-                this.fetchedEventGroups = FetchState.failure(reason);
-            });
+        this.fetchedEventGroups = await this.firebaseApiService.function('event-get').call({
+            groupIds: this.groupIds
+        });
     }
 
     public isRecent(event: Event): boolean {

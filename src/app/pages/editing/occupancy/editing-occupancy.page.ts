@@ -5,7 +5,6 @@ import { CalendarEventTitleWithDateFormatter } from './CalendarEventTitleWithDat
 import { CalendarLocalizedDateFormtter } from './CalendarLocalizedDateFormatter';
 import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { FetchState } from 'src/app/types/fetch-state';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { internalLinks } from 'src/app/types/internal-link-path';
 import { Occupancy } from 'src/app/modules/firebase-api/types/occupancy';
@@ -15,6 +14,7 @@ import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 import { TrackBy } from 'src/app/types/track-by';
 import { UtcDate } from 'src/app/types/utc-date';
+import { Result } from 'src/app/modules/firebase-api/types/result';
 
 @Component({
     providers: [
@@ -36,11 +36,9 @@ export class EditingOccupancyPage {
 
     public CalendarView = CalendarView;
 
-    public FetchState = FetchState;
-
     public Location = Occupancy.Location;
 
-    public occupancies: FetchState<Occupancy[]> = FetchState.loading;
+    public fetchedOccupancies: Result<Occupancy[]> | null = null;
 
     public activeDate = new Date();
 
@@ -116,21 +114,12 @@ export class EditingOccupancyPage {
         })));
     }
 
-    public getOccupancy() {
-        this.firebaseApiService
-            .function('occupancy')
-            .function('getAll')
-            .call({})
-            .then(occupancies => {
-                this.occupancies = FetchState.success(occupancies.map(occupancy => Occupancy.concrete(occupancy)));
-            })
-            .catch(reason => {
-                this.occupancies = FetchState.failure(reason);
-            });
+    public async getOccupancy() {
+        this.fetchedOccupancies = await this.firebaseApiService.function('occupancy-getAll').call({});
     }
 
     public async deleteOccupancy(occupancy: Occupancy, editDate: UtcDate, deleteNotRecurring: boolean = false) {
-        if (!this.occupancies.isSuccess())
+        if (!this.fetchedOccupancies || this.fetchedOccupancies.isFailure())
             return;
         if (occupancy.recurring && deleteNotRecurring) {
             // eslint-disable-next-line no-underscore-dangle, object-property-newline
@@ -146,25 +135,19 @@ export class EditingOccupancyPage {
                     excludingDates: excludingDates
                 }
             };
-            this.occupancies = FetchState.success(this.occupancies.content.map(_occupancy => _occupancy.id.guidString === occupancy.id.guidString ? newOccupancy : _occupancy));
-            await this.firebaseApiService
-                .function('occupancy')
-                .function('edit')
-                .call({
-                    editType: 'change',
-                    occupancy: Occupancy.flatten(newOccupancy),
-                    occupancyId: occupancy.id.guidString
-                });
+            this.fetchedOccupancies = Result.success(this.fetchedOccupancies.value.map(_occupancy => _occupancy.id.guidString === occupancy.id.guidString ? newOccupancy : _occupancy));
+            await this.firebaseApiService.function('occupancy-edit').call({
+                editType: 'change',
+                occupancy: Occupancy.flatten(newOccupancy),
+                occupancyId: occupancy.id.guidString
+            });
         } else {
-            this.occupancies = FetchState.success(this.occupancies.content.filter(_occupancy => _occupancy.id.guidString !== occupancy.id.guidString));
-            await this.firebaseApiService
-                .function('occupancy')
-                .function('edit')
-                .call({
-                    editType: 'remove',
-                    occupancy: null,
-                    occupancyId: occupancy.id.guidString
-                });
+            this.fetchedOccupancies = Result.success(this.fetchedOccupancies.value.filter(_occupancy => _occupancy.id.guidString !== occupancy.id.guidString));
+            await this.firebaseApiService.function('occupancy-edit').call({
+                editType: 'remove',
+                occupancy: null,
+                occupancyId: occupancy.id.guidString
+            });
         }
     }
 

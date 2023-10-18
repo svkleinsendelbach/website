@@ -78,7 +78,7 @@ export class LoginPageComponent {
         const verifyResponse = await this.firebaseApiService.function('verifyRecaptcha').call({
             token: token
         });
-        if (verifyResponse.action !== 'websiteEditingLoginForm' || !verifyResponse.success) {
+        if (verifyResponse.isFailure() || verifyResponse.value.action !== 'websiteEditingLoginForm' || !verifyResponse.value.success) {
             this.inputForm.status = 'recaptchaFailed';
             return;
         }

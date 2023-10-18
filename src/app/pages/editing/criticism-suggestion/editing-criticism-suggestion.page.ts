@@ -2,11 +2,11 @@ import { AppearanceService } from 'src/app/services/appearance.service';
 import { Component } from '@angular/core';
 import { CriticismSuggestion } from 'src/app/modules/firebase-api/types/criticism-sugggestion';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { FetchState } from 'src/app/types/fetch-state';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 import { TrackBy } from 'src/app/types/track-by';
+import { Result } from 'src/app/modules/firebase-api/types/result';
 
 @Component({
     selector: 'app-editing-criticism-suggestion',
@@ -18,10 +18,10 @@ export class EditingCriticismSuggestionPage {
 
     public CriticismSuggestion = CriticismSuggestion;
 
-    public criticismSuggestions: FetchState<{
-        notWorkedOff: CriticismSuggestion[];
+    public fetchedCriticismSuggestions: Result<{
+        active: CriticismSuggestion[];
         workedOff: CriticismSuggestion[] | null;
-    }> = FetchState.loading;
+    }> | null = null;
 
     public expandedCriticismSuggestionId: string | null = null;
 
@@ -35,67 +35,51 @@ export class EditingCriticismSuggestionPage {
         this.titleService.setTitle('Kritik und Vorschläge');
     }
 
-    public getCriticismSuggestions(workedOff: boolean = false) {
-        this.firebaseApiService
-            .function('criticismSuggestion')
-            .function('getAll')
-            .call({
-                workedOff: workedOff
-            })
-            .then(criticismSuggestions => {
-                if (!workedOff) {
-                    this.criticismSuggestions = FetchState.success({
-                        notWorkedOff: criticismSuggestions.map(criticismSuggestion => CriticismSuggestion.concrete(criticismSuggestion)),
-                        workedOff: null
-                    });
-                } else if (this.criticismSuggestions.isSuccess())
-                    this.criticismSuggestions.content.workedOff = criticismSuggestions.map(criticismSuggestion => CriticismSuggestion.concrete(criticismSuggestion));
-            })
-            .catch(reason => {
-                if (!workedOff)
-                    this.criticismSuggestions = FetchState.failure(reason);
+    public async getCriticismSuggestions(state: 'active' | 'workedOff' = 'active') {
+        const fetchedCriticismSuggestions = await this.firebaseApiService.function('criticismSuggestion-getAll').call({
+            workedOff: state === 'workedOff'
+        });
+        if (fetchedCriticismSuggestions.isFailure())
+            this.fetchedCriticismSuggestions = fetchedCriticismSuggestions;
+        else if (state === 'active') {
+            this.fetchedCriticismSuggestions = Result.success({
+                active: fetchedCriticismSuggestions.value,
+                workedOff: this.fetchedCriticismSuggestions !== null && this.fetchedCriticismSuggestions.isSuccess() ? this.fetchedCriticismSuggestions.value.workedOff : null
             });
+        } else if (this.fetchedCriticismSuggestions !== null && this.fetchedCriticismSuggestions.isSuccess()) {
+            this.fetchedCriticismSuggestions = Result.success({
+                active: this.fetchedCriticismSuggestions.value.active,
+                workedOff: fetchedCriticismSuggestions.value
+            });
+        }
     }
 
-    public async toggleworkedOff(criticismSuggestion: CriticismSuggestion) {
-        if (!this.criticismSuggestions.isSuccess())
+    public async toggleState(criticismSuggestion: CriticismSuggestion) {
+        if (!this.fetchedCriticismSuggestions || this.fetchedCriticismSuggestions.isFailure())
             return;
         if (criticismSuggestion.workedOff) {
-            this.criticismSuggestions = FetchState.success({
-                notWorkedOff: [
-                    ...this.criticismSuggestions.content.notWorkedOff, {
-                        ...criticismSuggestion,
-                        workedOff: false
-                    }
-                ],
-                workedOff: this.criticismSuggestions.content.workedOff
-                    ? this.criticismSuggestions.content.workedOff.filter(_criticismSuggestion => _criticismSuggestion.id !== criticismSuggestion.id)
+            this.fetchedCriticismSuggestions = Result.success({
+                active: [...this.fetchedCriticismSuggestions.value.active, { ...criticismSuggestion, workedOff: false }],
+                workedOff: this.fetchedCriticismSuggestions.value.workedOff
+                    ? this.fetchedCriticismSuggestions.value.workedOff.filter(_criticismSuggestion => _criticismSuggestion.id !== criticismSuggestion.id)
                     : null
             });
         } else {
-            this.criticismSuggestions = FetchState.success({
-                notWorkedOff: this.criticismSuggestions.content.notWorkedOff.filter(_criticismSuggestion => _criticismSuggestion.id !== criticismSuggestion.id),
-                workedOff: this.criticismSuggestions.content.workedOff
-                    ? [
-                        ...this.criticismSuggestions.content.workedOff, {
-                            ...criticismSuggestion,
-                            workedOff: true
-                        }
-                    ]
+            this.fetchedCriticismSuggestions = Result.success({
+                active: this.fetchedCriticismSuggestions.value.active.filter(_criticismSuggestion => _criticismSuggestion.id !== criticismSuggestion.id),
+                workedOff: this.fetchedCriticismSuggestions.value.workedOff
+                    ? [...this.fetchedCriticismSuggestions.value.workedOff, { ...criticismSuggestion, workedOff: true }]
                     : null
             });
         }
-        await this.firebaseApiService
-            .function('criticismSuggestion')
-            .function('edit')
-            .call({
-                criticismSuggestion: {
-                    ...CriticismSuggestion.flatten(criticismSuggestion),
-                    workedOff: !criticismSuggestion.workedOff
-                },
-                criticismSuggestionId: criticismSuggestion.id.guidString,
-                editType: 'change'
-            });
+        await this.firebaseApiService.function('criticismSuggestion-edit').call({
+            criticismSuggestion: {
+                ...CriticismSuggestion.flatten(criticismSuggestion),
+                workedOff: !criticismSuggestion.workedOff
+            },
+            criticismSuggestionId: criticismSuggestion.id.guidString,
+            editType: 'change'
+        });
     }
 
     public expand(criticismSuggestion: CriticismSuggestion) {

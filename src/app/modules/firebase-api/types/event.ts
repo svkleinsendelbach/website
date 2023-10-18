@@ -121,4 +121,18 @@ export namespace EventGroup {
         groupId: EventGroupId;
         events: Event.Flatten[];
     }
+
+    export function flatten(eventGroup: EventGroup): EventGroup.Flatten {
+        return {
+            groupId: eventGroup.groupId,
+            events: eventGroup.events.map(event => Event.flatten(event))
+        };
+    }
+
+    export function concrete(eventGroup: EventGroup.Flatten): EventGroup {
+        return {
+            groupId: eventGroup.groupId,
+            events: eventGroup.events.map(event => Event.concrete(event))
+        };
+    }
 }

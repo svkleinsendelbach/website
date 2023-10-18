@@ -10,23 +10,23 @@
         [ngClass]="deviceType.current"
     >
         <p
-            *ngIf="criticismSuggestions.isLoading()"
+            *ngIf="!fetchedCriticismSuggestions"
             class="text margin-top-large secondaryColor"
         >Kritik und Vorschläge werden geladen</p>
         <p
-            *ngIf="criticismSuggestions.isFailure()"
+            *ngIf="fetchedCriticismSuggestions && fetchedCriticismSuggestions.isFailure()"
             class="text margin-top-large primaryColor"
         >Kritik und Vorschläge konnten nicht geladen werden</p>
         <p
-            *ngIf="criticismSuggestions.isSuccess() && criticismSuggestions.content.notWorkedOff.length === 0"
+            *ngIf="fetchedCriticismSuggestions && fetchedCriticismSuggestions.isSuccess() && fetchedCriticismSuggestions.value.active.length === 0"
             class="text margin-top-large primaryColor"
         >Keine Kritik und Vorschläge</p>
         <div
-            *ngIf="criticismSuggestions.isSuccess()"
+            *ngIf="fetchedCriticismSuggestions && fetchedCriticismSuggestions.isSuccess()"
             class="list-container"
         >
             <div
-                *ngFor="let criticismSuggestion of criticismSuggestions.content.notWorkedOff; trackBy: TrackBy.id"
+                *ngFor="let criticismSuggestion of fetchedCriticismSuggestions.value.active; trackBy: TrackBy.id"
                 class="container"
             >
                 <div
@@ -46,7 +46,7 @@
                     <p
                         class="worked-off"
                         role="none"
-                        (click)="$event.stopPropagation(); toggleworkedOff(criticismSuggestion)"
+                        (click)="$event.stopPropagation(); toggleState(criticismSuggestion)"
                     >Abgearbeitet</p>
                 </div>
                 <p
@@ -56,14 +56,14 @@
             </div>
         </div>
         <p
-            *ngIf="criticismSuggestions.isSuccess() && !criticismSuggestions.content.workedOff"
+            *ngIf="fetchedCriticismSuggestions&& fetchedCriticismSuggestions.isSuccess() && !fetchedCriticismSuggestions.value.workedOff"
             id="show-worked-off-button"
             role="none"
-            (click)="getCriticismSuggestions(true)"
+            (click)="getCriticismSuggestions('workedOff')"
         >Abgearbeitete anzeigen</p>
     </text-section>
     <text-section
-        *ngIf="criticismSuggestions.isSuccess() && criticismSuggestions.content.workedOff"
+        *ngIf="fetchedCriticismSuggestions&& fetchedCriticismSuggestions.isSuccess() && fetchedCriticismSuggestions.value.workedOff && fetchedCriticismSuggestions.value.workedOff.length !== null"
         title="Abgearbeitete Kritik und Vorschläge"
         [ngClass]="deviceType.current"
     >
@@ -71,7 +71,7 @@
             class="list-container"
         >
             <div
-                *ngFor="let criticismSuggestion of criticismSuggestions.content.workedOff; trackBy: TrackBy.id"
+                *ngFor="let criticismSuggestion of fetchedCriticismSuggestions.value.workedOff; trackBy: TrackBy.id"
                 class="container"
             >
                 <div
@@ -91,7 +91,7 @@
                     <p
                         class="worked-off"
                         role="none"
-                        (click)="$event.stopPropagation(); toggleworkedOff(criticismSuggestion)"
+                        (click)="$event.stopPropagation(); toggleState(criticismSuggestion)"
                     >Rückgänging</p>
                 </div>
                 <p
@@ -101,7 +101,7 @@
             </div>
         </div>
         <p
-            *ngIf="criticismSuggestions.content.workedOff.length === 0"
+            *ngIf="fetchedCriticismSuggestions.value.workedOff.length === 0"
             class="text margin-top-large primaryColor"
         >Keine abgearbeitete Kritik und Vorschläge</p>
     </text-section>

@@ -62,14 +62,13 @@ export class EditingEventsPage {
                 };
             });
         }
-        await this.firebaseApiService.function('event').function('edit')
-            .call({
-                editType: 'remove',
-                event: null,
-                eventId: eventId.guidString,
-                groupId: groupId,
-                previousGroupId: null
-            });
+        await this.firebaseApiService.function('event-edit').call({
+            editType: 'remove',
+            event: null,
+            eventId: eventId.guidString,
+            groupId: groupId,
+            previousGroupId: null
+        });
     }
 
     public async editEvent(groupId: EventGroupId, event: Event) {
@@ -86,13 +85,8 @@ export class EditingEventsPage {
     }
 
     public async getEvents() {
-        this.eventGroups = await this.firebaseApiService.function('event').function('get')
-            .call({
-                groupIds: EventGroupId.all
-            })
-            .then(eventGroups => eventGroups.map(eventGroup => ({
-                events: eventGroup.events.map(event => Event.concrete(event)),
-                groupId: eventGroup.groupId
-            })));
+        this.eventGroups = (await this.firebaseApiService.function('event-get').call({
+            groupIds: EventGroupId.all
+        })).value;
     }
 }

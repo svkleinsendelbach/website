@@ -137,43 +137,36 @@ export class EditOccupancyPage implements OnInit {
             if (editDate && !this.previousOccupancy.recurring.excludingDates.some(date => editDate.compare(date) === 'equal'))
                 // eslint-disable-next-line object-property-newline
                 excludingDates = [...this.previousOccupancy.recurring.excludingDates, editDate];
-            await this.firebaseApiService
-                .function('occupancy')
-                .function('edit')
-                .call({
-                    editType: 'change',
-                    occupancy: {
-                        ...Occupancy.flatten(this.previousOccupancy),
-                        recurring: Occupancy.Recurring.flatten({
-                            ...this.previousOccupancy.recurring,
-                            excludingDates: excludingDates
-                        })
-                    },
-                    occupancyId: this.previousOccupancy.id.guidString
-                })
-                .catch(_ => {
-                    this.inputForm.status = 'failed';
-                });
-        }
-        await this.firebaseApiService
-            .function('occupancy')
-            .function('edit')
-            .call({
-                editType: editType,
+            const result1 = await this.firebaseApiService.function('occupancy-edit').call({
+                editType: 'change',
                 occupancy: {
-                    end: this.inputForm.field('end').value.encoded,
-                    location: this.inputForm.field('location').value,
-                    recurring: this.inputForm.field('isRecurring').value ? Occupancy.Recurring.flatten(recurring) : null,
-                    start: this.inputForm.field('start').value.encoded,
-                    title: this.inputForm.field('title').value
+                    ...Occupancy.flatten(this.previousOccupancy),
+                    recurring: Occupancy.Recurring.flatten({
+                        ...this.previousOccupancy.recurring,
+                        excludingDates: excludingDates
+                    })
                 },
-                occupancyId: occupancyId.guidString
-            })
-            .catch(reason => {
-                this.inputForm.status = 'failed';
-                throw reason;
+                occupancyId: this.previousOccupancy.id.guidString
             });
-        await this.router.navigateByUrl(internalLinks['bearbeiten/belegungsplan'].link);
-        this.inputForm.status = 'valid';
+            if (result1.isFailure())
+                this.inputForm.status = 'failed';
+        }
+        const result2 = await this.firebaseApiService.function('occupancy-edit').call({
+            editType: editType,
+            occupancy: {
+                end: this.inputForm.field('end').value.encoded,
+                location: this.inputForm.field('location').value,
+                recurring: this.inputForm.field('isRecurring').value ? Occupancy.Recurring.flatten(recurring) : null,
+                start: this.inputForm.field('start').value.encoded,
+                title: this.inputForm.field('title').value
+            },
+            occupancyId: occupancyId.guidString
+        });
+        if (result2.isFailure())
+            this.inputForm.status = 'failed';
+        else {
+            await this.router.navigateByUrl(internalLinks['bearbeiten/belegungsplan'].link);
+            this.inputForm.status = 'valid';
+        }
     }
 }

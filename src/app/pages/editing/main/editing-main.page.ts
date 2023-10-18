@@ -33,21 +33,15 @@ export class EditingMainPage {
     public async handleAccessRequest(handleRequest: 'accept' | 'decline', hashedUserId: string) {
         if (this.unauthenticatedUsers)
             this.unauthenticatedUsers = this.unauthenticatedUsers.filter(user => user.hashedUserId !== hashedUserId);
-        await this.firebaseApiService
-            .function('user')
-            .function('handleAccessRequest')
-            .call({
-                handleRequest: handleRequest,
-                hashedUserId: hashedUserId
-            });
+        await this.firebaseApiService.function('user-handleAccessRequest').call({
+            handleRequest: handleRequest,
+            hashedUserId: hashedUserId
+        });
     }
 
     public async getUnauthenticatedUsers() {
-        this.unauthenticatedUsers = await this.firebaseApiService
-            .function('user')
-            .function('getAll')
-            .call({
-                type: 'unauthenticated'
-            });
+        this.unauthenticatedUsers = (await this.firebaseApiService.function('user-getAll').call({
+            type: 'unauthenticated'
+        })).value;
     }
 }

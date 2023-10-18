@@ -60,16 +60,13 @@ export class EditingReportsPage {
                 reports: reports
             };
         });
-        await this.firebaseApiService
-            .function('report')
-            .function('edit')
-            .call({
-                editType: 'remove',
-                groupId: groupId,
-                previousGroupId: null,
-                report: null,
-                reportId: reportId.guidString
-            });
+        await this.firebaseApiService.function('report-edit').call({
+            editType: 'remove',
+            groupId: groupId,
+            previousGroupId: null,
+            report: null,
+            reportId: reportId.guidString
+        });
     }
 
     public async editReport(groupId: ReportGroupId, report: Report) {
@@ -86,26 +83,17 @@ export class EditingReportsPage {
     }
 
     public async getReports() {
-        const reportGroups = await Promise.all(ReportGroupId.all.map(async groupId => {
-            const result = await this.firebaseApiService
-                .function('report')
-                .function('get')
-                .call({
-                    groupId: groupId,
-                    numberReports: null
-                });
+        this.reportGroups = await Promise.all(ReportGroupId.all.map(async groupId => {
+            const result = await this.firebaseApiService.function('report-get').call({
+                groupId: groupId,
+                numberReports: null
+            });
+            if (result.isFailure())
+                throw result.error;
             return {
                 groupId: groupId,
-                reports: result.reports
+                reports: result.value.reports
             };
         }));
-        this.reportGroups = reportGroups.flatMap(reportGroup => {
-            if (reportGroup.reports.length === 0)
-                return [];
-            return {
-                groupId: reportGroup.groupId,
-                reports: reportGroup.reports.map(report => Report.concrete(report))
-            };
-        });
     }
 }

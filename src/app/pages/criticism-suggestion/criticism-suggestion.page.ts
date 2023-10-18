@@ -71,29 +71,25 @@ export class CriticismSuggestionPage {
             .call({
                 token: token
             });
-        if (verifyResponse.action !== 'criticismSuggestionForm' || !verifyResponse.success) {
+        if (verifyResponse.isFailure() || verifyResponse.value.action !== 'criticismSuggestionForm' || !verifyResponse.value.success) {
             this.inputForm.status = 'recaptchaFailed';
             return;
         }
-        await this.firebaseApi
-            .function('criticismSuggestion')
-            .function('edit')
-            .call({
-                criticismSuggestion: {
-                    description: this.inputForm.field('description').value,
-                    title: this.inputForm.field('title').value,
-                    type: this.inputForm.field('type').value,
-                    workedOff: false
-                },
-                criticismSuggestionId: Guid.newGuid().guidString,
-                editType: 'add'
-            })
-            .catch(_ => {
-                this.inputForm.status = 'failed';
-            })
-            .then(_ => {
-                this.inputForm.status = 'valid';
-                this.inputForm.reset();
-            });
+        const result = await this.firebaseApi.function('criticismSuggestion-edit').call({
+            criticismSuggestion: {
+                description: this.inputForm.field('description').value,
+                title: this.inputForm.field('title').value,
+                type: this.inputForm.field('type').value,
+                workedOff: false
+            },
+            criticismSuggestionId: Guid.newGuid().guidString,
+            editType: 'add'
+        });
+        if (result.isFailure())
+            this.inputForm.status = 'failed';
+        else {
+            this.inputForm.status = 'valid';
+            this.inputForm.reset();
+        }
     }
 }

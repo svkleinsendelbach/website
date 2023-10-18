@@ -122,7 +122,7 @@ export class ContactPage {
         const verifyResponse = await this.firebaseApiService.function('verifyRecaptcha').call({
             token: token
         });
-        if (verifyResponse.action !== 'contactForm' || !verifyResponse.success) {
+        if (verifyResponse.isFailure() || verifyResponse.value.action !== 'contactForm' || !verifyResponse.value.success) {
             this.inputForm.status = 'recaptchaFailed';
             return;
         }

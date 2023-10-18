@@ -2,8 +2,7 @@ import { AngularFireFunctions } from '@angular/fire/compat/functions';
 import { CallSecret } from '../types/call-secret';
 import { Crypter } from '../crypter/Crypter';
 import { DatabaseType } from '../types/database-type';
-import { FirebaseFunctions as FFunctions } from '../firebase-functions';
-import { FirebaseFunctionsType } from '../types/firebase-functions-type';
+import { FirebaseFunctions, firebaseFunctionMapResultValues } from '../firebase-functions';
 import { FunctionType } from '../types/function-type';
 import { Injectable } from '@angular/core';
 import { ResultType } from '../types/result-type';
@@ -11,40 +10,37 @@ import { UtcDate } from 'src/app/types/utc-date';
 import { VerboseType } from '../types/verbose-type';
 import { environment } from 'src/environments/environment';
 import { lastValueFrom } from 'rxjs';
+import { Result } from '../types/result';
 
-class FirebaseFunctions<FFunctions extends FirebaseFunctionsType> {
+export class FirebaseFunction<Key extends keyof FirebaseFunctions> {
     public constructor(
-        private readonly firebaseFunctions: AngularFireFunctions,
-        private readonly functionName: string
+        private readonly angularFireFunctions: AngularFireFunctions,
+        private readonly key: Key
     ) {}
 
-    public function<Key extends (FFunctions extends FunctionType<unknown, unknown> ? never : (string & keyof FFunctions))>(key: Key): FirebaseFunctions<FFunctions extends FunctionType<unknown, unknown> ? never : FFunctions[Key]> {
-        return new FirebaseFunctions(this.firebaseFunctions, `${this.functionName}-${key}`);
-    }
-
-    public async call(parameters: FFunctions extends FunctionType<unknown, unknown> ? FunctionType.Parameters<FFunctions> : never): Promise<FFunctions extends FunctionType<unknown, unknown> ? FunctionType.ReturnType<FFunctions> : never> {
+    public async call(flattenParameters: FunctionType.FlattenParameters<FirebaseFunctions[Key]>): Promise<ResultType<FunctionType.ReturnType<FirebaseFunctions[Key]>>> {
         const crypter = new Crypter(environment.cryptionKeys);
         const expiresAtUtcDate = UtcDate.now.advanced({ minute: 1 });
-        const functionName = environment.databaseType === 'release' ? this.functionName : `debug-${this.functionName}`;
-        const callableFunction = this.firebaseFunctions.httpsCallable<{
+        const functionName = environment.databaseType === 'release' ? this.key : `debug-${this.key}`;
+        const callableFunction = this.angularFireFunctions.httpsCallable<{
             verbose: VerboseType;
             databaseType: DatabaseType;
             callSecret: CallSecret.Flatten;
             parameters: string;
         }, { result: string; context: unknown }>(functionName);
-        const returnValue = await lastValueFrom(callableFunction({
+        const encryptedReturnValue = await lastValueFrom(callableFunction({
             callSecret: {
                 expiresAt: expiresAtUtcDate.encoded,
                 hashedData: Crypter.sha512(expiresAtUtcDate.encoded, environment.callSecretKey)
             },
             databaseType: environment.databaseType,
-            parameters: crypter.encodeEncrypt(parameters),
+            parameters: crypter.encodeEncrypt(flattenParameters),
             verbose: environment.verbose
         }));
-        const result = crypter.decryptDecode<ResultType<FFunctions extends FunctionType<unknown, unknown> ? FunctionType.ReturnType<FFunctions> : never>>(returnValue.result);
-        if (result.state === 'failure')
-            throw result.error;
-        return result.value;
+        const returnValue: ResultType<FunctionType.FlattenReturnType<FirebaseFunctions[Key]>> = Result.fromObject(crypter.decryptDecode(encryptedReturnValue.result));
+        if (returnValue.isFailure())
+            console.error(returnValue.error);
+        return returnValue.map(content => firebaseFunctionMapResultValues[this.key](content));
     }
 }
 
@@ -53,10 +49,10 @@ class FirebaseFunctions<FFunctions extends FirebaseFunctionsType> {
 })
 export class FirebaseApiService {
     public constructor(
-        private readonly firebaseFunctions: AngularFireFunctions
+        private readonly angularFireFunctions: AngularFireFunctions
     ) {}
 
-    public function<Key extends keyof FFunctions>(key: Key): FirebaseFunctions<FFunctions[Key]> {
-        return new FirebaseFunctions(this.firebaseFunctions, key);
+    public function<Key extends keyof FirebaseFunctions>(key: Key): FirebaseFunction<Key> {
+        return new FirebaseFunction(this.angularFireFunctions, key);
     }
 }

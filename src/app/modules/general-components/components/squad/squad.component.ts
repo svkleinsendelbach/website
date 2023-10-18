@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AnpfiffInfoTeamParameters } from 'src/app/modules/firebase-api/types/anpfiff-info-team-parameters';
 import { DeviceTypeService } from '../../../../services/device-type.service';
-import { FetchState } from 'src/app/types/fetch-state';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { SquadPerson } from '../../types/squad-person';
 import { StyleConfigService } from '../../../../services/style-config.service';
 import { TeamSquad } from 'src/app/modules/firebase-api/types/team-squad';
 import { TrackBy } from 'src/app/types/track-by';
+import { Result } from 'src/app/modules/firebase-api/types/result';
 
 @Component({
     selector: 'squad',
@@ -18,7 +18,7 @@ export class SquadComponent implements OnInit {
 
     public TrackBy = TrackBy;
 
-    public fetchedSquad: FetchState<TeamSquad> = FetchState.loading;
+    public fetchedSquad: Result<TeamSquad> | null = null;
 
     public constructor(
         private readonly firebaseApiService: FirebaseApiService,
@@ -26,17 +26,10 @@ export class SquadComponent implements OnInit {
         public readonly deviceType: DeviceTypeService
     ) {}
 
-    public ngOnInit() {
-        this.firebaseApiService.function('bfvData').function('teamSquad')
-            .call({
-                type: this.parametersType
-            })
-            .then(squad => {
-                this.fetchedSquad = FetchState.success(squad);
-            })
-            .catch(reason => {
-                this.fetchedSquad = FetchState.failure(reason);
-            });
+    public async ngOnInit() {
+        this.fetchedSquad = await this.firebaseApiService.function('bfvData-teamSquad').call({
+            type: this.parametersType
+        });
     }
 
     public squadPersonInfo(person: TeamSquad.Person): SquadPerson {

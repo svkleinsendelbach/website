@@ -132,31 +132,28 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
             this.bfvGameInputForm.status = 'gameIdNotFound';
             return;
         }
-        try {
-            const gameInfo = await this.firebaseApiService.function('bfvData').function('gameInfo')
-                .call({
-                    gameId: match.groups['id']
-                });
-            if (!gameInfo.report) {
+        const gameInfo = await this.firebaseApiService.function('bfvData-gameInfo').call({
+            gameId: match.groups['id']
+        });
+        if (gameInfo.isFailure()) {
+            if (gameInfo.error.code === 'not-found')
+                this.bfvGameInputForm.status = 'gameNotFound';
+            else
+                this.bfvGameInputForm.status = 'failed';
+        } else {
+            if (!gameInfo.value.report) {
                 this.bfvGameInputForm.status = 'reportNotFound';
                 return;
             }
-            const { isSg2, sgHomeAway } = GameInfo.additionalProperties(gameInfo);
+            const { isSg2, sgHomeAway } = GameInfo.additionalProperties(gameInfo.value);
             this.inputForm.field('groupId').initialValue = isSg2 ? 'football-adults/second-team/game-report' : 'football-adults/first-team/game-report';
-            this.inputForm.field('title').initialValue = `${UtcDate.decode(gameInfo.date).description} | ${gameInfo.report.title}`;
-            this.inputForm.field('message').initialValue = gameInfo.report.paragraphs.reduce((result1, paragraph) => `${result1 + paragraph.reduce((result2, value) => {
+            this.inputForm.field('title').initialValue = `${UtcDate.decode(gameInfo.value.date).description} | ${gameInfo.value.report.title}`;
+            this.inputForm.field('message').initialValue = gameInfo.value.report.paragraphs.reduce((result1, paragraph) => `${result1 + paragraph.reduce((result2, value) => {
                 if (value.link === null)
                     return result2 + value.text;
                 return `${result2}[${value.text}](${value.link})`;
             }, '')}\n\n`, '').trim();
-            this.imageUrl = `https://service-prod.bfv.de/export.media?action=getLogo&format=16&id=${sgHomeAway === 'home' ? gameInfo.awayTeam.imageId : gameInfo.homeTeam.imageId}`;
-        } catch (error) {
-            if (error === null || typeof error !== 'object' || !('code' in error) || error.code !== 'not-found') {
-                this.bfvGameInputForm.status = 'failed';
-                throw error;
-            }
-            this.bfvGameInputForm.status = 'gameNotFound';
-            return;
+            this.imageUrl = `https://service-prod.bfv.de/export.media?action=getLogo&format=16&id=${sgHomeAway === 'home' ? gameInfo.value.awayTeam.imageId : gameInfo.value.homeTeam.imageId}`;
         }
         this.bfvGameInputForm.status = 'valid';
     }
@@ -182,25 +179,24 @@ export class EditReportPage implements OnInit, AfterViewInit, OnDestroy {
         this.inputForm.status = 'loading';
         const reportId = this.previousReport ? this.previousReport.report.id : Guid.newGuid();
         const createDate = (this.previousReport ? this.previousReport.report.createDate : UtcDate.now).encoded;
-        await this.firebaseApiService.function('report').function('edit')
-            .call({
-                editType: this.previousReport ? 'change' : 'add',
-                groupId: this.inputForm.field('groupId').value,
-                previousGroupId: this.previousReport ? this.previousReport.groupId : null,
-                report: {
-                    createDate: createDate,
-                    imageUrl: this.imageUrl,
-                    message: this.inputForm.field('message').value,
-                    title: this.inputForm.field('title').value
-                },
-                reportId: reportId.guidString
-            })
-            .catch(reason => {
-                this.inputForm.status = 'failed';
-                throw reason;
-            });
-        await this.router.navigateByUrl(internalLinks['bearbeiten/berichte'].link);
-        this.inputForm.status = 'valid';
+        const result = await this.firebaseApiService.function('report-edit').call({
+            editType: this.previousReport ? 'change' : 'add',
+            groupId: this.inputForm.field('groupId').value,
+            previousGroupId: this.previousReport ? this.previousReport.groupId : null,
+            report: {
+                createDate: createDate,
+                imageUrl: this.imageUrl,
+                message: this.inputForm.field('message').value,
+                title: this.inputForm.field('title').value
+            },
+            reportId: reportId.guidString
+        });
+        if (result.isFailure())
+            this.inputForm.status = 'failed';
+        else {
+            await this.router.navigateByUrl(internalLinks['bearbeiten/berichte'].link);
+            this.inputForm.status = 'valid';
+        }
     }
 
     private updateMessagePreview(message: string) {

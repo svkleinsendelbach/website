@@ -2,29 +2,30 @@
     [title]="isGameReport ? 'Aktuelle Spielberichte' : 'Aktuelle Berichte'"
 >
     <p
-        *ngIf="fetchedReports.isLoading()"
+        *ngIf="!fetchedReports"
         class="text center large primaryColor"
     >{{ isGameReport ? 'Spielberichte' : 'Berichte' }} werden geladen</p>
     <p
-        *ngIf="fetchedReports.isFailure()"
+        *ngIf="fetchedReports && fetchedReports.isFailure()"
         class="text center large primaryColor"
     >{{ isGameReport ? 'Spielberichte' : 'Berichte' }} konnten nicht geladen werden</p>
     <p
-        *ngIf="fetchedReports.isSuccess() && fetchedReports.content.reports.length === 0"
+        *ngIf="fetchedReports && fetchedReports.isSuccess() && fetchedReports.value.reports.length === 0"
         class="text center large primaryColor"
     >Keine {{ isGameReport ? 'Spielberichte' : 'Berichte' }}</p>
     <div
+        *ngIf="fetchedReports && fetchedReports.isSuccess()"
         id="report-container"
     >
         <report
-            *ngFor="let report of fetchedReports.content?.reports; trackBy: TrackBy.id"
+            *ngFor="let report of fetchedReports.value.reports; trackBy: TrackBy.id"
             [report]="report"
          />
     </div>
     <a
-        *ngIf="showAllReportsButton || (fetchedReports.isSuccess() && fetchedReports.content.hasMore)"
+        *ngIf="fetchedReports && fetchedReports.isSuccess()"
         link="berichte"
         id="view-all-reports"
         class="primaryColor"
-    >{{ showAllReportsButton ? 'Alle Berichte der anderen Abteilungen anzeigen' : isGameReport ? 'Alle Spielberichte' : 'Alle Berichte' }}</a>
+    >{{ fetchedReports.value.hasMore ? isGameReport ? 'Alle Spielberichte' : 'Alle Berichte' : 'Alle Berichte der anderen Abteilungen anzeigen' }}</a>
 </text-section>

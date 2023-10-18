@@ -164,7 +164,12 @@
                 "@typescript-eslint/lines-around-comment": "off",
                 "multiline-comment-style": "off",
                 "sort-imports": "off",
-                "@angular-eslint/no-output-on-prefix": "off"
+                "@angular-eslint/no-output-on-prefix": "off",
+                "newline-per-chained-call": "off",
+                "no-extend-native": "off",
+                "func-names": "off",
+                "no-console": "off",
+                "object-property-newline": "off"
             }
         }
     ]

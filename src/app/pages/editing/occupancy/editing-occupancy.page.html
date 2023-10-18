@@ -15,16 +15,16 @@
             (click)="$event.preventDefault(); $event.stopPropagation(); addNewOccupancy()"
         >Neues Event hinzufügen</p>
         <p
-            *ngIf="occupancies.isLoading()"
+            *ngIf="!fetchedOccupancies"
             class="text margin-top-large secondaryColor"
         >Belegungsplan wird geladen</p>
         <p
-            *ngIf="occupancies.isFailure()"
+            *ngIf="fetchedOccupancies && fetchedOccupancies.isFailure()"
             class="text margin-top-large primaryColor"
         >Belegungsplan konnte nicht geladen werden</p>
         <div
             id="header"
-            *ngIf="occupancies.isSuccess()"
+            *ngIf="fetchedOccupancies && fetchedOccupancies.isSuccess()"
         >
             <div
                 id="navigator"
@@ -78,14 +78,14 @@
             >{{ activeDate | calendarDate:(currentView + 'ViewTitle'):'de' }}</div>
         </div>
         <div
-            *ngIf="occupancies.isSuccess()"
+            *ngIf="fetchedOccupancies && fetchedOccupancies.isSuccess()"
             id="container"
             [ngSwitch]="currentView"
         >
             <mwl-calendar-month-view
                 *ngSwitchCase="CalendarView.Month"
                 [viewDate]="activeDate"
-                [events]="events(occupancies.content)"
+                [events]="events(fetchedOccupancies.value)"
                 [activeDayIsOpen]="activeDateIsOpen"
                 (dayClicked)="dateClicked($event.day)"
                 (eventClicked)="eventClicked($event.event)"
@@ -95,7 +95,7 @@
             <mwl-calendar-week-view
                 *ngSwitchCase="CalendarView.Week"
                 [viewDate]="activeDate"
-                [events]="events(occupancies.content)"
+                [events]="events(fetchedOccupancies.value)"
                 (dayHeaderClicked)="viewDate($event.day.date)"
                 (eventClicked)="eventClicked($event.event)"
                 [locale]="locale"
@@ -106,14 +106,14 @@
             <app-location-calendar-day-view
                 *ngSwitchCase="CalendarView.Day"
                 [viewDate]="activeDate"
-                [events]="events(occupancies.content)"
+                [events]="events(fetchedOccupancies.value)"
                 [locale]="locale"
                 [dayStartHour]="8"
                 [dayEndHour]="24"
             />
         </div>
         <div
-            *ngIf="occupancies.isSuccess()"
+            *ngIf="fetchedOccupancies && fetchedOccupancies.isSuccess()"
             id="description-container"
         >
             <div

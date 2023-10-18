@@ -30,12 +30,9 @@ export class EditingUserRolesPage {
     }
 
     public async getUsers() {
-        this.users = await this.firebaseApiService
-            .function('user')
-            .function('getAll')
-            .call({
-                type: 'authenticated'
-            });
+        this.users = (await this.firebaseApiService.function('user-getAll').call({
+            type: 'authenticated'
+        })).value;
     }
 
     public async editRole(user: User, role: User.Role) {
@@ -45,20 +42,15 @@ export class EditingUserRolesPage {
             user.roles = user.roles.filter(r => r !== role);
         else
             user.roles.push(role);
-        await this.firebaseApiService
-            .function('user')
-            .function('editRoles')
-            .call({
-                hashedUserId: user.hashedUserId,
-                roles: user.roles
-            })
-            .catch(_ => {
-                if (user.roles === 'unauthenticated')
-                    return;
-                if (user.roles.includes(role))
-                    user.roles = user.roles.filter(r => r !== role);
-                else
-                    user.roles.push(role);
-            });
+        const result = await this.firebaseApiService.function('user-editRoles').call({
+            hashedUserId: user.hashedUserId,
+            roles: user.roles
+        });
+        if (result.isFailure()) {
+            if (user.roles.includes(role))
+                user.roles = user.roles.filter(r => r !== role);
+            else
+                user.roles.push(role);
+        }
     }
 }

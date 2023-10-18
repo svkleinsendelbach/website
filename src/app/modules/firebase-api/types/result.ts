@@ -1,76 +1,89 @@
-export type Result<T, E extends Error> = Result.Failure<E> | Result.Success<T>;
+interface IResult<Content, Failure extends Error = Error> {
+    value: Content | null;
+    error: Failure | null;
+
+    isSuccess(): this is Result.Success<Content>;
+    isFailure(): this is Result.Failure<Failure>;
+
+    get(): Content;
+
+    map<NewContent>(mapper: (value: Content) => NewContent): IResult<NewContent, Failure>;
+    mapError<NewFailure extends Error>(mapper: (error: Failure) => NewFailure): IResult<Content, NewFailure>;
+}
+
+export type Result<Content, Failure extends Error = Error> = Result.Success<Content> | Result.Failure<Failure>;
 
 export namespace Result {
-    export class Success<T> {
-        public readonly state = 'success';
-
+    export class Success<Content> implements IResult<Content, never> {
         public readonly error = null;
 
         public constructor(
-            public readonly value: T
+            public readonly value: Content
         ) {}
 
-        public get valueOrError(): T {
+        public isSuccess(): this is Result.Success<Content> {
+            return true;
+        }
+
+        public isFailure(): this is Result.Failure<never> {
+            return false;
+        }
+
+        public get(): Content {
             return this.value;
         }
 
-        public get(): T {
-            return this.value;
+        public map<NewContent>(mapper: (value: Content) => NewContent): Result.Success<NewContent> {
+            return new Result.Success(mapper(this.value));
         }
 
-        public map<T2>(mapper: (value: T) => T2): Result<T2, never> {
-            return new Result.Success<T2>(mapper(this.value));
-        }
-
-        public mapError(): Result<T, never> {
+        public mapError(): Result.Success<Content> {
             return this;
         }
     }
 
-    export class Failure<E extends Error> {
-        public readonly state = 'failure';
-
+    export class Failure<Failure extends Error = Error> implements IResult<never, Failure> {
         public readonly value = null;
 
         public constructor(
-            public readonly error: E
+            public readonly error: Failure
         ) {}
 
-        public get valueOrError(): E {
-            return this.error;
+        public isSuccess(): this is Result.Success<never> {
+            return false;
+        }
+
+        public isFailure(): this is Result.Failure<Failure> {
+            return true;
         }
 
         public get(): never {
-            // eslint-disable-next-line @typescript-eslint/no-throw-literal
             throw this.error;
         }
 
-        public map(): Result<never, E> {
+        public map(): Result.Failure<Failure> {
             return this;
         }
 
-        public mapError<E2 extends Error>(mapper: (value: E) => E2): Result<never, E2> {
-            return new Result.Failure<E2>(mapper(this.error));
+        public mapError<NewFailure extends Error>(mapper: (error: Failure) => NewFailure): Result.Failure<NewFailure> {
+            return new Result.Failure(mapper(this.error));
         }
     }
 
-    export function success<T>(value: T): Result<T, never>;
-    export function success(): Result<void, never>;
+    export function fromObject<Content, Failure extends Error>(object: { value: Content } | { error: Failure }): Result<Content, Failure> {
+        if ('value' in object)
+            return Result.success(object.value);
+        return Result.failure(object.error);
+    }
+
+    export function success<Content>(value: Content): Result.Success<Content>;
+    export function success(): Result.Success<void>;
     // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-    export function success<T>(value?: T): Result<T | void, never> {
-        // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-        return new Result.Success<T | void>(value);
+    export function success<Content>(value?: Content): Result.Success<Content | void> {
+        return new Result.Success(value);
     }
 
-    export function failure<E extends Error>(error: E): Result<never, E> {
-        return new Result.Failure<E>(error);
-    }
-
-    export function isSuccess<T, E extends Error>(result: Result<T, E>): result is Result.Success<T> {
-        return result.state === 'success';
-    }
-
-    export function isFailure<T, E extends Error>(result: Result<T, E>): result is Result.Failure<E> {
-        return result.state === 'failure';
+    export function failure<Failure extends Error>(error: Failure): Result.Failure<Failure> {
+        return new Result.Failure(error);
     }
 }

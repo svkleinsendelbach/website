@@ -81,11 +81,10 @@ export class AuthService {
         const user = await this.firebaseAuth.currentUser;
         if (user === null)
             throw new LoginError('unknown');
-        await this.firebaseApiService.function('user').function('requestAccess')
-            .call({
-                firstName: firstName,
-                lastName: lastName
-            });
+        await this.firebaseApiService.function('user-requestAccess').call({
+            firstName: firstName,
+            lastName: lastName
+        });
     }
 
     public async removeRegistration() {
@@ -143,11 +142,9 @@ export class AuthService {
     }
 
     private async checkRoles(roles: User.Role[]): Promise<AuthenticationStatus> {
-        const status = await this.firebaseApiService.function('user').function('checkRoles')
-            .call({
-                roles: roles
-            })
-            .then(() => 'authenticated' as const)
+        const status = await this.firebaseApiService.function('user-checkRoles').call({
+            roles: roles
+        }).then(() => 'authenticated' as const)
             .catch(() => 'unauthenticated' as const);
         const crypter = new Crypter(environment.cryptionKeys);
         const storedEncryptedRoles = localStorage.getItem('userRoles');

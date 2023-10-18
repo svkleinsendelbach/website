@@ -2,20 +2,20 @@
     title="Kommende Termine"
 >
     <p
-      *ngIf="fetchedEventGroups.isLoading()"
+      *ngIf="!fetchedEventGroups"
       class="text center large primaryColor"
     >Termine werden geladen</p>
     <p
-      *ngIf="fetchedEventGroups.isFailure()"
+      *ngIf="fetchedEventGroups && fetchedEventGroups.isFailure()"
       class="text center large primaryColor"
     >Termine konnten nicht geladen werden</p>
     <p
-      *ngIf="fetchedEventGroups.isSuccess() && fetchedEventGroups.content.length === 0"
+      *ngIf="fetchedEventGroups &&  fetchedEventGroups.isSuccess() && fetchedEventGroups.value.length === 0"
       class="text center large primaryColor"
     >Keine Termine</p>
     <div
         id="event-groups"
-        *ngFor="let eventGroup of fetchedEventGroups.content; trackBy: TrackBy.property('groupId')"
+        *ngFor="let eventGroup of fetchedEventGroups &&  fetchedEventGroups.isSuccess() ? fetchedEventGroups.value : []; trackBy: TrackBy.property('groupId')"
         [ngClass]="deviceType.current"
     >
         <p
@@ -74,14 +74,14 @@
         ></p>
     </div>
     <p
-        *ngIf="fetchedEventGroups.isSuccess() && fetchedEventGroups.content.length !== 0 && !isCalendarSubscriptionSeletionShown"
+        *ngIf="fetchedEventGroups && fetchedEventGroups.isSuccess() && fetchedEventGroups.value.length !== 0 && !isCalendarSubscriptionSeletionShown"
         id="subscribe-calendar"
         class="textColor"
         role="none"
         (click)="showCalendarSubscriptionSeletion()"
     >ics-Kalender abonnieren</p>
     <div
-        *ngIf="fetchedEventGroups.isSuccess() && fetchedEventGroups.content.length !== 0 && isCalendarSubscriptionSeletionShown"
+        *ngIf="fetchedEventGroups &&  fetchedEventGroups.isSuccess() && fetchedEventGroups.value.length !== 0 && isCalendarSubscriptionSeletionShown"
         id="calendar-subscription-container"
     >
         <p
