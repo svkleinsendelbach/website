@@ -61,9 +61,9 @@
             class="status info"
         >Bitte melden Sie sich im seperaten Anmeldefenster an.</p>
         <p
-            *ngIf="signInWithAppleStatus !== 'valid' && signInWithAppleStatus !== 'loading'"
+            *ngIf="signInWithAppleStatus !== 'failed'"
             class="status error"
-        >{{ loginErrorMessage(signInWithAppleStatus) }}</p>
+        >Anmeldung ist fehlgeschlagen.</p>
     </div>
 
     <div
@@ -103,8 +103,8 @@
             class="status info"
         >Bitte melden Sie sich im seperaten Anmeldefenster an.</p>
         <p
-            *ngIf="signInWithGoogleStatus !== 'valid' && signInWithGoogleStatus !== 'loading'"
+            *ngIf="signInWithGoogleStatus !== 'failed'"
             class="status error"
-        >{{ loginErrorMessage(signInWithGoogleStatus) }}</p>
+        >Anmeldung ist fehlgeschlagen.</p>
     </div>
 </text-section>

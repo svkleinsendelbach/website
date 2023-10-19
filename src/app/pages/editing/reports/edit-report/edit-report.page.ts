@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Report, ReportGroupId } from 'src/app/modules/firebase-api/types/report';
+import { Report, ReportGroupId } from 'src/app/types/report';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { ErrorLevel } from 'src/app/modules/input-form/types/error-level';
 import { FileStorageService } from 'src/app/modules/firebase-api/services/file-storage.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { GameInfo } from 'src/app/modules/firebase-api/types/game-info';
-import { Guid } from 'src/app/modules/firebase-api/types/guid';
+import { GameInfo } from 'src/app/types/game-info';
+import { Guid } from 'src/app/types/guid';
 import { InputError } from 'src/app/modules/input-form/types/input-error';
 import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';

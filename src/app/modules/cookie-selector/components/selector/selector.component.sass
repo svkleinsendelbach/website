@@ -57,11 +57,19 @@
             @include font-roboto
             @include font-weight('light')
             @include font-size('small')
+            background-color: color('background')
+            border-color: color('text')
+            color: color('text')
             border: 1px solid
             cursor: pointer
             padding: 6px 0
             text-align: center
             width: 30%
+
+            &.selected
+                background-color: color('primary')
+                border-color: color('primary')
+                color: color('background')
 
             &.unchangable
                 cursor: not-allowed

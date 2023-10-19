@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ContactItem } from 'src/app/modules/general-components/types/contact-item';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
-import { EventGroupId } from 'src/app/modules/firebase-api/types/event';
+import { EventGroupId } from 'src/app/types/event';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 import { websiteConfig } from 'src/app/config/website-config';

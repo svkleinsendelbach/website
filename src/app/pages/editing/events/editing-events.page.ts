@@ -1,8 +1,8 @@
-import { Event, EventGroup, EventGroupId } from 'src/app/modules/firebase-api/types/event';
+import { Event, EventGroup, EventGroupId } from 'src/app/types/event';
 import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { Guid } from 'src/app/modules/firebase-api/types/guid';
+import { Guid } from 'src/app/types/guid';
 import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';

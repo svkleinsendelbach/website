@@ -1,8 +1,8 @@
-import { Report, ReportGroup, ReportGroupId } from 'src/app/modules/firebase-api/types/report';
+import { Report, ReportGroup, ReportGroupId } from 'src/app/types/report';
 import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { Guid } from 'src/app/modules/firebase-api/types/guid';
+import { Guid } from 'src/app/types/guid';
 import { internalLinks } from 'src/app/types/internal-link-path';
 import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';

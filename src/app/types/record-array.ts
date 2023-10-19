@@ -20,3 +20,11 @@ export function mapRecord<T extends Record<string, unknown>, U>(record: T, callb
         newRecord[entry.key] = callbackfn(entry.value, entry.key);
     return newRecord;
 }
+
+export function includesAll<T>(array: T[], expectedElements: T[]): boolean {
+    for (const expectedElement of expectedElements) {
+        if (!array.includes(expectedElement))
+            return false;
+    }
+    return true;
+}

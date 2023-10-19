@@ -1,9 +1,10 @@
 import { Observable, lastValueFrom } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Injectable } from '@angular/core';
+import { FirebaseApiModule } from '../firebase-api.module';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: FirebaseApiModule
 })
 export class FileStorageService {
     public constructor(

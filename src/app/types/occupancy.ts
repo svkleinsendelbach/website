@@ -88,11 +88,11 @@ export namespace Occupancy {
             }
         }
 
-        export interface Flatten {
+        export type Flatten = {
             repeatEvery: Recurring.Type;
             untilIncluding: string;
             excludingDates: string[];
-        }
+        };
 
         export function flatten(recurring: Recurring): Recurring.Flatten {
             return {
@@ -119,14 +119,14 @@ export namespace Occupancy {
         }
     }
 
-    export interface Flatten {
+    export type Flatten = {
         id: string;
         location: Occupancy.Location;
         title: string;
         start: string;
         end: string;
         recurring: Occupancy.Recurring.Flatten | null;
-    }
+    };
 
     export function flatten(occupancy: Occupancy): Occupancy.Flatten;
     export function flatten(occupancy: Omit<Occupancy, 'id'>): Omit<Occupancy.Flatten, 'id'>;

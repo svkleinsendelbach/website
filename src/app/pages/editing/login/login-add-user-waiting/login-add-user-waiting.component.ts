@@ -6,7 +6,6 @@ import { InputError } from 'src/app/modules/input-form/types/input-error';
 import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';
 import { internalLinks } from 'src/app/types/internal-link-path';
-import { LoginError } from 'src/app/modules/authentication/types/login-error';
 import { Router } from '@angular/router';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { ValidationResult } from 'src/app/modules/input-form/types/validation-result';
@@ -27,7 +26,7 @@ export class LoginAddUserWaitingComponent {
     {
         invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
         loading: new InputError('Antrag wird übermittelt.', ErrorLevel.Info),
-        ...LoginError.Code.statusMessages
+        failed: new InputError('Antrag konnte nicht übermittelt werden.')
     });
 
     public constructor(
@@ -39,7 +38,7 @@ export class LoginAddUserWaitingComponent {
 
     public async handleCancel() {
         this.inputForm.reset();
-        await this.authService.removeRegistration();
+        await this.authService.logOut();
         this.addToWaitingUserCanceled.emit();
     }
 
@@ -49,30 +48,13 @@ export class LoginAddUserWaitingComponent {
         const validation = this.inputForm.evaluate();
         if (validation === ValidationResult.Invalid)
             return;
-        const result = await this.authService
-            .requestAccess(this.inputForm.field('firstName').value, this.inputForm.field('lastName').value)
-            .catch(reason => this.handleLoginError(reason));
-        if (result === 'error')
-            return;
-        this.inputForm.status = 'valid';
-        this.inputForm.reset();
-        await this.router.navigateByUrl(internalLinks.home.link);
-    }
-
-    private handleLoginError(reason: unknown): 'error' {
-        if (typeof reason !== 'object' || reason === null) {
-            this.inputForm.status = 'unknown';
-            return 'error';
+        try {
+            await this.authService.requestAccess(this.inputForm.field('firstName').value, this.inputForm.field('lastName').value);
+            this.inputForm.status = 'valid';
+            this.inputForm.reset();
+            await this.router.navigateByUrl(internalLinks.home.link);
+        } catch {
+            this.inputForm.status = 'failed';
         }
-        if (!('name' in reason) || (reason as Record<'name', unknown>).name !== 'WebsiteEditorAuthServiceLoginError') {
-            this.inputForm.status = 'unknown';
-            return 'error';
-        }
-        if (!('code' in reason) || typeof (reason as Record<'code', unknown>).code !== 'string' || !LoginError.Code.typeGuard((reason as Record<'code', string>).code)) {
-            this.inputForm.status = 'unknown';
-            return 'error';
-        }
-        this.inputForm.status = (reason as Record<'code', LoginError.Code>).code;
-        return 'error';
     }
 }

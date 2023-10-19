@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AnpfiffInfoTeamParameters } from 'src/app/modules/firebase-api/types/anpfiff-info-team-parameters';
 import { DeviceTypeService } from '../../../../services/device-type.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { SquadPerson } from '../../types/squad-person';
 import { StyleConfigService } from '../../../../services/style-config.service';
-import { TeamSquad } from 'src/app/modules/firebase-api/types/team-squad';
+import { TeamSquad } from 'src/app/types/team-squad';
 import { TrackBy } from 'src/app/types/track-by';
-import { Result } from 'src/app/modules/firebase-api/types/result';
+import { Result } from 'src/app/types/result';
+import { AnpfiffInfoTeamParameters } from 'src/app/types/anpfiff-info-parameters';
 
 @Component({
     selector: 'squad',

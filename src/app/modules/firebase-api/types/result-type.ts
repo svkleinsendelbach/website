@@ -1,5 +1,5 @@
 import { FunctionsErrorCodeCore } from '@angular/fire/functions';
-import { Result } from './result';
+import { Result } from '../../../types/result';
 
 export interface FirebaseFunctionError extends Error {
     name: 'FirebaseFunctionError';

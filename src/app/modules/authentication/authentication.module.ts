@@ -2,7 +2,6 @@ import { AuthenticationCheckComponent } from './components/authentication-check/
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { TextSectionModule } from '../text-section/text-section.module';
-import { AppModule } from 'src/app/app.module';
 
 @NgModule({
     declarations: [AuthenticationCheckComponent],

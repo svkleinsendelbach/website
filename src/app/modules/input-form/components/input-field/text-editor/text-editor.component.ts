@@ -1,7 +1,7 @@
 import { AngularEditorConfig, SelectOption, UploadResponse } from '@kolkov/angular-editor';
 import { Component, Input, OnInit } from '@angular/core';
 import { FileStorageService } from 'src/app/modules/firebase-api/services/file-storage.service';
-import { Guid } from 'src/app/modules/firebase-api/types/guid';
+import { Guid } from 'src/app/types/guid';
 import { HttpResponse } from '@angular/common/http';
 import { InputField } from '../../../types/input-field';
 import { Observable } from 'rxjs';

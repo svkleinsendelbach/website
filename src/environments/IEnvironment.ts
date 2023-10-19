@@ -1,4 +1,4 @@
-import { Crypter } from 'src/app/modules/firebase-api/crypter/Crypter';
+import { CrypterService } from 'src/app/modules/crypter/services/crypter.service';
 import { DatabaseType } from 'src/app/modules/firebase-api/types/database-type';
 import { FirebaseOptions } from '@angular/fire/app';
 import { VerboseType } from 'src/app/modules/firebase-api/types/verbose-type';
@@ -15,7 +15,7 @@ export interface IEnvironment {
         password: string;
     } | null;
     verbose: VerboseType;
-    cryptionKeys: Crypter.Keys;
+    cryptionKeys: CrypterService.Keys;
     callSecretKey: string;
     production: boolean;
     name: string;

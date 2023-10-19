@@ -1,4 +1,4 @@
-import { FunctionType } from './types/function-type';
+import { FunctionType } from './function-type';
 import {
     ContactFunctionType,
     CriticismSuggestionEditFunctionType,
@@ -19,7 +19,7 @@ import {
     UserHandleAccessRequestFunctionType,
     UserRequestAccessFunctionType,
     VerifyRecaptchaFunctionType
-} from './function-types';
+} from './firebase-functions-types';
 
 export interface FirebaseFunctions {
     'verifyRecaptcha': VerifyRecaptchaFunctionType;

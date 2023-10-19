@@ -24,6 +24,7 @@ import { AngularFirePerformanceModule, DATA_COLLECTION_ENABLED, INSTRUMENTATION_
 // Internal Modules
 import { AuthenticationModule } from './modules/authentication/authentication.module';
 import { CookieSelectorModule } from './modules/cookie-selector/cookie-selector.module';
+import { CrypterModule } from './modules/crypter/crypter.module';
 import { EventsModule } from './modules/events/events.module';
 import { FirebaseApiModule } from './modules/firebase-api/firebase-api.module';
 import { FooterModule } from './modules/footer/footer.module';
@@ -147,6 +148,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
         BrowserAnimationsModule,
         BrowserModule,
         CookieSelectorModule,
+        CrypterModule,
         EventsModule,
         FirebaseApiModule,
         FontAwesomeModule,

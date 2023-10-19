@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { Report, ReportGroupId } from 'src/app/modules/firebase-api/types/report';
+import { Report, ReportGroupId } from 'src/app/types/report';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { ReportMessageParser } from '../../types/ReportMessageParser';
 import { StyleConfigService } from 'src/app/services/style-config.service';

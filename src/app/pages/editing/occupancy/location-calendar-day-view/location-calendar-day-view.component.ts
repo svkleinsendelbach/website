@@ -2,7 +2,7 @@ import { CalendarEvent, CalendarWeekViewComponent, DateAdapter, getWeekViewPerio
 import { ChangeDetectorRef, Component, ElementRef, Inject, LOCALE_ID } from '@angular/core';
 import { LocationDayCalendarUtils, LocationDayView } from './LocationDayCalendarUtils';
 import { WeekViewAllDayEventRow, WeekViewHourColumn } from 'calendar-utils';
-import { Occupancy } from 'src/app/modules/firebase-api/types/occupancy';
+import { Occupancy } from 'src/app/types/occupancy';
 import { TrackBy } from 'src/app/types/track-by';
 import { UtcDate } from 'src/app/types/utc-date';
 

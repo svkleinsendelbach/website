@@ -1,15 +1,15 @@
-import { Event, EventGroup, EventGroupId } from './types/event';
-import { Report, ReportGroupId } from './types/report';
-import { AnpfiffInfoTeamParameters } from './types/anpfiff-info-team-parameters';
-import { CriticismSuggestion } from './types/criticism-sugggestion';
-import { EditType } from './types/edit-type';
-import { FunctionType } from './types/function-type';
-import { GameInfo } from './types/game-info';
-import { Occupancy } from './types/occupancy';
+import { Event, EventGroup, EventGroupId } from '../../../types/event';
+import { Report, ReportGroupId } from '../../../types/report';
+import { CriticismSuggestion } from '../../../types/criticism-sugggestion';
+import { EditType } from './edit-type';
+import { FunctionType } from './function-type';
+import { GameInfo } from '../../../types/game-info';
+import { Occupancy } from '../../../types/occupancy';
 import { Receiver } from 'src/app/pages/contact/contact.page';
-import { TeamSquad } from './types/team-squad';
-import { User } from './types/user';
-import { Guid } from './types/guid';
+import { TeamSquad } from '../../../types/team-squad';
+import { User } from '../../../types/user';
+import { Guid } from '../../../types/guid';
+import { AnpfiffInfoTeamParameters } from '../../../types/anpfiff-info-parameters';
 
 export type ContactFunctionType = FunctionType<{
     name: string;

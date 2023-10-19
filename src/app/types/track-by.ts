@@ -1,6 +1,6 @@
-import { Guid } from '../modules/firebase-api/types/guid';
+import { Guid } from './guid';
 import { SquadPerson } from '../modules/general-components/types/squad-person';
-import { TeamSquad } from '../modules/firebase-api/types/team-squad';
+import { TeamSquad } from './team-squad';
 
 export namespace TrackBy {
     export function identity<T>(_index: number, value: T): T {

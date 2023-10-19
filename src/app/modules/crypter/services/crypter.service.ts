@@ -1,36 +1,38 @@
 import { CBCDecryptor, CBCEncryptor } from 'aes-ts';
-import { addPadding, bitIteratorToBytes, randomBytes, removePadding, unishortBytes, unishortString, xor } from './utils';
+import { addPadding, bitIteratorToBytes, randomBytes, removePadding, unishortBytes, unishortString, xor } from '../types/utils';
 import { Base64 } from 'js-base64';
-import { BytesToBitIterator } from './BytesToBitIterator';
-import { CombineIterator } from './CombineIterator';
-import { RandomBitIterator } from './RandomBitIterator';
+import { BytesToBitIterator } from '../types/BytesToBitIterator';
+import { CombineIterator } from '../types/CombineIterator';
+import { RandomBitIterator } from '../types/RandomBitIterator';
 import { sha512 as cryptSha512 } from 'sha512-crypt-ts';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { CrypterModule } from '../crypter.module';
 
-export class Crypter {
-    public constructor(
-        private readonly cryptionKeys: Crypter.Keys
-    ) {}
-
+@Injectable({
+    providedIn: CrypterModule
+})
+export class CrypterService {
     public encryptAes(bytes: Uint8Array): Uint8Array {
-        const encrypter = new CBCEncryptor(this.cryptionKeys.encryptionKey, this.cryptionKeys.initialisationVector);
+        const encrypter = new CBCEncryptor(environment.cryptionKeys.encryptionKey, environment.cryptionKeys.initialisationVector);
         return encrypter.encrypt(addPadding(bytes));
     }
 
     public decryptAes(bytes: Uint8Array): Uint8Array {
-        const decrypter = new CBCDecryptor(this.cryptionKeys.encryptionKey, this.cryptionKeys.initialisationVector);
+        const decrypter = new CBCDecryptor(environment.cryptionKeys.encryptionKey, environment.cryptionKeys.initialisationVector);
         return removePadding(decrypter.decrypt(bytes));
     }
 
     public encryptVernamCipher(bytes: Uint8Array): Uint8Array {
         const key = randomBytes(32);
-        const randomBitIterator = new RandomBitIterator(Uint8Array.from([...key, ...this.cryptionKeys.vernamKey]));
+        const randomBitIterator = new RandomBitIterator(Uint8Array.from([...key, ...environment.cryptionKeys.vernamKey]));
         const bytesToBitIterator = new BytesToBitIterator(bytes);
         const combineIterator = new CombineIterator(randomBitIterator, bytesToBitIterator, xor);
         return Uint8Array.from([...key, ...bitIteratorToBytes(combineIterator)]);
     }
 
     public decryptVernamCipher(bytes: Uint8Array): Uint8Array {
-        const randomBitIterator = new RandomBitIterator(Uint8Array.from([...bytes.slice(0, 32), ...this.cryptionKeys.vernamKey]));
+        const randomBitIterator = new RandomBitIterator(Uint8Array.from([...bytes.slice(0, 32), ...environment.cryptionKeys.vernamKey]));
         const bytesToBitIterator = new BytesToBitIterator(bytes.slice(32));
         const combineIterator = new CombineIterator(randomBitIterator, bytesToBitIterator, xor);
         return bitIteratorToBytes(combineIterator);
@@ -63,17 +65,17 @@ export class Crypter {
         const decodedData = unishortString(decryptedData);
         return JSON.parse(decodedData) as T;
     }
+
+    public sha512(value: string, key: string | null = null): string {
+        const hashedValue = key === null ? cryptSha512.base64(value) : cryptSha512.base64Hmac(key, value);
+        return hashedValue.replaceAll('/', '_');
+    }
 }
 
-export namespace Crypter {
+export namespace CrypterService {
     export interface Keys {
         encryptionKey: Uint8Array;
         initialisationVector: Uint8Array;
         vernamKey: Uint8Array;
-    }
-
-    export function sha512(value: string, key: string | null = null): string {
-        const hashedValue = key === null ? cryptSha512.base64(value) : cryptSha512.base64Hmac(key, value);
-        return hashedValue.replaceAll('/', '_');
     }
 }

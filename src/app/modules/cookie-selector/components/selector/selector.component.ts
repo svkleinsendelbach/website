@@ -1,7 +1,5 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { CookieSelectionService } from '../../services/cookie-selection.service';
-import { CookieType } from '../../types/cookie-type';
-import { CookiesSelection } from '../../types/cookie-selection';
+import { Component, OnDestroy } from '@angular/core';
+import { CookieSelectionService, CookiesSelection } from '../../services/cookie-selection.service';
 import { DeviceTypeService } from '../../../../services/device-type.service';
 import { StyleConfigService } from '../../../../services/style-config.service';
 
@@ -10,65 +8,46 @@ import { StyleConfigService } from '../../../../services/style-config.service';
     styleUrls: ['./selector.component.sass'],
     templateUrl: './selector.component.html'
 })
-export class CookieSelectorComponent implements OnInit, OnDestroy {
-    @Input() public isShown = false;
+export class CookieSelectorComponent implements OnDestroy {
+    public cookiesSelection: CookiesSelection;
 
-    public showSelection: boolean;
+    public isShown: boolean;
+
+    public selectionShown: boolean;
 
     public detailsShown = false;
-
-    public cookiesSelection: CookiesSelection = CookiesSelection.defaultSelection;
 
     public constructor(
         public readonly cookieSelectionService: CookieSelectionService,
         public readonly styleConfig: StyleConfigService,
         public readonly deviceType: DeviceTypeService
     ) {
-        this.showSelection = this.deviceType.current !== 'mobile';
-    }
-
-    public ngOnInit() {
-        this.cookieSelectionService.listeners.add('cookieSelector', newCookieSelection => {
-            this.cookiesSelection = newCookieSelection;
+        this.cookiesSelection = this.cookieSelectionService.cookiesSelection;
+        this.cookieSelectionService.listeners.add('cookieSelector', selection => {
+            this.cookiesSelection = selection;
         });
-        const cookieSelection = this.cookieSelectionService.cookiesSelection;
-        if (!cookieSelection)
-            this.isShown = true;
+        this.isShown = !this.cookieSelectionService.isSelectionSaved;
+        this.selectionShown = this.deviceType.current !== 'mobile';
     }
 
     public ngOnDestroy() {
-        this.deviceType.listeners.remove('cookieSelector');
+        this.cookieSelectionService.listeners.remove('cookieSelector');
     }
 
-    public handleCookieSelection(type: CookieType) {
-        switch (type) {
-        case 'necessary':
-            this.cookiesSelection.necessary = 'selected';
-            break;
-        case 'functionality':
-            this.cookiesSelection.functionality = this.cookiesSelection.functionality === 'selected' ? 'unselected' : 'selected';
-            break;
-        case 'statistics':
-            this.cookiesSelection.statistics = this.cookiesSelection.statistics === 'selected' ? 'unselected' : 'selected';
-            break;
-        default:
-            break;
-        }
+    public toggleCookieSelection(type: keyof CookiesSelection) {
+        if (type === 'necessary')
+            return;
+        this.cookiesSelection[type] = this.cookiesSelection[type] === 'selected' ? 'unselected' : 'selected';
     }
 
-    public handleShowSelction() {
-        this.showSelection = !this.showSelection;
-        if (!this.showSelection)
+    public toggleSelectionShown() {
+        this.selectionShown = !this.selectionShown;
+        if (!this.selectionShown)
             this.detailsShown = false;
     }
 
-    public handleShowDetails() {
+    public toggleDetailsShown() {
         this.detailsShown = !this.detailsShown;
-    }
-
-    public handleConfirmSelected() {
-        this.cookieSelectionService.saveCookieSelection(this.cookiesSelection);
-        this.isShown = false;
     }
 
     public handleConfirmAll() {
@@ -80,12 +59,8 @@ export class CookieSelectorComponent implements OnInit, OnDestroy {
         this.handleConfirmSelected();
     }
 
-    public selectionButtonStyle(type: CookieType): Record<string, string> {
-        const isSelected = this.cookiesSelection[type] === 'selected';
-        return {
-            backgroundColor: this.styleConfig.css(isSelected ? 'primary' : 'background'),
-            borderColor: this.styleConfig.css(isSelected ? 'primary' : 'text'),
-            color: this.styleConfig.css(isSelected ? 'background' : 'text')
-        };
+    public handleConfirmSelected() {
+        this.cookieSelectionService.saveCookieSelection(this.cookiesSelection);
+        this.isShown = false;
     }
 }

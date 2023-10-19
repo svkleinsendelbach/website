@@ -149,7 +149,7 @@
                 "no-confusing-arrow": "off",
                 "max-statements": "off",
                 "object-shorthand": ["error", "never"],
-                "es/no-optional-chaining": "error",
+                "es/no-optional-chaining": "off",
                 "@typescript-eslint/prefer-optional-chain": "off",
                 "no-continue": "off",
                 "max-lines-per-function": "off",
@@ -169,7 +169,10 @@
                 "no-extend-native": "off",
                 "func-names": "off",
                 "no-console": "off",
-                "object-property-newline": "off"
+                "object-property-newline": "off",
+                "@typescript-eslint/member-ordering": "off",
+                "@typescript-eslint/init-declarations": "off",
+                "@typescript-eslint/no-use-before-define": "off"
             }
         }
     ]

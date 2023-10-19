@@ -1,12 +1,12 @@
 import { AppearanceService } from 'src/app/services/appearance.service';
 import { Component } from '@angular/core';
-import { CriticismSuggestion } from 'src/app/modules/firebase-api/types/criticism-sugggestion';
+import { CriticismSuggestion } from 'src/app/types/criticism-sugggestion';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 import { TrackBy } from 'src/app/types/track-by';
-import { Result } from 'src/app/modules/firebase-api/types/result';
+import { Result } from 'src/app/types/result';
 
 @Component({
     selector: 'app-editing-criticism-suggestion',

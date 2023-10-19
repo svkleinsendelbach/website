@@ -1,4 +1,4 @@
-import { AnpfiffInfoPersonParameters } from './anpfiff-info-person-parameters';
+import { AnpfiffInfoPersonParameters } from './anpfiff-info-parameters';
 
 export interface TeamSquad {
     squad: {

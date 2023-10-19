@@ -9,6 +9,7 @@ interface IResult<Content, Failure extends Error = Error> {
 
     map<NewContent>(mapper: (value: Content) => NewContent): IResult<NewContent, Failure>;
     mapError<NewFailure extends Error>(mapper: (error: Failure) => NewFailure): IResult<Content, NewFailure>;
+    mapResult<T>(mapSuccess: (value: Content) => T, mapFailure: (error: Failure) => T): T;
 }
 
 export type Result<Content, Failure extends Error = Error> = Result.Success<Content> | Result.Failure<Failure>;
@@ -37,8 +38,12 @@ export namespace Result {
             return new Result.Success(mapper(this.value));
         }
 
-        public mapError(): Result.Success<Content> {
+        public mapError<T>(mapper: (error: never) => T): Result.Success<Content> {
             return this;
+        }
+
+        public mapResult<T>(mapSuccess: (value: Content) => T, mapFailure: (error: never) => T): T {
+            return mapSuccess(this.value);
         }
     }
 
@@ -61,12 +66,16 @@ export namespace Result {
             throw this.error;
         }
 
-        public map(): Result.Failure<Failure> {
+        public map<T>(mapper: (value: never) => T): Result.Failure<Failure> {
             return this;
         }
 
         public mapError<NewFailure extends Error>(mapper: (error: Failure) => NewFailure): Result.Failure<NewFailure> {
             return new Result.Failure(mapper(this.error));
+        }
+
+        public mapResult<T>(mapSuccess: (value: never) => T, mapFailure: (error: Failure) => T): T {
+            return mapFailure(this.error);
         }
     }
 

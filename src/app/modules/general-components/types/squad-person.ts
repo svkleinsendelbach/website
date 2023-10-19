@@ -1,4 +1,4 @@
-import { AnpfiffInfoPersonParameters } from '../../firebase-api/types/anpfiff-info-person-parameters';
+import { AnpfiffInfoPersonParameters } from '../../../types/anpfiff-info-parameters';
 
 export interface SquadPerson {
     imageId: number | null;

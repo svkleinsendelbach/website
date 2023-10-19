@@ -1,7 +1,7 @@
 import { CalendarEvent, GetWeekViewArgs, WeekView } from 'calendar-utils';
 import { CalendarUtils } from 'angular-calendar';
 import { Injectable } from '@angular/core';
-import { Occupancy } from 'src/app/modules/firebase-api/types/occupancy';
+import { Occupancy } from 'src/app/types/occupancy';
 import { UtcDate } from 'src/app/types/utc-date';
 
 export type GetLocationDayViewArgs = GetWeekViewArgs & {

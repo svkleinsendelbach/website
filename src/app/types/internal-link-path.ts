@@ -1,5 +1,5 @@
 import { Link } from './link';
-import { mapRecord } from './record';
+import { mapRecord } from './record-array';
 
 const internalLinkPathTitles = {
     'anfahrt': 'Anfahrt',

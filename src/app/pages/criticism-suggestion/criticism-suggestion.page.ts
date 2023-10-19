@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CriticismSuggestion } from 'src/app/modules/firebase-api/types/criticism-sugggestion';
+import { CriticismSuggestion } from 'src/app/types/criticism-sugggestion';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { ErrorLevel } from 'src/app/modules/input-form/types/error-level';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
-import { Guid } from 'src/app/modules/firebase-api/types/guid';
+import { Guid } from 'src/app/types/guid';
 import { InputError } from 'src/app/modules/input-form/types/input-error';
 import { InputField } from 'src/app/modules/input-form/types/input-field';
 import { InputForm } from 'src/app/modules/input-form/types/input-form';

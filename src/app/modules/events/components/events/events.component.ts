@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Event, EventGroup, EventGroupId } from 'src/app/modules/firebase-api/types/event';
+import { Event, EventGroup, EventGroupId } from 'src/app/types/event';
 import { DeviceTypeService } from '../../../../services/device-type.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { StyleConfigService } from '../../../../services/style-config.service';
 import { TrackBy } from 'src/app/types/track-by';
 import { UtcDate } from 'src/app/types/utc-date';
-import { Result } from 'src/app/modules/firebase-api/types/result';
+import { Result } from 'src/app/types/result';
+import { mapRecord } from 'src/app/types/record-array';
 
 @Component({
     selector: 'events',
@@ -32,9 +33,7 @@ export class EventsComponent implements OnInit {
         public readonly styleConfig: StyleConfigService,
         public readonly deviceType: DeviceTypeService
     ) {
-        this.calendarSubscriptionSelection = {} as Record<EventGroupId, boolean>;
-        for (const groupId of EventGroupId.all)
-            this.calendarSubscriptionSelection[groupId] = false;
+        this.calendarSubscriptionSelection = mapRecord(EventGroupId.title, () => false);
     }
 
     public get anyCalendarSubscriptionSelected(): boolean {
@@ -47,8 +46,6 @@ export class EventsComponent implements OnInit {
     }
 
     public async ngOnInit() {
-        if (!(this.groupIds as EventGroupId[] | undefined))
-            return;
         for (const groupId of this.groupIds)
             this.calendarSubscriptionSelection[groupId] = true;
         this.fetchedEventGroups = await this.firebaseApiService.function('event-get').call({

@@ -7,14 +7,14 @@ import { Component } from '@angular/core';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { internalLinks } from 'src/app/types/internal-link-path';
-import { Occupancy } from 'src/app/modules/firebase-api/types/occupancy';
+import { Occupancy } from 'src/app/types/occupancy';
 import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 import { TrackBy } from 'src/app/types/track-by';
 import { UtcDate } from 'src/app/types/utc-date';
-import { Result } from 'src/app/modules/firebase-api/types/result';
+import { Result } from 'src/app/types/result';
 
 @Component({
     providers: [
