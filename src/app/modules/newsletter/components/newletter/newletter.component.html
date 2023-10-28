@@ -1,0 +1,263 @@
+<div
+    id="title-page"
+>
+    <div
+        id="top-container"
+    >
+        <div
+            id="date-container"
+        >
+            <p id="month">{{ newsletter.titlePage.month }}</p>
+            <p id="year">{{ newsletter.titlePage.year }}</p>
+        </div>
+        <p id="name">SV KLEINSENDELBACH</p>
+    </div>
+    <div
+        id="background"
+    >
+        <div id="background-color"></div>
+        <div
+            id="image-container"
+        >
+            <img
+                id="background-image"
+                [src]="newsletter.titlePage.imageSrc"
+                title="SV Kleinsendelbach"
+                alt="SV Kleinsendelbach"
+            >
+        </div>
+    </div>
+    <img
+        id="logo"
+        src="assets/images/svk-logo.svg"
+        title="SV Kleinsendelbach"
+        alt="SV Kleinsendelbach"
+    >
+    <div
+        id="title-container"
+    >
+        <p id="title">{{ newsletter.titlePage.title }}</p>
+        <p id="title-description">{{ newsletter.titlePage.description }}</p>
+    </div>
+    <a
+        id="website-link"
+        href="https:\\www.svkleinsendelbach.de"
+        title="SV Kleinsendelbach"
+        target="_blank"
+    >www.svkleinsendelbach.de</a>
+</div>
+
+<p
+    class="section-title"
+    *ngIf="existsDepartmentsContent"
+>Neues aus unseren Abteilungen</p>
+<div
+    id="departments"
+    *ngIf="existsDepartmentsContent"
+>
+    <div
+        class="department"
+        *ngFor="let department of departments; trackBy: TrackBy.id"
+    >
+        <p class="department-title">{{ Department.title[department.id] }}</p>
+        <div
+            class="department-content"
+            *ngFor="let content of department.content; trackBy: TrackBy.property('title')"
+        >
+            <p class="department-content-title">{{ content.title }}</p>
+            <p class="department-content-description">{{ content.description }}</p>
+        </div>
+        <a
+            class="department-link"
+            [link]="Department.websiteLink[department.id]"
+            target="_blank"
+        >Mehr lesen</a>
+    </div>
+</div>
+
+<p
+    class="section-title"
+    *ngIf="existsEventsContent"
+>Kommende Termine / Ankündigungen</p>
+<div
+    id="event-groups"
+    *ngIf="existsEventsContent"
+>
+    <div
+        class="event-group"
+        *ngFor="let eventGroup of eventGroups; trackBy: TrackBy.id"
+    >
+        <p class="event-group-title">{{ EventGroup.title[eventGroup.groupId] }}</p>
+        <div
+            class="event"
+            *ngFor="let event of eventGroup.events; trackBy: TrackBy.property('title')"
+        >
+            <p class="event-date">{{ event.date.description }}</p>
+            <p class="event-title">{{ event.title }}</p>
+            <p
+                class="event-subtitle"
+                *ngIf="event.subtitle !== null"
+            >{{ event.subtitle }}</p>
+        </div>
+    </div>
+</div>
+
+<p class="section-title">Unsere Social-Media Kanäle</p>
+<div
+    id="social-media-container"
+>
+    <div
+        class="social-media"
+    >
+        <img
+            class="social-media-logo"
+            src="assets/images/svk-logo-dark.png"
+            title="Website der SG"
+            alt="Website der SG"
+        >
+        <p class="social-media-name">Website</p>
+        <p class="social-media-title">SV Kleinsendelbach e.V.</p>
+        <a
+            class="social-media-link"
+            href="www.svkleinsendelbach.de"
+            title="SV Kleinsendelbach"
+            target="_blank"
+        >svkleinsendelbach.de</a>
+    </div>
+    <div
+        class="social-media"
+    >
+        <fa-icon
+            class="social-media-logo"
+            [icon]="['fab', 'facebook-f']"
+        />
+        <p class="social-media-name">Facebook</p>
+        <p class="social-media-title">SV Kleinsendelbach e.V.</p>
+        <a
+            class="social-media-link"
+            href="https://www.facebook.com/svkleinsendelbach"
+            title="Facebook"
+            target="_blank"
+        >facebook.com/svkleinsendelbach</a>
+    </div>
+    <div
+        class="social-media"
+    >
+        <fa-icon
+            class="social-media-logo"
+            [icon]="['fab', 'discord']"
+        />
+        <p class="social-media-name">Discord</p>
+        <p class="social-media-title">SV Kleinsendelbach e.V.</p>
+        <a
+            class="social-media-link"
+            href="https://discord.gg/gpJMrajz7q"
+            title="Discord"
+            target="_blank"
+        >discord.gg/gpJMrajz7q</a>
+    </div>
+    <div
+        class="social-media"
+    >
+        <fa-icon
+            class="social-media-logo"
+            [icon]="['fab', 'instagram']"
+        />
+        <p class="social-media-name">Instagram</p>
+        <p class="social-media-title">SG Kleinsendelbach / Hetzles</p>
+        <a
+            class="social-media-link"
+            href="https://www.instagram.com/sgkleinsendelbachhetzles"
+            title="Instagram"
+            target="_blank"
+        >instagram.com/sgkleinsendelbachhetzles</a>
+    </div>
+    <div
+        class="social-media"
+    >
+        <img
+            class="social-media-logo"
+            src="assets/images/sg-logo.png"
+            title="Website der SG"
+            alt="Website der SG"
+        >
+        <p class="social-media-name">Website der SG</p>
+        <p class="social-media-title">SG Kleinsendelbach / Hetzles</p>
+        <a
+            class="social-media-link"
+            href="http://sg-kh.de"
+            title="Website der SG"
+            target="_blank"
+        >sg-kh.de</a>
+    </div>
+</div>
+
+<p
+    class="section-title"
+    *ngIf="existsSponsors"
+>Unsere Sponsoren</p>
+<p
+    class="sponsors-title"
+    *ngIf="sponsors.mainSponsors"
+>Unsere Hauptsponsoren</p>
+<div
+    id="main-sponsors"
+    class="sponsors"
+    *ngIf="sponsors.mainSponsors"
+>
+    <div
+        class="sponsor"
+        *ngFor="let sponsor of sponsors.mainSponsors; trackBy: TrackBy.property('name')"
+    >
+        <img
+            class="sponsor-logo"
+            [src]="sponsor.logoSrc"
+            [title]="sponsor.name"
+            [alt]="sponsor.name"
+        >
+        <p class="sponsor-name">{{ sponsor.name }}</p>
+    </div>
+</div>
+<p
+    class="sponsors-title"
+    *ngIf="sponsors.premiumSponsors"
+>Unsere Premiumsponsoren</p>
+<div
+    id="premium-sponsors"
+    class="sponsors"
+    *ngIf="sponsors.premiumSponsors"
+>
+    <div
+        class="sponsor"
+        *ngFor="let sponsor of sponsors.premiumSponsors; trackBy: TrackBy.property('name')"
+    >
+        <img
+            class="sponsor-logo"
+            [src]="sponsor.logoSrc"
+            [title]="sponsor.name"
+            [alt]="sponsor.name"
+        >
+        <p class="sponsor-name">{{ sponsor.name }}</p>
+    </div>
+</div>
+<p
+    class="sponsors-title"
+    *ngIf="sponsors.partners"
+>Weitere Partner</p>
+<div
+    id="partners"
+    class="sponsors"
+    *ngIf="sponsors.partners"
+>
+    <div
+        class="sponsor"
+        *ngFor="let sponsor of sponsors.partners; trackBy: TrackBy.property('name')"
+    >
+        <img
+            class="sponsor-logo"
+            [src]="sponsor.logoSrc"
+            [title]="sponsor.name"
+            [alt]="sponsor.name"
+        >
+    </div>
+</div>

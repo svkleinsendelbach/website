@@ -87,6 +87,7 @@ import { SponsorComponent } from './pages/about-us/sponsors/sponsor/sponsor.comp
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
+import { NewsletterModule } from './modules/newsletter/newsletter.module';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -158,6 +159,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
         HttpClientJsonpModule,
         HttpClientModule,
         InputFormModule,
+        NewsletterModule,
         RecaptchaV3Module,
         ReportsModule,
         TextSectionModule,

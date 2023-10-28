@@ -172,7 +172,8 @@
                 "object-property-newline": "off",
                 "@typescript-eslint/member-ordering": "off",
                 "@typescript-eslint/init-declarations": "off",
-                "@typescript-eslint/no-use-before-define": "off"
+                "@typescript-eslint/no-use-before-define": "off",
+                "no-undefined": "off"
             }
         }
     ]

@@ -1,0 +1,339 @@
+@import '/src/sass/color'
+@import '/src/sass/text'
+@import '/src/sass/flex'
+
+$primary-color: #29368A
+$secondary-color: #FFFFFF
+
+:host
+    @include flex-column(flex-start, center)
+    padding-bottom: 50px
+    border: 2px dashed color('primary') // TODO
+    margin: 50px auto // TODO
+    width: 50% // TODO
+
+#title-page
+    @include flex-column(flex-start, center)
+    width: 100%
+    position: relative
+
+    #top-container
+        @include flex-row(flex-start, center)
+        width: 100%
+        margin-top: 75px
+
+        &::after
+            content: ''
+            display: block
+            padding-top: 50%
+
+        #date-container
+            @include flex-column(flex-start, flex-start)
+            margin-left: 50px
+            margin-right: auto
+
+            #month
+                @include font-metrophobic
+                @include font-weight('normal')
+                @include font-size('normal')
+                color: $secondary-color
+
+            #year
+                @include font-metrophobic
+                @include font-weight('semi-bold')
+                @include font-size('header')
+                color: $secondary-color
+                line-height: 32px
+
+        #name
+            @include font-metrophobic
+            @include font-weight('bold')
+            @include font-size('x-large')
+            color: $secondary-color
+            margin-right: 50px
+
+    #background
+        @include flex-column(flex-start, center)
+        width: 100%
+        position: absolute
+        z-index: -1
+        overflow: hidden
+
+        #background-color
+            width: 200%
+
+            &::after
+                content: ''
+                display: block
+                padding-top: 100%
+                background-color: $primary-color
+                border-radius: 0 0 50% 50%
+                transform: translateY(-70%)
+
+        #image-container
+            position: absolute
+            width: 65%
+            margin-top: 50px
+
+            &::after
+                content: ''
+                display: block
+                padding-top: 100%
+
+            #background-image
+                width: 100%
+                height: 100%
+                display: block
+                position: absolute
+                object-fit: cover
+                object-position: center
+                border-radius: 50%
+
+    #logo
+        width: 12%
+        margin-left: 50px
+        margin-right: auto
+
+    #title-container
+        @include flex-row(flex-start, center)
+        width: 100%
+        margin-top: 25px
+
+        #title
+            @include font-roboto
+            @include font-weight('bold')
+            @include font-size('xl-header')
+            color: color('text')
+            width: calc(50% - 50px)
+            margin-left: 50px
+
+        #title-description
+            @include font-roboto
+            @include font-weight('light')
+            @include font-size('normal')
+            color: color('text')
+            width: calc(50% - 50px)
+            margin-right: 50px
+
+    #website-link
+        @include font-roboto
+        @include font-weight('normal')
+        @include font-size('medium')
+        color: $secondary-color
+        background-color: $primary-color
+        margin-top: 50px
+        width: 65%
+        text-align: center
+        text-decoration: none
+        cursor: pointer
+        padding: 5px 0
+        border-radius: 1000px
+
+.section-title
+    @include font-roboto
+    @include font-weight('normal')
+    @include font-size('large')
+    color: $secondary-color
+    background-color: $primary-color
+    width: calc(82.5% - 40px)
+    margin-right: 17.5%
+    margin-top: 75px
+    margin-bottom: 50px
+    padding: 7.5px 20px
+    border-radius: 0 1000px 1000px 0
+
+#departments
+    @include flex-column(flex-start, center)
+    width: 65%
+
+    .department
+        @include flex-column(flex-start, center)
+        width: 100%
+        border-bottom: 1.5px solid $primary-color
+        padding-bottom: 30px
+        margin-bottom: 30px
+
+        &:last-child
+            border-bottom: 0
+            padding-bottom: 0
+            margin-bottom: 0
+
+        .department-title
+            @include font-roboto
+            @include font-weight('normal')
+            @include font-size('medium')
+            color: color('text')
+            width: 100%
+            text-align: center
+            margin-bottom: 15px
+
+        .department-content
+            @include flex-column(flex-start, center)
+            width: 100%
+            margin-bottom: 30px
+
+            .department-content-title
+                @include font-roboto
+                @include font-weight('normal')
+                @include font-size('normal')
+                color: color('text')
+                width: 100%
+                text-align: left
+                margin-bottom: 5px
+
+            .department-content-description
+                @include font-roboto
+                @include font-weight('light')
+                @include font-size('small')
+                color: color('text')
+                width: 100%
+                text-align: justify
+
+        .department-link
+            @include font-roboto
+            @include font-weight('normal')
+            @include font-size('normal')
+            color: $primary-color
+            width: 100%
+            text-align: left
+            text-decoration: none
+            cursor: pointer
+
+#event-groups
+    @include flex-column(flex-start, center)
+    width: 65%
+
+    .event-group
+        @include flex-column(flex-start, center)
+        width: 100%
+        border-bottom: 1.5px solid $primary-color
+        padding-bottom: 30px
+        margin-bottom: 30px
+
+        &:last-child
+            border-bottom: 0
+            padding-bottom: 0
+            margin-bottom: 0
+
+        .event-group-title
+            @include font-roboto
+            @include font-weight('normal')
+            @include font-size('medium')
+            color: color('text')
+            width: 100%
+            text-align: center
+            margin-bottom: 15px
+
+        .event
+            @include flex-column(flex-start, center)
+            width: 100%
+            margin-bottom: 30px
+
+            &:last-child
+                margin-bottom: 0
+
+            .event-date
+                @include font-roboto
+                @include font-weight('light')
+                @include font-size('small')
+                color: $primary-color
+                width: 100%
+                text-align: left
+
+            .event-title
+                @include font-roboto
+                @include font-weight('normal')
+                @include font-size('normal')
+                color: color('text')
+                width: 100%
+                text-align: left
+                margin-bottom: 5px
+
+            .event-subtitle
+                @include font-roboto
+                @include font-weight('light')
+                @include font-size('small')
+                color: color('text')
+                width: 100%
+                text-align: justify
+
+#social-media-container
+    @include flex-row(flex-start, center)
+    width: 65%
+    flex-wrap: wrap
+
+    .social-media
+        @include flex-column(flex-start, center)
+        width: calc(50% - 30px)
+        padding: 15px
+
+        .social-media-logo
+            font-size: 80px
+            height: 80px
+            text-align: center
+            margin-bottom: 10px
+
+        .social-media-name
+            @include font-roboto
+            @include font-weight('normal')
+            @include font-size('normal')
+            color: color('text')
+            text-align: center
+
+        .social-media-title
+            @include font-roboto
+            @include font-weight('light')
+            @include font-size('normal')
+            color: color('text')
+            text-align: center
+            margin-bottom: 5px
+
+        .social-media-link
+            @include font-roboto
+            @include font-weight('normal')
+            @include font-size('normal')
+            color: $primary-color
+            text-align: center
+            cursor: pointer
+            text-decoration: none
+            overflow-wrap: anywhere
+
+.sponsors-title
+    @include font-roboto
+    @include font-weight('normal')
+    @include font-size('medium')
+    color: color('text')
+    width: 65%
+    text-align: center
+    margin-bottom: 15px
+
+.sponsors
+    @include flex-row(flex-start, center)
+    width: 65%
+    flex-wrap: wrap
+    border-bottom: 1.5px solid $primary-color
+    padding-bottom: 30px
+    margin-bottom: 30px
+
+    &:last-child
+        border-bottom: 0
+        padding-bottom: 0
+        margin-bottom: 0
+
+    .sponsor
+        width: calc(25% - 10px)
+        padding: 10px 5px
+
+        .sponsor-logo
+            width: 100%
+
+        .sponsor-name
+            @include font-roboto
+            @include font-weight('light')
+            @include font-size('small')
+            color: color('text')
+            text-align: center
+
+#main-sponsors, #premium-sponsors
+    .sponsor
+        width: calc(33.3% - 10px)

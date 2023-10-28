@@ -14,12 +14,14 @@ export function recordEntries<T extends Record<string, unknown>>(record: T): { k
         }));
 }
 
-export function mapRecord<T extends Record<string, unknown>, U>(record: T, callbackfn: (value: T[keyof T], key: keyof T) => U): Record<keyof T, U> {
+export function mapRecord<T extends Record<string, unknown>, U>(record: T, callbackFn: (value: T[keyof T], key: keyof T) => U): Record<keyof T, U> {
     const newRecord = {} as Record<keyof T, U>;
     for (const entry of recordEntries(record))
-        newRecord[entry.key] = callbackfn(entry.value, entry.key);
+        newRecord[entry.key] = callbackFn(entry.value, entry.key);
     return newRecord;
 }
+
+export type Element<T extends unknown[]> = T extends (infer U) ? U : never;
 
 export function includesAll<T>(array: T[], expectedElements: T[]): boolean {
     for (const expectedElement of expectedElements) {
@@ -27,4 +29,20 @@ export function includesAll<T>(array: T[], expectedElements: T[]): boolean {
             return false;
     }
     return true;
+}
+
+export function compactMap<T, U>(array: T[], callbackFn: (value: T, index: number, array: T[]) => U | null | undefined): U[] {
+    return array
+        .flatMap((value, index, _array) => {
+            const mappedValue = callbackFn(value, index, _array);
+            if (mappedValue === null || mappedValue === undefined)
+                return [];
+            return { wrapped: mappedValue };
+        })
+        .map(value => value.wrapped);
+}
+
+export function mapExisting<T, U>(array: (T | null | undefined)[], callbackFn: (value: T, index: number, array: T[]) => U): U[] {
+    return compactMap(array, value => value)
+        .map(callbackFn);
 }

@@ -18,8 +18,8 @@ export interface Sponsor {
     };
 }
 
-export interface Sponsors {
+export type Sponsors = {
     mainSponsors: NonEmptyArray<Sponsor> | null;
     premiumSponsors: NonEmptyArray<Sponsor> | null;
     partners: NonEmptyArray<Sponsor> | null;
-}
+};
