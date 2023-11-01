@@ -10,6 +10,8 @@ import { TeamSquad } from '../../../types/team-squad';
 import { User } from '../../../types/user';
 import { Guid } from '../../../types/guid';
 import { AnpfiffInfoTeamParameters } from '../../../types/anpfiff-info-parameters';
+import { Newsletter } from 'src/app/types/newletter';
+import { UtcDate } from 'src/app/types/utc-date';
 
 export type ContactFunctionType = FunctionType<{
     name: string;
@@ -152,3 +154,49 @@ export type VerifyRecaptchaFunctionType = FunctionType<{
     hostname: string;
     errorCodes: string[] | null;
 }>;
+
+export type NewsletterEditFunctionType = FunctionType<{
+    editType: EditType;
+    newsletterId: string;
+    newsletter: Omit<Newsletter.Flatten, 'id'> | null;
+}, void>;
+
+export type NewsletterGetAllFunctionType = FunctionType<Record<string, never>, {
+    id: string;
+    date: string;
+    title: string;
+    description: string;
+    imageSrc: string;
+    month: Newsletter.Month;
+    year: number;
+}[], {
+    id: string;
+    date: UtcDate;
+    title: string;
+    description: string;
+    imageSrc: string;
+    month: Newsletter.Month;
+    year: number;
+}[]>;
+
+export namespace NewsletterGetAllFunctionType {
+    export function mapReturnValue(returnValue: FunctionType.FlattenReturnType<NewsletterGetAllFunctionType>): FunctionType.ReturnType<NewsletterGetAllFunctionType> {
+        return returnValue.map(newsletter => ({
+            ...newsletter,
+            date: UtcDate.decode(newsletter.date)
+        }));
+    }
+}
+
+export type NewsletterGetFunctionType = FunctionType<{
+    id: string;
+}, Newsletter.Flatten | null, Newsletter | null>;
+
+
+export namespace NewsletterGetFunctionType {
+    export function mapReturnValue(returnValue: FunctionType.FlattenReturnType<NewsletterGetFunctionType>): FunctionType.ReturnType<NewsletterGetFunctionType> {
+        if (returnValue === null)
+            return null;
+        return Newsletter.concrete(returnValue);
+    }
+}

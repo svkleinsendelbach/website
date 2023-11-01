@@ -7,6 +7,9 @@ import {
     EventEditFunctionType,
     EventGetFunctionType,
     GameInfoGetFunctionType,
+    NewsletterEditFunctionType,
+    NewsletterGetAllFunctionType,
+    NewsletterGetFunctionType,
     OccupancyEditFunctionType,
     OccupancyGetAllFunctionType,
     ReportEditFunctionType,
@@ -41,6 +44,9 @@ export interface FirebaseFunctions {
     'user-checkRoles': UserCheckRolesFunctionType;
     'user-handleAccessRequest': UserHandleAccessRequestFunctionType;
     'user-editRoles': UserEditRolesFunctionType;
+    'newsletter-get': NewsletterGetFunctionType;
+    'newsletter-getAll': NewsletterGetAllFunctionType;
+    'newsletter-edit': NewsletterEditFunctionType;
 }
 
 function identity<T>(value: T): T {
@@ -66,5 +72,8 @@ export const firebaseFunctionMapResultValues: { [Key in keyof FirebaseFunctions]
     'user-getAll': identity,
     'user-checkRoles': identity,
     'user-handleAccessRequest': identity,
-    'user-editRoles': identity
+    'user-editRoles': identity,
+    'newsletter-get': NewsletterGetFunctionType.mapReturnValue,
+    'newsletter-getAll': NewsletterGetAllFunctionType.mapReturnValue,
+    'newsletter-edit': identity
 };

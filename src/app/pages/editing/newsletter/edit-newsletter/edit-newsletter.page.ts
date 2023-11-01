@@ -258,7 +258,7 @@ export class EditNewsletterPage implements OnInit {
         const event = {
             date: this.eventInputForm.field('date').value,
             title: this.eventInputForm.field('title').value,
-            subtitle: this.eventInputForm.field('subtitle').value
+            subtitle: this.eventInputForm.field('subtitle').value === '' ? null : this.eventInputForm.field('subtitle').value
         };
         if (this.activeEvent[2] < this.events[this.activeEvent[1]].length)
             this.events[this.activeEvent[1]][this.activeEvent[2]] = event;
@@ -273,7 +273,7 @@ export class EditNewsletterPage implements OnInit {
 
     public get newsletter(): Omit<Newsletter, 'id'> {
         return {
-            date: UtcDate.now,
+            date: this.previousNewsletter ? this.previousNewsletter.date : UtcDate.now,
             titlePage: {
                 title: this.titlePageInputForm.field('title').value,
                 description: this.titlePageInputForm.field('description').value,
@@ -282,7 +282,7 @@ export class EditNewsletterPage implements OnInit {
                 month: this.titlePageInputForm.field('month').value
             },
             departments: mapRecord(this.departments, department => department.length === 0 ? null : department),
-            events: mapRecord(this.events, event => event.length === 0 ? null : event)
+            events: mapRecord(this.events, eventGroup => eventGroup.length === 0 ? null : eventGroup)
         };
     }
 
@@ -297,7 +297,6 @@ export class EditNewsletterPage implements OnInit {
             return;
         }
         this.titlePageInputForm.status = 'loading';
-        /*
         const newsletterId = this.previousNewsletter ? this.previousNewsletter.id : `${this.titlePageInputForm.field('year').value}-${Newsletter.Month.title[this.titlePageInputForm.field('month').value]}`;
         const result = await this.firebaseApiService.function('newsletter-edit').call({
             editType: this.previousNewsletter ? 'change' : 'add',
@@ -310,6 +309,5 @@ export class EditNewsletterPage implements OnInit {
             await this.router.navigateByUrl(internalLinks['bearbeiten/newsletter'].link);
             this.titlePageInputForm.status = 'valid';
         }
-        */
     }
 }

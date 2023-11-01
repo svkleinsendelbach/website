@@ -21,18 +21,18 @@ export namespace EventGroupId {
     ];
 
     export const title: Record<EventGroupId, string> = {
-        'dancing': 'Tanzen',
-        'football-adults/ah-team': 'Alte Herren',
-        'football-adults/first-team': '1. Mannschaft',
+        'general': 'Allgemeines',
         'football-adults/general': 'Herrenfußball',
+        'football-adults/first-team': '1. Mannschaft',
         'football-adults/second-team': '2. Mannschaft',
+        'football-adults/ah-team': 'Alte Herren',
+        'football-youth/general': 'Jugendfußball',
         'football-youth/c-youth': 'C-Jugend',
         'football-youth/e-youth': 'E-Jugend',
         'football-youth/f-youth': 'F-Jugend',
         'football-youth/g-youth': 'G-Jugend',
-        'football-youth/general': 'Jugendfußball',
-        'general': 'Allgemeines',
-        'gymnastics': 'Gymnastik'
+        'gymnastics': 'Gymnastik',
+        'dancing': 'Tanzen'
     };
 
     export function encodeSelectedGroupIds(selection: EventGroupId[]): string {
