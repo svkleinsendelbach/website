@@ -61,7 +61,7 @@
             class="status info"
         >Bitte melden Sie sich im seperaten Anmeldefenster an.</p>
         <p
-            *ngIf="signInWithAppleStatus !== 'failed'"
+            *ngIf="signInWithAppleStatus === 'failed'"
             class="status error"
         >Anmeldung ist fehlgeschlagen.</p>
     </div>
@@ -103,7 +103,7 @@
             class="status info"
         >Bitte melden Sie sich im seperaten Anmeldefenster an.</p>
         <p
-            *ngIf="signInWithGoogleStatus !== 'failed'"
+            *ngIf="signInWithGoogleStatus === 'failed'"
             class="status error"
         >Anmeldung ist fehlgeschlagen.</p>
     </div>

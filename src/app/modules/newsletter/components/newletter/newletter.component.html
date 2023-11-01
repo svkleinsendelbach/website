@@ -7,7 +7,7 @@
         <div
             id="date-container"
         >
-            <p id="month">{{ newsletter.titlePage.month }}</p>
+            <p id="month">{{ Month.title[newsletter.titlePage.month] }}</p>
             <p id="year">{{ newsletter.titlePage.year }}</p>
         </div>
         <p id="name">SV KLEINSENDELBACH</p>
@@ -29,7 +29,7 @@
     </div>
     <img
         id="logo"
-        src="assets/images/svk-logo.svg"
+        [src]="absoluteUrl('assets/images/svk-logo.svg')"
         title="SV Kleinsendelbach"
         alt="SV Kleinsendelbach"
     >
@@ -69,7 +69,8 @@
         </div>
         <a
             class="department-link"
-            [link]="Department.websiteLink[department.id]"
+            [href]="absoluteUrl(Department.websiteLink[department.id].link)"
+            [title]="Department.title[department.id]"
             target="_blank"
         >Mehr lesen</a>
     </div>
@@ -111,7 +112,7 @@
     >
         <img
             class="social-media-logo"
-            src="assets/images/svk-logo-dark.png"
+            [src]="absoluteUrl('assets/images/svk-logo-dark.png')"
             title="Website der SG"
             alt="Website der SG"
         >
@@ -177,7 +178,7 @@
     >
         <img
             class="social-media-logo"
-            src="assets/images/sg-logo.png"
+            [src]="absoluteUrl('assets/images/sg-logo.png')"
             title="Website der SG"
             alt="Website der SG"
         >
@@ -211,7 +212,7 @@
     >
         <img
             class="sponsor-logo"
-            [src]="sponsor.logoSrc"
+            [src]="absoluteUrl(sponsor.logoSrc)"
             [title]="sponsor.name"
             [alt]="sponsor.name"
         >
@@ -233,7 +234,7 @@
     >
         <img
             class="sponsor-logo"
-            [src]="sponsor.logoSrc"
+            [src]="absoluteUrl(sponsor.logoSrc)"
             [title]="sponsor.name"
             [alt]="sponsor.name"
         >
@@ -255,7 +256,7 @@
     >
         <img
             class="sponsor-logo"
-            [src]="sponsor.logoSrc"
+            [src]="absoluteUrl(sponsor.logoSrc)"
             [title]="sponsor.name"
             [alt]="sponsor.name"
         >

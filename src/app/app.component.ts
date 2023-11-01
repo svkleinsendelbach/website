@@ -27,10 +27,9 @@ export class AppComponent {
                 location: ['bottom', 'left']
             });
         }
-        const statisticsCookie = this.cookieSelectionService.cookiesSelection ? this.cookieSelectionService.cookiesSelection.statistics : null;
-        void this.fireAnalytics.setAnalyticsCollectionEnabled(statisticsCookie === 'selected');
-        this.firePerformance.instrumentationEnabled = (statisticsCookie === 'selected') as unknown as Promise<boolean>;
-        this.firePerformance.dataCollectionEnabled = (statisticsCookie === 'selected') as unknown as Promise<boolean>;
+        void this.fireAnalytics.setAnalyticsCollectionEnabled(this.cookieSelectionService.cookiesSelection.statistics === 'selected');
+        this.firePerformance.instrumentationEnabled = (this.cookieSelectionService.cookiesSelection.statistics === 'selected') as unknown as Promise<boolean>;
+        this.firePerformance.dataCollectionEnabled = (this.cookieSelectionService.cookiesSelection.statistics === 'selected') as unknown as Promise<boolean>;
         this.cookieSelectionService.listeners.add('fireAnalytics', selection => {
             void this.fireAnalytics.setAnalyticsCollectionEnabled(selection.functionality === 'selected');
             this.firePerformance.instrumentationEnabled = (selection.functionality === 'selected') as unknown as Promise<boolean>;

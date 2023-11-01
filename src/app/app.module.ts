@@ -88,6 +88,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { NewsletterModule } from './modules/newsletter/newsletter.module';
+import { EditingNewsletterPage } from './pages/editing/newsletter/editing-newsletter.page';
+import { EditNewsletterPage } from './pages/editing/newsletter/edit-newsletter/edit-newsletter.page';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -106,9 +108,11 @@ import { NewsletterModule } from './modules/newsletter/newsletter.module';
         EditingEventsPage,
         EditingMainPage,
         EditingNavigationBarComponent,
+        EditingNewsletterPage,
         EditingOccupancyPage,
         EditingReportsPage,
         EditingUserRolesPage,
+        EditNewsletterPage,
         EditOccupancyPage,
         EditReportPage,
         EYouthPage,

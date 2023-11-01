@@ -1,16 +1,14 @@
 @import '/src/sass/color'
 @import '/src/sass/text'
 @import '/src/sass/flex'
+@import '/src/sass/reset'
 
-$primary-color: #29368A
-$secondary-color: #FFFFFF
+$primary-color: #29368A // sass-lint:disable-line no-color-hex
+$secondary-color: #FFFFFF // sass-lint:disable-line no-color-hex
 
 :host
     @include flex-column(flex-start, center)
     padding-bottom: 50px
-    border: 2px dashed color('primary') // TODO
-    margin: 50px auto // TODO
-    width: 50% // TODO
 
 #title-page
     @include flex-column(flex-start, center)
@@ -141,6 +139,7 @@ $secondary-color: #FFFFFF
     margin-bottom: 50px
     padding: 7.5px 20px
     border-radius: 0 1000px 1000px 0
+    page-break-before: always
 
 #departments
     @include flex-column(flex-start, center)

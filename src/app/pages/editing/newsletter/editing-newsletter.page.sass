@@ -1,0 +1,20 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+@import '/src/sass/color'
+
+:host
+    @include flex-column(flex-start, center)
+    width: 100%
+
+#add-event
+    @include font-montserrat
+    @include font-size('normal')
+    @include font-weight('small')
+    background-color: color('background')
+    border: 1px solid color('text')
+    border-radius: 5px
+    color: color('primary')
+    cursor: pointer
+    margin-bottom: 25px
+    padding: 5px 15px
+    text-align: center

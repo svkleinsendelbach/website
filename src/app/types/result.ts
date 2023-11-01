@@ -79,8 +79,8 @@ export namespace Result {
         }
     }
 
-    export function fromObject<Content, Failure extends Error>(object: { value: Content } | { error: Failure }): Result<Content, Failure> {
-        if ('value' in object)
+    export function fromObject<Content, Failure extends Error>(object: { state: 'success'; value: Content } | { state: 'failure'; error: Failure }): Result<Content, Failure> {
+        if (object.state === 'success')
             return Result.success(object.value);
         return Result.failure(object.error);
     }

@@ -7,6 +7,7 @@ import { User } from 'src/app/types/user';
 import firebase from 'firebase/compat/app';
 import { CookieService } from 'ngx-cookie-service';
 import { includesAll } from 'src/app/types/record-array';
+import { Result } from 'src/app/types/result';
 
 @Injectable({
     providedIn: 'root'
@@ -31,7 +32,7 @@ export class AuthService {
                 throw error;
             });
         }
-        if (credential.user === null)
+        if (credential.user === null || credential.user as firebase.User | undefined === undefined)
             throw new Error('Login failed, no user in credential.');
         const authenticated = await this.checkRoles([]);
         return authenticated === 'authenticated' ? 'registered' : 'unregistered';
@@ -58,9 +59,9 @@ export class AuthService {
     }
 
     private async checkRoles(expectedRoles: User.Role[]): Promise<'authenticated' | 'unauthenticated'> {
-        const hasRoles = (await this.firebaseApiService.function('user-checkRoles')
-            .call({ roles: expectedRoles }))
-            .mapResult(() => true, () => false);
+        const r = await this.firebaseApiService.function('user-checkRoles')
+            .call({ roles: expectedRoles });
+        const hasRoles = r.mapResult(() => true, () => false);
         if (hasRoles && expectedRoles.length !== 0)
             this.cookieService.set('userRoles', this.crypter.encodeEncrypt(expectedRoles));
         else

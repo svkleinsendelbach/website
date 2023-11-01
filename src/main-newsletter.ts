@@ -1,8 +1,8 @@
-import { AppModule } from './app/app.module';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { NewsletterModule } from './app/modules/newsletter/newsletter.module';
 
 platformBrowserDynamic()
-    .bootstrapModule(AppModule)
+    .bootstrapModule(NewsletterModule)
     .catch(error => {
         console.error(error);
     });

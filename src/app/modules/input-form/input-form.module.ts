@@ -12,6 +12,8 @@ import { SelectComponent } from './components/input-field/select/select.componen
 import { TextEditorComponent } from './components/input-field/text-editor/text-editor.component';
 import { TextInputComponent } from './components/input-field/text-input/text-input.component';
 import { TextareaComponent } from './components/input-field/textarea/textarea.component';
+import { StepperComponent } from './components/input-field/stepper/stepper.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [
@@ -22,6 +24,7 @@ import { TextareaComponent } from './components/input-field/textarea/textarea.co
         InputFormComponent,
         LabelComponent,
         SelectComponent,
+        StepperComponent,
         TextareaComponent,
         TextEditorComponent,
         TextInputComponent
@@ -32,6 +35,7 @@ import { TextareaComponent } from './components/input-field/textarea/textarea.co
         InlineSelectComponent,
         InputFormComponent,
         SelectComponent,
+        StepperComponent,
         TextareaComponent,
         TextEditorComponent,
         TextInputComponent
@@ -39,6 +43,7 @@ import { TextareaComponent } from './components/input-field/textarea/textarea.co
     imports: [
         AngularEditorModule,
         CommonModule,
+        FontAwesomeModule,
         FormsModule
     ]
 })

@@ -1,0 +1,121 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+@import '/src/sass/color'
+
+#preview-toggle
+    @include flex-row(flex-start, center)
+    margin-bottom: 20px
+
+    .preview-button
+        @include font-montserrat
+        @include font-size('normal')
+        @include font-weight('normal')
+        color: color('text')
+        background-color: color('background')
+        border: 1px solid color('text')
+        cursor: pointer
+        padding: 5px 15px
+
+        &.off
+            border-radius: 5px 0 0 5px
+
+        &.on
+            border-radius: 0 5px 5px 0
+            border-left: 0
+
+        &.active
+            background-color: color('hoveredBackground')
+            color: color('primary')
+
+        &:hover
+            background-color: color('hoveredBackground')
+
+#title-description-textarea
+    height: 150px
+
+#preview
+    width: 50%
+    border: 1px solid color('text')
+
+#departments, #events
+    @include flex-column(flex-start, center)
+    width: 100%
+
+    .department, .event-group
+        @include flex-column(flex-start, flex-start)
+        width: 100%
+        margin-bottom: 20px
+
+        &:last-child
+            margin-bottom: 0
+
+        .title-container
+            @include flex-row(flex-start, flex-start)
+            width: 100%
+            margin-bottom: 5px
+
+            .title
+                @include font-montserrat
+                @include font-size('normal')
+                @include font-weight('medium')
+                color: color('text')
+
+            .add-button
+                @include font-montserrat
+                @include font-size('normal')
+                @include font-weight('normal')
+                color: color('text')
+                background-color: color('background')
+                border: 1px solid color('text')
+                border-radius: 5px
+                cursor: pointer
+                padding: 0 10px
+                margin-left: 15px
+
+                &:hover
+                    background-color: color('hoveredBackground')
+
+        &.active .title-container .title
+            color: color('secondaryText')
+
+        .missing
+            @include font-montserrat
+            @include font-size('normal')
+            @include font-weight('normal')
+            color: color('primary')
+
+        .content-container, .events
+            @include flex-column(flex-start, flex-start)
+            width: 100%
+
+            .content, .event
+                @include flex-row(flex-start, flex-start)
+                width: 100%
+                margin-bottom: 5px
+
+                &:last-child
+                    margin-bottom: 0
+
+                .title
+                    @include font-montserrat
+                    @include font-size('normal')
+                    @include font-weight('normal')
+                    color: color('text')
+
+                .edit-button, .delete-button
+                    @include font-montserrat
+                    @include font-size('normal')
+                    @include font-weight('normal')
+                    color: color('text')
+                    background-color: color('background')
+                    border: 1px solid color('text')
+                    border-radius: 5px
+                    cursor: pointer
+                    padding: 0 10px
+                    margin-left: 15px
+
+                    &:hover
+                        background-color: color('hoveredBackground')
+
+                &.active .title
+                    color: color('secondaryText')

@@ -51,7 +51,7 @@ export class EditEventPage implements OnInit {
         isImportant: new InputField<boolean>(false),
         link: new InputField('', [Validator.eitherOne('Das ist kein gültiger Link.', Validator.empty(''), Validator.url(''))]),
         subtitle: new InputField<string>(''),
-        title: new InputField<string>('', [Validator.required('Der Titel is erfordelich.')])
+        title: new InputField<string>('', [Validator.required('Der Titel ist erfordelich.')])
     }, {
         failed: new InputError('Das Event konnte nicht gespeichert werden.'),
         invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),

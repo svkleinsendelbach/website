@@ -14,7 +14,7 @@ export class InputFormComponent<ExtraStatus extends PropertyKey> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     @Input() public inputForm!: InputForm<Record<string, InputField<any>>, ExtraStatus>;
 
-    @Input() public submitButtonText!: string;
+    @Input() public submitButtonText: string | null = null;
 
     @Input() public cancelButtonText: string | null = null;
 

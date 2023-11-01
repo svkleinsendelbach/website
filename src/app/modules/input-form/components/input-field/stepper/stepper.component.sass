@@ -1,0 +1,52 @@
+@import '/src/sass/flex'
+@import '/src/sass/text'
+@import '/src/sass/color'
+
+:host
+    @include flex-column(flex-start, center)
+    margin-bottom: 20px
+    width: 100%
+
+#container
+    @include flex-row(flex-start, center)
+    width: 100%
+
+    #input
+        @include font-montserrat
+        @include font-size('large')
+        @include font-weight('normal')
+        background-color: color('background')
+        border: 1px solid color('text')
+        border-radius: 8px
+        color: color('text')
+        cursor: pointer
+        height: 48px
+        text-align: center
+        vertical-align: middle
+        width: 50%
+
+    #stepper
+        @include flex-row(flex-start, center)
+        width: 50%
+
+        #increase-button, #decrease-button
+            @include flex-row(center, center)
+            @include font-size('normal')
+            background-color: color('background')
+            border: 1px solid color('text')
+            color: color('text')
+            cursor: pointer
+            height: 48px
+            width: 25%
+
+            &:hover
+                background-color: color('hoveredBackground')
+
+        #increase-button
+            border-radius: 8px 0 0 8px
+
+        #decrease-button
+            border-radius: 0 8px 8px 0
+
+    &.error
+        border: 1px solid color('formStatusError')

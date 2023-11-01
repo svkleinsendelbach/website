@@ -15,15 +15,31 @@
     padding-top: 48px
     width: 85%
 
-    .title
-        color: color('text')
-        @include font-montserrat
-        @include font-size('header')
-        @include font-weight('medium')
-        margin-bottom: 40px
-        overflow-wrap: break-word
-        text-align: center
+    #title-container
+        @include flex-row(flex-start, center)
         width: 100%
+
+        #collapse-button
+            @include font-montserrat
+            @include font-size('x-large')
+            @include font-weight('medium')
+            color: color('text')
+            text-align: center
+            margin-top: 10px
+            cursor: pointer
+
+        .title
+            color: color('text')
+            @include font-montserrat
+            @include font-size('header')
+            @include font-weight('medium')
+            margin-bottom: 40px
+            overflow-wrap: break-word
+            text-align: center
+            width: 100%
+
+            &.collapsable
+                cursor: pointer
 
     ::ng-deep .text
         color: color('text')

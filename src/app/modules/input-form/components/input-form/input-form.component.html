@@ -6,6 +6,7 @@
 >
     <ng-content></ng-content>
     <div
+        *ngIf="cancelButtonText !== null || submitButtonClicked !== null"
         id="cancel-submit-container"
     >
         <p
@@ -16,6 +17,7 @@
         >{{ cancelButtonText }}</p>
         <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
         <p
+            *ngIf="submitButtonText !== null"
             id="submit-button"
             role="none"
             (click)="$event.preventDefault(); $event.stopPropagation(); submitButtonClicked.emit()"

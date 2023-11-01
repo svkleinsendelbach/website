@@ -37,6 +37,8 @@ import { SecondTeamPage } from './pages/football-adults/second-team/second-team.
 import { SportshomePage } from './pages/about-us/sportshome/sportshome.page';
 import { StatutePage } from './pages/about-us/statute/statute.page';
 import { SponsorsPage } from './pages/about-us/sponsors/sponsors.page';
+import { EditingNewsletterPage } from './pages/editing/newsletter/editing-newsletter.page';
+import { EditNewsletterPage } from './pages/editing/newsletter/edit-newsletter/edit-newsletter.page';
 
 export const internalRoutes: Record<InternalLinkPath, Type<unknown>> = {
     'anfahrt': DrivePage,
@@ -50,6 +52,8 @@ export const internalRoutes: Record<InternalLinkPath, Type<unknown>> = {
     'bearbeiten/kritik-vorschläge': EditingCriticismSuggestionPage,
     'bearbeiten/termine': EditingEventsPage,
     'bearbeiten/termine/bearbeiten': EditEventPage,
+    'bearbeiten/newsletter': EditingNewsletterPage,
+    'bearbeiten/newsletter/bearbeiten': EditNewsletterPage,
     'berichte': AllReportsPage,
     'chroniken': ChroniclePage,
     'datenschutz': PrivacyPage,

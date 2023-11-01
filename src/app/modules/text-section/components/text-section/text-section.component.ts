@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { StyleConfigService } from '../../../../services/style-config.service';
 
 @Component({
@@ -9,6 +9,10 @@ import { StyleConfigService } from '../../../../services/style-config.service';
 export class TextSectionComponent {
     @Input() public title: string | null = null;
 
+    @Input() public collapsed: boolean | null = null;
+
+    @Output() public collapsedChanged = new EventEmitter<boolean>();
+
     public constructor(
         public readonly styleConfig: StyleConfigService
     ) {}
@@ -18,15 +22,7 @@ export class TextSectionComponent {
             return null;
         const validCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-#';
         /* eslint-disable id-length */
-        const replaceCharacters = {
-            Ä: 'AE',
-            Ö: 'OE',
-            Ü: 'UE',
-            ß: 'ss',
-            ä: 'ae',
-            ö: 'oe',
-            ü: 'ue'
-        };
+        const replaceCharacters = { Ä: 'AE', Ö: 'OE', Ü: 'UE', ß: 'ss', ä: 'ae', ö: 'oe', ü: 'ue' };
         let titleId = '';
         function addCharacter(character: string) {
             if (character === '-' && (titleId === '' || titleId.endsWith('-')))
@@ -44,5 +40,12 @@ export class TextSectionComponent {
         if (titleId.endsWith('-'))
             titleId = titleId.slice(0, titleId.length - 1);
         return titleId;
+    }
+
+    public toggleCollapsed() {
+        if (this.collapsed === null)
+            return;
+        this.collapsed = !this.collapsed;
+        this.collapsedChanged.emit(this.collapsed);
     }
 }

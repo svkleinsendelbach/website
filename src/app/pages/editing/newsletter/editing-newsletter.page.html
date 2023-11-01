@@ -1,0 +1,56 @@
+<app-editing-navigation-bar
+    backButtonLink="bearbeiten"
+/>
+<authentication-check
+    [roles]="['websiteManager']"
+    (onAuthentication)="getNewsletter()"
+>
+    <text-section
+            title="Newsletter bearbeiten"
+    >
+        <p
+            id="add-event"
+            role="none"
+            (click)="$event.preventDefault(); $event.stopPropagation(); addNewNewsletter()"
+        >Neuen Newsletter hinzufügen</p>
+        <!--p
+            *ngIf="!eventGroups"
+            class="text margin-top-large secondaryColor"
+        >Termine werden geladen</p>
+        <div
+            *ngFor="let eventGroup of eventGroups; trackBy: TrackBy.property('groupId')"
+            class="event-group"
+            [ngClass]="deviceType.current"
+        >
+        <p
+            class="group-name textColor"
+        >{{ eventGroupTitle[eventGroup.groupId] }}</p>
+        <div
+            *ngFor="let event of eventGroup.events; trackBy: TrackBy.id"
+            class="event"
+        >
+            <div
+            class="title-container"
+            >
+            <p
+                class="title textColor"
+            >{{ event.title + ' | ' + event.date.description }}</p>
+            <p
+                *ngIf="event.subtitle"
+                class="subtitle secondaryColor"
+            >{{ event.subtitle }}</p>
+            </div>
+            <p
+                class="edit-button primaryColor"
+                role="none"
+                (click)="$event.preventDefault(); $event.stopPropagation(); editEvent(eventGroup.groupId, event)"
+            >Bearbeiten</p>
+            <p
+                class="delete-button primaryColor"
+                role="none"
+                (click)="$event.preventDefault(); $event.stopPropagation(); deleteEvent(eventGroup.groupId, event.id)"
+            >Löschen</p>
+        </div>
+        </div-->
+    </text-section>
+</authentication-check>

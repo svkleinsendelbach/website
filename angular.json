@@ -76,6 +76,10 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "newsletter": {
+                "outputPath": "dist/newletter",
+                "main": "src/main-newsletter.ts"
             }
           },
           "defaultConfiguration": "production"
@@ -88,6 +92,9 @@
             },
             "development": {
               "browserTarget": "svkleinsendelbach-website:build:development"
+            },
+            "newsletter": {
+                "browserTarget": "svkleinsendelbach-website:build:newsletter"
             }
           },
           "defaultConfiguration": "development"
