@@ -39,10 +39,6 @@ export class EditNewsletterPage implements OnInit {
     public titlePageInputForm = new InputForm({
         title: new InputField<string>('', [Validator.required('Der Titel ist erforderlich.')]),
         description: new InputField<string>('', [Validator.required('Die Nachricht ist erforderlich.')]),
-        imageSrc: new InputField<string>('', [
-            Validator.required('Das Titelbild ist erforderlich.'),
-            Validator.url('Das ist keine gültige Url.')
-        ]),
         month: new InputField<Newsletter.Month>(Newsletter.Month.fromNumber(UtcDate.now.month) ?? 'january', [
             Validator.required('Der Monat ist erforderlich.'),
             Validator.isOneOf(recordKeys(Newsletter.Month.title), 'Der Monat ist ungültig.')
@@ -109,7 +105,6 @@ export class EditNewsletterPage implements OnInit {
         if (this.previousNewsletter) {
             this.titlePageInputForm.field('title').initialValue = this.previousNewsletter.titlePage.title;
             this.titlePageInputForm.field('description').initialValue = this.previousNewsletter.titlePage.description;
-            this.titlePageInputForm.field('imageSrc').initialValue = this.previousNewsletter.titlePage.imageSrc;
             this.titlePageInputForm.field('month').initialValue = this.previousNewsletter.titlePage.month;
             this.titlePageInputForm.field('year').initialValue = this.previousNewsletter.titlePage.year;
             this.departments = mapRecord(this.previousNewsletter.departments, department => department ?? []);
@@ -277,7 +272,6 @@ export class EditNewsletterPage implements OnInit {
             titlePage: {
                 title: this.titlePageInputForm.field('title').value,
                 description: this.titlePageInputForm.field('description').value,
-                imageSrc: this.titlePageInputForm.field('imageSrc').value,
                 year: this.titlePageInputForm.field('year').value,
                 month: this.titlePageInputForm.field('month').value
             },

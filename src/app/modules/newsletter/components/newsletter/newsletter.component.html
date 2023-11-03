@@ -1,0 +1,346 @@
+<table width="100%" [ngClass]="'scaling-' + scaling">
+    <tbody class="w100">
+        <table class="w100">
+            <tbody class="w100">
+                <tr class="w100">
+                    <td class="w5"></td>
+                    <td class="w45 align-left metrophobic fw-bold fs-x-large color-text">SV Kleinsendelbach&nbsp;</td>
+                    <td class="w45">
+                        <table class="w100">
+                            <tbody class="w100">
+                                <tr class="w100">
+                                    <td class="w100 align-right metrophobic fw-normal fs-normal lh-20px color-text">Oktober&nbsp;</td>
+                                </tr>
+                                <tr class="w100">
+                                    <td class="w100 align-right metrophobic fw-semi-bold fs-xx-large color-text">2023&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="w5"></td>
+                </tr>
+                <tr class="w100 h25px"></tr>
+            </tbody>
+        </table>
+        <table class="w100">
+            <tbody class="w100">
+                <tr class="w100">
+                    <td class="w5"></td>
+                    <td class="w10">
+                        <img class="w100" src="https://svkleinsendelbach-website.web.app/assets/images/svk-logo.svg" alt="SV Kleinsendelbach">
+                    </td>
+                    <td class="w5"></td>
+                    <td class="w75 va-top">
+                        <table class="w100">
+                            <tbody class="w100">
+                                <tr class="w100">
+                                    <td class="w100 align-left roboto fw-bold fs-xxx-large color-text">{{ newsletter.titlePage.title }}</td>
+                                </tr>
+                                <tr class="w100">
+                                    <td class="w100 align-left roboto fw-light fs-medium color-text">{{ newsletter.titlePage.description }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="w5"></td>
+                </tr>
+                <tr class="w100 h75px"></tr>
+            </tbody>
+        </table>
+        <table class="w100">
+            <tbody class="w100">
+                <tr class="w100">
+                    <td class="w20"></td>
+                    <td class="w50">
+                        <a class="w100 align-center roboto fw-normal fs-normal link block background-primary color-secondary p-top5px p-bottom5px border-radius" href="https://www.svkleinsendelbach.de">www.svkleinsendelbach.de</a>
+                    </td>
+                    <td class="w20"></td>
+                </tr>
+                <tr class="w100 h75px"></tr>
+            </tbody>
+        </table>
+        <table class="w100">
+            <tbody class="w100">
+                <tr class="w100">
+                    <td class="w5 background-primary"></td>
+                    <td class="w80 align-left roboto fw-normal fs-normal background-primary color-secondary p-top5px p-bottom5px border-radius-right">Neues aus unseren Abteilungen</td>
+                    <td class="w15"></td>
+                </tr>
+                <tr class="w100 h75px"></tr>
+            </tbody>
+        </table>
+        <table class="w100">
+            <tbody class="w100">
+                <tr class="w100" *ngFor="let department of departments; trackBy: TrackBy.id">
+                    <td class="w5"></td>
+                    <td class="w90">
+                        <table class="w100">
+                            <tbody class="w100">
+                                <tr class="w100">
+                                    <td class="w100 roboto align-center fw-normal fs-medium color-text">{{ Department.title[department.id] }}</td>
+                                </tr>
+                                <tr class="w100" *ngFor="let content of department.content; trackBy: TrackBy.property('title')">
+                                    <td class="w100">
+                                        <table class="w100">
+                                            <tbody class="w100">
+                                                <tr class="w100">
+                                                    <td class="w100 roboto align-left fw-normal fs-normal p-top25px color-text">{{ content.title }}</td>
+                                                </tr>
+                                                <tr class="w100">
+                                                    <td class="w100 roboto align-block fw-light fs-small p-top5px color-text">{{ content.description }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr class="w100">
+                                    <td class="w100 p-top15px"><a class="w100 roboto align-left fw-normal fs-normal link color-primary" [href]="absoluteUrl(Department.websiteLink[department.id].link)">Mehr lesen</a></td>
+                                </tr>
+                                <tr class="w100 h75px" *ngIf="department.id !== departments[departments.length - 1].id"></tr>
+                                <tr class="w100">
+                                    <td class="w100 h1px background-primary" *ngIf="department.id !== departments[departments.length - 1].id"></td>
+                                </tr>
+                                <tr class="w100 h75px" *ngIf="department.id !== departments[departments.length - 1].id"></tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="w5"></td>
+                </tr>
+                <tr class="w100 h75px"></tr>
+            </tbody>
+        </table>
+        <table class="w100">
+            <tbody class="w100">
+                <tr class="w100">
+                    <td class="w5 background-primary"></td>
+                    <td class="w80 align-left roboto fw-normal fs-normal background-primary color-secondary p-top5px p-bottom5px border-radius-right">Kommende Termine / Ankündigungen</td>
+                    <td class="w15"></td>
+                </tr>
+                <tr class="w100 h75px"></tr>
+            </tbody>
+        </table>
+        <table class="w100">
+            <tbody class="w100">
+                <tr class="w100" *ngFor="let eventGroup of eventGroups; trackBy: TrackBy.id">
+                    <td class="w5"></td>
+                    <td class="w90">
+                        <table class="w100">
+                            <tbody class="w100">
+                                <tr class="w100">
+                                    <td class="w100 roboto align-center fw-normal fs-medium color-text">{{ EventGroup.title[eventGroup.groupId] }}</td>
+                                </tr>
+                                <tr class="w100" *ngFor="let event of eventGroup.events; trackBy: TrackBy.property('title')">
+                                    <td class="w100">
+                                        <table class="w100">
+                                            <tbody class="w100">
+                                                <tr class="w100">
+                                                    <td class="w100 roboto align-left fw-light fs-small p-top25px color-primary">{{ event.date.description }}</td>
+                                                </tr>
+                                                <tr class="w100">
+                                                    <td class="w100 roboto align-left fw-normal fs-normal p-top5px color-text">{{ event.title }}</td>
+                                                </tr>
+                                                <tr class="w100" *ngIf="event.subtitle !== null">
+                                                    <td class="w100 roboto align-block fw-light fs-small p-top5px color-text">{{ event.subtitle }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr class="w100 h75px" *ngIf="eventGroup.groupId !== eventGroups[eventGroups.length - 1].groupId"></tr>
+                                <tr class="w100">
+                                    <td class="w100 h1px background-primary" *ngIf="eventGroup.groupId !== eventGroups[eventGroups.length - 1].groupId"></td>
+                                </tr>
+                                <tr class="w100 h75px" *ngIf="eventGroup.groupId !== eventGroups[eventGroups.length - 1].groupId"></tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="w5"></td>
+                </tr>
+                <tr class="w100 h75px"></tr>
+            </tbody>
+        </table>
+        <table class="w100">
+            <tbody class="w100">
+                <tr class="w100">
+                    <td class="w5 background-primary"></td>
+                    <td class="w80 align-left roboto fw-normal fs-normal background-primary color-secondary p-top5px p-bottom5px border-radius-right">Unsere Social-Media Kanäle</td>
+                    <td class="w15"></td>
+                </tr>
+                <tr class="w100 h75px"></tr>
+            </tbody>
+        </table>
+        <table class="w100">
+            <tbody class="w100">
+                <tr class="w100" *ngFor="let socialMediaRow of socialMediaList; trackBy: TrackBy.identity">
+                    <td class="w5"></td>
+                    <td class="w45" *ngFor="let socialMediaItem of socialMediaRow; trackBy: TrackBy.property('link')">
+                        <table class="w100">
+                            <tbody class="w100">
+                                <tr class="w100">
+                                    <td class="w100 align-center p-top25px">
+                                        <img class="h100px" [src]="absoluteUrl(socialMediaItem.image)" [alt]="socialMediaItem.name">
+                                    </td>
+                                </tr>
+                                <tr class="w100">
+                                    <td class="w100 roboto align-center fw-normal fs-normal color-text p-top5px">{{ socialMediaItem.name }}</td>
+                                </tr>
+                                <tr class="w100">
+                                    <td class="w100 roboto align-center fw-light fs-normal color-text">{{ socialMediaItem.title }}</td>
+                                </tr>
+                                <tr class="w100">
+                                    <td class="w100 align-center"><a class="w100 roboto fw-normal fs-normal link color-primary" [href]="socialMediaItem.link">{{ socialMediaItem.displayLink }}</a></td>
+                                </tr>
+                                <tr class="w100 h75px"></tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="w5"></td>
+                </tr>
+                <tr class="w100 h75px"></tr>
+            </tbody>
+        </table>
+        <table class="w100" *ngIf="existsSponsors">
+            <tbody class="w100">
+                <tr class="w100">
+                    <td class="w5 background-primary"></td>
+                    <td class="w80 align-left roboto fw-normal fs-normal background-primary color-secondary p-top5px p-bottom5px border-radius-right">Unsere Sponsoren</td>
+                    <td class="w15"></td>
+                </tr>
+                <tr class="w100 h75px"></tr>
+            </tbody>
+        </table>
+        <table class="w100" *ngIf="existsSponsors">
+            <tbody class="w100">
+                <tr class="w100" *ngIf="sponsors.mainSponsors">
+                    <td class="w5"></td>
+                    <td class="w90">
+                        <table class="w100">
+                            <tbody class="w100">
+                                <tr class="w100">
+                                    <td class="w100 roboto align-center fw-normal fs-medium color-text">Unsere Hauptsponsoren</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="w5"></td>
+                </tr>
+                <tr class="w100">
+                    <td class="w5"></td>
+                    <td class="w90">
+                        <table class="w100">
+                            <tbody class="w100">
+                                <tr class="w100" *ngFor="let sponsorsRow of sponsors.mainSponsors; trackBy: TrackBy.identity">
+                                    <td class="w33" *ngFor="let sponsor of sponsorsRow; trackBy: TrackBy.property('name')">
+                                        <table class="w100">
+                                            <tbody class="w100">
+                                                <tr class="w100">
+                                                    <td class="w100"><img class="w100 align-center" [src]="absoluteUrl(sponsor.logoSrc)" [alt]="sponsor.name"></td>
+                                                </tr>
+                                                <tr class="w100">
+                                                    <td class="w100 roboto align-center fw-light fs-small color-text">{{ sponsor.name }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td class="w33" *ngIf="sponsorsRow.length < 2"></td>
+                                    <td class="w33" *ngIf="sponsorsRow.length < 3"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="w5"></td>
+                </tr>
+                <tr class="w100 h75px" *ngIf="sponsors.mainSponsors"></tr>
+                <tr class="w100" *ngIf="sponsors.mainSponsors">
+                    <td class="w5"></td>
+                    <td class="w90 h1px background-primary"></td>
+                    <td class="w5"></td>
+                </tr>
+                <tr class="w100 h75px" *ngIf="sponsors.mainSponsors"></tr>
+                <tr class="w100" *ngIf="sponsors.premiumSponsors">
+                    <td class="w5"></td>
+                    <td class="w90">
+                        <table class="w100">
+                            <tbody class="w100">
+                                <tr class="w100">
+                                    <td class="w100 roboto align-center fw-normal fs-medium color-text">Unsere Premiumsponsoren</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="w5"></td>
+                </tr>
+                <tr class="w100">
+                    <td class="w5"></td>
+                    <td class="w90">
+                        <table class="w100">
+                            <tbody class="w100">
+                                <tr class="w100" *ngFor="let sponsorsRow of sponsors.premiumSponsors; trackBy: TrackBy.identity">
+                                    <td class="w33" *ngFor="let sponsor of sponsorsRow; trackBy: TrackBy.property('name')">
+                                        <table class="w100">
+                                            <tbody class="w100">
+                                                <tr class="w100">
+                                                    <td class="w100"><img class="w100 align-center" [src]="absoluteUrl(sponsor.logoSrc)" [alt]="sponsor.name"></td>
+                                                </tr>
+                                                <tr class="w100">
+                                                    <td class="w100 roboto align-center fw-light fs-small color-text">{{ sponsor.name }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td class="w33" *ngIf="sponsorsRow.length < 2"></td>
+                                    <td class="w33" *ngIf="sponsorsRow.length < 3"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="w5"></td>
+                </tr>
+                <tr class="w100 h75px" *ngIf="sponsors.premiumSponsors"></tr>
+                <tr class="w100" *ngIf="sponsors.premiumSponsors">
+                    <td class="w5"></td>
+                    <td class="w90 h1px background-primary"></td>
+                    <td class="w5"></td>
+                </tr>
+                <tr class="w100 h75px" *ngIf="sponsors.premiumSponsors"></tr>
+                <tr class="w100" *ngIf="sponsors.partners">
+                    <td class="w5"></td>
+                    <td class="w90">
+                        <table class="w100">
+                            <tbody class="w100">
+                                <tr class="w100">
+                                    <td class="w100 roboto align-center fw-normal fs-medium color-text">Weitere Partner</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="w5"></td>
+                </tr>
+                <tr class="w100">
+                    <td class="w5"></td>
+                    <td class="w90">
+                        <table class="w100">
+                            <tbody class="w100">
+                                <tr class="w100" *ngFor="let sponsorsRow of sponsors.partners; trackBy: TrackBy.identity">
+                                    <td class="w25" *ngFor="let sponsor of sponsorsRow; trackBy: TrackBy.property('name')">
+                                        <table class="w100">
+                                            <tbody class="w100">
+                                                <tr class="w100">
+                                                    <td class="w100"><img class="w100 align-center" [src]="absoluteUrl(sponsor.logoSrc)" [alt]="sponsor.name"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td class="w25" *ngIf="sponsorsRow.length < 2"></td>
+                                    <td class="w25" *ngIf="sponsorsRow.length < 3"></td>
+                                    <td class="w25" *ngIf="sponsorsRow.length < 4"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="w5"></td>
+                </tr>
+            </tbody>
+        </table>
+    </tbody>
+</table>

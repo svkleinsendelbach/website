@@ -38,10 +38,6 @@
                 label="Nachricht"
                 [inputField]="titlePageInputForm.field('description')"
             />
-            <input-field-text
-                label="Titelbild"
-                [inputField]="titlePageInputForm.field('imageSrc')"
-            />
             <input-field-select
                 label="Monat"
                 [selectOptions]="monthSelectOptions"
@@ -52,9 +48,10 @@
                 [inputField]="titlePageInputForm.field('year')"
             />
         </input-form>
-        <app-newletter
+        <app-newsletter
             *ngIf="isPreviewShown"
             [newsletter]="newsletter"
+            scaling="website"
             id="preview"
         />
     </text-section>

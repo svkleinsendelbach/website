@@ -166,7 +166,6 @@ export type NewsletterGetAllFunctionType = FunctionType<Record<string, never>, {
     date: string;
     title: string;
     description: string;
-    imageSrc: string;
     month: Newsletter.Month;
     year: number;
 }[], {
@@ -174,7 +173,6 @@ export type NewsletterGetAllFunctionType = FunctionType<Record<string, never>, {
     date: UtcDate;
     title: string;
     description: string;
-    imageSrc: string;
     month: Newsletter.Month;
     year: number;
 }[]>;

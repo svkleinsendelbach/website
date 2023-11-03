@@ -14,7 +14,6 @@ export class AppNewsletterComponent {
         titlePage: {
             title: 'New Record',
             description: 'Aaron Loeb has won again over his opponent Teddy Yu. He set a new record during the last tennis match. Visit our website for more details.',
-            imageSrc: 'https://media-public.canva.com/dgc9s/MAEKqQdgc9s/1/s3.jpg',
             month: 'october',
             year: 2023
         },

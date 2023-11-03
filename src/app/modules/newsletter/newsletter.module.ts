@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NewletterComponent } from './components/newletter/newletter.component';
+import { NewsletterComponent } from './components/newsletter/newsletter.component';
 import { TextSectionModule } from '../text-section/text-section.module';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,9 +14,9 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     bootstrap: [AppNewsletterComponent],
     declarations: [
         AppNewsletterComponent,
-        NewletterComponent
+        NewsletterComponent
     ],
-    exports: [NewletterComponent],
+    exports: [NewsletterComponent],
     imports: [
         BrowserModule,
         CommonModule,

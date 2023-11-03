@@ -10,7 +10,6 @@ export type Newsletter = {
     titlePage: {
         title: string;
         description: string;
-        imageSrc: string;
         month: Newsletter.Month;
         year: number;
     };
@@ -85,7 +84,6 @@ export namespace Newsletter {
         titlePage: {
             title: string;
             description: string;
-            imageSrc: string;
             month: Newsletter.Month;
             year: number;
         };
