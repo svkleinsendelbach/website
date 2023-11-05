@@ -1,4 +1,22 @@
+<text-section
+    *ngIf="!fetchedNewsletter || !fetchedNewsletter.isSuccess() || fetchedNewsletter.value === null"
+>
+    <p
+        *ngIf="!fetchedNewsletter"
+        class="text center large primaryColor"
+    >Newsletter wird geladen</p>
+    <p
+        *ngIf="fetchedNewsletter && fetchedNewsletter.isFailure()"
+        class="text center large primaryColor"
+    >Newsletter konnten nicht geladen werden</p>
+    <p
+        *ngIf="fetchedNewsletter && fetchedNewsletter.isSuccess() && fetchedNewsletter.value === null"
+        class="text center large primaryColor"
+    >Newsletter konnten nicht gefunden werden</p>
+</text-section>
+
 <app-newsletter
-    [newsletter]="newsletter"
+    *ngIf="fetchedNewsletter && fetchedNewsletter.isSuccess() && fetchedNewsletter.value !== null"
+    [newsletter]="fetchedNewsletter.value"
     scaling="newsletter"
 />

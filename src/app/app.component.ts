@@ -5,6 +5,7 @@ import { CookieSelectionService } from './modules/cookie-selector/services/cooki
 import Crate from '@widgetbot/crate';
 import { DeviceTypeService } from './services/device-type.service';
 import { StyleConfigService } from './services/style-config.service';
+import { CrypterService } from './modules/crypter/services/crypter.service';
 
 @Component({
     selector: 'app-root',

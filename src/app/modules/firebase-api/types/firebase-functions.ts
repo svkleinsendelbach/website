@@ -10,6 +10,9 @@ import {
     NewsletterEditFunctionType,
     NewsletterGetAllFunctionType,
     NewsletterGetFunctionType,
+    NewsletterSubscriptionGetAllFunctionType,
+    NewsletterSubscriptionSubscribeFunctionType,
+    NewsletterSubscriptionUnsubscribeFunctionType,
     OccupancyEditFunctionType,
     OccupancyGetAllFunctionType,
     ReportEditFunctionType,
@@ -47,6 +50,9 @@ export interface FirebaseFunctions {
     'newsletter-get': NewsletterGetFunctionType;
     'newsletter-getAll': NewsletterGetAllFunctionType;
     'newsletter-edit': NewsletterEditFunctionType;
+    'newsletter-subscription-getAll': NewsletterSubscriptionGetAllFunctionType;
+    'newsletter-subscription-subscribe': NewsletterSubscriptionSubscribeFunctionType;
+    'newsletter-subscription-unsubscribe': NewsletterSubscriptionUnsubscribeFunctionType;
 }
 
 function identity<T>(value: T): T {
@@ -75,5 +81,8 @@ export const firebaseFunctionMapResultValues: { [Key in keyof FirebaseFunctions]
     'user-editRoles': identity,
     'newsletter-get': NewsletterGetFunctionType.mapReturnValue,
     'newsletter-getAll': NewsletterGetAllFunctionType.mapReturnValue,
-    'newsletter-edit': identity
+    'newsletter-edit': identity,
+    'newsletter-subscription-getAll': identity,
+    'newsletter-subscription-subscribe': identity,
+    'newsletter-subscription-unsubscribe': identity
 };

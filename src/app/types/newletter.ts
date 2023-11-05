@@ -126,7 +126,7 @@ export namespace Newsletter {
     export function concrete(newsletter: Omit<Newsletter.Flatten, 'id'>): Omit<Newsletter, 'id'>;
     export function concrete(newsletter: Newsletter.Flatten | Omit<Newsletter.Flatten, 'id'>): Newsletter | Omit<Newsletter, 'id'> {
         return {
-            ...'id' in newsletter ? { id: newsletter } : {},
+            ...'id' in newsletter ? { id: newsletter.id } : {},
             date: UtcDate.decode(newsletter.date),
             titlePage: newsletter.titlePage,
             departments: newsletter.departments,

@@ -92,6 +92,9 @@ import { EditingNewsletterPage } from './pages/editing/newsletter/editing-newsle
 import { EditNewsletterPage } from './pages/editing/newsletter/edit-newsletter/edit-newsletter.page';
 import { NewsletterOverviewPage } from './pages/newsletter/overview/newsletter-overview.page';
 import { NewsletterPage } from './pages/newsletter/newsletter/newsletter.page';
+import { NewsletterSubscribePage } from './pages/newsletter/subscribe/newsletter-subscribe.page';
+import { NewsletterUnsubscribePage } from './pages/newsletter/unsubscribe/newsletter-unsubscribe.page';
+import { NewsletterUnsubscribeWithIdPage } from './pages/newsletter/unsubscribe-with-id/newsletter-unsubscribe-with-id.page';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -135,6 +138,9 @@ import { NewsletterPage } from './pages/newsletter/newsletter/newsletter.page';
         ManagersPage,
         NewsletterOverviewPage,
         NewsletterPage,
+        NewsletterSubscribePage,
+        NewsletterUnsubscribePage,
+        NewsletterUnsubscribeWithIdPage,
         PageNotFoundPage,
         PrivacyPage,
         RequestPage,

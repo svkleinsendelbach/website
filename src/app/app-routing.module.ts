@@ -41,6 +41,9 @@ import { EditingNewsletterPage } from './pages/editing/newsletter/editing-newsle
 import { EditNewsletterPage } from './pages/editing/newsletter/edit-newsletter/edit-newsletter.page';
 import { NewsletterOverviewPage } from './pages/newsletter/overview/newsletter-overview.page';
 import { NewsletterPage } from './pages/newsletter/newsletter/newsletter.page';
+import { NewsletterSubscribePage } from './pages/newsletter/subscribe/newsletter-subscribe.page';
+import { NewsletterUnsubscribePage } from './pages/newsletter/unsubscribe/newsletter-unsubscribe.page';
+import { NewsletterUnsubscribeWithIdPage } from './pages/newsletter/unsubscribe-with-id/newsletter-unsubscribe-with-id.page';
 
 export const internalRoutes: Record<InternalLinkPath, Type<unknown>> = {
     'anfahrt': DrivePage,
@@ -79,7 +82,9 @@ export const internalRoutes: Record<InternalLinkPath, Type<unknown>> = {
     'sportheim': SportshomePage,
     'tanzen': DancingPage,
     'über-uns': ManagersPage,
-    'newsletter': NewsletterOverviewPage
+    'newsletter': NewsletterOverviewPage,
+    'newsletter/anmelden': NewsletterSubscribePage,
+    'newsletter/abmelden': NewsletterUnsubscribePage
 };
 
 const routes: Routes = [
@@ -92,6 +97,10 @@ const routes: Routes = [
         path: entry[0],
         component: entry[1]
     })),
+    {
+        path: 'newsletter/abmelden/:id',
+        component: NewsletterUnsubscribeWithIdPage
+    },
     {
         path: 'newsletter/:id',
         component: NewsletterPage

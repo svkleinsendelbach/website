@@ -6,7 +6,7 @@
         class="text center large primaryColor"
     >Newsletter wird geladen</p>
     <p
-        *ngIf="fetchedNewsletter && fetchedNewsletter.isFailure()"
+        *ngIf="fetchedNewsletter && fetchedNewsletter.isFailure() && fetchedNewsletter.error !== 'no-id' && fetchedNewsletter.error !== 'not-found'"
         class="text center large primaryColor"
     >Newsletter konnten nicht geladen werden</p>
     <p

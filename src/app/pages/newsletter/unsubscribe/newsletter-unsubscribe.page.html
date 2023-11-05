@@ -1,0 +1,14 @@
+<text-section
+    title="Newsletter Abmeldung"
+>
+    <input-form
+        [inputForm]="inputForm"
+        submitButtonText="Abmelden"
+        (submitButtonClicked)="onSubmit()"
+    >
+        <input-field-text
+            label="Ihre E-Mail Adresse"
+            [inputField]="inputForm.field('email')"
+        />
+    </input-form>
+</text-section>

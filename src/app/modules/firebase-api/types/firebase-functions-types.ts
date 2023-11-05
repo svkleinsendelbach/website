@@ -198,3 +198,17 @@ export namespace NewsletterGetFunctionType {
         return Newsletter.concrete(returnValue);
     }
 }
+
+export type NewsletterSubscriptionGetAllFunctionType = FunctionType<Record<string, never>, {
+    id: string;
+    email: string;
+}[]>;
+
+export type NewsletterSubscriptionSubscribeFunctionType = FunctionType<{
+    email: string;
+}, void>;
+
+export type NewsletterSubscriptionUnsubscribeFunctionType = FunctionType<{
+    id: string | null;
+    email: string | null;
+}, void>;

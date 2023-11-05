@@ -38,7 +38,9 @@ const internalLinkPathTitles = {
     'sportheim': 'Sportheim',
     'tanzen': 'Tanzen',
     'über-uns': 'Über uns',
-    'newsletter': 'Alle Newsletter'
+    'newsletter': 'Alle Newsletter',
+    'newsletter/anmelden': 'Newsletter Anmeldung',
+    'newsletter/abmelden': 'Newsletter Abmeldung'
 } satisfies Record<string, string>;
 
 export type InternalLinkPath = keyof typeof internalLinkPathTitles;

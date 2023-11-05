@@ -7,6 +7,7 @@ import { EventGroupId } from 'src/app/types/event';
 import { UtcDate } from 'src/app/types/utc-date';
 import { sponsorsConfig } from 'src/app/config/sponsors-config';
 import { Sponsor, Sponsors } from 'src/app/types/sponsors';
+import { Link } from 'src/app/types/link';
 
 interface SocialMediaItem {
     image: string;
@@ -21,7 +22,7 @@ interface SocialMediaItem {
     styleUrls: ['./newsletter.component.sass'],
     templateUrl: './newsletter.component.html'
 })
-export class NewsletterComponent { // TODO: Nicht richtig angezeigt, abmelden
+export class NewsletterComponent { // TODO: Abmelden
     public TrackBy = TrackBy;
 
     public Month = Newsletter.Month;
@@ -30,7 +31,7 @@ export class NewsletterComponent { // TODO: Nicht richtig angezeigt, abmelden
 
     public EventGroup = EventGroupId;
 
-    @Input() public newsletter!: Omit<Newsletter, 'id'>;
+    @Input() public newsletter!: Newsletter;
 
     @Input() public scaling: 'newsletter' | 'website' = 'newsletter';
 

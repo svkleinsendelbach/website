@@ -8,6 +8,10 @@ import { AppNewsletterComponent } from './app.newsletter.component';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { FirebaseApiModule } from '../firebase-api/firebase-api.module';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+import { CrypterModule } from '../crypter/crypter.module';
 
 
 @NgModule({
@@ -18,8 +22,11 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     ],
     exports: [NewsletterComponent],
     imports: [
+        AngularFireModule.initializeApp(environment.firebase),
         BrowserModule,
         CommonModule,
+        CrypterModule,
+        FirebaseApiModule,
         FontAwesomeModule,
         TextSectionModule
     ]

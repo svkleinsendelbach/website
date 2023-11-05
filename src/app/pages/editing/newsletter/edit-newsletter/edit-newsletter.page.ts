@@ -266,8 +266,10 @@ export class EditNewsletterPage implements OnInit {
         this.eventInputForm.reset();
     }
 
-    public get newsletter(): Omit<Newsletter, 'id'> {
+    public get newsletter(): Newsletter {
+        const newsletterId = this.previousNewsletter ? this.previousNewsletter.id : `${this.titlePageInputForm.field('year').value}-${Newsletter.Month.title[this.titlePageInputForm.field('month').value]}`.toLowerCase();
         return {
+            id: newsletterId,
             date: this.previousNewsletter ? this.previousNewsletter.date : UtcDate.now,
             titlePage: {
                 title: this.titlePageInputForm.field('title').value,
@@ -291,11 +293,10 @@ export class EditNewsletterPage implements OnInit {
             return;
         }
         this.titlePageInputForm.status = 'loading';
-        const newsletterId = this.previousNewsletter ? this.previousNewsletter.id : `${this.titlePageInputForm.field('year').value}-${Newsletter.Month.title[this.titlePageInputForm.field('month').value]}`.toLowerCase();
         const result = await this.firebaseApiService.function('newsletter-edit').call({
             editType: this.previousNewsletter ? 'change' : 'add',
             newsletter: Newsletter.flatten(this.newsletter),
-            newsletterId: newsletterId
+            newsletterId: this.newsletter.id
         });
         if (result.isFailure())
             this.titlePageInputForm.status = 'failed';
