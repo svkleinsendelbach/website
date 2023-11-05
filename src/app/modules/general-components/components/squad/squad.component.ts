@@ -5,8 +5,8 @@ import { SquadPerson } from '../../types/squad-person';
 import { StyleConfigService } from '../../../../services/style-config.service';
 import { TeamSquad } from 'src/app/types/team-squad';
 import { TrackBy } from 'src/app/types/track-by';
-import { Result } from 'src/app/types/result';
 import { AnpfiffInfoTeamParameters } from 'src/app/types/anpfiff-info-parameters';
+import { FirebaseFunctionResult } from 'src/app/modules/firebase-api/types/firebase-function-result';
 
 @Component({
     selector: 'squad',
@@ -18,7 +18,7 @@ export class SquadComponent implements OnInit {
 
     public TrackBy = TrackBy;
 
-    public fetchedSquad: Result<TeamSquad> | null = null;
+    public fetchedSquad: FirebaseFunctionResult<TeamSquad> | null = null;
 
     public constructor(
         private readonly firebaseApiService: FirebaseApiService,

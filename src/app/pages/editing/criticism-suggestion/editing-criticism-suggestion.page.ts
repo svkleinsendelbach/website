@@ -7,6 +7,7 @@ import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 import { TrackBy } from 'src/app/types/track-by';
 import { Result } from 'src/app/types/result';
+import { FirebaseFunctionResult } from 'src/app/modules/firebase-api/types/firebase-function-result';
 
 @Component({
     selector: 'app-editing-criticism-suggestion',
@@ -18,7 +19,7 @@ export class EditingCriticismSuggestionPage {
 
     public CriticismSuggestion = CriticismSuggestion;
 
-    public fetchedCriticismSuggestions: Result<{
+    public fetchedCriticismSuggestions: FirebaseFunctionResult<{
         active: CriticismSuggestion[];
         workedOff: CriticismSuggestion[] | null;
     }> | null = null;

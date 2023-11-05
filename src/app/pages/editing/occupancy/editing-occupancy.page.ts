@@ -15,6 +15,7 @@ import { Title } from '@angular/platform-browser';
 import { TrackBy } from 'src/app/types/track-by';
 import { UtcDate } from 'src/app/types/utc-date';
 import { Result } from 'src/app/types/result';
+import { FirebaseFunctionResult } from 'src/app/modules/firebase-api/types/firebase-function-result';
 
 @Component({
     providers: [
@@ -38,7 +39,7 @@ export class EditingOccupancyPage {
 
     public Location = Occupancy.Location;
 
-    public fetchedOccupancies: Result<Occupancy[]> | null = null;
+    public fetchedOccupancies: FirebaseFunctionResult<Occupancy[]> | null = null;
 
     public activeDate = new Date();
 

@@ -9,5 +9,5 @@ export interface FirebaseFunctionError extends Error {
     stack?: string;
 }
 
-export type ResultType<T> = Result<T, FirebaseFunctionError>;
+export type FirebaseFunctionResult<T> = Result<T, FirebaseFunctionError>;
 

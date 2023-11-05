@@ -5,7 +5,7 @@ import { FirebaseApiService } from 'src/app/modules/firebase-api/services/fireba
 import { StyleConfigService } from 'src/app/services/style-config.service';
 import { Title } from '@angular/platform-browser';
 import { TrackBy } from 'src/app/types/track-by';
-import { Result } from 'src/app/types/result';
+import { FirebaseFunctionResult } from 'src/app/modules/firebase-api/types/firebase-function-result';
 
 @Component({
     selector: 'pages-all-reports',
@@ -17,7 +17,7 @@ export class AllReportsPage implements OnInit {
 
     public Report = Report;
 
-    public fetchedReports: Result<(Report & { groupId: ReportGroupId })[]> | null = null;
+    public fetchedReports: FirebaseFunctionResult<(Report & { groupId: ReportGroupId })[]> | null = null;
 
     public constructor(
         public readonly titleService: Title,

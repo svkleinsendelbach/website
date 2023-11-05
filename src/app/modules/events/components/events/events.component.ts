@@ -5,8 +5,8 @@ import { FirebaseApiService } from 'src/app/modules/firebase-api/services/fireba
 import { StyleConfigService } from '../../../../services/style-config.service';
 import { TrackBy } from 'src/app/types/track-by';
 import { UtcDate } from 'src/app/types/utc-date';
-import { Result } from 'src/app/types/result';
 import { mapRecord } from 'src/app/types/record-array';
+import { FirebaseFunctionResult } from 'src/app/modules/firebase-api/types/firebase-function-result';
 
 @Component({
     selector: 'events',
@@ -20,7 +20,7 @@ export class EventsComponent implements OnInit {
 
     public EventGroupId = EventGroupId;
 
-    public fetchedEventGroups: Result<EventGroup[]> | null = null;
+    public fetchedEventGroups: FirebaseFunctionResult<EventGroup[]> | null = null;
 
     public expandedGroupId: EventGroupId | null = null;
 

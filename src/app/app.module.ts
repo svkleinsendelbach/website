@@ -90,6 +90,8 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { NewsletterModule } from './modules/newsletter/newsletter.module';
 import { EditingNewsletterPage } from './pages/editing/newsletter/editing-newsletter.page';
 import { EditNewsletterPage } from './pages/editing/newsletter/edit-newsletter/edit-newsletter.page';
+import { NewsletterOverviewPage } from './pages/newsletter/overview/newsletter-overview.page';
+import { NewsletterPage } from './pages/newsletter/newsletter/newsletter.page';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -131,6 +133,8 @@ import { EditNewsletterPage } from './pages/editing/newsletter/edit-newsletter/e
         LoginPage,
         LoginPageComponent,
         ManagersPage,
+        NewsletterOverviewPage,
+        NewsletterPage,
         PageNotFoundPage,
         PrivacyPage,
         RequestPage,

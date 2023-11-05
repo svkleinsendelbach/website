@@ -1,4 +1,4 @@
-interface IResult<Content, Failure extends Error = Error> {
+interface IResult<Content, Failure = never> {
     value: Content | null;
     error: Failure | null;
 
@@ -8,11 +8,11 @@ interface IResult<Content, Failure extends Error = Error> {
     get(): Content;
 
     map<NewContent>(mapper: (value: Content) => NewContent): IResult<NewContent, Failure>;
-    mapError<NewFailure extends Error>(mapper: (error: Failure) => NewFailure): IResult<Content, NewFailure>;
+    mapError<NewFailure>(mapper: (error: Failure) => NewFailure): IResult<Content, NewFailure>;
     mapResult<T>(mapSuccess: (value: Content) => T, mapFailure: (error: Failure) => T): T;
 }
 
-export type Result<Content, Failure extends Error = Error> = Result.Success<Content> | Result.Failure<Failure>;
+export type Result<Content, Failure = never> = Result.Success<Content> | Result.Failure<Failure>;
 
 export namespace Result {
     export class Success<Content> implements IResult<Content, never> {
@@ -47,7 +47,7 @@ export namespace Result {
         }
     }
 
-    export class Failure<Failure extends Error = Error> implements IResult<never, Failure> {
+    export class Failure<Failure = never> implements IResult<never, Failure> {
         public readonly value = null;
 
         public constructor(
@@ -70,7 +70,7 @@ export namespace Result {
             return this;
         }
 
-        public mapError<NewFailure extends Error>(mapper: (error: Failure) => NewFailure): Result.Failure<NewFailure> {
+        public mapError<NewFailure>(mapper: (error: Failure) => NewFailure): Result.Failure<NewFailure> {
             return new Result.Failure(mapper(this.error));
         }
 
@@ -79,7 +79,7 @@ export namespace Result {
         }
     }
 
-    export function fromObject<Content, Failure extends Error>(object: { state: 'success'; value: Content } | { state: 'failure'; error: Failure }): Result<Content, Failure> {
+    export function fromObject<Content, Failure>(object: { state: 'success'; value: Content } | { state: 'failure'; error: Failure }): Result<Content, Failure> {
         if (object.state === 'success')
             return Result.success(object.value);
         return Result.failure(object.error);
@@ -92,7 +92,7 @@ export namespace Result {
         return new Result.Success(value);
     }
 
-    export function failure<Failure extends Error>(error: Failure): Result.Failure<Failure> {
+    export function failure<Failure>(error: Failure): Result.Failure<Failure> {
         return new Result.Failure(error);
     }
 }

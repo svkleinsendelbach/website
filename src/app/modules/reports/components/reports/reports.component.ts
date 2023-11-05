@@ -3,7 +3,7 @@ import { Report, ReportGroupId } from 'src/app/types/report';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { FirebaseApiService } from 'src/app/modules/firebase-api/services/firebase-api.service';
 import { TrackBy } from 'src/app/types/track-by';
-import { Result } from 'src/app/types/result';
+import { FirebaseFunctionResult } from 'src/app/modules/firebase-api/types/firebase-function-result';
 
 @Component({
     selector: 'reports',
@@ -17,7 +17,7 @@ export class ReportsComponent implements OnInit {
 
     public TrackBy = TrackBy;
 
-    public fetchedReports: Result<{ reports: Report[]; hasMore: boolean }> | null = null;
+    public fetchedReports: FirebaseFunctionResult<{ reports: Report[]; hasMore: boolean }> | null = null;
 
     public constructor(
         private readonly firebaseApiService: FirebaseApiService,

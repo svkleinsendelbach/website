@@ -15,6 +15,10 @@ export namespace Link {
         return new Link(title, `/${path}`, false);
     }
 
+    export function internalParam<InternalPath extends string>(title: string, path: InternalPath, param: string): Link {
+        return new Link(title, `/${path}/${param}`, false);
+    }
+
     export function external(title: string, link: string, openInNewTab: boolean = true): Link {
         return new Link(title, link, openInNewTab);
     }

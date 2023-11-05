@@ -37,7 +37,8 @@ const internalLinkPathTitles = {
     'sponsoren': 'Unsere Sponsoren',
     'sportheim': 'Sportheim',
     'tanzen': 'Tanzen',
-    'über-uns': 'Über uns'
+    'über-uns': 'Über uns',
+    'newsletter': 'Alle Newsletter'
 } satisfies Record<string, string>;
 
 export type InternalLinkPath = keyof typeof internalLinkPathTitles;

@@ -291,7 +291,7 @@ export class EditNewsletterPage implements OnInit {
             return;
         }
         this.titlePageInputForm.status = 'loading';
-        const newsletterId = this.previousNewsletter ? this.previousNewsletter.id : `${this.titlePageInputForm.field('year').value}-${Newsletter.Month.title[this.titlePageInputForm.field('month').value]}`;
+        const newsletterId = this.previousNewsletter ? this.previousNewsletter.id : `${this.titlePageInputForm.field('year').value}-${Newsletter.Month.title[this.titlePageInputForm.field('month').value]}`.toLowerCase();
         const result = await this.firebaseApiService.function('newsletter-edit').call({
             editType: this.previousNewsletter ? 'change' : 'add',
             newsletter: Newsletter.flatten(this.newsletter),

@@ -1,0 +1,37 @@
+<text-section
+    title="Alle Newsletter"
+>
+    <p
+        *ngIf="!fetchedNewsletter"
+        class="text center large primaryColor"
+    >Newsletter werden geladen</p>
+    <p
+        *ngIf="fetchedNewsletter && fetchedNewsletter.isFailure()"
+        class="text center large primaryColor"
+    >Newsletter konnten nicht geladen werden</p>
+    <p
+    *ngIf="fetchedNewsletter && fetchedNewsletter.isSuccess() && fetchedNewsletter.value.length === 0"
+        class="text center large primaryColor"
+    >Keine Newsletter</p>
+    <div
+        class="container"
+        [ngClass]="deviceType.current"
+    >
+        <a
+            *ngFor="let newsletter of fetchedNewsletter && fetchedNewsletter.isSuccess() ? fetchedNewsletter.value : []; trackBy: TrackBy.id"
+            class="newsletter"
+            [link]="newsletterLink(newsletter)"
+        >
+            <div
+                class="title-container"
+            >
+                <p
+                    class="title textColor"
+                >{{ newsletter.title }} | {{ Month.title[newsletter.month] }} {{ newsletter.year }}</p>
+                <p
+                    class="description secondaryColor"
+                >{{ newsletter.description }}</p>
+            </div>
+        </a>
+    </div>
+</text-section>

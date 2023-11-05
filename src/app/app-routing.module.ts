@@ -39,6 +39,8 @@ import { StatutePage } from './pages/about-us/statute/statute.page';
 import { SponsorsPage } from './pages/about-us/sponsors/sponsors.page';
 import { EditingNewsletterPage } from './pages/editing/newsletter/editing-newsletter.page';
 import { EditNewsletterPage } from './pages/editing/newsletter/edit-newsletter/edit-newsletter.page';
+import { NewsletterOverviewPage } from './pages/newsletter/overview/newsletter-overview.page';
+import { NewsletterPage } from './pages/newsletter/newsletter/newsletter.page';
 
 export const internalRoutes: Record<InternalLinkPath, Type<unknown>> = {
     'anfahrt': DrivePage,
@@ -76,7 +78,8 @@ export const internalRoutes: Record<InternalLinkPath, Type<unknown>> = {
     'sponsoren': SponsorsPage,
     'sportheim': SportshomePage,
     'tanzen': DancingPage,
-    'über-uns': ManagersPage
+    'über-uns': ManagersPage,
+    'newsletter': NewsletterOverviewPage
 };
 
 const routes: Routes = [
@@ -89,6 +92,10 @@ const routes: Routes = [
         path: entry[0],
         component: entry[1]
     })),
+    {
+        path: 'newsletter/:id',
+        component: NewsletterPage
+    },
     {
         path: '**',
         component: PageNotFoundPage
