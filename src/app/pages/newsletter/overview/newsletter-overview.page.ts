@@ -6,6 +6,7 @@ import { NewsletterGetAllFunctionType } from 'src/app/modules/firebase-api/types
 import { FunctionType } from 'src/app/modules/firebase-api/types/function-type';
 import { DeviceTypeService } from 'src/app/services/device-type.service';
 import { StyleConfigService } from 'src/app/services/style-config.service';
+import { internalLinks } from 'src/app/types/internal-link-path';
 import { Link } from 'src/app/types/link';
 import { Newsletter } from 'src/app/types/newletter';
 import { TrackBy } from 'src/app/types/track-by';
@@ -19,6 +20,10 @@ export class NewsletterOverviewPage implements OnInit {
     public TrackBy = TrackBy;
 
     public Month = Newsletter.Month;
+
+    public subscribeNewsletterLink = internalLinks['newsletter/anmelden'];
+
+    public unsubscribeNewsletterLink = internalLinks['newsletter/abmelden'];
 
     public fetchedNewsletter: FirebaseFunctionResult<FunctionType.ReturnType<NewsletterGetAllFunctionType>> | null = null;
 

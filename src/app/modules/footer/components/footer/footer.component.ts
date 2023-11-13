@@ -15,6 +15,7 @@ export class FooterComponent {
     public TrackBy = TrackBy;
 
     public links = [
+        internalLinks.newsletter,
         internalLinks.anfahrt,
         internalLinks.kontakt,
         internalLinks['kritik-vorschläge'],

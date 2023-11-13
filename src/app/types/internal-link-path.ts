@@ -39,7 +39,7 @@ const internalLinkPathTitles = {
     'sportheim': 'Sportheim',
     'tanzen': 'Tanzen',
     'über-uns': 'Über uns',
-    'newsletter': 'Alle Newsletter',
+    'newsletter': 'Newsletter',
     'newsletter/anmelden': 'Newsletter Anmeldung',
     'newsletter/abmelden': 'Newsletter Abmeldung'
 } satisfies Record<string, string>;
