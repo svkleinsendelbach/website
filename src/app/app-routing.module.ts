@@ -44,6 +44,7 @@ import { NewsletterPage } from './pages/newsletter/newsletter/newsletter.page';
 import { NewsletterSubscribePage } from './pages/newsletter/subscribe/newsletter-subscribe.page';
 import { NewsletterUnsubscribePage } from './pages/newsletter/unsubscribe/newsletter-unsubscribe.page';
 import { NewsletterUnsubscribeWithIdPage } from './pages/newsletter/unsubscribe-with-id/newsletter-unsubscribe-with-id.page';
+import { PublishNewsletterPage } from './pages/editing/newsletter/publish-newsletter/publish-newsletter.page';
 
 export const internalRoutes: Record<InternalLinkPath, Type<unknown>> = {
     'anfahrt': DrivePage,
@@ -59,6 +60,7 @@ export const internalRoutes: Record<InternalLinkPath, Type<unknown>> = {
     'bearbeiten/termine/bearbeiten': EditEventPage,
     'bearbeiten/newsletter': EditingNewsletterPage,
     'bearbeiten/newsletter/bearbeiten': EditNewsletterPage,
+    'bearbeiten/newsletter/veröffentlichen': PublishNewsletterPage,
     'berichte': AllReportsPage,
     'chroniken': ChroniclePage,
     'datenschutz': PrivacyPage,

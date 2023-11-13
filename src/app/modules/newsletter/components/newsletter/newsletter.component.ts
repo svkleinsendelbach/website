@@ -22,7 +22,7 @@ interface SocialMediaItem {
     styleUrls: ['./newsletter.component.sass'],
     templateUrl: './newsletter.component.html'
 })
-export class NewsletterComponent { // TODO: Abmelden
+export class NewsletterComponent {
     public TrackBy = TrackBy;
 
     public Month = Newsletter.Month;
@@ -142,12 +142,5 @@ export class NewsletterComponent { // TODO: Abmelden
             newList[newList.length - 1].push(item);
             return newList;
         }, []);
-    }
-
-    public absoluteUrl(relativeUrl: string): string {
-        const baseUrl = 'https://svkleinsendelbach-website.web.app';
-        if (relativeUrl.startsWith('/'))
-            return baseUrl + relativeUrl;
-        return `${baseUrl}/${relativeUrl}`;
     }
 }

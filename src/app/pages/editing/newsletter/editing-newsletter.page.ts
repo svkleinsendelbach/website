@@ -11,6 +11,7 @@ import { internalLinks } from 'src/app/types/internal-link-path';
 import { Newsletter } from 'src/app/types/newletter';
 import { FunctionType } from 'src/app/modules/firebase-api/types/function-type';
 import { NewsletterGetAllFunctionType } from 'src/app/modules/firebase-api/types/firebase-functions-types';
+import { UtcDate } from 'src/app/types/utc-date';
 
 @Component({
     selector: 'app-editing-newsletter',
@@ -30,6 +31,7 @@ export class EditingNewsletterPage {
         public readonly styleConfig: StyleConfigService,
         private readonly firebaseApiService: FirebaseApiService,
         private readonly sharedData: SharedDataService<{
+            publishNewsletter: { id: string; date: UtcDate; title: string; description: string; month: Newsletter.Month; year: number };
             editNewsletter: Newsletter;
         }>,
         private readonly router: Router
@@ -44,6 +46,11 @@ export class EditingNewsletterPage {
     public async addNewNewsletter() {
         this.sharedData.removeValue('editNewsletter');
         await this.router.navigateByUrl(internalLinks['bearbeiten/newsletter/bearbeiten'].link);
+    }
+
+    public async publishNewsletter(newsletter: { id: string; date: UtcDate; title: string; description: string; month: Newsletter.Month; year: number }) {
+        this.sharedData.setValue('publishNewsletter', newsletter);
+        await this.router.navigateByUrl(internalLinks['bearbeiten/newsletter/veröffentlichen'].link);
     }
 
     public async editNewsletter(id: string) {

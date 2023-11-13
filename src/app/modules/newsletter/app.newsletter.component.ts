@@ -11,7 +11,7 @@ import { FirebaseApiService } from '../firebase-api/services/firebase-api.servic
 export class AppNewsletterComponent implements OnInit {
     public fetchedNewsletter: FirebaseFunctionResult<Newsletter | null> | null = null;
 
-    public newsletterId = '2023-November';
+    public newsletterId = '2023-november';
 
     public constructor(
         private readonly firebaseApi: FirebaseApiService

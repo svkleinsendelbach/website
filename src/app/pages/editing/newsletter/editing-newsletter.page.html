@@ -33,6 +33,12 @@
             >{{ Month.title[newsletter.month] }} {{ newsletter.year }}</p>
             </div>
             <p
+                *ngIf="!newsletter.alreadyPublished"
+                class="publish-button primaryColor"
+                role="none"
+                (click)="$event.preventDefault(); $event.stopPropagation(); publishNewsletter(newsletter)"
+            >Veröffentlichen</p>
+            <p
                 class="edit-button primaryColor"
                 role="none"
                 (click)="$event.preventDefault(); $event.stopPropagation(); editNewsletter(newsletter.id)"

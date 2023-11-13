@@ -15,6 +15,7 @@ const internalLinkPathTitles = {
     'bearbeiten/termine/bearbeiten': 'Termin bearbeiten',
     'bearbeiten/newsletter': 'Newsletter bearbeiten',
     'bearbeiten/newsletter/bearbeiten': 'Newsletter bearbeiten',
+    'bearbeiten/newsletter/veröffentlichen': 'Newsletter veröffentlichen',
     'berichte': 'Alle Berichte',
     'chroniken': 'Chronik',
     'datenschutz': 'Datenschutz',

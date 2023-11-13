@@ -270,6 +270,7 @@ export class EditNewsletterPage implements OnInit {
         const newsletterId = this.previousNewsletter ? this.previousNewsletter.id : `${this.titlePageInputForm.field('year').value}-${Newsletter.Month.title[this.titlePageInputForm.field('month').value]}`.toLowerCase();
         return {
             id: newsletterId,
+            alreadyPublished: this.previousNewsletter ? this.previousNewsletter.alreadyPublished : false,
             date: this.previousNewsletter ? this.previousNewsletter.date : UtcDate.now,
             titlePage: {
                 title: this.titlePageInputForm.field('title').value,

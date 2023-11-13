@@ -52,7 +52,7 @@
                 <tr class="w100">
                     <td class="w20"></td>
                     <td class="w50">
-                        <a class="w100 align-center roboto fw-normal fs-normal link block background-primary color-secondary p-top5px p-bottom5px border-radius" href="https://www.svkleinsendelbach.de">www.svkleinsendelbach.de</a>
+                        <a class="w100 align-center roboto fw-normal fs-normal link block background-primary color-secondary p-top5px p-bottom5px border-radius" href="https://svkleinsendelbach-website.web.app">www.svkleinsendelbach-website.web.app</a>
                     </td>
                     <td class="w20"></td>
                 </tr>
@@ -63,13 +63,13 @@
             <tbody class="w100">
                 <tr class="w100">
                     <td class="w5"></td>
-                    <td class="w90 align-left roboto fw-normal fs-normal color-text">Wenn der Newsletter nicht richtig angezeigt wird, klicken Sie <a class="color-primary link" [href]="absoluteUrl('newsletter/' + newsletter.id)" title="Newsletter" target="_blank">hier</a>.</td>
+                    <td class="w90 align-left roboto fw-normal fs-normal color-text">Wenn der Newsletter nicht richtig angezeigt wird, klicken Sie <a class="color-primary link" [href]="'https://svkleinsendelbach-website.web.app/newsletter/' + newsletter.id" title="Newsletter" target="_blank">hier</a>.</td>
                     <td class="w5"></td>
                 </tr>
                 <tr class="w100 h75px"></tr>
             </tbody>
         </table>
-        <table class="w100">
+        <table class="w100" *ngIf="existsDepartmentsContent">
             <tbody class="w100">
                 <tr class="w100">
                     <td class="w5 background-primary"></td>
@@ -79,7 +79,7 @@
                 <tr class="w100 h75px"></tr>
             </tbody>
         </table>
-        <table class="w100">
+        <table class="w100" *ngIf="existsDepartmentsContent">
             <tbody class="w100">
                 <tr class="w100" *ngFor="let department of departments; trackBy: TrackBy.id">
                     <td class="w5"></td>
@@ -104,7 +104,7 @@
                                     </td>
                                 </tr>
                                 <tr class="w100">
-                                    <td class="w100 p-top15px"><a class="w100 roboto align-left fw-normal fs-normal link color-primary" [href]="absoluteUrl(Department.websiteLink[department.id].link)">Mehr lesen</a></td>
+                                    <td class="w100 p-top15px"><a class="w100 roboto align-left fw-normal fs-normal link color-primary" [href]="'https://svkleinsendelbach-website.web.app' + Department.websiteLink[department.id].link">Mehr lesen</a></td>
                                 </tr>
                                 <tr class="w100 h75px" *ngIf="department.id !== departments[departments.length - 1].id"></tr>
                                 <tr class="w100">
@@ -119,7 +119,7 @@
                 <tr class="w100 h75px"></tr>
             </tbody>
         </table>
-        <table class="w100">
+        <table class="w100" *ngIf="existsEventsContent">
             <tbody class="w100">
                 <tr class="w100">
                     <td class="w5 background-primary"></td>
@@ -129,7 +129,7 @@
                 <tr class="w100 h75px"></tr>
             </tbody>
         </table>
-        <table class="w100">
+        <table class="w100" *ngIf="existsEventsContent">
             <tbody class="w100">
                 <tr class="w100" *ngFor="let eventGroup of eventGroups; trackBy: TrackBy.id">
                     <td class="w5"></td>
@@ -188,7 +188,7 @@
                             <tbody class="w100">
                                 <tr class="w100">
                                     <td class="w100 align-center p-top25px">
-                                        <img class="h100px" [src]="absoluteUrl(socialMediaItem.image)" [alt]="socialMediaItem.name">
+                                        <img class="h100px" [src]="'https://svkleinsendelbach-website.web.app/' + socialMediaItem.image" [alt]="socialMediaItem.name">
                                     </td>
                                 </tr>
                                 <tr class="w100">
@@ -234,6 +234,7 @@
                     </td>
                     <td class="w5"></td>
                 </tr>
+                <tr class="w100 h75px" *ngIf="sponsors.mainSponsors"></tr>
                 <tr class="w100">
                     <td class="w5"></td>
                     <td class="w90">
@@ -244,7 +245,7 @@
                                         <table class="w100">
                                             <tbody class="w100">
                                                 <tr class="w100">
-                                                    <td class="w100"><img class="w100 align-center" [src]="absoluteUrl(sponsor.logoSrc)" [alt]="sponsor.name"></td>
+                                                    <td class="w100"><img class="w100 align-center" [src]="'https://svkleinsendelbach-website.web.app/' + sponsor.logoSrc" [alt]="sponsor.name"></td>
                                                 </tr>
                                                 <tr class="w100">
                                                     <td class="w100 roboto align-center fw-light fs-small color-text">{{ sponsor.name }}</td>
@@ -280,6 +281,7 @@
                     </td>
                     <td class="w5"></td>
                 </tr>
+                <tr class="w100 h75px" *ngIf="sponsors.premiumSponsors"></tr>
                 <tr class="w100">
                     <td class="w5"></td>
                     <td class="w90">
@@ -290,7 +292,7 @@
                                         <table class="w100">
                                             <tbody class="w100">
                                                 <tr class="w100">
-                                                    <td class="w100"><img class="w100 align-center" [src]="absoluteUrl(sponsor.logoSrc)" [alt]="sponsor.name"></td>
+                                                    <td class="w100"><img class="w100 align-center" [src]="'https://svkleinsendelbach-website.web.app/' + sponsor.logoSrc" [alt]="sponsor.name"></td>
                                                 </tr>
                                                 <tr class="w100">
                                                     <td class="w100 roboto align-center fw-light fs-small color-text">{{ sponsor.name }}</td>
@@ -326,6 +328,7 @@
                     </td>
                     <td class="w5"></td>
                 </tr>
+                <tr class="w100 h75px" *ngIf="sponsors.partners"></tr>
                 <tr class="w100">
                     <td class="w5"></td>
                     <td class="w90">
@@ -336,7 +339,7 @@
                                         <table class="w100">
                                             <tbody class="w100">
                                                 <tr class="w100">
-                                                    <td class="w100"><img class="w100 align-center" [src]="absoluteUrl(sponsor.logoSrc)" [alt]="sponsor.name"></td>
+                                                    <td class="w100"><img class="w100 align-center" [src]="'https://svkleinsendelbach-website.web.app/' + sponsor.logoSrc" [alt]="sponsor.name"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -350,6 +353,15 @@
                     </td>
                     <td class="w5"></td>
                 </tr>
+                <tr class="w100 h75px" *ngIf="sponsors.partners"></tr>
+            </tbody>
+        </table>
+        <table class="w100">
+            <tbody class="w100">
+                <tr class="w100">
+                    <td class="w100 align-block roboto fw-normal fs-normal color-text">Sie möchten unseren Newsletter abbestellen? Folgen Sie dem <a class="link color-primary" href="https://svkleinsendelbach-website.web.app/newsletter/abmelden/%newsletter-subscriber-id%">Link</a> um sich automatisch abzumelden. Sie können sich jederzeit auf unserer Website wieder für den Newsletter anmelden.</td>
+                </tr>
+                <tr class="w100 h25px" *ngIf="sponsors.partners"></tr>
             </tbody>
         </table>
     </tbody>

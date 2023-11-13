@@ -95,6 +95,7 @@ import { NewsletterPage } from './pages/newsletter/newsletter/newsletter.page';
 import { NewsletterSubscribePage } from './pages/newsletter/subscribe/newsletter-subscribe.page';
 import { NewsletterUnsubscribePage } from './pages/newsletter/unsubscribe/newsletter-unsubscribe.page';
 import { NewsletterUnsubscribeWithIdPage } from './pages/newsletter/unsubscribe-with-id/newsletter-unsubscribe-with-id.page';
+import { PublishNewsletterPage } from './pages/editing/newsletter/publish-newsletter/publish-newsletter.page';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -143,6 +144,7 @@ import { NewsletterUnsubscribeWithIdPage } from './pages/newsletter/unsubscribe-
         NewsletterUnsubscribeWithIdPage,
         PageNotFoundPage,
         PrivacyPage,
+        PublishNewsletterPage,
         RequestPage,
         SecondTeamPage,
         SocialMediaLinksComponent,

@@ -163,6 +163,7 @@ export type NewsletterEditFunctionType = FunctionType<{
 
 export type NewsletterGetAllFunctionType = FunctionType<Record<string, never>, {
     id: string;
+    alreadyPublished: boolean;
     date: string;
     title: string;
     description: string;
@@ -170,6 +171,7 @@ export type NewsletterGetAllFunctionType = FunctionType<Record<string, never>, {
     year: number;
 }[], {
     id: string;
+    alreadyPublished: boolean;
     date: UtcDate;
     title: string;
     description: string;
@@ -199,10 +201,11 @@ export namespace NewsletterGetFunctionType {
     }
 }
 
-export type NewsletterSubscriptionGetAllFunctionType = FunctionType<Record<string, never>, {
+export type NewsletterPublishFunctionType = FunctionType<{
     id: string;
-    email: string;
-}[]>;
+    html: string;
+}, void>;
+
 
 export type NewsletterSubscriptionSubscribeFunctionType = FunctionType<{
     email: string;

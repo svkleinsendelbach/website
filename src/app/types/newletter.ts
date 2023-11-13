@@ -6,6 +6,7 @@ import { UtcDate } from './utc-date';
 
 export type Newsletter = {
     id: string;
+    alreadyPublished: boolean;
     date: UtcDate;
     titlePage: {
         title: string;
@@ -80,6 +81,7 @@ export namespace Newsletter {
 
     export interface Flatten {
         id: string;
+        alreadyPublished: boolean;
         date: string;
         titlePage: {
             title: string;
@@ -107,6 +109,7 @@ export namespace Newsletter {
     export function flatten(newsletter: Newsletter | Omit<Newsletter, 'id'>): Newsletter.Flatten | Omit<Newsletter.Flatten, 'id'> {
         return {
             ...'id' in newsletter ? { id: newsletter.id } : {},
+            alreadyPublished: newsletter.alreadyPublished,
             date: newsletter.date.encoded,
             titlePage: newsletter.titlePage,
             departments: newsletter.departments,
@@ -127,6 +130,7 @@ export namespace Newsletter {
     export function concrete(newsletter: Newsletter.Flatten | Omit<Newsletter.Flatten, 'id'>): Newsletter | Omit<Newsletter, 'id'> {
         return {
             ...'id' in newsletter ? { id: newsletter.id } : {},
+            alreadyPublished: newsletter.alreadyPublished,
             date: UtcDate.decode(newsletter.date),
             titlePage: newsletter.titlePage,
             departments: newsletter.departments,

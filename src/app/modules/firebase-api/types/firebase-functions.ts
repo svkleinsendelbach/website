@@ -10,7 +10,7 @@ import {
     NewsletterEditFunctionType,
     NewsletterGetAllFunctionType,
     NewsletterGetFunctionType,
-    NewsletterSubscriptionGetAllFunctionType,
+    NewsletterPublishFunctionType,
     NewsletterSubscriptionSubscribeFunctionType,
     NewsletterSubscriptionUnsubscribeFunctionType,
     OccupancyEditFunctionType,
@@ -50,7 +50,7 @@ export interface FirebaseFunctions {
     'newsletter-get': NewsletterGetFunctionType;
     'newsletter-getAll': NewsletterGetAllFunctionType;
     'newsletter-edit': NewsletterEditFunctionType;
-    'newsletter-subscription-getAll': NewsletterSubscriptionGetAllFunctionType;
+    'newsletter-publish': NewsletterPublishFunctionType;
     'newsletter-subscription-subscribe': NewsletterSubscriptionSubscribeFunctionType;
     'newsletter-subscription-unsubscribe': NewsletterSubscriptionUnsubscribeFunctionType;
 }
@@ -82,7 +82,7 @@ export const firebaseFunctionMapResultValues: { [Key in keyof FirebaseFunctions]
     'newsletter-get': NewsletterGetFunctionType.mapReturnValue,
     'newsletter-getAll': NewsletterGetAllFunctionType.mapReturnValue,
     'newsletter-edit': identity,
-    'newsletter-subscription-getAll': identity,
+    'newsletter-publish': identity,
     'newsletter-subscription-subscribe': identity,
     'newsletter-subscription-unsubscribe': identity
 };
