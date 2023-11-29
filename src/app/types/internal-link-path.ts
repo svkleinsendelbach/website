@@ -39,6 +39,7 @@ const internalLinkPathTitles = {
     'sportheim': 'Sportheim',
     'tanzen': 'Tanzen',
     'über-uns': 'Über uns',
+    'förderverein': 'Förderverein',
     'newsletter': 'Newsletter',
     'newsletter/anmelden': 'Newsletter Anmeldung',
     'newsletter/abmelden': 'Newsletter Abmeldung'

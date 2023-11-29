@@ -45,6 +45,7 @@ import { NewsletterSubscribePage } from './pages/newsletter/subscribe/newsletter
 import { NewsletterUnsubscribePage } from './pages/newsletter/unsubscribe/newsletter-unsubscribe.page';
 import { NewsletterUnsubscribeWithIdPage } from './pages/newsletter/unsubscribe-with-id/newsletter-unsubscribe-with-id.page';
 import { PublishNewsletterPage } from './pages/editing/newsletter/publish-newsletter/publish-newsletter.page';
+import { SupportAssociationPage } from './pages/about-us/support-association/support-association.page';
 
 export const internalRoutes: Record<InternalLinkPath, Type<unknown>> = {
     'anfahrt': DrivePage,
@@ -84,6 +85,7 @@ export const internalRoutes: Record<InternalLinkPath, Type<unknown>> = {
     'sportheim': SportshomePage,
     'tanzen': DancingPage,
     'über-uns': ManagersPage,
+    'förderverein': SupportAssociationPage,
     'newsletter': NewsletterOverviewPage,
     'newsletter/anmelden': NewsletterSubscribePage,
     'newsletter/abmelden': NewsletterUnsubscribePage

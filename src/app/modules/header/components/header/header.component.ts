@@ -28,7 +28,7 @@ export class HeaderComponent {
                 { topItem: 'home' },
                 {
                     topItem: 'über-uns',
-                    subItems: ['über-uns', 'sportheim', 'onlineshop', 'chroniken', 'satzung', 'sponsoren', 'datenschutz', 'mitgliedsantrag']
+                    subItems: ['über-uns', 'sportheim', 'onlineshop', 'chroniken', 'satzung', 'sponsoren', 'förderverein', 'datenschutz', 'mitgliedsantrag']
                 },
                 {
                     topItem: 'fussball/herren',
@@ -50,7 +50,7 @@ export class HeaderComponent {
                 },
                 {
                     topItem: 'über-uns',
-                    subItems: ['über-uns', 'sportheim', 'onlineshop', 'chroniken', 'satzung', 'sponsoren', 'datenschutz', 'mitgliedsantrag']
+                    subItems: ['über-uns', 'sportheim', 'onlineshop', 'chroniken', 'satzung', 'sponsoren', 'förderverein', 'datenschutz', 'mitgliedsantrag']
                 },
                 {
                     topItem: 'fussball/herren',
@@ -72,7 +72,7 @@ export class HeaderComponent {
                 },
                 {
                     topItem: 'über-uns',
-                    subItems: ['über-uns', 'sportheim', 'onlineshop', 'chroniken', 'satzung', 'sponsoren', 'datenschutz', 'mitgliedsantrag']
+                    subItems: ['über-uns', 'sportheim', 'onlineshop', 'chroniken', 'satzung', 'sponsoren', 'förderverein', 'datenschutz', 'mitgliedsantrag']
                 },
                 {
                     topItem: 'fussball/herren',

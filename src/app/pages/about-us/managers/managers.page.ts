@@ -49,6 +49,12 @@ export class ManagersPage {
             title: 'Satzung'
         },
         {
+            id: 'support-association',
+            link: 'förderverein',
+            subtitle: 'Förderverein Sport Kleinsendelbach e.V.',
+            title: 'Förderverein'
+        },
+        {
             id: 'sponsors',
             link: 'sponsoren',
             subtitle: 'Die Sponsoren des SV Kleinsendelbach',

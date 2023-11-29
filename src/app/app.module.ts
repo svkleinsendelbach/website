@@ -96,6 +96,7 @@ import { NewsletterSubscribePage } from './pages/newsletter/subscribe/newsletter
 import { NewsletterUnsubscribePage } from './pages/newsletter/unsubscribe/newsletter-unsubscribe.page';
 import { NewsletterUnsubscribeWithIdPage } from './pages/newsletter/unsubscribe-with-id/newsletter-unsubscribe-with-id.page';
 import { PublishNewsletterPage } from './pages/editing/newsletter/publish-newsletter/publish-newsletter.page';
+import { SupportAssociationPage } from './pages/about-us/support-association/support-association.page';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -151,7 +152,8 @@ import { PublishNewsletterPage } from './pages/editing/newsletter/publish-newsle
         SponsorComponent,
         SponsorsPage,
         SportshomePage,
-        StatutePage
+        StatutePage,
+        SupportAssociationPage
     ],
     imports: [
         AngularFireAnalyticsModule,
