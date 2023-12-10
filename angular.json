@@ -52,7 +52,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.sass",
+              "node_modules/angular-calendar/css/angular-calendar.css"
             ],
             "scripts": []
           },
@@ -70,7 +71,13 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/app/environment/environment.ts",
+                  "with": "src/app/environment/environment.prod.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,
@@ -112,9 +119,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.sass",
+              "node_modules/angular-calendar/css/angular-calendar.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "fileReplacements": [
+              {
+                "replace": "src/app/environment/environment.ts",
+                "with": "src/app/environment/environment.prod.ts"
+              }
+            ]
           }
         },
         "lint": {
@@ -125,6 +139,23 @@
               "src/**/*.html"
             ]
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "website:build:production",
+              "serveTarget": "website:serve:production"
+            },
+            "development": {
+              "buildTarget": "website:build:development",
+              "serveTarget": "website:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

@@ -42,5 +42,9 @@ testem.log
 Thumbs.db
 
 /package-lock.json
-/src/app/environment/environment.ts
-/src/app/environment/environment.*.ts
+/src/app/environment/environment*.ts
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json

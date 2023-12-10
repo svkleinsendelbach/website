@@ -1,7 +1,7 @@
 import { FirebaseOptions } from '@angular/fire/app';
 import { CryptionKeys, DatabaseType, VerboseType } from 'kleinsendelbach-website-library';
 
-export interface IEnvironment {
+export type Environment = {
     firebase: FirebaseOptions;
     googleMaps: {
         apiKey: string;

@@ -1,4 +1,4 @@
-const internalPathTitles = {
+export const internalPathTitles = {
     home: 'Startseite'
 } satisfies Record<string, string>;
 

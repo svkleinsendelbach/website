@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "svkleinsendelbach-website": {
+      "hosting": {
+        "website": [
+          "svkleinsendelbach-website"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "svkleinsendelbach-website"
+  }
+}

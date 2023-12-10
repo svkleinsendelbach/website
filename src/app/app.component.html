@@ -1,1 +1,10 @@
-<router-outlet></router-outlet>
+<header
+    [headerData]="headerData"
+></header>
+<router-outlet
+    [ngClass]="deviceType.current"
+/>
+<footer
+    [footerData]="footerData"
+></footer>
+<cookie-selector/>
