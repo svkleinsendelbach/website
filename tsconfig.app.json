@@ -9,12 +9,6 @@
     "src/main.ts"
   ],
   "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "src/**/*.spec.ts",
-    "src/app/modules/firebase-api/database-scheme.ts",
-    "src/app/modules/firebase-api/types/scheme-type.ts",
-    "src/app/modules/firebase-api/services/database-manager.service.ts"
+    "src/**/*.d.ts"
   ]
 }
