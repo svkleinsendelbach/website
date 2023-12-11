@@ -1,0 +1,111 @@
+<text-section
+    *ngIf="sponsorsData.main"
+    title="Unsere Hauptsponsoren"
+>
+    <sponsors
+        [sponsors]="sponsorsData.main"
+    />
+</text-section>
+<text-section
+    *ngIf="sponsorsData.normal"
+    title="Unsere Premiumsponsoren"
+>
+    <sponsors
+        [sponsors]="sponsorsData.normal"
+    />
+</text-section>
+<text-section
+    *ngIf="sponsorsData.small"
+    title="Weitere Partner"
+>
+    <sponsors
+        [sponsors]="sponsorsData.small"
+    />
+</text-section>
+<text-section
+    title="Sponsor werden"
+>
+    <p
+        class="text align-center"
+    >Möchten Sie auch Sponsor werden, schreiben Sie der Vorstandschaft unter <a
+        link="kontakt"
+        class="text"
+    >Kontakt</a>.</p>
+    <p
+        class="text align-center"
+    >Es ist auch ein Trikot- / Traininganzug-Sponsoring der Jugend Mannschaften möglich.</p>
+    <box-splitted
+        class="sponsoring"
+        title="Hauptsponsor"
+    >
+        <p
+            class="text color-secondary"
+        >- 4 Meter Bandenwerbung (ohne Herstellkosten)</p>
+        <p
+            class="text color-secondary"
+        >- Anzeige auf Homepage als Hauptsponsor</p>
+        <p
+            class="text color-secondary"
+        >- Anzeige im Newsletter als Hauptsponsor</p>
+        <p
+            class="text color-secondary"
+        >- Werbung auf unseren Social-Media-Kanälen</p>
+        <p
+            class="text margin-top color-primary"
+        >300,00 Euro pro Jahr</p>
+    </box-splitted>
+    <box-splitted
+        class="sponsoring"
+        title="Premiumsponsor"
+    >
+        <p
+            class="text color-secondary"
+        >- 2 Meter Bandenwerbung (ohne Herstellkosten)</p>
+        <p
+            class="text color-secondary"
+        >- Anzeige auf Homepage als Premiumsponsor</p>
+        <p
+            class="text color-secondary"
+        >- Anzeige im Newsletter als Premiumsponsor</p>
+        <p
+            class="text color-secondary"
+        >- Werbung auf unseren Social-Media-Kanälen</p>
+        <p
+            class="text margin-top color-primary"
+        >200,00 Euro pro Jahr</p>
+    </box-splitted>
+    <box-splitted
+        class="sponsoring"
+        title="Partner"
+    >
+        <p
+            class="text color-secondary"
+        >- Anzeige auf Homepage als Partner</p>
+        <p
+            class="text color-secondary"
+        >- Anzeige im Newsletter als Partner</p>
+        <p
+            class="text color-secondary"
+        >- Werbung auf unseren Social-Media-Kanälen</p>
+        <p
+            class="text margin-top color-primary"
+        >100,00 Euro pro Jahr</p>
+    </box-splitted>
+    <box-splitted
+        class="sponsoring"
+        title="Trikotsponsor"
+    >
+        <p
+            class="text color-secondary"
+        >- Anzeige auf Homepage als Premiumsponsor</p>
+        <p
+            class="text color-secondary"
+        >- Anzeige im Newsletter als Premiumsponsor</p>
+        <p
+            class="text color-secondary"
+        >- Werbung auf unseren Social-Media-Kanälen</p>
+        <p
+            class="text margin-top color-primary"
+        >Preis nach Absprache</p>
+    </box-splitted>
+</text-section>

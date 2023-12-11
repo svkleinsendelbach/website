@@ -1,7 +1,7 @@
 import { FooterData } from "kleinsendelbach-website-library";
-import { InternalPath } from "../types/internal-path";
+import { InternalPathKey } from "../types/internal-paths";
 
-export const footerConfig: FooterData<InternalPath> = {
+export const footerConfig: FooterData<InternalPathKey> = {
     appearanceChangerShown: true,
     copyright: '© Copyright 2024 SV Kleinsendelbach e.V.',
     editLink: null,

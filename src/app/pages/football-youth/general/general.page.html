@@ -1,0 +1,77 @@
+<text-section
+    title="Abteilung Jugendfußball"
+>
+    <p
+        class="text color-secondary"
+    >Liebe Besucher, Mitglieder, Kinder und Eltern,</p>
+    <p
+        class="text margin-top color-secondary"
+    >im Namen der Fußballjugend des SV Kleinsendelbach e.V. heiße ich Sie auf unserer Internetseite herzlich willkommen!</p>
+    <p
+        class="text margin-top color-secondary"
+    >Die Nachwuchsarbeit nimmt schon seit Jahren einen hohen Stellenwert bei unserem Verein ein und besitzt einen guten Ruf in und außerhalb der Gemeinde. Im Kleinfeldbereich, bis 11 Jahre, können wir alle drei Altersklassen besetzen.</p>
+    <p
+        class="text margin-top color-secondary"
+    >Im Großfeldbereich, U13, U15, U17 und U19, haben wir zu der Spielgemeinschaft 'Schwabachtal' zusammengeschlossen. Mit den Nachbarvereinen FC Dormitz, SV Hetzles, TSV Neunkirchen und FC Kalchreuth haben wir starke Partner gefunden, die wunderbar zusammen harmonieren. Durch diesen Zusammenschluss konnten Lücken in den einzelnen Altersklassen geschlossen und mit den ersten Mannschaften ein gewisses Liga-Niveau erreicht werden. Dadurch müssen talentierte Spieler nicht zwangsläufig zu größeren Vereinen wechseln und können somit ihre Fahrten zum Training kurz halten.</p>
+    <p
+        class="text margin-top color-secondary"
+    >Die Jugend liegt uns sehr am Herzen und deshalb möchten wir unsere Jugendarbeit erhalten, verstärken und für die Zukunft ausbauen sowie Perspektiven bieten.</p>
+</text-section>
+
+<text-section>
+    <links
+        [linksData]="linksData"
+    />
+</text-section>
+
+<text-section
+    title="Kontakt"
+>
+    <contacts
+        [contactsData]="contactsData"
+    />
+</text-section>
+
+<text-section>
+    <div
+        class="text-images"
+    >
+        <img
+            class="text-image"
+            src="assets/images/großfeld-jugend-mannschaft.jpg"
+            title="Großfeld Jugend"
+            alt="Großfeld Jugend"
+        >
+        <img
+            class="text-image"
+            src="assets/images/kleinfeld-jugend-mannschaft.jpg"
+            title="Kleinfeld Jugend"
+            alt="Kleinfeld Jugend"
+        >
+    </div>
+    <p
+        class="text align-center margin-top-large color-secondary"
+    >Viel Spaß beim Sport wünscht</p>
+    <p
+        class="text align-center color-primary"
+    >die Jugendabteilung</p>
+</text-section>
+
+<text-section
+    title="Aktuelle Berichte"
+>
+    <reports
+        [reportGroups]="reportGroups"
+        [reportGroupTitle]="reportGroupTitle"
+    />
+</text-section>
+
+<text-section
+    title="Kommende Termine"
+>
+    <events
+        [eventGroups]="eventGroups"
+        [eventGroupTitle]="eventGroupTitle"
+        [getCalendarSubscriptionLink]="getCalendarSubscriptionLink"
+    />
+</text-section>

@@ -1,0 +1,80 @@
+<text-section
+    title="Abteilung Herrenfußball"
+>
+    <p
+        class="text color-secondary"
+    >Die <a
+        link="football-adults/first-team"
+        class="text"
+    >1. Mannschaft</a> spielt als Spielgemeinschaft SG Kleinsendelbach / Hetzles in der A-Klasse 4 im Kreis Erlangen / Pegnitzgrund.</p>
+    <p
+        class="text color-secondary"
+    >Hier geht es zur <a
+        class="text"
+        href="http://sg-kh.de/sgkh-1-herren/"
+        target="_blank"
+        title="1. Mannschaft"
+    >Homepage</a> der 1. Mannschaft SG Kleinsendelbach / Hetzles.</p>
+    <p
+        class="text margin-top-large color-secondary"
+    >Die <a
+        link="football-adults/second-team"
+        class="text"
+    >2. Mannschaft</a> spielt als Spielgemeinschaft SG Kleinsendelbach / Hetzles 2 in der A-Klasse 9 im Kreis Erlangen / Pegnitzgrund.</p>
+    <p
+        class="text color-secondary"
+    >Hier geht es zur <a
+        class="text"
+        href="http://sg-kh.de/sgkh-2-herren/"
+        target="_blank"
+        title="2. Mannschaft"
+    >Homepage</a> der 2. Mannschaft SG Kleinsendelbach / Hetzles.</p>
+</text-section>
+
+<text-section>
+    <links
+        [linksData]="linksData"
+    />
+</text-section>
+
+<text-section
+    title="Kontakt"
+>
+    <contacts
+        [contactsData]="contactsData"
+    />
+</text-section>
+
+<text-section>
+    <img
+        class="text-image"
+        src="assets/images/herren-mannschaft.png"
+        title="Herrenabteilung"
+        alt="Herrenabteilung"
+    >
+    <p
+        class="text align-center margin-top-large color-secondary"
+    >Viel Spaß beim Sport wünscht</p>
+    <p
+        class="text align-center color-primary"
+    >die Herrenabteilung</p>
+</text-section>
+
+<text-section
+    title="Aktuelle Berichte"
+>
+    <reports
+        [reportGroups]="reportGroups"
+        [reportGroupTitle]="reportGroupTitle"
+    />
+</text-section>
+
+<text-section
+    title="Kommende Termine"
+>
+    <events
+        [eventGroups]="eventGroups"
+        [eventGroupTitle]="eventGroupTitle"
+        [getCalendarSubscriptionLink]="getCalendarSubscriptionLink"
+    />
+</text-section>

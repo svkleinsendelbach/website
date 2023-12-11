@@ -1,0 +1,90 @@
+<text-section
+    title="D-Jugend der SG Schwabachtal"
+>
+    <p
+        class="text color-secondary"
+    >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+    <p
+        class="text margin-top color-secondary"
+    >Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+</text-section>
+
+<text-section
+    title="Kontakt"
+>
+    <contacts
+        [contactsData]="contactsData"
+    />
+</text-section>
+
+<text-section
+    title="Kommende Termine"
+>
+    <events
+        [eventGroups]="eventGroups"
+        [eventGroupTitle]="eventGroupTitle"
+        [getCalendarSubscriptionLink]="getCalendarSubscriptionLink"
+    />
+</text-section>
+
+<text-section
+    title="Ergebnisse und Tabellen"
+>
+    <p
+        class="text large margin-bottom"
+    >Ergebnisse der D1:</p>
+    <bfv-widget
+        class="bfv-widget"
+        [teamId]="bfvWidgetTeamId1"
+    ></bfv-widget>
+    <p
+        class="text large margin-top-large margin-bottom"
+    >Ergebnisse der D2:</p>
+    <bfv-widget
+        class="bfv-widget"
+        [teamId]="bfvWidgetTeamId2"
+    ></bfv-widget>
+    <p
+    class="text large margin-top-large margin-bottom"
+    >Ergebnisse der D3:</p>
+    <bfv-widget
+        class="bfv-widget"
+        [teamId]="bfvWidgetTeamId3"
+    ></bfv-widget>
+    <p
+        class="text large margin-top-large margin-bottom"
+    >Ergebnisse der D4:</p>
+    <bfv-widget
+        class="bfv-widget"
+        [teamId]="bfvWidgetTeamId4"
+    ></bfv-widget>
+</text-section>
+
+<text-section
+    title="Aktuelle Berichte"
+>
+    <reports
+        [reportGroups]="reportGroups"
+        [reportGroupTitle]="reportGroupTitle"
+    />
+</text-section>
+
+<text-section
+    title="Trainingszeiten"
+>
+    <p
+        class="text align-center color-secondary"
+    >Das Training der D1 findet jeden Montag und Donnerstag von 18:00Uhr - 19:15Uhr in Hetzles statt.</p>
+    <p
+        class="text align-center margin-top color-secondary"
+    >Das Training der D2 und D3 findet jeden Montag und Freitag von 17:00Uhr - 18:30Uhr in Neunkirchen am Brand statt.</p>
+    <p
+        class="text align-center margin-top margin-bottom-large color-secondary"
+    >Das Training der D4 findet jeden Dienstag und Donnerstag von 17:15Uhr - 18:45Uhr in Hetzles statt.</p>
+    <maps
+        class="maps"
+        [apiKey]="googleMapsApiKey"
+        [options]="mapOptions"
+        [markers]="mapMarkers"
+    />
+</text-section>
