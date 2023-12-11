@@ -94,6 +94,14 @@ export const internalPaths = {
     contact: {
         title: 'Kontakt',
         path: 'kontakt'
+    },
+    criticism: {
+        title: 'Kritik und Vorschläge',
+        path: 'kritik'
+    },
+    impressum: {
+        title: 'Impressum',
+        path: 'impressum'
     }
 } satisfies Record<string, {
     title: string;

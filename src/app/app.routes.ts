@@ -26,6 +26,9 @@ import { GymnasticsPage } from './pages/gymnastics/gymnastics.page';
 import { DancingPage } from './pages/dancing/dancing.page';
 import { DrivePage } from './pages/drive/drive.page';
 import { ContactPage } from './pages/contact/contact.page';
+import { CriticsmPage } from './pages/criticsm/criticsm.page';
+import { PageNotFoundPage } from './pages/page-not-found/page-not-found.page';
+import { ImpressumPage } from './pages/impressum/impressum.page';
 
 const internalRoutes: Record<InternalPathKey, Type<unknown>> = {
     home: HomePage,
@@ -51,7 +54,9 @@ const internalRoutes: Record<InternalPathKey, Type<unknown>> = {
     gymnastics: GymnasticsPage,
     dancing: DancingPage,
     drive: DrivePage,
-    contact: ContactPage
+    contact: ContactPage,
+    criticism: CriticsmPage,
+    impressum: ImpressumPage
 }
 
 export const routes: Routes = [
@@ -63,5 +68,9 @@ export const routes: Routes = [
     ...entries(internalRoutes).map<Route>(({ key, value }) => ({
         path: internalPaths[key].path,
         component: value
-    }))
+    })),
+    {
+        path: '**',
+        component: PageNotFoundPage
+    }
 ];

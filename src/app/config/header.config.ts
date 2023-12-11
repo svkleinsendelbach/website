@@ -1,7 +1,7 @@
 import { HeaderData, Link } from "kleinsendelbach-website-library";
 import { InternalPathKey } from "../types/internal-paths";
 
-export const headerConfig: HeaderData<InternalPathKey | 'onlineshop', InternalPathKey> = {
+export const headerConfig: HeaderData<Exclude<InternalPathKey, 'criticism' | 'impressum'> | 'onlineshop', InternalPathKey> = {
     name: 'SV Kleinsendelbach',
     logoSrc: 'assets/images/svk-logo.svg',
     homeLink: 'home',

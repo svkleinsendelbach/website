@@ -1,0 +1,18 @@
+@import '../../../../node_modules/kleinsendelbach-website-library/styles/index'
+
+.image-link
+    @include flex-column(flex-start, center)
+    width: 100%
+    margin-top: 64px
+
+    .link
+        @include font($size: 'xlarge')
+        color: color('primary')
+        cursor: pointer
+        text-decoration: none
+        margin-bottom: 32px
+
+    .image
+        width: 100%
+        max-height: 500px
+

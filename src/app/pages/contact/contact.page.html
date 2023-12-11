@@ -11,8 +11,8 @@
         class="text align-center margin-top margin-bottom-large color-secondary"
     >Für Kritik und Vorschläge, benutzen Sie bitte dieses Formular: <a
         class="text"
-        link="home"
-    >Kritik und Vorschläge</a></p><!-- TODO: Link -->
+        link="criticism"
+    >Kritik und Vorschläge</a></p>
 
     <input-form
         [inputForm]="inputForm"
@@ -49,7 +49,7 @@
         >Jetzt beitreten</a></p>
         <p
             *ngIf="inputForm.field('answerOption').value === 'discord'"
-            class="text margin-bottom-small color-secondary"
+            class="text margin-bottom color-secondary"
         >Gebe in einen Text-Channel (z.B. <a
             class="text"
             href="https://discord.com/channels/1083387091423072419/1163097463549329508"
