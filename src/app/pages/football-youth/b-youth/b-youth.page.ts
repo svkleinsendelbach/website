@@ -21,8 +21,8 @@ export class BYouthPage {
 
     public contactsData: ContactsData = [
         contact('Trainer', 'andreas-lorenz'),
-        contact('Co-Trainer', 'lars-schmieder'),
-        contact('Co-Trainer', 'ulrich-gruetzner')
+        contact('Trainer', 'lars-schmieder'),
+        contact('Trainer', 'ulrich-gruetzner')
     ];
 
     public googleMapsApiKey =  environment.googleMaps.apiKey;

@@ -20,7 +20,7 @@ export class AYouthPage {
     public contactsData: ContactsData = [
         contact('Trainer', 'matthias-sitter'),
         contact('Trainer', 'jochen-holzenleuchter'),
-        contact('Co-Trainer', 'jannik-dressel')
+        contact('Trainer', 'jannik-dressel')
     ];
 
     public googleMapsApiKey =  environment.googleMaps.apiKey;

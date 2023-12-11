@@ -21,7 +21,7 @@ export class CYouthPage {
 
     public contactsData: ContactsData = [
         contact('Trainer C1', 'peter-hoefler'),
-        contact('Co-Trainer C1', 'steven-kellner'),
+        contact('Trainer C1', 'steven-kellner'),
         contact('Trainer C2', 'juergen-haas')
     ];
 

@@ -1,10 +1,11 @@
 import { Title } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { BannerComponent, BannerData, DeviceTypeService, EventGroup, EventsComponent, Link, LinkDirective, LinksComponent, LinksData, ReportsComponent, ReportGroup, SocialMediaComponent, SponsorsRowsComponent, TextSectionComponent } from 'kleinsendelbach-website-library';
+import { BannerComponent, DeviceTypeService, EventGroup, EventsComponent, Link, LinkDirective, LinksComponent, LinksData, ReportsComponent, ReportGroup, SocialMediaComponent, SponsorsRowsComponent, TextSectionComponent } from 'kleinsendelbach-website-library';
 import { InternalPathKey } from '../../types/internal-paths';
 import { sponsorsConfig } from '../../config/sponsors.config';
 import { socialMediaConfig } from '../../config/social-media.config';
+import { homeBannerConfig } from '../../config/home-banner.config';
 
 @Component({
     selector: 'home-page',
@@ -15,29 +16,7 @@ import { socialMediaConfig } from '../../config/social-media.config';
 })
 export class HomePage {
 
-    public bannerData: BannerData<InternalPathKey> = [
-        {
-            imageSource: 'assets/images/herren-mannschaft.png',
-            title: 'Herren Mannschaft',
-            subTitle: '1. und 2. Mannschaft 2019 / 2020',
-            link: Link.external('Google', 'https://google.com'), // TODO
-            isCurrent: false
-        },
-        {
-            imageSource: 'assets/images/kleinfeld-jugend-mannschaft.jpg',
-            title: 'Kleinfeld Jugend Mannschaft',
-            subTitle: 'E- bis G-Jugend',
-            link: Link.external('Google', 'https://google.com'), // TODO
-            isCurrent: false
-        },
-        {
-            imageSource: 'assets/images/großfeld-jugend-mannschaft.jpg',
-            title: 'Großfeld Jugend Mannschaft',
-            subTitle: 'A- bis D-Jugend',
-            link: Link.external('Google', 'https://google.com'), // TODO
-            isCurrent: false
-        }
-    ];
+    public bannerData = homeBannerConfig;
 
     public linksData: LinksData<InternalPathKey> = [
         {
@@ -66,6 +45,42 @@ export class HomePage {
             },
             title: 'Jugendfußball',
             subtitle: 'Ergebnisse und Tabellen der Jugendmannschaften des SV Kleinsendelbach'
+        },
+        {
+            link: 'gymnastics',
+            icon: {
+                name: 'user-group',
+                animation: 'jump'
+            },
+            title: 'Gymnastik',
+            subtitle: 'Gymnastikangebote beim SV Kleinsendelbach'
+        },
+        {
+            link: 'dancing',
+            icon: {
+                name: 'child-reaching',
+                animation: 'jump'
+            },
+            title: 'Tanzen',
+            subtitle: 'Tanzgruppen der Kinder'
+        },
+        {
+            link: 'drive',
+            icon: {
+                name: 'map',
+                animation: 'shake'
+            },
+            title: 'Anfahrt',
+            subtitle: 'Anfahrt zum Sportverein Kleinsendelbach'
+        },
+        {
+            link: 'contact',
+            icon: {
+                name: 'address-card',
+                animation: 'shake'
+            },
+            title: 'Kontakt',
+            subtitle: 'Kontakt zum SV Kleinsendelbach aufnehmen'
         }
     ];
 

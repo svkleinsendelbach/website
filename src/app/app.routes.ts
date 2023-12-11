@@ -22,6 +22,10 @@ import { DYouthPage } from './pages/football-youth/d-youth/d-youth.page';
 import { EYouthPage } from './pages/football-youth/e-youth/e-youth.page';
 import { FYouthPage } from './pages/football-youth/f-youth/f-youth.page';
 import { GYouthPage } from './pages/football-youth/g-youth/g-youth.page';
+import { GymnasticsPage } from './pages/gymnastics/gymnastics.page';
+import { DancingPage } from './pages/dancing/dancing.page';
+import { DrivePage } from './pages/drive/drive.page';
+import { ContactPage } from './pages/contact/contact.page';
 
 const internalRoutes: Record<InternalPathKey, Type<unknown>> = {
     home: HomePage,
@@ -43,7 +47,11 @@ const internalRoutes: Record<InternalPathKey, Type<unknown>> = {
     'football-youth/d-youth': DYouthPage,
     'football-youth/e-youth': EYouthPage,
     'football-youth/f-youth': FYouthPage,
-    'football-youth/g-youth': GYouthPage
+    'football-youth/g-youth': GYouthPage,
+    gymnastics: GymnasticsPage,
+    dancing: DancingPage,
+    drive: DrivePage,
+    contact: ContactPage
 }
 
 export const routes: Routes = [

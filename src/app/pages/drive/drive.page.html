@@ -1,0 +1,28 @@
+<text-section
+    title="Anfahrt zum Sportheim Kleinsendelbach"
+>
+    <p
+        class="text align-center color-secondary"
+    >Sportverein Kleinsendelbach e.V.</p>
+    <p
+        class="text align-center margin-top color-secondary"
+    >Hauptstraße 21</p>
+    <p
+        class="text align-center color-secondary"
+    >91077 Kleinsendelbach</p>
+    <a
+        class="text align-center margin-top margin-bottom-large"
+        href="tel:091268304"
+        title="Sportverein Kleinsendelbach e.V."
+    >
+        <fa-icon
+            icon="phone"
+        /> 09126 / 8304
+    </a>
+    <maps
+        class="maps"
+        [apiKey]="googleMapsApiKey"
+        [options]="mapOptions"
+        [markers]="mapMarkers"
+    />
+</text-section>

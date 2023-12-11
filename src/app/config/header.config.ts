@@ -89,6 +89,22 @@ export const headerConfig: HeaderData<InternalPathKey | 'onlineshop', InternalPa
         'football-youth/g-youth': {
             title: 'G-Jugend',
             link: 'football-youth/g-youth'
+        },
+        gymnastics: {
+            title: 'Gymnastik',
+            link: 'gymnastics'
+        },
+        dancing: {
+            title: 'Tanzen',
+            link: 'dancing'
+        },
+        drive: {
+            title: 'Anfahrt',
+            link: 'drive'
+        },
+        contact: {
+            title: 'Kontakt',
+            link: 'contact'
         }
     },
     sorting: {
@@ -110,11 +126,25 @@ export const headerConfig: HeaderData<InternalPathKey | 'onlineshop', InternalPa
                 key: 'football-youth',
                 title: 'Jugendfußball',
                 subItems: ['football-youth', 'football-youth/a-youth', 'football-youth/b-youth', 'football-youth/c-youth', 'football-youth/d-youth', 'football-youth/e-youth', 'football-youth/f-youth', 'football-youth/g-youth']
+            },
+            {
+                topItem: 'gymnastics'
+            },
+            {
+                topItem: 'dancing'
+            },
+            {
+                topItem: 'drive'
+            },
+            {
+                topItem: 'contact'
             }
         ],
         tablet: [
             {
-                topItem: 'home'
+                key: 'home',
+                title: 'Home',
+                subItems: ['home', 'drive', 'contact']
             },
             {
                 key: 'managers',
@@ -130,11 +160,18 @@ export const headerConfig: HeaderData<InternalPathKey | 'onlineshop', InternalPa
                 key: 'football-youth',
                 title: 'Jugendfußball',
                 subItems: ['football-youth', 'football-youth/a-youth', 'football-youth/b-youth', 'football-youth/c-youth', 'football-youth/d-youth', 'football-youth/e-youth', 'football-youth/f-youth', 'football-youth/g-youth']
+            },
+            {
+                key: 'gymnastics',
+                title: 'Gymnastik',
+                subItems: ['gymnastics', 'dancing']
             }
         ],
         mobile: [
             {
-                topItem: 'home'
+                key: 'home',
+                title: 'Home',
+                subItems: ['home', 'drive', 'contact']
             },
             {
                 key: 'managers',
@@ -150,6 +187,11 @@ export const headerConfig: HeaderData<InternalPathKey | 'onlineshop', InternalPa
                 key: 'football-youth',
                 title: 'Jugendfußball',
                 subItems: ['football-youth', 'football-youth/a-youth', 'football-youth/b-youth', 'football-youth/c-youth', 'football-youth/d-youth', 'football-youth/e-youth', 'football-youth/f-youth', 'football-youth/g-youth']
+            },
+            {
+                key: 'gymnastics',
+                title: 'Gymnastik',
+                subItems: ['gymnastics', 'dancing']
             }
         ]
     }

@@ -1,0 +1,74 @@
+<text-section
+  title="Kontakt zum SV Kleinsendelbach"
+>
+    <p
+        class="text align-center color-secondary"
+    >Bitte nehmen Sie Kontakt mit uns auf.</p>
+    <p
+        class="text align-center color-secondary"
+    >Wir werden Ihnen gerne antworten.</p>
+    <p
+        class="text align-center margin-top margin-bottom-large color-secondary"
+    >Für Kritik und Vorschläge, benutzen Sie bitte dieses Formular: <a
+        class="text"
+        link="home"
+    >Kritik und Vorschläge</a></p><!-- TODO: Link -->
+
+    <input-form
+        [inputForm]="inputForm"
+        submitButtonText="Abschicken"
+        (submitButtonClicked)="onSubmit()"
+    >
+        <input-field-text
+            label="Ihr Name"
+            [inputField]="inputForm.field('name')"
+        />
+        <input-field-inline-select
+            label="Antwortoption"
+            [selectOptions]="answerOptionSelectOptions"
+            [inputField]="inputForm.field('answerOption')"
+        />
+        <input-field-text
+            *ngIf="inputForm.field('answerOption').value === 'email'"
+            label="Ihre E-Mail Adresse"
+            [inputField]="inputForm.field('email')"
+        />
+        <input-field-text
+            *ngIf="inputForm.field('answerOption').value === 'whats-app-sms'"
+            label="Ihre Mobilfunknummer"
+            [inputField]="inputForm.field('phoneNumber')"
+        />
+        <p
+            *ngIf="inputForm.field('answerOption').value === 'discord'"
+            class="text margin-top color-secondary"
+        >Trete dem SV Kleinsendelbach Discord bei: <a
+            class="text"
+            href="https://discord.gg/gpJMrajz7q"
+            target="_blank"
+            title="Discord beitreten"
+        >Jetzt beitreten</a></p>
+        <p
+            *ngIf="inputForm.field('answerOption').value === 'discord'"
+            class="text margin-bottom-small color-secondary"
+        >Gebe in einen Text-Channel (z.B. <a
+            class="text"
+            href="https://discord.com/channels/1083387091423072419/1163097463549329508"
+            target="_blank"
+            title="Text-Channel 'allgemein'"
+        >allgemein</a>) den Befehl '/user' ein und kopiere deine Nutzer-ID.</p>
+        <input-field-text
+            *ngIf="inputForm.field('answerOption').value === 'discord'"
+            label="Ihre Discord Nutzer-ID"
+            [inputField]="inputForm.field('discordUserId')"
+        />
+        <input-field-select
+            label="Anfrage an"
+            [selectOptions]="receiverSelectOptions"
+            [inputField]="inputForm.field('receiver')"
+        />
+        <input-field-text-area
+            label="Ihre Nachricht"
+            [inputField]="inputForm.field('message')"
+        />
+    </input-form>
+</text-section>

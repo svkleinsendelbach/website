@@ -78,6 +78,22 @@ export const internalPaths = {
     'football-youth/g-youth': {
         title: 'G-Jugend',
         path: 'fussball/jugend/g-jugend'
+    },
+    gymnastics: {
+        title: 'Gymnastik',
+        path: 'gymnastik'
+    },
+    dancing: {
+        title: 'Tanzen',
+        path: 'tanzen'
+    },
+    drive: {
+        title: 'Anfahrt',
+        path: 'anfahrt'
+    },
+    contact: {
+        title: 'Kontakt',
+        path: 'kontakt'
     }
 } satisfies Record<string, {
     title: string;
