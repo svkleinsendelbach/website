@@ -1,0 +1,52 @@
+<text-section
+    *ngIf="state === 'loading'"
+    title="Authentifizierung wird überprüft"
+>
+    <p
+        class="text align-center color-secondary"
+    >Es wird überprüft, ob Sie berechtigt sind diese Seite zu besuchen.</p>
+</text-section>
+<text-section
+    *ngIf="state === 'alreadyLoggedIn'"
+    title="Authentifizierung bestätigt"
+>
+    <p
+        class="text align-center color-secondary"
+    >Sie konnten nicht automatisch weitergeleitet werden. Bitte nutzen Sie den Link:</p>
+    <a
+        class="text large align-center margin-top"
+        link="editing/main"
+    >Jetzt bearbeiten</a>
+</text-section>
+<text-section
+    *ngIf="state === 'login'"
+    title="Zum Bearbeiten anmelden"
+>
+    <login
+        (login)="handleRegistrationState($event)"
+    />
+</text-section>
+<text-section
+    *ngIf="state === 'requestAccess'"
+    title="Bearbeiten beantragen"
+>
+    <p
+        class="text align-center margin-bottom-large color-secondary"
+    >Du bist nicht registriert um zu bearbeiten. Um die Rechte dafür zu beantragen, gebe deinen Namen an und klicke auf 'Beantragen'. Dies kann einige Tage dauern. Ansonsten klicke auf 'Abbrechen'.</p>
+    <input-form
+        [inputForm]="requestAccessInputForm"
+        submitButtonText="Beantragen"
+        cancelButtonText="Abbrechen"
+        (cancelButtonClicked)="cancelRequestAccess()"
+        (submitButtonClicked)="requestAccess()"
+    >
+        <text-input
+            label="Ihr Vorname"
+            [inputField]="requestAccessInputForm.field('firstName')"
+        />
+        <text-input
+            label="Ihr Nachname"
+            [inputField]="requestAccessInputForm.field('lastName')"
+        />
+    </input-form>
+</text-section>

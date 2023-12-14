@@ -1,0 +1,22 @@
+@import '../../../../../../node_modules/kleinsendelbach-website-library/styles/index'
+
+.hint
+    @include font
+    padding: 5px 0
+    text-align: start
+    width: 97.5%
+
+.preview-message
+    @include flex-column(center, flex-start)
+    bottom: 20px
+    margin:
+        bottom: 20px
+        top: 10px
+    width: 100%
+
+    .preview-text
+        @include font
+        margin-bottom: 10px
+
+    .message-preview
+        @include markdown-container

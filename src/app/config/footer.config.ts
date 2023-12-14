@@ -4,7 +4,7 @@ import { InternalPathKey } from "../types/internal-paths";
 export const footerConfig: FooterData<InternalPathKey> = {
     appearanceChangerShown: true,
     copyright: '© Copyright 2024 SV Kleinsendelbach e.V.',
-    editLink: null,
+    editLink: 'editing/main',
     links: [
         {
             title: 'Anfahrt',

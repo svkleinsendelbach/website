@@ -102,6 +102,46 @@ export const internalPaths = {
     impressum: {
         title: 'Impressum',
         path: 'impressum'
+    },
+    'editing/login': {
+        title: 'Anmelden',
+        path: 'bearbeiten/anmelden'
+    },
+    'editing/main': {
+        title: 'Bearbeiten',
+        path: 'bearbeiten'
+    },
+    'editing/user-roles/edit': {
+        title: 'Benutzerollen',
+        path: 'bearbeiten/benutzerrollen/bearbeiten'
+    },
+    'editing/criticism/edit': {
+        title: 'Kritik und Vorschläge',
+        path: 'bearbeiten/kritik/bearbeiten'
+    },
+    'editing/occupancy': {
+        title: 'Belegungsplan',
+        path: 'bearbeiten/belegungsplan'
+    },
+    'editing/occupancy/edit': {
+        title: 'Belegungsplan',
+        path: 'bearbeiten/belegungsplan/bearbeiten'
+    },
+    'editing/events': {
+        title: 'Termine',
+        path: 'bearbeiten/termine'
+    },
+    'editing/events/edit': {
+        title: 'Termine',
+        path: 'bearbeiten/termine/bearbeiten'
+    },
+    'editing/reports': {
+        title: 'Berichte',
+        path: 'bearbeiten/berichte'
+    },
+    'editing/reports/edit': {
+        title: 'Berichte',
+        path: 'bearbeiten/berichte/bearbeiten'
     }
 } satisfies Record<string, {
     title: string;

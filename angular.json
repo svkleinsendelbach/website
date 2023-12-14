@@ -49,10 +49,16 @@
             "inlineStyleLanguage": "sass",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "input": "node_modules/kleinsendelbach-website-library/assets",
+                "glob": "**/*",
+                "output": "assets"
+              }
             ],
             "styles": [
               "src/styles.sass",
+              "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/angular-calendar/css/angular-calendar.css"
             ],
             "scripts": []

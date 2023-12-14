@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { InlineSelectComponent, InputError, InputField, InputForm, InputFormComponent, SelectOptions, TextAreaComponent, TextComponent, TextSectionComponent, Validator } from 'kleinsendelbach-website-library';
+import { FirebaseApiService, Guid, InlineSelectInputComponent, InputError, InputField, InputForm, InputFormComponent, SelectOptions, TextAreaInputComponent, TextInputComponent, TextSectionComponent, Validator } from 'kleinsendelbach-website-library';
 import { Criticism } from '../../types/criticism';
+import { FirebaseFunctions } from '../../types/firebase-functions';
 
 @Component({
     selector: 'criticsm-page',
     standalone: true,
-    imports: [CommonModule, TextSectionComponent, InputFormComponent, InlineSelectComponent, TextComponent, TextAreaComponent],
+    imports: [CommonModule, TextSectionComponent, InputFormComponent, InlineSelectInputComponent, TextInputComponent, TextAreaInputComponent],
     templateUrl: './criticsm.page.html',
     styleUrl: './criticsm.page.sass'
 })
@@ -30,7 +31,8 @@ export class CriticsmPage {
     });
 
     constructor(
-        private readonly titleService: Title
+        private readonly titleService: Title,
+        private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>
     ) {
         this.titleService.setTitle('Kritik und Vorschläge')
     }
@@ -43,6 +45,24 @@ export class CriticsmPage {
     }
 
     public async onSubmit() {
-        // TODO
+        if (this.inputForm.evaluate() === 'invalid')
+            return;
+        this.inputForm.status = 'loading';
+        const result = await this.firebaseApi.function('criticism-edit').call({
+            editType: 'add',
+            criticismId: Guid.newGuid().guidString,
+            criticism: {
+                type: this.inputForm.field('type').value,
+                title: this.inputForm.field('title').value,
+                description: this.inputForm.field('description').value,
+                workedOff: false
+            }
+        });
+        if (result.isSuccess()) {
+            this.inputForm.status = 'valid';
+            this.inputForm.reset();
+        } else {
+            this.inputForm.status = 'failed';
+        }
     }
 }

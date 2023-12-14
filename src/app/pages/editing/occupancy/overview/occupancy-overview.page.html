@@ -1,0 +1,24 @@
+<navigation-bar
+    [navigationBarData]="navigationBarData"
+/>
+<authentication-check
+    [roles]="['occupancyManager']"
+    loginLink="editing/login"
+    (onAuthentication)="getOccupancies()"
+>
+    <text-section
+        title="Belegungsplan"
+    >
+        <button
+            class="add-new-button"
+            actionLink="editing/occupancy/edit"
+            (action)="clearSharedData()"
+            [prominent]="true"
+        >Neues Event hinzufügen</button>
+        <calendar
+            *ngIf="occupanciesResult && occupanciesResult.isSuccess()"
+            [events]="events(occupanciesResult.value)"
+            [columns]="calendarColumns"
+        />
+    </text-section>
+</authentication-check>

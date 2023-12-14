@@ -9,15 +9,15 @@
         submitButtonText="Abschicken"
         (submitButtonClicked)="onSubmit()"
     >
-        <input-field-inline-select
+        <inline-select-input
             [selectOptions]="typeSelectOptions"
             [inputField]="inputForm.field('type')"
         />
-        <input-field-text
+        <text-input
             label="Titel"
             [inputField]="inputForm.field('title')"
         />
-        <input-field-text-area
+        <text-area-input
             label="Beschreibung"
             [inputField]="inputForm.field('description')"
         />

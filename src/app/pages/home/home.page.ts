@@ -1,16 +1,19 @@
+import { ReportGroupId } from './../../types/report-group-id';
 import { Title } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { BannerComponent, DeviceTypeService, EventGroup, EventsComponent, Link, LinkDirective, LinksComponent, LinksData, ReportsComponent, ReportGroup, SocialMediaComponent, SponsorsRowsComponent, TextSectionComponent } from 'kleinsendelbach-website-library';
+import { BannerComponent, DeviceTypeService, EventGroup, EventsComponent, Link, LinkDirective, LinksComponent, LinksData, ReportsComponent, ReportGroup, SocialMediaComponent, SponsorsRowsComponent, TextSectionComponent, FirebaseApiService, Result, ResultDisplayComponent } from 'kleinsendelbach-website-library';
 import { InternalPathKey } from '../../types/internal-paths';
 import { sponsorsConfig } from '../../config/sponsors.config';
 import { socialMediaConfig } from '../../config/social-media.config';
 import { homeBannerConfig } from '../../config/home-banner.config';
+import { EventGroupId } from '../../types/event-group-id';
+import { FirebaseFunctions } from '../../types/firebase-functions';
 
 @Component({
     selector: 'home-page',
     standalone: true,
-    imports: [CommonModule, TextSectionComponent, BannerComponent, LinksComponent, LinkDirective, SponsorsRowsComponent, SocialMediaComponent, EventsComponent, ReportsComponent],
+    imports: [CommonModule, TextSectionComponent, BannerComponent, LinksComponent, LinkDirective, SponsorsRowsComponent, SocialMediaComponent, EventsComponent, ReportsComponent, ResultDisplayComponent],
     templateUrl: './home.page.html',
     styleUrl: './home.page.sass'
 })
@@ -90,20 +93,35 @@ export class HomePage {
 
     public sponsorsData = sponsorsConfig;
 
-   public eventGroups: EventGroup<never>[] = []; // TODO
+   public eventGroupsResult: Result<EventGroup<EventGroupId>[]> | null = null;
 
-   public eventGroupTitle: Record<never, string> = {}; // TODO
+   public eventGroupTitle: Record<EventGroupId, string> = EventGroupId.title;
 
-   public getCalendarSubscriptionLink: (eventGroupIds: never[]) => string = () => ''; // TODO
+   public getCalendarSubscriptionLink = EventGroupId.getCalendarSubscriptionLink;
 
-   public reportGroups: ReportGroup<never>[] = []; // TODO
+   public reportGroupsResult: Result<ReportGroup<ReportGroupId>[]> | null = null
 
-   public reportGroupTitle: Record<never, string> = {}; // TODO
+   public reportGroupTitle: Record<ReportGroupId, string> = ReportGroupId.title;
 
     constructor(
         private readonly titleService: Title,
-        public readonly deviceType: DeviceTypeService
+        public readonly deviceType: DeviceTypeService,
+        private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>
     ) {
-        this.titleService.setTitle('SV Kleinsendelbach')
+        this.titleService.setTitle('SV Kleinsendelbach');
+        void this.fetchEventGroups();
+        void this.fetchReportGroups();
+    }
+
+    private async fetchEventGroups() {
+        this.eventGroupsResult = await this.firebaseApi.function('event-get').call({
+            groupIds: ['general']
+        });
+    }
+
+    private async fetchReportGroups() {
+        this.reportGroupsResult = await this.firebaseApi.function('report-get').call({
+            groupIds: ['general']
+        });
     }
 }

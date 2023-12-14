@@ -1,0 +1,37 @@
+<navigation-bar
+    [navigationBarData]="navigationBarData"
+/>
+<authentication-check
+    [roles]="['websiteManager']"
+    loginLink="editing/login"
+    (onAuthentication)="getReports()"
+>
+    <text-section
+        title="Aktuelle Berichte"
+    >
+        <button
+            class="add-new-button"
+            actionLink="editing/reports/edit"
+            (action)="clearSharedData()"
+            [prominent]="true"
+        >Neuen Bericht hinzufügen</button>
+        <result-display
+            [result]="reportGroupsResult"
+        />
+        <ng-container
+            *ngIf="reportGroupsResult && reportGroupsResult.isSuccess()"
+        >
+            <div
+                *ngFor="let reportGroup of reportGroupsResult.value; trackBy: TrackBy.property('groupId')"
+                class="event-group"
+            >
+                <p
+                    class="text group-name"
+                >{{ reportGroupTitle[reportGroup.groupId] }}</p>
+                <overview-list
+                    [overviewListData]="reportOverviewListData(reportGroup)"
+                />
+            </div>
+        </ng-container>
+    </text-section>
+</authentication-check>

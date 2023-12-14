@@ -1,12 +1,14 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { AppearanceColor, AuthenticationService, Color, CookieSelectorComponent, DeviceTypeService, EnvironmentService, FooterComponent, HeaderComponent, InternalLinkService, StyleConfigService } from 'kleinsendelbach-website-library';
+import { AppearanceColor, AuthenticationService, Color, CookieSelectorComponent, DeviceTypeService, EnvironmentService, FirebaseApiService, FooterComponent, HeaderComponent, InternalLinkService, StyleConfigService } from 'kleinsendelbach-website-library';
 import { environment } from './environment/environment';
 import { Environment } from './types/environment';
 import { footerConfig } from './config/footer.config';
 import { headerConfig } from './config/header.config';
 import { InternalPathKey, internalPaths } from './types/internal-paths';
+import { FirebaseFunctions, firebaseFunctionResultMappers } from './types/firebase-functions';
+import { UserRole } from './types/user-role';
 
 @Component({
     selector: 'app-root',
@@ -22,16 +24,16 @@ export class AppComponent {
     public footerData = footerConfig;
 
     constructor(
-        private readonly authenticationService: AuthenticationService,
+        private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly environmentService: EnvironmentService<Environment>,
-        // TODO: private readonly firebaseApiService: FirebaseApiService,
+        private readonly firebaseApiService: FirebaseApiService<FirebaseFunctions>,
         private readonly internalLinkService: InternalLinkService<InternalPathKey>,
         private readonly styleConfigService: StyleConfigService,
         public readonly deviceType: DeviceTypeService
     ) {
-        // TODO: this.authenticationService.setup();
         this.environmentService.setup(environment);
-        // TODO: this.firebaseApiService.setup();
+        this.firebaseApiService.setup(firebaseFunctionResultMappers);
+        this.authenticationService.setup(async () => (await this.firebaseApiService.function('user-getRoles').call({})).get());
         this.internalLinkService.setup(internalPaths);
         this.styleConfigService.setup({
             primary: new AppearanceColor(Color.hex('#C90024'), Color.hex('#C4354F')),

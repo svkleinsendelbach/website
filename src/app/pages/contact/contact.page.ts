@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { InlineSelectComponent, InputError, InputField, InputForm, InputFormComponent, LinkDirective, SelectComponent, SelectOptions, TextAreaComponent, TextComponent, TextSectionComponent, Validator, entries, keys } from 'kleinsendelbach-website-library';
+import { InlineSelectInputComponent, InputError, InputField, InputForm, InputFormComponent, LinkDirective, SelectInputComponent, SelectOptions, TextAreaInputComponent, TextInputComponent, TextSectionComponent, Validator, entries, keys } from 'kleinsendelbach-website-library';
 
 @Component({
     selector: 'contact-page',
     standalone: true,
-    imports: [CommonModule, TextSectionComponent, InputFormComponent, InlineSelectComponent, SelectComponent, TextComponent, TextAreaComponent, LinkDirective],
+    imports: [CommonModule, TextSectionComponent, InputFormComponent, InlineSelectInputComponent, SelectInputComponent, TextInputComponent, TextAreaInputComponent, LinkDirective],
     templateUrl: './contact.page.html',
     styleUrl: './contact.page.sass'
 })

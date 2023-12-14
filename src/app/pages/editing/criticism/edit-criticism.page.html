@@ -1,0 +1,20 @@
+<navigation-bar
+    [navigationBarData]="navigationBarData"
+/>
+<authentication-check
+    [roles]="['admin']"
+    loginLink="editing/login"
+    (onAuthentication)="getCriticism()"
+>
+    <text-section
+        title="Kritik und Vorschläge"
+    >
+        <result-display
+            [result]="criticismResult"
+        />
+        <overview-list
+            *ngIf="criticismResult && criticismResult.isSuccess()"
+            [overviewListData]="criticismOverviewListData(criticismResult.value)"
+        />
+    </text-section>
+</authentication-check>

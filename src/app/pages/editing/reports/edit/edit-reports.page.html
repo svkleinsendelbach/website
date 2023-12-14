@@ -1,0 +1,76 @@
+<navigation-bar
+    [navigationBarData]="navigationBarData"
+/>
+<authentication-check
+    [roles]="['websiteManager']"
+    loginLink="editing/login"
+>
+    <text-section
+        *ngIf="!previousReport"
+        title="Spiel von BFV übernehmen"
+    >
+        <p
+            class="text margin-bottom-large"
+        >Um ein Spiel der 1. oder 2. Mannschaft von BFV zu übernehmen, fügen Sie den Link zum BFV Spiel hier ein, bsp: www.bfv.de/spiele/...</p>
+        <input-form
+            [inputForm]="bfvGameInputForm"
+            submitButtonText="Übernehmen"
+            (submitButtonClicked)="takeBfvGame()"
+        >
+        <text-input
+            label="BFV Spiele Link"
+            [inputField]="bfvGameInputForm.field('bfvGameLink')"
+        />
+        <p
+            class="hint textColor"
+        >Achtung! Die Anzeige hat einen Fehler. Die Felder werden nicht ausgefüllt, werden aber trotzdem übernommen. Um das Spiel as Termin zu speichern, klicke auf erst auf 'Übernehmen' und dann auf 'Hinzufüen' unten auf der Seite.</p>
+        </input-form>
+    </text-section>
+    <text-section
+        title="Aktueller Bericht"
+    >
+        <input-form
+            [inputForm]="inputForm"
+            [submitButtonText]="previousReport ? 'Speichern' : 'Hinzufügen'"
+            (submitButtonClicked)="saveReport()"
+        >
+            <select-input
+                label="Zugehöriges Thema"
+                [selectOptions]="groupIdSelectOptions"
+                [inputField]="inputForm.field('groupId')"
+            />
+            <text-input
+                label="Titel"
+                [inputField]="inputForm.field('title')"
+            />
+            <text-input
+                label="Bild-Url"
+                placeholder="Bild-Url (optional)"
+                [inputField]="inputForm.field('imageUrl')"
+            />
+            <img
+                *ngIf="inputForm.field('imageUrl').value !== ''"
+                [src]="inputForm.field('imageUrl').value"
+                title="Bild"
+                alt="Bild"
+                id="image"
+            >
+            <text-area-input
+                label="Nachricht"
+                [inputField]="inputForm.field('message')"
+            />
+            <div
+                class="preview-message"
+            >
+                <p
+                    class="preview-text"
+                    *ngIf="inputForm.field('message').value !== ''"
+                >Vorschau:</p>
+                <div
+                    #messagePreview
+                    class="message-preview"
+                ></div>
+            </div>
+        </input-form>
+    </text-section>
+</authentication-check>

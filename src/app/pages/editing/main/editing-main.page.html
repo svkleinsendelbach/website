@@ -1,0 +1,75 @@
+<navigation-bar
+    [navigationBarData]="navigationBarData"
+/>
+<authentication-check
+    [roles]="['admin']"
+    loginLink="editing/login"
+    [authenticationStates]="authenticationStates"
+    key="admin"
+    (onAuthentication)="getUnauthenticatedUsers()"
+>
+    <text-section
+        title="Benutzer"
+    >
+        <p
+            *ngIf="unauthenticatedUsers && unauthenticatedUsers.length !== 0"
+            class="text align-center margin-bottom color-secondary"
+        >Folgende Personen haben Zugriff beantragt. Bestätige oder lehen die Anfrage ab.</p>
+        <unauthenticated-users
+            *ngIf="unauthenticatedUsers && unauthenticatedUsers.length !== 0"
+            [unauthenticatedUsers]="unauthenticatedUsers"
+            (handleAccessRequest)="handleAccessRequest($event.type, $event.user)"
+        />
+        <ng-container *ngTemplateOutlet="button; context: { buttonText: 'Bearbeiten', link: 'editing/user-roles/edit', text: 'Benutzerrollen bearbeiten' }"/>
+    </text-section>
+    <text-section
+        title="Kritik und Vorschläge"
+    >
+        <ng-container *ngTemplateOutlet="button; context: { buttonText: 'Ansehen', link: 'editing/criticism/edit', text: 'Kritik und Vorschläge ansehen' }"/>
+    </text-section>
+</authentication-check>
+<authentication-check
+    [roles]="['occupancyManager']"
+    loginLink="editing/login"
+    [authenticationStates]="authenticationStates"
+    key="occupancyManager"
+>
+    <text-section
+        title="Belegunsplan"
+    >
+        <ng-container *ngTemplateOutlet="button; context: { buttonText: 'Ansehen', link: 'editing/occupancy', text: 'Belegunsplan ansehen' }"/>
+    </text-section>
+</authentication-check>
+<authentication-check
+    [roles]="['websiteManager']"
+    loginLink="editing/login"
+    [authenticationStates]="authenticationStates"
+    key="websiteManager"
+>
+    <text-section
+        title="Website bearbeiten"
+    >
+        <ng-container *ngTemplateOutlet="button; context: { buttonText: 'Bearbeiten', link: 'editing/events', text: 'Kommende Termine bearbeiten' }"/>
+        <ng-container *ngTemplateOutlet="button; context: { buttonText: 'Bearbeiten', link: 'editing/reports', text: 'Berichte bearbeiten' }"/>
+    </text-section>
+</authentication-check>
+
+<ng-template
+    #button
+    let-buttonText="buttonText"
+    let-text="text"
+    let-link="link"
+>
+    <div
+        class="navigation-button-container"
+    >
+        <button
+            class="button"
+            [actionLink]="link"
+            [prominent]="true"
+        >{{ buttonText }}</button>
+        <p
+            class="text color-secondary"
+        >{{ text }}</p>
+    </div>
+</ng-template>

@@ -1,0 +1,53 @@
+<navigation-bar
+    [navigationBarData]="navigationBarData"
+/>
+<authentication-check
+    [roles]="['occupancyManager']"
+    loginLink="editing/login"
+>
+    <text-section
+        title="Belegungsplan"
+    >
+        <input-form
+            [inputForm]="inputForm"
+            [submitButtonText]="previousOccupancy ? (previousOccupancy.recurring && !inputForm.field('isRecurring').value ? 'Alle Speichern' : 'Speichern') : 'Hinzufügen'"
+            [cancelButtonText]="previousOccupancy && previousOccupancy.recurring && !inputForm.field('isRecurring').value ? 'Einzelnen Speichern' : null"
+            (submitButtonClicked)="saveOccupancy()"
+            (cancelButtonClicked)="saveOccupancy(true)"
+        >
+            <inline-select-input
+                label="Ort"
+                [selectOptions]="selectLocationOptions"
+                [inputField]="inputForm.field('location')"
+            />
+            <text-input
+                label="Titel"
+                [inputField]="inputForm.field('title')"
+            />
+            <date-time-input
+                label="Beginn"
+                [inputField]="inputForm.field('start')"
+            />
+            <date-time-input
+                label="Ende"
+                [inputField]="inputForm.field('end')"
+            />
+            <checkbox-input
+                label="Wiederholen"
+                [inputField]="inputForm.field('isRecurring')"
+            />
+            <inline-select-input
+                *ngIf="inputForm.field('isRecurring').value"
+                label="Wiederholen pro"
+                [selectOptions]="selectRecurringTypeOptions"
+                [inputField]="inputForm.field('recurringRepeatEvery')"
+            />
+            <date-time-input
+                *ngIf="inputForm.field('isRecurring').value"
+                label="Endet am"
+                components="date"
+                [inputField]="inputForm.field('recurringUntilIncluding')"
+            />
+        </input-form>
+    </text-section>
+</authentication-check>

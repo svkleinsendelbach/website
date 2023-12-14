@@ -19,21 +19,21 @@
         submitButtonText="Abschicken"
         (submitButtonClicked)="onSubmit()"
     >
-        <input-field-text
+        <text-input
             label="Ihr Name"
             [inputField]="inputForm.field('name')"
         />
-        <input-field-inline-select
+        <inline-select-input
             label="Antwortoption"
             [selectOptions]="answerOptionSelectOptions"
             [inputField]="inputForm.field('answerOption')"
         />
-        <input-field-text
+        <text-input
             *ngIf="inputForm.field('answerOption').value === 'email'"
             label="Ihre E-Mail Adresse"
             [inputField]="inputForm.field('email')"
         />
-        <input-field-text
+        <text-input
             *ngIf="inputForm.field('answerOption').value === 'whats-app-sms'"
             label="Ihre Mobilfunknummer"
             [inputField]="inputForm.field('phoneNumber')"
@@ -56,17 +56,17 @@
             target="_blank"
             title="Text-Channel 'allgemein'"
         >allgemein</a>) den Befehl '/user' ein und kopiere deine Nutzer-ID.</p>
-        <input-field-text
+        <text-input
             *ngIf="inputForm.field('answerOption').value === 'discord'"
             label="Ihre Discord Nutzer-ID"
             [inputField]="inputForm.field('discordUserId')"
         />
-        <input-field-select
+        <select-input
             label="Anfrage an"
             [selectOptions]="receiverSelectOptions"
             [inputField]="inputForm.field('receiver')"
         />
-        <input-field-text-area
+        <text-area-input
             label="Ihre Nachricht"
             [inputField]="inputForm.field('message')"
         />

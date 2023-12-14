@@ -29,6 +29,16 @@ import { ContactPage } from './pages/contact/contact.page';
 import { CriticsmPage } from './pages/criticsm/criticsm.page';
 import { PageNotFoundPage } from './pages/page-not-found/page-not-found.page';
 import { ImpressumPage } from './pages/impressum/impressum.page';
+import { LoginPage } from './pages/editing/login/login.page';
+import { EditingMainPage } from './pages/editing/main/editing-main.page';
+import { EditUserRolesPage } from './pages/editing/user-roles/edit-user-roles.page';
+import { EditCriticismPage } from './pages/editing/criticism/edit-criticism.page';
+import { OccupancyOverviewPage } from './pages/editing/occupancy/overview/occupancy-overview.page';
+import { EditOccupancyPage } from './pages/editing/occupancy/edit/edit-occupancy.page';
+import { EventsOverviewPage } from './pages/editing/events/overview/events-overview.page';
+import { EditEventsPage } from './pages/editing/events/edit/edit-events.page';
+import { ReportsOverviewPage } from './pages/editing/reports/overview/reports-overview.page';
+import { EditReportsPage } from './pages/editing/reports/edit/edit-reports.page';
 
 const internalRoutes: Record<InternalPathKey, Type<unknown>> = {
     home: HomePage,
@@ -56,7 +66,17 @@ const internalRoutes: Record<InternalPathKey, Type<unknown>> = {
     drive: DrivePage,
     contact: ContactPage,
     criticism: CriticsmPage,
-    impressum: ImpressumPage
+    impressum: ImpressumPage,
+    'editing/login': LoginPage,
+    'editing/main': EditingMainPage,
+    'editing/user-roles/edit': EditUserRolesPage,
+    'editing/criticism/edit': EditCriticismPage,
+    'editing/occupancy': OccupancyOverviewPage,
+    'editing/occupancy/edit': EditOccupancyPage,
+    'editing/events': EventsOverviewPage,
+    'editing/events/edit': EditEventsPage,
+    'editing/reports': ReportsOverviewPage,
+    'editing/reports/edit': EditReportsPage
 }
 
 export const routes: Routes = [
