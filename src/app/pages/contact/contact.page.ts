@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { InlineSelectInputComponent, InputError, InputField, InputForm, InputFormComponent, LinkDirective, SelectInputComponent, SelectOptions, TextAreaInputComponent, TextInputComponent, TextSectionComponent, Validator, entries, keys } from 'kleinsendelbach-website-library';
+import { FirebaseApiService, InlineSelectInputComponent, InputError, InputField, InputForm, InputFormComponent, LinkDirective, RecaptchaService, SelectInputComponent, SelectOptions, TextAreaInputComponent, TextInputComponent, TextSectionComponent, Validator, entries, keys } from 'kleinsendelbach-website-library';
+import { FirebaseFunctions } from '../../types/firebase-functions';
 
 @Component({
     selector: 'contact-page',
@@ -67,7 +68,9 @@ export class ContactPage {
     });
 
     constructor(
-        private readonly titleService: Title
+        private readonly titleService: Title,
+        private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
+        private readonly recaptchaService: RecaptchaService
     ) {
         this.titleService.setTitle('Kontakt')
     }
@@ -86,7 +89,42 @@ export class ContactPage {
         })));
     }
 
+    private get answerOption(): { email: string } | { phoneNumber: string } | { discordUserId: string } {
+        switch (this.inputForm.field('answerOption').value) {
+        case 'email':
+            return {
+                email: this.inputForm.field('email').value
+            };
+        case 'whats-app-sms':
+            return {
+                phoneNumber: this.inputForm.field('phoneNumber').value
+            };
+        case 'discord':
+            return {
+                discordUserId: this.inputForm.field('discordUserId').value
+            };
+        }
+    }
+
     public async onSubmit() {
-        // TODO
+        if (this.inputForm.evaluate() === 'invalid')
+            return;
+        this.inputForm.status = 'loading';
+        if (await this.recaptchaService.verify('contact_page') === 'invalid') {
+            this.inputForm.status = 'recaptchaFailed';
+            return;
+        }
+        const result = await this.firebaseApi.function('contact').call({
+            name: this.inputForm.field('name').value,
+            answer: this.answerOption,
+            receiver: this.inputForm.field('receiver').value,
+            message: this.inputForm.field('message').value
+        });
+        if (result.isSuccess()) {
+            this.inputForm.status = 'valid';
+            this.inputForm.reset();
+        } else {
+            this.inputForm.status = 'failed';
+        }
     }
 }

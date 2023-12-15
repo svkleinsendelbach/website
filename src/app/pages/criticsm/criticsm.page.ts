@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { FirebaseApiService, Guid, InlineSelectInputComponent, InputError, InputField, InputForm, InputFormComponent, SelectOptions, TextAreaInputComponent, TextInputComponent, TextSectionComponent, Validator } from 'kleinsendelbach-website-library';
+import { FirebaseApiService, Guid, InlineSelectInputComponent, InputError, InputField, InputForm, InputFormComponent, SelectOptions, TextAreaInputComponent, TextInputComponent, TextSectionComponent, Validator, RecaptchaService } from 'kleinsendelbach-website-library';
 import { Criticism } from '../../types/criticism';
 import { FirebaseFunctions } from '../../types/firebase-functions';
 
@@ -32,7 +32,8 @@ export class CriticsmPage {
 
     constructor(
         private readonly titleService: Title,
-        private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>
+        private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
+        private readonly recaptchaService: RecaptchaService
     ) {
         this.titleService.setTitle('Kritik und Vorschläge')
     }
@@ -48,6 +49,10 @@ export class CriticsmPage {
         if (this.inputForm.evaluate() === 'invalid')
             return;
         this.inputForm.status = 'loading';
+        if (await this.recaptchaService.verify('criticism_page') === 'invalid') {
+            this.inputForm.status = 'recaptchaFailed';
+            return;
+        }
         const result = await this.firebaseApi.function('criticism-edit').call({
             editType: 'add',
             criticismId: Guid.newGuid().guidString,

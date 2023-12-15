@@ -53,7 +53,7 @@ export class EditCriticismPage {
 
     public criticismOverviewListData(criticism: Criticism[]): OverviewListData<InternalPathKey> {
         return criticism.map(criticism => ({
-            title: (criticism.workedOff ? 'Bereits abgearbeitet: ' : '') + criticism.title,
+            title: `${Criticism.Type.description(criticism.type)}: ${criticism.title}` + (criticism.workedOff ? ' (abgearbeitet)' : ''),
             subtitle: this.expandedCriticismId?.guidString === criticism.id.guidString ? criticism.description : null,
             buttons: [
                 {

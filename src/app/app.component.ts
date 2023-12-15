@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { AppearanceColor, AuthenticationService, Color, CookieSelectorComponent, DeviceTypeService, EnvironmentService, FirebaseApiService, FooterComponent, HeaderComponent, InternalLinkService, StyleConfigService } from 'kleinsendelbach-website-library';
+import { AppearanceColor, AuthenticationService, Color, CookieSelectorComponent, DeviceTypeService, EnvironmentService, FirebaseApiService, FooterComponent, HeaderComponent, InternalLinkService, RecaptchaService, RecaptchaVerificationService, StyleConfigService } from 'kleinsendelbach-website-library';
 import { environment } from './environment/environment';
 import { Environment } from './types/environment';
 import { footerConfig } from './config/footer.config';
@@ -9,6 +9,7 @@ import { headerConfig } from './config/header.config';
 import { InternalPathKey, internalPaths } from './types/internal-paths';
 import { FirebaseFunctions, firebaseFunctionResultMappers } from './types/firebase-functions';
 import { UserRole } from './types/user-role';
+import Crate from '@widgetbot/crate';
 
 @Component({
     selector: 'app-root',
@@ -28,18 +29,26 @@ export class AppComponent {
         private readonly environmentService: EnvironmentService<Environment>,
         private readonly firebaseApiService: FirebaseApiService<FirebaseFunctions>,
         private readonly internalLinkService: InternalLinkService<InternalPathKey>,
+        private readonly recaptchaVerificationService: RecaptchaVerificationService,
         private readonly styleConfigService: StyleConfigService,
         public readonly deviceType: DeviceTypeService
     ) {
+        if (this.deviceType.isDesktop) {
+            new Crate({
+                server: '1083387091423072419',
+                channel: '1083387096179421239',
+                location:  ['bottom', 'left']
+            });
+        }
         this.environmentService.setup(environment);
         this.firebaseApiService.setup(firebaseFunctionResultMappers);
         this.authenticationService.setup(async () => (await this.firebaseApiService.function('user-getRoles').call({})).get());
+        this.recaptchaVerificationService.setup(async (token) => await this.firebaseApiService.function('verifyRecaptcha').call({ token: token }));
         this.internalLinkService.setup(internalPaths);
         this.styleConfigService.setup({
             primary: new AppearanceColor(Color.hex('#C90024'), Color.hex('#C4354F')),
             accent: new AppearanceColor(Color.hex('#FFD93D'), Color.hex('#F2BE22')),
             background: new AppearanceColor(Color.hex('#FFFFFF'), Color.hex('#24252A')),
-            secondaryBackground: new AppearanceColor(Color.hex('#FFFFFF'), Color.hex('#3C4A57')),
             hoveredBackground: new AppearanceColor(Color.hex('#E0E0E0'), Color.hex('#44454A')),
             shadow: new AppearanceColor(Color.hex('#80808080'), Color.hex('#80808080')),
             text: new AppearanceColor(Color.hex('#24252A'), Color.hex('#C8D6E5')),

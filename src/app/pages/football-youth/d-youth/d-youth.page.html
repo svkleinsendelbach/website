@@ -20,12 +20,19 @@
 <text-section
     title="Kommende Termine"
 >
-    <events
-        [eventGroups]="eventGroups"
-        [eventGroupTitle]="eventGroupTitle"
-        [getCalendarSubscriptionLink]="getCalendarSubscriptionLink"
-    />
+    <result-display
+        [result]="eventGroupsResult"
+        [showError]="true"
+    >
+        <events
+            *ngIf="eventGroupsResult && eventGroupsResult.isSuccess()"
+            [eventGroups]="eventGroupsResult.value"
+            [eventGroupTitle]="eventGroupTitle"
+            [getCalendarSubscriptionLink]="getCalendarSubscriptionLink"
+        />
+    </result-display>
 </text-section>
+
 
 <text-section
     title="Ergebnisse und Tabellen"
@@ -63,10 +70,16 @@
 <text-section
     title="Aktuelle Berichte"
 >
-    <reports
-        [reportGroups]="reportGroups"
-        [reportGroupTitle]="reportGroupTitle"
-    />
+    <result-display
+        [result]="reportGroupsResult"
+        [showError]="true"
+    >
+        <reports
+            *ngIf="reportGroupsResult && reportGroupsResult.isSuccess()"
+            [reportGroups]="reportGroupsResult.value"
+            [reportGroupTitle]="reportGroupTitle"
+        />
+    </result-display>
 </text-section>
 
 <text-section

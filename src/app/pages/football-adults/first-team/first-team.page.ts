@@ -1,15 +1,21 @@
 import { Title } from '@angular/platform-browser';
 import { Component } from '@angular/core';
-import { BfvWidgetComponent, ContactsComponent, ContactsData, EventGroup, EventsComponent, MapsComponent, ReportGroup, ReportsComponent, SquadComponent, SquadData, TextSectionComponent } from 'kleinsendelbach-website-library';
+import { BfvWidgetComponent, ContactsComponent, ContactsData, EventGroup, EventsComponent, FirebaseApiService, MapsComponent, ReportGroup, ReportsComponent, Result, ResultDisplayComponent, SquadComponent, SquadData, TextSectionComponent } from 'kleinsendelbach-website-library';
 import { bfvWidgetConfig } from '../../../config/bfv-widget.config';
 import { contact } from '../../../config/contacts.config';
 import { environment } from '../../../environment/environment';
 import { mapsConfig } from '../../../config/maps.config';
+import { EventGroupId } from '../../../types/event-group-id';
+import { ReportGroupId } from '../../../types/report-group-id';
+import { FirebaseFunctions } from '../../../types/firebase-functions';
+import { CommonModule } from '@angular/common';
+import { anpfiffInfoTeamParametersConfig } from '../../../config/anpfiffInfoTeamParameters.config';
+import { TeamSquad } from '../../../types/team-squad';
 
 @Component({
     selector: 'first-team-page',
     standalone: true,
-    imports: [TextSectionComponent, EventsComponent, ReportsComponent, BfvWidgetComponent, ContactsComponent, MapsComponent, SquadComponent],
+    imports: [CommonModule, TextSectionComponent, EventsComponent, ReportsComponent, ContactsComponent, SquadComponent, ResultDisplayComponent, BfvWidgetComponent, MapsComponent],
     templateUrl: './first-team.page.html',
     styleUrl: './first-team.page.sass'
 })
@@ -35,21 +41,43 @@ export class FirstTeamPage {
         mapsConfig.coordinates['b-field']
     ]
 
-    public eventGroups: EventGroup<never>[] = []; // TODO
+    public eventGroupsResult: Result<EventGroup<EventGroupId>[]> | null = null;
 
-    public eventGroupTitle: Record<never, string> = {}; // TODO
+    public eventGroupTitle: Record<EventGroupId, string> = EventGroupId.title;
 
-    public getCalendarSubscriptionLink: (eventGroupIds: never[]) => string = () => ''; // TODO
+    public getCalendarSubscriptionLink = EventGroupId.getCalendarSubscriptionLink;
 
-    public reportGroups: ReportGroup<never>[] = []; // TODO
+    public reportGroupsResult: Result<ReportGroup<ReportGroupId>[]> | null = null
 
-    public reportGroupTitle: Record<never, string> = {}; // TODO
+    public reportGroupTitle: Record<ReportGroupId, string> = ReportGroupId.title;
 
-    public squadData: SquadData = []; // TODO
+    public squadResult: Result<SquadData> | null = null;
 
     constructor(
         private readonly titleService: Title,
+        private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>
     ) {
         this.titleService.setTitle('Erste Mannschaft')
+        void this.fetchEventGroups();
+        void this.fetchReportGroups();
+        void this.fetchSquad();
+    }
+
+    private async fetchEventGroups() {
+        this.eventGroupsResult = await this.firebaseApi.function('event-get').call({
+            groupIds: ['football-adults/first-team']
+        });
+    }
+
+    private async fetchReportGroups() {
+        this.reportGroupsResult = await this.firebaseApi.function('report-get').call({
+            groupIds: ['football-adults/first-team']
+        });
+    }
+
+    private async fetchSquad() {
+        this.squadResult = (await this.firebaseApi.function('bfvData-teamSquad').call({
+            anpfiffInfoTeamParameters: anpfiffInfoTeamParametersConfig['first-team']
+        })).map(teamSquad => TeamSquad.toSquadData(teamSquad));
     }
 }

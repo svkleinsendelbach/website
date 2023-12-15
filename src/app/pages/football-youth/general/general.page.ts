@@ -1,13 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { Component } from '@angular/core';
-import { TextSectionComponent, LinksComponent, EventsComponent, ReportsComponent, ContactsComponent, LinkDirective, LinksData, ContactsData, EventGroup, ReportGroup, Link } from 'kleinsendelbach-website-library';
+import { TextSectionComponent, LinksComponent, EventsComponent, ReportsComponent, ContactsComponent, LinkDirective, LinksData, ContactsData, EventGroup, ReportGroup, Link, Result, FirebaseApiService, ResultDisplayComponent } from 'kleinsendelbach-website-library';
 import { InternalPathKey } from '../../../types/internal-paths';
 import { contact } from '../../../config/contacts.config';
+import { EventGroupId } from '../../../types/event-group-id';
+import { ReportGroupId } from '../../../types/report-group-id';
+import { FirebaseFunctions } from '../../../types/firebase-functions';
 
 @Component({
     selector: 'football-youth-page',
     standalone: true,
-    imports: [TextSectionComponent, LinksComponent, EventsComponent, ReportsComponent, ContactsComponent, LinkDirective],
+    imports: [CommonModule, TextSectionComponent, LinksComponent, EventsComponent, ReportsComponent, ContactsComponent, LinkDirective, ResultDisplayComponent],
     templateUrl: './general.page.html',
     styleUrl: './general.page.sass'
 })
@@ -64,19 +68,34 @@ export class FootballYouthGeneralPage {
         contact('Jugendleiter Kleinfeld', 'stefan-seubert')
     ]
 
-    public eventGroups: EventGroup<never>[] = []; // TODO
+    public eventGroupsResult: Result<EventGroup<EventGroupId>[]> | null = null;
 
-    public eventGroupTitle: Record<never, string> = {}; // TODO
+    public eventGroupTitle: Record<EventGroupId, string> = EventGroupId.title;
 
-    public getCalendarSubscriptionLink: (eventGroupIds: never[]) => string = () => ''; // TODO
+    public getCalendarSubscriptionLink = EventGroupId.getCalendarSubscriptionLink;
 
-    public reportGroups: ReportGroup<never>[] = []; // TODO
+    public reportGroupsResult: Result<ReportGroup<ReportGroupId>[]> | null = null
 
-    public reportGroupTitle: Record<never, string> = {}; // TODO
+    public reportGroupTitle: Record<ReportGroupId, string> = ReportGroupId.title;
 
     constructor(
         private readonly titleService: Title,
+        private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>
     ) {
         this.titleService.setTitle('Jugendfußball')
+        void this.fetchEventGroups();
+        void this.fetchReportGroups();
+    }
+
+    private async fetchEventGroups() {
+        this.eventGroupsResult = await this.firebaseApi.function('event-get').call({
+            groupIds: ['football-youth/general', 'football-youth/a-youth', 'football-youth/b-youth', 'football-youth/c-youth', 'football-youth/d-youth', 'football-youth/e-youth', 'football-youth/f-youth', 'football-youth/g-youth']
+        });
+    }
+
+    private async fetchReportGroups() {
+        this.reportGroupsResult = await this.firebaseApi.function('report-get').call({
+            groupIds: ['football-youth/general', 'football-youth/a-youth', 'football-youth/b-youth', 'football-youth/c-youth', 'football-youth/d-youth', 'football-youth/e-youth', 'football-youth/f-youth', 'football-youth/g-youth']
+        });
     }
 }

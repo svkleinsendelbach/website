@@ -4,6 +4,7 @@ export type ReportGroupId =
     | 'football-adults/first-team'
     | 'football-adults/general'
     | 'football-adults/second-team'
+    | 'football-adults/ah-team'
     | 'football-youth/a-youth'
     | 'football-youth/b-youth'
     | 'football-youth/c-youth'
@@ -21,6 +22,7 @@ export namespace ReportGroupId {
         'football-adults/general',
         'football-adults/first-team',
         'football-adults/second-team',
+        'football-adults/ah-team',
         'football-youth/general',
         'football-youth/a-youth',
         'football-youth/b-youth',
@@ -38,6 +40,7 @@ export namespace ReportGroupId {
         'football-adults/first-team': '1. Mannschaft',
         'football-adults/general': 'Herrenfußball',
         'football-adults/second-team': '2. Mannschaft',
+        'football-adults/ah-team': 'Alte Herren',
         'football-youth/a-youth': 'A-Jugend',
         'football-youth/b-youth': 'B-Jugend',
         'football-youth/c-youth': 'C-Jugend',
@@ -61,7 +64,7 @@ export namespace ReportGroupId {
             title: 'Allgemeines'
         },
         {
-            groupIds: ['football-adults/general', 'football-adults/first-team', 'football-adults/second-team'],
+            groupIds: ['football-adults/general', 'football-adults/first-team', 'football-adults/second-team', 'football-adults/ah-team'],
             title: 'Herrenfußball'
         },
         {

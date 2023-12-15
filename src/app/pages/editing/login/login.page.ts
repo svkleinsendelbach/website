@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { LinkDirective, TextSectionComponent, AuthenticationService, InternalLinkService, FirebaseApiService, LoginComponent, InputError, InputField, InputForm, Validator, InputFormComponent, TextInputComponent } from 'kleinsendelbach-website-library';
+import { LinkDirective, TextSectionComponent, AuthenticationService, InternalLinkService, FirebaseApiService, LoginComponent, InputError, InputField, InputForm, Validator, InputFormComponent, TextInputComponent, RecaptchaService } from 'kleinsendelbach-website-library';
 import { Router } from '@angular/router';
 import { InternalPathKey } from '../../../types/internal-paths';
 import { FirebaseFunctions } from '../../../types/firebase-functions';
@@ -24,6 +24,7 @@ export class LoginPage {
     },
     {
         invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
+        recaptchaFailed: new InputError('reCaptcha failed.'),
         loading: new InputError('Antrag wird übermittelt.', 'info'),
         failed: new InputError('Antrag konnte nicht übermittelt werden.')
     });
@@ -33,7 +34,8 @@ export class LoginPage {
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly router: Router,
         private readonly linkService: InternalLinkService<InternalPathKey>,
-        private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>
+        private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
+        private readonly recaptchaService: RecaptchaService
     ) {
         this.titleService.setTitle('Anmelden');
         void this.checkInitialAuthentication();
@@ -67,6 +69,11 @@ export class LoginPage {
     public async requestAccess() {
         if (this.requestAccessInputForm.evaluate() === 'invalid')
             return;
+        this.requestAccessInputForm.status = 'loading';
+        if (await this.recaptchaService.verify('login_page_request_access') === 'invalid') {
+            this.requestAccessInputForm.status = 'recaptchaFailed';
+            return;
+        }
         try {
             await this.firebaseApi.function('user-requestAccess').call({
                 firstName: this.requestAccessInputForm.field('firstName').value,
