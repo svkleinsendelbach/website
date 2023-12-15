@@ -67,7 +67,8 @@ export class BYouthPage {
 
     private async fetchReportGroups() {
         this.reportGroupsResult = await this.firebaseApi.function('report-get').call({
-            groupIds: ['football-youth/b-youth']
+            groupIds: ['football-youth/b-youth'],
+            count: 5
         });
     }
 }

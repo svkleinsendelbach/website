@@ -74,7 +74,7 @@ export class EditReportsPage implements OnInit, AfterViewInit, OnDestroy {
         private readonly styleConfig: StyleConfigService,
         private readonly sharedData: SharedDataService<{
             editReport: {
-                event: Report.Flatten,
+                report: Report.Flatten,
                 groupId: ReportGroupId
             }
         }>
@@ -82,7 +82,7 @@ export class EditReportsPage implements OnInit, AfterViewInit, OnDestroy {
         const previousReport = this.sharedData.getValue('editReport');
         if (previousReport) {
             this.previousReport = {
-                ... Report.concrete(previousReport.event),
+                ... Report.concrete(previousReport.report),
                 groupId: previousReport.groupId
             }
         }
@@ -184,7 +184,7 @@ export class EditReportsPage implements OnInit, AfterViewInit, OnDestroy {
             previousGroupId: this.previousReport ? this.previousReport.groupId : null,
             report: {
                 createDate: createDate,
-                imageUrl: this.inputForm.field('imageUrl').value,
+                imageUrl: this.inputForm.field('imageUrl').value || null,
                 message: this.inputForm.field('message').value,
                 title: this.inputForm.field('title').value
             },

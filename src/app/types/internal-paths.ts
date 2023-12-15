@@ -103,6 +103,10 @@ export const internalPaths = {
         title: 'Impressum',
         path: 'impressum'
     },
+    reports: {
+        title: 'Berichte',
+        path: 'berichte'
+    },
     'editing/login': {
         title: 'Anmelden',
         path: 'bearbeiten/anmelden'

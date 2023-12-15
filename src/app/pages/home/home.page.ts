@@ -121,7 +121,8 @@ export class HomePage {
 
     private async fetchReportGroups() {
         this.reportGroupsResult = await this.firebaseApi.function('report-get').call({
-            groupIds: ['general']
+            groupIds: ['general'],
+            count: 5
         });
     }
 }

@@ -71,7 +71,8 @@ export class FirstTeamPage {
 
     private async fetchReportGroups() {
         this.reportGroupsResult = await this.firebaseApi.function('report-get').call({
-            groupIds: ['football-adults/first-team']
+            groupIds: ['football-adults/first-team'],
+            count: 5
         });
     }
 

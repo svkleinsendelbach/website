@@ -56,7 +56,8 @@ export class ReportsOverviewPage {
 
     public async getReports() {
         this.reportGroupsResult = await this.firebaseApi.function('report-get').call({
-            groupIds: ReportGroupId.all
+            groupIds: ReportGroupId.all,
+            count: null
         });
     }
 

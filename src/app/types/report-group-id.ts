@@ -1,10 +1,11 @@
 
 export type ReportGroupId =
-    | 'dancing'
-    | 'football-adults/first-team'
+    | 'general'
     | 'football-adults/general'
+    | 'football-adults/first-team'
     | 'football-adults/second-team'
     | 'football-adults/ah-team'
+    | 'football-youth/general'
     | 'football-youth/a-youth'
     | 'football-youth/b-youth'
     | 'football-youth/c-youth'
@@ -12,9 +13,8 @@ export type ReportGroupId =
     | 'football-youth/e-youth'
     | 'football-youth/f-youth'
     | 'football-youth/g-youth'
-    | 'football-youth/general'
-    | 'general'
-    | 'gymnastics';
+    | 'gymnastics'
+    | 'dancing';
 
 export namespace ReportGroupId {
     export const all: ReportGroupId[] = [

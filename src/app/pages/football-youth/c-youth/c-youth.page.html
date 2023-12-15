@@ -22,7 +22,6 @@
 >
     <result-display
         [result]="eventGroupsResult"
-        [showError]="true"
     >
         <events
             *ngIf="eventGroupsResult && eventGroupsResult.isSuccess()"
@@ -58,12 +57,12 @@
 >
     <result-display
         [result]="reportGroupsResult"
-        [showError]="true"
     >
         <reports
             *ngIf="reportGroupsResult && reportGroupsResult.isSuccess()"
             [reportGroups]="reportGroupsResult.value"
             [reportGroupTitle]="reportGroupTitle"
+            allReportsLink="reports"
         />
     </result-display>
 </text-section>

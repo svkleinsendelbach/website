@@ -85,6 +85,7 @@ export type ReportEditFunctionType = FunctionType<{
 
 export type ReportGetFunctionType = FunctionType<{
     groupIds: ReportGroupId[];
+    count: number | null;
 }, ReportGroup.Flatten<ReportGroupId>[], ReportGroup<ReportGroupId>[]>;
 
 export namespace ReportGetFunctionType {

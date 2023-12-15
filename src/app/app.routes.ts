@@ -39,6 +39,7 @@ import { EventsOverviewPage } from './pages/editing/events/overview/events-overv
 import { EditEventsPage } from './pages/editing/events/edit/edit-events.page';
 import { ReportsOverviewPage } from './pages/editing/reports/overview/reports-overview.page';
 import { EditReportsPage } from './pages/editing/reports/edit/edit-reports.page';
+import { ReportsPage } from './pages/reports/reports.page';
 
 const internalRoutes: Record<InternalPathKey, Type<unknown>> = {
     home: HomePage,
@@ -67,6 +68,7 @@ const internalRoutes: Record<InternalPathKey, Type<unknown>> = {
     contact: ContactPage,
     criticism: CriticsmPage,
     impressum: ImpressumPage,
+    reports: ReportsPage,
     'editing/login': LoginPage,
     'editing/main': EditingMainPage,
     'editing/user-roles/edit': EditUserRolesPage,

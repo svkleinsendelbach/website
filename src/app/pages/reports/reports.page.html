@@ -1,0 +1,13 @@
+<text-section
+    title="Aktuelle Berichte"
+>
+    <result-display
+        [result]="reportGroupsResult"
+    >
+        <reports
+            *ngIf="reportGroupsResult && reportGroupsResult.isSuccess()"
+            [reportGroups]="reportGroupsResult.value"
+            [reportGroupTitle]="reportGroupTitle"
+        />
+    </result-display>
+</text-section>

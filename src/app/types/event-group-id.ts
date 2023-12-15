@@ -1,19 +1,19 @@
 export type EventGroupId =
-    | 'dancing'
-     | 'football-adults/ah-team'
-     | 'football-adults/first-team'
-     | 'football-adults/general'
-     | 'football-adults/second-team'
-     | 'football-youth/a-youth'
-     | 'football-youth/b-youth'
-     | 'football-youth/c-youth'
-     | 'football-youth/d-youth'
-     | 'football-youth/e-youth'
-     | 'football-youth/f-youth'
-     | 'football-youth/g-youth'
-     | 'football-youth/general'
-     | 'general'
-     | 'gymnastics';
+    | 'general'
+    | 'football-adults/general'
+    | 'football-adults/first-team'
+    | 'football-adults/second-team'
+    | 'football-adults/ah-team'
+    | 'football-youth/general'
+    | 'football-youth/a-youth'
+    | 'football-youth/b-youth'
+    | 'football-youth/c-youth'
+    | 'football-youth/d-youth'
+    | 'football-youth/e-youth'
+    | 'football-youth/f-youth'
+    | 'football-youth/g-youth'
+    | 'gymnastics'
+    | 'dancing';
 
 export namespace EventGroupId {
     export const all: EventGroupId[] = [
