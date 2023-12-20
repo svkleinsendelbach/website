@@ -6,7 +6,6 @@ import { FirebaseFunctions } from '../../../../types/firebase-functions';
 import { UserRole } from '../../../../types/user-role';
 import { Occupancy } from '../../../../types/occupancy';
 import { CalendarEvent } from 'angular-calendar';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -49,7 +48,6 @@ export class OccupancyOverviewPage {
         private readonly titleService: Title,
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
-        private readonly router: Router,
         private readonly linkService: LinkService<InternalPathKey>,
         private readonly sharedData: SharedDataService<{
             editOccupancy: {
@@ -75,40 +73,26 @@ export class OccupancyOverviewPage {
             actions: [
                 {
                     label: '<i class="fa fa-pencil"></i> Berarbeiten |',
-                    // eslint-disable-next-line @typescript-eslint/no-shadow
                     onClick: ({ event }: {
                         event: CalendarEvent<{ occupancy: Occupancy; date: UtcDate; columnId: Occupancy.Location }>;
                         sourceEvent: KeyboardEvent | MouseEvent;
-                    }) => {
-                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                        void this.editOccupancy(event.meta!.occupancy, event.meta!.date);
-                    }
+                    }) => void this.editOccupancy(event.meta!.occupancy, event.meta!.date)
                 },
                 {
-                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                     label: event.meta!.occupancy.recurring ? ' <i class="fa fa-trash"></i> Alle |' : ' <i class="fa fa-trash"></i> Löschen',
-                    // eslint-disable-next-line @typescript-eslint/no-shadow
                     onClick: ({ event }: {
                         event: CalendarEvent<{ occupancy: Occupancy; date: UtcDate; columnId: Occupancy.Location }>;
                         sourceEvent: KeyboardEvent | MouseEvent;
-                    }) => {
-                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                        void this.deleteOccupancy(event.meta!.occupancy, event.meta!.date);
-                    }
+                    }) => void this.deleteOccupancy(event.meta!.occupancy, event.meta!.date, 'delete-complete')
                 },
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 ...event.meta!.occupancy.recurring
                     ? [
                         {
                             label: ' <i class="fa fa-trash"></i> Einzelnen',
-                            // eslint-disable-next-line @typescript-eslint/no-shadow
                             onClick: ({ event }: {
                                 event: CalendarEvent<{ occupancy: Occupancy; date: UtcDate; columnId: Occupancy.Location }>;
                                 sourceEvent: KeyboardEvent | MouseEvent;
-                            }) => {
-                                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                                void this.deleteOccupancy(event.meta!.occupancy, event.meta!.date, true);
-                            }
+                            }) => void this.deleteOccupancy(event.meta!.occupancy, event.meta!.date, 'delete-recurring-single')
                         }
                     ]
                     : []
@@ -116,42 +100,41 @@ export class OccupancyOverviewPage {
         })));
     }
 
-    public async deleteOccupancy(occupancy: Occupancy, editDate: UtcDate, deleteNotRecurring: boolean = false) {
-        if (!this.occupanciesResult || this.occupanciesResult.isFailure())
-            return;
-        if (occupancy.recurring && deleteNotRecurring) {
-            const _editDate = editDate.setted({ hour: 0, minute: 0 });
-            let { excludingDates } = occupancy.recurring;
-            if (!occupancy.recurring.excludingDates.some(date => _editDate.compare(date) === 'equal'))
-                excludingDates = [...occupancy.recurring.excludingDates, _editDate];
-            const newOccupancy: Occupancy = {
-                ...occupancy,
-                recurring: {
-                    ...occupancy.recurring,
-                    excludingDates: excludingDates
-                }
-            };
-            this.occupanciesResult = Result.success(this.occupanciesResult.value.map(_occupancy => _occupancy.id.guidString === occupancy.id.guidString ? newOccupancy : _occupancy));
-            await this.firebaseApi.function('occupancy-edit').call({
-                editType: 'change',
-                occupancy: Occupancy.flatten(newOccupancy),
-                occupancyId: occupancy.id.guidString
-            });
-        } else {
-            this.occupanciesResult = Result.success(this.occupanciesResult.value.filter(_occupancy => _occupancy.id.guidString !== occupancy.id.guidString));
-            await this.firebaseApi.function('occupancy-edit').call({
-                editType: 'remove',
-                occupancy: null,
-                occupancyId: occupancy.id.guidString
-            });
-        }
-    }
-
     public async editOccupancy(occupancy: Occupancy, editDate: UtcDate) {
         this.sharedData.setValue('editOccupancy', {
             editDate: editDate.encoded,
             occupancy: Occupancy.flatten(occupancy)
         });
-        await this.router.navigateByUrl(this.linkService.link('editing/occupancy/edit').link);
+        await this.linkService.navigate('editing/occupancy/edit');
+    }
+
+    public async deleteOccupancy(occupancy: Occupancy, editDate: UtcDate, type: 'delete-complete' | 'delete-recurring-single') {
+        if (type === 'delete-complete')
+            await this.deleteCompleteOccupancy(occupancy);
+        else
+            await this.deleteRecurringSingleOccupancy(occupancy, editDate.setted({ hour: 0, minute: 0 }));
+    }
+
+    private async deleteCompleteOccupancy(occupancy: Occupancy) {
+        if (!this.occupanciesResult || this.occupanciesResult.isFailure())
+            return;
+        this.occupanciesResult = this.occupanciesResult.map(occupancies => occupancies.filter(_occupancy => _occupancy.id.guidString !== occupancy.id.guidString));
+        await this.firebaseApi.function('occupancy-edit').call({
+            editType: 'remove',
+            occupancy: null,
+            occupancyId: occupancy.id.guidString
+        });
+    }
+
+    private async deleteRecurringSingleOccupancy(occupancy: Occupancy, editDate: UtcDate) {
+        if (!this.occupanciesResult || this.occupanciesResult.isFailure() || !occupancy.recurring)
+            return;
+        occupancy.recurring.excludingDates = [...occupancy.recurring.excludingDates, editDate];
+        this.occupanciesResult = this.occupanciesResult.map(occupancies => occupancies.map(_occupancy => _occupancy.id.guidString === occupancy.id.guidString ? occupancy : _occupancy));
+        await this.firebaseApi.function('occupancy-edit').call({
+            editType: 'change',
+            occupancy: Occupancy.flatten(occupancy),
+            occupancyId: occupancy.id.guidString
+        });
     }
 }

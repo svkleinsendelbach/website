@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationCheckComponent, AuthenticationService, FirebaseApiService, NewsletterComponent, InputError, InputField, InputForm, InputFormComponent, LinkService, NavigationBarComponent, NavigationBarData, SelectInputComponent, SelectOptions, SharedDataService, StepperInputComponent, TextAreaInputComponent, TextInputComponent, TextSectionComponent, UtcDate, Validator, entries, keys, mapRecord, NewsletterData, values, TrackBy, DateTimeInputComponent, ButtonComponent } from 'kleinsendelbach-website-library';
+import { AuthenticationCheckComponent, AuthenticationService, FirebaseApiService, NewsletterComponent, InputField, InputForm, InputFormComponent, LinkService, NavigationBarComponent, NavigationBarData, SelectInputComponent, SelectOptions, SharedDataService, StepperInputComponent, TextAreaInputComponent, TextInputComponent, TextSectionComponent, UtcDate, Validator, entries, keys, mapRecord, NewsletterData, values, TrackBy, DateTimeInputComponent, ButtonComponent } from 'kleinsendelbach-website-library';
 import { InternalPathKey } from '../../../../types/internal-paths';
 import { Newsletter } from '../../../../types/newsletter';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 import { FirebaseFunctions } from '../../../../types/firebase-functions';
 import { UserRole } from '../../../../types/user-role';
 import { EventGroupId } from '../../../../types/event-group-id';
@@ -48,26 +47,19 @@ export class EditNewsletterPage implements OnInit {
         ]),
         year: new InputField<number>(UtcDate.now.year)
     }, {
-        failed: new InputError('Der Newsletter konnte nicht gespeichert werden.'),
-        invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
-        hasEmptyDepartmentOrEvent: new InputError('Es gibt Abteilungen ohne Berichte oder fehlende Termine. Bitte füge sie unten hinzu.'),
-        loading: new InputError('Der Newsletter wird gespeichert.', 'info')
+        hasEmptyDepartmentOrEvent: 'Es gibt Abteilungen ohne Berichte oder fehlende Termine. Bitte füge sie unten hinzu.'
     });
 
     public departmentInputForm = new InputForm({
         title: new InputField<string>('', [Validator.required('Der Titel ist erforderlich.')]),
         description: new InputField<string>('', [Validator.required('Die Nachricht ist erforderlich.')])
-    }, {
-        invalidInput: new InputError('Nicht alle Eingaben sind gültig.')
-    });
+    }, {});
 
     public eventInputForm = new InputForm({
         date: new InputField<UtcDate>(UtcDate.now, [Validator.futureDate('Das Datum muss in der Zukunft liegen')]),
         title: new InputField<string>('', [Validator.required('Der Titel ist erforderlich.')]),
         subtitle: new InputField<string>('')
-    }, {
-        invalidInput: new InputError('Nicht alle Eingaben sind gültig.')
-    });
+    }, {});
 
     public previousNewsletter: Newsletter | null = null;
 
@@ -92,7 +84,6 @@ export class EditNewsletterPage implements OnInit {
         private readonly titleService: Title,
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
-        private readonly router: Router,
         private readonly linkService: LinkService<InternalPathKey>,
         private readonly sharedData: SharedDataService<{
             editNewsletter: Newsletter.Flatten;
@@ -297,26 +288,18 @@ export class EditNewsletterPage implements OnInit {
     }
 
     public async saveNewsletter() {
-        if (this.inputForm.status === 'loading')
+        const hasEmptyDepartmentOrEventStateAlreadyShown = this.inputForm.state === 'hasEmptyDepartmentOrEvent';
+        if (this.inputForm.evaluateAndSetLoading() === 'invalid')
             return;
-        const hasEmptyDepartmentOrEventStateAlreadyShown = this.inputForm.status === 'hasEmptyDepartmentOrEvent';
-        if (this.inputForm.evaluate() === 'invalid')
-            return;
-        if (!hasEmptyDepartmentOrEventStateAlreadyShown && (this.hasEmptyDepartment || this.hasEmptyEvent)) {
-            this.inputForm.status = 'hasEmptyDepartmentOrEvent';
-            return;
-        }
-        this.inputForm.status = 'loading';
+        if (!hasEmptyDepartmentOrEventStateAlreadyShown && (this.hasEmptyDepartment || this.hasEmptyEvent))
+            return this.inputForm.setState('hasEmptyDepartmentOrEvent');
         const result = await this.firebaseApi.function('newsletter-edit').call({
             editType: this.previousNewsletter ? 'change' : 'add',
             newsletter: Newsletter.flatten(this.newsletter),
             newsletterId: this.newsletter.id
         });
-        if (result.isFailure())
-            this.inputForm.status = 'failed';
-        else {
-            await this.router.navigateByUrl(this.linkService.link('editing/newsletter').link);
-            this.inputForm.status = 'valid';
-        }
+        this.inputForm.finish(result);
+        if (result.isSuccess())
+            await this.linkService.navigate('editing/newsletter');
     }
 }

@@ -3,7 +3,6 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } fr
 import { Report, NavigationBarComponent, AuthenticationCheckComponent, TextSectionComponent, InputFormComponent, TextInputComponent, SelectInputComponent, DateTimeInputComponent, CheckboxInputComponent, NavigationBarData, AuthenticationService, FirebaseApiService, LinkService, SharedDataService, SelectOptions, InputError, InputField, InputForm, Validator, StyleConfigService, MarkdownParser, UtcDate, Guid, TextAreaInputComponent } from 'kleinsendelbach-website-library';
 import { InternalPathKey } from '../../../../types/internal-paths';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 import { FirebaseFunctions } from '../../../../types/firebase-functions';
 import { ReportGroupId } from '../../../../types/report-group-id';
 import { UserRole } from '../../../../types/user-role';
@@ -39,12 +38,9 @@ export class EditReportsPage implements OnInit, AfterViewInit, OnDestroy {
             Validator.url('Das ist kein gültiger Link.')
         ])
     }, {
-        failed: new InputError('Der Bericht konnte nicht gefunden werden.'),
-        gameIdNotFound: new InputError('Die Spiel-Id wurde im Link nicht gefunden.'),
-        gameNotFound: new InputError('Das Spiel wurde bei BFV nicht gefunden.'),
-        invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
-        loading: new InputError('BFV Daten werden übernommen.', 'info'),
-        reportNotFound: new InputError('Das Spiel hat keinen Bericht bei BFV.')
+        gameIdNotFound: 'Die Spiel-Id wurde im Link nicht gefunden.',
+        gameNotFound: 'Das Spiel wurde bei BFV nicht gefunden.',
+        reportNotFound: 'Das Spiel hat keinen Bericht bei BFV.'
     });
 
     public inputForm = new InputForm({
@@ -55,11 +51,7 @@ export class EditReportsPage implements OnInit, AfterViewInit, OnDestroy {
         message: new InputField<string>('', [Validator.required('Die Nachricht ist erfordelich.')]),
         title: new InputField<string>('', [Validator.required('Der Titel ist erfordelich.')]),
         imageUrl: new InputField<string>('', [Validator.eitherOne('Das ist kein gültiger Link.', Validator.empty(''), Validator.url(''))])
-    }, {
-        failed: new InputError('Der Bericht konnte nicht gespeichert werden.'),
-        invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
-        loading: new InputError('Der Bericht wird gespeichert.', 'info')
-    });
+    }, {});
 
     @ViewChild('messagePreview') public messagePreviewElement: ElementRef<HTMLElement> | null = null;
 
@@ -69,7 +61,6 @@ export class EditReportsPage implements OnInit, AfterViewInit, OnDestroy {
         private readonly titleService: Title,
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
-        private readonly router: Router,
         private readonly linkService: LinkService<InternalPathKey>,
         private readonly styleConfig: StyleConfigService,
         private readonly sharedData: SharedDataService<{
@@ -138,44 +129,36 @@ export class EditReportsPage implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public async takeBfvGame() {
-        if (this.bfvGameInputForm.evaluate() === 'invalid')
+        if (this.bfvGameInputForm.evaluateAndSetLoading() === 'invalid')
             return;
-        this.bfvGameInputForm.status = 'loading';
         const match = (/^(?:https:\/\/)?(?:www\.)?bfv\.de\/spiele\/(?:\S+?\/)?(?<id>\S+?)$/gu).exec(this.bfvGameInputForm.field('bfvGameLink').value);
-        if (!match || !match.groups) {
-            this.bfvGameInputForm.status = 'gameIdNotFound';
-            return;
-        }
-        const gameInfo = await this.firebaseApi.function('bfvData-gameInfo').call({
+        if (!match || !match.groups || !('id' in match.groups))
+            return this.bfvGameInputForm.setState('gameIdNotFound');
+        const gameInfoResult = await this.firebaseApi.function('bfvData-gameInfo').call({
             gameId: match.groups['id']
         });
-        if (gameInfo.isFailure()) {
-            if (gameInfo.error.code === 'not-found')
-                this.bfvGameInputForm.status = 'gameNotFound';
-            else
-                this.bfvGameInputForm.status = 'failed';
-        } else {
-            if (!gameInfo.value.report) {
-                this.bfvGameInputForm.status = 'reportNotFound';
-                return;
-            }
-            const { isSg2, sgHomeAway } = GameInfo.additionalProperties(gameInfo.value);
+        this.bfvGameInputForm.finish(gameInfoResult);
+        if (gameInfoResult.isFailure() && gameInfoResult.error.code === 'not-found')
+            return this.bfvGameInputForm.setState('gameNotFound');
+        if (gameInfoResult.isSuccess()) {
+            const gameInfo = gameInfoResult.value;
+            if (!gameInfo.report)
+                return this.bfvGameInputForm.setState('reportNotFound');
+            const { isSg2, sgHomeAway } = GameInfo.additionalProperties(gameInfo);
             this.inputForm.field('groupId').initialValue = isSg2 ? 'football-adults/second-team' : 'football-adults/first-team';
-            this.inputForm.field('title').initialValue = `${UtcDate.decode(gameInfo.value.date).description} | ${gameInfo.value.report.title}`;
-            this.inputForm.field('message').initialValue = gameInfo.value.report.paragraphs.reduce((result1, paragraph) => `${result1 + paragraph.reduce((result2, value) => {
+            this.inputForm.field('title').initialValue = `${UtcDate.decode(gameInfo.date).description} | ${gameInfo.report.title}`;
+            this.inputForm.field('message').initialValue = gameInfo.report.paragraphs.reduce((result1, paragraph) => `${result1 + paragraph.reduce((result2, value) => {
                 if (value.link === null)
                     return result2 + value.text;
                 return `${result2}[${value.text}](${value.link})`;
             }, '')}\n\n`, '').trim();
-            this.inputForm.field('imageUrl').initialValue = `https://service-prod.bfv.de/export.media?action=getLogo&format=16&id=${sgHomeAway === 'home' ? gameInfo.value.awayTeam.imageId : gameInfo.value.homeTeam.imageId}`;
+            this.inputForm.field('imageUrl').initialValue = `https://service-prod.bfv.de/export.media?action=getLogo&format=16&id=${sgHomeAway === 'home' ? gameInfo.awayTeam.imageId : gameInfo.homeTeam.imageId}`;
         }
-        this.bfvGameInputForm.status = 'valid';
     }
 
     public async saveReport() {
-        if (this.inputForm.evaluate() === 'invalid')
+        if (this.inputForm.evaluateAndSetLoading() === 'invalid')
             return;
-        this.inputForm.status = 'loading';
         const reportId = this.previousReport ? this.previousReport.id : Guid.newGuid();
         const createDate = (this.previousReport ? this.previousReport.createDate : UtcDate.now).encoded;
         const result = await this.firebaseApi.function('report-edit').call({
@@ -190,11 +173,8 @@ export class EditReportsPage implements OnInit, AfterViewInit, OnDestroy {
             },
             reportId: reportId.guidString
         });
-        if (result.isFailure())
-            this.inputForm.status = 'failed';
-        else {
-            await this.router.navigateByUrl(this.linkService.link('editing/reports').link);
-            this.inputForm.status = 'valid';
-        }
+        this.inputForm.finish(result);
+        if (result.isSuccess())
+            await this.linkService.navigate('editing/reports');
     }
 }

@@ -29,11 +29,7 @@ export class SubscribeNewsletterPage {
             Validator.email('Das ist keine gültige E-Mail Addresse.')
         ])
     }, {
-        invalidInput: new InputError('Nicht alle Eingaben sind gültig'),
-        loading: new InputError('Sie werden für den Newsletter angemeldet.', 'info'),
-        recaptchaFailed: new InputError('reCAPTCHA ungültig.'),
-        failed: new InputError('Anmeldung ist fehlgeschlagen.'),
-        success: new InputError('Sie haben den Newsletter abonniert.', 'success')
+        recaptchaFailed: 'Ungültige reCAPTCHA. Bitte versuchen Sie es erneut.'
     });
 
     constructor(
@@ -46,21 +42,13 @@ export class SubscribeNewsletterPage {
     }
 
     public async onSubmit() {
-        if (this.inputForm.evaluate() === 'invalid')
+        if (this.inputForm.evaluateAndSetLoading() === 'invalid')
             return;
-        this.inputForm.status = 'loading';
-        if (await this.recaptchaService.verify('subscribe_newsletter_page') === 'invalid') {
-            this.inputForm.status = 'recaptchaFailed';
-            return;
-        }
+        if (await this.recaptchaService.verify('subscribe_newsletter_page') === 'invalid')
+            return this.inputForm.setState('recaptchaFailed');
         const result = await this.firebaseApi.function('newsletter-subscription-subscribe').call({
             email: this.inputForm.field('email').value
         });
-        if (result.isSuccess()) {
-            this.inputForm.status = 'valid';
-            this.inputForm.reset();
-        } else {
-            this.inputForm.status = 'failed';
-        }
+        this.inputForm.finish(result);
     }
 }

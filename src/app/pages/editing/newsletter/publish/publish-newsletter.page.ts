@@ -37,10 +37,7 @@ export class PublishNewsletterPage {
     public inputForm = new InputForm({
         html: new InputField<string>('', [Validator.required('Html ist erforderlich.')])
     }, {
-        noNewsletter: new InputError('Es wurde kein Newsletter übergeben. Gehe eine Seite zurück und versuche es erneut.'),
-        failed: new InputError('Der Newsletter konnte nicht veröffentlicht werden.'),
-        invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
-        loading: new InputError('Der Newsletter wird veröffentlicht.', 'info')
+        noNewsletter: 'Es wurde kein Newsletter übergeben. Gehe eine Seite zurück und versuche es erneut.'
     });
 
     public newsletter: Newsletter.Overview | null = null;
@@ -49,7 +46,6 @@ export class PublishNewsletterPage {
         private readonly titleService: Title,
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
-        private readonly router: Router,
         private readonly linkService: LinkService<InternalPathKey>,
         private readonly sharedData: SharedDataService<{
             publishNewsletter: Newsletter.Overview.Flatten;
@@ -62,24 +58,16 @@ export class PublishNewsletterPage {
     }
 
     public async publishNewsletter() {
-        if (this.inputForm.status === 'loading')
+        if (this.inputForm.evaluateAndSetLoading() === 'invalid')
             return;
-        if (this.inputForm.evaluate() === 'invalid')
-            return;
-        if (!this.newsletter) {
-            this.inputForm.status = 'noNewsletter';
-            return;
-        }
-        this.inputForm.status = 'loading';
+        if (!this.newsletter)
+            return this.inputForm.setState('noNewsletter');
         const result = await this.firebaseApi.function('newsletter-publish').call({
             id: this.newsletter.id,
             html: this.inputForm.field('html').value
         });
-        if (result.isFailure())
-            this.inputForm.status = 'failed';
-        else {
-            await this.router.navigateByUrl(this.linkService.link('editing/newsletter').link);
-            this.inputForm.status = 'valid';
-        }
+        this.inputForm.finish(result);
+        if (result.isSuccess())
+            await this.linkService.navigate('editing/newsletter');
     }
 }

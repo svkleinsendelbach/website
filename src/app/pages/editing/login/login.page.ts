@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { LinkDirective, TextSectionComponent, AuthenticationService, LinkService, FirebaseApiService, LoginComponent, InputError, InputField, InputForm, Validator, InputFormComponent, TextInputComponent, RecaptchaService } from 'kleinsendelbach-website-library';
-import { Router } from '@angular/router';
 import { InternalPathKey } from '../../../types/internal-paths';
 import { FirebaseFunctions } from '../../../types/firebase-functions';
 import { UserRole } from '../../../types/user-role';
@@ -23,16 +22,12 @@ export class LoginPage {
         lastName: new InputField<string>('', [Validator.required('Der Nachname ist erforderlich.')])
     },
     {
-        invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
-        recaptchaFailed: new InputError('reCaptcha failed.'),
-        loading: new InputError('Antrag wird übermittelt.', 'info'),
-        failed: new InputError('Antrag konnte nicht übermittelt werden.')
+        recaptchaFailed: 'Ungültige reCAPTCHA. Bitte versuchen Sie es erneut.'
     });
 
     constructor(
         private readonly titleService: Title,
         private readonly authenticationService: AuthenticationService<UserRole>,
-        private readonly router: Router,
         private readonly linkService: LinkService<InternalPathKey>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
         private readonly recaptchaService: RecaptchaService
@@ -42,9 +37,9 @@ export class LoginPage {
     }
 
     private async checkInitialAuthentication() {
-        const isLoggedIn = await this.authenticationService.isLoggedIn();
+        const isLoggedIn = this.authenticationService.isLoggedIn();
         if (isLoggedIn) {
-            await this.router.navigateByUrl(this.linkService.link('editing/main').link);
+            await this.linkService.navigate('editing/main');
             this.state = 'alreadyLoggedIn';
         } else {
             this.state = 'login';
@@ -53,7 +48,7 @@ export class LoginPage {
 
     public async handleRegistrationState(registrationState: 'registered' | 'unregistered') {
         if (registrationState === 'registered') {
-            await this.router.navigateByUrl(this.linkService.link('editing/main').link);
+            await this.linkService.navigate('editing/main');
             this.state = 'alreadyLoggedIn';
         } else {
             this.state = 'requestAccess';
@@ -67,23 +62,18 @@ export class LoginPage {
     }
 
     public async requestAccess() {
-        if (this.requestAccessInputForm.evaluate() === 'invalid')
+        if (this.requestAccessInputForm.evaluateAndSetLoading() === 'invalid')
             return;
-        this.requestAccessInputForm.status = 'loading';
-        if (await this.recaptchaService.verify('login_page_request_access') === 'invalid') {
-            this.requestAccessInputForm.status = 'recaptchaFailed';
-            return;
-        }
-        try {
-            await this.firebaseApi.function('user-requestAccess').call({
-                firstName: this.requestAccessInputForm.field('firstName').value,
-                lastName: this.requestAccessInputForm.field('lastName').value
-            });
-            this.requestAccessInputForm.reset();
-            await this.router.navigateByUrl(this.linkService.link('home').link);
+        if (await this.recaptchaService.verify('login_page_request_access') === 'invalid')
+            return this.requestAccessInputForm.setState('recaptchaFailed');
+        const result = await this.firebaseApi.function('user-requestAccess').call({
+            firstName: this.requestAccessInputForm.field('firstName').value,
+            lastName: this.requestAccessInputForm.field('lastName').value
+        });
+        this.requestAccessInputForm.finish(result);
+        if (result.isSuccess()) {
+            await this.linkService.navigate('home');
             this.state = 'login';
-        } catch {
-            this.requestAccessInputForm.status = 'failed';
         }
     }
 }

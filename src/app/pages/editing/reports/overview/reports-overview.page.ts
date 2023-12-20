@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 import { TextSectionComponent, NavigationBarComponent, AuthenticationCheckComponent, ButtonComponent, OverviewListComponent, ResultDisplayComponent, Report, AuthenticationService, FirebaseApiService, NavigationBarData, ReportGroup, Result, SharedDataService, TrackBy, OverviewListData, LinkService } from 'kleinsendelbach-website-library';
 import { FirebaseFunctions } from '../../../../types/firebase-functions';
 import { InternalPathKey } from '../../../../types/internal-paths';
@@ -42,7 +41,6 @@ export class ReportsOverviewPage {
         private readonly titleService: Title,
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
-        private readonly router: Router,
         private readonly linkService: LinkService<InternalPathKey>,
         private readonly sharedData: SharedDataService<{
             editReport: {
@@ -114,6 +112,6 @@ export class ReportsOverviewPage {
             report: Report.flatten(report),
             groupId: groupId
         });
-        await this.router.navigateByUrl(this.linkService.link('editing/reports/edit').link);
+        await this.linkService.navigate('editing/reports/edit');
     }
 }

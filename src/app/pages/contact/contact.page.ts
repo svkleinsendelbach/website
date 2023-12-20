@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { FirebaseApiService, InlineSelectInputComponent, InputError, InputField, InputForm, InputFormComponent, LinkDirective, RecaptchaService, SelectInputComponent, SelectOptions, TextAreaInputComponent, TextInputComponent, TextSectionComponent, Validator, entries, keys } from 'kleinsendelbach-website-library';
+import { FirebaseApiService, InlineSelectInputComponent, InputField, InputForm, InputFormComponent, LinkDirective, RecaptchaService, SelectInputComponent, SelectOptions, TextAreaInputComponent, TextInputComponent, TextSectionComponent, Validator, entries, keys } from 'kleinsendelbach-website-library';
 import { FirebaseFunctions } from '../../types/firebase-functions';
 
 @Component({
@@ -35,7 +35,7 @@ export class ContactPage {
         discordUserId: string;
         receiver: keyof typeof ContactPage.receivers;
         message: string;
-    }, 'invalidInput' | 'loading' | 'recaptchaFailed' | 'failed' | 'success'> = new InputForm({
+    }, 'recaptchaFailed'> = new InputForm({
         name: new InputField<string>('', [Validator.required('Ihr Name ist erforderlich.')]),
         answerOption: new InputField<keyof typeof ContactPage.answerOptions>('email', [
             Validator.required('Eine Antwortoption ist erforderlich.'),
@@ -60,11 +60,7 @@ export class ContactPage {
         message: new InputField<string>('', [Validator.required('Eine Nachricht ist erforderlich.')])
     },
     {
-        invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
-        recaptchaFailed: new InputError('reCAPTCHA ungültig.'),
-        failed: new InputError('Die Nachricht konnte nicht versandt werden.'),
-        loading: new InputError('Die Nachricht wird versandt.', 'info'),
-        success: new InputError('Die Nachricht wurde versandt', 'success')
+        recaptchaFailed: 'Ungültige reCAPTCHA. Bitte versuchen Sie es erneut.'
     });
 
     constructor(
@@ -92,39 +88,25 @@ export class ContactPage {
     private get answerOption(): { email: string } | { phoneNumber: string } | { discordUserId: string } {
         switch (this.inputForm.field('answerOption').value) {
         case 'email':
-            return {
-                email: this.inputForm.field('email').value
-            };
+            return { email: this.inputForm.field('email').value };
         case 'whats-app-sms':
-            return {
-                phoneNumber: this.inputForm.field('phoneNumber').value
-            };
+            return { phoneNumber: this.inputForm.field('phoneNumber').value };
         case 'discord':
-            return {
-                discordUserId: this.inputForm.field('discordUserId').value
-            };
+            return { discordUserId: this.inputForm.field('discordUserId').value };
         }
     }
 
     public async onSubmit() {
-        if (this.inputForm.evaluate() === 'invalid')
+        if (this.inputForm.evaluateAndSetLoading() === 'invalid')
             return;
-        this.inputForm.status = 'loading';
-        if (await this.recaptchaService.verify('contact_page') === 'invalid') {
-            this.inputForm.status = 'recaptchaFailed';
-            return;
-        }
+        if (await this.recaptchaService.verify('contact_page') === 'invalid')
+            return this.inputForm.setState('recaptchaFailed');
         const result = await this.firebaseApi.function('contact').call({
             name: this.inputForm.field('name').value,
             answer: this.answerOption,
             receiver: this.inputForm.field('receiver').value,
             message: this.inputForm.field('message').value
         });
-        if (result.isSuccess()) {
-            this.inputForm.status = 'valid';
-            this.inputForm.reset();
-        } else {
-            this.inputForm.status = 'failed';
-        }
+        this.inputForm.finish(result);
     }
 }

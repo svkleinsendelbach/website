@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AuthenticationCheckComponent, AuthenticationService, ButtonComponent, FirebaseApiService, LinkService, NavigationBarComponent, NavigationBarData, OverviewListComponent, OverviewListData, Result, ResultDisplayComponent, SharedDataService, TextSectionComponent, TrackBy, UtcDate } from 'kleinsendelbach-website-library';
 import { InternalPathKey } from '../../../../types/internal-paths';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 import { FirebaseFunctions } from '../../../../types/firebase-functions';
 import { UserRole } from '../../../../types/user-role';
 import { Newsletter } from '../../../../types/newsletter';
@@ -40,7 +39,6 @@ export class NewsletterOverviewPage {
         private readonly titleService: Title,
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
-        private readonly router: Router,
         private readonly linkService: LinkService<InternalPathKey>,
         private readonly sharedData: SharedDataService<{
             publishNewsletter: Newsletter.Overview.Flatten;
@@ -88,7 +86,7 @@ export class NewsletterOverviewPage {
 
     public async publishNewsletter(newsletter: Newsletter.Overview) {
         this.sharedData.setValue('publishNewsletter', Newsletter.Overview.flatten(newsletter));
-        await this.router.navigateByUrl(this.linkService.link('editing/newsletter/publish').link);
+        await this.linkService.navigate('editing/newsletter/publish');
     }
 
     public async editNewsletter(newsletter: Newsletter.Overview) {
@@ -96,7 +94,7 @@ export class NewsletterOverviewPage {
         if (!completeNewsletter)
             return;
         this.sharedData.setValue('editNewsletter', Newsletter.flatten(completeNewsletter));
-        await this.router.navigateByUrl(this.linkService.link('editing/newsletter/edit').link);
+        await this.linkService.navigate('editing/newsletter/edit');
     }
 
     public async deleteNewsletter(newsletter: Newsletter.Overview) {

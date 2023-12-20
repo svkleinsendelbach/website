@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NavigationBarComponent, CalendarComponent, TextSectionComponent, AuthenticationCheckComponent, NavigationBarData, AuthenticationService, FirebaseApiService, SharedDataService, InputError, InputField, InputForm, UtcDate, Validator, SelectOptions, Guid, LinkService, InputFormComponent, InlineSelectInputComponent, CheckboxInputComponent, TextInputComponent, DateTimeInputComponent } from 'kleinsendelbach-website-library';
+import { NavigationBarComponent, CalendarComponent, TextSectionComponent, AuthenticationCheckComponent, NavigationBarData, AuthenticationService, FirebaseApiService, SharedDataService, InputError, InputField, InputForm, UtcDate, Validator, SelectOptions, Guid, LinkService, InputFormComponent, InlineSelectInputComponent, CheckboxInputComponent, TextInputComponent, DateTimeInputComponent, Result } from 'kleinsendelbach-website-library';
 import { InternalPathKey } from '../../../../types/internal-paths';
 import { Title } from '@angular/platform-browser';
 import { FirebaseFunctions } from '../../../../types/firebase-functions';
@@ -61,11 +61,7 @@ export class EditOccupancyPage implements OnInit {
         recurringUntilIncluding: new InputField<UtcDate>(UtcDate.now, [Validator.validateIf(() => this.inputForm.field('isRecurring').value, Validator.futureDate('Das Datum muss in der Zukunft liegen.'))]),
         start: new InputField<UtcDate>(UtcDate.now, []),
         title: new InputField<string>('', [Validator.required('Der Titel ist erfordelich.')])
-    }, {
-        failed: new InputError('Das Event konnte nicht gespeichert werden.'),
-        invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
-        loading: new InputError('Das Event wird gespeichert.', 'info')
-    });
+    }, {});
 
     public previousOccupancy: Occupancy | null = null;
 
@@ -73,7 +69,6 @@ export class EditOccupancyPage implements OnInit {
         private readonly titleService: Title,
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
-        private readonly router: Router,
         private readonly linkService: LinkService<InternalPathKey>,
         private readonly sharedData: SharedDataService<{
             editOccupancy: {
@@ -116,55 +111,69 @@ export class EditOccupancyPage implements OnInit {
         }
     }
 
-    public async saveOccupancy(editNotRecurring: boolean = false) {
-        if (this.inputForm.evaluate() === 'invalid')
+    private get editDate(): UtcDate | null {
+        const previousOccupancy = this.sharedData.getValue('editOccupancy');
+        if (!previousOccupancy)
+            return null;
+        return UtcDate.decode(previousOccupancy.editDate).setted({ hour: 0, minute: 0 });
+    }
+
+    public async saveOccupancy(type: 'edit-complete' | 'edit-recurring-single') {
+        if (this.inputForm.evaluateAndSetLoading() === 'invalid')
             return;
-        this.inputForm.status = 'loading';
-        const recurring: Occupancy.Recurring = {
-            excludingDates: this.previousOccupancy && this.previousOccupancy.recurring ? this.previousOccupancy.recurring.excludingDates : [],
-            repeatEvery: this.inputForm.field('recurringRepeatEvery').value,
-            untilIncluding: this.inputForm.field('recurringUntilIncluding').value.setted({ hour: 0, minute: 0 })
-        };
-        let occupancyId = this.previousOccupancy ? this.previousOccupancy.id : Guid.newGuid();
-        let editType: EditType = this.previousOccupancy ? 'change' : 'add';
-        if (this.previousOccupancy && this.previousOccupancy.recurring && !this.inputForm.field('isRecurring').value && editNotRecurring) {
-            occupancyId = Guid.newGuid();
-            editType = 'add';
-            let { excludingDates } = this.previousOccupancy.recurring;
-            const editOccupancy = this.sharedData.getValue('editOccupancy');
-            const editDate = editOccupancy ? UtcDate.decode(editOccupancy.editDate).setted({ hour: 0, minute: 0 }) : null;
-            if (editDate && !this.previousOccupancy.recurring.excludingDates.some(date => editDate.compare(date) === 'equal'))
-                excludingDates = [...this.previousOccupancy.recurring.excludingDates, editDate];
-            const result1 = await this.firebaseApi.function('occupancy-edit').call({
-                editType: 'change',
-                occupancy: {
-                    ...Occupancy.flatten(this.previousOccupancy),
-                    recurring: Occupancy.Recurring.flatten({
-                        ...this.previousOccupancy.recurring,
-                        excludingDates: excludingDates
-                    })
-                },
-                occupancyId: this.previousOccupancy.id.guidString
-            });
-            if (result1.isFailure())
-                this.inputForm.status = 'failed';
-        }
-        const result2 = await this.firebaseApi.function('occupancy-edit').call({
-            editType: editType,
+        let result: Result<void>;
+        if (type === 'edit-complete')
+            result = await this.editCompleteOccupancy();
+        else
+            result = await this.editRecurringSingleOccupancy();
+        this.inputForm.finish(result);
+        if (result.isSuccess())
+            await this.linkService.navigate('editing/occupancy');
+    }
+
+    private async editCompleteOccupancy(): Promise<Result<void>> {
+        return await this.firebaseApi.function('occupancy-edit').call({
+            editType: this.previousOccupancy ? 'change' : 'add',
+            occupancyId: (this.previousOccupancy ? this.previousOccupancy.id : Guid.newGuid()).guidString,
             occupancy: {
                 end: this.inputForm.field('end').value.encoded,
                 location: this.inputForm.field('location').value,
-                recurring: this.inputForm.field('isRecurring').value ? Occupancy.Recurring.flatten(recurring) : null,
+                recurring: this.inputForm.field('isRecurring').value ? Occupancy.Recurring.flatten({
+                    excludingDates: this.previousOccupancy && this.previousOccupancy.recurring ? this.previousOccupancy.recurring.excludingDates : [],
+                    repeatEvery: this.inputForm.field('recurringRepeatEvery').value,
+                    untilIncluding: this.inputForm.field('recurringUntilIncluding').value.setted({ hour: 0, minute: 0 })
+                }) : null,
                 start: this.inputForm.field('start').value.encoded,
                 title: this.inputForm.field('title').value
-            },
-            occupancyId: occupancyId.guidString
+            }
         });
-        if (result2.isFailure())
-            this.inputForm.status = 'failed';
-        else {
-            await this.router.navigateByUrl(this.linkService.link('editing/occupancy').link);
-            this.inputForm.status = 'valid';
-        }
+    }
+
+    private async editRecurringSingleOccupancy(): Promise<Result<void>> {
+        if (!this.previousOccupancy || !this.previousOccupancy.recurring || !this.editDate)
+            return Result.failure(undefined);
+        this.previousOccupancy.recurring.excludingDates = [...this.previousOccupancy.recurring.excludingDates, this.editDate];
+        return Result.merge(...await Promise.all([
+            this.firebaseApi.function('occupancy-edit').call({
+                editType: 'change',
+                occupancyId: this.previousOccupancy.id.guidString,
+                occupancy: Occupancy.flatten(this.previousOccupancy)
+            }),
+            this.firebaseApi.function('occupancy-edit').call({
+                editType: 'add',
+                occupancyId: Guid.newGuid().guidString,
+                occupancy: {
+                    end: this.inputForm.field('end').value.encoded,
+                    location: this.inputForm.field('location').value,
+                    recurring: this.inputForm.field('isRecurring').value ? Occupancy.Recurring.flatten({
+                        excludingDates: [],
+                        repeatEvery: this.inputForm.field('recurringRepeatEvery').value,
+                        untilIncluding: this.inputForm.field('recurringUntilIncluding').value.setted({ hour: 0, minute: 0 })
+                    }) : null,
+                    start: this.inputForm.field('start').value.encoded,
+                    title: this.inputForm.field('title').value
+                }
+            })
+        ]));
     }
 }

@@ -12,8 +12,8 @@
             [inputForm]="inputForm"
             [submitButtonText]="previousOccupancy ? (previousOccupancy.recurring && !inputForm.field('isRecurring').value ? 'Alle Speichern' : 'Speichern') : 'Hinzufügen'"
             [cancelButtonText]="previousOccupancy && previousOccupancy.recurring && !inputForm.field('isRecurring').value ? 'Einzelnen Speichern' : null"
-            (submitButtonClicked)="saveOccupancy()"
-            (cancelButtonClicked)="saveOccupancy(true)"
+            (submitButtonClicked)="saveOccupancy('edit-complete')"
+            (cancelButtonClicked)="saveOccupancy('edit-recurring-single')"
         >
             <inline-select-input
                 label="Ort"

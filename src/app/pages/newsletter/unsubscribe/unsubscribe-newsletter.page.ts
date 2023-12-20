@@ -31,11 +31,7 @@ export class UnsubscribeNewsletterPage {
             Validator.email('Das ist keine gültige E-Mail Addresse.')
         ])
     }, {
-        invalidInput: new InputError('Nicht alle Eingaben sind gültig'),
-        loading: new InputError('Sie werden für den Newsletter abgemeldet.', 'info'),
-        recaptchaFailed: new InputError('reCAPTCHA ungültig.'),
-        failed: new InputError('Abmeldung ist fehlgeschlagen.'),
-        success: new InputError('Sie haben den Newsletter deabonniert.', 'success')
+        recaptchaFailed: 'Ungültige reCAPTCHA. Bitte versuchen Sie es erneut.'
     });
 
     public unsubscribeWithIdState: 'loading' | 'failed' | 'success' = 'loading';
@@ -68,22 +64,14 @@ export class UnsubscribeNewsletterPage {
     }
 
     public async onSubmit() {
-        if (this.inputForm.evaluate() === 'invalid')
+        if (this.inputForm.evaluateAndSetLoading() === 'invalid')
             return;
-        this.inputForm.status = 'loading';
-        if (await this.recaptchaService.verify('unsubscribe_newsletter_page') === 'invalid') {
-            this.inputForm.status = 'recaptchaFailed';
-            return;
-        }
+        if (await this.recaptchaService.verify('unsubscribe_newsletter_page') === 'invalid')
+            return this.inputForm.setState('recaptchaFailed');
         const result = await this.firebaseApi.function('newsletter-subscription-unsubscribe').call({
             id: null,
             email: this.inputForm.field('email').value
         });
-        if (result.isSuccess()) {
-            this.inputForm.status = 'valid';
-            this.inputForm.reset();
-        } else {
-            this.inputForm.status = 'failed';
-        }
+        this.inputForm.finish(result);
     }
 }

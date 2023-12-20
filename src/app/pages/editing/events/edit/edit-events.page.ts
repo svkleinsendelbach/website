@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationCheckComponent, AuthenticationService, CheckboxInputComponent, DateTimeInputComponent, Event, FirebaseApiService, Guid, InputError, InputField, InputForm, InputFormComponent, LinkService, NavigationBarComponent, NavigationBarData, SelectInputComponent, SelectOptions, SharedDataService, TextInputComponent, TextSectionComponent, UtcDate, Validator } from 'kleinsendelbach-website-library';
 import { InternalPathKey } from '../../../../types/internal-paths';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 import { FirebaseFunctions } from '../../../../types/firebase-functions';
 import { UserRole } from '../../../../types/user-role';
 import { EventGroupId } from '../../../../types/event-group-id';
@@ -39,11 +38,8 @@ export class EditEventsPage implements OnInit {
             Validator.url('Das ist kein gültiger Link.')
         ])
     }, {
-        failed: new InputError('Das Event konnte nicht gefunden werden.'),
-        gameIdNotFound: new InputError('Die Spiel-Id wurde im Link nicht gefunden.'),
-        gameNotFound: new InputError('Das Spiel wurde bei BFV nicht gefunden.'),
-        invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
-        loading: new InputError('BFV Daten werden übernommen.', 'info')
+        gameIdNotFound: 'Die Spiel-Id wurde im Link nicht gefunden.',
+        gameNotFound: 'Das Spiel wurde bei BFV nicht gefunden.'
     });
 
     public inputForm = new InputForm({
@@ -56,11 +52,7 @@ export class EditEventsPage implements OnInit {
         link: new InputField('', [Validator.eitherOne('Das ist kein gültiger Link.', Validator.empty(''), Validator.url(''))]),
         subtitle: new InputField<string>(''),
         title: new InputField<string>('', [Validator.required('Der Titel ist erfordelich.')])
-    }, {
-        failed: new InputError('Das Event konnte nicht gespeichert werden.'),
-        invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
-        loading: new InputError('Das Event wird gespeichert.', 'info')
-    });
+    }, {});
 
     public previousEvent: (Event & { groupId: EventGroupId }) | null = null;
 
@@ -68,7 +60,6 @@ export class EditEventsPage implements OnInit {
         private readonly titleService: Title,
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
-        private readonly router: Router,
         private readonly linkService: LinkService<InternalPathKey>,
         private readonly sharedData: SharedDataService<{
             editEvent: {
@@ -111,37 +102,31 @@ export class EditEventsPage implements OnInit {
     }
 
     public async takeBfvGame() {
-        if (this.bfvGameInputForm.evaluate() === 'invalid')
+        if (this.bfvGameInputForm.evaluateAndSetLoading() === 'invalid')
             return;
-        this.bfvGameInputForm.status = 'loading';
         const match = (/^(?:https:\/\/)?(?:www\.)?bfv\.de\/spiele\/(?:\S+?\/)?(?<id>\S+?)$/gu).exec(this.bfvGameInputForm.field('bfvGameLink').value);
-        if (!match || !match.groups || !('id' in match.groups)) {
-            this.bfvGameInputForm.status = 'gameIdNotFound';
-            return;
-        }
-        const gameInfo = await this.firebaseApi.function('bfvData-gameInfo').call({
+        if (!match || !match.groups || !('id' in match.groups))
+            return this.bfvGameInputForm.setState('gameIdNotFound');
+        const gameInfoResult = await this.firebaseApi.function('bfvData-gameInfo').call({
             gameId: match.groups['id']
         });
-        if (gameInfo.isFailure()) {
-            if (gameInfo.error.code === 'not-found')
-                this.bfvGameInputForm.status = 'gameNotFound';
-            else
-                this.bfvGameInputForm.status = 'failed';
-        } else {
-            const { isSg2 } = GameInfo.additionalProperties(gameInfo.value);
+        this.bfvGameInputForm.finish(gameInfoResult);
+        if (gameInfoResult.isFailure() && gameInfoResult.error.code === 'not-found')
+            return this.bfvGameInputForm.setState('gameNotFound');
+        if (gameInfoResult.isSuccess()) {
+            const gameInfo = gameInfoResult.value;
+            const { isSg2 } = GameInfo.additionalProperties(gameInfo);
             this.inputForm.field('groupId').inputValue = isSg2 ? 'football-adults/second-team' : 'football-adults/first-team';
-            this.inputForm.field('title').inputValue = `${gameInfo.value.homeTeam.name} gegen ${gameInfo.value.awayTeam.name}`;
-            this.inputForm.field('subtitle').inputValue = gameInfo.value.adressDescription ?? '';
+            this.inputForm.field('title').inputValue = `${gameInfo.homeTeam.name} gegen ${gameInfo.awayTeam.name}`;
+            this.inputForm.field('subtitle').inputValue = gameInfo.adressDescription ?? '';
             this.inputForm.field('link').inputValue = `https://www.bfv.de/spiele/${match.groups['id']}`;
-            this.inputForm.field('date').inputValue = UtcDate.decode(gameInfo.value.date);
-            this.bfvGameInputForm.status = 'valid';
+            this.inputForm.field('date').inputValue = UtcDate.decode(gameInfo.date);
         }
     }
 
     public async saveEvent() {
-        if (this.inputForm.evaluate() === 'invalid')
+        if (this.inputForm.evaluateAndSetLoading() === 'invalid')
             return;
-        this.inputForm.status = 'loading';
         const eventId = this.previousEvent ? this.previousEvent.id : Guid.newGuid();
         const result = await this.firebaseApi.function('event-edit').call({
             editType: this.previousEvent ? 'change' : 'add',
@@ -156,11 +141,8 @@ export class EditEventsPage implements OnInit {
             groupId: this.inputForm.field('groupId').value,
             previousGroupId: this.previousEvent ? this.previousEvent.groupId : null
         });
-        if (result.isFailure())
-            this.inputForm.status = 'failed';
-        else {
-            await this.router.navigateByUrl(this.linkService.link('editing/events').link);
-            this.inputForm.status = 'valid';
-        }
+        this.inputForm.finish(result);
+        if (result.isSuccess())
+            await this.linkService.navigate('editing/events');
     }
 }

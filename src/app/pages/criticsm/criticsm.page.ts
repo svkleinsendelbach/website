@@ -23,11 +23,7 @@ export class CriticsmPage {
         description: new InputField<string>('', [Validator.required('Eine Beschreibung ist erforderlich.')])
     },
     {
-        invalidInput: new InputError('Nicht alle Eingaben sind gültig.'),
-        recaptchaFailed: new InputError('reCAPTCHA ungültig.'),
-        failed: new InputError('Rückmeldung konnte nicht gespeichert werden.'),
-        loading: new InputError('Rückmeldung wird gespeichert.', 'info'),
-        success: new InputError('Rückmeldung wurde versandt', 'success')
+        recaptchaFailed: 'Ungültige reCAPTCHA. Bitte versuchen Sie es erneut.'
     });
 
     constructor(
@@ -46,13 +42,10 @@ export class CriticsmPage {
     }
 
     public async onSubmit() {
-        if (this.inputForm.evaluate() === 'invalid')
+        if (this.inputForm.evaluateAndSetLoading() === 'invalid')
             return;
-        this.inputForm.status = 'loading';
-        if (await this.recaptchaService.verify('criticism_page') === 'invalid') {
-            this.inputForm.status = 'recaptchaFailed';
-            return;
-        }
+        if (await this.recaptchaService.verify('criticism_page') === 'invalid')
+            return this.inputForm.setState('recaptchaFailed');
         const result = await this.firebaseApi.function('criticism-edit').call({
             editType: 'add',
             criticismId: Guid.newGuid().guidString,
@@ -63,11 +56,6 @@ export class CriticsmPage {
                 workedOff: false
             }
         });
-        if (result.isSuccess()) {
-            this.inputForm.status = 'valid';
-            this.inputForm.reset();
-        } else {
-            this.inputForm.status = 'failed';
-        }
+        this.inputForm.finish(result);
     }
 }
