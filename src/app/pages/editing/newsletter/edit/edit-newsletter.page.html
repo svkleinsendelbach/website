@@ -27,7 +27,7 @@
         <input-form
             *ngIf="!isPreviewShown"
             [inputForm]="inputForm"
-            [submitButtonText]="inputForm.state === 'hasEmptyDepartmentOrEvent' ? (previousNewsletter ? 'Trotzdem bearbeiten' : 'Trotzdem hinzufügen') : (previousNewsletter ? 'Bearbeiten' : 'Hinzufügen')"
+            [submitButtonText]="inputForm.state === 'hasEmptyDepartmentOrEvent' ? (previousNewsletter ? 'Trotzdem bearbeiten' : 'Trotzdem hinzufügen') : (previousNewsletter ? 'Speichern' : 'Hinzufügen')"
             (submitButtonClicked)="saveNewsletter()"
         >
             <text-input

@@ -10,11 +10,11 @@
     >
         <p
             *ngIf="!newsletter"
-            class="text color-primary align-center"
+            class="text align-center margin-bottom color-primary"
         >Es wurde kein Newsletter übergeben. Gehe eine Seite zurück und versuche es erneut.</p>
         <p
             *ngIf="newsletter"
-            class="text"
+            class="text margin-bottom"
         >Um den Newsletter "{{ newsletter.id }}" vom {{ Month.title[newsletter.month] }} {{ newsletter.year }} zu veröffentlichen, kopiere die Html für die Email in das Textfeld.</p>
         <input-form
             *ngIf="newsletter"

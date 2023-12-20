@@ -51,7 +51,7 @@ export class ContactPage {
         ]),
         discordUserId: new InputField<string>('', [
             Validator.validateIf(() => this.inputForm.field('answerOption').value === 'discord', Validator.required('Ihre Discord Nutzer-ID ist erforderlich.')),
-            Validator.validateIf(() => this.inputForm.field('answerOption').value === 'discord', Validator.pattern(/^\d{18}$/u, 'Das ist keine gültige Discord Nutzer-ID.'))
+            Validator.validateIf(() => this.inputForm.field('answerOption').value === 'discord', Validator.pattern(/^\d{18,}$/u, 'Das ist keine gültige Discord Nutzer-ID.'))
         ]),
         receiver: new InputField<keyof typeof ContactPage.receivers>('managers', [
             Validator.required('Eine Empfänger ist erforderlich.'),

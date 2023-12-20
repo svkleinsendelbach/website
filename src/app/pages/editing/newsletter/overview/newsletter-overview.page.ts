@@ -16,6 +16,8 @@ import { CommonModule } from '@angular/common';
 })
 export class NewsletterOverviewPage {
 
+    public TrackBy = TrackBy;
+
     public navigationBarData: NavigationBarData<InternalPathKey> = [
         {
             text: 'Zurück',
@@ -33,7 +35,7 @@ export class NewsletterOverviewPage {
 
     public newsletterResult: Result<Newsletter.Overview[]> | null = null;
 
-    public TrackBy = TrackBy;
+    public editNewsletterLoading: boolean = false;
 
     constructor(
         private readonly titleService: Title,
@@ -62,17 +64,17 @@ export class NewsletterOverviewPage {
             title: `${newsletter.title} | ${newsletter.date.description}`,
             subtitle: `${Newsletter.Month.title[newsletter.month]} ${newsletter.year}`,
             buttons: [
-                {
+                ...(newsletter.alreadyPublished ? [] : [{
                     title: 'Veröffentlichen',
                     action: () => void this.publishNewsletter(newsletter),
                     link: null,
                     options: null
-                },
+                }]),
                 {
                     title: 'Bearbeiten',
                     action: () => void this.editNewsletter(newsletter),
                     link: null,
-                    options: null
+                    options: this.editNewsletterLoading ? 'disabled' : null
                 },
                 {
                     title: 'Löschen',
@@ -90,7 +92,9 @@ export class NewsletterOverviewPage {
     }
 
     public async editNewsletter(newsletter: Newsletter.Overview) {
+        this.editNewsletterLoading = true;
         const completeNewsletter = (await this.firebaseApi.function('newsletter-get').call({ id: newsletter.id })).value;
+        this.editNewsletterLoading = false;
         if (!completeNewsletter)
             return;
         this.sharedData.setValue('editNewsletter', Newsletter.flatten(completeNewsletter));

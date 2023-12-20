@@ -101,8 +101,13 @@ export class EditOccupancyPage implements OnInit {
         if (this.previousOccupancy) {
             this.inputForm.field('location').initialValue = this.previousOccupancy.location;
             this.inputForm.field('title').initialValue = this.previousOccupancy.title;
-            this.inputForm.field('start').initialValue = this.previousOccupancy.start;
-            this.inputForm.field('end').initialValue = this.previousOccupancy.end;
+            if (this.editDate) {
+                this.inputForm.field('start').initialValue = this.editDate.setted({ hour: this.previousOccupancy.start.hour, minute: this.previousOccupancy.start.minute });
+                this.inputForm.field('end').initialValue = this.editDate.advanced({ day: this.previousOccupancy.end.day - this.previousOccupancy.start.day }).setted({ hour: this.previousOccupancy.end.hour, minute: this.previousOccupancy.end.minute });
+            } else {
+                this.inputForm.field('start').initialValue = this.previousOccupancy.start;
+                this.inputForm.field('end').initialValue = this.previousOccupancy.end;
+            }
             this.inputForm.field('isRecurring').initialValue = this.previousOccupancy.recurring !== null;
             if (this.previousOccupancy.recurring) {
                 this.inputForm.field('recurringUntilIncluding').initialValue = this.previousOccupancy.recurring.untilIncluding;
