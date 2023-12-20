@@ -17,6 +17,7 @@
         >Neuen Termin hinzufügen</button>
         <result-display
             [result]="eventGroupsResult"
+            [showEmptyListError]="true"
         />
         <ng-container
             *ngIf="eventGroupsResult && eventGroupsResult.isSuccess()"

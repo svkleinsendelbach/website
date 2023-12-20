@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { AppearanceColor, AuthenticationService, Color, CookieSelectorComponent, DeviceTypeService, EnvironmentService, FirebaseApiService, FooterComponent, HeaderComponent, InternalLinkService, RecaptchaService, RecaptchaVerificationService, StyleConfigService } from 'kleinsendelbach-website-library';
+import { AppearanceColor, AuthenticationService, Color, CookieSelectorComponent, DeviceTypeService, EnvironmentService, FirebaseApiService, FooterComponent, HeaderComponent, LinkService, RecaptchaVerificationService, StyleConfigService } from 'kleinsendelbach-website-library';
 import { environment } from './environment/environment';
 import { Environment } from './types/environment';
 import { footerConfig } from './config/footer.config';
@@ -28,7 +28,7 @@ export class AppComponent {
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly environmentService: EnvironmentService<Environment>,
         private readonly firebaseApiService: FirebaseApiService<FirebaseFunctions>,
-        private readonly internalLinkService: InternalLinkService<InternalPathKey>,
+        private readonly linkService: LinkService<InternalPathKey>,
         private readonly recaptchaVerificationService: RecaptchaVerificationService,
         private readonly styleConfigService: StyleConfigService,
         public readonly deviceType: DeviceTypeService
@@ -44,7 +44,7 @@ export class AppComponent {
         this.firebaseApiService.setup(firebaseFunctionResultMappers);
         this.authenticationService.setup(async () => (await this.firebaseApiService.function('user-getRoles').call({})).get());
         this.recaptchaVerificationService.setup(async (token) => await this.firebaseApiService.function('verifyRecaptcha').call({ token: token }));
-        this.internalLinkService.setup(internalPaths);
+        this.linkService.setup(internalPaths, 'https://svkleinsendelbach-website.web.app');
         this.styleConfigService.setup({
             primary: new AppearanceColor(Color.hex('#C90024'), Color.hex('#C4354F')),
             accent: new AppearanceColor(Color.hex('#FFD93D'), Color.hex('#F2BE22')),

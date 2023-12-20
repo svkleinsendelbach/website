@@ -17,6 +17,7 @@
         >Neuen Bericht hinzufügen</button>
         <result-display
             [result]="reportGroupsResult"
+            [showEmptyListError]="true"
         />
         <ng-container
             *ngIf="reportGroupsResult && reportGroupsResult.isSuccess()"

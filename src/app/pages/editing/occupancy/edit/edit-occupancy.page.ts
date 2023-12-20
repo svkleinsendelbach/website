@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NavigationBarComponent, CalendarComponent, TextSectionComponent, AuthenticationCheckComponent, NavigationBarData, AuthenticationService, FirebaseApiService, SharedDataService, InputError, InputField, InputForm, UtcDate, Validator, SelectOptions, Guid, InternalLinkService, InputFormComponent, InlineSelectInputComponent, CheckboxInputComponent, TextInputComponent, DateTimeInputComponent } from 'kleinsendelbach-website-library';
+import { NavigationBarComponent, CalendarComponent, TextSectionComponent, AuthenticationCheckComponent, NavigationBarData, AuthenticationService, FirebaseApiService, SharedDataService, InputError, InputField, InputForm, UtcDate, Validator, SelectOptions, Guid, LinkService, InputFormComponent, InlineSelectInputComponent, CheckboxInputComponent, TextInputComponent, DateTimeInputComponent } from 'kleinsendelbach-website-library';
 import { InternalPathKey } from '../../../../types/internal-paths';
 import { Title } from '@angular/platform-browser';
 import { FirebaseFunctions } from '../../../../types/firebase-functions';
@@ -74,7 +74,7 @@ export class EditOccupancyPage implements OnInit {
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
         private readonly router: Router,
-        private readonly linkService: InternalLinkService<InternalPathKey>,
+        private readonly linkService: LinkService<InternalPathKey>,
         private readonly sharedData: SharedDataService<{
             editOccupancy: {
                 occupancy: Occupancy.Flatten;

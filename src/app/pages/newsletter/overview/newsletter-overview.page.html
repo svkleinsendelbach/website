@@ -1,0 +1,32 @@
+<text-section
+    title="An- / Abmelden"
+>
+    <p
+        class="text margin-bottom color-secondary"
+    >Jetzt für unseren Newsletter anmelden um die neusten Berichte und kommende Termine des SV Kleinsendelbach nicht zu verpassen:</p>
+    <button
+        class="button"
+        actionLink="newsletter/subscribe"
+        [prominent]="true"
+    >Anmelden</button>
+    <p
+        class="text margin-top-large margin-bottom color-secondary"
+    >Sie möchten unseren Newsletter abbestellen? Dann klicken Sie hier:</p>
+    <button
+        class="button"
+        actionLink="newsletter/unsubscribe"
+        [prominent]="true"
+    >Abmelden</button>
+</text-section>
+<text-section
+    title="Newsletter"
+>
+    <result-display
+        [result]="newsletterResult"
+        [showEmptyListError]="true"
+    />
+    <overview-list
+        *ngIf="newsletterResult && newsletterResult.isSuccess()"
+        [overviewListData]="newsletterOverviewListData(newsletterResult.value)"
+    />
+</text-section>

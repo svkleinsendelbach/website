@@ -1,7 +1,16 @@
 import { HeaderData, Link } from "kleinsendelbach-website-library";
 import { InternalPathKey } from "../types/internal-paths";
 
-type ExcludedPathKeys = 'criticism' | 'impressum' | 'reports' | 'editing/login' | 'editing/main' | 'editing/user-roles/edit' | 'editing/criticism/edit' | 'editing/occupancy' | 'editing/occupancy/edit' | 'editing/events' | 'editing/events/edit' | 'editing/reports' | 'editing/reports/edit';
+type ExcludedPathKeys =
+    | 'criticism' | 'impressum' | 'reports'
+    | 'newsletter' | 'newsletter/:id' | 'newsletter/subscribe' | 'newsletter/unsubscribe' | 'newsletter/unsubscribe/:id'
+    | 'editing/login' | 'editing/main'
+    | 'editing/user-roles/edit'
+    | 'editing/criticism/edit'
+    | 'editing/occupancy' | 'editing/occupancy/edit'
+    | 'editing/events' | 'editing/events/edit'
+    | 'editing/reports' | 'editing/reports/edit'
+    | 'editing/newsletter' | 'editing/newsletter/publish' | 'editing/newsletter/edit';
 
 export const headerConfig: HeaderData<Exclude<InternalPathKey, ExcludedPathKeys> | 'onlineshop', InternalPathKey> = {
     name: 'SV Kleinsendelbach',

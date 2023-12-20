@@ -1,0 +1,17 @@
+<navigation-bar
+    [navigationBarData]="navigationBarData"
+/>
+<text-section
+    title="Newsletter Anmeldung"
+>
+    <input-form
+        [inputForm]="inputForm"
+        submitButtonText="Anmelden"
+        (submitButtonClicked)="onSubmit()"
+    >
+        <text-input
+            label="Ihre E-Mail Adresse"
+            [inputField]="inputForm.field('email')"
+        />
+    </input-form>
+</text-section>

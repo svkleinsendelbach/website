@@ -1,0 +1,27 @@
+<navigation-bar
+    [navigationBarData]="navigationBarData"
+/>
+<authentication-check
+    [roles]="['websiteManager']"
+    loginLink="editing/login"
+    (onAuthentication)="getNewsletter()"
+>
+    <text-section
+        title="Newsletter"
+    >
+        <button
+            class="add-new-button"
+            actionLink="editing/newsletter/edit"
+            (action)="clearSharedData()"
+            [prominent]="true"
+        >Neuen Newsletter hinzufügen</button>
+        <result-display
+            [result]="newsletterResult"
+            [showEmptyListError]="true"
+        />
+        <overview-list
+            *ngIf="newsletterResult && newsletterResult.isSuccess()"
+                [overviewListData]="newsletterOverviewListData(newsletterResult.value)"
+        />
+    </text-section>
+</authentication-check>

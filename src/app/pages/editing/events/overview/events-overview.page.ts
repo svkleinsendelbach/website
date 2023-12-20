@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { NavigationBarData, AuthenticationService, FirebaseApiService, InternalLinkService, SharedDataService, Event, Result, EventGroup, TextSectionComponent, NavigationBarComponent, AuthenticationCheckComponent, ButtonComponent, OverviewListComponent, OverviewListData, TrackBy, ResultDisplayComponent } from 'kleinsendelbach-website-library';
+import { NavigationBarData, AuthenticationService, FirebaseApiService, LinkService, SharedDataService, Event, Result, EventGroup, TextSectionComponent, NavigationBarComponent, AuthenticationCheckComponent, ButtonComponent, OverviewListComponent, OverviewListData, TrackBy, ResultDisplayComponent } from 'kleinsendelbach-website-library';
 import { FirebaseFunctions } from '../../../../types/firebase-functions';
 import { InternalPathKey } from '../../../../types/internal-paths';
 import { UserRole } from '../../../../types/user-role';
@@ -43,7 +43,7 @@ export class EventsOverviewPage {
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
         private readonly router: Router,
-        private readonly linkService: InternalLinkService<InternalPathKey>,
+        private readonly linkService: LinkService<InternalPathKey>,
         private readonly sharedData: SharedDataService<{
             editEvent: {
                 event: Event.Flatten,

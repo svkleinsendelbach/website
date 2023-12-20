@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { TextSectionComponent, NavigationBarComponent, AuthenticationCheckComponent, ButtonComponent, OverviewListComponent, ResultDisplayComponent, Report, AuthenticationService, FirebaseApiService, InternalLinkService, NavigationBarData, ReportGroup, Result, SharedDataService, TrackBy, OverviewListData } from 'kleinsendelbach-website-library';
+import { TextSectionComponent, NavigationBarComponent, AuthenticationCheckComponent, ButtonComponent, OverviewListComponent, ResultDisplayComponent, Report, AuthenticationService, FirebaseApiService, NavigationBarData, ReportGroup, Result, SharedDataService, TrackBy, OverviewListData, LinkService } from 'kleinsendelbach-website-library';
 import { FirebaseFunctions } from '../../../../types/firebase-functions';
 import { InternalPathKey } from '../../../../types/internal-paths';
 import { ReportGroupId } from '../../../../types/report-group-id';
@@ -43,7 +43,7 @@ export class ReportsOverviewPage {
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
         private readonly router: Router,
-        private readonly linkService: InternalLinkService<InternalPathKey>,
+        private readonly linkService: LinkService<InternalPathKey>,
         private readonly sharedData: SharedDataService<{
             editReport: {
                 report: Report.Flatten,

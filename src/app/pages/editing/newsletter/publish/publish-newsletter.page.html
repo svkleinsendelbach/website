@@ -1,0 +1,31 @@
+<navigation-bar
+    [navigationBarData]="navigationBarData"
+/>
+<authentication-check
+    [roles]="['websiteManager']"
+    loginLink="editing/login"
+>
+    <text-section
+        title="Newsletter"
+    >
+        <p
+            *ngIf="!newsletter"
+            class="text color-primary align-center"
+        >Es wurde kein Newsletter übergeben. Gehe eine Seite zurück und versuche es erneut.</p>
+        <p
+            *ngIf="newsletter"
+            class="text"
+        >Um den Newsletter "{{ newsletter.id }}" vom {{ Month.title[newsletter.month] }} {{ newsletter.year }} zu veröffentlichen, kopiere die Html für die Email in das Textfeld.</p>
+        <input-form
+            *ngIf="newsletter"
+            [inputForm]="inputForm"
+            submitButtonText="Veröffentlichen"
+            (submitButtonClicked)="publishNewsletter()"
+        >
+            <text-area-input
+                label="Html für E-Mail"
+                [inputField]="inputForm.field('html')"
+            />
+    </input-form>
+    </text-section>
+</authentication-check>

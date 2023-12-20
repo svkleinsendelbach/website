@@ -1,6 +1,6 @@
 import { InternalPathKey } from './../../../../types/internal-paths';
 import { Component } from '@angular/core';
-import { AuthenticationCheckComponent, AuthenticationService, ButtonComponent, CalendarComponent, Color, FirebaseApiService, InternalLinkService, NavigationBarComponent, NavigationBarData, Result, ResultDisplayComponent, SharedDataService, TextSectionComponent, User, UtcDate } from 'kleinsendelbach-website-library';
+import { AuthenticationCheckComponent, AuthenticationService, ButtonComponent, CalendarComponent, Color, FirebaseApiService, LinkService, NavigationBarComponent, NavigationBarData, Result, ResultDisplayComponent, SharedDataService, TextSectionComponent, User, UtcDate } from 'kleinsendelbach-website-library';
 import { Title } from '@angular/platform-browser';
 import { FirebaseFunctions } from '../../../../types/firebase-functions';
 import { UserRole } from '../../../../types/user-role';
@@ -50,7 +50,7 @@ export class OccupancyOverviewPage {
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
         private readonly router: Router,
-        private readonly linkService: InternalLinkService<InternalPathKey>,
+        private readonly linkService: LinkService<InternalPathKey>,
         private readonly sharedData: SharedDataService<{
             editOccupancy: {
                 occupancy: Occupancy.Flatten;

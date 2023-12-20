@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationCheckComponent, AuthenticationService, CheckboxInputComponent, DateTimeInputComponent, Event, FirebaseApiService, Guid, InputError, InputField, InputForm, InputFormComponent, InternalLinkService, NavigationBarComponent, NavigationBarData, SelectInputComponent, SelectOptions, SharedDataService, TextInputComponent, TextSectionComponent, UtcDate, Validator } from 'kleinsendelbach-website-library';
+import { AuthenticationCheckComponent, AuthenticationService, CheckboxInputComponent, DateTimeInputComponent, Event, FirebaseApiService, Guid, InputError, InputField, InputForm, InputFormComponent, LinkService, NavigationBarComponent, NavigationBarData, SelectInputComponent, SelectOptions, SharedDataService, TextInputComponent, TextSectionComponent, UtcDate, Validator } from 'kleinsendelbach-website-library';
 import { InternalPathKey } from '../../../../types/internal-paths';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -69,7 +69,7 @@ export class EditEventsPage implements OnInit {
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
         private readonly router: Router,
-        private readonly linkService: InternalLinkService<InternalPathKey>,
+        private readonly linkService: LinkService<InternalPathKey>,
         private readonly sharedData: SharedDataService<{
             editEvent: {
                 event: Event.Flatten,

@@ -107,6 +107,26 @@ export const internalPaths = {
         title: 'Berichte',
         path: 'berichte'
     },
+    newsletter: {
+        title: 'Newsletter',
+        path: 'newsletter'
+    },
+    'newsletter/:id': {
+        title: 'Newsletter',
+        path: 'newsletter/:id'
+    },
+    'newsletter/subscribe': {
+        title: 'Newsletter Anmeldung',
+        path: 'newsletter/anmelden'
+    },
+    'newsletter/unsubscribe': {
+        title: 'Newsletter Abmeldung',
+        path: 'newsletter/abmelden'
+    },
+    'newsletter/unsubscribe/:id': {
+        title: 'Newsletter Abmeldung',
+        path: 'newsletter/abmelden/:id'
+    },
     'editing/login': {
         title: 'Anmelden',
         path: 'bearbeiten/anmelden'
@@ -146,6 +166,18 @@ export const internalPaths = {
     'editing/reports/edit': {
         title: 'Berichte',
         path: 'bearbeiten/berichte/bearbeiten'
+    },
+    'editing/newsletter': {
+        title: 'Newsletter',
+        path: 'bearbeiten/newsletter'
+    },
+    'editing/newsletter/publish': {
+        title: 'Newsletter',
+        path: 'bearbeiten/newsletter/veröffentlichen'
+    },
+    'editing/newsletter/edit': {
+        title: 'Newsletter',
+        path: 'bearbeiten/newsletter/bearbeiten'
     }
 } satisfies Record<string, {
     title: string;

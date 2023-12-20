@@ -27,7 +27,7 @@
     "@widgetbot/crate": "^3.7.0",
     "angular-calendar": "^0.31.0",
     "font-awesome": "^4.7.0",
-    "kleinsendelbach-website-library": "^0.0.59",
+    "kleinsendelbach-website-library": "^0.0.70",
     "ng-recaptcha": "^13.2.1",
     "react-redux": "^9.0.4",
     "rxjs": "~7.8.0",

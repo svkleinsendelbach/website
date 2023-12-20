@@ -15,6 +15,10 @@ export const footerConfig: FooterData<InternalPathKey> = {
             link: 'contact'
         },
         {
+            title: 'Newsletter',
+            link: 'newsletter'
+        },
+        {
             title: 'Kritik und Vorschläge',
             link: 'criticism'
         },

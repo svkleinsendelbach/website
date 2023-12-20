@@ -11,6 +11,7 @@
     >
         <result-display
             [result]="criticismResult"
+            [showEmptyListError]="true"
         />
         <overview-list
             *ngIf="criticismResult && criticismResult.isSuccess()"

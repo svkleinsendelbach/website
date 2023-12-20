@@ -1,0 +1,196 @@
+<navigation-bar
+    [navigationBarData]="navigationBarData"
+/>
+<authentication-check
+    [roles]="['websiteManager']"
+    loginLink="editing/login"
+>
+    <text-section
+        title="Newsletter"
+    >
+        <div
+            class="preview-toggle"
+        >
+            <p
+                class="preview-button off"
+                [class.active]="!isPreviewShown"
+                role="none"
+                (click)="togglePreview(false)"
+            >Bearbeiten</p>
+            <p
+                class="preview-button on"
+                [class.active]="isPreviewShown"
+                role="none"
+                (click)="togglePreview(true)"
+            >Vorschau</p>
+        </div>
+        <input-form
+            *ngIf="!isPreviewShown"
+            [inputForm]="inputForm"
+            [submitButtonText]="inputForm.status === 'hasEmptyDepartmentOrEvent' ? (previousNewsletter ? 'Trotzdem bearbeiten' : 'Trotzdem hinzufügen') : (previousNewsletter ? 'Bearbeiten' : 'Hinzufügen')"
+            (submitButtonClicked)="saveNewsletter()"
+        >
+            <text-input
+                label="Titel"
+                [inputField]="inputForm.field('title')"
+            />
+            <text-area-input
+                id="title-description-textarea"
+                label="Nachricht"
+                [inputField]="inputForm.field('description')"
+            />
+            <select-input
+                label="Monat"
+                [selectOptions]="monthSelectOptions"
+                [inputField]="inputForm.field('month')"
+            />
+            <stepper-input
+                label="Jahr"
+                [inputField]="inputForm.field('year')"
+            />
+        </input-form>
+        <newsletter
+            *ngIf="isPreviewShown"
+            class="preview"
+            [newsletterData]="newsletterData"
+            scaling="website"
+        />
+    </text-section>
+    <text-section
+        *ngIf="!isPreviewShown"
+        title="Berichte der Abteilungen"
+        [collapsed]="true"
+    >
+        <div
+            class="departments"
+        >
+            <div
+                class="department"
+                *ngFor="let department of departmentList; trackBy: TrackBy.id"
+                [class.active]="activeDepartment && activeDepartment[1] === department.id"
+            >
+                <div
+                    class="title-container"
+                >
+                    <p class="title">{{ Department.title[department.id] }}</p>
+                    <button
+                        class="add-button"
+                        (action)="addDepartmentButtonClicked(department.id)"
+                    >Hinzufügen</button>
+                </div>
+                <p
+                    class="missing"
+                    *ngIf="department.content.length === 0"
+                >Noch keine Berichte</p>
+                <div
+                    class="content-container"
+                    *ngIf="department.content.length !== 0"
+                >
+                    <div
+                        class="content"
+                        *ngFor="let content of department.content; trackBy: TrackBy.property('title')"
+                        [class.active]="activeDepartment && activeDepartment[2] === content.index"
+                    >
+                        <p class="title">{{ content.title }}</p>
+                        <button
+                            class="edit-button"
+                            (action)="editDepartmentButtonClicked(department.id, content)"
+                        >Bearbeiten</button>
+                        <button
+                            class="delete-button"
+                            (action)="deleteDepartmentButtonClicked(department.id, content.index)"
+                        >Löschen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input-form
+            [inputForm]="departmentInputForm"
+            *ngIf="activeDepartment"
+            cancelButtonText="Abbrechen"
+            (cancelButtonClicked)="cancelDepartmentInput()"
+            [submitButtonText]="activeDepartment[0] === 'add' ? 'Hinzufügen' : 'Speichern'"
+            (submitButtonClicked)="submitDepartmentInput()"
+        >
+            <text-input
+                label="Titel"
+                [inputField]="departmentInputForm.field('title')"
+            />
+            <text-area-input
+                label="Nachricht"
+                [inputField]="departmentInputForm.field('description')"
+            />
+        </input-form>
+    </text-section>
+    <text-section
+        *ngIf="!isPreviewShown"
+        title="Kommende Termine"
+        [collapsed]="true"
+    >
+        <div
+            class="events"
+        >
+            <div
+                class="event-group"
+                *ngFor="let eventGroup of eventList; trackBy: TrackBy.id"
+                [class.active]="activeEvent && activeEvent[1] === eventGroup.id"
+            >
+                <div
+                    class="title-container"
+                >
+                    <p class="title">{{ EventGroup.title[eventGroup.id] }}</p>
+                    <button
+                        class="add-button"
+                        (action)="addEventButtonClicked(eventGroup.id)"
+                    >Hinzufügen</button>
+                </div>
+                <p
+                    class="missing"
+                    *ngIf="eventGroup.events.length === 0"
+                >Noch keine Berichte</p>
+                <div
+                    class="events"
+                    *ngIf="eventGroup.events.length !== 0"
+                >
+                    <div
+                        class="event"
+                        *ngFor="let event of eventGroup.events; trackBy: TrackBy.property('title')"
+                        [class.active]="activeEvent && activeEvent[2] === event.index"
+                    >
+                        <p class="title">{{ event.date.description }} | {{ event.title }}</p>
+                        <button
+                            class="edit-button"
+                            (action)="editEventButtonClicked(eventGroup.id, event)"
+                        >Bearbeiten</button>
+                        <button
+                            class="delete-button"
+                            (action)="deleteEventButtonClicked(eventGroup.id, event.index)"
+                        >Löschen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input-form
+            [inputForm]="eventInputForm"
+            *ngIf="activeEvent"
+            cancelButtonText="Abbrechen"
+            (cancelButtonClicked)="cancelEventInput()"
+            [submitButtonText]="activeEvent[0] === 'add' ? 'Hinzufügen' : 'Speichern'"
+            (submitButtonClicked)="submitEventInput()"
+        >
+            <date-time-input
+                label="Datum / Uhrzeit"
+                [inputField]="eventInputForm.field('date')"
+            />
+            <text-input
+                label="Titel"
+                [inputField]="eventInputForm.field('title')"
+            />
+            <text-input
+                label="Untertitel"
+                placeholder="Untertitel (optional)"
+                [inputField]="eventInputForm.field('subtitle')"
+            />
+        </input-form>
+    </text-section>
+</authentication-check>

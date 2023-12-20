@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { LinkDirective, TextSectionComponent, AuthenticationService, InternalLinkService, FirebaseApiService, LoginComponent, InputError, InputField, InputForm, Validator, InputFormComponent, TextInputComponent, RecaptchaService } from 'kleinsendelbach-website-library';
+import { LinkDirective, TextSectionComponent, AuthenticationService, LinkService, FirebaseApiService, LoginComponent, InputError, InputField, InputForm, Validator, InputFormComponent, TextInputComponent, RecaptchaService } from 'kleinsendelbach-website-library';
 import { Router } from '@angular/router';
 import { InternalPathKey } from '../../../types/internal-paths';
 import { FirebaseFunctions } from '../../../types/firebase-functions';
@@ -33,7 +33,7 @@ export class LoginPage {
         private readonly titleService: Title,
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly router: Router,
-        private readonly linkService: InternalLinkService<InternalPathKey>,
+        private readonly linkService: LinkService<InternalPathKey>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
         private readonly recaptchaService: RecaptchaService
     ) {

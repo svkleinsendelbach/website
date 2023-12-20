@@ -40,6 +40,13 @@ import { EditEventsPage } from './pages/editing/events/edit/edit-events.page';
 import { ReportsOverviewPage } from './pages/editing/reports/overview/reports-overview.page';
 import { EditReportsPage } from './pages/editing/reports/edit/edit-reports.page';
 import { ReportsPage } from './pages/reports/reports.page';
+import { NewsletterOverviewPage as EditingNewsletterOverviewPage } from './pages/editing/newsletter/overview/newsletter-overview.page';
+import { PublishNewsletterPage } from './pages/editing/newsletter/publish/publish-newsletter.page';
+import { EditNewsletterPage } from './pages/editing/newsletter/edit/edit-newsletter.page';
+import { NewsletterOverviewPage } from './pages/newsletter/overview/newsletter-overview.page';
+import { NewsletterPage } from './pages/newsletter/newsletter/newsletter.page';
+import { SubscribeNewsletterPage } from './pages/newsletter/subscribe/subscribe-newsletter.page';
+import { UnsubscribeNewsletterPage } from './pages/newsletter/unsubscribe/unsubscribe-newsletter.page';
 
 const internalRoutes: Record<InternalPathKey, Type<unknown>> = {
     home: HomePage,
@@ -69,6 +76,11 @@ const internalRoutes: Record<InternalPathKey, Type<unknown>> = {
     criticism: CriticsmPage,
     impressum: ImpressumPage,
     reports: ReportsPage,
+    newsletter: NewsletterOverviewPage,
+    'newsletter/subscribe': SubscribeNewsletterPage,
+    'newsletter/unsubscribe': UnsubscribeNewsletterPage,
+    'newsletter/unsubscribe/:id': UnsubscribeNewsletterPage,
+    'newsletter/:id': NewsletterPage,
     'editing/login': LoginPage,
     'editing/main': EditingMainPage,
     'editing/user-roles/edit': EditUserRolesPage,
@@ -78,7 +90,10 @@ const internalRoutes: Record<InternalPathKey, Type<unknown>> = {
     'editing/events': EventsOverviewPage,
     'editing/events/edit': EditEventsPage,
     'editing/reports': ReportsOverviewPage,
-    'editing/reports/edit': EditReportsPage
+    'editing/reports/edit': EditReportsPage,
+    'editing/newsletter': EditingNewsletterOverviewPage,
+    'editing/newsletter/publish': PublishNewsletterPage,
+    'editing/newsletter/edit': EditNewsletterPage
 }
 
 export const routes: Routes = [

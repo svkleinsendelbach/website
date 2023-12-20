@@ -1,0 +1,26 @@
+<navigation-bar
+    [navigationBarData]="navigationBarData"
+/>
+<text-section
+    title="Newsletter Abmeldung"
+>
+    <p
+        *ngIf="unsubscribeWithIdState === 'loading'"
+        class="text align-center color-secondary"
+    >Sie werden vom Newsletter abgemeldet</p>
+    <p
+        *ngIf="unsubscribeWithIdState === 'success'"
+        class="text align-center color-primary"
+    >Sie wurden vom Newsletter abgemeldet</p>
+    <input-form
+        *ngIf="unsubscribeWithIdState === 'failed'"
+        [inputForm]="inputForm"
+        submitButtonText="Abmelden"
+        (submitButtonClicked)="onSubmit()"
+    >
+        <text-input
+            label="Ihre E-Mail Adresse"
+            [inputField]="inputForm.field('email')"
+        />
+    </input-form>
+</text-section>

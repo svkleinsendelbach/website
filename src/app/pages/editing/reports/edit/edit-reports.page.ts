@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Report, NavigationBarComponent, AuthenticationCheckComponent, TextSectionComponent, InputFormComponent, TextInputComponent, SelectInputComponent, DateTimeInputComponent, CheckboxInputComponent, NavigationBarData, AuthenticationService, FirebaseApiService, InternalLinkService, SharedDataService, SelectOptions, InputError, InputField, InputForm, Validator, StyleConfigService, MarkdownParser, UtcDate, Guid, TextAreaInputComponent } from 'kleinsendelbach-website-library';
+import { Report, NavigationBarComponent, AuthenticationCheckComponent, TextSectionComponent, InputFormComponent, TextInputComponent, SelectInputComponent, DateTimeInputComponent, CheckboxInputComponent, NavigationBarData, AuthenticationService, FirebaseApiService, LinkService, SharedDataService, SelectOptions, InputError, InputField, InputForm, Validator, StyleConfigService, MarkdownParser, UtcDate, Guid, TextAreaInputComponent } from 'kleinsendelbach-website-library';
 import { InternalPathKey } from '../../../../types/internal-paths';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -70,7 +70,7 @@ export class EditReportsPage implements OnInit, AfterViewInit, OnDestroy {
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
         private readonly router: Router,
-        private readonly linkService: InternalLinkService<InternalPathKey>,
+        private readonly linkService: LinkService<InternalPathKey>,
         private readonly styleConfig: StyleConfigService,
         private readonly sharedData: SharedDataService<{
             editReport: {

@@ -7,12 +7,12 @@ import {
     EventEditFunctionType,
     EventGetFunctionType,
     GameInfoGetFunctionType,
-    // NewsletterEditFunctionType,
-    // NewsletterGetAllFunctionType,
-    // NewsletterGetFunctionType,
-    // NewsletterPublishFunctionType,
-    // NewsletterSubscriptionSubscribeFunctionType,
-    // NewsletterSubscriptionUnsubscribeFunctionType,
+    NewsletterEditFunctionType,
+    NewsletterGetAllFunctionType,
+    NewsletterGetFunctionType,
+    NewsletterPublishFunctionType,
+    NewsletterSubscriptionSubscribeFunctionType,
+    NewsletterSubscriptionUnsubscribeFunctionType,
     OccupancyEditFunctionType,
     OccupancyGetFunctionType,
     ReportEditFunctionType,
@@ -45,12 +45,12 @@ export type FirebaseFunctions = {
     'user-getRoles': UserGetRolesFunctionType;
     'user-handleAccessRequest': UserHandleAccessRequestFunctionType;
     'user-editRoles': UserEditRolesFunctionType;
-    // 'newsletter-get': NewsletterGetFunctionType;
-    // 'newsletter-getAll': NewsletterGetAllFunctionType;
-    // 'newsletter-edit': NewsletterEditFunctionType;
-    // 'newsletter-publish': NewsletterPublishFunctionType;
-    // 'newsletter-subscription-subscribe': NewsletterSubscriptionSubscribeFunctionType;
-    // 'newsletter-subscription-unsubscribe': NewsletterSubscriptionUnsubscribeFunctionType;
+    'newsletter-get': NewsletterGetFunctionType;
+    'newsletter-getAll': NewsletterGetAllFunctionType;
+    'newsletter-edit': NewsletterEditFunctionType;
+    'newsletter-publish': NewsletterPublishFunctionType;
+    'newsletter-subscription-subscribe': NewsletterSubscriptionSubscribeFunctionType;
+    'newsletter-subscription-unsubscribe': NewsletterSubscriptionUnsubscribeFunctionType;
 }
 
 function identity<T>(value: T): T {
@@ -76,10 +76,10 @@ export const firebaseFunctionResultMappers: { [Key in keyof FirebaseFunctions]: 
     'user-getRoles': identity,
     'user-handleAccessRequest': identity,
     'user-editRoles': identity,
-    // 'newsletter-get': NewsletterGetFunctionType.mapReturnValue,
-    // 'newsletter-getAll': NewsletterGetAllFunctionType.mapReturnValue,
-    // 'newsletter-edit': identity,
-    // 'newsletter-publish': identity,
-    // 'newsletter-subscription-subscribe': identity,
-    // 'newsletter-subscription-unsubscribe': identity
+    'newsletter-get': NewsletterGetFunctionType.mapReturnValue,
+    'newsletter-getAll': NewsletterGetAllFunctionType.mapReturnValue,
+    'newsletter-edit': identity,
+    'newsletter-publish': identity,
+    'newsletter-subscription-subscribe': identity,
+    'newsletter-subscription-unsubscribe': identity
 };
