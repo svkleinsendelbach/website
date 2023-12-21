@@ -81,7 +81,14 @@ export namespace Newsletter {
                     link: socialMedia.link.link
                 }
             })),
-            sponsors: sponsorsConfig
+            sponsors: mapRecord(sponsorsConfig, sponsors => {
+                if (!sponsors)
+                    return null;
+                return sponsors.map(sponsor => ({
+                    ...sponsor,
+                    logoSrc: linkService.absoluteLink(sponsor.logoSrc)
+                }))
+            })
         };
     }
 

@@ -31,7 +31,8 @@ export class UnsubscribeNewsletterPage {
             Validator.email('Das ist keine gültige E-Mail Addresse.')
         ])
     }, {
-        recaptchaFailed: 'Ungültige reCAPTCHA. Bitte versuchen Sie es erneut.'
+        recaptchaFailed: 'Ungültige reCAPTCHA. Bitte versuchen Sie es erneut.',
+        emailNotFound: 'Die E-Mail Addresse ist nicht für den Newsletter angemeldet.'
     });
 
     public unsubscribeWithIdState: 'loading' | 'failed' | 'success' = 'loading';
@@ -73,5 +74,7 @@ export class UnsubscribeNewsletterPage {
             email: this.inputForm.field('email').value
         });
         this.inputForm.finish(result);
+        if (result.isFailure() && result.error.code === 'not-found')
+            this.inputForm.setState('emailNotFound');
     }
 }

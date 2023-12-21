@@ -1,0 +1,19 @@
+<text-section
+    *ngIf="!newsletterResult || newsletterResult.isFailure() || !newsletterResult.value"
+    title="Newsletter"
+>
+    <result-display
+        [result]="newsletterResult"
+    />
+    <p
+        *ngIf="newsletterResult && newsletterResult.isSuccess() && !newsletterResult.value"
+        class="text align-center color-primary"
+    >Newsletter wurde nicht gefunden</p>
+</text-section>
+<newsletter
+    *ngIf="newsletterResult && newsletterResult.isSuccess() && newsletterResult.value"
+    class="newsletter"
+    [newsletterData]="newsletterData(newsletterResult.value)"
+    scaling="newsletter"
+/>
+

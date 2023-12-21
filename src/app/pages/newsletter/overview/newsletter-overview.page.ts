@@ -29,6 +29,8 @@ export class NewsletterOverviewPage {
 
     private async fetchNewsletter() {
         this.newsletterResult = await this.firebaseApi.function('newsletter-getAll').call({});
+        if (this.newsletterResult.isSuccess())
+            this.newsletterResult = Result.success(this.newsletterResult.value.filter(newsletter => newsletter.alreadyPublished));
     }
 
     public newsletterOverviewListData(newsletter: Newsletter.Overview[]): OverviewListData<InternalPathKey> {
