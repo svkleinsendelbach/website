@@ -15,7 +15,7 @@
         <p
             *ngIf="newsletter"
             class="text margin-bottom"
-        >Um den Newsletter "{{ newsletter.id }}" vom {{ Month.title[newsletter.month] }} {{ newsletter.year }} zu veröffentlichen, kopiere die Html für die Email in das Textfeld.</p>
+        >Um den Newsletter "{{ newsletter.id }}" vom {{ Month.title[newsletter.month] }} {{ newsletter.year }} zu veröffentlichen, kopiere die Html für die Email von <a class="text" [href]="'https://newsletter-806a6.web.app/' + newsletter.id" title="Newsletter" target="_blank">hier</a> in das Textfeld.</p>
         <input-form
             *ngIf="newsletter"
             [inputForm]="inputForm"
