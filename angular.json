@@ -50,6 +50,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/ads.txt",
               {
                 "input": "node_modules/kleinsendelbach-website-library/assets",
                 "glob": "**/*",

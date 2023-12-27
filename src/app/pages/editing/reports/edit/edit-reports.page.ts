@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Report, NavigationBarComponent, AuthenticationCheckComponent, TextSectionComponent, InputFormComponent, TextInputComponent, SelectInputComponent, DateTimeInputComponent, CheckboxInputComponent, NavigationBarData, AuthenticationService, FirebaseApiService, LinkService, SharedDataService, SelectOptions, InputError, InputField, InputForm, Validator, StyleConfigService, MarkdownParser, UtcDate, Guid, TextAreaInputComponent } from 'kleinsendelbach-website-library';
+import { Report, NavigationBarComponent, AuthenticationCheckComponent, TextSectionComponent, InputFormComponent, TextInputComponent, SelectInputComponent, DateTimeInputComponent, CheckboxInputComponent, NavigationBarData, AuthenticationService, FirebaseApiService, LinkService, SharedDataService, SelectOptions, InputError, InputField, InputForm, Validator, StyleConfigService, MarkdownParserService, UtcDate, Guid, TextAreaInputComponent } from 'kleinsendelbach-website-library';
 import { InternalPathKey } from '../../../../types/internal-paths';
 import { Title } from '@angular/platform-browser';
 import { FirebaseFunctions } from '../../../../types/firebase-functions';
@@ -62,6 +62,7 @@ export class EditReportsPage implements OnInit, AfterViewInit, OnDestroy {
         private readonly authenticationService: AuthenticationService<UserRole>,
         private readonly firebaseApi: FirebaseApiService<FirebaseFunctions>,
         private readonly linkService: LinkService<InternalPathKey>,
+        private readonly markdownParser: MarkdownParserService,
         private readonly styleConfig: StyleConfigService,
         private readonly sharedData: SharedDataService<{
             editReport: {
@@ -118,7 +119,7 @@ export class EditReportsPage implements OnInit, AfterViewInit, OnDestroy {
         while (this.messagePreviewElement.nativeElement.firstChild !== null)
             this.messagePreviewElement.nativeElement.removeChild(this.messagePreviewElement.nativeElement.firstChild);
         this.messagePreviewElement.nativeElement.style.color = this.styleConfig.css('text');
-        const elements = MarkdownParser.parse(message);
+        const elements = this.markdownParser.parse(message);
         if (elements === null) {
             this.messagePreviewElement.nativeElement.style.color = this.styleConfig.css('primary');
             this.messagePreviewElement.nativeElement.append('Es gab ein Fehler bei der Nachricht.');
