@@ -1,27 +1,46 @@
-# Website
+# Website-Projekt
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.6.
+Dies ist das Repository für das Website-Projekt von [SV Kleinsendelbach e.V.](https://svkleinsendelbach-website.web.app) Die Website wurde entwickelt, um Informationen über den Sportverein Kleinsendelbach und seine Projekte bereitzustellen.
 
-## Development server
+## Inhaltsverzeichnis
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Verwendung](#verwendung)
+- [Fehler / Vorschläge](#fehler--vorschläge)
+- [Beitragen / Installation](#beitragen--installation)
+- [Lizenz](#lizenz)
 
-## Code scaffolding
+## Verwendung
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Die Website des SV Kleinsendelbach erfüllt mehrere Zwecke, die darauf abzielen, die Verbindung zwischen dem Verein, seinen Mitgliedern, Fans und der Öffentlichkeit zu stärken. Hier sind einige Verwendungen für die Website:
 
-## Build
+1. **Aktuelle Informationen und Neuigkeiten:** Die Website dient als zentrale Anlaufstelle für aktuelle Nachrichten, Veranstaltungen und Aktivitäten des Sportvereins. Hier können Fans und Mitglieder die neuesten Entwicklungen verfolgen.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+2. **Spielplan und Ergebnisse:** Die Website bietet einen Überblick über den aktuellen Spielplan des Vereins, vergangene Ergebnisse und kommende Spiele. Dies ist besonders nützlich für Fans, die die Leistungen ihres Teams verfolgen möchten.
 
-## Running unit tests
+3. **Merchandising:** Ein Online-Shop auf der Website ermöglicht den Verkauf von Vereinsmerchandising, wie Trikots, Schals oder andere Fanartikel.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+4. **Jugendarbeit und Nachwuchsförderung:** Informationen über die Jugendarbeit des Vereins, Jugendteams, Trainingsmöglichkeiten und Rekrutierung können auf der Website präsentiert werden, um junge Talente anzuziehen und zu fördern.
 
-## Running end-to-end tests
+5. **Sponsoren und Partner:** Die Website bietet Platz für Informationen über Sponsoren und Partner des Vereins. Dies ist wichtig für die finanzielle Unterstützung des Vereins und stärkt die Bindung zu Geschäftspartnern.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Fehler / Vorschläge
 
-## Further help
+Hast du Fehler auf der Website gefunden oder du möchtest Beiträge und Vorschläge beitragen, dann folge diese Schritte:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Um einen Fehler der Website zu melden, erstelle einen neuen Issue in [Github Issues](https://github.com/svkleinsendelbach/website/issues).
+- Um eine neue Feature anzuforden, kannst du ebenfalls einen neuen Issue in [Github Issues](https://github.com/svkleinsendelbach/website/issues) erstellen.
+
+## Beitragen / Installation
+
+Die Website wurde mit [Angular CLI 17](https://github.com/angular/angular-cli) generiert.
+
+1. Klone das Repository: `git clone https://github.com/svkleinsendelbach/website.git`.
+2. Wechsel in das Projektverzeichnis: `cd website`.
+3. Erstelle einen Branch für deine Änderungen: `git checkout -b feature/neues-feature`.
+4. Mache deine Änderungen und committe sie: `git commit -m 'Füge neues Feature hinzu'`.
+5. Push deinen Branch: `git push origin feature/neues-feature`.
+6. Erstelle einen Pull Request.
+
+## Lizenz
+
+Dieses Projekt ist unter der [MIT-Lizenz](https://github.com/svkleinsendelbach/website/blob/main/LICENSE) lizenziert - siehe die [LICENSE](https://github.com/svkleinsendelbach/website/blob/main/LICENSE)-Datei für weitere Details.
