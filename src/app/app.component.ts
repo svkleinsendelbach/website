@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { AppearanceColor, AuthenticationService, Color, CookieSelectorComponent, DeviceTypeService, EnvironmentService, FirebaseApiService, FooterComponent, HeaderComponent, LinkService, RecaptchaVerificationService, StyleConfigService } from 'kleinsendelbach-website-library';
+import { AnalyticsService, AppearanceColor, AuthenticationService, Color, CookieSelectorComponent, DeviceTypeService, EnvironmentService, FirebaseApiService, FooterComponent, HeaderComponent, LinkService, RecaptchaVerificationService, StyleConfigService } from 'kleinsendelbach-website-library';
 import { environment } from './environment/environment';
 import { Environment } from './types/environment';
 import { footerConfig } from './config/footer.config';
@@ -32,6 +32,7 @@ export class AppComponent {
         private readonly linkService: LinkService<InternalPathKey>,
         private readonly recaptchaVerificationService: RecaptchaVerificationService,
         private readonly styleConfigService: StyleConfigService,
+        private readonly analytics: AnalyticsService,
         public readonly deviceType: DeviceTypeService
     ) {
         if (this.deviceType.isDesktop) {
@@ -47,6 +48,7 @@ export class AppComponent {
         this.recaptchaVerificationService.setup(async (token) => await this.firebaseApiService.function('verifyRecaptcha').call({ token: token }));
         this.linkService.setup(internalPaths, baseUrl);
         this.styleConfigService.setup(colorConfig);
+        this.analytics.setup();
     }
 
     @HostListener('window:resize') public onResize() {
